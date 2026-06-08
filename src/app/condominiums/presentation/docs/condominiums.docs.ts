@@ -1,0 +1,17 @@
+import { ApiEndpointProps } from '@/app/common/decorators/api-endpoint.decorator';
+import { HttpStatus } from '@nestjs/common';
+import { CondominiumResponse } from '../../application/dtos/responses/condominium.response';
+
+export const createCondominium: ApiEndpointProps = {
+  summary: 'Crear un nuevo condominio',
+  status: HttpStatus.CREATED,
+  withToken: true,
+};
+
+export const getCondominiumByKey: ApiEndpointProps = {
+  summary: 'Obtener un condominio por su clave',
+  status: HttpStatus.OK,
+  withToken: true,
+  serialization: CondominiumResponse,
+  type: CondominiumResponse,
+};
