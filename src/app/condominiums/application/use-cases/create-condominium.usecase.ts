@@ -5,8 +5,8 @@ import {
 } from '@nestjs/common';
 
 import CondominiumsRepository from '../../domain/repositories/condominiums.repository';
-import { PROVIDES_NAMES } from '@/app/common/enums/provides-names.enums';
-import { CreateCondominiumRequest } from '../dtos/requests/create-condominium.request';
+import { PROVIDES_NAMES } from '@/common/enums/provides-names.enums';
+import { CreateCondominiumRequest } from '../../presentation/dtos/requests/create-condominium.request';
 
 const FATAL_ERROR_MESSAGE = 'Error creating condominium';
 

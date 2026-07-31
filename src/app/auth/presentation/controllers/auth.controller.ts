@@ -2,16 +2,19 @@ import { Body, Controller, Get, Post, Req, Res } from '@nestjs/common';
 import { Request, Response } from 'express';
 
 import { LoginUseCase } from '../../application/use-cases/login.usecase';
-import { LoginRequest } from '../../application/dto/requests/login.request';
-import { Public } from '@/app/common/decorators/public.decorator';
+import { LoginRequest } from '../dto/requests/login.request';
 import { MeUseCase } from '../../application/use-cases/me.usecase';
-import { CurrentUser } from '@/app/common/decorators/current-user.decorator';
 import { AuthUserEntity } from '../../domain/entities/auth-user.entity';
 import { RefreshUseCase } from '../../application/use-cases/refresh-token.usecase';
-import { ApiEndpoint } from '@/app/common/decorators/api-endpoint.decorator';
 
 import * as AuthDocs from '../docs/auth.docs';
+import { Public } from '@/common/decorators/public.decorator';
+import { ApiEndpoint } from '@/common/decorators/api-endpoint.decorator';
+import { CurrentUser } from '@/common/decorators/current-user.decorator';
+import { LogoutUseCase } from '../../application/use-cases/logout.usecase';
+
 const isProduction = process.env.APP_ENV === 'production';
+const sameSite = isProduction ? 'strict' : 'none';
 
 @Controller('auth')
 export class AuthController {
@@ -19,6 +22,7 @@ export class AuthController {
     private readonly loginUseCase: LoginUseCase,
     private readonly refreshUseCase: RefreshUseCase,
     private readonly meUseCase: MeUseCase,
+    private readonly logoutUseCase: LogoutUseCase,
   ) {}
 
   @Post('login')
@@ -29,32 +33,28 @@ export class AuthController {
     @Res({ passthrough: true })
     response: Response,
   ) {
-    const result = await this.loginUseCase.execute(
-      {
-        email: dto.email,
-        password: dto.password,
-      },
-      req.ip,
-      req.headers['user-agent'],
-    );
+    const result = await this.loginUseCase.execute({
+      email: dto.email,
+      password: dto.password,
+      ipAddress: req.ip,
+      userAgent: req.headers['user-agent'],
+    });
 
     response.cookie('access_token', result.accessToken, {
       httpOnly: true,
       secure: true,
-      sameSite: isProduction ? 'strict' : 'none',
+      sameSite,
       maxAge: 15 * 60 * 1000,
     });
 
     response.cookie('refresh_token', result.refreshToken, {
       httpOnly: true,
       secure: true,
-      sameSite: isProduction ? 'strict' : 'none',
+      sameSite,
       maxAge: 30 * 24 * 60 * 60 * 1000,
     });
 
-    return {
-      success: true,
-    };
+    return { success: true };
   }
 
   @Post('refresh-token')
@@ -65,26 +65,31 @@ export class AuthController {
     response: Response,
   ) {
     const refreshToken = req.cookies.refresh_token;
-
     const result = await this.refreshUseCase.execute(refreshToken);
 
     response.cookie('access_token', result.accessToken, {
       httpOnly: true,
       secure: true,
-      sameSite: isProduction ? 'strict' : 'none',
+      sameSite,
       maxAge: 15 * 60 * 1000,
     });
 
     response.cookie('refresh_token', result.refreshToken, {
       httpOnly: true,
       secure: true,
-      sameSite: isProduction ? 'strict' : 'none',
+      sameSite,
       maxAge: 30 * 24 * 60 * 60 * 1000,
     });
 
     return {
       success: true,
     };
+  }
+  @Post('logout')
+  @Public()
+  async logout(@Req() req: Request) {
+    const refreshToken = req.cookies.refresh_token;
+    await this.logoutUseCase.execute(refreshToken);
   }
 
   @Get('me')

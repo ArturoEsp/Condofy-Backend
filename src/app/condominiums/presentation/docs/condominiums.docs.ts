@@ -1,6 +1,6 @@
-import { ApiEndpointProps } from '@/app/common/decorators/api-endpoint.decorator';
 import { HttpStatus } from '@nestjs/common';
-import { CondominiumResponse } from '../../application/dtos/responses/condominium.response';
+import { CondominiumResponse } from '../dtos/responses/condominium.response';
+import { ApiEndpointProps } from '@/common/decorators/api-endpoint.decorator';
 
 export const createCondominium: ApiEndpointProps = {
   summary: 'Crear un nuevo condominio',

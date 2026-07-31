@@ -183,6 +183,7 @@ export type CondominiumWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Condominium"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Condominium"> | Date | string
   houses?: Prisma.HouseListRelationFilter
+  admins?: Prisma.UserListRelationFilter
   residentProfiles?: Prisma.ResidentProfileListRelationFilter
   maintenanceCharges?: Prisma.MaintenanceChargeListRelationFilter
 }
@@ -194,6 +195,7 @@ export type CondominiumOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   houses?: Prisma.HouseOrderByRelationAggregateInput
+  admins?: Prisma.UserOrderByRelationAggregateInput
   residentProfiles?: Prisma.ResidentProfileOrderByRelationAggregateInput
   maintenanceCharges?: Prisma.MaintenanceChargeOrderByRelationAggregateInput
 }
@@ -208,6 +210,7 @@ export type CondominiumWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"Condominium"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Condominium"> | Date | string
   houses?: Prisma.HouseListRelationFilter
+  admins?: Prisma.UserListRelationFilter
   residentProfiles?: Prisma.ResidentProfileListRelationFilter
   maintenanceCharges?: Prisma.MaintenanceChargeListRelationFilter
 }, "id" | "key">
@@ -241,6 +244,7 @@ export type CondominiumCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   houses?: Prisma.HouseCreateNestedManyWithoutCondominiumInput
+  admins?: Prisma.UserCreateNestedManyWithoutCondominiumInput
   residentProfiles?: Prisma.ResidentProfileCreateNestedManyWithoutCondominiumInput
   maintenanceCharges?: Prisma.MaintenanceChargeCreateNestedManyWithoutCondominiumInput
 }
@@ -252,6 +256,7 @@ export type CondominiumUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   houses?: Prisma.HouseUncheckedCreateNestedManyWithoutCondominiumInput
+  admins?: Prisma.UserUncheckedCreateNestedManyWithoutCondominiumInput
   residentProfiles?: Prisma.ResidentProfileUncheckedCreateNestedManyWithoutCondominiumInput
   maintenanceCharges?: Prisma.MaintenanceChargeUncheckedCreateNestedManyWithoutCondominiumInput
 }
@@ -263,6 +268,7 @@ export type CondominiumUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   houses?: Prisma.HouseUpdateManyWithoutCondominiumNestedInput
+  admins?: Prisma.UserUpdateManyWithoutCondominiumNestedInput
   residentProfiles?: Prisma.ResidentProfileUpdateManyWithoutCondominiumNestedInput
   maintenanceCharges?: Prisma.MaintenanceChargeUpdateManyWithoutCondominiumNestedInput
 }
@@ -274,6 +280,7 @@ export type CondominiumUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   houses?: Prisma.HouseUncheckedUpdateManyWithoutCondominiumNestedInput
+  admins?: Prisma.UserUncheckedUpdateManyWithoutCondominiumNestedInput
   residentProfiles?: Prisma.ResidentProfileUncheckedUpdateManyWithoutCondominiumNestedInput
   maintenanceCharges?: Prisma.MaintenanceChargeUncheckedUpdateManyWithoutCondominiumNestedInput
 }
@@ -326,6 +333,11 @@ export type CondominiumMinOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
 }
 
+export type CondominiumNullableScalarRelationFilter = {
+  is?: Prisma.CondominiumWhereInput | null
+  isNot?: Prisma.CondominiumWhereInput | null
+}
+
 export type CondominiumScalarRelationFilter = {
   is?: Prisma.CondominiumWhereInput
   isNot?: Prisma.CondominiumWhereInput
@@ -337,6 +349,22 @@ export type StringFieldUpdateOperationsInput = {
 
 export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string
+}
+
+export type CondominiumCreateNestedOneWithoutAdminsInput = {
+  create?: Prisma.XOR<Prisma.CondominiumCreateWithoutAdminsInput, Prisma.CondominiumUncheckedCreateWithoutAdminsInput>
+  connectOrCreate?: Prisma.CondominiumCreateOrConnectWithoutAdminsInput
+  connect?: Prisma.CondominiumWhereUniqueInput
+}
+
+export type CondominiumUpdateOneWithoutAdminsNestedInput = {
+  create?: Prisma.XOR<Prisma.CondominiumCreateWithoutAdminsInput, Prisma.CondominiumUncheckedCreateWithoutAdminsInput>
+  connectOrCreate?: Prisma.CondominiumCreateOrConnectWithoutAdminsInput
+  upsert?: Prisma.CondominiumUpsertWithoutAdminsInput
+  disconnect?: Prisma.CondominiumWhereInput | boolean
+  delete?: Prisma.CondominiumWhereInput | boolean
+  connect?: Prisma.CondominiumWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CondominiumUpdateToOneWithWhereWithoutAdminsInput, Prisma.CondominiumUpdateWithoutAdminsInput>, Prisma.CondominiumUncheckedUpdateWithoutAdminsInput>
 }
 
 export type CondominiumCreateNestedOneWithoutHousesInput = {
@@ -381,12 +409,73 @@ export type CondominiumUpdateOneRequiredWithoutMaintenanceChargesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.CondominiumUpdateToOneWithWhereWithoutMaintenanceChargesInput, Prisma.CondominiumUpdateWithoutMaintenanceChargesInput>, Prisma.CondominiumUncheckedUpdateWithoutMaintenanceChargesInput>
 }
 
+export type CondominiumCreateWithoutAdminsInput = {
+  id?: string
+  key: string
+  name: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  houses?: Prisma.HouseCreateNestedManyWithoutCondominiumInput
+  residentProfiles?: Prisma.ResidentProfileCreateNestedManyWithoutCondominiumInput
+  maintenanceCharges?: Prisma.MaintenanceChargeCreateNestedManyWithoutCondominiumInput
+}
+
+export type CondominiumUncheckedCreateWithoutAdminsInput = {
+  id?: string
+  key: string
+  name: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  houses?: Prisma.HouseUncheckedCreateNestedManyWithoutCondominiumInput
+  residentProfiles?: Prisma.ResidentProfileUncheckedCreateNestedManyWithoutCondominiumInput
+  maintenanceCharges?: Prisma.MaintenanceChargeUncheckedCreateNestedManyWithoutCondominiumInput
+}
+
+export type CondominiumCreateOrConnectWithoutAdminsInput = {
+  where: Prisma.CondominiumWhereUniqueInput
+  create: Prisma.XOR<Prisma.CondominiumCreateWithoutAdminsInput, Prisma.CondominiumUncheckedCreateWithoutAdminsInput>
+}
+
+export type CondominiumUpsertWithoutAdminsInput = {
+  update: Prisma.XOR<Prisma.CondominiumUpdateWithoutAdminsInput, Prisma.CondominiumUncheckedUpdateWithoutAdminsInput>
+  create: Prisma.XOR<Prisma.CondominiumCreateWithoutAdminsInput, Prisma.CondominiumUncheckedCreateWithoutAdminsInput>
+  where?: Prisma.CondominiumWhereInput
+}
+
+export type CondominiumUpdateToOneWithWhereWithoutAdminsInput = {
+  where?: Prisma.CondominiumWhereInput
+  data: Prisma.XOR<Prisma.CondominiumUpdateWithoutAdminsInput, Prisma.CondominiumUncheckedUpdateWithoutAdminsInput>
+}
+
+export type CondominiumUpdateWithoutAdminsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  houses?: Prisma.HouseUpdateManyWithoutCondominiumNestedInput
+  residentProfiles?: Prisma.ResidentProfileUpdateManyWithoutCondominiumNestedInput
+  maintenanceCharges?: Prisma.MaintenanceChargeUpdateManyWithoutCondominiumNestedInput
+}
+
+export type CondominiumUncheckedUpdateWithoutAdminsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  houses?: Prisma.HouseUncheckedUpdateManyWithoutCondominiumNestedInput
+  residentProfiles?: Prisma.ResidentProfileUncheckedUpdateManyWithoutCondominiumNestedInput
+  maintenanceCharges?: Prisma.MaintenanceChargeUncheckedUpdateManyWithoutCondominiumNestedInput
+}
+
 export type CondominiumCreateWithoutHousesInput = {
   id?: string
   key: string
   name: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  admins?: Prisma.UserCreateNestedManyWithoutCondominiumInput
   residentProfiles?: Prisma.ResidentProfileCreateNestedManyWithoutCondominiumInput
   maintenanceCharges?: Prisma.MaintenanceChargeCreateNestedManyWithoutCondominiumInput
 }
@@ -397,6 +486,7 @@ export type CondominiumUncheckedCreateWithoutHousesInput = {
   name: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  admins?: Prisma.UserUncheckedCreateNestedManyWithoutCondominiumInput
   residentProfiles?: Prisma.ResidentProfileUncheckedCreateNestedManyWithoutCondominiumInput
   maintenanceCharges?: Prisma.MaintenanceChargeUncheckedCreateNestedManyWithoutCondominiumInput
 }
@@ -423,6 +513,7 @@ export type CondominiumUpdateWithoutHousesInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  admins?: Prisma.UserUpdateManyWithoutCondominiumNestedInput
   residentProfiles?: Prisma.ResidentProfileUpdateManyWithoutCondominiumNestedInput
   maintenanceCharges?: Prisma.MaintenanceChargeUpdateManyWithoutCondominiumNestedInput
 }
@@ -433,6 +524,7 @@ export type CondominiumUncheckedUpdateWithoutHousesInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  admins?: Prisma.UserUncheckedUpdateManyWithoutCondominiumNestedInput
   residentProfiles?: Prisma.ResidentProfileUncheckedUpdateManyWithoutCondominiumNestedInput
   maintenanceCharges?: Prisma.MaintenanceChargeUncheckedUpdateManyWithoutCondominiumNestedInput
 }
@@ -444,6 +536,7 @@ export type CondominiumCreateWithoutResidentProfilesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   houses?: Prisma.HouseCreateNestedManyWithoutCondominiumInput
+  admins?: Prisma.UserCreateNestedManyWithoutCondominiumInput
   maintenanceCharges?: Prisma.MaintenanceChargeCreateNestedManyWithoutCondominiumInput
 }
 
@@ -454,6 +547,7 @@ export type CondominiumUncheckedCreateWithoutResidentProfilesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   houses?: Prisma.HouseUncheckedCreateNestedManyWithoutCondominiumInput
+  admins?: Prisma.UserUncheckedCreateNestedManyWithoutCondominiumInput
   maintenanceCharges?: Prisma.MaintenanceChargeUncheckedCreateNestedManyWithoutCondominiumInput
 }
 
@@ -480,6 +574,7 @@ export type CondominiumUpdateWithoutResidentProfilesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   houses?: Prisma.HouseUpdateManyWithoutCondominiumNestedInput
+  admins?: Prisma.UserUpdateManyWithoutCondominiumNestedInput
   maintenanceCharges?: Prisma.MaintenanceChargeUpdateManyWithoutCondominiumNestedInput
 }
 
@@ -490,6 +585,7 @@ export type CondominiumUncheckedUpdateWithoutResidentProfilesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   houses?: Prisma.HouseUncheckedUpdateManyWithoutCondominiumNestedInput
+  admins?: Prisma.UserUncheckedUpdateManyWithoutCondominiumNestedInput
   maintenanceCharges?: Prisma.MaintenanceChargeUncheckedUpdateManyWithoutCondominiumNestedInput
 }
 
@@ -500,6 +596,7 @@ export type CondominiumCreateWithoutMaintenanceChargesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   houses?: Prisma.HouseCreateNestedManyWithoutCondominiumInput
+  admins?: Prisma.UserCreateNestedManyWithoutCondominiumInput
   residentProfiles?: Prisma.ResidentProfileCreateNestedManyWithoutCondominiumInput
 }
 
@@ -510,6 +607,7 @@ export type CondominiumUncheckedCreateWithoutMaintenanceChargesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   houses?: Prisma.HouseUncheckedCreateNestedManyWithoutCondominiumInput
+  admins?: Prisma.UserUncheckedCreateNestedManyWithoutCondominiumInput
   residentProfiles?: Prisma.ResidentProfileUncheckedCreateNestedManyWithoutCondominiumInput
 }
 
@@ -536,6 +634,7 @@ export type CondominiumUpdateWithoutMaintenanceChargesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   houses?: Prisma.HouseUpdateManyWithoutCondominiumNestedInput
+  admins?: Prisma.UserUpdateManyWithoutCondominiumNestedInput
   residentProfiles?: Prisma.ResidentProfileUpdateManyWithoutCondominiumNestedInput
 }
 
@@ -546,6 +645,7 @@ export type CondominiumUncheckedUpdateWithoutMaintenanceChargesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   houses?: Prisma.HouseUncheckedUpdateManyWithoutCondominiumNestedInput
+  admins?: Prisma.UserUncheckedUpdateManyWithoutCondominiumNestedInput
   residentProfiles?: Prisma.ResidentProfileUncheckedUpdateManyWithoutCondominiumNestedInput
 }
 
@@ -556,12 +656,14 @@ export type CondominiumUncheckedUpdateWithoutMaintenanceChargesInput = {
 
 export type CondominiumCountOutputType = {
   houses: number
+  admins: number
   residentProfiles: number
   maintenanceCharges: number
 }
 
 export type CondominiumCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   houses?: boolean | CondominiumCountOutputTypeCountHousesArgs
+  admins?: boolean | CondominiumCountOutputTypeCountAdminsArgs
   residentProfiles?: boolean | CondominiumCountOutputTypeCountResidentProfilesArgs
   maintenanceCharges?: boolean | CondominiumCountOutputTypeCountMaintenanceChargesArgs
 }
@@ -586,6 +688,13 @@ export type CondominiumCountOutputTypeCountHousesArgs<ExtArgs extends runtime.Ty
 /**
  * CondominiumCountOutputType without action
  */
+export type CondominiumCountOutputTypeCountAdminsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UserWhereInput
+}
+
+/**
+ * CondominiumCountOutputType without action
+ */
 export type CondominiumCountOutputTypeCountResidentProfilesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.ResidentProfileWhereInput
 }
@@ -605,6 +714,7 @@ export type CondominiumSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   createdAt?: boolean
   updatedAt?: boolean
   houses?: boolean | Prisma.Condominium$housesArgs<ExtArgs>
+  admins?: boolean | Prisma.Condominium$adminsArgs<ExtArgs>
   residentProfiles?: boolean | Prisma.Condominium$residentProfilesArgs<ExtArgs>
   maintenanceCharges?: boolean | Prisma.Condominium$maintenanceChargesArgs<ExtArgs>
   _count?: boolean | Prisma.CondominiumCountOutputTypeDefaultArgs<ExtArgs>
@@ -637,6 +747,7 @@ export type CondominiumSelectScalar = {
 export type CondominiumOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "key" | "name" | "createdAt" | "updatedAt", ExtArgs["result"]["condominium"]>
 export type CondominiumInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   houses?: boolean | Prisma.Condominium$housesArgs<ExtArgs>
+  admins?: boolean | Prisma.Condominium$adminsArgs<ExtArgs>
   residentProfiles?: boolean | Prisma.Condominium$residentProfilesArgs<ExtArgs>
   maintenanceCharges?: boolean | Prisma.Condominium$maintenanceChargesArgs<ExtArgs>
   _count?: boolean | Prisma.CondominiumCountOutputTypeDefaultArgs<ExtArgs>
@@ -648,6 +759,7 @@ export type $CondominiumPayload<ExtArgs extends runtime.Types.Extensions.Interna
   name: "Condominium"
   objects: {
     houses: Prisma.$HousePayload<ExtArgs>[]
+    admins: Prisma.$UserPayload<ExtArgs>[]
     residentProfiles: Prisma.$ResidentProfilePayload<ExtArgs>[]
     maintenanceCharges: Prisma.$MaintenanceChargePayload<ExtArgs>[]
   }
@@ -1052,6 +1164,7 @@ readonly fields: CondominiumFieldRefs;
 export interface Prisma__CondominiumClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   houses<T extends Prisma.Condominium$housesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Condominium$housesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$HousePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  admins<T extends Prisma.Condominium$adminsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Condominium$adminsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   residentProfiles<T extends Prisma.Condominium$residentProfilesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Condominium$residentProfilesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ResidentProfilePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   maintenanceCharges<T extends Prisma.Condominium$maintenanceChargesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Condominium$maintenanceChargesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MaintenanceChargePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
@@ -1502,6 +1615,30 @@ export type Condominium$housesArgs<ExtArgs extends runtime.Types.Extensions.Inte
   take?: number
   skip?: number
   distinct?: Prisma.HouseScalarFieldEnum | Prisma.HouseScalarFieldEnum[]
+}
+
+/**
+ * Condominium.admins
+ */
+export type Condominium$adminsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
+  orderBy?: Prisma.UserOrderByWithRelationInput | Prisma.UserOrderByWithRelationInput[]
+  cursor?: Prisma.UserWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.UserScalarFieldEnum | Prisma.UserScalarFieldEnum[]
 }
 
 /**

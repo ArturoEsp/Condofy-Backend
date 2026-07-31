@@ -57,6 +57,7 @@ model Condominium {
   key                String              @unique
   name               String
   houses             House[]
+  admins             User[]
   residentProfiles   ResidentProfile[]
   maintenanceCharges MaintenanceCharge[]
   createdAt          DateTime            @default(now())
@@ -72,9 +73,11 @@ model User {
   isEmailVerified Boolean          @default(false)
   residentProfile ResidentProfile?
   payments        Payment[]
+  userSessions    UserSession[]
+  condominium     Condominium?     @relation(fields: [condominiumId], references: [id], onDelete: SetNull)
+  condominiumId   String?
   createdAt       DateTime         @default(now())
   updatedAt       DateTime         @updatedAt
-  userSessions    UserSession[]
 
   @@index([email])
 }
@@ -99,11 +102,13 @@ model House {
   houseNumber        String
   tower              String?
   residents          ResidentProfile[]
-  createdAt          DateTime            @default(now())
-  updatedAt          DateTime            @updatedAt
   maintenanceCharges MaintenanceCharge[]
   houseAccount       HouseAccount?
   accountMovements   AccountMovement[]
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime            @updatedAt
+
+  @@unique([condominiumId, houseNumber])
 }
 
 model ResidentProfile {

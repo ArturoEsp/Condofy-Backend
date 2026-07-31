@@ -3,7 +3,7 @@ import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 
 import UserSessionRepository from '../../domain/repositories/user-session.repository';
-import { PROVIDES_NAMES } from '@/app/common/enums/provides-names.enums';
+import { PROVIDES_NAMES } from '@/common/enums/provides-names.enums';
 import { JwtPayloadEntity } from '../../domain/entities/jwt-payload.entity';
 
 @Injectable()

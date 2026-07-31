@@ -5,6 +5,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 import { AppModule } from './app.module';
 import 'dotenv/config';
+import { ApplicationExceptionFilter } from './core/infrastructure/filters/application-exception.filter';
 
 process.env.TZ = 'America/Mexico_City';
 const DEFAULT_PORT = 3000;
@@ -37,6 +38,8 @@ async function bootstrap() {
       excludeExtraneousValues: true,
     }),
   );
+
+  app.useGlobalFilters(new ApplicationExceptionFilter());
 
   const config = new DocumentBuilder()
     .setTitle('Condofy API')

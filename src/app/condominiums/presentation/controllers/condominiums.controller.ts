@@ -1,10 +1,10 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { CreateCondominiumUseCase } from '../../application/use-cases/create-condominium.usecase';
-import { CreateCondominiumRequest } from '../../application/dtos/requests/create-condominium.request';
+import { CreateCondominiumRequest } from '../dtos/requests/create-condominium.request';
 
 import * as Docs from '../docs/condominiums.docs';
-import { ApiEndpoint } from '@/app/common/decorators/api-endpoint.decorator';
 import { GetCondominiumByKeyUseCase } from '../../application/use-cases/get-condominium-by-key.usecase';
+import { ApiEndpoint } from '@/common/decorators/api-endpoint.decorator';
 
 @Controller('condominiums')
 export class CondominiumsController {

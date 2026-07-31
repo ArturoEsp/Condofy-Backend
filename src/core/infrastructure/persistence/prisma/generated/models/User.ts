@@ -31,6 +31,7 @@ export type UserMinAggregateOutputType = {
   role: $Enums.UserRole | null
   status: $Enums.UserStatus | null
   isEmailVerified: boolean | null
+  condominiumId: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -42,6 +43,7 @@ export type UserMaxAggregateOutputType = {
   role: $Enums.UserRole | null
   status: $Enums.UserStatus | null
   isEmailVerified: boolean | null
+  condominiumId: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -53,6 +55,7 @@ export type UserCountAggregateOutputType = {
   role: number
   status: number
   isEmailVerified: number
+  condominiumId: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -66,6 +69,7 @@ export type UserMinAggregateInputType = {
   role?: true
   status?: true
   isEmailVerified?: true
+  condominiumId?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -77,6 +81,7 @@ export type UserMaxAggregateInputType = {
   role?: true
   status?: true
   isEmailVerified?: true
+  condominiumId?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -88,6 +93,7 @@ export type UserCountAggregateInputType = {
   role?: true
   status?: true
   isEmailVerified?: true
+  condominiumId?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -172,6 +178,7 @@ export type UserGroupByOutputType = {
   role: $Enums.UserRole
   status: $Enums.UserStatus
   isEmailVerified: boolean
+  condominiumId: string | null
   createdAt: Date
   updatedAt: Date
   _count: UserCountAggregateOutputType | null
@@ -204,11 +211,13 @@ export type UserWhereInput = {
   role?: Prisma.EnumUserRoleFilter<"User"> | $Enums.UserRole
   status?: Prisma.EnumUserStatusFilter<"User"> | $Enums.UserStatus
   isEmailVerified?: Prisma.BoolFilter<"User"> | boolean
+  condominiumId?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   residentProfile?: Prisma.XOR<Prisma.ResidentProfileNullableScalarRelationFilter, Prisma.ResidentProfileWhereInput> | null
   payments?: Prisma.PaymentListRelationFilter
   userSessions?: Prisma.UserSessionListRelationFilter
+  condominium?: Prisma.XOR<Prisma.CondominiumNullableScalarRelationFilter, Prisma.CondominiumWhereInput> | null
 }
 
 export type UserOrderByWithRelationInput = {
@@ -218,11 +227,13 @@ export type UserOrderByWithRelationInput = {
   role?: Prisma.SortOrder
   status?: Prisma.SortOrder
   isEmailVerified?: Prisma.SortOrder
+  condominiumId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   residentProfile?: Prisma.ResidentProfileOrderByWithRelationInput
   payments?: Prisma.PaymentOrderByRelationAggregateInput
   userSessions?: Prisma.UserSessionOrderByRelationAggregateInput
+  condominium?: Prisma.CondominiumOrderByWithRelationInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -235,11 +246,13 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   role?: Prisma.EnumUserRoleFilter<"User"> | $Enums.UserRole
   status?: Prisma.EnumUserStatusFilter<"User"> | $Enums.UserStatus
   isEmailVerified?: Prisma.BoolFilter<"User"> | boolean
+  condominiumId?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   residentProfile?: Prisma.XOR<Prisma.ResidentProfileNullableScalarRelationFilter, Prisma.ResidentProfileWhereInput> | null
   payments?: Prisma.PaymentListRelationFilter
   userSessions?: Prisma.UserSessionListRelationFilter
+  condominium?: Prisma.XOR<Prisma.CondominiumNullableScalarRelationFilter, Prisma.CondominiumWhereInput> | null
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -249,6 +262,7 @@ export type UserOrderByWithAggregationInput = {
   role?: Prisma.SortOrder
   status?: Prisma.SortOrder
   isEmailVerified?: Prisma.SortOrder
+  condominiumId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
@@ -266,6 +280,7 @@ export type UserScalarWhereWithAggregatesInput = {
   role?: Prisma.EnumUserRoleWithAggregatesFilter<"User"> | $Enums.UserRole
   status?: Prisma.EnumUserStatusWithAggregatesFilter<"User"> | $Enums.UserStatus
   isEmailVerified?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
+  condominiumId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
 }
@@ -282,6 +297,7 @@ export type UserCreateInput = {
   residentProfile?: Prisma.ResidentProfileCreateNestedOneWithoutUserInput
   payments?: Prisma.PaymentCreateNestedManyWithoutCreatedByInput
   userSessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  condominium?: Prisma.CondominiumCreateNestedOneWithoutAdminsInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -291,6 +307,7 @@ export type UserUncheckedCreateInput = {
   role?: $Enums.UserRole
   status?: $Enums.UserStatus
   isEmailVerified?: boolean
+  condominiumId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   residentProfile?: Prisma.ResidentProfileUncheckedCreateNestedOneWithoutUserInput
@@ -310,6 +327,7 @@ export type UserUpdateInput = {
   residentProfile?: Prisma.ResidentProfileUpdateOneWithoutUserNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutCreatedByNestedInput
   userSessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  condominium?: Prisma.CondominiumUpdateOneWithoutAdminsNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -319,6 +337,7 @@ export type UserUncheckedUpdateInput = {
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  condominiumId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   residentProfile?: Prisma.ResidentProfileUncheckedUpdateOneWithoutUserNestedInput
@@ -333,6 +352,7 @@ export type UserCreateManyInput = {
   role?: $Enums.UserRole
   status?: $Enums.UserStatus
   isEmailVerified?: boolean
+  condominiumId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -355,8 +375,19 @@ export type UserUncheckedUpdateManyInput = {
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  condominiumId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type UserListRelationFilter = {
+  every?: Prisma.UserWhereInput
+  some?: Prisma.UserWhereInput
+  none?: Prisma.UserWhereInput
+}
+
+export type UserOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
 }
 
 export type UserCountOrderByAggregateInput = {
@@ -366,6 +397,7 @@ export type UserCountOrderByAggregateInput = {
   role?: Prisma.SortOrder
   status?: Prisma.SortOrder
   isEmailVerified?: Prisma.SortOrder
+  condominiumId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -377,6 +409,7 @@ export type UserMaxOrderByAggregateInput = {
   role?: Prisma.SortOrder
   status?: Prisma.SortOrder
   isEmailVerified?: Prisma.SortOrder
+  condominiumId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -388,6 +421,7 @@ export type UserMinOrderByAggregateInput = {
   role?: Prisma.SortOrder
   status?: Prisma.SortOrder
   isEmailVerified?: Prisma.SortOrder
+  condominiumId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -395,6 +429,48 @@ export type UserMinOrderByAggregateInput = {
 export type UserScalarRelationFilter = {
   is?: Prisma.UserWhereInput
   isNot?: Prisma.UserWhereInput
+}
+
+export type UserCreateNestedManyWithoutCondominiumInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCondominiumInput, Prisma.UserUncheckedCreateWithoutCondominiumInput> | Prisma.UserCreateWithoutCondominiumInput[] | Prisma.UserUncheckedCreateWithoutCondominiumInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCondominiumInput | Prisma.UserCreateOrConnectWithoutCondominiumInput[]
+  createMany?: Prisma.UserCreateManyCondominiumInputEnvelope
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+}
+
+export type UserUncheckedCreateNestedManyWithoutCondominiumInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCondominiumInput, Prisma.UserUncheckedCreateWithoutCondominiumInput> | Prisma.UserCreateWithoutCondominiumInput[] | Prisma.UserUncheckedCreateWithoutCondominiumInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCondominiumInput | Prisma.UserCreateOrConnectWithoutCondominiumInput[]
+  createMany?: Prisma.UserCreateManyCondominiumInputEnvelope
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+}
+
+export type UserUpdateManyWithoutCondominiumNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCondominiumInput, Prisma.UserUncheckedCreateWithoutCondominiumInput> | Prisma.UserCreateWithoutCondominiumInput[] | Prisma.UserUncheckedCreateWithoutCondominiumInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCondominiumInput | Prisma.UserCreateOrConnectWithoutCondominiumInput[]
+  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutCondominiumInput | Prisma.UserUpsertWithWhereUniqueWithoutCondominiumInput[]
+  createMany?: Prisma.UserCreateManyCondominiumInputEnvelope
+  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  update?: Prisma.UserUpdateWithWhereUniqueWithoutCondominiumInput | Prisma.UserUpdateWithWhereUniqueWithoutCondominiumInput[]
+  updateMany?: Prisma.UserUpdateManyWithWhereWithoutCondominiumInput | Prisma.UserUpdateManyWithWhereWithoutCondominiumInput[]
+  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+}
+
+export type UserUncheckedUpdateManyWithoutCondominiumNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCondominiumInput, Prisma.UserUncheckedCreateWithoutCondominiumInput> | Prisma.UserCreateWithoutCondominiumInput[] | Prisma.UserUncheckedCreateWithoutCondominiumInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCondominiumInput | Prisma.UserCreateOrConnectWithoutCondominiumInput[]
+  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutCondominiumInput | Prisma.UserUpsertWithWhereUniqueWithoutCondominiumInput[]
+  createMany?: Prisma.UserCreateManyCondominiumInputEnvelope
+  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  update?: Prisma.UserUpdateWithWhereUniqueWithoutCondominiumInput | Prisma.UserUpdateWithWhereUniqueWithoutCondominiumInput[]
+  updateMany?: Prisma.UserUpdateManyWithWhereWithoutCondominiumInput | Prisma.UserUpdateManyWithWhereWithoutCondominiumInput[]
+  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
 }
 
 export type EnumUserRoleFieldUpdateOperationsInput = {
@@ -407,6 +483,10 @@ export type EnumUserStatusFieldUpdateOperationsInput = {
 
 export type BoolFieldUpdateOperationsInput = {
   set?: boolean
+}
+
+export type NullableStringFieldUpdateOperationsInput = {
+  set?: string | null
 }
 
 export type UserCreateNestedOneWithoutUserSessionsInput = {
@@ -451,6 +531,75 @@ export type UserUpdateOneRequiredWithoutPaymentsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutPaymentsInput, Prisma.UserUpdateWithoutPaymentsInput>, Prisma.UserUncheckedUpdateWithoutPaymentsInput>
 }
 
+export type UserCreateWithoutCondominiumInput = {
+  id?: string
+  email: string
+  passwordHash: string
+  role?: $Enums.UserRole
+  status?: $Enums.UserStatus
+  isEmailVerified?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  residentProfile?: Prisma.ResidentProfileCreateNestedOneWithoutUserInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutCreatedByInput
+  userSessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutCondominiumInput = {
+  id?: string
+  email: string
+  passwordHash: string
+  role?: $Enums.UserRole
+  status?: $Enums.UserStatus
+  isEmailVerified?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  residentProfile?: Prisma.ResidentProfileUncheckedCreateNestedOneWithoutUserInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCreatedByInput
+  userSessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutCondominiumInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutCondominiumInput, Prisma.UserUncheckedCreateWithoutCondominiumInput>
+}
+
+export type UserCreateManyCondominiumInputEnvelope = {
+  data: Prisma.UserCreateManyCondominiumInput | Prisma.UserCreateManyCondominiumInput[]
+  skipDuplicates?: boolean
+}
+
+export type UserUpsertWithWhereUniqueWithoutCondominiumInput = {
+  where: Prisma.UserWhereUniqueInput
+  update: Prisma.XOR<Prisma.UserUpdateWithoutCondominiumInput, Prisma.UserUncheckedUpdateWithoutCondominiumInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutCondominiumInput, Prisma.UserUncheckedCreateWithoutCondominiumInput>
+}
+
+export type UserUpdateWithWhereUniqueWithoutCondominiumInput = {
+  where: Prisma.UserWhereUniqueInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutCondominiumInput, Prisma.UserUncheckedUpdateWithoutCondominiumInput>
+}
+
+export type UserUpdateManyWithWhereWithoutCondominiumInput = {
+  where: Prisma.UserScalarWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateManyMutationInput, Prisma.UserUncheckedUpdateManyWithoutCondominiumInput>
+}
+
+export type UserScalarWhereInput = {
+  AND?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+  OR?: Prisma.UserScalarWhereInput[]
+  NOT?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+  id?: Prisma.StringFilter<"User"> | string
+  email?: Prisma.StringFilter<"User"> | string
+  passwordHash?: Prisma.StringFilter<"User"> | string
+  role?: Prisma.EnumUserRoleFilter<"User"> | $Enums.UserRole
+  status?: Prisma.EnumUserStatusFilter<"User"> | $Enums.UserStatus
+  isEmailVerified?: Prisma.BoolFilter<"User"> | boolean
+  condominiumId?: Prisma.StringNullableFilter<"User"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
+}
+
 export type UserCreateWithoutUserSessionsInput = {
   id?: string
   email: string
@@ -462,6 +611,7 @@ export type UserCreateWithoutUserSessionsInput = {
   updatedAt?: Date | string
   residentProfile?: Prisma.ResidentProfileCreateNestedOneWithoutUserInput
   payments?: Prisma.PaymentCreateNestedManyWithoutCreatedByInput
+  condominium?: Prisma.CondominiumCreateNestedOneWithoutAdminsInput
 }
 
 export type UserUncheckedCreateWithoutUserSessionsInput = {
@@ -471,6 +621,7 @@ export type UserUncheckedCreateWithoutUserSessionsInput = {
   role?: $Enums.UserRole
   status?: $Enums.UserStatus
   isEmailVerified?: boolean
+  condominiumId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   residentProfile?: Prisma.ResidentProfileUncheckedCreateNestedOneWithoutUserInput
@@ -504,6 +655,7 @@ export type UserUpdateWithoutUserSessionsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   residentProfile?: Prisma.ResidentProfileUpdateOneWithoutUserNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutCreatedByNestedInput
+  condominium?: Prisma.CondominiumUpdateOneWithoutAdminsNestedInput
 }
 
 export type UserUncheckedUpdateWithoutUserSessionsInput = {
@@ -513,6 +665,7 @@ export type UserUncheckedUpdateWithoutUserSessionsInput = {
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  condominiumId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   residentProfile?: Prisma.ResidentProfileUncheckedUpdateOneWithoutUserNestedInput
@@ -530,6 +683,7 @@ export type UserCreateWithoutResidentProfileInput = {
   updatedAt?: Date | string
   payments?: Prisma.PaymentCreateNestedManyWithoutCreatedByInput
   userSessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  condominium?: Prisma.CondominiumCreateNestedOneWithoutAdminsInput
 }
 
 export type UserUncheckedCreateWithoutResidentProfileInput = {
@@ -539,6 +693,7 @@ export type UserUncheckedCreateWithoutResidentProfileInput = {
   role?: $Enums.UserRole
   status?: $Enums.UserStatus
   isEmailVerified?: boolean
+  condominiumId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -572,6 +727,7 @@ export type UserUpdateWithoutResidentProfileInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   payments?: Prisma.PaymentUpdateManyWithoutCreatedByNestedInput
   userSessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  condominium?: Prisma.CondominiumUpdateOneWithoutAdminsNestedInput
 }
 
 export type UserUncheckedUpdateWithoutResidentProfileInput = {
@@ -581,6 +737,7 @@ export type UserUncheckedUpdateWithoutResidentProfileInput = {
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  condominiumId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -598,6 +755,7 @@ export type UserCreateWithoutPaymentsInput = {
   updatedAt?: Date | string
   residentProfile?: Prisma.ResidentProfileCreateNestedOneWithoutUserInput
   userSessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  condominium?: Prisma.CondominiumCreateNestedOneWithoutAdminsInput
 }
 
 export type UserUncheckedCreateWithoutPaymentsInput = {
@@ -607,6 +765,7 @@ export type UserUncheckedCreateWithoutPaymentsInput = {
   role?: $Enums.UserRole
   status?: $Enums.UserStatus
   isEmailVerified?: boolean
+  condominiumId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   residentProfile?: Prisma.ResidentProfileUncheckedCreateNestedOneWithoutUserInput
@@ -640,6 +799,7 @@ export type UserUpdateWithoutPaymentsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   residentProfile?: Prisma.ResidentProfileUpdateOneWithoutUserNestedInput
   userSessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  condominium?: Prisma.CondominiumUpdateOneWithoutAdminsNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPaymentsInput = {
@@ -649,10 +809,61 @@ export type UserUncheckedUpdateWithoutPaymentsInput = {
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  condominiumId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   residentProfile?: Prisma.ResidentProfileUncheckedUpdateOneWithoutUserNestedInput
   userSessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateManyCondominiumInput = {
+  id?: string
+  email: string
+  passwordHash: string
+  role?: $Enums.UserRole
+  status?: $Enums.UserStatus
+  isEmailVerified?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type UserUpdateWithoutCondominiumInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  residentProfile?: Prisma.ResidentProfileUpdateOneWithoutUserNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutCreatedByNestedInput
+  userSessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutCondominiumInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  residentProfile?: Prisma.ResidentProfileUncheckedUpdateOneWithoutUserNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutCreatedByNestedInput
+  userSessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateManyWithoutCondominiumInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -702,11 +913,13 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   role?: boolean
   status?: boolean
   isEmailVerified?: boolean
+  condominiumId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   residentProfile?: boolean | Prisma.User$residentProfileArgs<ExtArgs>
   payments?: boolean | Prisma.User$paymentsArgs<ExtArgs>
   userSessions?: boolean | Prisma.User$userSessionsArgs<ExtArgs>
+  condominium?: boolean | Prisma.User$condominiumArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -717,8 +930,10 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   role?: boolean
   status?: boolean
   isEmailVerified?: boolean
+  condominiumId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  condominium?: boolean | Prisma.User$condominiumArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -728,8 +943,10 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   role?: boolean
   status?: boolean
   isEmailVerified?: boolean
+  condominiumId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  condominium?: boolean | Prisma.User$condominiumArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectScalar = {
@@ -739,19 +956,25 @@ export type UserSelectScalar = {
   role?: boolean
   status?: boolean
   isEmailVerified?: boolean
+  condominiumId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "passwordHash" | "role" | "status" | "isEmailVerified" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "passwordHash" | "role" | "status" | "isEmailVerified" | "condominiumId" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   residentProfile?: boolean | Prisma.User$residentProfileArgs<ExtArgs>
   payments?: boolean | Prisma.User$paymentsArgs<ExtArgs>
   userSessions?: boolean | Prisma.User$userSessionsArgs<ExtArgs>
+  condominium?: boolean | Prisma.User$condominiumArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
-export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
-export type UserIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  condominium?: boolean | Prisma.User$condominiumArgs<ExtArgs>
+}
+export type UserIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  condominium?: boolean | Prisma.User$condominiumArgs<ExtArgs>
+}
 
 export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "User"
@@ -759,6 +982,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     residentProfile: Prisma.$ResidentProfilePayload<ExtArgs> | null
     payments: Prisma.$PaymentPayload<ExtArgs>[]
     userSessions: Prisma.$UserSessionPayload<ExtArgs>[]
+    condominium: Prisma.$CondominiumPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -767,6 +991,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     role: $Enums.UserRole
     status: $Enums.UserStatus
     isEmailVerified: boolean
+    condominiumId: string | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["user"]>
@@ -1166,6 +1391,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   residentProfile<T extends Prisma.User$residentProfileArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$residentProfileArgs<ExtArgs>>): Prisma.Prisma__ResidentProfileClient<runtime.Types.Result.GetResult<Prisma.$ResidentProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   payments<T extends Prisma.User$paymentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$paymentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   userSessions<T extends Prisma.User$userSessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$userSessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserSessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  condominium<T extends Prisma.User$condominiumArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$condominiumArgs<ExtArgs>>): Prisma.Prisma__CondominiumClient<runtime.Types.Result.GetResult<Prisma.$CondominiumPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1201,6 +1427,7 @@ export interface UserFieldRefs {
   readonly role: Prisma.FieldRef<"User", 'UserRole'>
   readonly status: Prisma.FieldRef<"User", 'UserStatus'>
   readonly isEmailVerified: Prisma.FieldRef<"User", 'Boolean'>
+  readonly condominiumId: Prisma.FieldRef<"User", 'String'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
 }
@@ -1457,6 +1684,10 @@ export type UserCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions
    */
   data: Prisma.UserCreateManyInput | Prisma.UserCreateManyInput[]
   skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1527,6 +1758,10 @@ export type UserUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions
    * Limit how many Users to update.
    */
   limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1660,6 +1895,25 @@ export type User$userSessionsArgs<ExtArgs extends runtime.Types.Extensions.Inter
   take?: number
   skip?: number
   distinct?: Prisma.UserSessionScalarFieldEnum | Prisma.UserSessionScalarFieldEnum[]
+}
+
+/**
+ * User.condominium
+ */
+export type User$condominiumArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Condominium
+   */
+  select?: Prisma.CondominiumSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Condominium
+   */
+  omit?: Prisma.CondominiumOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CondominiumInclude<ExtArgs> | null
+  where?: Prisma.CondominiumWhereInput
 }
 
 /**

@@ -12,5 +12,6 @@ export default interface CondominiumsRepository {
     data: Partial<CreateCondominium>,
   ): Promise<CondominiumEntity>;
   findOneById(id: string): Promise<CondominiumEntity | null>;
+  findOneByAdminId(userId: string): Promise<CondominiumEntity | null>;
   findOneByKey(key: string): Promise<CondominiumEntity | null>;
 }

@@ -4,8 +4,8 @@ import {
   InternalServerErrorException,
 } from '@nestjs/common';
 
-import { PROVIDES_NAMES } from '@/app/common/enums/provides-names.enums';
 import CondominiumsRepository from '../../domain/repositories/condominiums.repository';
+import { PROVIDES_NAMES } from '@/common/enums/provides-names.enums';
 
 const FATAL_ERROR_MESSAGE = 'Error fetching condominium by key';
 

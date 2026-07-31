@@ -213,6 +213,7 @@ export type HouseOrderByWithRelationInput = {
 
 export type HouseWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  condominiumId_houseNumber?: Prisma.HouseCondominiumIdHouseNumberCompoundUniqueInput
   AND?: Prisma.HouseWhereInput | Prisma.HouseWhereInput[]
   OR?: Prisma.HouseWhereInput[]
   NOT?: Prisma.HouseWhereInput | Prisma.HouseWhereInput[]
@@ -226,7 +227,7 @@ export type HouseWhereUniqueInput = Prisma.AtLeast<{
   maintenanceCharges?: Prisma.MaintenanceChargeListRelationFilter
   houseAccount?: Prisma.XOR<Prisma.HouseAccountNullableScalarRelationFilter, Prisma.HouseAccountWhereInput> | null
   accountMovements?: Prisma.AccountMovementListRelationFilter
-}, "id">
+}, "id" | "condominiumId_houseNumber">
 
 export type HouseOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -338,6 +339,11 @@ export type HouseListRelationFilter = {
 
 export type HouseOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
+}
+
+export type HouseCondominiumIdHouseNumberCompoundUniqueInput = {
+  condominiumId: string
+  houseNumber: string
 }
 
 export type HouseCountOrderByAggregateInput = {

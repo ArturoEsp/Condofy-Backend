@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
-import { PROVIDES_NAMES } from '../common/enums/provides-names.enums';
 import { CondominiumsPrismaRepository } from './infrastructure/repositories/condominiums.prisma.repository';
 import { CondominiumsController } from './presentation/controllers/condominiums.controller';
 import { CreateCondominiumUseCase } from './application/use-cases/create-condominium.usecase';
 import { GetCondominiumByKeyUseCase } from './application/use-cases/get-condominium-by-key.usecase';
+import { PROVIDES_NAMES } from '@/common/enums/provides-names.enums';
 
 @Module({
   imports: [],
@@ -16,11 +16,6 @@ import { GetCondominiumByKeyUseCase } from './application/use-cases/get-condomin
     GetCondominiumByKeyUseCase,
   ],
   controllers: [CondominiumsController],
-  exports: [
-    {
-      provide: PROVIDES_NAMES.CondominiumsRepository,
-      useClass: CondominiumsPrismaRepository,
-    },
-  ],
+  exports: [PROVIDES_NAMES.CondominiumsRepository],
 })
 export class CondominiumsModule {}
