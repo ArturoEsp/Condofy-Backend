@@ -2,7 +2,7 @@ import UsersRepository from '@/app/users/domain/repositories/users.repository';
 import { JwtService } from '@nestjs/jwt';
 
 import UserSessionRepository from '../../domain/repositories/user-session.repository';
-import { EncryptionService } from '@/core/domain/services/encryptation.service';
+import { EncryptionService } from '@/core/domain/services/encryption.service';
 import { InvalidCredentialsException } from '../errors/invalid-credentials.exception';
 import { LoginCommand } from '../commands/login.command';
 import CondominiumsRepository from '@/app/condominiums/domain/repositories/condominiums.repository';
@@ -29,7 +29,9 @@ export class LoginUseCase {
     );
 
     if (!isValidPassword) throw new InvalidCredentialsException();
-    if (user.status === 'SUSPENDED') throw new SuspendedAccountException();
+    if (user.status === 'SUSPENDED' || user.status === 'INACTIVE') {
+      throw new SuspendedAccountException();
+    }
 
     try {
       const session = await this.sessionsRepository.create({
@@ -61,7 +63,11 @@ export class LoginUseCase {
         expiresIn: '15m',
       });
 
+      const refreshSecret =
+        process.env.JWT_REFRESH_SECRET || process.env.APP_SECRET;
+
       const refreshToken = await this.jwtService.signAsync(payload, {
+        secret: refreshSecret,
         expiresIn: '30d',
       });
 

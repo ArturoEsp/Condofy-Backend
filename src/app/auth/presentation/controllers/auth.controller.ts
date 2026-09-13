@@ -87,9 +87,27 @@ export class AuthController {
   }
   @Post('logout')
   @Public()
-  async logout(@Req() req: Request) {
+  async logout(
+    @Req() req: Request,
+    @Res({ passthrough: true }) response: Response,
+  ) {
     const refreshToken = req.cookies.refresh_token;
-    await this.logoutUseCase.execute(refreshToken);
+    if (refreshToken) {
+      await this.logoutUseCase.execute(refreshToken);
+    }
+
+    response.clearCookie('access_token', {
+      httpOnly: true,
+      secure: true,
+      sameSite,
+    });
+    response.clearCookie('refresh_token', {
+      httpOnly: true,
+      secure: true,
+      sameSite,
+    });
+
+    return { success: true };
   }
 
   @Get('me')

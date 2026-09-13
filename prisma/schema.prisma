@@ -15,6 +15,7 @@ datasource db {
 enum UserRole {
   ADMIN
   RESIDENT
+  STAND
 }
 
 enum ResidentType {
@@ -27,6 +28,7 @@ enum UserStatus {
   PENDING
   ACTIVE
   SUSPENDED
+  INACTIVE
 }
 
 enum MaintenanceChargeStatus {
@@ -50,6 +52,34 @@ enum AccountMovementType {
   ADJUSTMENT
   CREDIT
   LATE_FEE
+}
+
+enum AuthorizationType {
+  ONE_TIME
+  DATE_RANGE
+  PERMANENT
+}
+
+enum AuthorizationStatus {
+  PENDING
+  ACTIVE
+  EXPIRED
+  CANCELLED
+  USED
+}
+
+enum EntryType {
+  ENTRY
+  EXIT
+}
+
+enum VisitorCategory {
+  FAMILY
+  FRIEND
+  DELIVERY
+  SERVICE
+  EMPLOYEE
+  OTHER
 }
 
 model Condominium {
@@ -78,6 +108,7 @@ model User {
   condominiumId   String?
   createdAt       DateTime         @default(now())
   updatedAt       DateTime         @updatedAt
+  accessLogs      AccessLog[]
 
   @@index([email])
 }
@@ -105,27 +136,87 @@ model House {
   maintenanceCharges MaintenanceCharge[]
   houseAccount       HouseAccount?
   accountMovements   AccountMovement[]
+  visitors           Visitor[]
+  houseConfiguration HouseConfiguration?
+  isDisabled         Boolean             @default(false)
   createdAt          DateTime            @default(now())
   updatedAt          DateTime            @updatedAt
 
   @@unique([condominiumId, houseNumber])
 }
 
+model HouseConfiguration {
+  id              String   @id @default(uuid())
+  house           House    @relation(fields: [houseId], references: [id], onDelete: Cascade)
+  houseId         String   @unique
+  hideAccessAfter Int?     @default(30)
+  updatedAt       DateTime @updatedAt
+}
+
 model ResidentProfile {
-  id            String       @id @default(uuid())
-  userId        String       @unique
-  user          User         @relation(fields: [userId], references: [id])
-  condominiumId String
-  condominium   Condominium  @relation(fields: [condominiumId], references: [id], onDelete: Restrict)
-  houseId       String
-  house         House        @relation(fields: [houseId], references: [id], onDelete: Restrict)
-  residentType  ResidentType
-  firstName     String
-  lastName      String
-  phone         String?
-  comments      String?
-  createdAt     DateTime     @default(now())
-  updatedAt     DateTime     @updatedAt
+  id              String       @id @default(uuid())
+  userId          String       @unique
+  user            User         @relation(fields: [userId], references: [id])
+  condominiumId   String
+  condominium     Condominium  @relation(fields: [condominiumId], references: [id], onDelete: Restrict)
+  houseId         String
+  house           House        @relation(fields: [houseId], references: [id], onDelete: Restrict)
+  residentType    ResidentType
+  canCreateVisits Boolean      @default(true)
+  firstName       String
+  lastName        String
+  phone           String?
+  comments        String?
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+}
+
+// Visitors and Access
+model Visitor {
+  id             String                @id @default(uuid())
+  house          House                 @relation(fields: [houseId], references: [id], onDelete: Cascade)
+  houseId        String
+  firstName      String
+  lastName       String?
+  phone          String?
+  email          String?
+  photo          String?
+  category       VisitorCategory
+  vehiclePlate   String?
+  notes          String?
+  authorizations AccessAuthorization[]
+  createdAt      DateTime              @default(now())
+  updatedAt      DateTime              @updatedAt
+}
+
+model AccessAuthorization {
+  id           String              @id @default(uuid())
+  index        Int                 @default(autoincrement())
+  visitor      Visitor             @relation(fields: [visitorId], references: [id])
+  visitorId    String
+  qrCode       String              @unique
+  vehiclePlate String?
+  type         AuthorizationType
+  status       AuthorizationStatus
+  validFrom    DateTime
+  validUntil   DateTime?
+  maxEntries   Int?
+  usedEntries  Int                 @default(0)
+  notes        String?
+  logs         AccessLog[]
+  createdAt    DateTime            @default(now())
+  updatedAt    DateTime            @updatedAt
+}
+
+model AccessLog {
+  id                    String              @id @default(uuid())
+  authorization         AccessAuthorization @relation(fields: [accessAuthorizationId], references: [id], onDelete: Cascade)
+  accessAuthorizationId String
+  entryType             EntryType
+  observations          String?
+  userAccept            User                @relation(fields: [userAcceptId], references: [id], onDelete: Cascade)
+  userAcceptId          String
+  date                  DateTime            @default(now())
 }
 
 // Account model to manage condominium's financial accounts
@@ -150,7 +241,6 @@ model AccountMovement {
 }
 
 // Payment model to track maintenance charges and payments
-
 model MaintenanceCharge {
   id                  String                  @id @default(uuid())
   condominiumId       String

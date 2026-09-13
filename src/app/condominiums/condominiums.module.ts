@@ -12,10 +12,22 @@ import { PROVIDES_NAMES } from '@/common/enums/provides-names.enums';
       provide: PROVIDES_NAMES.CondominiumsRepository,
       useClass: CondominiumsPrismaRepository,
     },
-    CreateCondominiumUseCase,
-    GetCondominiumByKeyUseCase,
+    {
+      provide: CreateCondominiumUseCase,
+      inject: [PROVIDES_NAMES.CondominiumsRepository],
+      useFactory: (repository) => {
+        return new CreateCondominiumUseCase(repository);
+      },
+    },
+    {
+      provide: GetCondominiumByKeyUseCase,
+      inject: [PROVIDES_NAMES.CondominiumsRepository],
+      useFactory: (repository) => {
+        return new GetCondominiumByKeyUseCase(repository);
+      },
+    },
   ],
   controllers: [CondominiumsController],
-  exports: [PROVIDES_NAMES.CondominiumsRepository],
+  exports: [PROVIDES_NAMES.CondominiumsRepository, CreateCondominiumUseCase],
 })
 export class CondominiumsModule {}

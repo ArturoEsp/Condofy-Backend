@@ -3,4 +3,6 @@ export interface AuthUserEntity {
   email: string;
   role: string;
   sessionId: string;
+  condominiumId?: string;
+  condominiumKey?: string;
 }

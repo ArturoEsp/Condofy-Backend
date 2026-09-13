@@ -41,12 +41,20 @@ export class MeUseCase {
         user.id,
       );
 
-      console.log(profileResident);
-
       if (profileResident) {
         resident.firstName = profileResident.firstName;
         resident.lastName = profileResident.lastName;
         resident.phone = profileResident.phone;
+
+        if (profileResident.condominiumId) {
+          const condo = await this.condominiumsRepository.findOneById(
+            profileResident.condominiumId,
+          );
+          if (condo) {
+            condominium.condominiumKey = condo.key;
+            condominium.condominiumName = condo.name;
+          }
+        }
       }
     }
 

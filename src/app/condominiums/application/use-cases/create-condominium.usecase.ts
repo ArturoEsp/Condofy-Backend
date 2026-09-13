@@ -1,29 +1,19 @@
-import {
-  Inject,
-  Injectable,
-  InternalServerErrorException,
-} from '@nestjs/common';
-
 import CondominiumsRepository from '../../domain/repositories/condominiums.repository';
-import { PROVIDES_NAMES } from '@/common/enums/provides-names.enums';
-import { CreateCondominiumRequest } from '../../presentation/dtos/requests/create-condominium.request';
+import { CreateCondominiumCommand } from '../commands/create-condominium.command';
+import { FatalErrorException } from '@/common/errors/fatal-message.error';
 
 const FATAL_ERROR_MESSAGE = 'Error creating condominium';
 
-@Injectable()
 export class CreateCondominiumUseCase {
   constructor(
-    @Inject(PROVIDES_NAMES.CondominiumsRepository)
     private readonly condominiumsRepository: CondominiumsRepository,
   ) {}
 
-  async execute(data: CreateCondominiumRequest) {
+  async execute(data: CreateCondominiumCommand) {
     try {
       await this.condominiumsRepository.create(data);
     } catch (error) {
-      throw new InternalServerErrorException(FATAL_ERROR_MESSAGE, {
-        cause: error,
-      });
+      throw new FatalErrorException(FATAL_ERROR_MESSAGE, error);
     }
   }
 }

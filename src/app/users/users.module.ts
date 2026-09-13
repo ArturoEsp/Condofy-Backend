@@ -17,9 +17,12 @@ import { CoreModule } from '@/core/core.module';
     },
     {
       provide: CreateUserUseCase,
-      inject: [PROVIDES_NAMES.UsersRepository],
-      useFactory: (repository) => {
-        return new CreateUserUseCase(repository);
+      inject: [
+        PROVIDES_NAMES.UsersRepository,
+        PROVIDES_NAMES.EncryptionService,
+      ],
+      useFactory: (repository, encryptionService) => {
+        return new CreateUserUseCase(repository, encryptionService);
       },
     },
   ],

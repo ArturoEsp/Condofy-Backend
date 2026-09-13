@@ -19,3 +19,11 @@ export const getHouses: ApiEndpointProps = {
   serialization: ListHousesResponse,
   type: ListHousesResponse,
 };
+
+export const updateHouse: ApiEndpointProps = {
+  summary: 'Actualizar una casa',
+  status: HttpStatus.OK,
+  withToken: true,
+  serialization: HouseResponse,
+  type: HouseResponse,
+};

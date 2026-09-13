@@ -9,7 +9,7 @@ import {
 } from 'class-validator';
 
 import { ResidentType } from '@/core/infrastructure/persistence/prisma/generated/browser';
-import { CreateResidentCommand } from '@/app/residents/application/commands/create-redisent.command';
+import { CreateResidentCommand } from '@/app/residents/application/commands/create-resident.command';
 
 export class CreateResidentInHouseRequest implements Omit<
   CreateResidentCommand,

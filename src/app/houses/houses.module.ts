@@ -1,10 +1,11 @@
 import { Module } from '@nestjs/common';
-import { HousesPrismaRepository } from './infrastructure/repositories/houses.repository.prisma';
+import { HousesPrismaRepository } from './infrastructure/repositories/houses.prisma.repository';
 import { UsersModule } from '../users/users.module';
 import { PROVIDES_NAMES } from '@/common/enums/provides-names.enums';
 import { CreateHouseUseCase } from './application/use-cases/create-house.usecase';
 import { HousesCondominiumController } from './presentation/controllers/houses-condominium.controller';
 import { ListHousesUseCase } from './application/use-cases/list-houses.usecase';
+import { UpdateHouseUseCase } from './application/use-cases/update-house.usecase';
 
 @Module({
   imports: [UsersModule],
@@ -25,6 +26,13 @@ import { ListHousesUseCase } from './application/use-cases/list-houses.usecase';
       inject: [PROVIDES_NAMES.HousesRepository],
       useFactory: (repository) => {
         return new ListHousesUseCase(repository);
+      },
+    },
+    {
+      provide: UpdateHouseUseCase,
+      inject: [PROVIDES_NAMES.HousesRepository],
+      useFactory: (repository) => {
+        return new UpdateHouseUseCase(repository);
       },
     },
   ],

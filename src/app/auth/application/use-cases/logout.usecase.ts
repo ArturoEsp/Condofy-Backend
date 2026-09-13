@@ -10,10 +10,16 @@ export class LogoutUseCase {
   ) {}
 
   async execute(refreshToken: string) {
+    if (!refreshToken) return;
+
     let payload: JwtPayloadEntity;
+    const refreshSecret =
+      process.env.JWT_REFRESH_SECRET || process.env.APP_SECRET;
 
     try {
-      payload = await this.jwtService.verifyAsync(refreshToken);
+      payload = await this.jwtService.verifyAsync(refreshToken, {
+        secret: refreshSecret,
+      });
     } catch {
       throw new UnauthorizedException('Invalid refresh token');
     }

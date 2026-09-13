@@ -1,9 +1,13 @@
 import UsersRepository from '../../domain/repositories/users.repository';
 import { CreateUserCommand } from '../commands/create-user.command';
-import { EmailExistException } from '../errors/email-exist.exeception';
+import { EmailExistException } from '../errors/email-exist.exception';
+import { EncryptionService } from '@/core/domain/services/encryption.service';
 
 export class CreateUserUseCase {
-  constructor(private readonly usersRepository: UsersRepository) {}
+  constructor(
+    private readonly usersRepository: UsersRepository,
+    private readonly encryptionService: EncryptionService,
+  ) {}
 
   async execute(data: CreateUserCommand) {
     const { password, ...rest } = data;
@@ -11,9 +15,11 @@ export class CreateUserUseCase {
 
     if (existEmail) throw new EmailExistException();
 
+    const passwordHash = await this.encryptionService.hash(password);
+
     return await this.usersRepository.create({
       ...rest,
-      passwordHash: password,
+      passwordHash,
     });
   }
 }

@@ -11,6 +11,9 @@ import { RolesGuard } from './app/auth/presentation/guards/roles.guard';
 import { ResidentsModule } from './app/residents/residents.module';
 import { CondominiumIdPipe } from './common/pipes/condominium-id.pipe';
 import { HousesModule } from './app/houses/houses.module';
+import { AccessControlModule } from './app/access-control/access-control.module';
+
+import { CondominiumGuard } from './app/auth/presentation/guards/condominium.guard';
 
 @Module({
   imports: [
@@ -26,6 +29,7 @@ import { HousesModule } from './app/houses/houses.module';
     AuthModule,
     CondominiumsModule,
     HousesModule,
+    AccessControlModule,
   ],
   controllers: [],
   providers: [
@@ -37,6 +41,10 @@ import { HousesModule } from './app/houses/houses.module';
     {
       provide: APP_GUARD,
       useClass: RolesGuard,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: CondominiumGuard,
     },
   ],
 })

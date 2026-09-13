@@ -13,6 +13,10 @@ export class ResidentResponse {
 
   @ApiProperty()
   @Expose()
+  userId: string;
+
+  @ApiProperty()
+  @Expose()
   condominiumId: string;
 
   @ApiProperty()
@@ -46,6 +50,10 @@ export class ResidentResponse {
   @ApiProperty()
   @Expose()
   phone: string | null;
+
+  @ApiProperty()
+  @Expose()
+  canCreateVisits: boolean;
 
   @ApiProperty()
   @Expose()

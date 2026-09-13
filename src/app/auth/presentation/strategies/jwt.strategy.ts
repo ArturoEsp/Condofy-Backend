@@ -30,7 +30,16 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
   async validate(payload: JwtPayloadEntity): Promise<AuthUserEntity> {
     const session = await this.prisma.userSession.findUnique({
       where: { id: payload.sessionId },
-      include: { user: true },
+      include: {
+        user: {
+          include: {
+            condominium: true,
+            residentProfile: {
+              include: { condominium: true },
+            },
+          },
+        },
+      },
     });
 
     if (!session) throw new UnauthorizedException(SESSION_NOT_FOUND);
@@ -38,11 +47,18 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
     if (session.expiresAt < new Date())
       throw new UnauthorizedException(SESSION_EXPIRED);
 
+    const condominium =
+      session.user.condominium ||
+      session.user.residentProfile?.condominium ||
+      null;
+
     return {
       id: session.user.id,
       email: session.user.email,
       role: session.user.role,
       sessionId: session.id,
+      condominiumId: condominium?.id,
+      condominiumKey: condominium?.key,
     };
   }
 }

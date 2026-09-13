@@ -3,17 +3,16 @@ FROM node:20-alpine AS builder
 
 WORKDIR /app
 
-# Copiar manifiestos e instalar dependencias de desarrollo y producción
-COPY package*.json ./
+# Copiar manifiestos de paquetes e instalar dependencias con yarn
+COPY package.json yarn.lock ./
 COPY prisma ./prisma/
 
-RUN npm ci
+RUN yarn install --frozen-lockfile
 
-# Copiar el código fuente y compilar NestJS
-# Con Prisma 7, la generación ocurre de forma integrada o mediante la build
+# Copiar código fuente, generar Prisma Client y compilar NestJS
 COPY . .
 RUN npx prisma generate
-RUN npm run build
+RUN yarn build
 
 # 2. ETAPA DE EJECUCIÓN (Runner)
 FROM node:20-alpine AS runner
@@ -22,17 +21,19 @@ WORKDIR /app
 
 ENV NODE_ENV=production
 
-# Copiar solo lo estrictamente necesario para producción
-COPY package*.json ./
-COPY prisma ./prisma/
+# Copiar manifiestos y prisma schema
+COPY --chown=node:node package.json yarn.lock ./
+COPY --chown=node:node prisma ./prisma/
 
-# Instalar únicamente dependencias de producción
-RUN npm ci --only=production
+# Instalar dependencias de producción
+RUN yarn install --production --frozen-lockfile && yarn cache clean
 
-# Copiar la compilación de NestJS desde la etapa anterior
-COPY --from=builder /app/dist ./dist
+# Copiar la compilación desde el builder
+COPY --from=builder --chown=node:node /app/dist ./dist
+
+# Ejecutar como usuario sin privilegios
+USER node
 
 EXPOSE 3000
 
-# Aplicar migraciones al iniciar el contenedor y arrancar el servidor
-CMD ["sh", "-c", "npx prisma migrate deploy && node dist/main"]
+CMD ["node", "dist/main"]

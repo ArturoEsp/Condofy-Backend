@@ -1,24 +1,30 @@
-import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
-import * as bcrypt from 'bcrypt';
+import { UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 
 import UserSessionRepository from '../../domain/repositories/user-session.repository';
-import { PROVIDES_NAMES } from '@/common/enums/provides-names.enums';
 import { JwtPayloadEntity } from '../../domain/entities/jwt-payload.entity';
+import { EncryptionService } from '@/core/domain/services/encryption.service';
 
-@Injectable()
 export class RefreshUseCase {
   constructor(
-    @Inject(PROVIDES_NAMES.UserSessionsRepository)
     private readonly sessionsRepository: UserSessionRepository,
     private readonly jwtService: JwtService,
+    private readonly encryptionService: EncryptionService,
   ) {}
 
   async execute(refreshToken: string) {
+    if (!refreshToken) {
+      throw new UnauthorizedException('Refresh token is required');
+    }
+
     let payload: JwtPayloadEntity;
+    const refreshSecret =
+      process.env.JWT_REFRESH_SECRET || process.env.APP_SECRET;
 
     try {
-      payload = await this.jwtService.verifyAsync(refreshToken);
+      payload = await this.jwtService.verifyAsync(refreshToken, {
+        secret: refreshSecret,
+      });
     } catch {
       throw new UnauthorizedException('Invalid refresh token');
     }
@@ -37,7 +43,7 @@ export class RefreshUseCase {
       throw new UnauthorizedException('Session expired');
     }
 
-    const isValidRefresh = await bcrypt.compare(
+    const isValidRefresh = await this.encryptionService.compare(
       refreshToken,
       session.refreshTokenHash,
     );
@@ -56,21 +62,12 @@ export class RefreshUseCase {
       expiresIn: '15m',
     });
 
-    const newRefreshTokenPayload: JwtPayloadEntity = {
-      sub: payload.sub,
-      role: payload.role,
-      sessionId: session.id,
-    };
+    const newRefreshToken = await this.jwtService.signAsync(newPayload, {
+      secret: refreshSecret,
+      expiresIn: '30d',
+    });
 
-    const newRefreshToken = await this.jwtService.signAsync(
-      newRefreshTokenPayload,
-      {
-        secret: process.env.JWT_REFRESH_SECRET,
-        expiresIn: '30d',
-      },
-    );
-
-    const refreshTokenHash = await bcrypt.hash(newRefreshToken, 12);
+    const refreshTokenHash = await this.encryptionService.hash(newRefreshToken);
 
     await this.sessionsRepository.update({
       id: session.id,

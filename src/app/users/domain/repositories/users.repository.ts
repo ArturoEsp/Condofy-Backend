@@ -10,4 +10,5 @@ export default interface UsersRepository {
   findOneByEmail: (email: string) => Promise<UserEntity | null>;
   findOneById: (id: string) => Promise<UserEntity | null>;
   findMany: (filters?: FindManyUsersFilters) => Promise<UserEntity[]>;
+  delete: (id: string) => Promise<void>;
 }

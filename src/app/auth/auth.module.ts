@@ -75,7 +75,17 @@ import { LogoutUseCase } from './application/use-cases/logout.usecase';
         return new LogoutUseCase(session, jwt);
       },
     },
-    RefreshUseCase,
+    {
+      provide: RefreshUseCase,
+      inject: [
+        PROVIDES_NAMES.UserSessionsRepository,
+        JwtService,
+        PROVIDES_NAMES.EncryptionService,
+      ],
+      useFactory: (sessions, jwt, encryption) => {
+        return new RefreshUseCase(sessions, jwt, encryption);
+      },
+    },
   ],
   exports: [JwtModule],
   controllers: [AuthController],

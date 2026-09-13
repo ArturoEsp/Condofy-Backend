@@ -1,18 +1,10 @@
-import {
-  Inject,
-  Injectable,
-  InternalServerErrorException,
-} from '@nestjs/common';
-
 import CondominiumsRepository from '../../domain/repositories/condominiums.repository';
-import { PROVIDES_NAMES } from '@/common/enums/provides-names.enums';
+import { FatalErrorException } from '@/common/errors/fatal-message.error';
 
 const FATAL_ERROR_MESSAGE = 'Error fetching condominium by key';
 
-@Injectable()
 export class GetCondominiumByKeyUseCase {
   constructor(
-    @Inject(PROVIDES_NAMES.CondominiumsRepository)
     private readonly condominiumsRepository: CondominiumsRepository,
   ) {}
 
@@ -20,9 +12,7 @@ export class GetCondominiumByKeyUseCase {
     try {
       return await this.condominiumsRepository.findOneByKey(key);
     } catch (error) {
-      throw new InternalServerErrorException(FATAL_ERROR_MESSAGE, {
-        cause: error,
-      });
+      throw new FatalErrorException(FATAL_ERROR_MESSAGE, error);
     }
   }
 }

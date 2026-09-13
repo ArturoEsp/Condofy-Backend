@@ -21,9 +21,10 @@ export class ResidentsPrismaRepository implements ResidentsRepository {
         condominiumId: data.condominiumId,
         houseId: data.houseId,
         residentType: data.residentType,
+        canCreateVisits: data.canCreateVisits ?? true,
         userId: data.userId,
       },
-      include: { user: true },
+      include: { user: true, house: true },
     });
 
     return ResidentEntityMapper.toDomain(resident);
@@ -38,7 +39,7 @@ export class ResidentsPrismaRepository implements ResidentsRepository {
       data: {
         ...data,
       },
-      include: { user: true },
+      include: { user: true, house: true },
     });
 
     return ResidentEntityMapper.toDomain(resident);
@@ -48,20 +49,29 @@ export class ResidentsPrismaRepository implements ResidentsRepository {
     await this.prismaService.residentProfile.delete({ where: { id } });
   }
 
+  async findOneById(id: string): Promise<ResidentEntity | null> {
+    const resident = await this.prismaService.residentProfile.findUnique({
+      where: { id },
+      include: { user: true, house: true },
+    });
+
+    return resident ? ResidentEntityMapper.toDomain(resident) : null;
+  }
+
   async findOneByUserId(userId: string): Promise<ResidentEntity | null> {
     const resident = await this.prismaService.residentProfile.findUnique({
       where: {
         userId,
       },
-      include: { user: true },
+      include: { user: true, house: true },
     });
 
-    return ResidentEntityMapper.toDomain(resident);
+    return resident ? ResidentEntityMapper.toDomain(resident) : null;
   }
 
   async findManyByHouseId(houseId: string) {
     const residents = await this.prismaService.residentProfile.findMany({
-      include: { user: true },
+      include: { user: true, house: true },
       where: { houseId },
     });
 
@@ -72,7 +82,7 @@ export class ResidentsPrismaRepository implements ResidentsRepository {
     const { page, size, fullText, condominiumId, orderBy, houseId } = params;
 
     const residents = await this.prismaService.residentProfile.findMany({
-      include: { user: true },
+      include: { user: true, house: true },
       where: {
         ...(condominiumId && { condominiumId }),
         ...(houseId && { houseId }),

@@ -5,4 +5,6 @@ export const PROVIDES_NAMES = {
   HousesRepository: 'HousesRepository',
   ResidentsRepository: 'ResidentsRepository',
   EncryptionService: 'EncryptionService',
+  AccessAuthorizationsRepository: 'AccessAuthorizationsRepository',
+  VisitorsRepository: 'VisitorsRepository',
 } as const;

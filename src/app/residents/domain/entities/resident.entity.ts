@@ -6,12 +6,15 @@ import {
 
 export class ResidentEntity {
   id: string;
+  userId: string;
   email: string;
   role: UserRole;
   status: UserStatus;
   condominiumId: string;
   houseId: string;
+  houseNumber?: string;
   residentType: ResidentType;
+  canCreateVisits: boolean;
   firstName: string;
   lastName: string;
   phone: string | null;

@@ -1,73 +1,124 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# 🏢 Condofy - Backend API
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Backend RESTful para la plataforma de administración y control de condominios **Condofy**, desarrollado con **NestJS**, **TypeScript**, **PostgreSQL** y **Prisma ORM**.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+---
 
-## Description
+## 🏛️ Arquitectura de Software
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+El proyecto sigue los principios de **Arquitectura Hexagonal (Ports & Adapters)** combinados con **Domain-Driven Design (DDD)**:
 
-## Installation
-
-```bash
-$ yarn install
+```
+src/
+├── app/                              # Módulos de dominio y bounded contexts
+│   ├── auth/                         # Autenticación, JWT, rotación de sesiones
+│   ├── condominiums/                 # Administración de condominios
+│   ├── houses/                       # Gestión de casas y asignaciones
+│   ├── residents/                    # Perfiles de residentes y usuarios
+│   └── users/                        # Gestión de identidad y credenciales
+│       └── [módulo]/
+│           ├── domain/               # Entidades, Value Objects e interfaces de Repositorio (Puertos)
+│           ├── application/          # Casos de uso y Commands (Lógica de aplicación agnóstica)
+│           ├── infrastructure/       # Implementaciones de repositorio con Prisma y Mappers (Adaptadores)
+│           └── presentation/         # Controladores HTTP, DTOs con validación y Swagger Docs
+├── common/                           # Decoradores, Guards, Pipes, Enums transversales
+│   ├── decorators/                   # @Public(), @Roles(), @CondominiumId(), @CurrentUser()
+│   ├── pipes/                        # CondominiumIdPipe
+│   └── enums/                        # Nombres de inyección de dependencias (PROVIDES_NAMES)
+└── core/                             # Servicios nucleares (PrismaService, EncryptionService, Filtros globales)
+    ├── domain/                       # Contratos centrales de servicios
+    └── infrastructure/               # Persistencia Prisma, adaptadores criptográficos (Bcrypt)
 ```
 
-## Running the app
+### Principios Clave
+
+1. **Inversión de Dependencias (DIP):** Los casos de uso orquestan la lógica de negocio consumiendo contratos de repositorio de la capa de dominio, desacoplados del ORM (Prisma).
+2. **Aislamiento Multi-Inquilino (Multi-Tenancy):** Control estricto de accesos mediante `CondominiumGuard` y validación de contexto en capa de aplicación para garantizar que los recursos pertenezcan al condominio activo.
+3. **Cifrado Seguro:** Las contraseñas se procesan mediante `EncryptionService` con Bcrypt antes de cualquier persistencia.
+4. **Resiliencia de Sesiones:** Autenticación por cookies HTTP-only con rotación criptográfica segura de Refresh Tokens.
+
+---
+
+## 🚀 Requisitos Previos
+
+- **Node.js:** v20.x o superior
+- **Yarn:** v1.22.x
+- **PostgreSQL:** v16.x (o Docker para levantarlo en contenedor)
+
+---
+
+## ⚙️ Configuración del Entorno
+
+1. Clona el repositorio y navega al directorio del proyecto:
+
+   ```bash
+   git clone https://github.com/ArturoEsp/Condofy-Backend.git
+   cd Condofy-Backend
+   ```
+
+2. Crea tu archivo de variables de entorno a partir de la plantilla:
+
+   ```bash
+   cp .env.example .env
+   ```
+
+3. Configura las variables esenciales en `.env`:
+   ```dotenv
+   APP_PORT=3000
+   APP_ENV=development
+   APP_SECRET=clave_secreta_jwt_minimo_32_caracteres
+   JWT_REFRESH_SECRET=clave_secreta_refresh_minimo_32_caracteres
+   DATABASE_URL="postgresql://postgres:root@localhost:5432/condofy?schema=public"
+   ```
+
+---
+
+## 📦 Instalación y Base de Datos
 
 ```bash
-# development
-$ yarn run start
+# 1. Instalar dependencias
+yarn install
 
-# watch mode
-$ yarn run start:dev
+# 2. Generar el cliente de Prisma
+npx prisma generate
 
-# production mode
-$ yarn run start:prod
+# 3. Aplicar migraciones a la base de datos
+npx prisma migrate dev
+
+# 4. (Opcional) Cargar datos semilla
+npx tsx prisma/seed/seed.ts
 ```
 
-## Test
+---
+
+## 💻 Ejecución
 
 ```bash
-# unit tests
-$ yarn run test
+# Modo desarrollo con recarga en caliente
+yarn start:dev
 
-# e2e tests
-$ yarn run test:e2e
-
-# test coverage
-$ yarn run test:cov
+# Modo producción
+yarn build
+yarn start:prod
 ```
 
-## Support
+---
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+## 📖 Documentación de la API (Swagger)
 
-## Stay in touch
+Una vez iniciado el servidor, accede a la documentación interactiva Swagger en:
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+```
+http://localhost:3000/api-docs
+```
 
-## License
+---
 
-Nest is [MIT licensed](LICENSE).
+## 🐳 Despliegue con Docker
+
+El proyecto incluye un `Dockerfile` optimizado en múltiples etapas (_multi-stage build_) y un manifiesto `docker-compose.prod.yml`:
+
+```bash
+# Construir y levantar servicios con Docker Compose
+docker compose -f docker-compose.prod.yml up -d --build
+```
