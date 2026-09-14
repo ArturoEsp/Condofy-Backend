@@ -25,8 +25,8 @@ ENV NODE_ENV=production
 COPY --chown=node:node package.json yarn.lock prisma.config.ts* ./
 COPY --chown=node:node prisma ./prisma/
 
-# Instalar dependencias de producción
-RUN yarn install --production --frozen-lockfile && yarn cache clean
+# Copiar dependencias ya instaladas y compiladas desde el builder
+COPY --from=builder --chown=node:node /app/node_modules ./node_modules
 
 # Copiar la compilación desde el builder
 COPY --from=builder --chown=node:node /app/dist ./dist
