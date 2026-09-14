@@ -1,5 +1,5 @@
 # 1. ETAPA DE CONSTRUCCIÓN (Builder)
-FROM node:20-slim AS builder
+FROM node:22-slim AS builder
 
 WORKDIR /app
 
@@ -10,8 +10,8 @@ RUN apt-get update && apt-get install -y openssl ca-certificates && rm -rf /var/
 COPY package.json yarn.lock prisma.config.ts* ./
 COPY prisma ./prisma/
 
-# Instalar dependencias (usa binarios precompilados compatibles con Debian)
-RUN yarn install
+# Instalar dependencias con compatibilidad para Prisma 7
+RUN yarn install --ignore-engines
 
 # Copiar código fuente, generar Prisma Client y compilar NestJS
 COPY . .
@@ -19,7 +19,7 @@ RUN npx prisma generate
 RUN yarn build
 
 # 2. ETAPA DE EJECUCIÓN (Runner)
-FROM node:20-slim AS runner
+FROM node:22-slim AS runner
 
 WORKDIR /app
 
