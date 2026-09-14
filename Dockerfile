@@ -15,6 +15,7 @@ RUN yarn install --ignore-engines
 
 # Copiar código fuente, generar Prisma Client y compilar NestJS
 COPY . .
+ENV DATABASE_URL="postgresql://postgres:postgres@localhost:5432/condofy?schema=public"
 RUN npx prisma generate
 RUN yarn build
 
