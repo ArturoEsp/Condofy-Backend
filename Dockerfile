@@ -1,13 +1,17 @@
 # 1. ETAPA DE CONSTRUCCIÓN (Builder)
-FROM node:20-alpine AS builder
+FROM node:20-slim AS builder
 
 WORKDIR /app
+
+# Instalar dependencias del sistema para Prisma y certificados SSL
+RUN apt-get update && apt-get install -y openssl ca-certificates && rm -rf /var/lib/apt/lists/*
 
 # Copiar manifiestos de paquetes e instalar dependencias con yarn
 COPY package.json yarn.lock prisma.config.ts* ./
 COPY prisma ./prisma/
 
-RUN yarn install --frozen-lockfile
+# Instalar dependencias (usa binarios precompilados compatibles con Debian)
+RUN yarn install
 
 # Copiar código fuente, generar Prisma Client y compilar NestJS
 COPY . .
@@ -15,11 +19,14 @@ RUN npx prisma generate
 RUN yarn build
 
 # 2. ETAPA DE EJECUCIÓN (Runner)
-FROM node:20-alpine AS runner
+FROM node:20-slim AS runner
 
 WORKDIR /app
 
 ENV NODE_ENV=production
+
+# Instalar OpenSSL para el motor de Prisma en tiempo de ejecución
+RUN apt-get update && apt-get install -y openssl ca-certificates && rm -rf /var/lib/apt/lists/*
 
 # Copiar manifiestos y prisma schema
 COPY --chown=node:node package.json yarn.lock prisma.config.ts* ./
