@@ -1,6 +1,6 @@
 import * as bcrypt from 'bcrypt';
 
-import { PrismaClient } from '@/core/infrastructure/persistence/prisma/generated/client';
+import { PrismaClient } from '../../src/core/infrastructure/persistence/prisma/generated/client';
 import { PrismaPg } from '@prisma/adapter-pg';
 
 const prisma = new PrismaClient({
