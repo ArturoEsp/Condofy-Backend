@@ -9,4 +9,5 @@ export interface CreateUserCommand {
   isEmailVerified: boolean;
   role: UserRole;
   status: UserStatus;
+  condominiumId?: string | null;
 }

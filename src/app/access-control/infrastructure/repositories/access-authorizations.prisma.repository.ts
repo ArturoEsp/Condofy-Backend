@@ -10,10 +10,65 @@ import AccessAuthorizationsRepository, {
 import { AccessAuthorizationEntity } from '../../domain/entities/access-authorization.entity';
 import { AccessAuthorizationEntityMapper } from '../mappers/access-authorization.mapper';
 import { Prisma } from '@/core/infrastructure/persistence/prisma/generated/client';
+import {
+  AuthorizationStatus,
+  AuthorizationType,
+} from '@/core/infrastructure/persistence/prisma/generated/enums';
 
 @Injectable()
 export class AccessAuthorizationsPrismaRepository implements AccessAuthorizationsRepository {
   constructor(private readonly prismaService: PrismaService) {}
+
+  private async autoSyncAuthorizationsStatus(): Promise<void> {
+    const now = new Date();
+    const startOfToday = new Date(
+      now.getFullYear(),
+      now.getMonth(),
+      now.getDate(),
+      0,
+      0,
+      0,
+      0,
+    );
+
+    // 1. Expirar pases cuya fecha límite ya pasó o de un solo día anteriores a hoy
+    await this.prismaService.accessAuthorization.updateMany({
+      where: {
+        status: AuthorizationStatus.ACTIVE,
+        OR: [
+          {
+            validUntil: {
+              lt: now,
+            },
+          },
+          {
+            type: AuthorizationType.ONE_TIME,
+            validUntil: null,
+            validFrom: {
+              lt: startOfToday,
+            },
+          },
+        ],
+      },
+      data: {
+        status: AuthorizationStatus.EXPIRED,
+      },
+    });
+
+    // 2. Activar pases pendientes cuya fecha de inicio ya fue alcanzada y siguen vigentes
+    await this.prismaService.accessAuthorization.updateMany({
+      where: {
+        status: AuthorizationStatus.PENDING,
+        validFrom: {
+          lte: now,
+        },
+        OR: [{ validUntil: null }, { validUntil: { gte: now } }],
+      },
+      data: {
+        status: AuthorizationStatus.ACTIVE,
+      },
+    });
+  }
 
   async create(
     data: CreateAccessAuthorizationData,
@@ -45,10 +100,20 @@ export class AccessAuthorizationsPrismaRepository implements AccessAuthorization
   }
 
   async findOneById(id: string): Promise<AccessAuthorizationEntity | null> {
+    await this.autoSyncAuthorizationsStatus();
+
     const access = await this.prismaService.accessAuthorization.findUnique({
       where: { id },
       include: {
-        visitor: true,
+        visitor: {
+          include: {
+            house: {
+              include: {
+                condominium: true,
+              },
+            },
+          },
+        },
         logs: {
           orderBy: {
             date: 'desc',
@@ -61,9 +126,62 @@ export class AccessAuthorizationsPrismaRepository implements AccessAuthorization
     return access ? AccessAuthorizationEntityMapper.toDomain(access) : null;
   }
 
+  async findOneByIdOrIdentifier(
+    identifier: string,
+  ): Promise<AccessAuthorizationEntity | null> {
+    await this.autoSyncAuthorizationsStatus();
+
+    const includeRelations = {
+      visitor: {
+        include: {
+          house: {
+            include: {
+              condominium: true,
+            },
+          },
+        },
+      },
+      logs: {
+        orderBy: {
+          date: 'desc' as const,
+        },
+        take: 1,
+      },
+    };
+
+    // 1. Intentar buscar por ID directo
+    let access = await this.prismaService.accessAuthorization.findUnique({
+      where: { id: identifier },
+      include: includeRelations,
+    });
+
+    // 2. Si no se encuentra y tiene formato tipo ACC-0001, buscar por index
+    if (!access && identifier.toUpperCase().startsWith('ACC-')) {
+      const indexNum = parseInt(identifier.substring(4), 10);
+      if (!isNaN(indexNum)) {
+        access = await this.prismaService.accessAuthorization.findFirst({
+          where: { index: indexNum },
+          include: includeRelations,
+        });
+      }
+    }
+
+    // 3. Si no se encuentra, buscar por qrCode (token / PIN)
+    if (!access) {
+      access = await this.prismaService.accessAuthorization.findUnique({
+        where: { qrCode: identifier },
+        include: includeRelations,
+      });
+    }
+
+    return access ? AccessAuthorizationEntityMapper.toDomain(access) : null;
+  }
+
   async findManyByHouseId(
     params: ParamsFindManyAccessAuthorizations,
   ): Promise<AccessAuthorizationEntity[]> {
+    await this.autoSyncAuthorizationsStatus();
+
     const where = this.buildWhereInput(params);
 
     // Si se filtra específicamente por insideCondo, filtramos sobre los resultados con logs
@@ -119,6 +237,8 @@ export class AccessAuthorizationsPrismaRepository implements AccessAuthorization
   async countByHouseId(
     params: ParamsCountAccessAuthorizations,
   ): Promise<number> {
+    await this.autoSyncAuthorizationsStatus();
+
     const where = this.buildWhereInput(params);
 
     if (params.insideCondo !== undefined) {
@@ -151,6 +271,8 @@ export class AccessAuthorizationsPrismaRepository implements AccessAuthorization
   }
 
   async getKpisByHouseId(houseId: string): Promise<AccessControlKpis> {
+    await this.autoSyncAuthorizationsStatus();
+
     const accesses = await this.prismaService.accessAuthorization.findMany({
       where: {
         visitor: {

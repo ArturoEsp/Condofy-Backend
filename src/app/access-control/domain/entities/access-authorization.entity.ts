@@ -10,6 +10,16 @@ export class AccessAuthorizationEntity {
   code: string; // Identificador visual tipo ACC-0001
   visitorId: string;
   visitor?: VisitorEntity;
+  house?: {
+    id: string;
+    houseNumber: string;
+    tower?: string | null;
+  };
+  condominium?: {
+    id: string;
+    name: string;
+    key?: string;
+  };
   qrCode: string;
   pin: string;
   vehiclePlate: string | null;

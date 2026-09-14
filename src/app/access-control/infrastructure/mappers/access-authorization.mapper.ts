@@ -1,13 +1,21 @@
 import {
   AccessAuthorization,
   AccessLog,
+  Condominium,
+  House,
   Visitor,
 } from '@/core/infrastructure/persistence/prisma/generated/client';
 import { AccessAuthorizationEntity } from '../../domain/entities/access-authorization.entity';
 import { VisitorEntityMapper } from './visitor.mapper';
 
+export type VisitorWithHouseAndCondo = Visitor & {
+  house?: House & {
+    condominium?: Condominium;
+  };
+};
+
 export type AccessAuthorizationWithRelations = AccessAuthorization & {
-  visitor?: Visitor;
+  visitor?: VisitorWithHouseAndCondo;
   logs?: AccessLog[];
 };
 
@@ -30,6 +38,20 @@ export class AccessAuthorizationEntityMapper {
       visitorId: model.visitorId,
       visitor: model.visitor
         ? VisitorEntityMapper.toDomain(model.visitor)
+        : undefined,
+      house: model.visitor?.house
+        ? {
+            id: model.visitor.house.id,
+            houseNumber: model.visitor.house.houseNumber,
+            tower: model.visitor.house.tower,
+          }
+        : undefined,
+      condominium: model.visitor?.house?.condominium
+        ? {
+            id: model.visitor.house.condominium.id,
+            name: model.visitor.house.condominium.name,
+            key: model.visitor.house.condominium.key,
+          }
         : undefined,
       qrCode: model.qrCode,
       pin: model.qrCode,

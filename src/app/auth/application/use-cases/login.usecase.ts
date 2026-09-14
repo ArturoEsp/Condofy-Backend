@@ -50,6 +50,11 @@ export class LoginUseCase {
           user.id,
         );
         if (condominium) condominiumKey = condominium.key;
+      } else if (user.role === 'STAND' && user.condominiumId) {
+        const condo = await this.condominiumsRepository.findOneById(
+          user.condominiumId,
+        );
+        if (condo) condominiumKey = condo.key;
       }
 
       const payload = {

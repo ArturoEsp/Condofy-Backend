@@ -36,6 +36,21 @@ export class MeUseCase {
       condominium.condominiumName = findCondominium.name;
     }
 
+    if (user.role === 'STAND') {
+      resident.firstName = 'Caseta';
+      resident.lastName = 'Vigilancia';
+
+      if (user.condominiumId) {
+        const condo = await this.condominiumsRepository.findOneById(
+          user.condominiumId,
+        );
+        if (condo) {
+          condominium.condominiumKey = condo.key;
+          condominium.condominiumName = condo.name;
+        }
+      }
+    }
+
     if (user.role === 'RESIDENT') {
       const profileResident = await this.residentsRepository.findOneByUserId(
         user.id,

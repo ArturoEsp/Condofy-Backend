@@ -10,6 +10,7 @@ export class UserEntity {
   role: UserRole;
   status: UserStatus;
   isEmailVerified: boolean;
+  condominiumId?: string | null;
   createdAt: Date;
   updatedAt: Date;
 }

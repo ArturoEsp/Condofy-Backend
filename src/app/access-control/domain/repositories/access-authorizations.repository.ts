@@ -54,6 +54,9 @@ export default interface AccessAuthorizationsRepository {
     data: CreateAccessAuthorizationData,
   ): Promise<AccessAuthorizationEntity>;
   findOneById(id: string): Promise<AccessAuthorizationEntity | null>;
+  findOneByIdOrIdentifier(
+    identifier: string,
+  ): Promise<AccessAuthorizationEntity | null>;
   findManyByHouseId(
     params: ParamsFindManyAccessAuthorizations,
   ): Promise<AccessAuthorizationEntity[]>;

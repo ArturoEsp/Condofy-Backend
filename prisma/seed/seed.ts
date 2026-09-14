@@ -36,6 +36,28 @@ async function main(): Promise<void> {
   console.log(
     `✅ Administrador configurado con éxito bajo el correo: ${admin.email}`,
   );
+
+  const condo = await prisma.condominium.findFirst();
+  if (condo) {
+    const guardEmail = 'guardia@condofy.com';
+    const guardPassword = await bcrypt.hash('guardia1234', 10);
+    await prisma.user.upsert({
+      where: { email: guardEmail },
+      update: {
+        passwordHash: guardPassword,
+        role: 'STAND',
+        condominiumId: condo.id,
+      },
+      create: {
+        email: guardEmail,
+        passwordHash: guardPassword,
+        role: 'STAND',
+        status: 'ACTIVE',
+        condominiumId: condo.id,
+      },
+    });
+    console.log(`✅ Guardia configurado: ${guardEmail} / guardia1234`);
+  }
 }
 
 main()

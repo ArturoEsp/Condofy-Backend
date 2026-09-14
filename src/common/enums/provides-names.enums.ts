@@ -7,4 +7,5 @@ export const PROVIDES_NAMES = {
   EncryptionService: 'EncryptionService',
   AccessAuthorizationsRepository: 'AccessAuthorizationsRepository',
   VisitorsRepository: 'VisitorsRepository',
+  AccessLogsRepository: 'AccessLogsRepository',
 } as const;
