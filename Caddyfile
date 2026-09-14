@@ -1,0 +1,19 @@
+{
+    # Opciones globales
+    # email tu-correo@ejemplo.com
+}
+
+{$DOMAIN:localhost} {
+    reverse_proxy api:3000
+
+    # Cabeceras de seguridad recomendadas
+    header {
+        Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+        X-Content-Type-Options "nosniff"
+        X-Frame-Options "DENY"
+    }
+
+    # Compresión automática para optimizar transferencia
+    encode gzip zstd
+}
+

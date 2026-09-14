@@ -3,8 +3,6 @@ import {
   Controller,
   Delete,
   Get,
-  Inject,
-  NotFoundException,
   Param,
   Patch,
   Post,
@@ -13,14 +11,15 @@ import { ApiTags } from '@nestjs/swagger';
 import { ApiEndpoint } from '@/common/decorators/api-endpoint.decorator';
 import { CondominiumId } from '@/common/decorators/condominium.decorator';
 import { Roles } from '@/common/decorators/roles.decorator';
-import { PROVIDES_NAMES } from '@/common/enums/provides-names.enums';
 import {
   UserRole,
   UserStatus,
 } from '@/core/infrastructure/persistence/prisma/generated/enums';
 
 import { CreateUserUseCase } from '@/app/users/application/use-cases/create-user.usecase';
-import UsersRepository from '@/app/users/domain/repositories/users.repository';
+import { ListGuardsUseCase } from '../../application/use-cases/list-guards.usecase';
+import { UpdateGuardStatusUseCase } from '../../application/use-cases/update-guard-status.usecase';
+import { DeleteGuardUseCase } from '../../application/use-cases/delete-guard.usecase';
 
 import * as Docs from '../docs/admin-security.docs';
 import { CreateGuardRequest } from '../dtos/requests/create-guard.request';
@@ -32,8 +31,9 @@ import { UpdateGuardStatusRequest } from '../dtos/requests/update-guard-status.r
 export class AdminSecurityController {
   constructor(
     private readonly createUserUseCase: CreateUserUseCase,
-    @Inject(PROVIDES_NAMES.UsersRepository)
-    private readonly usersRepository: UsersRepository,
+    private readonly listGuardsUseCase: ListGuardsUseCase,
+    private readonly updateGuardStatusUseCase: UpdateGuardStatusUseCase,
+    private readonly deleteGuardUseCase: DeleteGuardUseCase,
   ) {}
 
   @Post()
@@ -55,15 +55,7 @@ export class AdminSecurityController {
   @Get()
   @ApiEndpoint(Docs.listGuards)
   async listGuards(@CondominiumId() condominiumId: string) {
-    return await this.usersRepository.findMany({
-      where: {
-        role: UserRole.STAND,
-        condominiumId,
-      },
-      orderBy: {
-        createdAt: 'desc',
-      },
-    });
+    return await this.listGuardsUseCase.execute(condominiumId);
   }
 
   @Patch(':id/status')
@@ -73,18 +65,11 @@ export class AdminSecurityController {
     @Param('id') id: string,
     @Body() dto: UpdateGuardStatusRequest,
   ) {
-    const user = await this.usersRepository.findOneById(id);
-    if (
-      !user ||
-      user.condominiumId !== condominiumId ||
-      user.role !== UserRole.STAND
-    ) {
-      throw new NotFoundException('Guardia no encontrado en este condominio.');
-    }
-
-    return await this.usersRepository.update(id, {
-      status: dto.status,
-    });
+    return await this.updateGuardStatusUseCase.execute(
+      id,
+      dto.status,
+      condominiumId,
+    );
   }
 
   @Delete(':id')
@@ -93,16 +78,6 @@ export class AdminSecurityController {
     @CondominiumId() condominiumId: string,
     @Param('id') id: string,
   ) {
-    const user = await this.usersRepository.findOneById(id);
-    if (
-      !user ||
-      user.condominiumId !== condominiumId ||
-      user.role !== UserRole.STAND
-    ) {
-      throw new NotFoundException('Guardia no encontrado en este condominio.');
-    }
-
-    await this.usersRepository.delete(id);
-    return { success: true, message: 'Guardia eliminado exitosamente' };
+    return await this.deleteGuardUseCase.execute(id, condominiumId);
   }
 }

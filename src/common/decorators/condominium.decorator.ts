@@ -5,7 +5,18 @@ import { CondominiumIdPipe } from '../pipes/condominium-id.pipe';
 export const CondominiumIdParam = createParamDecorator(
   (paramName: string = 'condominiumKey', ctx: ExecutionContext) => {
     const request = ctx.switchToHttp().getRequest();
-    return request.params[paramName];
+    const key = request.params?.[paramName];
+
+    // Si el usuario autenticado ya resolvió el condominiumId para esta clave, reutilizarlo
+    if (
+      request.user?.condominiumKey &&
+      request.user.condominiumKey === key &&
+      request.user.condominiumId
+    ) {
+      return request.user.condominiumId;
+    }
+
+    return key;
   },
 );
 

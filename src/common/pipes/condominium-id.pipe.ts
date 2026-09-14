@@ -13,6 +13,15 @@ export class CondominiumIdPipe implements PipeTransform<
       throw new NotFoundException('Condominium key was not provided');
     }
 
+    // Si ya es un UUID válido de 36 caracteres, evitar consulta redundante
+    const isUuid =
+      /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(
+        condominiumKey,
+      );
+    if (isUuid) {
+      return condominiumKey;
+    }
+
     // Buscamos el registro por su key en la BD
     const condominium = await this.prismaService.condominium.findUnique({
       where: { key: condominiumKey },

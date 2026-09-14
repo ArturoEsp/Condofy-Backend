@@ -17,6 +17,9 @@ import { GetPublicPassUseCase } from './application/use-cases/get-public-pass.us
 import { StandRegisterAccessLogUseCase } from './application/use-cases/stand-register-access-log.usecase';
 import { StandGetAccessLogsUseCase } from './application/use-cases/stand-get-access-logs.usecase';
 import { StandGetDashboardStatsUseCase } from './application/use-cases/stand-get-dashboard-stats.usecase';
+import { ListGuardsUseCase } from './application/use-cases/list-guards.usecase';
+import { UpdateGuardStatusUseCase } from './application/use-cases/update-guard-status.usecase';
+import { DeleteGuardUseCase } from './application/use-cases/delete-guard.usecase';
 
 import { ResidentAccessControlController } from './presentation/controllers/resident-access-control.controller';
 import { ResidentVisitorsController } from './presentation/controllers/resident-visitors.controller';
@@ -134,6 +137,27 @@ import { AdminSecurityController } from './presentation/controllers/admin-securi
         return new StandGetDashboardStatsUseCase(accessLogsRepo);
       },
     },
+    {
+      provide: ListGuardsUseCase,
+      inject: [PROVIDES_NAMES.UsersRepository],
+      useFactory: (usersRepo) => {
+        return new ListGuardsUseCase(usersRepo);
+      },
+    },
+    {
+      provide: UpdateGuardStatusUseCase,
+      inject: [PROVIDES_NAMES.UsersRepository],
+      useFactory: (usersRepo) => {
+        return new UpdateGuardStatusUseCase(usersRepo);
+      },
+    },
+    {
+      provide: DeleteGuardUseCase,
+      inject: [PROVIDES_NAMES.UsersRepository],
+      useFactory: (usersRepo) => {
+        return new DeleteGuardUseCase(usersRepo);
+      },
+    },
   ],
   controllers: [
     ResidentAccessControlController,
@@ -155,6 +179,9 @@ import { AdminSecurityController } from './presentation/controllers/admin-securi
     StandRegisterAccessLogUseCase,
     StandGetAccessLogsUseCase,
     StandGetDashboardStatsUseCase,
+    ListGuardsUseCase,
+    UpdateGuardStatusUseCase,
+    DeleteGuardUseCase,
   ],
 })
 export class AccessControlModule {}

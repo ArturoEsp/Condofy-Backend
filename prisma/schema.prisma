@@ -110,7 +110,7 @@ model User {
   updatedAt       DateTime         @updatedAt
   accessLogs      AccessLog[]
 
-  @@index([email])
+  @@index([condominiumId])
 }
 
 model UserSession {
@@ -124,6 +124,9 @@ model UserSession {
   expiresAt        DateTime
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
+
+  @@index([userId])
+  @@index([expiresAt])
 }
 
 model House {
@@ -169,6 +172,9 @@ model ResidentProfile {
   comments        String?
   createdAt       DateTime     @default(now())
   updatedAt       DateTime     @updatedAt
+
+  @@index([condominiumId])
+  @@index([houseId])
 }
 
 // Visitors and Access
@@ -187,6 +193,9 @@ model Visitor {
   authorizations AccessAuthorization[]
   createdAt      DateTime              @default(now())
   updatedAt      DateTime              @updatedAt
+
+  @@index([houseId])
+  @@index([category])
 }
 
 model AccessAuthorization {
@@ -206,6 +215,10 @@ model AccessAuthorization {
   logs         AccessLog[]
   createdAt    DateTime            @default(now())
   updatedAt    DateTime            @updatedAt
+
+  @@index([visitorId])
+  @@index([status])
+  @@index([validFrom, validUntil])
 }
 
 model AccessLog {
@@ -217,6 +230,10 @@ model AccessLog {
   userAccept            User                @relation(fields: [userAcceptId], references: [id], onDelete: Cascade)
   userAcceptId          String
   date                  DateTime            @default(now())
+
+  @@index([accessAuthorizationId])
+  @@index([userAcceptId])
+  @@index([date])
 }
 
 // Account model to manage condominium's financial accounts
@@ -238,6 +255,9 @@ model AccountMovement {
   amount       Decimal             @db.Decimal(12, 2)
   movementDate DateTime
   createdAt    DateTime            @default(now())
+
+  @@index([houseId])
+  @@index([movementDate])
 }
 
 // Payment model to track maintenance charges and payments
@@ -259,6 +279,11 @@ model MaintenanceCharge {
   lateFees            LateFee[]
   createdAt           DateTime                @default(now())
   updatedAt           DateTime                @updatedAt
+
+  @@index([condominiumId])
+  @@index([houseId])
+  @@index([status])
+  @@index([dueDate])
 }
 
 model Payment {
@@ -274,6 +299,10 @@ model Payment {
   createdBy           User              @relation(fields: [createdById], references: [id])
   createdAt           DateTime          @default(now())
   updatedAt           DateTime          @updatedAt
+
+  @@index([maintenanceChargeId])
+  @@index([createdById])
+  @@index([paymentDate])
 }
 
 model MaintenancePeriod {
@@ -286,6 +315,8 @@ model MaintenancePeriod {
   generatedAt   DateTime            @default(now())
   charges       MaintenanceCharge[]
   createdAt     DateTime            @default(now())
+
+  @@index([condominiumId])
 }
 
 model LateFee {
@@ -295,4 +326,6 @@ model LateFee {
   amount              Decimal           @db.Decimal(12, 2)
   reason              String
   createdAt           DateTime          @default(now())
+
+  @@index([maintenanceChargeId])
 }

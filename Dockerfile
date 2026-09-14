@@ -4,7 +4,7 @@ FROM node:20-alpine AS builder
 WORKDIR /app
 
 # Copiar manifiestos de paquetes e instalar dependencias con yarn
-COPY package.json yarn.lock ./
+COPY package.json yarn.lock prisma.config.ts* ./
 COPY prisma ./prisma/
 
 RUN yarn install --frozen-lockfile
@@ -22,7 +22,7 @@ WORKDIR /app
 ENV NODE_ENV=production
 
 # Copiar manifiestos y prisma schema
-COPY --chown=node:node package.json yarn.lock ./
+COPY --chown=node:node package.json yarn.lock prisma.config.ts* ./
 COPY --chown=node:node prisma ./prisma/
 
 # Instalar dependencias de producción
@@ -36,4 +36,4 @@ USER node
 
 EXPOSE 3000
 
-CMD ["node", "dist/main"]
+CMD ["yarn", "start:prod:migrate"]

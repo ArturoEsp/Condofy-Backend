@@ -1,10 +1,11 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { ConfigService } from '@nestjs/config';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import type { Request } from 'express';
 
-import { PrismaService } from '@/core/infrastructure/persistence/prisma/prisma.service';
+import { PROVIDES_NAMES } from '@/common/enums/provides-names.enums';
+import UserSessionRepository from '../../domain/repositories/user-session.repository';
 import { JwtPayloadEntity } from '../../domain/entities/jwt-payload.entity';
 import { AuthUserEntity } from '../../domain/entities/auth-user.entity';
 
@@ -15,12 +16,14 @@ const SESSION_EXPIRED = 'Session expired';
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
   constructor(
-    private readonly prisma: PrismaService,
+    @Inject(PROVIDES_NAMES.UserSessionsRepository)
+    private readonly sessionsRepository: UserSessionRepository,
     private readonly configService: ConfigService,
   ) {
     super({
       jwtFromRequest: ExtractJwt.fromExtractors([
         (request: Request) => request?.cookies?.access_token,
+        ExtractJwt.fromAuthHeaderAsBearerToken(),
       ]),
       ignoreExpiration: false,
       secretOrKey: configService.getOrThrow<string>('APP_SECRET'),
@@ -28,37 +31,22 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
   }
 
   async validate(payload: JwtPayloadEntity): Promise<AuthUserEntity> {
-    const session = await this.prisma.userSession.findUnique({
-      where: { id: payload.sessionId },
-      include: {
-        user: {
-          include: {
-            condominium: true,
-            residentProfile: {
-              include: { condominium: true },
-            },
-          },
-        },
-      },
-    });
+    const session = await this.sessionsRepository.findSessionWithUser(
+      payload.sessionId,
+    );
 
     if (!session) throw new UnauthorizedException(SESSION_NOT_FOUND);
     if (session.isRevoked) throw new UnauthorizedException(SESSION_REVOKED);
     if (session.expiresAt < new Date())
       throw new UnauthorizedException(SESSION_EXPIRED);
 
-    const condominium =
-      session.user.condominium ||
-      session.user.residentProfile?.condominium ||
-      null;
-
     return {
       id: session.user.id,
       email: session.user.email,
       role: session.user.role,
       sessionId: session.id,
-      condominiumId: condominium?.id,
-      condominiumKey: condominium?.key,
+      condominiumId: session.user.condominiumId || undefined,
+      condominiumKey: session.user.condominiumKey || undefined,
     };
   }
 }
