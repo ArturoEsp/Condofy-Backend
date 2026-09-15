@@ -26,4 +26,5 @@ export default interface UserSessionRepository {
   findSessionWithUser(id: string): Promise<SessionWithUser | null>;
   delete(id: string): Promise<void>;
   deleteByUserId(userId: string): Promise<void>;
+  deleteExpiredSessions(): Promise<number>;
 }

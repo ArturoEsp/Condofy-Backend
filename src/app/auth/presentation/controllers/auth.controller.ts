@@ -1,6 +1,7 @@
 import { Body, Controller, Get, Post, Req, Res } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Request, Response, CookieOptions } from 'express';
+import { Throttle } from '@nestjs/throttler';
 
 import { LoginUseCase } from '../../application/use-cases/login.usecase';
 import { LoginRequest } from '../dto/requests/login.request';
@@ -54,6 +55,7 @@ export class AuthController {
 
   @Post('login')
   @Public()
+  @Throttle({ default: { limit: 10, ttl: 60000 } })
   async login(
     @Body() dto: LoginRequest,
     @Req() req: Request,

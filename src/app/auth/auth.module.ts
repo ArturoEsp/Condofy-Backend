@@ -15,6 +15,7 @@ import { CoreModule } from '@/core/core.module';
 import { ResidentsModule } from '../residents/residents.module';
 import { CondominiumsModule } from '../condominiums/condominiums.module';
 import { LogoutUseCase } from './application/use-cases/logout.usecase';
+import { SessionCleanupTask } from './infrastructure/tasks/session-cleanup.task';
 
 @Module({
   imports: [
@@ -34,6 +35,7 @@ import { LogoutUseCase } from './application/use-cases/logout.usecase';
   ],
   providers: [
     JwtStrategy,
+    SessionCleanupTask,
     {
       provide: PROVIDES_NAMES.UserSessionsRepository,
       useClass: UserSessionPrismaRepository,
