@@ -107,3 +107,28 @@ export const VisitorCategory = {
 } as const
 
 export type VisitorCategory = (typeof VisitorCategory)[keyof typeof VisitorCategory]
+
+
+export const ParcelStatus = {
+  IN_CUSTODY: 'IN_CUSTODY',
+  DELIVERED: 'DELIVERED',
+  RETURNED: 'RETURNED'
+} as const
+
+export type ParcelStatus = (typeof ParcelStatus)[keyof typeof ParcelStatus]
+
+
+export const CourierCompany = {
+  AMAZON: 'AMAZON',
+  MERCADO_LIBRE: 'MERCADO_LIBRE',
+  DHL: 'DHL',
+  FEDEX: 'FEDEX',
+  ESTAFETA: 'ESTAFETA',
+  UBER_EATS: 'UBER_EATS',
+  RAPPI: 'RAPPI',
+  DIDI: 'DIDI',
+  CORREOS_DE_MEXICO: 'CORREOS_DE_MEXICO',
+  OTHER: 'OTHER'
+} as const
+
+export type CourierCompany = (typeof CourierCompany)[keyof typeof CourierCompany]

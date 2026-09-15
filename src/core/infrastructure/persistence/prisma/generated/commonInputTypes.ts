@@ -321,6 +321,40 @@ export type EnumEntryTypeWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumEntryTypeFilter<$PrismaModel>
 }
 
+export type EnumCourierCompanyFilter<$PrismaModel = never> = {
+  equals?: $Enums.CourierCompany | Prisma.EnumCourierCompanyFieldRefInput<$PrismaModel>
+  in?: $Enums.CourierCompany[] | Prisma.ListEnumCourierCompanyFieldRefInput<$PrismaModel>
+  notIn?: $Enums.CourierCompany[] | Prisma.ListEnumCourierCompanyFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumCourierCompanyFilter<$PrismaModel> | $Enums.CourierCompany
+}
+
+export type EnumParcelStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.ParcelStatus | Prisma.EnumParcelStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.ParcelStatus[] | Prisma.ListEnumParcelStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ParcelStatus[] | Prisma.ListEnumParcelStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumParcelStatusFilter<$PrismaModel> | $Enums.ParcelStatus
+}
+
+export type EnumCourierCompanyWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.CourierCompany | Prisma.EnumCourierCompanyFieldRefInput<$PrismaModel>
+  in?: $Enums.CourierCompany[] | Prisma.ListEnumCourierCompanyFieldRefInput<$PrismaModel>
+  notIn?: $Enums.CourierCompany[] | Prisma.ListEnumCourierCompanyFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumCourierCompanyWithAggregatesFilter<$PrismaModel> | $Enums.CourierCompany
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumCourierCompanyFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumCourierCompanyFilter<$PrismaModel>
+}
+
+export type EnumParcelStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ParcelStatus | Prisma.EnumParcelStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.ParcelStatus[] | Prisma.ListEnumParcelStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ParcelStatus[] | Prisma.ListEnumParcelStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumParcelStatusWithAggregatesFilter<$PrismaModel> | $Enums.ParcelStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumParcelStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumParcelStatusFilter<$PrismaModel>
+}
+
 export type DecimalFilter<$PrismaModel = never> = {
   equals?: runtime.Decimal | runtime.DecimalJsLike | number | string | Prisma.DecimalFieldRefInput<$PrismaModel>
   in?: runtime.Decimal[] | runtime.DecimalJsLike[] | number[] | string[] | Prisma.ListDecimalFieldRefInput<$PrismaModel>
@@ -717,6 +751,40 @@ export type NestedEnumEntryTypeWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumEntryTypeFilter<$PrismaModel>
   _max?: Prisma.NestedEnumEntryTypeFilter<$PrismaModel>
+}
+
+export type NestedEnumCourierCompanyFilter<$PrismaModel = never> = {
+  equals?: $Enums.CourierCompany | Prisma.EnumCourierCompanyFieldRefInput<$PrismaModel>
+  in?: $Enums.CourierCompany[] | Prisma.ListEnumCourierCompanyFieldRefInput<$PrismaModel>
+  notIn?: $Enums.CourierCompany[] | Prisma.ListEnumCourierCompanyFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumCourierCompanyFilter<$PrismaModel> | $Enums.CourierCompany
+}
+
+export type NestedEnumParcelStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.ParcelStatus | Prisma.EnumParcelStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.ParcelStatus[] | Prisma.ListEnumParcelStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ParcelStatus[] | Prisma.ListEnumParcelStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumParcelStatusFilter<$PrismaModel> | $Enums.ParcelStatus
+}
+
+export type NestedEnumCourierCompanyWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.CourierCompany | Prisma.EnumCourierCompanyFieldRefInput<$PrismaModel>
+  in?: $Enums.CourierCompany[] | Prisma.ListEnumCourierCompanyFieldRefInput<$PrismaModel>
+  notIn?: $Enums.CourierCompany[] | Prisma.ListEnumCourierCompanyFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumCourierCompanyWithAggregatesFilter<$PrismaModel> | $Enums.CourierCompany
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumCourierCompanyFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumCourierCompanyFilter<$PrismaModel>
+}
+
+export type NestedEnumParcelStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ParcelStatus | Prisma.EnumParcelStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.ParcelStatus[] | Prisma.ListEnumParcelStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ParcelStatus[] | Prisma.ListEnumParcelStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumParcelStatusWithAggregatesFilter<$PrismaModel> | $Enums.ParcelStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumParcelStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumParcelStatusFilter<$PrismaModel>
 }
 
 export type NestedDecimalFilter<$PrismaModel = never> = {

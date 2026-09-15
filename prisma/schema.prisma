@@ -82,6 +82,25 @@ enum VisitorCategory {
   OTHER
 }
 
+enum ParcelStatus {
+  IN_CUSTODY
+  DELIVERED
+  RETURNED
+}
+
+enum CourierCompany {
+  AMAZON
+  MERCADO_LIBRE
+  DHL
+  FEDEX
+  ESTAFETA
+  UBER_EATS
+  RAPPI
+  DIDI
+  CORREOS_DE_MEXICO
+  OTHER
+}
+
 model Condominium {
   id                 String              @id @default(uuid())
   key                String              @unique
@@ -90,25 +109,28 @@ model Condominium {
   admins             User[]
   residentProfiles   ResidentProfile[]
   maintenanceCharges MaintenanceCharge[]
+  parcels            ParcelDelivery[]
   createdAt          DateTime            @default(now())
   updatedAt          DateTime            @updatedAt
 }
 
 model User {
-  id              String           @id @default(uuid())
-  email           String           @unique
-  passwordHash    String
-  role            UserRole         @default(RESIDENT)
-  status          UserStatus       @default(PENDING)
-  isEmailVerified Boolean          @default(false)
-  residentProfile ResidentProfile?
-  payments        Payment[]
-  userSessions    UserSession[]
-  condominium     Condominium?     @relation(fields: [condominiumId], references: [id], onDelete: SetNull)
-  condominiumId   String?
-  createdAt       DateTime         @default(now())
-  updatedAt       DateTime         @updatedAt
-  accessLogs      AccessLog[]
+  id               String           @id @default(uuid())
+  email            String           @unique
+  passwordHash     String
+  role             UserRole         @default(RESIDENT)
+  status           UserStatus       @default(PENDING)
+  isEmailVerified  Boolean          @default(false)
+  residentProfile  ResidentProfile?
+  payments         Payment[]
+  userSessions     UserSession[]
+  condominium      Condominium?     @relation(fields: [condominiumId], references: [id], onDelete: SetNull)
+  condominiumId    String?
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+  accessLogs       AccessLog[]
+  parcelsReceived  ParcelDelivery[] @relation("ParcelReceivedBy")
+  parcelsDelivered ParcelDelivery[] @relation("ParcelDeliveredBy")
 
   @@index([condominiumId])
 }
@@ -141,6 +163,7 @@ model House {
   accountMovements   AccountMovement[]
   visitors           Visitor[]
   houseConfiguration HouseConfiguration?
+  parcels            ParcelDelivery[]
   isDisabled         Boolean             @default(false)
   createdAt          DateTime            @default(now())
   updatedAt          DateTime            @updatedAt
@@ -234,6 +257,39 @@ model AccessLog {
   @@index([accessAuthorizationId])
   @@index([userAcceptId])
   @@index([date])
+}
+
+model ParcelDelivery {
+  id               String         @id @default(uuid())
+  condominiumId    String
+  condominium      Condominium    @relation(fields: [condominiumId], references: [id], onDelete: Cascade)
+  houseId          String
+  house            House          @relation(fields: [houseId], references: [id], onDelete: Cascade)
+  courier          CourierCompany
+  customCourier    String?
+  trackingNumber   String?
+  packageCount     Int            @default(1)
+  photoUrl         String?
+  notes            String?
+  pickupCode       String
+  status           ParcelStatus   @default(IN_CUSTODY)
+  receivedAt       DateTime       @default(now())
+  receivedById     String
+  receivedBy       User           @relation("ParcelReceivedBy", fields: [receivedById], references: [id])
+  notifiedAt       DateTime?
+  notificationSent Boolean        @default(false)
+  deliveredAt      DateTime?
+  deliveredById    String?
+  deliveredBy      User?          @relation("ParcelDeliveredBy", fields: [deliveredById], references: [id])
+  deliveredToName  String?
+  deliveryNotes    String?
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+
+  @@index([condominiumId, status])
+  @@index([houseId, status])
+  @@index([pickupCode])
+  @@index([receivedAt])
 }
 
 // Account model to manage condominium's financial accounts

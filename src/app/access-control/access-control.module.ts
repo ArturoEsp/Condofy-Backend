@@ -7,6 +7,7 @@ import { PROVIDES_NAMES } from '@/common/enums/provides-names.enums';
 import { AccessAuthorizationsPrismaRepository } from './infrastructure/repositories/access-authorizations.prisma.repository';
 import { VisitorsPrismaRepository } from './infrastructure/repositories/visitors.prisma.repository';
 import { AccessLogsPrismaRepository } from './infrastructure/repositories/access-logs.prisma.repository';
+import { ParcelDeliveryPrismaRepository } from './infrastructure/repositories/parcel-delivery.prisma.repository';
 
 import { CreateAccessAuthorizationUseCase } from './application/use-cases/create-access-authorization.usecase';
 import { ListHouseAccessAuthorizationsUseCase } from './application/use-cases/list-house-access-authorizations.usecase';
@@ -20,9 +21,17 @@ import { StandGetDashboardStatsUseCase } from './application/use-cases/stand-get
 import { ListGuardsUseCase } from './application/use-cases/list-guards.usecase';
 import { UpdateGuardStatusUseCase } from './application/use-cases/update-guard-status.usecase';
 import { DeleteGuardUseCase } from './application/use-cases/delete-guard.usecase';
+import { StandRegisterParcelUseCase } from './application/use-cases/stand-register-parcel.usecase';
+import { StandDeliverParcelUseCase } from './application/use-cases/stand-deliver-parcel.usecase';
+import { StandGetParcelsUseCase } from './application/use-cases/stand-get-parcels.usecase';
+import { StandGetParcelStatsUseCase } from './application/use-cases/stand-get-parcel-stats.usecase';
+import { StandNotifyParcelUseCase } from './application/use-cases/stand-notify-parcel.usecase';
+import { ResidentGetParcelsUseCase } from './application/use-cases/resident-get-parcels.usecase';
+import { ResidentCreateDeliveryPassUseCase } from './application/use-cases/resident-create-delivery-pass.usecase';
 
 import { ResidentAccessControlController } from './presentation/controllers/resident-access-control.controller';
 import { ResidentVisitorsController } from './presentation/controllers/resident-visitors.controller';
+import { ResidentParcelsController } from './presentation/controllers/resident-parcels.controller';
 import { PublicPassController } from './presentation/controllers/public-pass.controller';
 import { StandAccessControlController } from './presentation/controllers/stand-access-control.controller';
 import { AdminSecurityController } from './presentation/controllers/admin-security.controller';
@@ -41,6 +50,10 @@ import { AdminSecurityController } from './presentation/controllers/admin-securi
     {
       provide: PROVIDES_NAMES.AccessLogsRepository,
       useClass: AccessLogsPrismaRepository,
+    },
+    {
+      provide: PROVIDES_NAMES.ParcelDeliveryRepository,
+      useClass: ParcelDeliveryPrismaRepository,
     },
     {
       provide: CreateAccessAuthorizationUseCase,
@@ -158,10 +171,71 @@ import { AdminSecurityController } from './presentation/controllers/admin-securi
         return new DeleteGuardUseCase(usersRepo);
       },
     },
+    {
+      provide: StandRegisterParcelUseCase,
+      inject: [PROVIDES_NAMES.ParcelDeliveryRepository],
+      useFactory: (parcelRepo) => {
+        return new StandRegisterParcelUseCase(parcelRepo);
+      },
+    },
+    {
+      provide: StandDeliverParcelUseCase,
+      inject: [PROVIDES_NAMES.ParcelDeliveryRepository],
+      useFactory: (parcelRepo) => {
+        return new StandDeliverParcelUseCase(parcelRepo);
+      },
+    },
+    {
+      provide: StandGetParcelsUseCase,
+      inject: [PROVIDES_NAMES.ParcelDeliveryRepository],
+      useFactory: (parcelRepo) => {
+        return new StandGetParcelsUseCase(parcelRepo);
+      },
+    },
+    {
+      provide: StandGetParcelStatsUseCase,
+      inject: [PROVIDES_NAMES.ParcelDeliveryRepository],
+      useFactory: (parcelRepo) => {
+        return new StandGetParcelStatsUseCase(parcelRepo);
+      },
+    },
+    {
+      provide: StandNotifyParcelUseCase,
+      inject: [PROVIDES_NAMES.ParcelDeliveryRepository],
+      useFactory: (parcelRepo) => {
+        return new StandNotifyParcelUseCase(parcelRepo);
+      },
+    },
+    {
+      provide: ResidentGetParcelsUseCase,
+      inject: [
+        PROVIDES_NAMES.ResidentsRepository,
+        PROVIDES_NAMES.ParcelDeliveryRepository,
+      ],
+      useFactory: (residentsRepo, parcelRepo) => {
+        return new ResidentGetParcelsUseCase(residentsRepo, parcelRepo);
+      },
+    },
+    {
+      provide: ResidentCreateDeliveryPassUseCase,
+      inject: [
+        PROVIDES_NAMES.ResidentsRepository,
+        PROVIDES_NAMES.VisitorsRepository,
+        PROVIDES_NAMES.AccessAuthorizationsRepository,
+      ],
+      useFactory: (residentsRepo, visitorsRepo, accessAuthorizationsRepo) => {
+        return new ResidentCreateDeliveryPassUseCase(
+          residentsRepo,
+          visitorsRepo,
+          accessAuthorizationsRepo,
+        );
+      },
+    },
   ],
   controllers: [
     ResidentAccessControlController,
     ResidentVisitorsController,
+    ResidentParcelsController,
     PublicPassController,
     StandAccessControlController,
     AdminSecurityController,
@@ -170,6 +244,7 @@ import { AdminSecurityController } from './presentation/controllers/admin-securi
     PROVIDES_NAMES.AccessAuthorizationsRepository,
     PROVIDES_NAMES.VisitorsRepository,
     PROVIDES_NAMES.AccessLogsRepository,
+    PROVIDES_NAMES.ParcelDeliveryRepository,
     CreateAccessAuthorizationUseCase,
     ListHouseAccessAuthorizationsUseCase,
     UpdateAccessAuthorizationUseCase,
@@ -182,6 +257,13 @@ import { AdminSecurityController } from './presentation/controllers/admin-securi
     ListGuardsUseCase,
     UpdateGuardStatusUseCase,
     DeleteGuardUseCase,
+    StandRegisterParcelUseCase,
+    StandDeliverParcelUseCase,
+    StandGetParcelsUseCase,
+    StandGetParcelStatsUseCase,
+    StandNotifyParcelUseCase,
+    ResidentGetParcelsUseCase,
+    ResidentCreateDeliveryPassUseCase,
   ],
 })
 export class AccessControlModule {}
