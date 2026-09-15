@@ -59,6 +59,7 @@ export const ModelName = {
   Visitor: 'Visitor',
   AccessAuthorization: 'AccessAuthorization',
   AccessLog: 'AccessLog',
+  ParcelDelivery: 'ParcelDelivery',
   HouseAccount: 'HouseAccount',
   AccountMovement: 'AccountMovement',
   MaintenanceCharge: 'MaintenanceCharge',
@@ -213,6 +214,33 @@ export const AccessLogScalarFieldEnum = {
 } as const
 
 export type AccessLogScalarFieldEnum = (typeof AccessLogScalarFieldEnum)[keyof typeof AccessLogScalarFieldEnum]
+
+
+export const ParcelDeliveryScalarFieldEnum = {
+  id: 'id',
+  condominiumId: 'condominiumId',
+  houseId: 'houseId',
+  courier: 'courier',
+  customCourier: 'customCourier',
+  trackingNumber: 'trackingNumber',
+  packageCount: 'packageCount',
+  photoUrl: 'photoUrl',
+  notes: 'notes',
+  pickupCode: 'pickupCode',
+  status: 'status',
+  receivedAt: 'receivedAt',
+  receivedById: 'receivedById',
+  notifiedAt: 'notifiedAt',
+  notificationSent: 'notificationSent',
+  deliveredAt: 'deliveredAt',
+  deliveredById: 'deliveredById',
+  deliveredToName: 'deliveredToName',
+  deliveryNotes: 'deliveryNotes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ParcelDeliveryScalarFieldEnum = (typeof ParcelDeliveryScalarFieldEnum)[keyof typeof ParcelDeliveryScalarFieldEnum]
 
 
 export const HouseAccountScalarFieldEnum = {

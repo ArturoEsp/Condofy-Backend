@@ -36,3 +36,33 @@ export const standGetPass: ApiEndpointProps = {
   serialization: PublicPassResponse,
   type: PublicPassResponse,
 };
+
+export const standRegisterParcel: ApiEndpointProps = {
+  summary: 'Registrar recepción de paquete en caseta',
+  status: HttpStatus.CREATED,
+  withToken: true,
+};
+
+export const standGetParcels: ApiEndpointProps = {
+  summary: 'Listar paquetes en caseta (en custodia y entregados)',
+  status: HttpStatus.OK,
+  withToken: true,
+};
+
+export const standGetParcelStats: ApiEndpointProps = {
+  summary: 'Obtener métricas de paquetería en caseta',
+  status: HttpStatus.OK,
+  withToken: true,
+};
+
+export const standDeliverParcel: ApiEndpointProps = {
+  summary: 'Entregar paquete mediante validación de PIN',
+  status: HttpStatus.OK,
+  withToken: true,
+};
+
+export const standNotifyParcel: ApiEndpointProps = {
+  summary: 'Marcar paquete como notificado y generar enlace de WhatsApp',
+  status: HttpStatus.OK,
+  withToken: true,
+};

@@ -17,12 +17,14 @@ import { AuthorizationStatus } from '@/core/infrastructure/persistence/prisma/ge
 
 import * as Docs from '../docs/resident-access-control.docs';
 import { CreateAccessAuthorizationRequest } from '../dtos/requests/create-access-authorization.request';
+import { CreateDeliveryPassRequest } from '../dtos/requests/create-delivery-pass.request';
 import { ParamsListAccessAuthorizationsRequest } from '../dtos/requests/params-list-access-authorizations.request';
 import { UpdateAccessAuthorizationRequest } from '../dtos/requests/update-access-authorization.request';
 
 import { CreateAccessAuthorizationUseCase } from '../../application/use-cases/create-access-authorization.usecase';
 import { ListHouseAccessAuthorizationsUseCase } from '../../application/use-cases/list-house-access-authorizations.usecase';
 import { UpdateAccessAuthorizationUseCase } from '../../application/use-cases/update-access-authorization.usecase';
+import { ResidentCreateDeliveryPassUseCase } from '../../application/use-cases/resident-create-delivery-pass.usecase';
 
 @ApiTags('Resident Access Control')
 @Controller(':condominiumKey/residents/access-authorizations')
@@ -32,7 +34,22 @@ export class ResidentAccessControlController {
     private readonly createAccessAuthorizationUseCase: CreateAccessAuthorizationUseCase,
     private readonly listHouseAccessAuthorizationsUseCase: ListHouseAccessAuthorizationsUseCase,
     private readonly updateAccessAuthorizationUseCase: UpdateAccessAuthorizationUseCase,
+    private readonly residentCreateDeliveryPassUseCase: ResidentCreateDeliveryPassUseCase,
   ) {}
+
+  @Post('quick-delivery')
+  @ApiEndpoint(Docs.createQuickDeliveryPass)
+  async createQuickDeliveryPass(
+    @CondominiumId() condominiumId: string,
+    @CurrentUser() user: AuthUserEntity,
+    @Body() dto: CreateDeliveryPassRequest,
+  ) {
+    return await this.residentCreateDeliveryPassUseCase.execute({
+      ...dto,
+      currentUserId: user.id,
+      condominiumId,
+    });
+  }
 
   @Post()
   @ApiEndpoint(Docs.createAccessAuthorization)

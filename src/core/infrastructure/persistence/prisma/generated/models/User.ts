@@ -218,6 +218,8 @@ export type UserWhereInput = {
   userSessions?: Prisma.UserSessionListRelationFilter
   condominium?: Prisma.XOR<Prisma.CondominiumNullableScalarRelationFilter, Prisma.CondominiumWhereInput> | null
   accessLogs?: Prisma.AccessLogListRelationFilter
+  parcelsReceived?: Prisma.ParcelDeliveryListRelationFilter
+  parcelsDelivered?: Prisma.ParcelDeliveryListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -235,6 +237,8 @@ export type UserOrderByWithRelationInput = {
   userSessions?: Prisma.UserSessionOrderByRelationAggregateInput
   condominium?: Prisma.CondominiumOrderByWithRelationInput
   accessLogs?: Prisma.AccessLogOrderByRelationAggregateInput
+  parcelsReceived?: Prisma.ParcelDeliveryOrderByRelationAggregateInput
+  parcelsDelivered?: Prisma.ParcelDeliveryOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -255,6 +259,8 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   userSessions?: Prisma.UserSessionListRelationFilter
   condominium?: Prisma.XOR<Prisma.CondominiumNullableScalarRelationFilter, Prisma.CondominiumWhereInput> | null
   accessLogs?: Prisma.AccessLogListRelationFilter
+  parcelsReceived?: Prisma.ParcelDeliveryListRelationFilter
+  parcelsDelivered?: Prisma.ParcelDeliveryListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -301,6 +307,8 @@ export type UserCreateInput = {
   userSessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
   condominium?: Prisma.CondominiumCreateNestedOneWithoutAdminsInput
   accessLogs?: Prisma.AccessLogCreateNestedManyWithoutUserAcceptInput
+  parcelsReceived?: Prisma.ParcelDeliveryCreateNestedManyWithoutReceivedByInput
+  parcelsDelivered?: Prisma.ParcelDeliveryCreateNestedManyWithoutDeliveredByInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -317,6 +325,8 @@ export type UserUncheckedCreateInput = {
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCreatedByInput
   userSessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
   accessLogs?: Prisma.AccessLogUncheckedCreateNestedManyWithoutUserAcceptInput
+  parcelsReceived?: Prisma.ParcelDeliveryUncheckedCreateNestedManyWithoutReceivedByInput
+  parcelsDelivered?: Prisma.ParcelDeliveryUncheckedCreateNestedManyWithoutDeliveredByInput
 }
 
 export type UserUpdateInput = {
@@ -333,6 +343,8 @@ export type UserUpdateInput = {
   userSessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
   condominium?: Prisma.CondominiumUpdateOneWithoutAdminsNestedInput
   accessLogs?: Prisma.AccessLogUpdateManyWithoutUserAcceptNestedInput
+  parcelsReceived?: Prisma.ParcelDeliveryUpdateManyWithoutReceivedByNestedInput
+  parcelsDelivered?: Prisma.ParcelDeliveryUpdateManyWithoutDeliveredByNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -349,6 +361,8 @@ export type UserUncheckedUpdateInput = {
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutCreatedByNestedInput
   userSessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
   accessLogs?: Prisma.AccessLogUncheckedUpdateManyWithoutUserAcceptNestedInput
+  parcelsReceived?: Prisma.ParcelDeliveryUncheckedUpdateManyWithoutReceivedByNestedInput
+  parcelsDelivered?: Prisma.ParcelDeliveryUncheckedUpdateManyWithoutDeliveredByNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -435,6 +449,11 @@ export type UserMinOrderByAggregateInput = {
 export type UserScalarRelationFilter = {
   is?: Prisma.UserWhereInput
   isNot?: Prisma.UserWhereInput
+}
+
+export type UserNullableScalarRelationFilter = {
+  is?: Prisma.UserWhereInput | null
+  isNot?: Prisma.UserWhereInput | null
 }
 
 export type UserCreateNestedManyWithoutCondominiumInput = {
@@ -537,6 +556,36 @@ export type UserUpdateOneRequiredWithoutAccessLogsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAccessLogsInput, Prisma.UserUpdateWithoutAccessLogsInput>, Prisma.UserUncheckedUpdateWithoutAccessLogsInput>
 }
 
+export type UserCreateNestedOneWithoutParcelsReceivedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutParcelsReceivedInput, Prisma.UserUncheckedCreateWithoutParcelsReceivedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutParcelsReceivedInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutParcelsDeliveredInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutParcelsDeliveredInput, Prisma.UserUncheckedCreateWithoutParcelsDeliveredInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutParcelsDeliveredInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutParcelsReceivedNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutParcelsReceivedInput, Prisma.UserUncheckedCreateWithoutParcelsReceivedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutParcelsReceivedInput
+  upsert?: Prisma.UserUpsertWithoutParcelsReceivedInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutParcelsReceivedInput, Prisma.UserUpdateWithoutParcelsReceivedInput>, Prisma.UserUncheckedUpdateWithoutParcelsReceivedInput>
+}
+
+export type UserUpdateOneWithoutParcelsDeliveredNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutParcelsDeliveredInput, Prisma.UserUncheckedCreateWithoutParcelsDeliveredInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutParcelsDeliveredInput
+  upsert?: Prisma.UserUpsertWithoutParcelsDeliveredInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutParcelsDeliveredInput, Prisma.UserUpdateWithoutParcelsDeliveredInput>, Prisma.UserUncheckedUpdateWithoutParcelsDeliveredInput>
+}
+
 export type UserCreateNestedOneWithoutPaymentsInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutPaymentsInput, Prisma.UserUncheckedCreateWithoutPaymentsInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutPaymentsInput
@@ -564,6 +613,8 @@ export type UserCreateWithoutCondominiumInput = {
   payments?: Prisma.PaymentCreateNestedManyWithoutCreatedByInput
   userSessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
   accessLogs?: Prisma.AccessLogCreateNestedManyWithoutUserAcceptInput
+  parcelsReceived?: Prisma.ParcelDeliveryCreateNestedManyWithoutReceivedByInput
+  parcelsDelivered?: Prisma.ParcelDeliveryCreateNestedManyWithoutDeliveredByInput
 }
 
 export type UserUncheckedCreateWithoutCondominiumInput = {
@@ -579,6 +630,8 @@ export type UserUncheckedCreateWithoutCondominiumInput = {
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCreatedByInput
   userSessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
   accessLogs?: Prisma.AccessLogUncheckedCreateNestedManyWithoutUserAcceptInput
+  parcelsReceived?: Prisma.ParcelDeliveryUncheckedCreateNestedManyWithoutReceivedByInput
+  parcelsDelivered?: Prisma.ParcelDeliveryUncheckedCreateNestedManyWithoutDeliveredByInput
 }
 
 export type UserCreateOrConnectWithoutCondominiumInput = {
@@ -635,6 +688,8 @@ export type UserCreateWithoutUserSessionsInput = {
   payments?: Prisma.PaymentCreateNestedManyWithoutCreatedByInput
   condominium?: Prisma.CondominiumCreateNestedOneWithoutAdminsInput
   accessLogs?: Prisma.AccessLogCreateNestedManyWithoutUserAcceptInput
+  parcelsReceived?: Prisma.ParcelDeliveryCreateNestedManyWithoutReceivedByInput
+  parcelsDelivered?: Prisma.ParcelDeliveryCreateNestedManyWithoutDeliveredByInput
 }
 
 export type UserUncheckedCreateWithoutUserSessionsInput = {
@@ -650,6 +705,8 @@ export type UserUncheckedCreateWithoutUserSessionsInput = {
   residentProfile?: Prisma.ResidentProfileUncheckedCreateNestedOneWithoutUserInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCreatedByInput
   accessLogs?: Prisma.AccessLogUncheckedCreateNestedManyWithoutUserAcceptInput
+  parcelsReceived?: Prisma.ParcelDeliveryUncheckedCreateNestedManyWithoutReceivedByInput
+  parcelsDelivered?: Prisma.ParcelDeliveryUncheckedCreateNestedManyWithoutDeliveredByInput
 }
 
 export type UserCreateOrConnectWithoutUserSessionsInput = {
@@ -681,6 +738,8 @@ export type UserUpdateWithoutUserSessionsInput = {
   payments?: Prisma.PaymentUpdateManyWithoutCreatedByNestedInput
   condominium?: Prisma.CondominiumUpdateOneWithoutAdminsNestedInput
   accessLogs?: Prisma.AccessLogUpdateManyWithoutUserAcceptNestedInput
+  parcelsReceived?: Prisma.ParcelDeliveryUpdateManyWithoutReceivedByNestedInput
+  parcelsDelivered?: Prisma.ParcelDeliveryUpdateManyWithoutDeliveredByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutUserSessionsInput = {
@@ -696,6 +755,8 @@ export type UserUncheckedUpdateWithoutUserSessionsInput = {
   residentProfile?: Prisma.ResidentProfileUncheckedUpdateOneWithoutUserNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutCreatedByNestedInput
   accessLogs?: Prisma.AccessLogUncheckedUpdateManyWithoutUserAcceptNestedInput
+  parcelsReceived?: Prisma.ParcelDeliveryUncheckedUpdateManyWithoutReceivedByNestedInput
+  parcelsDelivered?: Prisma.ParcelDeliveryUncheckedUpdateManyWithoutDeliveredByNestedInput
 }
 
 export type UserCreateWithoutResidentProfileInput = {
@@ -711,6 +772,8 @@ export type UserCreateWithoutResidentProfileInput = {
   userSessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
   condominium?: Prisma.CondominiumCreateNestedOneWithoutAdminsInput
   accessLogs?: Prisma.AccessLogCreateNestedManyWithoutUserAcceptInput
+  parcelsReceived?: Prisma.ParcelDeliveryCreateNestedManyWithoutReceivedByInput
+  parcelsDelivered?: Prisma.ParcelDeliveryCreateNestedManyWithoutDeliveredByInput
 }
 
 export type UserUncheckedCreateWithoutResidentProfileInput = {
@@ -726,6 +789,8 @@ export type UserUncheckedCreateWithoutResidentProfileInput = {
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCreatedByInput
   userSessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
   accessLogs?: Prisma.AccessLogUncheckedCreateNestedManyWithoutUserAcceptInput
+  parcelsReceived?: Prisma.ParcelDeliveryUncheckedCreateNestedManyWithoutReceivedByInput
+  parcelsDelivered?: Prisma.ParcelDeliveryUncheckedCreateNestedManyWithoutDeliveredByInput
 }
 
 export type UserCreateOrConnectWithoutResidentProfileInput = {
@@ -757,6 +822,8 @@ export type UserUpdateWithoutResidentProfileInput = {
   userSessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
   condominium?: Prisma.CondominiumUpdateOneWithoutAdminsNestedInput
   accessLogs?: Prisma.AccessLogUpdateManyWithoutUserAcceptNestedInput
+  parcelsReceived?: Prisma.ParcelDeliveryUpdateManyWithoutReceivedByNestedInput
+  parcelsDelivered?: Prisma.ParcelDeliveryUpdateManyWithoutDeliveredByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutResidentProfileInput = {
@@ -772,6 +839,8 @@ export type UserUncheckedUpdateWithoutResidentProfileInput = {
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutCreatedByNestedInput
   userSessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
   accessLogs?: Prisma.AccessLogUncheckedUpdateManyWithoutUserAcceptNestedInput
+  parcelsReceived?: Prisma.ParcelDeliveryUncheckedUpdateManyWithoutReceivedByNestedInput
+  parcelsDelivered?: Prisma.ParcelDeliveryUncheckedUpdateManyWithoutDeliveredByNestedInput
 }
 
 export type UserCreateWithoutAccessLogsInput = {
@@ -787,6 +856,8 @@ export type UserCreateWithoutAccessLogsInput = {
   payments?: Prisma.PaymentCreateNestedManyWithoutCreatedByInput
   userSessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
   condominium?: Prisma.CondominiumCreateNestedOneWithoutAdminsInput
+  parcelsReceived?: Prisma.ParcelDeliveryCreateNestedManyWithoutReceivedByInput
+  parcelsDelivered?: Prisma.ParcelDeliveryCreateNestedManyWithoutDeliveredByInput
 }
 
 export type UserUncheckedCreateWithoutAccessLogsInput = {
@@ -802,6 +873,8 @@ export type UserUncheckedCreateWithoutAccessLogsInput = {
   residentProfile?: Prisma.ResidentProfileUncheckedCreateNestedOneWithoutUserInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCreatedByInput
   userSessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  parcelsReceived?: Prisma.ParcelDeliveryUncheckedCreateNestedManyWithoutReceivedByInput
+  parcelsDelivered?: Prisma.ParcelDeliveryUncheckedCreateNestedManyWithoutDeliveredByInput
 }
 
 export type UserCreateOrConnectWithoutAccessLogsInput = {
@@ -833,6 +906,8 @@ export type UserUpdateWithoutAccessLogsInput = {
   payments?: Prisma.PaymentUpdateManyWithoutCreatedByNestedInput
   userSessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
   condominium?: Prisma.CondominiumUpdateOneWithoutAdminsNestedInput
+  parcelsReceived?: Prisma.ParcelDeliveryUpdateManyWithoutReceivedByNestedInput
+  parcelsDelivered?: Prisma.ParcelDeliveryUpdateManyWithoutDeliveredByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAccessLogsInput = {
@@ -848,6 +923,176 @@ export type UserUncheckedUpdateWithoutAccessLogsInput = {
   residentProfile?: Prisma.ResidentProfileUncheckedUpdateOneWithoutUserNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutCreatedByNestedInput
   userSessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  parcelsReceived?: Prisma.ParcelDeliveryUncheckedUpdateManyWithoutReceivedByNestedInput
+  parcelsDelivered?: Prisma.ParcelDeliveryUncheckedUpdateManyWithoutDeliveredByNestedInput
+}
+
+export type UserCreateWithoutParcelsReceivedInput = {
+  id?: string
+  email: string
+  passwordHash: string
+  role?: $Enums.UserRole
+  status?: $Enums.UserStatus
+  isEmailVerified?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  residentProfile?: Prisma.ResidentProfileCreateNestedOneWithoutUserInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutCreatedByInput
+  userSessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  condominium?: Prisma.CondominiumCreateNestedOneWithoutAdminsInput
+  accessLogs?: Prisma.AccessLogCreateNestedManyWithoutUserAcceptInput
+  parcelsDelivered?: Prisma.ParcelDeliveryCreateNestedManyWithoutDeliveredByInput
+}
+
+export type UserUncheckedCreateWithoutParcelsReceivedInput = {
+  id?: string
+  email: string
+  passwordHash: string
+  role?: $Enums.UserRole
+  status?: $Enums.UserStatus
+  isEmailVerified?: boolean
+  condominiumId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  residentProfile?: Prisma.ResidentProfileUncheckedCreateNestedOneWithoutUserInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCreatedByInput
+  userSessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  accessLogs?: Prisma.AccessLogUncheckedCreateNestedManyWithoutUserAcceptInput
+  parcelsDelivered?: Prisma.ParcelDeliveryUncheckedCreateNestedManyWithoutDeliveredByInput
+}
+
+export type UserCreateOrConnectWithoutParcelsReceivedInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutParcelsReceivedInput, Prisma.UserUncheckedCreateWithoutParcelsReceivedInput>
+}
+
+export type UserCreateWithoutParcelsDeliveredInput = {
+  id?: string
+  email: string
+  passwordHash: string
+  role?: $Enums.UserRole
+  status?: $Enums.UserStatus
+  isEmailVerified?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  residentProfile?: Prisma.ResidentProfileCreateNestedOneWithoutUserInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutCreatedByInput
+  userSessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  condominium?: Prisma.CondominiumCreateNestedOneWithoutAdminsInput
+  accessLogs?: Prisma.AccessLogCreateNestedManyWithoutUserAcceptInput
+  parcelsReceived?: Prisma.ParcelDeliveryCreateNestedManyWithoutReceivedByInput
+}
+
+export type UserUncheckedCreateWithoutParcelsDeliveredInput = {
+  id?: string
+  email: string
+  passwordHash: string
+  role?: $Enums.UserRole
+  status?: $Enums.UserStatus
+  isEmailVerified?: boolean
+  condominiumId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  residentProfile?: Prisma.ResidentProfileUncheckedCreateNestedOneWithoutUserInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCreatedByInput
+  userSessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  accessLogs?: Prisma.AccessLogUncheckedCreateNestedManyWithoutUserAcceptInput
+  parcelsReceived?: Prisma.ParcelDeliveryUncheckedCreateNestedManyWithoutReceivedByInput
+}
+
+export type UserCreateOrConnectWithoutParcelsDeliveredInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutParcelsDeliveredInput, Prisma.UserUncheckedCreateWithoutParcelsDeliveredInput>
+}
+
+export type UserUpsertWithoutParcelsReceivedInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutParcelsReceivedInput, Prisma.UserUncheckedUpdateWithoutParcelsReceivedInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutParcelsReceivedInput, Prisma.UserUncheckedCreateWithoutParcelsReceivedInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutParcelsReceivedInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutParcelsReceivedInput, Prisma.UserUncheckedUpdateWithoutParcelsReceivedInput>
+}
+
+export type UserUpdateWithoutParcelsReceivedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  residentProfile?: Prisma.ResidentProfileUpdateOneWithoutUserNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutCreatedByNestedInput
+  userSessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  condominium?: Prisma.CondominiumUpdateOneWithoutAdminsNestedInput
+  accessLogs?: Prisma.AccessLogUpdateManyWithoutUserAcceptNestedInput
+  parcelsDelivered?: Prisma.ParcelDeliveryUpdateManyWithoutDeliveredByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutParcelsReceivedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  condominiumId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  residentProfile?: Prisma.ResidentProfileUncheckedUpdateOneWithoutUserNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutCreatedByNestedInput
+  userSessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  accessLogs?: Prisma.AccessLogUncheckedUpdateManyWithoutUserAcceptNestedInput
+  parcelsDelivered?: Prisma.ParcelDeliveryUncheckedUpdateManyWithoutDeliveredByNestedInput
+}
+
+export type UserUpsertWithoutParcelsDeliveredInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutParcelsDeliveredInput, Prisma.UserUncheckedUpdateWithoutParcelsDeliveredInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutParcelsDeliveredInput, Prisma.UserUncheckedCreateWithoutParcelsDeliveredInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutParcelsDeliveredInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutParcelsDeliveredInput, Prisma.UserUncheckedUpdateWithoutParcelsDeliveredInput>
+}
+
+export type UserUpdateWithoutParcelsDeliveredInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  residentProfile?: Prisma.ResidentProfileUpdateOneWithoutUserNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutCreatedByNestedInput
+  userSessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  condominium?: Prisma.CondominiumUpdateOneWithoutAdminsNestedInput
+  accessLogs?: Prisma.AccessLogUpdateManyWithoutUserAcceptNestedInput
+  parcelsReceived?: Prisma.ParcelDeliveryUpdateManyWithoutReceivedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutParcelsDeliveredInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  condominiumId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  residentProfile?: Prisma.ResidentProfileUncheckedUpdateOneWithoutUserNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutCreatedByNestedInput
+  userSessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  accessLogs?: Prisma.AccessLogUncheckedUpdateManyWithoutUserAcceptNestedInput
+  parcelsReceived?: Prisma.ParcelDeliveryUncheckedUpdateManyWithoutReceivedByNestedInput
 }
 
 export type UserCreateWithoutPaymentsInput = {
@@ -863,6 +1108,8 @@ export type UserCreateWithoutPaymentsInput = {
   userSessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
   condominium?: Prisma.CondominiumCreateNestedOneWithoutAdminsInput
   accessLogs?: Prisma.AccessLogCreateNestedManyWithoutUserAcceptInput
+  parcelsReceived?: Prisma.ParcelDeliveryCreateNestedManyWithoutReceivedByInput
+  parcelsDelivered?: Prisma.ParcelDeliveryCreateNestedManyWithoutDeliveredByInput
 }
 
 export type UserUncheckedCreateWithoutPaymentsInput = {
@@ -878,6 +1125,8 @@ export type UserUncheckedCreateWithoutPaymentsInput = {
   residentProfile?: Prisma.ResidentProfileUncheckedCreateNestedOneWithoutUserInput
   userSessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
   accessLogs?: Prisma.AccessLogUncheckedCreateNestedManyWithoutUserAcceptInput
+  parcelsReceived?: Prisma.ParcelDeliveryUncheckedCreateNestedManyWithoutReceivedByInput
+  parcelsDelivered?: Prisma.ParcelDeliveryUncheckedCreateNestedManyWithoutDeliveredByInput
 }
 
 export type UserCreateOrConnectWithoutPaymentsInput = {
@@ -909,6 +1158,8 @@ export type UserUpdateWithoutPaymentsInput = {
   userSessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
   condominium?: Prisma.CondominiumUpdateOneWithoutAdminsNestedInput
   accessLogs?: Prisma.AccessLogUpdateManyWithoutUserAcceptNestedInput
+  parcelsReceived?: Prisma.ParcelDeliveryUpdateManyWithoutReceivedByNestedInput
+  parcelsDelivered?: Prisma.ParcelDeliveryUpdateManyWithoutDeliveredByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPaymentsInput = {
@@ -924,6 +1175,8 @@ export type UserUncheckedUpdateWithoutPaymentsInput = {
   residentProfile?: Prisma.ResidentProfileUncheckedUpdateOneWithoutUserNestedInput
   userSessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
   accessLogs?: Prisma.AccessLogUncheckedUpdateManyWithoutUserAcceptNestedInput
+  parcelsReceived?: Prisma.ParcelDeliveryUncheckedUpdateManyWithoutReceivedByNestedInput
+  parcelsDelivered?: Prisma.ParcelDeliveryUncheckedUpdateManyWithoutDeliveredByNestedInput
 }
 
 export type UserCreateManyCondominiumInput = {
@@ -950,6 +1203,8 @@ export type UserUpdateWithoutCondominiumInput = {
   payments?: Prisma.PaymentUpdateManyWithoutCreatedByNestedInput
   userSessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
   accessLogs?: Prisma.AccessLogUpdateManyWithoutUserAcceptNestedInput
+  parcelsReceived?: Prisma.ParcelDeliveryUpdateManyWithoutReceivedByNestedInput
+  parcelsDelivered?: Prisma.ParcelDeliveryUpdateManyWithoutDeliveredByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCondominiumInput = {
@@ -965,6 +1220,8 @@ export type UserUncheckedUpdateWithoutCondominiumInput = {
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutCreatedByNestedInput
   userSessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
   accessLogs?: Prisma.AccessLogUncheckedUpdateManyWithoutUserAcceptNestedInput
+  parcelsReceived?: Prisma.ParcelDeliveryUncheckedUpdateManyWithoutReceivedByNestedInput
+  parcelsDelivered?: Prisma.ParcelDeliveryUncheckedUpdateManyWithoutDeliveredByNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutCondominiumInput = {
@@ -987,12 +1244,16 @@ export type UserCountOutputType = {
   payments: number
   userSessions: number
   accessLogs: number
+  parcelsReceived: number
+  parcelsDelivered: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   payments?: boolean | UserCountOutputTypeCountPaymentsArgs
   userSessions?: boolean | UserCountOutputTypeCountUserSessionsArgs
   accessLogs?: boolean | UserCountOutputTypeCountAccessLogsArgs
+  parcelsReceived?: boolean | UserCountOutputTypeCountParcelsReceivedArgs
+  parcelsDelivered?: boolean | UserCountOutputTypeCountParcelsDeliveredArgs
 }
 
 /**
@@ -1026,6 +1287,20 @@ export type UserCountOutputTypeCountAccessLogsArgs<ExtArgs extends runtime.Types
   where?: Prisma.AccessLogWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountParcelsReceivedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ParcelDeliveryWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountParcelsDeliveredArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ParcelDeliveryWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1042,6 +1317,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   userSessions?: boolean | Prisma.User$userSessionsArgs<ExtArgs>
   condominium?: boolean | Prisma.User$condominiumArgs<ExtArgs>
   accessLogs?: boolean | Prisma.User$accessLogsArgs<ExtArgs>
+  parcelsReceived?: boolean | Prisma.User$parcelsReceivedArgs<ExtArgs>
+  parcelsDelivered?: boolean | Prisma.User$parcelsDeliveredArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -1090,6 +1367,8 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   userSessions?: boolean | Prisma.User$userSessionsArgs<ExtArgs>
   condominium?: boolean | Prisma.User$condominiumArgs<ExtArgs>
   accessLogs?: boolean | Prisma.User$accessLogsArgs<ExtArgs>
+  parcelsReceived?: boolean | Prisma.User$parcelsReceivedArgs<ExtArgs>
+  parcelsDelivered?: boolean | Prisma.User$parcelsDeliveredArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1107,6 +1386,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     userSessions: Prisma.$UserSessionPayload<ExtArgs>[]
     condominium: Prisma.$CondominiumPayload<ExtArgs> | null
     accessLogs: Prisma.$AccessLogPayload<ExtArgs>[]
+    parcelsReceived: Prisma.$ParcelDeliveryPayload<ExtArgs>[]
+    parcelsDelivered: Prisma.$ParcelDeliveryPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1517,6 +1798,8 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   userSessions<T extends Prisma.User$userSessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$userSessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserSessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   condominium<T extends Prisma.User$condominiumArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$condominiumArgs<ExtArgs>>): Prisma.Prisma__CondominiumClient<runtime.Types.Result.GetResult<Prisma.$CondominiumPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   accessLogs<T extends Prisma.User$accessLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$accessLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AccessLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  parcelsReceived<T extends Prisma.User$parcelsReceivedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$parcelsReceivedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ParcelDeliveryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  parcelsDelivered<T extends Prisma.User$parcelsDeliveredArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$parcelsDeliveredArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ParcelDeliveryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2063,6 +2346,54 @@ export type User$accessLogsArgs<ExtArgs extends runtime.Types.Extensions.Interna
   take?: number
   skip?: number
   distinct?: Prisma.AccessLogScalarFieldEnum | Prisma.AccessLogScalarFieldEnum[]
+}
+
+/**
+ * User.parcelsReceived
+ */
+export type User$parcelsReceivedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ParcelDelivery
+   */
+  select?: Prisma.ParcelDeliverySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ParcelDelivery
+   */
+  omit?: Prisma.ParcelDeliveryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ParcelDeliveryInclude<ExtArgs> | null
+  where?: Prisma.ParcelDeliveryWhereInput
+  orderBy?: Prisma.ParcelDeliveryOrderByWithRelationInput | Prisma.ParcelDeliveryOrderByWithRelationInput[]
+  cursor?: Prisma.ParcelDeliveryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ParcelDeliveryScalarFieldEnum | Prisma.ParcelDeliveryScalarFieldEnum[]
+}
+
+/**
+ * User.parcelsDelivered
+ */
+export type User$parcelsDeliveredArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ParcelDelivery
+   */
+  select?: Prisma.ParcelDeliverySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ParcelDelivery
+   */
+  omit?: Prisma.ParcelDeliveryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ParcelDeliveryInclude<ExtArgs> | null
+  where?: Prisma.ParcelDeliveryWhereInput
+  orderBy?: Prisma.ParcelDeliveryOrderByWithRelationInput | Prisma.ParcelDeliveryOrderByWithRelationInput[]
+  cursor?: Prisma.ParcelDeliveryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ParcelDeliveryScalarFieldEnum | Prisma.ParcelDeliveryScalarFieldEnum[]
 }
 
 /**

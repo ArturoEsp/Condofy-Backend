@@ -62,6 +62,11 @@ export type AccessAuthorization = Prisma.AccessAuthorizationModel
  */
 export type AccessLog = Prisma.AccessLogModel
 /**
+ * Model ParcelDelivery
+ * 
+ */
+export type ParcelDelivery = Prisma.ParcelDeliveryModel
+/**
  * Model HouseAccount
  * 
  */

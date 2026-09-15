@@ -8,4 +8,5 @@ export const PROVIDES_NAMES = {
   AccessAuthorizationsRepository: 'AccessAuthorizationsRepository',
   VisitorsRepository: 'VisitorsRepository',
   AccessLogsRepository: 'AccessLogsRepository',
+  ParcelDeliveryRepository: 'ParcelDeliveryRepository',
 } as const;

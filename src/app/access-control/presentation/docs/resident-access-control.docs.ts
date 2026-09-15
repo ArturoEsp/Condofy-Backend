@@ -34,3 +34,12 @@ export const revokeAccessAuthorization: ApiEndpointProps = {
   serialization: AccessAuthorizationResponse,
   type: AccessAuthorizationResponse,
 };
+
+export const createQuickDeliveryPass: ApiEndpointProps = {
+  summary:
+    'Crear un pase express para repartidor (Uber, Rappi, etc.) sin requerir nombre de chofer',
+  status: HttpStatus.CREATED,
+  withToken: true,
+  serialization: AccessAuthorizationResponse,
+  type: AccessAuthorizationResponse,
+};
