@@ -4,6 +4,7 @@ import { ClassSerializerInterceptor, ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import helmet from 'helmet';
+import { json, urlencoded } from 'express';
 
 import { AppModule } from './app.module';
 import 'dotenv/config';
@@ -18,6 +19,9 @@ async function bootstrap() {
   const configService = app.get(ConfigService);
 
   app.enableShutdownHooks();
+
+  app.use(json({ limit: '25mb' }));
+  app.use(urlencoded({ limit: '25mb', extended: true }));
 
   app.use(helmet());
 
