@@ -6,6 +6,9 @@ import {
 export interface CreateUserCommand {
   email: string;
   password: string;
+  firstName?: string | null;
+  lastName?: string | null;
+  phone?: string | null;
   isEmailVerified: boolean;
   role: UserRole;
   status: UserStatus;

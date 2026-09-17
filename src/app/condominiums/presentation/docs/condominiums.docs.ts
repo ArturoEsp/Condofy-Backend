@@ -15,3 +15,15 @@ export const getCondominiumByKey: ApiEndpointProps = {
   serialization: CondominiumResponse,
   type: CondominiumResponse,
 };
+
+export const getCondominiumDetails: ApiEndpointProps = {
+  summary: 'Obtener los detalles completos del condominio',
+  status: HttpStatus.OK,
+  withToken: true,
+};
+
+export const updateCondominiumDetails: ApiEndpointProps = {
+  summary: 'Actualizar la información del condominio',
+  status: HttpStatus.OK,
+  withToken: true,
+};

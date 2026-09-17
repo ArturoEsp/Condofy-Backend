@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import * as bcrypt from 'bcrypt';
 
 import { PrismaClient } from '../../src/core/infrastructure/persistence/prisma/generated/client';
@@ -21,16 +22,28 @@ async function main(): Promise<void> {
 
   // 1. Crear o actualizar el condominio 'Albero Residencial'
   const condoName = 'Albero Residencial';
-  const condoKey = 'albero-residencial';
+  const condoKey = 'RESIDENCIAL_ALBERO';
 
   const condo = await prisma.condominium.upsert({
     where: { key: condoKey },
     update: {
       name: condoName,
+      description:
+        'Residencial privado de primer nivel con seguridad privada y áreas verdes.',
+      googleMapsUrl: 'https://maps.google.com/?q=Albero+Residencial',
+      address: 'Av. Principal #100, Fracc. Albero Residencial',
+      contactPhone: '5512345678',
+      contactEmail: 'administracion@alberoresidencial.com',
     },
     create: {
       name: condoName,
       key: condoKey,
+      description:
+        'Residencial privado de primer nivel con seguridad privada y áreas verdes.',
+      googleMapsUrl: 'https://maps.google.com/?q=Albero+Residencial',
+      address: 'Av. Principal #100, Fracc. Albero Residencial',
+      contactPhone: '5512345678',
+      contactEmail: 'administracion@alberoresidencial.com',
     },
   });
 
@@ -43,6 +56,9 @@ async function main(): Promise<void> {
     where: { email: adminEmail },
     update: {
       passwordHash: hashedPassword,
+      firstName: 'Admin',
+      lastName: 'Principal',
+      phone: '5512345678',
       role: 'ADMIN',
       status: 'ACTIVE',
       isEmailVerified: true,
@@ -51,6 +67,9 @@ async function main(): Promise<void> {
     create: {
       email: adminEmail,
       passwordHash: hashedPassword,
+      firstName: 'Admin',
+      lastName: 'Principal',
+      phone: '5512345678',
       role: 'ADMIN',
       status: 'ACTIVE',
       isEmailVerified: true,

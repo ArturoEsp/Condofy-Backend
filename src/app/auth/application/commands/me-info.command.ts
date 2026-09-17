@@ -1,6 +1,7 @@
 import { UserRole } from '@/core/infrastructure/persistence/prisma/generated/browser';
 
 export interface MeInfoDTO {
+  id: string;
   email: string;
   role: UserRole;
   firstName: string;

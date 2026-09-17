@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Req, Res } from '@nestjs/common';
+import { Body, Controller, Get, Patch, Post, Put, Req, Res } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Request, Response, CookieOptions } from 'express';
 import { Throttle } from '@nestjs/throttler';
@@ -8,6 +8,10 @@ import { LoginRequest } from '../dto/requests/login.request';
 import { MeUseCase } from '../../application/use-cases/me.usecase';
 import { AuthUserEntity } from '../../domain/entities/auth-user.entity';
 import { RefreshUseCase } from '../../application/use-cases/refresh-token.usecase';
+import { UpdateProfileUseCase } from '../../application/use-cases/update-profile.usecase';
+import { ChangePasswordUseCase } from '../../application/use-cases/change-password.usecase';
+import { UpdateProfileRequest } from '../dto/requests/update-profile.request';
+import { ChangePasswordRequest } from '../dto/requests/change-password.request';
 
 import * as AuthDocs from '../docs/auth.docs';
 import { Public } from '@/common/decorators/public.decorator';
@@ -22,6 +26,8 @@ export class AuthController {
     private readonly refreshUseCase: RefreshUseCase,
     private readonly meUseCase: MeUseCase,
     private readonly logoutUseCase: LogoutUseCase,
+    private readonly updateProfileUseCase: UpdateProfileUseCase,
+    private readonly changePasswordUseCase: ChangePasswordUseCase,
     private readonly configService: ConfigService,
   ) {}
 
@@ -141,5 +147,23 @@ export class AuthController {
   @ApiEndpoint(AuthDocs.authGetMe)
   async me(@CurrentUser() user: AuthUserEntity) {
     return await this.meUseCase.execute(user.id);
+  }
+
+  @Patch('profile')
+  @ApiEndpoint(AuthDocs.authUpdateProfile)
+  async updateProfile(
+    @CurrentUser() user: AuthUserEntity,
+    @Body() dto: UpdateProfileRequest,
+  ) {
+    return await this.updateProfileUseCase.execute(user.id, dto);
+  }
+
+  @Put('change-password')
+  @ApiEndpoint(AuthDocs.authChangePassword)
+  async changePassword(
+    @CurrentUser() user: AuthUserEntity,
+    @Body() dto: ChangePasswordRequest,
+  ) {
+    return await this.changePasswordUseCase.execute(user.id, dto);
   }
 }

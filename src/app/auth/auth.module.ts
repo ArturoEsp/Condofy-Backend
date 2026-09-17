@@ -15,6 +15,8 @@ import { CoreModule } from '@/core/core.module';
 import { ResidentsModule } from '../residents/residents.module';
 import { CondominiumsModule } from '../condominiums/condominiums.module';
 import { LogoutUseCase } from './application/use-cases/logout.usecase';
+import { UpdateProfileUseCase } from './application/use-cases/update-profile.usecase';
+import { ChangePasswordUseCase } from './application/use-cases/change-password.usecase';
 import { SessionCleanupTask } from './infrastructure/tasks/session-cleanup.task';
 
 @Module({
@@ -86,6 +88,27 @@ import { SessionCleanupTask } from './infrastructure/tasks/session-cleanup.task'
       ],
       useFactory: (sessions, jwt, encryption) => {
         return new RefreshUseCase(sessions, jwt, encryption);
+      },
+    },
+    {
+      provide: UpdateProfileUseCase,
+      inject: [
+        PROVIDES_NAMES.UsersRepository,
+        PROVIDES_NAMES.ResidentsRepository,
+        MeUseCase,
+      ],
+      useFactory: (users, residents, me) => {
+        return new UpdateProfileUseCase(users, residents, me);
+      },
+    },
+    {
+      provide: ChangePasswordUseCase,
+      inject: [
+        PROVIDES_NAMES.UsersRepository,
+        PROVIDES_NAMES.EncryptionService,
+      ],
+      useFactory: (users, encryption) => {
+        return new ChangePasswordUseCase(users, encryption);
       },
     },
   ],

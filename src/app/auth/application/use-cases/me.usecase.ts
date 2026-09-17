@@ -36,6 +36,12 @@ export class MeUseCase {
       condominium.condominiumName = findCondominium.name;
     }
 
+    if (user.role === 'ADMIN') {
+      resident.firstName = user.firstName || '';
+      resident.lastName = user.lastName || '';
+      resident.phone = user.phone || '';
+    }
+
     if (user.role === 'STAND') {
       resident.firstName = 'Caseta';
       resident.lastName = 'Vigilancia';
@@ -74,6 +80,7 @@ export class MeUseCase {
     }
 
     return {
+      id: user.id,
       email: user.email,
       role: user.role,
       updatedAt: user.updatedAt.toISOString(),
