@@ -133,11 +133,20 @@ import { AdminSecurityController } from './presentation/controllers/admin-securi
       inject: [
         PROVIDES_NAMES.AccessAuthorizationsRepository,
         PROVIDES_NAMES.AccessLogsRepository,
+        PROVIDES_NAMES.ResidentsRepository,
+        WebPushService,
       ],
-      useFactory: (accessAuthorizationsRepo, accessLogsRepo) => {
+      useFactory: (
+        accessAuthorizationsRepo,
+        accessLogsRepo,
+        residentsRepo,
+        webPushService,
+      ) => {
         return new StandRegisterAccessLogUseCase(
           accessAuthorizationsRepo,
           accessLogsRepo,
+          residentsRepo,
+          webPushService,
         );
       },
     },
