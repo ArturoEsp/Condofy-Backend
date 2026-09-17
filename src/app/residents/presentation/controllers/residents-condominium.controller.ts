@@ -1,13 +1,16 @@
-import { Body, Controller, Get, Post, Query } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put, Query } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 
 import { CreateResidentUseCase } from '../../application/use-cases/create-resident.usecase';
+import { AdminSendResidentResetPasswordUseCase } from '../../application/use-cases/admin-send-resident-reset-password.usecase';
+import { AdminUpdateResidentPasswordUseCase } from '../../application/use-cases/admin-update-resident-password.usecase';
 import { CondominiumId } from '@/common/decorators/condominium.decorator';
 import { CurrentUser } from '@/common/decorators/current-user.decorator';
 import { Roles } from '@/common/decorators/roles.decorator';
 import { ApiEndpoint } from '@/common/decorators/api-endpoint.decorator';
 import * as Docs from '../docs/residents-condominium.docs';
 import { CreateResidentInHouseRequest } from '../dtos/requests/create-resident-inhouse.request';
+import { AdminUpdateResidentPasswordRequest } from '../dtos/requests/admin-update-resident-password.request';
 import { GetListResidentsUseCase } from '../../application/use-cases/get-list-residents.usecase';
 import { GetMyHouseUseCase } from '../../application/use-cases/get-my-house.usecase';
 import { ParamsListResidentRequest } from '../dtos/requests/params-list-residents.request';
@@ -20,6 +23,8 @@ export class ResidentsCondominiumController {
     private readonly createResidentUseCase: CreateResidentUseCase,
     private readonly listResidentsUseCase: GetListResidentsUseCase,
     private readonly getMyHouseUseCase: GetMyHouseUseCase,
+    private readonly adminSendResidentResetPasswordUseCase: AdminSendResidentResetPasswordUseCase,
+    private readonly adminUpdateResidentPasswordUseCase: AdminUpdateResidentPasswordUseCase,
   ) {}
 
   @Post()
@@ -51,5 +56,33 @@ export class ResidentsCondominiumController {
     @CurrentUser() user: AuthUserEntity,
   ) {
     return await this.getMyHouseUseCase.execute(user.id, condominiumId);
+  }
+
+  @Post(':id/send-reset-password')
+  @Roles('ADMIN')
+  @ApiEndpoint(Docs.sendResidentResetPassword)
+  async sendResetPassword(
+    @CondominiumId() condominiumId: string,
+    @Param('id') residentId: string,
+  ) {
+    return await this.adminSendResidentResetPasswordUseCase.execute(
+      residentId,
+      condominiumId,
+    );
+  }
+
+  @Put(':id/password')
+  @Roles('ADMIN')
+  @ApiEndpoint(Docs.adminUpdateResidentPassword)
+  async updatePassword(
+    @CondominiumId() condominiumId: string,
+    @Param('id') residentId: string,
+    @Body() dto: AdminUpdateResidentPasswordRequest,
+  ) {
+    return await this.adminUpdateResidentPasswordUseCase.execute(
+      residentId,
+      condominiumId,
+      dto.newPassword,
+    );
   }
 }

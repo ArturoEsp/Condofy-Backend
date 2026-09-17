@@ -1,4 +1,13 @@
-import { Body, Controller, Get, Patch, Post, Put, Req, Res } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Patch,
+  Post,
+  Put,
+  Req,
+  Res,
+} from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Request, Response, CookieOptions } from 'express';
 import { Throttle } from '@nestjs/throttler';
@@ -10,8 +19,12 @@ import { AuthUserEntity } from '../../domain/entities/auth-user.entity';
 import { RefreshUseCase } from '../../application/use-cases/refresh-token.usecase';
 import { UpdateProfileUseCase } from '../../application/use-cases/update-profile.usecase';
 import { ChangePasswordUseCase } from '../../application/use-cases/change-password.usecase';
+import { RequestPasswordResetUseCase } from '../../application/use-cases/request-password-reset.usecase';
+import { ResetPasswordUseCase } from '../../application/use-cases/reset-password.usecase';
 import { UpdateProfileRequest } from '../dto/requests/update-profile.request';
 import { ChangePasswordRequest } from '../dto/requests/change-password.request';
+import { ForgotPasswordRequest } from '../dto/requests/forgot-password.request';
+import { ResetPasswordRequest } from '../dto/requests/reset-password.request';
 
 import * as AuthDocs from '../docs/auth.docs';
 import { Public } from '@/common/decorators/public.decorator';
@@ -28,6 +41,8 @@ export class AuthController {
     private readonly logoutUseCase: LogoutUseCase,
     private readonly updateProfileUseCase: UpdateProfileUseCase,
     private readonly changePasswordUseCase: ChangePasswordUseCase,
+    private readonly requestPasswordResetUseCase: RequestPasswordResetUseCase,
+    private readonly resetPasswordUseCase: ResetPasswordUseCase,
     private readonly configService: ConfigService,
   ) {}
 
@@ -165,5 +180,21 @@ export class AuthController {
     @Body() dto: ChangePasswordRequest,
   ) {
     return await this.changePasswordUseCase.execute(user.id, dto);
+  }
+
+  @Post('forgot-password')
+  @Public()
+  @Throttle({ default: { limit: 5, ttl: 60000 } })
+  @ApiEndpoint(AuthDocs.authForgotPassword)
+  async forgotPassword(@Body() dto: ForgotPasswordRequest) {
+    return await this.requestPasswordResetUseCase.execute(dto);
+  }
+
+  @Post('reset-password')
+  @Public()
+  @Throttle({ default: { limit: 10, ttl: 60000 } })
+  @ApiEndpoint(AuthDocs.authResetPassword)
+  async resetPassword(@Body() dto: ResetPasswordRequest) {
+    return await this.resetPasswordUseCase.execute(dto);
   }
 }

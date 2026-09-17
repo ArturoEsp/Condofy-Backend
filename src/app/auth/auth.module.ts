@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module, forwardRef } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtModule, JwtService } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
@@ -17,13 +17,16 @@ import { CondominiumsModule } from '../condominiums/condominiums.module';
 import { LogoutUseCase } from './application/use-cases/logout.usecase';
 import { UpdateProfileUseCase } from './application/use-cases/update-profile.usecase';
 import { ChangePasswordUseCase } from './application/use-cases/change-password.usecase';
+import { RequestPasswordResetUseCase } from './application/use-cases/request-password-reset.usecase';
+import { ResetPasswordUseCase } from './application/use-cases/reset-password.usecase';
+import { PasswordResetTokensPrismaRepository } from './infrastructure/repositories/password-reset-tokens.prisma.repository';
 import { SessionCleanupTask } from './infrastructure/tasks/session-cleanup.task';
 
 @Module({
   imports: [
     CoreModule,
     UsersModule,
-    ResidentsModule,
+    forwardRef(() => ResidentsModule),
     CondominiumsModule,
     PassportModule.register({
       defaultStrategy: 'jwt',
@@ -111,8 +114,36 @@ import { SessionCleanupTask } from './infrastructure/tasks/session-cleanup.task'
         return new ChangePasswordUseCase(users, encryption);
       },
     },
+    {
+      provide: PROVIDES_NAMES.PasswordResetTokensRepository,
+      useClass: PasswordResetTokensPrismaRepository,
+    },
+    {
+      provide: RequestPasswordResetUseCase,
+      inject: [
+        PROVIDES_NAMES.UsersRepository,
+        PROVIDES_NAMES.PasswordResetTokensRepository,
+        PROVIDES_NAMES.MailService,
+        ConfigService,
+      ],
+      useFactory: (users, tokens, mail, config) => {
+        return new RequestPasswordResetUseCase(users, tokens, mail, config);
+      },
+    },
+    {
+      provide: ResetPasswordUseCase,
+      inject: [
+        PROVIDES_NAMES.UsersRepository,
+        PROVIDES_NAMES.PasswordResetTokensRepository,
+        PROVIDES_NAMES.EncryptionService,
+        PROVIDES_NAMES.UserSessionsRepository,
+      ],
+      useFactory: (users, tokens, encryption, sessions) => {
+        return new ResetPasswordUseCase(users, tokens, encryption, sessions);
+      },
+    },
   ],
-  exports: [JwtModule],
+  exports: [JwtModule, RequestPasswordResetUseCase],
   controllers: [AuthController],
 })
 export class AuthModule {}
