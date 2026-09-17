@@ -1,44 +1,54 @@
-name: CI/CD Pipeline - NestJS & Prisma
+name: CI/CD Pipeline - Condofy Backend
 
 on:
   push:
     branches:
-      - main # O el nombre de tu rama principal
+      - main
+  workflow_dispatch: # Permite disparar el despliegue manualmente desde la interfaz de GitHub
 
 jobs:
-  build-and-deploy:
+  build-and-test:
+    name: Build & Validate (CI)
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Clonar el repositorio en la máquina de GitHub
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      # 2. Configurar Node.js y compilar (Validación del CI)
-      - name: Setup Node.js
+      - name: Setup Node.js 22
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'npm'
+          node-version: "22"
+          cache: "yarn"
 
       - name: Install Dependencies
-        run: npm ci
+        run: yarn install --frozen-lockfile
 
       - name: Generate Prisma Client & Build NestJS
+        env:
+          DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/condofy?schema=public"
         run: |
           npx prisma generate
-          npm run build
+          yarn build
 
-      # 3. Despliegue en el Droplet vía SSH (CD)
-      - name: Deploy to DigitalOcean Droplet
+  deploy:
+    name: Deploy to DigitalOcean (CD)
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Deploy to DigitalOcean Droplet via SSH
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
-          port: ${{ secrets.SSH_PORT }}
+          port: ${{ secrets.SSH_PORT || 22 }}
           script: |
-            cd /ruta/de/tu/proyecto # Cambia esto a la carpeta en tu servidor
-            git pull origin main
+            cd /var/www/condofy-backend
+            git fetch origin main
+            git checkout main
+            git reset --hard origin/main
             docker compose -f docker-compose.prod.yml up -d --build
-            docker image prune -f # Limpia imágenes viejas para no llenar el disco de 25GB
+            docker image prune -f
