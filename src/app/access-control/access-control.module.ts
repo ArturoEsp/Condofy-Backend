@@ -2,6 +2,8 @@ import { Module } from '@nestjs/common';
 import { CoreModule } from '@/core/core.module';
 import { ResidentsModule } from '../residents/residents.module';
 import { UsersModule } from '../users/users.module';
+import { NotificationsModule } from '../notifications/notifications.module';
+import { WebPushService } from '../notifications/infrastructure/services/web-push.service';
 import { PROVIDES_NAMES } from '@/common/enums/provides-names.enums';
 
 import { AccessAuthorizationsPrismaRepository } from './infrastructure/repositories/access-authorizations.prisma.repository';
@@ -37,7 +39,7 @@ import { StandAccessControlController } from './presentation/controllers/stand-a
 import { AdminSecurityController } from './presentation/controllers/admin-security.controller';
 
 @Module({
-  imports: [CoreModule, ResidentsModule, UsersModule],
+  imports: [CoreModule, ResidentsModule, UsersModule, NotificationsModule],
   providers: [
     {
       provide: PROVIDES_NAMES.AccessAuthorizationsRepository,
@@ -173,9 +175,17 @@ import { AdminSecurityController } from './presentation/controllers/admin-securi
     },
     {
       provide: StandRegisterParcelUseCase,
-      inject: [PROVIDES_NAMES.ParcelDeliveryRepository],
-      useFactory: (parcelRepo) => {
-        return new StandRegisterParcelUseCase(parcelRepo);
+      inject: [
+        PROVIDES_NAMES.ParcelDeliveryRepository,
+        PROVIDES_NAMES.ResidentsRepository,
+        WebPushService,
+      ],
+      useFactory: (parcelRepo, residentsRepo, webPushService) => {
+        return new StandRegisterParcelUseCase(
+          parcelRepo,
+          residentsRepo,
+          webPushService,
+        );
       },
     },
     {
@@ -201,9 +211,17 @@ import { AdminSecurityController } from './presentation/controllers/admin-securi
     },
     {
       provide: StandNotifyParcelUseCase,
-      inject: [PROVIDES_NAMES.ParcelDeliveryRepository],
-      useFactory: (parcelRepo) => {
-        return new StandNotifyParcelUseCase(parcelRepo);
+      inject: [
+        PROVIDES_NAMES.ParcelDeliveryRepository,
+        PROVIDES_NAMES.ResidentsRepository,
+        WebPushService,
+      ],
+      useFactory: (parcelRepo, residentsRepo, webPushService) => {
+        return new StandNotifyParcelUseCase(
+          parcelRepo,
+          residentsRepo,
+          webPushService,
+        );
       },
     },
     {

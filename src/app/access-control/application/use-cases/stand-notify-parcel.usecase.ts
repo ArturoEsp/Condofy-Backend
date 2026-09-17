@@ -1,4 +1,7 @@
+import { Logger } from '@nestjs/common';
 import ParcelDeliveryRepository from '../../domain/repositories/parcel-delivery.repository';
+import ResidentsRepository from '@/app/residents/domain/repositories/residents.repository';
+import { WebPushService } from '@/app/notifications/infrastructure/services/web-push.service';
 import { ParcelNotFoundException } from '../exceptions/parcel-not-found.exception';
 
 export interface StandNotifyParcelCommand {
@@ -16,8 +19,12 @@ export interface StandNotifyParcelResult {
 }
 
 export class StandNotifyParcelUseCase {
+  private readonly logger = new Logger(StandNotifyParcelUseCase.name);
+
   constructor(
     private readonly parcelDeliveryRepository: ParcelDeliveryRepository,
+    private readonly residentsRepository: ResidentsRepository,
+    private readonly webPushService: WebPushService,
   ) {}
 
   async execute(
@@ -64,6 +71,39 @@ export class StandNotifyParcelUseCase {
       if (cleanPhone.length >= 10) {
         whatsappUrl = `https://api.whatsapp.com/send?phone=${encodeURIComponent(cleanPhone)}&text=${encodeURIComponent(message)}`;
       }
+    }
+
+    // Enviar notificación Push adicionalmente a los residentes de la casa
+    try {
+      const residents = await this.residentsRepository.findManyByHouseId(
+        parcel.houseId,
+      );
+      const userIds = residents
+        .map((resident) => resident.userId)
+        .filter(Boolean);
+
+      if (userIds.length > 0) {
+        const packagesText =
+          (parcel.packageCount ?? 1) > 1
+            ? ` (${parcel.packageCount} paquetes)`
+            : '';
+
+        await this.webPushService.sendNotificationToUsers(userIds, {
+          title: '📦 ¡Paquete listo para entrega en caseta!',
+          body: `Aviso de caseta: Tu paquete de ${courierLabel}${packagesText} te espera. Tu PIN de retiro es: ${parcel.pickupCode}`,
+          url: '/residente/dashboard',
+          tag: `parcel-${parcel.id}`,
+          data: {
+            parcelId: parcel.id,
+            pickupCode: parcel.pickupCode,
+          },
+        });
+      }
+    } catch (error) {
+      this.logger.error(
+        `Error al enviar notificación push de aviso de paquete (${parcel.id}):`,
+        error,
+      );
     }
 
     return {
