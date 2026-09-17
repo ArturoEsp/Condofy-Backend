@@ -45,6 +45,32 @@ export interface StandDashboardStats {
   todayExitsCount: number;
 }
 
+export interface ActiveEntryItemEntity {
+  accessAuthorizationId: string;
+  code: string;
+  pin: string;
+  type: string;
+  status: string;
+  vehiclePlate?: string | null;
+  notes?: string | null;
+  visitor?: {
+    id: string;
+    firstName: string;
+    lastName?: string | null;
+    category: string;
+    photo?: string | null;
+    phone?: string | null;
+  };
+  house?: {
+    id: string;
+    houseNumber: string;
+    tower?: string | null;
+  };
+  entryDate: Date;
+  entryObservations?: string | null;
+  entryLogId: string;
+}
+
 export interface ParamsFindAccessLogs {
   condominiumId: string;
   date?: string; // YYYY-MM-DD
@@ -65,5 +91,9 @@ export interface StandAccessLogsResult {
 export default interface AccessLogsRepository {
   create(data: CreateAccessLogData): Promise<AccessLogItemEntity>;
   findTodayLogs(params: ParamsFindAccessLogs): Promise<StandAccessLogsResult>;
+  findActiveEntries(
+    condominiumId: string,
+    search?: string,
+  ): Promise<ActiveEntryItemEntity[]>;
   getDashboardStats(condominiumId: string): Promise<StandDashboardStats>;
 }

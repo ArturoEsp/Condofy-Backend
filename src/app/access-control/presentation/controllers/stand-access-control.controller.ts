@@ -9,11 +9,14 @@ import { EntryType } from '@/core/infrastructure/persistence/prisma/generated/en
 
 import * as Docs from '../docs/stand-access-control.docs';
 import { RegisterAccessLogRequest } from '../dtos/requests/register-access-log.request';
+import { BatchExitRequest } from '../dtos/requests/batch-exit.request';
 import { RegisterParcelRequest } from '../dtos/requests/register-parcel.request';
 import { DeliverParcelRequest } from '../dtos/requests/deliver-parcel.request';
 import { NotifyParcelRequest } from '../dtos/requests/notify-parcel.request';
 import { StandRegisterAccessLogUseCase } from '../../application/use-cases/stand-register-access-log.usecase';
 import { StandGetAccessLogsUseCase } from '../../application/use-cases/stand-get-access-logs.usecase';
+import { StandGetActiveEntriesUseCase } from '../../application/use-cases/stand-get-active-entries.usecase';
+import { StandBatchExitUseCase } from '../../application/use-cases/stand-batch-exit.usecase';
 import { StandGetDashboardStatsUseCase } from '../../application/use-cases/stand-get-dashboard-stats.usecase';
 import { GetPublicPassUseCase } from '../../application/use-cases/get-public-pass.usecase';
 import { StandRegisterParcelUseCase } from '../../application/use-cases/stand-register-parcel.usecase';
@@ -32,6 +35,8 @@ export class StandAccessControlController {
   constructor(
     private readonly standRegisterAccessLogUseCase: StandRegisterAccessLogUseCase,
     private readonly standGetAccessLogsUseCase: StandGetAccessLogsUseCase,
+    private readonly standGetActiveEntriesUseCase: StandGetActiveEntriesUseCase,
+    private readonly standBatchExitUseCase: StandBatchExitUseCase,
     private readonly standGetDashboardStatsUseCase: StandGetDashboardStatsUseCase,
     private readonly getPublicPassUseCase: GetPublicPassUseCase,
     private readonly standRegisterParcelUseCase: StandRegisterParcelUseCase,
@@ -55,6 +60,33 @@ export class StandAccessControlController {
       observations: dto.observations,
       userAcceptId: user.id,
     });
+  }
+
+  @Post('access-logs/batch-exit')
+  @ApiEndpoint(Docs.standBatchExit)
+  async batchExit(
+    @CondominiumId() condominiumId: string,
+    @CurrentUser() user: AuthUserEntity,
+    @Body() dto: BatchExitRequest,
+  ) {
+    return await this.standBatchExitUseCase.execute({
+      condominiumId,
+      accessAuthorizationIds: dto.accessAuthorizationIds,
+      observations: dto.observations,
+      userAcceptId: user.id,
+    });
+  }
+
+  @Get('active-entries')
+  @ApiEndpoint(Docs.standGetActiveEntries)
+  async getActiveEntries(
+    @CondominiumId() condominiumId: string,
+    @Query('search') search?: string,
+  ) {
+    return await this.standGetActiveEntriesUseCase.execute(
+      condominiumId,
+      search,
+    );
   }
 
   @Get('access-logs')

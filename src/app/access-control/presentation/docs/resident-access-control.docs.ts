@@ -43,3 +43,10 @@ export const createQuickDeliveryPass: ApiEndpointProps = {
   serialization: AccessAuthorizationResponse,
   type: AccessAuthorizationResponse,
 };
+
+export const deleteAccessAuthorization: ApiEndpointProps = {
+  summary:
+    'Eliminar una autorización de acceso no utilizada (pendiente / sin entradas registradas)',
+  status: HttpStatus.OK,
+  withToken: true,
+};

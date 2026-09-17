@@ -66,4 +66,5 @@ export default interface AccessAuthorizationsRepository {
     id: string,
     data: UpdateAccessAuthorizationData,
   ): Promise<AccessAuthorizationEntity>;
+  delete(id: string): Promise<void>;
 }

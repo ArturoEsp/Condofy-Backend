@@ -30,6 +30,9 @@ import { StandGetParcelStatsUseCase } from './application/use-cases/stand-get-pa
 import { StandNotifyParcelUseCase } from './application/use-cases/stand-notify-parcel.usecase';
 import { ResidentGetParcelsUseCase } from './application/use-cases/resident-get-parcels.usecase';
 import { ResidentCreateDeliveryPassUseCase } from './application/use-cases/resident-create-delivery-pass.usecase';
+import { DeleteAccessAuthorizationUseCase } from './application/use-cases/delete-access-authorization.usecase';
+import { StandGetActiveEntriesUseCase } from './application/use-cases/stand-get-active-entries.usecase';
+import { StandBatchExitUseCase } from './application/use-cases/stand-batch-exit.usecase';
 
 import { ResidentAccessControlController } from './presentation/controllers/resident-access-control.controller';
 import { ResidentVisitorsController } from './presentation/controllers/resident-visitors.controller';
@@ -249,6 +252,39 @@ import { AdminSecurityController } from './presentation/controllers/admin-securi
         );
       },
     },
+    {
+      provide: DeleteAccessAuthorizationUseCase,
+      inject: [
+        PROVIDES_NAMES.ResidentsRepository,
+        PROVIDES_NAMES.AccessAuthorizationsRepository,
+      ],
+      useFactory: (residentsRepo, accessAuthorizationsRepo) => {
+        return new DeleteAccessAuthorizationUseCase(
+          residentsRepo,
+          accessAuthorizationsRepo,
+        );
+      },
+    },
+    {
+      provide: StandGetActiveEntriesUseCase,
+      inject: [PROVIDES_NAMES.AccessLogsRepository],
+      useFactory: (accessLogsRepo) => {
+        return new StandGetActiveEntriesUseCase(accessLogsRepo);
+      },
+    },
+    {
+      provide: StandBatchExitUseCase,
+      inject: [
+        PROVIDES_NAMES.AccessAuthorizationsRepository,
+        PROVIDES_NAMES.AccessLogsRepository,
+      ],
+      useFactory: (accessAuthorizationsRepo, accessLogsRepo) => {
+        return new StandBatchExitUseCase(
+          accessAuthorizationsRepo,
+          accessLogsRepo,
+        );
+      },
+    },
   ],
   controllers: [
     ResidentAccessControlController,
@@ -282,6 +318,9 @@ import { AdminSecurityController } from './presentation/controllers/admin-securi
     StandNotifyParcelUseCase,
     ResidentGetParcelsUseCase,
     ResidentCreateDeliveryPassUseCase,
+    DeleteAccessAuthorizationUseCase,
+    StandGetActiveEntriesUseCase,
+    StandBatchExitUseCase,
   ],
 })
 export class AccessControlModule {}
