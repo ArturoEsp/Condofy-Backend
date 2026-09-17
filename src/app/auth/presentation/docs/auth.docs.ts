@@ -23,3 +23,15 @@ export const authChangePassword: ApiEndpointProps = {
   status: HttpStatus.OK,
   withToken: true,
 };
+
+export const authForgotPassword: ApiEndpointProps = {
+  summary: 'Solicitar enlace para restablecer contraseña por correo',
+  status: HttpStatus.OK,
+  withToken: false,
+};
+
+export const authResetPassword: ApiEndpointProps = {
+  summary: 'Restablecer contraseña usando token de un solo uso',
+  status: HttpStatus.OK,
+  withToken: false,
+};

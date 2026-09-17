@@ -15,6 +15,7 @@ import { ResidentsModule } from './app/residents/residents.module';
 import { CondominiumIdPipe } from './common/pipes/condominium-id.pipe';
 import { HousesModule } from './app/houses/houses.module';
 import { AccessControlModule } from './app/access-control/access-control.module';
+import { NotificationsModule } from './app/notifications/notifications.module';
 import { CondominiumGuard } from './app/auth/presentation/guards/condominium.guard';
 import { HealthModule } from './app/health/health.module';
 
@@ -41,6 +42,7 @@ import { HealthModule } from './app/health/health.module';
     CondominiumsModule,
     HousesModule,
     AccessControlModule,
+    NotificationsModule,
   ],
   controllers: [],
   providers: [

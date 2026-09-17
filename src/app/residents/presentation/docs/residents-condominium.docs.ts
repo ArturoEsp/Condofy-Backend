@@ -27,3 +27,16 @@ export const getMyHouse: ApiEndpointProps = {
   serialization: HouseResponse,
   type: HouseResponse,
 };
+
+export const sendResidentResetPassword: ApiEndpointProps = {
+  summary:
+    'Enviar enlace de restablecimiento de contraseña al correo del residente',
+  status: HttpStatus.OK,
+  withToken: true,
+};
+
+export const adminUpdateResidentPassword: ApiEndpointProps = {
+  summary: 'Actualizar directamente la contraseña de un residente',
+  status: HttpStatus.OK,
+  withToken: true,
+};

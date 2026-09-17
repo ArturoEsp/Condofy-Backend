@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module, forwardRef } from '@nestjs/common';
 
 import { ResidentsPrismaRepository } from './infrastructure/repositories/residents.prisma.repository';
 import { UserSessionPrismaRepository } from '../auth/infrastructure/repositories/user-session.prisma.repository';
@@ -6,6 +6,7 @@ import { PROVIDES_NAMES } from '@/common/enums/provides-names.enums';
 import { UsersModule } from '../users/users.module';
 import { HousesModule } from '../houses/houses.module';
 import { CoreModule } from '@/core/core.module';
+import { AuthModule } from '../auth/auth.module';
 
 import { CreateResidentUseCase } from './application/use-cases/create-resident.usecase';
 import { CreateUserUseCase } from '../users/application/use-cases/create-user.usecase';
@@ -15,12 +16,20 @@ import { CreateFamilyMemberUseCase } from './application/use-cases/create-family
 import { ListFamilyMembersUseCase } from './application/use-cases/list-family-members.usecase';
 import { UpdateFamilyMemberUseCase } from './application/use-cases/update-family-member.usecase';
 import { ToggleFamilyMemberStatusUseCase } from './application/use-cases/toggle-family-member-status.usecase';
+import { AdminSendResidentResetPasswordUseCase } from './application/use-cases/admin-send-resident-reset-password.usecase';
+import { AdminUpdateResidentPasswordUseCase } from './application/use-cases/admin-update-resident-password.usecase';
+import { RequestPasswordResetUseCase } from '../auth/application/use-cases/request-password-reset.usecase';
 
 import { ResidentsCondominiumController } from './presentation/controllers/residents-condominium.controller';
 import { ResidentFamilyController } from './presentation/controllers/resident-family.controller';
 
 @Module({
-  imports: [UsersModule, HousesModule, CoreModule],
+  imports: [
+    UsersModule,
+    HousesModule,
+    CoreModule,
+    forwardRef(() => AuthModule),
+  ],
   providers: [
     {
       provide: PROVIDES_NAMES.ResidentsRepository,
@@ -121,6 +130,38 @@ import { ResidentFamilyController } from './presentation/controllers/resident-fa
         );
       },
     },
+    {
+      provide: AdminSendResidentResetPasswordUseCase,
+      inject: [PROVIDES_NAMES.ResidentsRepository, RequestPasswordResetUseCase],
+      useFactory: (residentsRepository, requestPasswordResetUseCase) => {
+        return new AdminSendResidentResetPasswordUseCase(
+          residentsRepository,
+          requestPasswordResetUseCase,
+        );
+      },
+    },
+    {
+      provide: AdminUpdateResidentPasswordUseCase,
+      inject: [
+        PROVIDES_NAMES.ResidentsRepository,
+        PROVIDES_NAMES.UsersRepository,
+        PROVIDES_NAMES.EncryptionService,
+        PROVIDES_NAMES.UserSessionsRepository,
+      ],
+      useFactory: (
+        residentsRepository,
+        usersRepository,
+        encryptionService,
+        userSessionRepository,
+      ) => {
+        return new AdminUpdateResidentPasswordUseCase(
+          residentsRepository,
+          usersRepository,
+          encryptionService,
+          userSessionRepository,
+        );
+      },
+    },
   ],
   controllers: [ResidentsCondominiumController, ResidentFamilyController],
   exports: [
@@ -131,6 +172,8 @@ import { ResidentFamilyController } from './presentation/controllers/resident-fa
     UpdateFamilyMemberUseCase,
     ToggleFamilyMemberStatusUseCase,
     GetMyHouseUseCase,
+    AdminSendResidentResetPasswordUseCase,
+    AdminUpdateResidentPasswordUseCase,
   ],
 })
 export class ResidentsModule {}

@@ -120,27 +120,42 @@ model Condominium {
 }
 
 model User {
-  id               String           @id @default(uuid())
-  email            String           @unique
-  passwordHash     String
-  firstName        String?
-  lastName         String?
-  phone            String?
-  role             UserRole         @default(RESIDENT)
-  status           UserStatus       @default(PENDING)
-  isEmailVerified  Boolean          @default(false)
-  residentProfile  ResidentProfile?
-  payments         Payment[]
-  userSessions     UserSession[]
-  condominium      Condominium?     @relation(fields: [condominiumId], references: [id], onDelete: SetNull)
-  condominiumId    String?
-  createdAt        DateTime         @default(now())
-  updatedAt        DateTime         @updatedAt
-  accessLogs       AccessLog[]
-  parcelsReceived  ParcelDelivery[] @relation("ParcelReceivedBy")
-  parcelsDelivered ParcelDelivery[] @relation("ParcelDeliveredBy")
+  id                  String               @id @default(uuid())
+  email               String               @unique
+  passwordHash        String
+  firstName           String?
+  lastName            String?
+  phone               String?
+  role                UserRole             @default(RESIDENT)
+  status              UserStatus           @default(PENDING)
+  isEmailVerified     Boolean              @default(false)
+  residentProfile     ResidentProfile?
+  payments            Payment[]
+  userSessions        UserSession[]
+  condominium         Condominium?         @relation(fields: [condominiumId], references: [id], onDelete: SetNull)
+  condominiumId       String?
+  createdAt           DateTime             @default(now())
+  updatedAt           DateTime             @updatedAt
+  accessLogs          AccessLog[]
+  parcelsReceived     ParcelDelivery[]     @relation("ParcelReceivedBy")
+  parcelsDelivered    ParcelDelivery[]     @relation("ParcelDeliveredBy")
+  passwordResetTokens PasswordResetToken[]
+  pushSubscriptions   PushSubscription[]
 
   @@index([condominiumId])
+}
+
+model PasswordResetToken {
+  id        String    @id @default(uuid())
+  tokenHash String    @unique
+  userId    String
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  @@index([userId])
+  @@index([tokenHash])
 }
 
 model UserSession {
@@ -157,6 +172,21 @@ model UserSession {
 
   @@index([userId])
   @@index([expiresAt])
+}
+
+model PushSubscription {
+  id             String   @id @default(uuid())
+  userId         String
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  endpoint       String   @unique
+  p256dh         String
+  auth           String
+  expirationTime BigInt?
+  userAgent      String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@index([userId])
 }
 
 model House {
