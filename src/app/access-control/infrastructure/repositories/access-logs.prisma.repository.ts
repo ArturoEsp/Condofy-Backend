@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from '@/core/infrastructure/persistence/prisma/prisma.service';
 import AccessLogsRepository, {
   AccessLogItemEntity,
+  ActiveEntryItemEntity,
   CreateAccessLogData,
   ParamsFindAccessLogs,
   StandAccessLogsResult,
@@ -198,6 +199,113 @@ export class AccessLogsPrismaRepository implements AccessLogsRepository {
       size,
       totalPages: Math.ceil(total / size),
     };
+  }
+
+  async findActiveEntries(
+    condominiumId: string,
+    search?: string,
+  ): Promise<ActiveEntryItemEntity[]> {
+    let where: Prisma.AccessAuthorizationWhereInput = {
+      visitor: {
+        house: {
+          condominiumId,
+        },
+      },
+      logs: {
+        some: {
+          entryType: EntryType.ENTRY,
+        },
+      },
+    };
+
+    if (search && search.trim().length > 0) {
+      const s = search.trim();
+      const orConditions: Prisma.AccessAuthorizationWhereInput[] = [
+        { visitor: { firstName: { contains: s, mode: 'insensitive' } } },
+        { visitor: { lastName: { contains: s, mode: 'insensitive' } } },
+        { visitor: { phone: { contains: s, mode: 'insensitive' } } },
+        {
+          visitor: {
+            house: { houseNumber: { contains: s, mode: 'insensitive' } },
+          },
+        },
+        { vehiclePlate: { contains: s, mode: 'insensitive' } },
+        { qrCode: { contains: s, mode: 'insensitive' } },
+      ];
+
+      if (s.toUpperCase().startsWith('ACC-')) {
+        const indexNum = parseInt(s.substring(4), 10);
+        if (!isNaN(indexNum)) {
+          orConditions.push({ index: indexNum });
+        }
+      }
+
+      where = {
+        ...where,
+        OR: orConditions,
+      };
+    }
+
+    const accesses = await this.prismaService.accessAuthorization.findMany({
+      where,
+      include: {
+        visitor: {
+          include: {
+            house: true,
+          },
+        },
+        logs: {
+          orderBy: { date: 'desc' },
+          take: 1,
+        },
+      },
+      orderBy: {
+        updatedAt: 'desc',
+      },
+    });
+
+    const activeAccesses = accesses.filter(
+      (acc) => acc.logs.length > 0 && acc.logs[0].entryType === EntryType.ENTRY,
+    );
+
+    activeAccesses.sort(
+      (a, b) => b.logs[0].date.getTime() - a.logs[0].date.getTime(),
+    );
+
+    return activeAccesses.map((acc) => {
+      const code = `ACC-${String(acc.index).padStart(4, '0')}`;
+      const lastLog = acc.logs[0];
+
+      return {
+        accessAuthorizationId: acc.id,
+        code,
+        pin: acc.qrCode,
+        type: acc.type,
+        status: acc.status,
+        vehiclePlate: acc.vehiclePlate,
+        notes: acc.notes,
+        visitor: acc.visitor
+          ? {
+              id: acc.visitor.id,
+              firstName: acc.visitor.firstName,
+              lastName: acc.visitor.lastName,
+              category: acc.visitor.category,
+              photo: acc.visitor.photo,
+              phone: acc.visitor.phone,
+            }
+          : undefined,
+        house: acc.visitor?.house
+          ? {
+              id: acc.visitor.house.id,
+              houseNumber: acc.visitor.house.houseNumber,
+              tower: acc.visitor.house.tower,
+            }
+          : undefined,
+        entryDate: lastLog.date,
+        entryObservations: lastLog.observations,
+        entryLogId: lastLog.id,
+      };
+    });
   }
 
   async getDashboardStats(condominiumId: string): Promise<StandDashboardStats> {

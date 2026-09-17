@@ -43,8 +43,9 @@ export class StandRegisterAccessLogUseCase {
     }
 
     if (
-      pass.status === AuthorizationStatus.EXPIRED ||
-      pass.status === AuthorizationStatus.CANCELLED
+      command.entryType === EntryType.ENTRY &&
+      (pass.status === AuthorizationStatus.EXPIRED ||
+        pass.status === AuthorizationStatus.CANCELLED)
     ) {
       throw new AccessAuthorizationInvalidStatusException(
         `No es posible registrar acceso. El pase se encuentra ${

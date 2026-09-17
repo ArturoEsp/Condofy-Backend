@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   Patch,
@@ -25,6 +26,7 @@ import { CreateAccessAuthorizationUseCase } from '../../application/use-cases/cr
 import { ListHouseAccessAuthorizationsUseCase } from '../../application/use-cases/list-house-access-authorizations.usecase';
 import { UpdateAccessAuthorizationUseCase } from '../../application/use-cases/update-access-authorization.usecase';
 import { ResidentCreateDeliveryPassUseCase } from '../../application/use-cases/resident-create-delivery-pass.usecase';
+import { DeleteAccessAuthorizationUseCase } from '../../application/use-cases/delete-access-authorization.usecase';
 
 @ApiTags('Resident Access Control')
 @Controller(':condominiumKey/residents/access-authorizations')
@@ -35,6 +37,7 @@ export class ResidentAccessControlController {
     private readonly listHouseAccessAuthorizationsUseCase: ListHouseAccessAuthorizationsUseCase,
     private readonly updateAccessAuthorizationUseCase: UpdateAccessAuthorizationUseCase,
     private readonly residentCreateDeliveryPassUseCase: ResidentCreateDeliveryPassUseCase,
+    private readonly deleteAccessAuthorizationUseCase: DeleteAccessAuthorizationUseCase,
   ) {}
 
   @Post('quick-delivery')
@@ -116,6 +119,20 @@ export class ResidentAccessControlController {
       currentUserId: user.id,
       condominiumId,
       status: AuthorizationStatus.CANCELLED,
+    });
+  }
+
+  @Delete(':id')
+  @ApiEndpoint(Docs.deleteAccessAuthorization)
+  async delete(
+    @CondominiumId() condominiumId: string,
+    @CurrentUser() user: AuthUserEntity,
+    @Param('id') id: string,
+  ) {
+    return await this.deleteAccessAuthorizationUseCase.execute({
+      id,
+      currentUserId: user.id,
+      condominiumId,
     });
   }
 }

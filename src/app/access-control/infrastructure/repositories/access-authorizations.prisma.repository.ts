@@ -344,6 +344,12 @@ export class AccessAuthorizationsPrismaRepository implements AccessAuthorization
     return AccessAuthorizationEntityMapper.toDomain(access);
   }
 
+  async delete(id: string): Promise<void> {
+    await this.prismaService.accessAuthorization.delete({
+      where: { id },
+    });
+  }
+
   private buildWhereInput(
     params: ParamsCountAccessAuthorizations,
   ): Prisma.AccessAuthorizationWhereInput {

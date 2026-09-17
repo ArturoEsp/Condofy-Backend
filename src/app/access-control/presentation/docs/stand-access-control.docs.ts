@@ -5,6 +5,8 @@ import {
   StandDashboardStatsResponse,
 } from '../dtos/responses/access-log.response';
 import { PublicPassResponse } from '../dtos/responses/public-pass.response';
+import { ActiveEntryResponse } from '../dtos/responses/active-entry.response';
+import { BatchExitResponse } from '../dtos/responses/batch-exit.response';
 
 export const standRegisterAccessLog: ApiEndpointProps = {
   summary: 'Registrar entrada o salida de un pase en caseta',
@@ -12,6 +14,23 @@ export const standRegisterAccessLog: ApiEndpointProps = {
   withToken: true,
   serialization: AccessLogResponse,
   type: AccessLogResponse,
+};
+
+export const standGetActiveEntries: ApiEndpointProps = {
+  summary: 'Listar visitas actualmente dentro del condominio en estado ENTRADA',
+  status: HttpStatus.OK,
+  withToken: true,
+  serialization: ActiveEntryResponse,
+  type: [ActiveEntryResponse],
+};
+
+export const standBatchExit: ApiEndpointProps = {
+  summary:
+    'Registrar salida rápida o masiva para visitas seleccionadas en ENTRADA',
+  status: HttpStatus.CREATED,
+  withToken: true,
+  serialization: BatchExitResponse,
+  type: BatchExitResponse,
 };
 
 export const standGetAccessLogs: ApiEndpointProps = {
