@@ -28,6 +28,11 @@ export type CondominiumMinAggregateOutputType = {
   id: string | null
   key: string | null
   name: string | null
+  description: string | null
+  googleMapsUrl: string | null
+  address: string | null
+  contactPhone: string | null
+  contactEmail: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -36,6 +41,11 @@ export type CondominiumMaxAggregateOutputType = {
   id: string | null
   key: string | null
   name: string | null
+  description: string | null
+  googleMapsUrl: string | null
+  address: string | null
+  contactPhone: string | null
+  contactEmail: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -44,6 +54,11 @@ export type CondominiumCountAggregateOutputType = {
   id: number
   key: number
   name: number
+  description: number
+  googleMapsUrl: number
+  address: number
+  contactPhone: number
+  contactEmail: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -54,6 +69,11 @@ export type CondominiumMinAggregateInputType = {
   id?: true
   key?: true
   name?: true
+  description?: true
+  googleMapsUrl?: true
+  address?: true
+  contactPhone?: true
+  contactEmail?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -62,6 +82,11 @@ export type CondominiumMaxAggregateInputType = {
   id?: true
   key?: true
   name?: true
+  description?: true
+  googleMapsUrl?: true
+  address?: true
+  contactPhone?: true
+  contactEmail?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -70,6 +95,11 @@ export type CondominiumCountAggregateInputType = {
   id?: true
   key?: true
   name?: true
+  description?: true
+  googleMapsUrl?: true
+  address?: true
+  contactPhone?: true
+  contactEmail?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -151,6 +181,11 @@ export type CondominiumGroupByOutputType = {
   id: string
   key: string
   name: string
+  description: string | null
+  googleMapsUrl: string | null
+  address: string | null
+  contactPhone: string | null
+  contactEmail: string | null
   createdAt: Date
   updatedAt: Date
   _count: CondominiumCountAggregateOutputType | null
@@ -180,6 +215,11 @@ export type CondominiumWhereInput = {
   id?: Prisma.StringFilter<"Condominium"> | string
   key?: Prisma.StringFilter<"Condominium"> | string
   name?: Prisma.StringFilter<"Condominium"> | string
+  description?: Prisma.StringNullableFilter<"Condominium"> | string | null
+  googleMapsUrl?: Prisma.StringNullableFilter<"Condominium"> | string | null
+  address?: Prisma.StringNullableFilter<"Condominium"> | string | null
+  contactPhone?: Prisma.StringNullableFilter<"Condominium"> | string | null
+  contactEmail?: Prisma.StringNullableFilter<"Condominium"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Condominium"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Condominium"> | Date | string
   houses?: Prisma.HouseListRelationFilter
@@ -193,6 +233,11 @@ export type CondominiumOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   key?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  description?: Prisma.SortOrderInput | Prisma.SortOrder
+  googleMapsUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  address?: Prisma.SortOrderInput | Prisma.SortOrder
+  contactPhone?: Prisma.SortOrderInput | Prisma.SortOrder
+  contactEmail?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   houses?: Prisma.HouseOrderByRelationAggregateInput
@@ -209,6 +254,11 @@ export type CondominiumWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.CondominiumWhereInput[]
   NOT?: Prisma.CondominiumWhereInput | Prisma.CondominiumWhereInput[]
   name?: Prisma.StringFilter<"Condominium"> | string
+  description?: Prisma.StringNullableFilter<"Condominium"> | string | null
+  googleMapsUrl?: Prisma.StringNullableFilter<"Condominium"> | string | null
+  address?: Prisma.StringNullableFilter<"Condominium"> | string | null
+  contactPhone?: Prisma.StringNullableFilter<"Condominium"> | string | null
+  contactEmail?: Prisma.StringNullableFilter<"Condominium"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Condominium"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Condominium"> | Date | string
   houses?: Prisma.HouseListRelationFilter
@@ -222,6 +272,11 @@ export type CondominiumOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   key?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  description?: Prisma.SortOrderInput | Prisma.SortOrder
+  googleMapsUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  address?: Prisma.SortOrderInput | Prisma.SortOrder
+  contactPhone?: Prisma.SortOrderInput | Prisma.SortOrder
+  contactEmail?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.CondominiumCountOrderByAggregateInput
@@ -236,6 +291,11 @@ export type CondominiumScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"Condominium"> | string
   key?: Prisma.StringWithAggregatesFilter<"Condominium"> | string
   name?: Prisma.StringWithAggregatesFilter<"Condominium"> | string
+  description?: Prisma.StringNullableWithAggregatesFilter<"Condominium"> | string | null
+  googleMapsUrl?: Prisma.StringNullableWithAggregatesFilter<"Condominium"> | string | null
+  address?: Prisma.StringNullableWithAggregatesFilter<"Condominium"> | string | null
+  contactPhone?: Prisma.StringNullableWithAggregatesFilter<"Condominium"> | string | null
+  contactEmail?: Prisma.StringNullableWithAggregatesFilter<"Condominium"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Condominium"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Condominium"> | Date | string
 }
@@ -244,6 +304,11 @@ export type CondominiumCreateInput = {
   id?: string
   key: string
   name: string
+  description?: string | null
+  googleMapsUrl?: string | null
+  address?: string | null
+  contactPhone?: string | null
+  contactEmail?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   houses?: Prisma.HouseCreateNestedManyWithoutCondominiumInput
@@ -257,6 +322,11 @@ export type CondominiumUncheckedCreateInput = {
   id?: string
   key: string
   name: string
+  description?: string | null
+  googleMapsUrl?: string | null
+  address?: string | null
+  contactPhone?: string | null
+  contactEmail?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   houses?: Prisma.HouseUncheckedCreateNestedManyWithoutCondominiumInput
@@ -270,6 +340,11 @@ export type CondominiumUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   key?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleMapsUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   houses?: Prisma.HouseUpdateManyWithoutCondominiumNestedInput
@@ -283,6 +358,11 @@ export type CondominiumUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   key?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleMapsUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   houses?: Prisma.HouseUncheckedUpdateManyWithoutCondominiumNestedInput
@@ -296,6 +376,11 @@ export type CondominiumCreateManyInput = {
   id?: string
   key: string
   name: string
+  description?: string | null
+  googleMapsUrl?: string | null
+  address?: string | null
+  contactPhone?: string | null
+  contactEmail?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -304,6 +389,11 @@ export type CondominiumUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   key?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleMapsUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -312,6 +402,11 @@ export type CondominiumUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   key?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleMapsUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -320,6 +415,11 @@ export type CondominiumCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   key?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  description?: Prisma.SortOrder
+  googleMapsUrl?: Prisma.SortOrder
+  address?: Prisma.SortOrder
+  contactPhone?: Prisma.SortOrder
+  contactEmail?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -328,6 +428,11 @@ export type CondominiumMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   key?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  description?: Prisma.SortOrder
+  googleMapsUrl?: Prisma.SortOrder
+  address?: Prisma.SortOrder
+  contactPhone?: Prisma.SortOrder
+  contactEmail?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -336,6 +441,11 @@ export type CondominiumMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   key?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  description?: Prisma.SortOrder
+  googleMapsUrl?: Prisma.SortOrder
+  address?: Prisma.SortOrder
+  contactPhone?: Prisma.SortOrder
+  contactEmail?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -352,6 +462,10 @@ export type CondominiumScalarRelationFilter = {
 
 export type StringFieldUpdateOperationsInput = {
   set?: string
+}
+
+export type NullableStringFieldUpdateOperationsInput = {
+  set?: string | null
 }
 
 export type DateTimeFieldUpdateOperationsInput = {
@@ -434,6 +548,11 @@ export type CondominiumCreateWithoutAdminsInput = {
   id?: string
   key: string
   name: string
+  description?: string | null
+  googleMapsUrl?: string | null
+  address?: string | null
+  contactPhone?: string | null
+  contactEmail?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   houses?: Prisma.HouseCreateNestedManyWithoutCondominiumInput
@@ -446,6 +565,11 @@ export type CondominiumUncheckedCreateWithoutAdminsInput = {
   id?: string
   key: string
   name: string
+  description?: string | null
+  googleMapsUrl?: string | null
+  address?: string | null
+  contactPhone?: string | null
+  contactEmail?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   houses?: Prisma.HouseUncheckedCreateNestedManyWithoutCondominiumInput
@@ -474,6 +598,11 @@ export type CondominiumUpdateWithoutAdminsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   key?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleMapsUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   houses?: Prisma.HouseUpdateManyWithoutCondominiumNestedInput
@@ -486,6 +615,11 @@ export type CondominiumUncheckedUpdateWithoutAdminsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   key?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleMapsUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   houses?: Prisma.HouseUncheckedUpdateManyWithoutCondominiumNestedInput
@@ -498,6 +632,11 @@ export type CondominiumCreateWithoutHousesInput = {
   id?: string
   key: string
   name: string
+  description?: string | null
+  googleMapsUrl?: string | null
+  address?: string | null
+  contactPhone?: string | null
+  contactEmail?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   admins?: Prisma.UserCreateNestedManyWithoutCondominiumInput
@@ -510,6 +649,11 @@ export type CondominiumUncheckedCreateWithoutHousesInput = {
   id?: string
   key: string
   name: string
+  description?: string | null
+  googleMapsUrl?: string | null
+  address?: string | null
+  contactPhone?: string | null
+  contactEmail?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   admins?: Prisma.UserUncheckedCreateNestedManyWithoutCondominiumInput
@@ -538,6 +682,11 @@ export type CondominiumUpdateWithoutHousesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   key?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleMapsUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   admins?: Prisma.UserUpdateManyWithoutCondominiumNestedInput
@@ -550,6 +699,11 @@ export type CondominiumUncheckedUpdateWithoutHousesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   key?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleMapsUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   admins?: Prisma.UserUncheckedUpdateManyWithoutCondominiumNestedInput
@@ -562,6 +716,11 @@ export type CondominiumCreateWithoutResidentProfilesInput = {
   id?: string
   key: string
   name: string
+  description?: string | null
+  googleMapsUrl?: string | null
+  address?: string | null
+  contactPhone?: string | null
+  contactEmail?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   houses?: Prisma.HouseCreateNestedManyWithoutCondominiumInput
@@ -574,6 +733,11 @@ export type CondominiumUncheckedCreateWithoutResidentProfilesInput = {
   id?: string
   key: string
   name: string
+  description?: string | null
+  googleMapsUrl?: string | null
+  address?: string | null
+  contactPhone?: string | null
+  contactEmail?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   houses?: Prisma.HouseUncheckedCreateNestedManyWithoutCondominiumInput
@@ -602,6 +766,11 @@ export type CondominiumUpdateWithoutResidentProfilesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   key?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleMapsUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   houses?: Prisma.HouseUpdateManyWithoutCondominiumNestedInput
@@ -614,6 +783,11 @@ export type CondominiumUncheckedUpdateWithoutResidentProfilesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   key?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleMapsUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   houses?: Prisma.HouseUncheckedUpdateManyWithoutCondominiumNestedInput
@@ -626,6 +800,11 @@ export type CondominiumCreateWithoutParcelsInput = {
   id?: string
   key: string
   name: string
+  description?: string | null
+  googleMapsUrl?: string | null
+  address?: string | null
+  contactPhone?: string | null
+  contactEmail?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   houses?: Prisma.HouseCreateNestedManyWithoutCondominiumInput
@@ -638,6 +817,11 @@ export type CondominiumUncheckedCreateWithoutParcelsInput = {
   id?: string
   key: string
   name: string
+  description?: string | null
+  googleMapsUrl?: string | null
+  address?: string | null
+  contactPhone?: string | null
+  contactEmail?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   houses?: Prisma.HouseUncheckedCreateNestedManyWithoutCondominiumInput
@@ -666,6 +850,11 @@ export type CondominiumUpdateWithoutParcelsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   key?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleMapsUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   houses?: Prisma.HouseUpdateManyWithoutCondominiumNestedInput
@@ -678,6 +867,11 @@ export type CondominiumUncheckedUpdateWithoutParcelsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   key?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleMapsUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   houses?: Prisma.HouseUncheckedUpdateManyWithoutCondominiumNestedInput
@@ -690,6 +884,11 @@ export type CondominiumCreateWithoutMaintenanceChargesInput = {
   id?: string
   key: string
   name: string
+  description?: string | null
+  googleMapsUrl?: string | null
+  address?: string | null
+  contactPhone?: string | null
+  contactEmail?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   houses?: Prisma.HouseCreateNestedManyWithoutCondominiumInput
@@ -702,6 +901,11 @@ export type CondominiumUncheckedCreateWithoutMaintenanceChargesInput = {
   id?: string
   key: string
   name: string
+  description?: string | null
+  googleMapsUrl?: string | null
+  address?: string | null
+  contactPhone?: string | null
+  contactEmail?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   houses?: Prisma.HouseUncheckedCreateNestedManyWithoutCondominiumInput
@@ -730,6 +934,11 @@ export type CondominiumUpdateWithoutMaintenanceChargesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   key?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleMapsUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   houses?: Prisma.HouseUpdateManyWithoutCondominiumNestedInput
@@ -742,6 +951,11 @@ export type CondominiumUncheckedUpdateWithoutMaintenanceChargesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   key?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleMapsUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   houses?: Prisma.HouseUncheckedUpdateManyWithoutCondominiumNestedInput
@@ -821,6 +1035,11 @@ export type CondominiumSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   id?: boolean
   key?: boolean
   name?: boolean
+  description?: boolean
+  googleMapsUrl?: boolean
+  address?: boolean
+  contactPhone?: boolean
+  contactEmail?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   houses?: boolean | Prisma.Condominium$housesArgs<ExtArgs>
@@ -835,6 +1054,11 @@ export type CondominiumSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   id?: boolean
   key?: boolean
   name?: boolean
+  description?: boolean
+  googleMapsUrl?: boolean
+  address?: boolean
+  contactPhone?: boolean
+  contactEmail?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["condominium"]>
@@ -843,6 +1067,11 @@ export type CondominiumSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   id?: boolean
   key?: boolean
   name?: boolean
+  description?: boolean
+  googleMapsUrl?: boolean
+  address?: boolean
+  contactPhone?: boolean
+  contactEmail?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["condominium"]>
@@ -851,11 +1080,16 @@ export type CondominiumSelectScalar = {
   id?: boolean
   key?: boolean
   name?: boolean
+  description?: boolean
+  googleMapsUrl?: boolean
+  address?: boolean
+  contactPhone?: boolean
+  contactEmail?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type CondominiumOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "key" | "name" | "createdAt" | "updatedAt", ExtArgs["result"]["condominium"]>
+export type CondominiumOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "key" | "name" | "description" | "googleMapsUrl" | "address" | "contactPhone" | "contactEmail" | "createdAt" | "updatedAt", ExtArgs["result"]["condominium"]>
 export type CondominiumInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   houses?: boolean | Prisma.Condominium$housesArgs<ExtArgs>
   admins?: boolean | Prisma.Condominium$adminsArgs<ExtArgs>
@@ -880,6 +1114,11 @@ export type $CondominiumPayload<ExtArgs extends runtime.Types.Extensions.Interna
     id: string
     key: string
     name: string
+    description: string | null
+    googleMapsUrl: string | null
+    address: string | null
+    contactPhone: string | null
+    contactEmail: string | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["condominium"]>
@@ -1313,6 +1552,11 @@ export interface CondominiumFieldRefs {
   readonly id: Prisma.FieldRef<"Condominium", 'String'>
   readonly key: Prisma.FieldRef<"Condominium", 'String'>
   readonly name: Prisma.FieldRef<"Condominium", 'String'>
+  readonly description: Prisma.FieldRef<"Condominium", 'String'>
+  readonly googleMapsUrl: Prisma.FieldRef<"Condominium", 'String'>
+  readonly address: Prisma.FieldRef<"Condominium", 'String'>
+  readonly contactPhone: Prisma.FieldRef<"Condominium", 'String'>
+  readonly contactEmail: Prisma.FieldRef<"Condominium", 'String'>
   readonly createdAt: Prisma.FieldRef<"Condominium", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Condominium", 'DateTime'>
 }

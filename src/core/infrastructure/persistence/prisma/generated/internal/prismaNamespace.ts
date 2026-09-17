@@ -1646,6 +1646,11 @@ export const CondominiumScalarFieldEnum = {
   id: 'id',
   key: 'key',
   name: 'name',
+  description: 'description',
+  googleMapsUrl: 'googleMapsUrl',
+  address: 'address',
+  contactPhone: 'contactPhone',
+  contactEmail: 'contactEmail',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -1657,6 +1662,9 @@ export const UserScalarFieldEnum = {
   id: 'id',
   email: 'email',
   passwordHash: 'passwordHash',
+  firstName: 'firstName',
+  lastName: 'lastName',
+  phone: 'phone',
   role: 'role',
   status: 'status',
   isEmailVerified: 'isEmailVerified',

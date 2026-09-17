@@ -9,3 +9,17 @@ export const authGetMe: ApiEndpointProps = {
   serialization: UserMeResponse,
   type: UserMeResponse,
 };
+
+export const authUpdateProfile: ApiEndpointProps = {
+  summary: 'Actualizar información básica del perfil del usuario autenticado',
+  status: HttpStatus.OK,
+  withToken: true,
+  serialization: UserMeResponse,
+  type: UserMeResponse,
+};
+
+export const authChangePassword: ApiEndpointProps = {
+  summary: 'Cambiar la contraseña del usuario autenticado',
+  status: HttpStatus.OK,
+  withToken: true,
+};
