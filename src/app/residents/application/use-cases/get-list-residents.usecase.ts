@@ -30,6 +30,7 @@ export class GetListResidentsUseCase {
         residents: residents.map((resident) => ({
           ...resident,
           houseNumber: resident.houseNumber || '',
+          tower: resident.tower || '',
         })),
         count,
       };

@@ -40,6 +40,7 @@ export class ResidentsCondominiumController {
   }
 
   @Get('list')
+  @Roles('ADMIN', 'STAND')
   @ApiEndpoint(Docs.listResidents)
   async listResidents(
     @CondominiumId() condominiumId: string,

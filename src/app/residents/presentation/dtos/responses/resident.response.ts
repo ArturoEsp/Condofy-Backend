@@ -72,4 +72,8 @@ export class ResidentWithHouseResponse extends ResidentResponse {
   @ApiProperty()
   @Expose()
   houseNumber: string;
+
+  @ApiProperty({ required: false })
+  @Expose()
+  tower?: string;
 }
