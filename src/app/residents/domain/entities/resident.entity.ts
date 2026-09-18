@@ -13,6 +13,7 @@ export class ResidentEntity {
   condominiumId: string;
   houseId: string;
   houseNumber?: string;
+  tower?: string;
   residentType: ResidentType;
   canCreateVisits: boolean;
   firstName: string;

@@ -92,6 +92,12 @@ export class ResidentsPrismaRepository implements ResidentsRepository {
             { lastName: { contains: fullText, mode: 'insensitive' } },
             { phone: { contains: fullText, mode: 'insensitive' } },
             { user: { email: { contains: fullText, mode: 'insensitive' } } },
+            {
+              house: {
+                houseNumber: { contains: fullText, mode: 'insensitive' },
+              },
+            },
+            { house: { tower: { contains: fullText, mode: 'insensitive' } } },
           ],
         }),
       },
@@ -116,6 +122,12 @@ export class ResidentsPrismaRepository implements ResidentsRepository {
             { lastName: { contains: fullText, mode: 'insensitive' } },
             { phone: { contains: fullText, mode: 'insensitive' } },
             { user: { email: { contains: fullText, mode: 'insensitive' } } },
+            {
+              house: {
+                houseNumber: { contains: fullText, mode: 'insensitive' },
+              },
+            },
+            { house: { tower: { contains: fullText, mode: 'insensitive' } } },
           ],
         }),
       },

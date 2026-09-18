@@ -18,6 +18,7 @@ export class ResidentEntityMapper {
       condominiumId: model.condominiumId,
       houseId: model.houseId,
       houseNumber: model.house?.houseNumber,
+      tower: model.house?.tower || undefined,
       residentType: model.residentType,
       canCreateVisits: model.canCreateVisits,
       firstName: model.firstName,
