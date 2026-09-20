@@ -244,6 +244,8 @@ export type UserWhereInput = {
   accessLogs?: Prisma.AccessLogListRelationFilter
   parcelsReceived?: Prisma.ParcelDeliveryListRelationFilter
   parcelsDelivered?: Prisma.ParcelDeliveryListRelationFilter
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessListRelationFilter
+  providerExitsRegistered?: Prisma.GeneralProviderAccessListRelationFilter
   passwordResetTokens?: Prisma.PasswordResetTokenListRelationFilter
   pushSubscriptions?: Prisma.PushSubscriptionListRelationFilter
 }
@@ -268,6 +270,8 @@ export type UserOrderByWithRelationInput = {
   accessLogs?: Prisma.AccessLogOrderByRelationAggregateInput
   parcelsReceived?: Prisma.ParcelDeliveryOrderByRelationAggregateInput
   parcelsDelivered?: Prisma.ParcelDeliveryOrderByRelationAggregateInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessOrderByRelationAggregateInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessOrderByRelationAggregateInput
   passwordResetTokens?: Prisma.PasswordResetTokenOrderByRelationAggregateInput
   pushSubscriptions?: Prisma.PushSubscriptionOrderByRelationAggregateInput
 }
@@ -295,6 +299,8 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   accessLogs?: Prisma.AccessLogListRelationFilter
   parcelsReceived?: Prisma.ParcelDeliveryListRelationFilter
   parcelsDelivered?: Prisma.ParcelDeliveryListRelationFilter
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessListRelationFilter
+  providerExitsRegistered?: Prisma.GeneralProviderAccessListRelationFilter
   passwordResetTokens?: Prisma.PasswordResetTokenListRelationFilter
   pushSubscriptions?: Prisma.PushSubscriptionListRelationFilter
 }, "id" | "email">
@@ -354,6 +360,8 @@ export type UserCreateInput = {
   accessLogs?: Prisma.AccessLogCreateNestedManyWithoutUserAcceptInput
   parcelsReceived?: Prisma.ParcelDeliveryCreateNestedManyWithoutReceivedByInput
   parcelsDelivered?: Prisma.ParcelDeliveryCreateNestedManyWithoutDeliveredByInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessCreateNestedManyWithoutEntryGuardInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessCreateNestedManyWithoutExitGuardInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
 }
@@ -377,6 +385,8 @@ export type UserUncheckedCreateInput = {
   accessLogs?: Prisma.AccessLogUncheckedCreateNestedManyWithoutUserAcceptInput
   parcelsReceived?: Prisma.ParcelDeliveryUncheckedCreateNestedManyWithoutReceivedByInput
   parcelsDelivered?: Prisma.ParcelDeliveryUncheckedCreateNestedManyWithoutDeliveredByInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessUncheckedCreateNestedManyWithoutEntryGuardInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessUncheckedCreateNestedManyWithoutExitGuardInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
 }
@@ -400,6 +410,8 @@ export type UserUpdateInput = {
   accessLogs?: Prisma.AccessLogUpdateManyWithoutUserAcceptNestedInput
   parcelsReceived?: Prisma.ParcelDeliveryUpdateManyWithoutReceivedByNestedInput
   parcelsDelivered?: Prisma.ParcelDeliveryUpdateManyWithoutDeliveredByNestedInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessUpdateManyWithoutEntryGuardNestedInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessUpdateManyWithoutExitGuardNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
 }
@@ -423,6 +435,8 @@ export type UserUncheckedUpdateInput = {
   accessLogs?: Prisma.AccessLogUncheckedUpdateManyWithoutUserAcceptNestedInput
   parcelsReceived?: Prisma.ParcelDeliveryUncheckedUpdateManyWithoutReceivedByNestedInput
   parcelsDelivered?: Prisma.ParcelDeliveryUncheckedUpdateManyWithoutDeliveredByNestedInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessUncheckedUpdateManyWithoutEntryGuardNestedInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessUncheckedUpdateManyWithoutExitGuardNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
 }
@@ -690,6 +704,36 @@ export type UserUpdateOneWithoutParcelsDeliveredNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutParcelsDeliveredInput, Prisma.UserUpdateWithoutParcelsDeliveredInput>, Prisma.UserUncheckedUpdateWithoutParcelsDeliveredInput>
 }
 
+export type UserCreateNestedOneWithoutProviderEntriesRegisteredInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutProviderEntriesRegisteredInput, Prisma.UserUncheckedCreateWithoutProviderEntriesRegisteredInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutProviderEntriesRegisteredInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutProviderExitsRegisteredInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutProviderExitsRegisteredInput, Prisma.UserUncheckedCreateWithoutProviderExitsRegisteredInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutProviderExitsRegisteredInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutProviderEntriesRegisteredNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutProviderEntriesRegisteredInput, Prisma.UserUncheckedCreateWithoutProviderEntriesRegisteredInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutProviderEntriesRegisteredInput
+  upsert?: Prisma.UserUpsertWithoutProviderEntriesRegisteredInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutProviderEntriesRegisteredInput, Prisma.UserUpdateWithoutProviderEntriesRegisteredInput>, Prisma.UserUncheckedUpdateWithoutProviderEntriesRegisteredInput>
+}
+
+export type UserUpdateOneWithoutProviderExitsRegisteredNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutProviderExitsRegisteredInput, Prisma.UserUncheckedCreateWithoutProviderExitsRegisteredInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutProviderExitsRegisteredInput
+  upsert?: Prisma.UserUpsertWithoutProviderExitsRegisteredInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutProviderExitsRegisteredInput, Prisma.UserUpdateWithoutProviderExitsRegisteredInput>, Prisma.UserUncheckedUpdateWithoutProviderExitsRegisteredInput>
+}
+
 export type UserCreateNestedOneWithoutPaymentsInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutPaymentsInput, Prisma.UserUncheckedCreateWithoutPaymentsInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutPaymentsInput
@@ -722,6 +766,8 @@ export type UserCreateWithoutCondominiumInput = {
   accessLogs?: Prisma.AccessLogCreateNestedManyWithoutUserAcceptInput
   parcelsReceived?: Prisma.ParcelDeliveryCreateNestedManyWithoutReceivedByInput
   parcelsDelivered?: Prisma.ParcelDeliveryCreateNestedManyWithoutDeliveredByInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessCreateNestedManyWithoutEntryGuardInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessCreateNestedManyWithoutExitGuardInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
 }
@@ -744,6 +790,8 @@ export type UserUncheckedCreateWithoutCondominiumInput = {
   accessLogs?: Prisma.AccessLogUncheckedCreateNestedManyWithoutUserAcceptInput
   parcelsReceived?: Prisma.ParcelDeliveryUncheckedCreateNestedManyWithoutReceivedByInput
   parcelsDelivered?: Prisma.ParcelDeliveryUncheckedCreateNestedManyWithoutDeliveredByInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessUncheckedCreateNestedManyWithoutEntryGuardInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessUncheckedCreateNestedManyWithoutExitGuardInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
 }
@@ -811,6 +859,8 @@ export type UserCreateWithoutPasswordResetTokensInput = {
   accessLogs?: Prisma.AccessLogCreateNestedManyWithoutUserAcceptInput
   parcelsReceived?: Prisma.ParcelDeliveryCreateNestedManyWithoutReceivedByInput
   parcelsDelivered?: Prisma.ParcelDeliveryCreateNestedManyWithoutDeliveredByInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessCreateNestedManyWithoutEntryGuardInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessCreateNestedManyWithoutExitGuardInput
   pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
 }
 
@@ -833,6 +883,8 @@ export type UserUncheckedCreateWithoutPasswordResetTokensInput = {
   accessLogs?: Prisma.AccessLogUncheckedCreateNestedManyWithoutUserAcceptInput
   parcelsReceived?: Prisma.ParcelDeliveryUncheckedCreateNestedManyWithoutReceivedByInput
   parcelsDelivered?: Prisma.ParcelDeliveryUncheckedCreateNestedManyWithoutDeliveredByInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessUncheckedCreateNestedManyWithoutEntryGuardInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessUncheckedCreateNestedManyWithoutExitGuardInput
   pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
 }
 
@@ -871,6 +923,8 @@ export type UserUpdateWithoutPasswordResetTokensInput = {
   accessLogs?: Prisma.AccessLogUpdateManyWithoutUserAcceptNestedInput
   parcelsReceived?: Prisma.ParcelDeliveryUpdateManyWithoutReceivedByNestedInput
   parcelsDelivered?: Prisma.ParcelDeliveryUpdateManyWithoutDeliveredByNestedInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessUpdateManyWithoutEntryGuardNestedInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessUpdateManyWithoutExitGuardNestedInput
   pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
 }
 
@@ -893,6 +947,8 @@ export type UserUncheckedUpdateWithoutPasswordResetTokensInput = {
   accessLogs?: Prisma.AccessLogUncheckedUpdateManyWithoutUserAcceptNestedInput
   parcelsReceived?: Prisma.ParcelDeliveryUncheckedUpdateManyWithoutReceivedByNestedInput
   parcelsDelivered?: Prisma.ParcelDeliveryUncheckedUpdateManyWithoutDeliveredByNestedInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessUncheckedUpdateManyWithoutEntryGuardNestedInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessUncheckedUpdateManyWithoutExitGuardNestedInput
   pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
 }
 
@@ -914,6 +970,8 @@ export type UserCreateWithoutUserSessionsInput = {
   accessLogs?: Prisma.AccessLogCreateNestedManyWithoutUserAcceptInput
   parcelsReceived?: Prisma.ParcelDeliveryCreateNestedManyWithoutReceivedByInput
   parcelsDelivered?: Prisma.ParcelDeliveryCreateNestedManyWithoutDeliveredByInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessCreateNestedManyWithoutEntryGuardInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessCreateNestedManyWithoutExitGuardInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
 }
@@ -936,6 +994,8 @@ export type UserUncheckedCreateWithoutUserSessionsInput = {
   accessLogs?: Prisma.AccessLogUncheckedCreateNestedManyWithoutUserAcceptInput
   parcelsReceived?: Prisma.ParcelDeliveryUncheckedCreateNestedManyWithoutReceivedByInput
   parcelsDelivered?: Prisma.ParcelDeliveryUncheckedCreateNestedManyWithoutDeliveredByInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessUncheckedCreateNestedManyWithoutEntryGuardInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessUncheckedCreateNestedManyWithoutExitGuardInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
 }
@@ -974,6 +1034,8 @@ export type UserUpdateWithoutUserSessionsInput = {
   accessLogs?: Prisma.AccessLogUpdateManyWithoutUserAcceptNestedInput
   parcelsReceived?: Prisma.ParcelDeliveryUpdateManyWithoutReceivedByNestedInput
   parcelsDelivered?: Prisma.ParcelDeliveryUpdateManyWithoutDeliveredByNestedInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessUpdateManyWithoutEntryGuardNestedInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessUpdateManyWithoutExitGuardNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
 }
@@ -996,6 +1058,8 @@ export type UserUncheckedUpdateWithoutUserSessionsInput = {
   accessLogs?: Prisma.AccessLogUncheckedUpdateManyWithoutUserAcceptNestedInput
   parcelsReceived?: Prisma.ParcelDeliveryUncheckedUpdateManyWithoutReceivedByNestedInput
   parcelsDelivered?: Prisma.ParcelDeliveryUncheckedUpdateManyWithoutDeliveredByNestedInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessUncheckedUpdateManyWithoutEntryGuardNestedInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessUncheckedUpdateManyWithoutExitGuardNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
 }
@@ -1019,6 +1083,8 @@ export type UserCreateWithoutPushSubscriptionsInput = {
   accessLogs?: Prisma.AccessLogCreateNestedManyWithoutUserAcceptInput
   parcelsReceived?: Prisma.ParcelDeliveryCreateNestedManyWithoutReceivedByInput
   parcelsDelivered?: Prisma.ParcelDeliveryCreateNestedManyWithoutDeliveredByInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessCreateNestedManyWithoutEntryGuardInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessCreateNestedManyWithoutExitGuardInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
 }
 
@@ -1041,6 +1107,8 @@ export type UserUncheckedCreateWithoutPushSubscriptionsInput = {
   accessLogs?: Prisma.AccessLogUncheckedCreateNestedManyWithoutUserAcceptInput
   parcelsReceived?: Prisma.ParcelDeliveryUncheckedCreateNestedManyWithoutReceivedByInput
   parcelsDelivered?: Prisma.ParcelDeliveryUncheckedCreateNestedManyWithoutDeliveredByInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessUncheckedCreateNestedManyWithoutEntryGuardInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessUncheckedCreateNestedManyWithoutExitGuardInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
 }
 
@@ -1079,6 +1147,8 @@ export type UserUpdateWithoutPushSubscriptionsInput = {
   accessLogs?: Prisma.AccessLogUpdateManyWithoutUserAcceptNestedInput
   parcelsReceived?: Prisma.ParcelDeliveryUpdateManyWithoutReceivedByNestedInput
   parcelsDelivered?: Prisma.ParcelDeliveryUpdateManyWithoutDeliveredByNestedInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessUpdateManyWithoutEntryGuardNestedInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessUpdateManyWithoutExitGuardNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
 }
 
@@ -1101,6 +1171,8 @@ export type UserUncheckedUpdateWithoutPushSubscriptionsInput = {
   accessLogs?: Prisma.AccessLogUncheckedUpdateManyWithoutUserAcceptNestedInput
   parcelsReceived?: Prisma.ParcelDeliveryUncheckedUpdateManyWithoutReceivedByNestedInput
   parcelsDelivered?: Prisma.ParcelDeliveryUncheckedUpdateManyWithoutDeliveredByNestedInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessUncheckedUpdateManyWithoutEntryGuardNestedInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessUncheckedUpdateManyWithoutExitGuardNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
 }
 
@@ -1122,6 +1194,8 @@ export type UserCreateWithoutResidentProfileInput = {
   accessLogs?: Prisma.AccessLogCreateNestedManyWithoutUserAcceptInput
   parcelsReceived?: Prisma.ParcelDeliveryCreateNestedManyWithoutReceivedByInput
   parcelsDelivered?: Prisma.ParcelDeliveryCreateNestedManyWithoutDeliveredByInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessCreateNestedManyWithoutEntryGuardInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessCreateNestedManyWithoutExitGuardInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
 }
@@ -1144,6 +1218,8 @@ export type UserUncheckedCreateWithoutResidentProfileInput = {
   accessLogs?: Prisma.AccessLogUncheckedCreateNestedManyWithoutUserAcceptInput
   parcelsReceived?: Prisma.ParcelDeliveryUncheckedCreateNestedManyWithoutReceivedByInput
   parcelsDelivered?: Prisma.ParcelDeliveryUncheckedCreateNestedManyWithoutDeliveredByInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessUncheckedCreateNestedManyWithoutEntryGuardInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessUncheckedCreateNestedManyWithoutExitGuardInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
 }
@@ -1182,6 +1258,8 @@ export type UserUpdateWithoutResidentProfileInput = {
   accessLogs?: Prisma.AccessLogUpdateManyWithoutUserAcceptNestedInput
   parcelsReceived?: Prisma.ParcelDeliveryUpdateManyWithoutReceivedByNestedInput
   parcelsDelivered?: Prisma.ParcelDeliveryUpdateManyWithoutDeliveredByNestedInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessUpdateManyWithoutEntryGuardNestedInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessUpdateManyWithoutExitGuardNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
 }
@@ -1204,6 +1282,8 @@ export type UserUncheckedUpdateWithoutResidentProfileInput = {
   accessLogs?: Prisma.AccessLogUncheckedUpdateManyWithoutUserAcceptNestedInput
   parcelsReceived?: Prisma.ParcelDeliveryUncheckedUpdateManyWithoutReceivedByNestedInput
   parcelsDelivered?: Prisma.ParcelDeliveryUncheckedUpdateManyWithoutDeliveredByNestedInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessUncheckedUpdateManyWithoutEntryGuardNestedInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessUncheckedUpdateManyWithoutExitGuardNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
 }
@@ -1226,6 +1306,8 @@ export type UserCreateWithoutAccessLogsInput = {
   condominium?: Prisma.CondominiumCreateNestedOneWithoutAdminsInput
   parcelsReceived?: Prisma.ParcelDeliveryCreateNestedManyWithoutReceivedByInput
   parcelsDelivered?: Prisma.ParcelDeliveryCreateNestedManyWithoutDeliveredByInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessCreateNestedManyWithoutEntryGuardInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessCreateNestedManyWithoutExitGuardInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
 }
@@ -1248,6 +1330,8 @@ export type UserUncheckedCreateWithoutAccessLogsInput = {
   userSessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
   parcelsReceived?: Prisma.ParcelDeliveryUncheckedCreateNestedManyWithoutReceivedByInput
   parcelsDelivered?: Prisma.ParcelDeliveryUncheckedCreateNestedManyWithoutDeliveredByInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessUncheckedCreateNestedManyWithoutEntryGuardInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessUncheckedCreateNestedManyWithoutExitGuardInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
 }
@@ -1286,6 +1370,8 @@ export type UserUpdateWithoutAccessLogsInput = {
   condominium?: Prisma.CondominiumUpdateOneWithoutAdminsNestedInput
   parcelsReceived?: Prisma.ParcelDeliveryUpdateManyWithoutReceivedByNestedInput
   parcelsDelivered?: Prisma.ParcelDeliveryUpdateManyWithoutDeliveredByNestedInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessUpdateManyWithoutEntryGuardNestedInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessUpdateManyWithoutExitGuardNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
 }
@@ -1308,6 +1394,8 @@ export type UserUncheckedUpdateWithoutAccessLogsInput = {
   userSessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
   parcelsReceived?: Prisma.ParcelDeliveryUncheckedUpdateManyWithoutReceivedByNestedInput
   parcelsDelivered?: Prisma.ParcelDeliveryUncheckedUpdateManyWithoutDeliveredByNestedInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessUncheckedUpdateManyWithoutEntryGuardNestedInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessUncheckedUpdateManyWithoutExitGuardNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
 }
@@ -1330,6 +1418,8 @@ export type UserCreateWithoutParcelsReceivedInput = {
   condominium?: Prisma.CondominiumCreateNestedOneWithoutAdminsInput
   accessLogs?: Prisma.AccessLogCreateNestedManyWithoutUserAcceptInput
   parcelsDelivered?: Prisma.ParcelDeliveryCreateNestedManyWithoutDeliveredByInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessCreateNestedManyWithoutEntryGuardInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessCreateNestedManyWithoutExitGuardInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
 }
@@ -1352,6 +1442,8 @@ export type UserUncheckedCreateWithoutParcelsReceivedInput = {
   userSessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
   accessLogs?: Prisma.AccessLogUncheckedCreateNestedManyWithoutUserAcceptInput
   parcelsDelivered?: Prisma.ParcelDeliveryUncheckedCreateNestedManyWithoutDeliveredByInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessUncheckedCreateNestedManyWithoutEntryGuardInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessUncheckedCreateNestedManyWithoutExitGuardInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
 }
@@ -1379,6 +1471,8 @@ export type UserCreateWithoutParcelsDeliveredInput = {
   condominium?: Prisma.CondominiumCreateNestedOneWithoutAdminsInput
   accessLogs?: Prisma.AccessLogCreateNestedManyWithoutUserAcceptInput
   parcelsReceived?: Prisma.ParcelDeliveryCreateNestedManyWithoutReceivedByInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessCreateNestedManyWithoutEntryGuardInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessCreateNestedManyWithoutExitGuardInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
 }
@@ -1401,6 +1495,8 @@ export type UserUncheckedCreateWithoutParcelsDeliveredInput = {
   userSessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
   accessLogs?: Prisma.AccessLogUncheckedCreateNestedManyWithoutUserAcceptInput
   parcelsReceived?: Prisma.ParcelDeliveryUncheckedCreateNestedManyWithoutReceivedByInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessUncheckedCreateNestedManyWithoutEntryGuardInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessUncheckedCreateNestedManyWithoutExitGuardInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
 }
@@ -1439,6 +1535,8 @@ export type UserUpdateWithoutParcelsReceivedInput = {
   condominium?: Prisma.CondominiumUpdateOneWithoutAdminsNestedInput
   accessLogs?: Prisma.AccessLogUpdateManyWithoutUserAcceptNestedInput
   parcelsDelivered?: Prisma.ParcelDeliveryUpdateManyWithoutDeliveredByNestedInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessUpdateManyWithoutEntryGuardNestedInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessUpdateManyWithoutExitGuardNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
 }
@@ -1461,6 +1559,8 @@ export type UserUncheckedUpdateWithoutParcelsReceivedInput = {
   userSessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
   accessLogs?: Prisma.AccessLogUncheckedUpdateManyWithoutUserAcceptNestedInput
   parcelsDelivered?: Prisma.ParcelDeliveryUncheckedUpdateManyWithoutDeliveredByNestedInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessUncheckedUpdateManyWithoutEntryGuardNestedInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessUncheckedUpdateManyWithoutExitGuardNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
 }
@@ -1494,6 +1594,8 @@ export type UserUpdateWithoutParcelsDeliveredInput = {
   condominium?: Prisma.CondominiumUpdateOneWithoutAdminsNestedInput
   accessLogs?: Prisma.AccessLogUpdateManyWithoutUserAcceptNestedInput
   parcelsReceived?: Prisma.ParcelDeliveryUpdateManyWithoutReceivedByNestedInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessUpdateManyWithoutEntryGuardNestedInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessUpdateManyWithoutExitGuardNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
 }
@@ -1516,6 +1618,232 @@ export type UserUncheckedUpdateWithoutParcelsDeliveredInput = {
   userSessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
   accessLogs?: Prisma.AccessLogUncheckedUpdateManyWithoutUserAcceptNestedInput
   parcelsReceived?: Prisma.ParcelDeliveryUncheckedUpdateManyWithoutReceivedByNestedInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessUncheckedUpdateManyWithoutEntryGuardNestedInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessUncheckedUpdateManyWithoutExitGuardNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutProviderEntriesRegisteredInput = {
+  id?: string
+  email: string
+  passwordHash: string
+  firstName?: string | null
+  lastName?: string | null
+  phone?: string | null
+  role?: $Enums.UserRole
+  status?: $Enums.UserStatus
+  isEmailVerified?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  residentProfile?: Prisma.ResidentProfileCreateNestedOneWithoutUserInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutCreatedByInput
+  userSessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  condominium?: Prisma.CondominiumCreateNestedOneWithoutAdminsInput
+  accessLogs?: Prisma.AccessLogCreateNestedManyWithoutUserAcceptInput
+  parcelsReceived?: Prisma.ParcelDeliveryCreateNestedManyWithoutReceivedByInput
+  parcelsDelivered?: Prisma.ParcelDeliveryCreateNestedManyWithoutDeliveredByInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessCreateNestedManyWithoutExitGuardInput
+  passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutProviderEntriesRegisteredInput = {
+  id?: string
+  email: string
+  passwordHash: string
+  firstName?: string | null
+  lastName?: string | null
+  phone?: string | null
+  role?: $Enums.UserRole
+  status?: $Enums.UserStatus
+  isEmailVerified?: boolean
+  condominiumId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  residentProfile?: Prisma.ResidentProfileUncheckedCreateNestedOneWithoutUserInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCreatedByInput
+  userSessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  accessLogs?: Prisma.AccessLogUncheckedCreateNestedManyWithoutUserAcceptInput
+  parcelsReceived?: Prisma.ParcelDeliveryUncheckedCreateNestedManyWithoutReceivedByInput
+  parcelsDelivered?: Prisma.ParcelDeliveryUncheckedCreateNestedManyWithoutDeliveredByInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessUncheckedCreateNestedManyWithoutExitGuardInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutProviderEntriesRegisteredInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutProviderEntriesRegisteredInput, Prisma.UserUncheckedCreateWithoutProviderEntriesRegisteredInput>
+}
+
+export type UserCreateWithoutProviderExitsRegisteredInput = {
+  id?: string
+  email: string
+  passwordHash: string
+  firstName?: string | null
+  lastName?: string | null
+  phone?: string | null
+  role?: $Enums.UserRole
+  status?: $Enums.UserStatus
+  isEmailVerified?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  residentProfile?: Prisma.ResidentProfileCreateNestedOneWithoutUserInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutCreatedByInput
+  userSessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  condominium?: Prisma.CondominiumCreateNestedOneWithoutAdminsInput
+  accessLogs?: Prisma.AccessLogCreateNestedManyWithoutUserAcceptInput
+  parcelsReceived?: Prisma.ParcelDeliveryCreateNestedManyWithoutReceivedByInput
+  parcelsDelivered?: Prisma.ParcelDeliveryCreateNestedManyWithoutDeliveredByInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessCreateNestedManyWithoutEntryGuardInput
+  passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutProviderExitsRegisteredInput = {
+  id?: string
+  email: string
+  passwordHash: string
+  firstName?: string | null
+  lastName?: string | null
+  phone?: string | null
+  role?: $Enums.UserRole
+  status?: $Enums.UserStatus
+  isEmailVerified?: boolean
+  condominiumId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  residentProfile?: Prisma.ResidentProfileUncheckedCreateNestedOneWithoutUserInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCreatedByInput
+  userSessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  accessLogs?: Prisma.AccessLogUncheckedCreateNestedManyWithoutUserAcceptInput
+  parcelsReceived?: Prisma.ParcelDeliveryUncheckedCreateNestedManyWithoutReceivedByInput
+  parcelsDelivered?: Prisma.ParcelDeliveryUncheckedCreateNestedManyWithoutDeliveredByInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessUncheckedCreateNestedManyWithoutEntryGuardInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutProviderExitsRegisteredInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutProviderExitsRegisteredInput, Prisma.UserUncheckedCreateWithoutProviderExitsRegisteredInput>
+}
+
+export type UserUpsertWithoutProviderEntriesRegisteredInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutProviderEntriesRegisteredInput, Prisma.UserUncheckedUpdateWithoutProviderEntriesRegisteredInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutProviderEntriesRegisteredInput, Prisma.UserUncheckedCreateWithoutProviderEntriesRegisteredInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutProviderEntriesRegisteredInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutProviderEntriesRegisteredInput, Prisma.UserUncheckedUpdateWithoutProviderEntriesRegisteredInput>
+}
+
+export type UserUpdateWithoutProviderEntriesRegisteredInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  residentProfile?: Prisma.ResidentProfileUpdateOneWithoutUserNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutCreatedByNestedInput
+  userSessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  condominium?: Prisma.CondominiumUpdateOneWithoutAdminsNestedInput
+  accessLogs?: Prisma.AccessLogUpdateManyWithoutUserAcceptNestedInput
+  parcelsReceived?: Prisma.ParcelDeliveryUpdateManyWithoutReceivedByNestedInput
+  parcelsDelivered?: Prisma.ParcelDeliveryUpdateManyWithoutDeliveredByNestedInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessUpdateManyWithoutExitGuardNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutProviderEntriesRegisteredInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  condominiumId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  residentProfile?: Prisma.ResidentProfileUncheckedUpdateOneWithoutUserNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutCreatedByNestedInput
+  userSessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  accessLogs?: Prisma.AccessLogUncheckedUpdateManyWithoutUserAcceptNestedInput
+  parcelsReceived?: Prisma.ParcelDeliveryUncheckedUpdateManyWithoutReceivedByNestedInput
+  parcelsDelivered?: Prisma.ParcelDeliveryUncheckedUpdateManyWithoutDeliveredByNestedInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessUncheckedUpdateManyWithoutExitGuardNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserUpsertWithoutProviderExitsRegisteredInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutProviderExitsRegisteredInput, Prisma.UserUncheckedUpdateWithoutProviderExitsRegisteredInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutProviderExitsRegisteredInput, Prisma.UserUncheckedCreateWithoutProviderExitsRegisteredInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutProviderExitsRegisteredInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutProviderExitsRegisteredInput, Prisma.UserUncheckedUpdateWithoutProviderExitsRegisteredInput>
+}
+
+export type UserUpdateWithoutProviderExitsRegisteredInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  residentProfile?: Prisma.ResidentProfileUpdateOneWithoutUserNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutCreatedByNestedInput
+  userSessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  condominium?: Prisma.CondominiumUpdateOneWithoutAdminsNestedInput
+  accessLogs?: Prisma.AccessLogUpdateManyWithoutUserAcceptNestedInput
+  parcelsReceived?: Prisma.ParcelDeliveryUpdateManyWithoutReceivedByNestedInput
+  parcelsDelivered?: Prisma.ParcelDeliveryUpdateManyWithoutDeliveredByNestedInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessUpdateManyWithoutEntryGuardNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutProviderExitsRegisteredInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  condominiumId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  residentProfile?: Prisma.ResidentProfileUncheckedUpdateOneWithoutUserNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutCreatedByNestedInput
+  userSessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  accessLogs?: Prisma.AccessLogUncheckedUpdateManyWithoutUserAcceptNestedInput
+  parcelsReceived?: Prisma.ParcelDeliveryUncheckedUpdateManyWithoutReceivedByNestedInput
+  parcelsDelivered?: Prisma.ParcelDeliveryUncheckedUpdateManyWithoutDeliveredByNestedInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessUncheckedUpdateManyWithoutEntryGuardNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
 }
@@ -1538,6 +1866,8 @@ export type UserCreateWithoutPaymentsInput = {
   accessLogs?: Prisma.AccessLogCreateNestedManyWithoutUserAcceptInput
   parcelsReceived?: Prisma.ParcelDeliveryCreateNestedManyWithoutReceivedByInput
   parcelsDelivered?: Prisma.ParcelDeliveryCreateNestedManyWithoutDeliveredByInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessCreateNestedManyWithoutEntryGuardInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessCreateNestedManyWithoutExitGuardInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
 }
@@ -1560,6 +1890,8 @@ export type UserUncheckedCreateWithoutPaymentsInput = {
   accessLogs?: Prisma.AccessLogUncheckedCreateNestedManyWithoutUserAcceptInput
   parcelsReceived?: Prisma.ParcelDeliveryUncheckedCreateNestedManyWithoutReceivedByInput
   parcelsDelivered?: Prisma.ParcelDeliveryUncheckedCreateNestedManyWithoutDeliveredByInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessUncheckedCreateNestedManyWithoutEntryGuardInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessUncheckedCreateNestedManyWithoutExitGuardInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
 }
@@ -1598,6 +1930,8 @@ export type UserUpdateWithoutPaymentsInput = {
   accessLogs?: Prisma.AccessLogUpdateManyWithoutUserAcceptNestedInput
   parcelsReceived?: Prisma.ParcelDeliveryUpdateManyWithoutReceivedByNestedInput
   parcelsDelivered?: Prisma.ParcelDeliveryUpdateManyWithoutDeliveredByNestedInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessUpdateManyWithoutEntryGuardNestedInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessUpdateManyWithoutExitGuardNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
 }
@@ -1620,6 +1954,8 @@ export type UserUncheckedUpdateWithoutPaymentsInput = {
   accessLogs?: Prisma.AccessLogUncheckedUpdateManyWithoutUserAcceptNestedInput
   parcelsReceived?: Prisma.ParcelDeliveryUncheckedUpdateManyWithoutReceivedByNestedInput
   parcelsDelivered?: Prisma.ParcelDeliveryUncheckedUpdateManyWithoutDeliveredByNestedInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessUncheckedUpdateManyWithoutEntryGuardNestedInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessUncheckedUpdateManyWithoutExitGuardNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
 }
@@ -1656,6 +1992,8 @@ export type UserUpdateWithoutCondominiumInput = {
   accessLogs?: Prisma.AccessLogUpdateManyWithoutUserAcceptNestedInput
   parcelsReceived?: Prisma.ParcelDeliveryUpdateManyWithoutReceivedByNestedInput
   parcelsDelivered?: Prisma.ParcelDeliveryUpdateManyWithoutDeliveredByNestedInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessUpdateManyWithoutEntryGuardNestedInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessUpdateManyWithoutExitGuardNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
 }
@@ -1678,6 +2016,8 @@ export type UserUncheckedUpdateWithoutCondominiumInput = {
   accessLogs?: Prisma.AccessLogUncheckedUpdateManyWithoutUserAcceptNestedInput
   parcelsReceived?: Prisma.ParcelDeliveryUncheckedUpdateManyWithoutReceivedByNestedInput
   parcelsDelivered?: Prisma.ParcelDeliveryUncheckedUpdateManyWithoutDeliveredByNestedInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessUncheckedUpdateManyWithoutEntryGuardNestedInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessUncheckedUpdateManyWithoutExitGuardNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
 }
@@ -1707,6 +2047,8 @@ export type UserCountOutputType = {
   accessLogs: number
   parcelsReceived: number
   parcelsDelivered: number
+  providerEntriesRegistered: number
+  providerExitsRegistered: number
   passwordResetTokens: number
   pushSubscriptions: number
 }
@@ -1717,6 +2059,8 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   accessLogs?: boolean | UserCountOutputTypeCountAccessLogsArgs
   parcelsReceived?: boolean | UserCountOutputTypeCountParcelsReceivedArgs
   parcelsDelivered?: boolean | UserCountOutputTypeCountParcelsDeliveredArgs
+  providerEntriesRegistered?: boolean | UserCountOutputTypeCountProviderEntriesRegisteredArgs
+  providerExitsRegistered?: boolean | UserCountOutputTypeCountProviderExitsRegisteredArgs
   passwordResetTokens?: boolean | UserCountOutputTypeCountPasswordResetTokensArgs
   pushSubscriptions?: boolean | UserCountOutputTypeCountPushSubscriptionsArgs
 }
@@ -1769,6 +2113,20 @@ export type UserCountOutputTypeCountParcelsDeliveredArgs<ExtArgs extends runtime
 /**
  * UserCountOutputType without action
  */
+export type UserCountOutputTypeCountProviderEntriesRegisteredArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.GeneralProviderAccessWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountProviderExitsRegisteredArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.GeneralProviderAccessWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
 export type UserCountOutputTypeCountPasswordResetTokensArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.PasswordResetTokenWhereInput
 }
@@ -1801,6 +2159,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   accessLogs?: boolean | Prisma.User$accessLogsArgs<ExtArgs>
   parcelsReceived?: boolean | Prisma.User$parcelsReceivedArgs<ExtArgs>
   parcelsDelivered?: boolean | Prisma.User$parcelsDeliveredArgs<ExtArgs>
+  providerEntriesRegistered?: boolean | Prisma.User$providerEntriesRegisteredArgs<ExtArgs>
+  providerExitsRegistered?: boolean | Prisma.User$providerExitsRegisteredArgs<ExtArgs>
   passwordResetTokens?: boolean | Prisma.User$passwordResetTokensArgs<ExtArgs>
   pushSubscriptions?: boolean | Prisma.User$pushSubscriptionsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -1862,6 +2222,8 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   accessLogs?: boolean | Prisma.User$accessLogsArgs<ExtArgs>
   parcelsReceived?: boolean | Prisma.User$parcelsReceivedArgs<ExtArgs>
   parcelsDelivered?: boolean | Prisma.User$parcelsDeliveredArgs<ExtArgs>
+  providerEntriesRegistered?: boolean | Prisma.User$providerEntriesRegisteredArgs<ExtArgs>
+  providerExitsRegistered?: boolean | Prisma.User$providerExitsRegisteredArgs<ExtArgs>
   passwordResetTokens?: boolean | Prisma.User$passwordResetTokensArgs<ExtArgs>
   pushSubscriptions?: boolean | Prisma.User$pushSubscriptionsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -1883,6 +2245,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     accessLogs: Prisma.$AccessLogPayload<ExtArgs>[]
     parcelsReceived: Prisma.$ParcelDeliveryPayload<ExtArgs>[]
     parcelsDelivered: Prisma.$ParcelDeliveryPayload<ExtArgs>[]
+    providerEntriesRegistered: Prisma.$GeneralProviderAccessPayload<ExtArgs>[]
+    providerExitsRegistered: Prisma.$GeneralProviderAccessPayload<ExtArgs>[]
     passwordResetTokens: Prisma.$PasswordResetTokenPayload<ExtArgs>[]
     pushSubscriptions: Prisma.$PushSubscriptionPayload<ExtArgs>[]
   }
@@ -2300,6 +2664,8 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   accessLogs<T extends Prisma.User$accessLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$accessLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AccessLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   parcelsReceived<T extends Prisma.User$parcelsReceivedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$parcelsReceivedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ParcelDeliveryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   parcelsDelivered<T extends Prisma.User$parcelsDeliveredArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$parcelsDeliveredArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ParcelDeliveryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  providerEntriesRegistered<T extends Prisma.User$providerEntriesRegisteredArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$providerEntriesRegisteredArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GeneralProviderAccessPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  providerExitsRegistered<T extends Prisma.User$providerExitsRegisteredArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$providerExitsRegisteredArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GeneralProviderAccessPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   passwordResetTokens<T extends Prisma.User$passwordResetTokensArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$passwordResetTokensArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PasswordResetTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   pushSubscriptions<T extends Prisma.User$pushSubscriptionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$pushSubscriptionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PushSubscriptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
@@ -2899,6 +3265,54 @@ export type User$parcelsDeliveredArgs<ExtArgs extends runtime.Types.Extensions.I
   take?: number
   skip?: number
   distinct?: Prisma.ParcelDeliveryScalarFieldEnum | Prisma.ParcelDeliveryScalarFieldEnum[]
+}
+
+/**
+ * User.providerEntriesRegistered
+ */
+export type User$providerEntriesRegisteredArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the GeneralProviderAccess
+   */
+  select?: Prisma.GeneralProviderAccessSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the GeneralProviderAccess
+   */
+  omit?: Prisma.GeneralProviderAccessOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.GeneralProviderAccessInclude<ExtArgs> | null
+  where?: Prisma.GeneralProviderAccessWhereInput
+  orderBy?: Prisma.GeneralProviderAccessOrderByWithRelationInput | Prisma.GeneralProviderAccessOrderByWithRelationInput[]
+  cursor?: Prisma.GeneralProviderAccessWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.GeneralProviderAccessScalarFieldEnum | Prisma.GeneralProviderAccessScalarFieldEnum[]
+}
+
+/**
+ * User.providerExitsRegistered
+ */
+export type User$providerExitsRegisteredArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the GeneralProviderAccess
+   */
+  select?: Prisma.GeneralProviderAccessSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the GeneralProviderAccess
+   */
+  omit?: Prisma.GeneralProviderAccessOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.GeneralProviderAccessInclude<ExtArgs> | null
+  where?: Prisma.GeneralProviderAccessWhereInput
+  orderBy?: Prisma.GeneralProviderAccessOrderByWithRelationInput | Prisma.GeneralProviderAccessOrderByWithRelationInput[]
+  cursor?: Prisma.GeneralProviderAccessWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.GeneralProviderAccessScalarFieldEnum | Prisma.GeneralProviderAccessScalarFieldEnum[]
 }
 
 /**

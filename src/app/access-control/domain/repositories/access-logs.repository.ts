@@ -88,6 +88,20 @@ export interface StandAccessLogsResult {
   totalPages: number;
 }
 
+export interface ResidentAccessLogEntity {
+  id: string;
+  accessAuthorizationId: string;
+  entryType: EntryType;
+  observations?: string | null;
+  date: Date;
+  userAccept: {
+    id: string;
+    name: string;
+    email: string;
+    role: string;
+  };
+}
+
 export default interface AccessLogsRepository {
   create(data: CreateAccessLogData): Promise<AccessLogItemEntity>;
   findTodayLogs(params: ParamsFindAccessLogs): Promise<StandAccessLogsResult>;
@@ -96,4 +110,7 @@ export default interface AccessLogsRepository {
     search?: string,
   ): Promise<ActiveEntryItemEntity[]>;
   getDashboardStats(condominiumId: string): Promise<StandDashboardStats>;
+  findLogsByAuthorizationId(
+    accessAuthorizationId: string,
+  ): Promise<ResidentAccessLogEntity[]>;
 }

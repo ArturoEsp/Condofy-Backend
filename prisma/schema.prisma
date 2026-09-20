@@ -101,46 +101,63 @@ enum CourierCompany {
   OTHER
 }
 
+enum GeneralProviderCategory {
+  WATER
+  GAS
+  GARDENING
+  TRASH
+  MAINTENANCE
+  OTHER
+}
+
+enum GeneralProviderStatus {
+  INSIDE
+  EXITED
+}
+
 model Condominium {
-  id                 String              @id @default(uuid())
-  key                String              @unique
-  name               String
-  description        String?
-  googleMapsUrl      String?
-  address            String?
-  contactPhone       String?
-  contactEmail       String?
-  houses             House[]
-  admins             User[]
-  residentProfiles   ResidentProfile[]
-  maintenanceCharges MaintenanceCharge[]
-  parcels            ParcelDelivery[]
-  createdAt          DateTime            @default(now())
-  updatedAt          DateTime            @updatedAt
+  id                      String                  @id @default(uuid())
+  key                     String                  @unique
+  name                    String
+  description             String?
+  googleMapsUrl           String?
+  address                 String?
+  contactPhone            String?
+  contactEmail            String?
+  houses                  House[]
+  admins                  User[]
+  residentProfiles        ResidentProfile[]
+  maintenanceCharges      MaintenanceCharge[]
+  parcels                 ParcelDelivery[]
+  generalProviderAccesses GeneralProviderAccess[]
+  createdAt               DateTime                @default(now())
+  updatedAt               DateTime                @updatedAt
 }
 
 model User {
-  id                  String               @id @default(uuid())
-  email               String               @unique
-  passwordHash        String
-  firstName           String?
-  lastName            String?
-  phone               String?
-  role                UserRole             @default(RESIDENT)
-  status              UserStatus           @default(PENDING)
-  isEmailVerified     Boolean              @default(false)
-  residentProfile     ResidentProfile?
-  payments            Payment[]
-  userSessions        UserSession[]
-  condominium         Condominium?         @relation(fields: [condominiumId], references: [id], onDelete: SetNull)
-  condominiumId       String?
-  createdAt           DateTime             @default(now())
-  updatedAt           DateTime             @updatedAt
-  accessLogs          AccessLog[]
-  parcelsReceived     ParcelDelivery[]     @relation("ParcelReceivedBy")
-  parcelsDelivered    ParcelDelivery[]     @relation("ParcelDeliveredBy")
-  passwordResetTokens PasswordResetToken[]
-  pushSubscriptions   PushSubscription[]
+  id                        String                  @id @default(uuid())
+  email                     String                  @unique
+  passwordHash              String
+  firstName                 String?
+  lastName                  String?
+  phone                     String?
+  role                      UserRole                @default(RESIDENT)
+  status                    UserStatus              @default(PENDING)
+  isEmailVerified           Boolean                 @default(false)
+  residentProfile           ResidentProfile?
+  payments                  Payment[]
+  userSessions              UserSession[]
+  condominium               Condominium?            @relation(fields: [condominiumId], references: [id], onDelete: SetNull)
+  condominiumId             String?
+  createdAt                 DateTime                @default(now())
+  updatedAt                 DateTime                @updatedAt
+  accessLogs                AccessLog[]
+  parcelsReceived           ParcelDelivery[]        @relation("ParcelReceivedBy")
+  parcelsDelivered          ParcelDelivery[]        @relation("ParcelDeliveredBy")
+  providerEntriesRegistered GeneralProviderAccess[] @relation("ProviderEntryGuard")
+  providerExitsRegistered   GeneralProviderAccess[] @relation("ProviderExitGuard")
+  passwordResetTokens       PasswordResetToken[]
+  pushSubscriptions         PushSubscription[]
 
   @@index([condominiumId])
 }
@@ -328,6 +345,34 @@ model ParcelDelivery {
   @@index([houseId, status])
   @@index([pickupCode])
   @@index([receivedAt])
+}
+
+model GeneralProviderAccess {
+  id            String                  @id @default(uuid())
+  condominiumId String
+  condominium   Condominium             @relation(fields: [condominiumId], references: [id], onDelete: Cascade)
+  name          String
+  category      GeneralProviderCategory
+  driverName    String?
+  vehiclePlate  String?
+  companyPhone  String?
+  notes         String?
+  status        GeneralProviderStatus   @default(INSIDE)
+
+  enteredAt    DateTime @default(now())
+  entryGuardId String
+  entryGuard   User     @relation("ProviderEntryGuard", fields: [entryGuardId], references: [id])
+
+  exitedAt    DateTime?
+  exitGuardId String?
+  exitGuard   User?     @relation("ProviderExitGuard", fields: [exitGuardId], references: [id])
+  exitNotes   String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([condominiumId, status])
+  @@index([enteredAt])
 }
 
 // Account model to manage condominium's financial accounts

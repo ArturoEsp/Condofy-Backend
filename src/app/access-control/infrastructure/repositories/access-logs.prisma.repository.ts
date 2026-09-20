@@ -5,6 +5,7 @@ import AccessLogsRepository, {
   ActiveEntryItemEntity,
   CreateAccessLogData,
   ParamsFindAccessLogs,
+  ResidentAccessLogEntity,
   StandAccessLogsResult,
   StandDashboardStats,
 } from '../../domain/repositories/access-logs.repository';
@@ -408,5 +409,52 @@ export class AccessLogsPrismaRepository implements AccessLogsRepository {
           : undefined,
       },
     };
+  }
+
+  async findLogsByAuthorizationId(
+    accessAuthorizationId: string,
+  ): Promise<ResidentAccessLogEntity[]> {
+    const logs = await this.prismaService.accessLog.findMany({
+      where: { accessAuthorizationId },
+      orderBy: { date: 'desc' },
+      include: {
+        userAccept: {
+          select: {
+            id: true,
+            email: true,
+            firstName: true,
+            lastName: true,
+            role: true,
+          },
+        },
+      },
+    });
+
+    return logs.map((log) => {
+      const firstName = log.userAccept.firstName?.trim() || '';
+      const lastName = log.userAccept.lastName?.trim() || '';
+      const fullName = `${firstName} ${lastName}`.trim();
+      const name =
+        fullName ||
+        (log.userAccept.role === 'STAND'
+          ? 'Oficial en caseta'
+          : log.userAccept.role === 'ADMIN'
+            ? 'Administración'
+            : log.userAccept.email);
+
+      return {
+        id: log.id,
+        accessAuthorizationId: log.accessAuthorizationId,
+        entryType: log.entryType,
+        observations: log.observations,
+        date: log.date,
+        userAccept: {
+          id: log.userAccept.id,
+          name,
+          email: log.userAccept.email,
+          role: log.userAccept.role,
+        },
+      };
+    });
   }
 }

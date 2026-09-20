@@ -99,6 +99,11 @@ export type AccessLog = Prisma.AccessLogModel
  */
 export type ParcelDelivery = Prisma.ParcelDeliveryModel
 /**
+ * Model GeneralProviderAccess
+ * 
+ */
+export type GeneralProviderAccess = Prisma.GeneralProviderAccessModel
+/**
  * Model HouseAccount
  * 
  */

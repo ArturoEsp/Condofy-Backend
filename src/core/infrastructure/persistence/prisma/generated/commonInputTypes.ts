@@ -381,6 +381,40 @@ export type EnumParcelStatusWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumParcelStatusFilter<$PrismaModel>
 }
 
+export type EnumGeneralProviderCategoryFilter<$PrismaModel = never> = {
+  equals?: $Enums.GeneralProviderCategory | Prisma.EnumGeneralProviderCategoryFieldRefInput<$PrismaModel>
+  in?: $Enums.GeneralProviderCategory[] | Prisma.ListEnumGeneralProviderCategoryFieldRefInput<$PrismaModel>
+  notIn?: $Enums.GeneralProviderCategory[] | Prisma.ListEnumGeneralProviderCategoryFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumGeneralProviderCategoryFilter<$PrismaModel> | $Enums.GeneralProviderCategory
+}
+
+export type EnumGeneralProviderStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.GeneralProviderStatus | Prisma.EnumGeneralProviderStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.GeneralProviderStatus[] | Prisma.ListEnumGeneralProviderStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.GeneralProviderStatus[] | Prisma.ListEnumGeneralProviderStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumGeneralProviderStatusFilter<$PrismaModel> | $Enums.GeneralProviderStatus
+}
+
+export type EnumGeneralProviderCategoryWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.GeneralProviderCategory | Prisma.EnumGeneralProviderCategoryFieldRefInput<$PrismaModel>
+  in?: $Enums.GeneralProviderCategory[] | Prisma.ListEnumGeneralProviderCategoryFieldRefInput<$PrismaModel>
+  notIn?: $Enums.GeneralProviderCategory[] | Prisma.ListEnumGeneralProviderCategoryFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumGeneralProviderCategoryWithAggregatesFilter<$PrismaModel> | $Enums.GeneralProviderCategory
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumGeneralProviderCategoryFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumGeneralProviderCategoryFilter<$PrismaModel>
+}
+
+export type EnumGeneralProviderStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.GeneralProviderStatus | Prisma.EnumGeneralProviderStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.GeneralProviderStatus[] | Prisma.ListEnumGeneralProviderStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.GeneralProviderStatus[] | Prisma.ListEnumGeneralProviderStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumGeneralProviderStatusWithAggregatesFilter<$PrismaModel> | $Enums.GeneralProviderStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumGeneralProviderStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumGeneralProviderStatusFilter<$PrismaModel>
+}
+
 export type DecimalFilter<$PrismaModel = never> = {
   equals?: runtime.Decimal | runtime.DecimalJsLike | number | string | Prisma.DecimalFieldRefInput<$PrismaModel>
   in?: runtime.Decimal[] | runtime.DecimalJsLike[] | number[] | string[] | Prisma.ListDecimalFieldRefInput<$PrismaModel>
@@ -838,6 +872,40 @@ export type NestedEnumParcelStatusWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumParcelStatusFilter<$PrismaModel>
   _max?: Prisma.NestedEnumParcelStatusFilter<$PrismaModel>
+}
+
+export type NestedEnumGeneralProviderCategoryFilter<$PrismaModel = never> = {
+  equals?: $Enums.GeneralProviderCategory | Prisma.EnumGeneralProviderCategoryFieldRefInput<$PrismaModel>
+  in?: $Enums.GeneralProviderCategory[] | Prisma.ListEnumGeneralProviderCategoryFieldRefInput<$PrismaModel>
+  notIn?: $Enums.GeneralProviderCategory[] | Prisma.ListEnumGeneralProviderCategoryFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumGeneralProviderCategoryFilter<$PrismaModel> | $Enums.GeneralProviderCategory
+}
+
+export type NestedEnumGeneralProviderStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.GeneralProviderStatus | Prisma.EnumGeneralProviderStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.GeneralProviderStatus[] | Prisma.ListEnumGeneralProviderStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.GeneralProviderStatus[] | Prisma.ListEnumGeneralProviderStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumGeneralProviderStatusFilter<$PrismaModel> | $Enums.GeneralProviderStatus
+}
+
+export type NestedEnumGeneralProviderCategoryWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.GeneralProviderCategory | Prisma.EnumGeneralProviderCategoryFieldRefInput<$PrismaModel>
+  in?: $Enums.GeneralProviderCategory[] | Prisma.ListEnumGeneralProviderCategoryFieldRefInput<$PrismaModel>
+  notIn?: $Enums.GeneralProviderCategory[] | Prisma.ListEnumGeneralProviderCategoryFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumGeneralProviderCategoryWithAggregatesFilter<$PrismaModel> | $Enums.GeneralProviderCategory
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumGeneralProviderCategoryFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumGeneralProviderCategoryFilter<$PrismaModel>
+}
+
+export type NestedEnumGeneralProviderStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.GeneralProviderStatus | Prisma.EnumGeneralProviderStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.GeneralProviderStatus[] | Prisma.ListEnumGeneralProviderStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.GeneralProviderStatus[] | Prisma.ListEnumGeneralProviderStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumGeneralProviderStatusWithAggregatesFilter<$PrismaModel> | $Enums.GeneralProviderStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumGeneralProviderStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumGeneralProviderStatusFilter<$PrismaModel>
 }
 
 export type NestedDecimalFilter<$PrismaModel = never> = {
