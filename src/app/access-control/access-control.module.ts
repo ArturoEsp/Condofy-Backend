@@ -31,8 +31,15 @@ import { StandNotifyParcelUseCase } from './application/use-cases/stand-notify-p
 import { ResidentGetParcelsUseCase } from './application/use-cases/resident-get-parcels.usecase';
 import { ResidentCreateDeliveryPassUseCase } from './application/use-cases/resident-create-delivery-pass.usecase';
 import { DeleteAccessAuthorizationUseCase } from './application/use-cases/delete-access-authorization.usecase';
+import { ResidentGetAccessAuthorizationLogsUseCase } from './application/use-cases/resident-get-access-authorization-logs.usecase';
 import { StandGetActiveEntriesUseCase } from './application/use-cases/stand-get-active-entries.usecase';
 import { StandBatchExitUseCase } from './application/use-cases/stand-batch-exit.usecase';
+import { StandRegisterGeneralProviderEntryUseCase } from './application/use-cases/stand-register-general-provider-entry.usecase';
+import { StandRegisterGeneralProviderExitUseCase } from './application/use-cases/stand-register-general-provider-exit.usecase';
+import { StandGetActiveGeneralProvidersUseCase } from './application/use-cases/stand-get-active-general-providers.usecase';
+import { StandGetGeneralProvidersHistoryUseCase } from './application/use-cases/stand-get-general-providers-history.usecase';
+import { ResidentGetActiveGeneralProvidersUseCase } from './application/use-cases/resident-get-active-general-providers.usecase';
+import { GeneralProvidersPrismaRepository } from './infrastructure/repositories/general-providers.prisma.repository';
 
 import { ResidentAccessControlController } from './presentation/controllers/resident-access-control.controller';
 import { ResidentVisitorsController } from './presentation/controllers/resident-visitors.controller';
@@ -40,6 +47,9 @@ import { ResidentParcelsController } from './presentation/controllers/resident-p
 import { PublicPassController } from './presentation/controllers/public-pass.controller';
 import { StandAccessControlController } from './presentation/controllers/stand-access-control.controller';
 import { AdminSecurityController } from './presentation/controllers/admin-security.controller';
+import { StandGeneralProvidersController } from './presentation/controllers/stand-general-providers.controller';
+import { ResidentGeneralProvidersController } from './presentation/controllers/resident-general-providers.controller';
+import { PrismaService } from '@/core/infrastructure/persistence/prisma/prisma.service';
 
 @Module({
   imports: [CoreModule, ResidentsModule, UsersModule, NotificationsModule],
@@ -59,6 +69,10 @@ import { AdminSecurityController } from './presentation/controllers/admin-securi
     {
       provide: PROVIDES_NAMES.ParcelDeliveryRepository,
       useClass: ParcelDeliveryPrismaRepository,
+    },
+    {
+      provide: PROVIDES_NAMES.GeneralProvidersRepository,
+      useClass: GeneralProvidersPrismaRepository,
     },
     {
       provide: CreateAccessAuthorizationUseCase,
@@ -275,6 +289,21 @@ import { AdminSecurityController } from './presentation/controllers/admin-securi
       },
     },
     {
+      provide: ResidentGetAccessAuthorizationLogsUseCase,
+      inject: [
+        PROVIDES_NAMES.ResidentsRepository,
+        PROVIDES_NAMES.AccessAuthorizationsRepository,
+        PROVIDES_NAMES.AccessLogsRepository,
+      ],
+      useFactory: (residentsRepo, accessAuthorizationsRepo, accessLogsRepo) => {
+        return new ResidentGetAccessAuthorizationLogsUseCase(
+          residentsRepo,
+          accessAuthorizationsRepo,
+          accessLogsRepo,
+        );
+      },
+    },
+    {
       provide: StandGetActiveEntriesUseCase,
       inject: [PROVIDES_NAMES.AccessLogsRepository],
       useFactory: (accessLogsRepo) => {
@@ -294,6 +323,57 @@ import { AdminSecurityController } from './presentation/controllers/admin-securi
         );
       },
     },
+    {
+      provide: StandRegisterGeneralProviderEntryUseCase,
+      inject: [
+        PROVIDES_NAMES.GeneralProvidersRepository,
+        PrismaService,
+        WebPushService,
+      ],
+      useFactory: (repo, prisma, webPush) => {
+        return new StandRegisterGeneralProviderEntryUseCase(
+          repo,
+          prisma,
+          webPush,
+        );
+      },
+    },
+    {
+      provide: StandRegisterGeneralProviderExitUseCase,
+      inject: [
+        PROVIDES_NAMES.GeneralProvidersRepository,
+        PrismaService,
+        WebPushService,
+      ],
+      useFactory: (repo, prisma, webPush) => {
+        return new StandRegisterGeneralProviderExitUseCase(
+          repo,
+          prisma,
+          webPush,
+        );
+      },
+    },
+    {
+      provide: StandGetActiveGeneralProvidersUseCase,
+      inject: [PROVIDES_NAMES.GeneralProvidersRepository],
+      useFactory: (repo) => {
+        return new StandGetActiveGeneralProvidersUseCase(repo);
+      },
+    },
+    {
+      provide: StandGetGeneralProvidersHistoryUseCase,
+      inject: [PROVIDES_NAMES.GeneralProvidersRepository],
+      useFactory: (repo) => {
+        return new StandGetGeneralProvidersHistoryUseCase(repo);
+      },
+    },
+    {
+      provide: ResidentGetActiveGeneralProvidersUseCase,
+      inject: [PROVIDES_NAMES.GeneralProvidersRepository],
+      useFactory: (repo) => {
+        return new ResidentGetActiveGeneralProvidersUseCase(repo);
+      },
+    },
   ],
   controllers: [
     ResidentAccessControlController,
@@ -302,12 +382,15 @@ import { AdminSecurityController } from './presentation/controllers/admin-securi
     PublicPassController,
     StandAccessControlController,
     AdminSecurityController,
+    StandGeneralProvidersController,
+    ResidentGeneralProvidersController,
   ],
   exports: [
     PROVIDES_NAMES.AccessAuthorizationsRepository,
     PROVIDES_NAMES.VisitorsRepository,
     PROVIDES_NAMES.AccessLogsRepository,
     PROVIDES_NAMES.ParcelDeliveryRepository,
+    PROVIDES_NAMES.GeneralProvidersRepository,
     CreateAccessAuthorizationUseCase,
     ListHouseAccessAuthorizationsUseCase,
     UpdateAccessAuthorizationUseCase,
@@ -328,8 +411,14 @@ import { AdminSecurityController } from './presentation/controllers/admin-securi
     ResidentGetParcelsUseCase,
     ResidentCreateDeliveryPassUseCase,
     DeleteAccessAuthorizationUseCase,
+    ResidentGetAccessAuthorizationLogsUseCase,
     StandGetActiveEntriesUseCase,
     StandBatchExitUseCase,
+    StandRegisterGeneralProviderEntryUseCase,
+    StandRegisterGeneralProviderExitUseCase,
+    StandGetActiveGeneralProvidersUseCase,
+    StandGetGeneralProvidersHistoryUseCase,
+    ResidentGetActiveGeneralProvidersUseCase,
   ],
 })
 export class AccessControlModule {}

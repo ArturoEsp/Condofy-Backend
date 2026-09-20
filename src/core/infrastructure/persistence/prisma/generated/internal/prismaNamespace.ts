@@ -395,6 +395,7 @@ export const ModelName = {
   AccessAuthorization: 'AccessAuthorization',
   AccessLog: 'AccessLog',
   ParcelDelivery: 'ParcelDelivery',
+  GeneralProviderAccess: 'GeneralProviderAccess',
   HouseAccount: 'HouseAccount',
   AccountMovement: 'AccountMovement',
   MaintenanceCharge: 'MaintenanceCharge',
@@ -416,7 +417,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "condominium" | "user" | "passwordResetToken" | "userSession" | "pushSubscription" | "house" | "houseConfiguration" | "residentProfile" | "visitor" | "accessAuthorization" | "accessLog" | "parcelDelivery" | "houseAccount" | "accountMovement" | "maintenanceCharge" | "payment" | "maintenancePeriod" | "lateFee"
+    modelProps: "condominium" | "user" | "passwordResetToken" | "userSession" | "pushSubscription" | "house" | "houseConfiguration" | "residentProfile" | "visitor" | "accessAuthorization" | "accessLog" | "parcelDelivery" | "generalProviderAccess" | "houseAccount" | "accountMovement" | "maintenanceCharge" | "payment" | "maintenancePeriod" | "lateFee"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1308,6 +1309,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    GeneralProviderAccess: {
+      payload: Prisma.$GeneralProviderAccessPayload<ExtArgs>
+      fields: Prisma.GeneralProviderAccessFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.GeneralProviderAccessFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GeneralProviderAccessPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.GeneralProviderAccessFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GeneralProviderAccessPayload>
+        }
+        findFirst: {
+          args: Prisma.GeneralProviderAccessFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GeneralProviderAccessPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.GeneralProviderAccessFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GeneralProviderAccessPayload>
+        }
+        findMany: {
+          args: Prisma.GeneralProviderAccessFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GeneralProviderAccessPayload>[]
+        }
+        create: {
+          args: Prisma.GeneralProviderAccessCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GeneralProviderAccessPayload>
+        }
+        createMany: {
+          args: Prisma.GeneralProviderAccessCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.GeneralProviderAccessCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GeneralProviderAccessPayload>[]
+        }
+        delete: {
+          args: Prisma.GeneralProviderAccessDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GeneralProviderAccessPayload>
+        }
+        update: {
+          args: Prisma.GeneralProviderAccessUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GeneralProviderAccessPayload>
+        }
+        deleteMany: {
+          args: Prisma.GeneralProviderAccessDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.GeneralProviderAccessUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.GeneralProviderAccessUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GeneralProviderAccessPayload>[]
+        }
+        upsert: {
+          args: Prisma.GeneralProviderAccessUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GeneralProviderAccessPayload>
+        }
+        aggregate: {
+          args: Prisma.GeneralProviderAccessAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateGeneralProviderAccess>
+        }
+        groupBy: {
+          args: Prisma.GeneralProviderAccessGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.GeneralProviderAccessGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.GeneralProviderAccessCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.GeneralProviderAccessCountAggregateOutputType> | number
+        }
+      }
+    }
     HouseAccount: {
       payload: Prisma.$HouseAccountPayload<ExtArgs>
       fields: Prisma.HouseAccountFieldRefs
@@ -1985,6 +2060,28 @@ export const ParcelDeliveryScalarFieldEnum = {
 export type ParcelDeliveryScalarFieldEnum = (typeof ParcelDeliveryScalarFieldEnum)[keyof typeof ParcelDeliveryScalarFieldEnum]
 
 
+export const GeneralProviderAccessScalarFieldEnum = {
+  id: 'id',
+  condominiumId: 'condominiumId',
+  name: 'name',
+  category: 'category',
+  driverName: 'driverName',
+  vehiclePlate: 'vehiclePlate',
+  companyPhone: 'companyPhone',
+  notes: 'notes',
+  status: 'status',
+  enteredAt: 'enteredAt',
+  entryGuardId: 'entryGuardId',
+  exitedAt: 'exitedAt',
+  exitGuardId: 'exitGuardId',
+  exitNotes: 'exitNotes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type GeneralProviderAccessScalarFieldEnum = (typeof GeneralProviderAccessScalarFieldEnum)[keyof typeof GeneralProviderAccessScalarFieldEnum]
+
+
 export const HouseAccountScalarFieldEnum = {
   id: 'id',
   houseId: 'houseId',
@@ -2288,6 +2385,34 @@ export type ListEnumParcelStatusFieldRefInput<$PrismaModel> = FieldRefInputType<
 
 
 /**
+ * Reference to a field of type 'GeneralProviderCategory'
+ */
+export type EnumGeneralProviderCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'GeneralProviderCategory'>
+    
+
+
+/**
+ * Reference to a field of type 'GeneralProviderCategory[]'
+ */
+export type ListEnumGeneralProviderCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'GeneralProviderCategory[]'>
+    
+
+
+/**
+ * Reference to a field of type 'GeneralProviderStatus'
+ */
+export type EnumGeneralProviderStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'GeneralProviderStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'GeneralProviderStatus[]'
+ */
+export type ListEnumGeneralProviderStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'GeneralProviderStatus[]'>
+    
+
+
+/**
  * Reference to a field of type 'Decimal'
  */
 export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal'>
@@ -2478,6 +2603,7 @@ export type GlobalOmitConfig = {
   accessAuthorization?: Prisma.AccessAuthorizationOmit
   accessLog?: Prisma.AccessLogOmit
   parcelDelivery?: Prisma.ParcelDeliveryOmit
+  generalProviderAccess?: Prisma.GeneralProviderAccessOmit
   houseAccount?: Prisma.HouseAccountOmit
   accountMovement?: Prisma.AccountMovementOmit
   maintenanceCharge?: Prisma.MaintenanceChargeOmit

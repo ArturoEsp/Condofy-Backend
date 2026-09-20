@@ -2,6 +2,7 @@ import { ApiEndpointProps } from '@/common/decorators/api-endpoint.decorator';
 import { HttpStatus } from '@nestjs/common';
 import { AccessAuthorizationResponse } from '../dtos/responses/access-authorization.response';
 import { ListAccessAuthorizationsResponse } from '../dtos/responses/list-access-authorizations.response';
+import { ResidentAccessLogResponse } from '../dtos/responses/resident-access-log.response';
 
 export const createAccessAuthorization: ApiEndpointProps = {
   summary: 'Crear un pase o control de acceso para un visitante',
@@ -49,4 +50,13 @@ export const deleteAccessAuthorization: ApiEndpointProps = {
     'Eliminar una autorización de acceso no utilizada (pendiente / sin entradas registradas)',
   status: HttpStatus.OK,
   withToken: true,
+};
+
+export const getAccessAuthorizationLogs: ApiEndpointProps = {
+  summary:
+    'Consultar el historial cronológico de entradas y salidas de una autorización de acceso',
+  status: HttpStatus.OK,
+  withToken: true,
+  serialization: ResidentAccessLogResponse,
+  type: [ResidentAccessLogResponse],
 };

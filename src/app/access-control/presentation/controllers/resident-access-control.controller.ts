@@ -27,6 +27,7 @@ import { ListHouseAccessAuthorizationsUseCase } from '../../application/use-case
 import { UpdateAccessAuthorizationUseCase } from '../../application/use-cases/update-access-authorization.usecase';
 import { ResidentCreateDeliveryPassUseCase } from '../../application/use-cases/resident-create-delivery-pass.usecase';
 import { DeleteAccessAuthorizationUseCase } from '../../application/use-cases/delete-access-authorization.usecase';
+import { ResidentGetAccessAuthorizationLogsUseCase } from '../../application/use-cases/resident-get-access-authorization-logs.usecase';
 
 @ApiTags('Resident Access Control')
 @Controller(':condominiumKey/residents/access-authorizations')
@@ -38,6 +39,7 @@ export class ResidentAccessControlController {
     private readonly updateAccessAuthorizationUseCase: UpdateAccessAuthorizationUseCase,
     private readonly residentCreateDeliveryPassUseCase: ResidentCreateDeliveryPassUseCase,
     private readonly deleteAccessAuthorizationUseCase: DeleteAccessAuthorizationUseCase,
+    private readonly residentGetAccessAuthorizationLogsUseCase: ResidentGetAccessAuthorizationLogsUseCase,
   ) {}
 
   @Post('quick-delivery')
@@ -131,6 +133,20 @@ export class ResidentAccessControlController {
   ) {
     return await this.deleteAccessAuthorizationUseCase.execute({
       id,
+      currentUserId: user.id,
+      condominiumId,
+    });
+  }
+
+  @Get(':id/logs')
+  @ApiEndpoint(Docs.getAccessAuthorizationLogs)
+  async getLogs(
+    @CondominiumId() condominiumId: string,
+    @CurrentUser() user: AuthUserEntity,
+    @Param('id') id: string,
+  ) {
+    return await this.residentGetAccessAuthorizationLogsUseCase.execute({
+      accessAuthorizationId: id,
       currentUserId: user.id,
       condominiumId,
     });

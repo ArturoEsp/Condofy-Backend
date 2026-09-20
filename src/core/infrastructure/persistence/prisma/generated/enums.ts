@@ -131,3 +131,23 @@ export const CourierCompany = {
 } as const
 
 export type CourierCompany = (typeof CourierCompany)[keyof typeof CourierCompany]
+
+
+export const GeneralProviderCategory = {
+  WATER: 'WATER',
+  GAS: 'GAS',
+  GARDENING: 'GARDENING',
+  TRASH: 'TRASH',
+  MAINTENANCE: 'MAINTENANCE',
+  OTHER: 'OTHER'
+} as const
+
+export type GeneralProviderCategory = (typeof GeneralProviderCategory)[keyof typeof GeneralProviderCategory]
+
+
+export const GeneralProviderStatus = {
+  INSIDE: 'INSIDE',
+  EXITED: 'EXITED'
+} as const
+
+export type GeneralProviderStatus = (typeof GeneralProviderStatus)[keyof typeof GeneralProviderStatus]
