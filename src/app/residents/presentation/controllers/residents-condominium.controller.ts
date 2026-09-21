@@ -4,12 +4,14 @@ import { ApiTags } from '@nestjs/swagger';
 import { CreateResidentUseCase } from '../../application/use-cases/create-resident.usecase';
 import { AdminSendResidentResetPasswordUseCase } from '../../application/use-cases/admin-send-resident-reset-password.usecase';
 import { AdminUpdateResidentPasswordUseCase } from '../../application/use-cases/admin-update-resident-password.usecase';
+import { UpdateResidentUseCase } from '../../application/use-cases/update-resident.usecase';
 import { CondominiumId } from '@/common/decorators/condominium.decorator';
 import { CurrentUser } from '@/common/decorators/current-user.decorator';
 import { Roles } from '@/common/decorators/roles.decorator';
 import { ApiEndpoint } from '@/common/decorators/api-endpoint.decorator';
 import * as Docs from '../docs/residents-condominium.docs';
 import { CreateResidentInHouseRequest } from '../dtos/requests/create-resident-inhouse.request';
+import { UpdateResidentRequest } from '../dtos/requests/update-resident.request';
 import { AdminUpdateResidentPasswordRequest } from '../dtos/requests/admin-update-resident-password.request';
 import { GetListResidentsUseCase } from '../../application/use-cases/get-list-residents.usecase';
 import { GetMyHouseUseCase } from '../../application/use-cases/get-my-house.usecase';
@@ -25,6 +27,7 @@ export class ResidentsCondominiumController {
     private readonly getMyHouseUseCase: GetMyHouseUseCase,
     private readonly adminSendResidentResetPasswordUseCase: AdminSendResidentResetPasswordUseCase,
     private readonly adminUpdateResidentPasswordUseCase: AdminUpdateResidentPasswordUseCase,
+    private readonly updateResidentUseCase: UpdateResidentUseCase,
   ) {}
 
   @Post()
@@ -84,6 +87,21 @@ export class ResidentsCondominiumController {
       residentId,
       condominiumId,
       dto.newPassword,
+    );
+  }
+
+  @Put(':id')
+  @Roles('ADMIN')
+  @ApiEndpoint(Docs.updateResident)
+  async updateResident(
+    @CondominiumId() condominiumId: string,
+    @Param('id') residentId: string,
+    @Body() dto: UpdateResidentRequest,
+  ) {
+    return await this.updateResidentUseCase.execute(
+      residentId,
+      condominiumId,
+      dto,
     );
   }
 }
