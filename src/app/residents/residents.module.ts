@@ -18,6 +18,7 @@ import { UpdateFamilyMemberUseCase } from './application/use-cases/update-family
 import { ToggleFamilyMemberStatusUseCase } from './application/use-cases/toggle-family-member-status.usecase';
 import { AdminSendResidentResetPasswordUseCase } from './application/use-cases/admin-send-resident-reset-password.usecase';
 import { AdminUpdateResidentPasswordUseCase } from './application/use-cases/admin-update-resident-password.usecase';
+import { UpdateResidentUseCase } from './application/use-cases/update-resident.usecase';
 import { RequestPasswordResetUseCase } from '../auth/application/use-cases/request-password-reset.usecase';
 
 import { ResidentsCondominiumController } from './presentation/controllers/residents-condominium.controller';
@@ -162,6 +163,16 @@ import { ResidentFamilyController } from './presentation/controllers/resident-fa
         );
       },
     },
+    {
+      provide: UpdateResidentUseCase,
+      inject: [
+        PROVIDES_NAMES.ResidentsRepository,
+        PROVIDES_NAMES.UsersRepository,
+      ],
+      useFactory: (residentsRepository, usersRepository) => {
+        return new UpdateResidentUseCase(residentsRepository, usersRepository);
+      },
+    },
   ],
   controllers: [ResidentsCondominiumController, ResidentFamilyController],
   exports: [
@@ -174,6 +185,7 @@ import { ResidentFamilyController } from './presentation/controllers/resident-fa
     GetMyHouseUseCase,
     AdminSendResidentResetPasswordUseCase,
     AdminUpdateResidentPasswordUseCase,
+    UpdateResidentUseCase,
   ],
 })
 export class ResidentsModule {}

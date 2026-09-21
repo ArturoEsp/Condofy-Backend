@@ -40,3 +40,11 @@ export const adminUpdateResidentPassword: ApiEndpointProps = {
   status: HttpStatus.OK,
   withToken: true,
 };
+
+export const updateResident: ApiEndpointProps = {
+  summary: 'Actualizar datos de un residente',
+  status: HttpStatus.OK,
+  withToken: true,
+  serialization: ResidentResponse,
+  type: ResidentResponse,
+};
