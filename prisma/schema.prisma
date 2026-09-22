@@ -33,9 +33,15 @@ enum UserStatus {
 
 enum MaintenanceChargeStatus {
   PENDING
+  IN_REVIEW
   PARTIAL
   PAID
   CANCELLED
+}
+
+enum LateFeeType {
+  PERCENTAGE
+  FIXED
 }
 
 enum PaymentMethod {
@@ -116,8 +122,8 @@ enum GeneralProviderStatus {
 }
 
 model Condominium {
-  id                      String                  @id @default(uuid())
-  key                     String                  @unique
+  id                      String                    @id @default(uuid())
+  key                     String                    @unique
   name                    String
   description             String?
   googleMapsUrl           String?
@@ -130,8 +136,9 @@ model Condominium {
   maintenanceCharges      MaintenanceCharge[]
   parcels                 ParcelDelivery[]
   generalProviderAccesses GeneralProviderAccess[]
-  createdAt               DateTime                @default(now())
-  updatedAt               DateTime                @updatedAt
+  billingConfig           CondominiumBillingConfig?
+  createdAt               DateTime                  @default(now())
+  updatedAt               DateTime                  @updatedAt
 }
 
 model User {
@@ -412,6 +419,11 @@ model MaintenanceCharge {
   status              MaintenanceChargeStatus @default(PENDING)
   paidAmount          Decimal                 @default(0) @db.Decimal(12, 2)
   notes               String?
+  proofUrl            String?
+  proofFileName       String?
+  proofUploadedAt     DateTime?
+  proofReference      String?
+  proofNotes          String?
   payments            Payment[]
   maintenancePeriod   MaintenancePeriod?      @relation(fields: [maintenancePeriodId], references: [id], onDelete: Restrict)
   maintenancePeriodId String?
@@ -434,6 +446,10 @@ model Payment {
   paymentMethod       PaymentMethod
   reference           String?
   observations        String?
+  receiptUrl          String?
+  receiptFileName     String?
+  receiptFolio        String?
+  receiptUploadedAt   DateTime?
   createdById         String
   createdBy           User              @relation(fields: [createdById], references: [id])
   createdAt           DateTime          @default(now())
@@ -455,6 +471,7 @@ model MaintenancePeriod {
   charges       MaintenanceCharge[]
   createdAt     DateTime            @default(now())
 
+  @@unique([condominiumId, year, month])
   @@index([condominiumId])
 }
 
@@ -467,4 +484,32 @@ model LateFee {
   createdAt           DateTime          @default(now())
 
   @@index([maintenanceChargeId])
+}
+
+model CondominiumBillingConfig {
+  id                        String      @id @default(uuid())
+  condominiumId             String      @unique
+  condominium               Condominium @relation(fields: [condominiumId], references: [id], onDelete: Cascade)
+  defaultMonthlyFee         Decimal     @default(1500.00) @db.Decimal(12, 2)
+  currency                  String      @default("MXN")
+  dueDay                    Int         @default(10)
+  applyLateFee              Boolean     @default(true)
+  lateFeeType               LateFeeType @default(PERCENTAGE)
+  lateFeeValue              Decimal     @default(10.00) @db.Decimal(12, 2)
+  gracePeriodDays           Int         @default(2)
+  bankName                  String?
+  accountHolder             String?
+  clabe                     String?
+  accountNumber             String?
+  paymentReferenceRule      String?
+  notes                     String?
+  notifyOnPeriodStart       Boolean     @default(true)
+  notifyDueDateReminder     Boolean     @default(true)
+  dueDateReminderDaysBefore Int         @default(3)
+  notifyOnProofReviewed     Boolean     @default(true)
+  notificationChannel       String      @default("ALL")
+  createdAt                 DateTime    @default(now())
+  updatedAt                 DateTime    @updatedAt
+
+  @@index([condominiumId])
 }

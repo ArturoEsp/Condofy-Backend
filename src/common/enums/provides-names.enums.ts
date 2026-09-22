@@ -13,4 +13,5 @@ export const PROVIDES_NAMES = {
   MailService: 'MailService',
   PasswordResetTokensRepository: 'PasswordResetTokensRepository',
   StorageService: 'StorageService',
+  BillingRepository: 'BillingRepository',
 } as const;
