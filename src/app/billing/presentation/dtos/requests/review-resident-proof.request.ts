@@ -18,4 +18,19 @@ export class ReviewResidentProofRequest {
   @IsString()
   @IsOptional()
   rejectReason?: string;
+
+  @ApiPropertyOptional({ example: 'REC-EXTERNO-2026-001' })
+  @IsString()
+  @IsOptional()
+  receiptFolio?: string;
+
+  @ApiPropertyOptional({ example: 'condominiums/condo1/payments/proof.pdf' })
+  @IsString()
+  @IsOptional()
+  receiptUrl?: string;
+
+  @ApiPropertyOptional({ example: 'recibo_contable.pdf' })
+  @IsString()
+  @IsOptional()
+  receiptFileName?: string;
 }

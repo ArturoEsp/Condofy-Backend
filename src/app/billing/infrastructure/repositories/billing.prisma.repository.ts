@@ -12,7 +12,10 @@ import BillingRepository, {
 import { BillingConfigEntity } from '../../domain/entities/billing-config.entity';
 import { BillingRecordEntity } from '../../domain/entities/billing-record.entity';
 import { BillingMapper } from '../mappers/billing.mapper';
-import { PaymentMethod } from '@/core/infrastructure/persistence/prisma/generated/client';
+import {
+  AccountMovementType,
+  PaymentMethod,
+} from '@/core/infrastructure/persistence/prisma/generated/client';
 
 import { BillingNotificationService } from '../services/billing-notification.service';
 
@@ -212,9 +215,13 @@ export class BillingPrismaRepository implements BillingRepository {
     }
     const periodStr = `${year}-${String(month).padStart(2, '0')}`;
 
-    // Buscar o autogenerar MaintenancePeriod
+    const now = new Date();
+    const isCurrentPeriod =
+      year === now.getFullYear() && month === now.getMonth() + 1;
+
+    // Buscar si el MaintenancePeriod ya existe
     const monthName = MONTH_NAMES[month - 1] || `Mes ${month}`;
-    const period = await this.prisma.maintenancePeriod.upsert({
+    let period = await this.prisma.maintenancePeriod.findUnique({
       where: {
         condominiumId_year_month: {
           condominiumId,
@@ -222,15 +229,31 @@ export class BillingPrismaRepository implements BillingRepository {
           month,
         },
       },
-      create: {
-        condominiumId,
-        year,
-        month,
-        name: `${monthName} ${year}`,
-        amount: config.defaultMonthlyFee,
-      },
-      update: {},
     });
+
+    // Si NO es el periodo actual y no existe, no inventar cargos retroactivos ni futuros
+    if (!isCurrentPeriod && !period) {
+      return {
+        period: periodStr,
+        count: 0,
+        totalCollected: 0,
+        totalExpected: 0,
+        records: [],
+      };
+    }
+
+    // Si es el periodo actual y no existe, crearlo
+    if (!period) {
+      period = await this.prisma.maintenancePeriod.create({
+        data: {
+          condominiumId,
+          year,
+          month,
+          name: `${monthName} ${year}`,
+          amount: config.defaultMonthlyFee,
+        },
+      });
+    }
 
     // Obtener casas activas del condominio
     const houses = await this.prisma.house.findMany({
@@ -243,7 +266,7 @@ export class BillingPrismaRepository implements BillingRepository {
       orderBy: [{ tower: 'asc' }, { houseNumber: 'asc' }],
     });
 
-    // Asegurar que exista un MaintenanceCharge para cada casa en este periodo
+    // Asegurar que exista un MaintenanceCharge para cada casa únicamente si es el periodo en curso
     const existingCharges = await this.prisma.maintenanceCharge.findMany({
       where: {
         condominiumId,
@@ -253,7 +276,7 @@ export class BillingPrismaRepository implements BillingRepository {
     const chargedHouseIds = new Set(existingCharges.map((c) => c.houseId));
 
     const missingHouses = houses.filter((h) => !chargedHouseIds.has(h.id));
-    if (missingHouses.length > 0) {
+    if (isCurrentPeriod && missingHouses.length > 0) {
       const dueDate = new Date(year, month - 1, config.dueDay, 23, 59, 59);
       await this.prisma.maintenanceCharge.createMany({
         data: missingHouses.map((h) => ({
@@ -269,9 +292,6 @@ export class BillingPrismaRepository implements BillingRepository {
     }
 
     // Si estamos en el periodo en curso, sincronizar cargos no liquidados con la cuota base vigente
-    const now = new Date();
-    const isCurrentPeriod =
-      year === now.getFullYear() && month === now.getMonth() + 1;
     if (isCurrentPeriod) {
       await this.prisma.maintenanceCharge.updateMany({
         where: {
@@ -296,6 +316,11 @@ export class BillingPrismaRepository implements BillingRepository {
       });
     }
 
+    // Auto-aplicar Saldo a Favor a cuotas pendientes de las viviendas que tengan crédito
+    for (const h of houses) {
+      await this.autoApplyCreditToHouse(h.id, condominiumId);
+    }
+
     // Cargar todos los cargos del periodo con relaciones
     const charges = await this.prisma.maintenanceCharge.findMany({
       where: {
@@ -308,6 +333,7 @@ export class BillingPrismaRepository implements BillingRepository {
             residents: {
               include: { user: true },
             },
+            houseAccount: true,
           },
         },
         payments: {
@@ -408,6 +434,136 @@ export class BillingPrismaRepository implements BillingRepository {
     return domain;
   }
 
+  /**
+   * Auto-aplica el saldo a favor disponible en HouseAccount a los cargos pendientes de la vivienda.
+   */
+  private async autoApplyCreditToHouse(
+    houseId: string,
+    condominiumId: string,
+  ): Promise<void> {
+    const account = await this.prisma.houseAccount.findUnique({
+      where: { houseId },
+    });
+    if (!account || Number(account.currentBalance) <= 0) return;
+
+    let availableCredit = Number(account.currentBalance);
+
+    const pendingCharges = await this.prisma.maintenanceCharge.findMany({
+      where: {
+        houseId,
+        condominiumId,
+        status: { in: ['PENDING', 'PARTIAL'] },
+      },
+      include: {
+        lateFees: true,
+        house: {
+          include: {
+            residents: {
+              include: { user: true },
+            },
+          },
+        },
+      },
+      orderBy: { dueDate: 'asc' },
+    });
+
+    if (pendingCharges.length === 0) return;
+
+    const config = await this.getConfig(condominiumId);
+    const adminUser = await this.prisma.user.findFirst({
+      where: { condominiumId, role: 'ADMIN' },
+    });
+
+    for (const charge of pendingCharges) {
+      if (availableCredit <= 0) break;
+
+      const baseAmount = Number(charge.amount);
+      const currentPaid = Number(charge.paidAmount ?? 0);
+
+      let lateFee = 0;
+      const graceDays = config.gracePeriodDays ?? 2;
+      const graceLimit = new Date(charge.dueDate);
+      graceLimit.setDate(graceLimit.getDate() + graceDays);
+      const now = new Date();
+
+      if (now > graceLimit && config.applyLateFee) {
+        if (config.lateFeeType === 'PERCENTAGE') {
+          lateFee = Math.round(baseAmount * (config.lateFeeValue / 100));
+        } else {
+          lateFee = Number(config.lateFeeValue);
+        }
+      } else if (charge.lateFees && charge.lateFees.length > 0) {
+        lateFee = charge.lateFees.reduce((sum, f) => sum + Number(f.amount), 0);
+      }
+
+      const totalDue = baseAmount + lateFee;
+      const remainingDue = Math.max(0, totalDue - currentPaid);
+      if (remainingDue <= 0) continue;
+
+      const amountToApply = Math.min(availableCredit, remainingDue);
+      const newPaid = currentPaid + amountToApply;
+      const isFullyPaid = newPaid >= totalDue;
+
+      const folio = `REC-CREDIT-${charge.house?.houseNumber || 'H'}-${Date.now().toString().slice(-6)}`;
+      const createdById =
+        adminUser?.id ||
+        charge.house?.residents?.[0]?.userId ||
+        (await this.prisma.user.findFirst())?.id ||
+        '';
+
+      await this.prisma.$transaction(async (tx) => {
+        // Descontar saldo a favor de la vivienda
+        await tx.houseAccount.update({
+          where: { houseId },
+          data: {
+            currentBalance: {
+              decrement: amountToApply,
+            },
+          },
+        });
+
+        // Registrar movimiento contable
+        await tx.accountMovement.create({
+          data: {
+            houseId,
+            type: AccountMovementType.PAYMENT,
+            description: `Aplicación de saldo a favor a cuota ${charge.concept}`,
+            amount: amountToApply,
+            movementDate: new Date(),
+          },
+        });
+
+        // Registrar pago
+        await tx.payment.create({
+          data: {
+            maintenanceChargeId: charge.id,
+            amount: amountToApply,
+            paymentDate: new Date(),
+            paymentMethod: PaymentMethod.TRANSFER,
+            reference: 'SALDO-A-FAVOR',
+            observations: isFullyPaid
+              ? 'Cuota liquidada automáticamente con Saldo a Favor'
+              : `Abono parcial de $${amountToApply.toLocaleString('es-MX')} MXN aplicado desde Saldo a Favor`,
+            receiptFolio: folio,
+            receiptUploadedAt: new Date(),
+            createdById,
+          },
+        });
+
+        // Actualizar cargo
+        await tx.maintenanceCharge.update({
+          where: { id: charge.id },
+          data: {
+            paidAmount: newPaid,
+            status: isFullyPaid ? 'PAID' : 'PARTIAL',
+          },
+        });
+      });
+
+      availableCredit -= amountToApply;
+    }
+  }
+
   async getChargeById(
     chargeId: string,
     condominiumId?: string,
@@ -423,6 +579,7 @@ export class BillingPrismaRepository implements BillingRepository {
             residents: {
               include: { user: true },
             },
+            houseAccount: true,
           },
         },
         payments: {
@@ -444,7 +601,7 @@ export class BillingPrismaRepository implements BillingRepository {
   ): Promise<BillingRecordEntity> {
     const charge = await this.prisma.maintenanceCharge.findFirst({
       where: { id: data.chargeId, condominiumId: data.condominiumId },
-      include: { house: true },
+      include: { house: true, lateFees: true },
     });
 
     if (!charge) {
@@ -452,6 +609,35 @@ export class BillingPrismaRepository implements BillingRepository {
         `Cargo no encontrado con ID: ${data.chargeId}`,
       );
     }
+
+    const config = await this.getConfig(data.condominiumId);
+    const baseAmount = Number(charge.amount);
+
+    let lateFee = 0;
+    const graceDays = config.gracePeriodDays ?? 2;
+    const graceLimit = new Date(charge.dueDate);
+    graceLimit.setDate(graceLimit.getDate() + graceDays);
+    const now = new Date();
+
+    if (now > graceLimit && config.applyLateFee) {
+      if (config.lateFeeType === 'PERCENTAGE') {
+        lateFee = Math.round(baseAmount * (config.lateFeeValue / 100));
+      } else {
+        lateFee = Number(config.lateFeeValue);
+      }
+    } else if (charge.lateFees && charge.lateFees.length > 0) {
+      lateFee = charge.lateFees.reduce((sum, f) => sum + Number(f.amount), 0);
+    }
+
+    const currentPaid = Number(charge.paidAmount ?? 0);
+    const totalDue = baseAmount + lateFee;
+    const remainingForCharge = Math.max(0, totalDue - currentPaid);
+
+    const paidAmount = Number(data.paidAmount);
+    const amountForCharge = Math.min(paidAmount, remainingForCharge);
+    const excessCredit = Math.max(0, paidAmount - remainingForCharge);
+    const newPaidAmount = currentPaid + amountForCharge;
+    const isChargePaid = newPaidAmount >= totalDue;
 
     const folio =
       data.receiptFolio ||
@@ -465,16 +651,24 @@ export class BillingPrismaRepository implements BillingRepository {
     else if (upperMethod === 'CHECK') prismaMethod = PaymentMethod.CHECK;
     else if (upperMethod === 'SPEI') prismaMethod = PaymentMethod.SPEI;
 
+    let observations = data.adminNotes || '';
+    if (excessCredit > 0) {
+      const noteExcess = `Total recibido: $${paidAmount.toLocaleString('es-MX')} MXN ($${amountForCharge.toLocaleString('es-MX')} aplicados a esta cuota, $${excessCredit.toLocaleString('es-MX')} acreditados a Saldo a Favor)`;
+      observations = observations
+        ? `${observations} | ${noteExcess}`
+        : noteExcess;
+    }
+
     await this.prisma.$transaction(async (tx) => {
       // 1. Crear registro en Payment
       await tx.payment.create({
         data: {
           maintenanceChargeId: data.chargeId,
-          amount: data.paidAmount,
+          amount: paidAmount,
           paymentDate: data.paymentDate,
           paymentMethod: prismaMethod,
           reference: data.transactionReference,
-          observations: data.adminNotes,
+          observations,
           receiptUrl: data.receiptUrl,
           receiptFileName: data.receiptFileName,
           receiptFolio: folio,
@@ -483,31 +677,47 @@ export class BillingPrismaRepository implements BillingRepository {
         },
       });
 
-      // 2. Actualizar MaintenanceCharge a PAID
+      // 2. Actualizar MaintenanceCharge
       await tx.maintenanceCharge.update({
         where: { id: data.chargeId },
         data: {
-          paidAmount: data.paidAmount,
-          status: 'PAID',
-          notes: data.adminNotes,
+          paidAmount: newPaidAmount,
+          status: isChargePaid ? 'PAID' : 'PARTIAL',
+          notes: observations,
         },
       });
 
-      // 3. Actualizar cuenta de la casa si existe
-      const account = await tx.houseAccount.findUnique({
-        where: { houseId: charge.houseId },
-      });
-      if (account) {
-        await tx.houseAccount.update({
+      // 3. Si hay excedente, acreditar a la cuenta de la vivienda
+      if (excessCredit > 0) {
+        await tx.houseAccount.upsert({
           where: { houseId: charge.houseId },
-          data: {
+          create: {
+            houseId: charge.houseId,
+            currentBalance: excessCredit,
+          },
+          update: {
             currentBalance: {
-              decrement: data.paidAmount,
+              increment: excessCredit,
             },
+          },
+        });
+
+        await tx.accountMovement.create({
+          data: {
+            houseId: charge.houseId,
+            type: AccountMovementType.CREDIT,
+            description: `Saldo a favor por excedente de pago en cuota ${charge.concept}`,
+            amount: excessCredit,
+            movementDate: new Date(),
           },
         });
       }
     });
+
+    // 4. Si hubo excedente acreditado, auto-aplicar a otras cuotas pendientes de la casa si existen
+    if (excessCredit > 0) {
+      await this.autoApplyCreditToHouse(charge.houseId, data.condominiumId);
+    }
 
     const updated = await this.getChargeById(data.chargeId, data.condominiumId);
     return updated!;
@@ -559,7 +769,9 @@ export class BillingPrismaRepository implements BillingRepository {
     const config = await this.getConfig(data.condominiumId);
 
     if (data.action === 'APPROVE') {
-      const folio = `REC-${charge.house?.houseNumber || 'H'}-${Date.now().toString().slice(-6)}`;
+      const folio =
+        data.receiptFolio?.trim() ||
+        `REC-${charge.house?.houseNumber || 'H'}-${Date.now().toString().slice(-6)}`;
       const baseAmount = Number(charge.amount);
 
       // Calcular recargo si el comprobante fue extemporáneo a los días de gracia
@@ -589,6 +801,8 @@ export class BillingPrismaRepository implements BillingRepository {
             reference: data.reference || charge.proofReference,
             observations: 'Comprobante aprobado por administración',
             receiptFolio: folio,
+            receiptUrl: data.receiptUrl,
+            receiptFileName: data.receiptFileName,
             receiptUploadedAt: new Date(),
             createdById: data.userId,
           },
@@ -601,22 +815,10 @@ export class BillingPrismaRepository implements BillingRepository {
             status: 'PAID',
           },
         });
-
-        // Actualizar saldo de la cuenta de la vivienda si existe
-        const account = await tx.houseAccount.findUnique({
-          where: { houseId: charge.houseId },
-        });
-        if (account) {
-          await tx.houseAccount.update({
-            where: { houseId: charge.houseId },
-            data: {
-              currentBalance: {
-                decrement: amountToPay,
-              },
-            },
-          });
-        }
       });
+
+      // Si la vivienda tiene saldo a favor acumulado, aplicarlo a otros cargos pendientes
+      await this.autoApplyCreditToHouse(charge.houseId, data.condominiumId);
 
       // Notificar al residente aprobación y emisión de recibo en segundo plano
       this.notificationService
@@ -659,6 +861,9 @@ export class BillingPrismaRepository implements BillingRepository {
     userId: string,
     condominiumId: string,
   ): Promise<{
+    houseId?: string;
+    houseNumber?: string;
+    creditBalance?: number;
     currentRecord: BillingRecordEntity | null;
     historyRecords: BillingRecordEntity[];
   }> {
@@ -667,16 +872,91 @@ export class BillingPrismaRepository implements BillingRepository {
       include: { house: true },
     });
 
-    if (!resident || !resident.houseId) {
+    let houseId = resident?.houseId;
+    let houseNumber = resident?.house?.houseNumber;
+
+    if (!houseId) {
+      // Si el usuario no tiene perfil de residente (ej. ADMIN probando la interfaz de residente),
+      // buscar la primera vivienda activa del condominio para previsualizar
+      const firstHouse = await this.prisma.house.findFirst({
+        where: { condominiumId, isDisabled: false },
+        orderBy: [{ tower: 'asc' }, { houseNumber: 'asc' }],
+      });
+      if (firstHouse) {
+        houseId = firstHouse.id;
+        houseNumber = firstHouse.houseNumber;
+      }
+    }
+
+    if (!houseId) {
       return { currentRecord: null, historyRecords: [] };
     }
 
     const config = await this.getConfig(condominiumId);
 
+    // Asegurar que el periodo actual y el cargo de mantenimiento para esta casa existan
+    const now = new Date();
+    const currentYear = now.getFullYear();
+    const currentMonth = now.getMonth() + 1;
+    const monthName = MONTH_NAMES[currentMonth - 1] || `Mes ${currentMonth}`;
+
+    const currentPeriod = await this.prisma.maintenancePeriod.upsert({
+      where: {
+        condominiumId_year_month: {
+          condominiumId,
+          year: currentYear,
+          month: currentMonth,
+        },
+      },
+      create: {
+        condominiumId,
+        year: currentYear,
+        month: currentMonth,
+        name: `${monthName} ${currentYear}`,
+        amount: config.defaultMonthlyFee,
+      },
+      update: {},
+    });
+
+    const existingCurrentCharge = await this.prisma.maintenanceCharge.findFirst(
+      {
+        where: {
+          condominiumId,
+          houseId,
+          maintenancePeriodId: currentPeriod.id,
+        },
+      },
+    );
+
+    if (!existingCurrentCharge) {
+      const dueDate = new Date(
+        currentYear,
+        currentMonth - 1,
+        config.dueDay,
+        23,
+        59,
+        59,
+      );
+      await this.prisma.maintenanceCharge.create({
+        data: {
+          condominiumId,
+          houseId,
+          maintenancePeriodId: currentPeriod.id,
+          concept: `Cuota de Mantenimiento - ${monthName} ${currentYear}`,
+          amount: config.defaultMonthlyFee,
+          dueDate,
+          status: 'PENDING',
+        },
+      });
+    }
+
+    // Auto-aplicar Saldo a Favor si la vivienda cuenta con crédito disponible
+    await this.autoApplyCreditToHouse(houseId, condominiumId);
+
     const charges = await this.prisma.maintenanceCharge.findMany({
       where: {
         condominiumId,
-        houseId: resident.houseId,
+        houseId,
       },
       include: {
         house: {
@@ -684,6 +964,7 @@ export class BillingPrismaRepository implements BillingRepository {
             residents: {
               include: { user: true },
             },
+            houseAccount: true,
           },
         },
         payments: {
@@ -700,9 +981,28 @@ export class BillingPrismaRepository implements BillingRepository {
       charges.map((c) => this.mapChargeToDomain(c, config)),
     );
 
+    const currentPeriodStr = `${currentYear}-${String(currentMonth).padStart(2, '0')}`;
+    const currentRecord =
+      domainRecords.find((r) => r.period === currentPeriodStr) ||
+      (domainRecords.length > 0 ? domainRecords[0] : null);
+
+    const historyRecords = currentRecord
+      ? domainRecords.filter((r) => r.id !== currentRecord.id)
+      : domainRecords;
+
+    const finalAccount = await this.prisma.houseAccount.findUnique({
+      where: { houseId },
+    });
+    const creditBalance = finalAccount
+      ? Math.max(0, Number(finalAccount.currentBalance))
+      : 0;
+
     return {
-      currentRecord: domainRecords.length > 0 ? domainRecords[0] : null,
-      historyRecords: domainRecords,
+      houseId,
+      houseNumber,
+      creditBalance,
+      currentRecord,
+      historyRecords,
     };
   }
 }

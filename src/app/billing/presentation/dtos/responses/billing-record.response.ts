@@ -131,6 +131,10 @@ export class BillingRecordResponse {
   @Expose()
   notes?: string | null;
 
+  @ApiPropertyOptional({ example: 3000 })
+  @Expose()
+  houseCreditBalance?: number;
+
   @ApiProperty()
   @Expose()
   createdAt: Date;

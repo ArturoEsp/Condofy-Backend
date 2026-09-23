@@ -5,4 +5,7 @@ export class ReviewResidentProofCommand {
   action: 'APPROVE' | 'REJECT';
   reference?: string;
   rejectReason?: string;
+  receiptFolio?: string;
+  receiptUrl?: string;
+  receiptFileName?: string;
 }

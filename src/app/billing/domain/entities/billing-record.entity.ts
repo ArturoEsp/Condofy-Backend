@@ -42,6 +42,7 @@ export class BillingRecordEntity {
   receipt?: PaymentReceiptEntity | null;
   residentProof?: ResidentProofEntity | null;
   notes?: string | null;
+  houseCreditBalance?: number;
   createdAt: Date;
   updatedAt: Date;
 }

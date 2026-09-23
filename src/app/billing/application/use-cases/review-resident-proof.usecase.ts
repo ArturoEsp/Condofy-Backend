@@ -12,6 +12,9 @@ export class ReviewResidentProofUseCase {
       action: command.action,
       reference: command.reference,
       rejectReason: command.rejectReason,
+      receiptUrl: command.receiptUrl,
+      receiptFileName: command.receiptFileName,
+      receiptFolio: command.receiptFolio,
     });
   }
 }

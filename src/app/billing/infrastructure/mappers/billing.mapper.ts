@@ -70,6 +70,9 @@ export interface PrismaHouseItemRecord {
   houseNumber: string;
   tower?: string | null;
   residents?: PrismaResidentProfileRecord[];
+  houseAccount?: {
+    currentBalance: number | string | Prisma.Decimal;
+  } | null;
 }
 
 export interface PrismaMaintenancePeriodRecord {
@@ -270,6 +273,9 @@ export class BillingMapper {
       receipt,
       residentProof,
       notes: charge.notes ?? null,
+      houseCreditBalance: charge.house?.houseAccount?.currentBalance
+        ? Math.max(0, Number(charge.house.houseAccount.currentBalance))
+        : 0,
       createdAt: charge.createdAt,
       updatedAt: charge.updatedAt,
     };

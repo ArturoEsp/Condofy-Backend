@@ -274,13 +274,43 @@ export class BillingController {
 
   @Patch('charges/:chargeId/review')
   @Roles('ADMIN')
+  @UseInterceptors(FileInterceptor('receiptFile'))
+  @ApiConsumes('application/json', 'multipart/form-data')
   @ApiEndpoint(docs.reviewResidentProof)
   async reviewResidentProof(
     @CondominiumId() condominiumId: string,
     @Param('chargeId') chargeId: string,
     @CurrentUser() user: AuthUserEntity,
     @Body() data: ReviewResidentProofRequest,
+    @UploadedFile() file?: Express.Multer.File,
   ) {
+    let receiptUrl = data.receiptUrl;
+    let receiptFileName = data.receiptFileName;
+
+    if (file) {
+      const path = this.storageService.buildStoragePath({
+        condominiumId,
+        module: 'payments',
+        fileName: file.originalname,
+        referenceId: chargeId,
+      });
+
+      const uploadResult = await this.storageService.uploadFile({
+        file: {
+          buffer: file.buffer,
+          mimetype: file.mimetype,
+          originalname: file.originalname,
+          size: file.size,
+        },
+        path,
+        isPublic: false,
+        contentType: file.mimetype,
+      });
+
+      receiptUrl = uploadResult.key;
+      receiptFileName = file.originalname;
+    }
+
     return await this.reviewResidentProofUseCase.execute({
       chargeId,
       condominiumId,
@@ -288,11 +318,14 @@ export class BillingController {
       action: data.action,
       reference: data.reference,
       rejectReason: data.rejectReason,
+      receiptUrl,
+      receiptFileName,
+      receiptFolio: data.receiptFolio,
     });
   }
 
   @Get('my-records')
-  @Roles('RESIDENT')
+  @Roles('RESIDENT', 'ADMIN')
   @ApiEndpoint(docs.getMyBilling)
   async getMyBilling(
     @CondominiumId() condominiumId: string,

@@ -59,6 +59,9 @@ export interface ReviewResidentProofData {
   action: 'APPROVE' | 'REJECT';
   reference?: string;
   rejectReason?: string;
+  receiptUrl?: string;
+  receiptFileName?: string;
+  receiptFolio?: string;
 }
 
 export default interface BillingRepository {
@@ -92,6 +95,9 @@ export default interface BillingRepository {
     userId: string,
     condominiumId: string,
   ): Promise<{
+    houseId?: string;
+    houseNumber?: string;
+    creditBalance?: number;
     currentRecord: BillingRecordEntity | null;
     historyRecords: BillingRecordEntity[];
   }>;
