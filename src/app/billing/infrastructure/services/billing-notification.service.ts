@@ -1,4 +1,5 @@
 import { Inject, Injectable, Logger } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { PrismaService } from '@/core/infrastructure/persistence/prisma/prisma.service';
 import { WebPushService } from '@/app/notifications/infrastructure/services/web-push.service';
 import { PROVIDES_NAMES } from '@/common/enums/provides-names.enums';
@@ -41,7 +42,19 @@ export class BillingNotificationService {
     private readonly webPushService: WebPushService,
     @Inject(PROVIDES_NAMES.MailService)
     private readonly mailService: MailService,
+    private readonly configService: ConfigService,
   ) {}
+
+  /**
+   * Obtiene la URL absoluta hacia la página de cuotas y pagos del residente en el frontend.
+   */
+  private getResidentPaymentsUrl(): string {
+    const rawUrl =
+      this.configService.get<string>('FRONTEND_URL') ||
+      'https://app.condofy.com.mx';
+    const cleanUrl = rawUrl.replace(/\/+$/, '');
+    return `${cleanUrl}/residente/pagos`;
+  }
 
   /**
    * Notificación inmediata al residente cuando su comprobante es aprobado o rechazado por administración.
@@ -104,7 +117,7 @@ export class BillingNotificationService {
             await this.webPushService.sendNotificationToUser(user.id, {
               title: `¡Pago Acreditado! Recibo emitido 🎉`,
               body: `Tu cuota de ${periodName} para ${houseNumber} fue aprobada. Folio: ${folio}`,
-              url: '/resident/payments',
+              url: '/residente/pagos',
               tag: `billing-approve-${chargeId}`,
             });
           }
@@ -128,7 +141,7 @@ export class BillingNotificationService {
                 },
               ],
               actionText: 'Ver Mi Recibo Oficial',
-              actionUrl: 'https://app.condofy.com.mx/resident/payments',
+              actionUrl: this.getResidentPaymentsUrl(),
             });
           }
         } else {
@@ -141,7 +154,7 @@ export class BillingNotificationService {
             await this.webPushService.sendNotificationToUser(user.id, {
               title: `Comprobante de Pago Rechazado ⚠️`,
               body: `El comprobante para ${houseNumber} no fue aprobado: ${reason}`,
-              url: '/resident/payments',
+              url: '/residente/pagos',
               tag: `billing-reject-${chargeId}`,
             });
           }
@@ -161,7 +174,7 @@ export class BillingNotificationService {
                 { label: 'Motivo de Rechazo', value: reason },
               ],
               actionText: 'Subir Comprobante Corregido',
-              actionUrl: 'https://app.condofy.com.mx/resident/payments',
+              actionUrl: this.getResidentPaymentsUrl(),
             });
           }
         }
@@ -225,7 +238,7 @@ export class BillingNotificationService {
           await this.webPushService.sendNotificationToUser(res.user.id, {
             title: `Cuota de Mantenimiento - ${periodName} 📅`,
             body: `Tu cuota de ${monthName} ya está disponible ($${monthlyFee.toLocaleString('es-MX')} ${currency}). Fecha límite: Día ${dueDay}.`,
-            url: '/resident/payments',
+            url: '/residente/pagos',
             tag: `period-start-${year}-${month}`,
           });
         }
@@ -251,7 +264,7 @@ export class BillingNotificationService {
               },
             ],
             actionText: 'Consultar y Pagar Cuota',
-            actionUrl: 'https://app.condofy.com.mx/resident/payments',
+            actionUrl: this.getResidentPaymentsUrl(),
           });
         }
 
@@ -388,7 +401,7 @@ export class BillingNotificationService {
           await this.webPushService.sendNotificationToUser(res.user.id, {
             title: `Recordatorio de Pago - ${periodName} ⏳`,
             body: `Tu cuota de ${houseNumber} vence pronto. Paga antes del día ${dueDay} para evitar recargo por mora.`,
-            url: '/resident/payments',
+            url: '/residente/pagos',
             tag: `reminder-${charge.id}`,
           });
         }
@@ -415,7 +428,7 @@ export class BillingNotificationService {
               },
             ],
             actionText: 'Reportar Mi Pago Ahora',
-            actionUrl: 'https://app.condofy.com.mx/resident/payments',
+            actionUrl: this.getResidentPaymentsUrl(),
           });
         }
 
