@@ -11,4 +11,6 @@ export class RegisterPaymentCommand {
   receiptUrl?: string;
   receiptFileName?: string;
   receiptFolio?: string;
+  waiveLateFee?: boolean;
+  waiveReason?: string;
 }

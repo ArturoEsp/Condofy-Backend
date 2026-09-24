@@ -41,6 +41,8 @@ export interface RegisterPaymentData {
   receiptUrl?: string;
   receiptFileName?: string;
   receiptFolio?: string;
+  waiveLateFee?: boolean;
+  waiveReason?: string;
 }
 
 export interface UploadResidentProofData {

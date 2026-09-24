@@ -29,9 +29,10 @@ ENV NODE_ENV=production
 # Instalar OpenSSL para el motor de Prisma en tiempo de ejecución
 RUN apt-get update && apt-get install -y openssl ca-certificates && rm -rf /var/lib/apt/lists/*
 
-# Copiar manifiestos, tsconfig y prisma schema
+# Copiar manifiestos, tsconfig, prisma schema y scripts administrativos
 COPY --chown=node:node package.json yarn.lock tsconfig.json prisma.config.ts* ./
 COPY --chown=node:node prisma ./prisma/
+COPY --chown=node:node scripts ./scripts/
 
 # Copiar dependencias ya instaladas y compiladas desde el builder
 COPY --from=builder --chown=node:node /app/node_modules ./node_modules

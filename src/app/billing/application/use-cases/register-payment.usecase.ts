@@ -17,6 +17,8 @@ export class RegisterPaymentUseCase {
       receiptUrl: command.receiptUrl,
       receiptFileName: command.receiptFileName,
       receiptFolio: command.receiptFolio,
+      waiveLateFee: command.waiveLateFee,
+      waiveReason: command.waiveReason,
     });
   }
 }

@@ -221,6 +221,8 @@ export class BillingController {
       receiptUrl,
       receiptFileName,
       receiptFolio: data.receiptFolio,
+      waiveLateFee: data.waiveLateFee,
+      waiveReason: data.waiveReason,
     });
   }
 
