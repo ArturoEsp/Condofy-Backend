@@ -8,6 +8,7 @@ Este documento contiene la referencia completa de los comandos de consola actual
 
 1. [Scripts Administrativos Actuales](#1-scripts-administrativos-actuales)
    - [`reset:billing` (Reinicio de Cobranza y Limpieza R2)](#resetbilling-reinicio-de-cobranza-y-limpieza-r2)
+   - [`delete:house` (Eliminación de Casa en Cascada y Limpieza R2)](#deletehouse-eliminación-de-casa-en-cascada-y-limpieza-r2)
    - [`delete:resident` (Eliminación de Residente en Cascada)](#deleteresident-eliminación-de-residente-en-cascada)
    - [`delete:condominium` (Eliminación de Condominio en Cascada)](#deletecondominium-eliminación-de-condominio-en-cascada)
 2. [Comandos Frecuentes de Desarrollo y Base de Datos (Local vs Docker)](#2-comandos-frecuentes-de-desarrollo-y-base-de-datos-local-vs-docker)
@@ -76,6 +77,72 @@ docker compose -f docker-compose.prod.yml exec api yarn reset:billing albero 9 2
 docker compose -f docker-compose.prod.yml exec -it api sh
 # (y dentro del contenedor ejecutas directamente):
 yarn reset:billing albero 9 2026
+```
+
+---
+
+### `delete:house` (Eliminación de Casa en Cascada y Limpieza R2)
+
+_Archivos:_
+
+- TypeScript: [`scripts/delete-house.ts`](file:///c:/Users/bmth_/OneDrive/Documentos/GitHub/Condofy-Backend/scripts/delete-house.ts)
+- SQL Nativo: [`scripts/delete_house_cascade.sql`](file:///c:/Users/bmth_/OneDrive/Documentos/GitHub/Condofy-Backend/scripts/delete_house_cascade.sql)
+
+Elimina de raíz una vivienda/casa creada de forma incorrecta, barriendo todas sus dependencias en cascada atómica y purgando cualquier archivo físico almacenado en **Cloudflare R2** para no dejar registros huérfanos ni consumo innecesario de almacenamiento.
+
+#### ¿Qué elementos elimina en cascada?
+
+1. **Cloudflare R2:** Elimina comprobantes de cuotas (`proofUrl`), recibos oficiales (`receiptUrl`), fotografías de paquetería en caseta (`photoUrl`) y fotos de visitantes (`photo`).
+2. **Accesos y Seguridad:** Registros de bitácora (`AccessLog`), códigos QR y autorizaciones (`AccessAuthorization`), y visitantes registrados (`Visitor`).
+3. **Caseta y Paquetería:** Todos los envíos recibidos o entregados para esa vivienda (`ParcelDelivery`).
+4. **Finanzas y Cobranza:** Cargos de mantenimiento (`MaintenanceCharge`), pagos (`Payment`), recargos por mora (`LateFee`), movimientos contables (`AccountMovement`), cuenta de vivienda (`HouseAccount`) y su configuración (`HouseConfiguration`).
+5. **Residentes y Cuentas de Usuario:**
+   - Elimina perfiles de residente (`ResidentProfile`).
+   - Si los usuarios asociados tenían rol `RESIDENT` y pertenecían **únicamente** a esta vivienda, se eliminan completamente sus sesiones (`UserSession`), tokens (`PasswordResetToken`), suscripciones (`PushSubscription`) y cuentas (`User`).
+   - 🛡️ **Protección de Seguridad:** Si un usuario vinculado tiene rol `ADMIN` o `STAND`, o tiene casas adicionales asignadas, **NUNCA** se elimina su cuenta; únicamente se desvincula de la vivienda.
+6. **Vivienda (`House`):** La casa es eliminada de forma definitiva del condominio.
+
+#### Sintaxis de uso:
+
+##### A. Ejecución Directa (Local / Desarrollo):
+
+```bash
+# Modo 1: Interactivo (te listará los condominios disponibles y pedirá el número de casa)
+yarn delete:house
+
+# Modo 2: Parámetros directos (Condominio y Número de casa)
+yarn delete:house albero 102
+yarn delete:house albero "Casa 38"
+yarn delete:house --condo albero --house 102
+
+# Modo 3: Por UUID directo de la casa
+yarn delete:house b8f75c74-04b8-4f78-b76b-2ef31be740a7
+
+# Modo 4: Simulación previa (--dry-run: lista TODO lo que borraría sin modificar nada)
+yarn delete:house albero 102 --dry-run
+
+# Modo 5: Desatendido / Automático (omite la confirmación manual 'SI')
+yarn delete:house albero 102 --yes
+```
+
+##### B. Ejecución con Docker (En Servidor de Producción / VPS):
+
+```bash
+# Modo interactivo a través del contenedor de la API:
+docker compose -f docker-compose.prod.yml exec -it api yarn delete:house
+
+# Pasando condominio y número de casa directamente:
+docker compose -f docker-compose.prod.yml exec -it api yarn delete:house albero 102
+
+# Simulación previa en producción (Dry-run):
+docker compose -f docker-compose.prod.yml exec api yarn delete:house albero 102 --dry-run
+
+# Modo desatendido para pipelines o scripts de migración:
+docker compose -f docker-compose.prod.yml exec api yarn delete:house albero 102 --yes
+
+# O dentro de la consola del contenedor:
+docker compose -f docker-compose.prod.yml exec -it api sh
+yarn delete:house albero 102
 ```
 
 ---
