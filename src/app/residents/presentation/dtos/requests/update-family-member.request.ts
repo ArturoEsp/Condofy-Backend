@@ -1,4 +1,5 @@
 import { ApiPropertyOptional } from '@nestjs/swagger';
+import { Transform } from 'class-transformer';
 import {
   IsBoolean,
   IsEmail,
@@ -16,6 +17,7 @@ export class UpdateFamilyMemberRequest {
   })
   @IsString()
   @IsOptional()
+  @Transform(({ value }) => (typeof value === 'string' ? value.trim() : value))
   firstName?: string;
 
   @ApiPropertyOptional({
@@ -24,6 +26,7 @@ export class UpdateFamilyMemberRequest {
   })
   @IsString()
   @IsOptional()
+  @Transform(({ value }) => (typeof value === 'string' ? value.trim() : value))
   lastName?: string;
 
   @ApiPropertyOptional({
@@ -32,6 +35,7 @@ export class UpdateFamilyMemberRequest {
   })
   @IsString()
   @IsOptional()
+  @Transform(({ value }) => (typeof value === 'string' ? value.trim() : value))
   phone?: string;
 
   @ApiPropertyOptional({
@@ -41,6 +45,9 @@ export class UpdateFamilyMemberRequest {
   @IsString()
   @IsEmail()
   @IsOptional()
+  @Transform(({ value }) =>
+    typeof value === 'string' ? value.trim().toLowerCase() : value,
+  )
   email?: string;
 
   @ApiPropertyOptional({
@@ -50,6 +57,7 @@ export class UpdateFamilyMemberRequest {
   @IsString()
   @MinLength(8)
   @IsOptional()
+  @Transform(({ value }) => (typeof value === 'string' ? value.trim() : value))
   password?: string;
 
   @ApiPropertyOptional({
@@ -72,5 +80,6 @@ export class UpdateFamilyMemberRequest {
   @ApiPropertyOptional({ description: 'Observaciones o notas adicionales' })
   @IsString()
   @IsOptional()
+  @Transform(({ value }) => (typeof value === 'string' ? value.trim() : value))
   comments?: string;
 }
