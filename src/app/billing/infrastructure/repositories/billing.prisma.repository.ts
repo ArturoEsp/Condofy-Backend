@@ -266,7 +266,7 @@ export class BillingPrismaRepository implements BillingRepository {
       orderBy: [{ tower: 'asc' }, { houseNumber: 'asc' }],
     });
 
-    // Asegurar que exista un MaintenanceCharge para cada casa únicamente si es el periodo en curso
+    // Asegurar que exista un MaintenanceCharge para cada casa activa del condominio
     const existingCharges = await this.prisma.maintenanceCharge.findMany({
       where: {
         condominiumId,
@@ -276,7 +276,7 @@ export class BillingPrismaRepository implements BillingRepository {
     const chargedHouseIds = new Set(existingCharges.map((c) => c.houseId));
 
     const missingHouses = houses.filter((h) => !chargedHouseIds.has(h.id));
-    if (isCurrentPeriod && missingHouses.length > 0) {
+    if (missingHouses.length > 0) {
       const dueDate = new Date(year, month - 1, config.dueDay, 23, 59, 59);
       await this.prisma.maintenanceCharge.createMany({
         data: missingHouses.map((h) => ({
@@ -326,6 +326,7 @@ export class BillingPrismaRepository implements BillingRepository {
       where: {
         condominiumId,
         maintenancePeriodId: period.id,
+        house: { isDisabled: false },
       },
       include: {
         house: {
@@ -343,13 +344,26 @@ export class BillingPrismaRepository implements BillingRepository {
         maintenancePeriod: true,
         lateFees: true,
       },
-      orderBy: [{ house: { tower: 'asc' } }, { house: { houseNumber: 'asc' } }],
     });
 
     // Mapear a entidades de dominio con cálculo dinámico de morosidad y firmas de URL frescas
     let domainRecords = await Promise.all(
       charges.map((c) => this.mapChargeToDomain(c, config)),
     );
+
+    // Ordenamiento natural por número de vivienda a nivel backend
+    domainRecords.sort((a, b) => {
+      const cmp = (a.houseNumber || '').localeCompare(
+        b.houseNumber || '',
+        undefined,
+        { numeric: true, sensitivity: 'base' },
+      );
+      if (cmp !== 0) return cmp;
+      return (a.tower || '').localeCompare(b.tower || '', undefined, {
+        numeric: true,
+        sensitivity: 'base',
+      });
+    });
 
     // Filtros
     if (params.status && params.status !== 'ALL') {
