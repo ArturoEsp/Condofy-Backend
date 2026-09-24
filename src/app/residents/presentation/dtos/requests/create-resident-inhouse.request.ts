@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { Transform } from 'class-transformer';
 import {
   IsEmail,
   IsEnum,
@@ -18,32 +19,40 @@ export class CreateResidentInHouseRequest implements Omit<
   @ApiProperty()
   @IsString()
   @IsNotEmpty()
+  @Transform(({ value }) => (typeof value === 'string' ? value.trim() : value))
   firstName: string;
 
   @ApiProperty()
   @IsString()
   @IsNotEmpty()
+  @Transform(({ value }) => (typeof value === 'string' ? value.trim() : value))
   lastName: string;
 
   @ApiProperty()
   @IsString()
   @IsOptional()
+  @Transform(({ value }) => (typeof value === 'string' ? value.trim() : value))
   phone: string | null;
 
   @ApiProperty()
   @IsString()
   @IsEmail()
+  @Transform(({ value }) =>
+    typeof value === 'string' ? value.trim().toLowerCase() : value,
+  )
   email: string;
 
   @ApiProperty()
   @IsString()
   @IsNotEmpty()
   @MinLength(8)
+  @Transform(({ value }) => (typeof value === 'string' ? value.trim() : value))
   password: string;
 
   @ApiProperty()
   @IsString()
   @IsNotEmpty()
+  @Transform(({ value }) => (typeof value === 'string' ? value.trim() : value))
   houseId: string;
 
   @ApiProperty()

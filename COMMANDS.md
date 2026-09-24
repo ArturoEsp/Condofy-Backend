@@ -11,6 +11,7 @@ Este documento contiene la referencia completa de los comandos de consola actual
    - [`delete:house` (Eliminación de Casa en Cascada y Limpieza R2)](#deletehouse-eliminación-de-casa-en-cascada-y-limpieza-r2)
    - [`delete:resident` (Eliminación de Residente en Cascada)](#deleteresident-eliminación-de-residente-en-cascada)
    - [`delete:condominium` (Eliminación de Condominio en Cascada)](#deletecondominium-eliminación-de-condominio-en-cascada)
+   - [`trim:records` (Limpieza y Sanitización de Espacios en BD)](#trimrecords-limpieza-y-sanitización-de-espacios-en-bd)
 2. [Comandos Frecuentes de Desarrollo y Base de Datos (Local vs Docker)](#2-comandos-frecuentes-de-desarrollo-y-base-de-datos-local-vs-docker)
 3. [🐳 Guía Rápida de Ejecución con Docker (Producción / VPS)](#3--guía-rápida-de-ejecución-con-docker-producción--vps)
 4. [Guía y Estándar para Crear Futuros Scripts](#4-guía-y-estándar-para-crear-futuros-scripts)
@@ -196,6 +197,55 @@ yarn delete:condominium <condominiumId_o_clave>
 
 ```bash
 docker compose -f docker-compose.prod.yml exec api yarn delete:condominium <condominiumId_o_clave>
+```
+
+---
+
+### `trim:records` (Limpieza y Sanitización de Espacios en BD)
+
+_Archivos:_
+
+- TypeScript: [`scripts/trim-db-records.ts`](file:///c:/Users/bmth_/OneDrive/Documentos/GitHub/Condofy-Backend/scripts/trim-db-records.ts)
+- SQL Nativo: [`scripts/trim_database_records.sql`](file:///c:/Users/bmth_/OneDrive/Documentos/GitHub/Condofy-Backend/scripts/trim_database_records.sql)
+
+Escanea y sanea la base de datos completa eliminando espacios en blanco accidentales al inicio o al final (`TRIM`) en campos de texto de:
+
+- **Condominios:** Nombre, calle/dirección (`address`), descripción, teléfono y email de contacto.
+- **Casas / Viviendas:** Número de casa (`houseNumber`) y torre (`tower`).
+- **Residentes:** Nombres, apellidos, teléfono y comentarios.
+- **Usuarios:** Nombres, apellidos, email (normalizado a minúsculas) y teléfono.
+- **Visitantes:** Nombres, apellidos, teléfono y placa de vehículo.
+- **Configuración Bancaria:** Nombre de banco, beneficiario (`accountHolder`), CLABE y número de cuenta.
+
+#### Sintaxis de uso:
+
+##### A. Ejecución Directa (Local):
+
+```bash
+# Modo 1: Simulación previa (--dry-run: te dice exactamente cuántos registros tienen espacios sin modificar la BD)
+yarn trim:records --dry-run
+
+# Modo 2: Interactivo (te muestra el reporte y te pide confirmación 'SI')
+yarn trim:records
+
+# Modo 3: Desatendido / Automático
+yarn trim:records --yes
+```
+
+##### B. Ejecución con Docker (Producción / VPS):
+
+```bash
+# Simulación previa en el contenedor activo:
+docker compose -f docker-compose.prod.yml exec api yarn trim:records --dry-run
+
+# Aplicación interactiva:
+docker compose -f docker-compose.prod.yml exec -it api yarn trim:records
+
+# Aplicación desatendida automática:
+docker compose -f docker-compose.prod.yml exec api yarn trim:records --yes
+
+# O mediante SQL directo con el contenedor de Postgres:
+docker compose -f docker-compose.prod.yml exec -i postgres psql -U condofy -d condofy < scripts/trim_database_records.sql
 ```
 
 ---

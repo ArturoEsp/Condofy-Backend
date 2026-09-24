@@ -22,7 +22,8 @@
     "delete:resident": "tsx scripts/delete-resident.ts",
     "delete:condominium": "tsx scripts/delete-condominium.ts",
     "delete:house": "tsx scripts/delete-house.ts",
-    "reset:billing": "tsx scripts/reset-billing-period.ts"
+    "reset:billing": "tsx scripts/reset-billing-period.ts",
+    "trim:records": "tsx scripts/trim-db-records.ts"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.1137.0",
