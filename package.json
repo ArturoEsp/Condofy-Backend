@@ -20,7 +20,8 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "delete:resident": "tsx scripts/delete-resident.ts",
-    "delete:condominium": "tsx prisma/scripts/delete-condominium.ts"
+    "delete:condominium": "tsx prisma/scripts/delete-condominium.ts",
+    "reset:billing": "tsx scripts/reset-billing-period.ts"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.1137.0",

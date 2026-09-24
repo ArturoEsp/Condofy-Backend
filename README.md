@@ -122,3 +122,10 @@ El proyecto incluye un `Dockerfile` optimizado en múltiples etapas (_multi-stag
 # Construir y levantar servicios con Docker Compose
 docker compose -f docker-compose.prod.yml up -d --build
 ```
+
+---
+
+## 🛠️ Comandos y Scripts Administrativos
+
+Para ejecutar tareas de mantenimiento por consola (reinicio de cobranza, eliminación de archivos en Cloudflare R2, eliminación de residentes en cascada, etc.), consulta la guía detallada en:
+👉 **[COMMANDS.md](./COMMANDS.md)**

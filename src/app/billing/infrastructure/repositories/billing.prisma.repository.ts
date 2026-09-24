@@ -617,9 +617,14 @@ export class BillingPrismaRepository implements BillingRepository {
     const graceDays = config.gracePeriodDays ?? 2;
     const graceLimit = new Date(charge.dueDate);
     graceLimit.setDate(graceLimit.getDate() + graceDays);
-    const now = new Date();
+    graceLimit.setHours(23, 59, 59, 999);
+    const paymentEffectiveDate = data.paymentDate
+      ? new Date(data.paymentDate)
+      : new Date();
 
-    if (now > graceLimit && config.applyLateFee) {
+    if (data.waiveLateFee) {
+      lateFee = 0;
+    } else if (paymentEffectiveDate > graceLimit && config.applyLateFee) {
       if (config.lateFeeType === 'PERCENTAGE') {
         lateFee = Math.round(baseAmount * (config.lateFeeValue / 100));
       } else {
@@ -652,6 +657,12 @@ export class BillingPrismaRepository implements BillingRepository {
     else if (upperMethod === 'SPEI') prismaMethod = PaymentMethod.SPEI;
 
     let observations = data.adminNotes || '';
+    if (data.waiveLateFee) {
+      const waiveNote = `[Recargo omitido: ${data.waiveReason?.trim() || 'Autorizado por administración'}]`;
+      observations = observations
+        ? `${observations} | ${waiveNote}`
+        : waiveNote;
+    }
     if (excessCredit > 0) {
       const noteExcess = `Total recibido: $${paidAmount.toLocaleString('es-MX')} MXN ($${amountForCharge.toLocaleString('es-MX')} aplicados a esta cuota, $${excessCredit.toLocaleString('es-MX')} acreditados a Saldo a Favor)`;
       observations = observations
@@ -660,6 +671,13 @@ export class BillingPrismaRepository implements BillingRepository {
     }
 
     await this.prisma.$transaction(async (tx) => {
+      // Si se condonó/omitió el recargo, eliminar posibles registros previos de LateFee vinculados al cargo
+      if (data.waiveLateFee) {
+        await tx.lateFee.deleteMany({
+          where: { maintenanceChargeId: data.chargeId },
+        });
+      }
+
       // 1. Crear registro en Payment
       await tx.payment.create({
         data: {
@@ -678,12 +696,17 @@ export class BillingPrismaRepository implements BillingRepository {
       });
 
       // 2. Actualizar MaintenanceCharge
+      const updatedNotes =
+        charge.notes && observations
+          ? `${charge.notes} | ${observations}`
+          : observations || charge.notes;
+
       await tx.maintenanceCharge.update({
         where: { id: data.chargeId },
         data: {
           paidAmount: newPaidAmount,
           status: isChargePaid ? 'PAID' : 'PARTIAL',
-          notes: observations,
+          notes: updatedNotes,
         },
       });
 

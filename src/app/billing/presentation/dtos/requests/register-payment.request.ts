@@ -8,7 +8,7 @@ import {
   IsString,
   Min,
 } from 'class-validator';
-import { Type } from 'class-transformer';
+import { Type, Transform } from 'class-transformer';
 
 export class RegisterPaymentRequest {
   @ApiProperty({ description: 'ID del cargo (MaintenanceCharge ID)' })
@@ -42,6 +42,7 @@ export class RegisterPaymentRequest {
   adminNotes?: string;
 
   @ApiPropertyOptional({ example: true })
+  @Transform(({ value }) => value === 'true' || value === true)
   @IsBoolean()
   @IsOptional()
   generateDigitalReceipt?: boolean;
@@ -60,4 +61,21 @@ export class RegisterPaymentRequest {
   @IsString()
   @IsOptional()
   receiptFolio?: string;
+
+  @ApiPropertyOptional({
+    example: false,
+    description: 'Indica si se condona/omite el recargo por mora',
+  })
+  @Transform(({ value }) => value === 'true' || value === true)
+  @IsBoolean()
+  @IsOptional()
+  waiveLateFee?: boolean;
+
+  @ApiPropertyOptional({
+    example: 'Carga inicial en plataforma',
+    description: 'Motivo de omisión del recargo por mora',
+  })
+  @IsString()
+  @IsOptional()
+  waiveReason?: string;
 }
