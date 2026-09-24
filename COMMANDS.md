@@ -39,39 +39,43 @@ Permite reiniciar el proceso de carga de cuotas de un mes y año específico, re
 ##### A. Ejecución Directa (Local / Desarrollo en tu máquina):
 
 ```bash
-# Modo interactivo (pregunta condominio, mes y año)
+# Modo 1: Interactivo (si no pasas argumentos, te preguntará el condominio, mes y año)
 yarn reset:billing
 
-# Con parámetros directos (Mes y Año)
-yarn reset:billing 9 2026
-yarn reset:billing septiembre 2026
+# Modo 2: Parámetros directos (Condominio, Mes y Año en cualquier orden)
+yarn reset:billing albero 9 2026
+yarn reset:billing 9 2026 --condo albero
+yarn reset:billing albero septiembre 2026
 
-# Simulación previa (NO borra nada, lista archivos y pagos encontrados)
-yarn reset:billing 9 2026 --dry-run
+# Modo 3: Simulación previa (NO borra nada, lista archivos R2 y pagos encontrados)
+yarn reset:billing albero 9 2026 --dry-run
 
-# Desatendido / Automático (Sin confirmación 'SI')
-yarn reset:billing 9 2026 --yes
+# Modo 4: Desatendido / Automático (Sin confirmación 'SI')
+yarn reset:billing albero 9 2026 --yes
 
-# Eliminación total (elimina cargos y periodo por completo)
-yarn reset:billing 9 2026 --hard-delete
+# Modo 5: Eliminación total (elimina cargos y periodo por completo)
+yarn reset:billing albero 9 2026 --hard-delete
 ```
 
 ##### B. Ejecución con Docker (En Servidor de Producción / VPS):
 
 ```bash
-# Modo interactivo a través del contenedor activo:
-docker compose -f docker-compose.prod.yml exec -it api yarn reset:billing 9 2026
+# Modo interactivo a través del contenedor activo (te preguntará condominio si no lo pasas):
+docker compose -f docker-compose.prod.yml exec -it api yarn reset:billing
 
-# Modo desatendido / directo:
-docker compose -f docker-compose.prod.yml exec api yarn reset:billing 9 2026 --yes
+# Pasando condominio, mes y año directamente:
+docker compose -f docker-compose.prod.yml exec -it api yarn reset:billing albero 9 2026
 
-# Simulación previa en producción:
-docker compose -f docker-compose.prod.yml exec api yarn reset:billing 9 2026 --dry-run
+# Modo desatendido / directo para scripts automáticos:
+docker compose -f docker-compose.prod.yml exec api yarn reset:billing albero 9 2026 --yes
+
+# Simulación previa en producción (Dry-run):
+docker compose -f docker-compose.prod.yml exec api yarn reset:billing albero 9 2026 --dry-run
 
 # O ingresando a la shell interactiva del contenedor:
 docker compose -f docker-compose.prod.yml exec -it api sh
 # (y dentro del contenedor ejecutas directamente):
-yarn reset:billing 9 2026
+yarn reset:billing albero 9 2026
 ```
 
 ---

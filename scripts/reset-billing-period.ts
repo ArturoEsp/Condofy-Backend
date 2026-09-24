@@ -113,17 +113,88 @@ async function deleteFromR2(key: string): Promise<boolean> {
 
 async function main() {
   const args = process.argv.slice(2);
+
+  if (args.includes('--help') || args.includes('-h')) {
+    console.log(`
+Uso:
+  yarn reset:billing [condominio] [mes] [año] [opciones]
+
+Argumentos (pueden especificarse en cualquier orden o interactivamente):
+  condominio   Clave (ej: albero), ID o nombre del condominio
+  mes          Número (1-12) o nombre del mes (ej: 9 o Septiembre)
+  año          Año de cuatro dígitos (ej: 2026)
+
+Opciones:
+  --condo, --condominium <val>   Especifica el condominio directamente
+  --month <val>                  Especifica el mes
+  --year <val>                   Especifica el año
+  --dry-run                      Modo simulación (no modifica BD ni R2)
+  --yes, -y                      Modo desatendido (omite confirmación 'SI')
+  --hard-delete                  Elimina cargos y periodo por completo
+  --help, -h                     Muestra esta ayuda
+
+Ejemplos:
+  yarn reset:billing albero 9 2026
+  yarn reset:billing 9 2026 --condo albero
+  yarn reset:billing albero 9 2026 --dry-run
+  yarn reset:billing albero 9 2026 --yes
+`);
+    process.exit(0);
+  }
+
   const isYes = args.includes('--yes') || args.includes('-y');
   const isDryRun = args.includes('--dry-run');
   const isHardDelete =
     args.includes('--hard-delete') || args.includes('--delete-charges');
 
-  // Filtrar banderas para obtener argumentos posicionales
-  const positionalArgs = args.filter((a) => !a.startsWith('-'));
+  // Buscar flags con valor --flag=val o --flag val
+  let condoArg: string | undefined;
+  let monthArg: string | undefined;
+  let yearArg: string | undefined;
 
-  let monthArg = positionalArgs[0];
-  let yearArg = positionalArgs[1];
-  let condoArg = positionalArgs[2];
+  for (let i = 0; i < args.length; i++) {
+    const a = args[i];
+    if (a.startsWith('--condo=') || a.startsWith('--condominium=')) {
+      condoArg = a.split('=')[1];
+    } else if (a === '--condo' || a === '--condominium') {
+      condoArg = args[i + 1];
+      i++;
+    } else if (a.startsWith('--month=')) {
+      monthArg = a.split('=')[1];
+    } else if (a === '--month') {
+      monthArg = args[i + 1];
+      i++;
+    } else if (a.startsWith('--year=')) {
+      yearArg = a.split('=')[1];
+    } else if (a === '--year') {
+      yearArg = args[i + 1];
+      i++;
+    }
+  }
+
+  // Argumentos posicionales no capturados por flags
+  const positionalArgs = args.filter((a, idx) => {
+    if (a.startsWith('-')) return false;
+    const prev = args[idx - 1];
+    if (
+      prev &&
+      ['--condo', '--condominium', '--month', '--year'].includes(prev)
+    ) {
+      return false;
+    }
+    return true;
+  });
+
+  // Inferir argumentos posicionales por tipo / valor
+  for (const pos of positionalArgs) {
+    if (/^\d{4}$/.test(pos) && !yearArg) {
+      yearArg = pos;
+    } else if (parseMonth(pos) && !monthArg) {
+      monthArg = pos;
+    } else if (!condoArg) {
+      condoArg = pos;
+    }
+  }
 
   console.log(
     '\n=============================================================',
@@ -149,41 +220,65 @@ async function main() {
     process.exit(1);
   }
 
-  let selectedCondo = condominiums[0];
-  if (condominiums.length > 1) {
-    if (condoArg) {
-      const found = condominiums.find(
-        (c) =>
-          c.id === condoArg ||
-          c.key.toLowerCase() === condoArg.toLowerCase() ||
-          c.name.toLowerCase().includes(condoArg.toLowerCase()),
+  let selectedCondo = null;
+
+  // Si se pasó argumento de condominio, intentar emparejarlo
+  if (condoArg) {
+    const query = condoArg.trim().toLowerCase();
+    selectedCondo = condominiums.find(
+      (c) =>
+        c.id.toLowerCase() === query ||
+        c.key.toLowerCase() === query ||
+        c.name.toLowerCase().includes(query),
+    );
+    if (!selectedCondo) {
+      console.warn(
+        `⚠️  No se encontró ningún condominio coincidente con: "${condoArg}"\n`,
       );
-      if (found) {
-        selectedCondo = found;
-      } else {
-        console.error(`❌ Condominio no encontrado con: "${condoArg}"`);
-        rl.close();
-        process.exit(1);
-      }
+    }
+  }
+
+  // Si no se proporcionó o no se encontró, solicitar interactivamente
+  while (!selectedCondo) {
+    console.log('🏢 CONDOMINIOS DISPONIBLES:');
+    condominiums.forEach((c, idx) => {
+      console.log(`  [${idx + 1}] ${c.name} (Clave: ${c.key} | ID: ${c.id})`);
+    });
+
+    const promptText =
+      condominiums.length === 1
+        ? `\n👉 Selecciona el condominio [1]: `
+        : `\n👉 Selecciona el número (1-${condominiums.length}) o escribe la clave [1]: `;
+
+    const answer = (await rl.question(promptText)).trim();
+    if (!answer || answer === '1') {
+      selectedCondo = condominiums[0];
     } else {
-      console.log('Condominios disponibles:');
-      condominiums.forEach((c, idx) => {
-        console.log(`  [${idx + 1}] ${c.name} (Clave: ${c.key})`);
-      });
-      const answer = await rl.question(
-        `\nSelecciona el número de condominio (1-${condominiums.length}) [1]: `,
-      );
-      const chosenIdx = parseInt(answer.trim() || '1', 10) - 1;
-      selectedCondo = condominiums[chosenIdx] || condominiums[0];
+      const idx = parseInt(answer, 10) - 1;
+      if (!isNaN(idx) && idx >= 0 && idx < condominiums.length) {
+        selectedCondo = condominiums[idx];
+      } else {
+        const found = condominiums.find(
+          (c) =>
+            c.key.toLowerCase() === answer.toLowerCase() ||
+            c.name.toLowerCase().includes(answer.toLowerCase()) ||
+            c.id.toLowerCase() === answer.toLowerCase(),
+        );
+        if (found) {
+          selectedCondo = found;
+        } else {
+          console.log('⚠️  Opción no válida. Intenta nuevamente.\n');
+        }
+      }
     }
   }
 
   console.log(
-    `🏢 Condominio seleccionado: ${selectedCondo.name} (ID: ${selectedCondo.id})\n`,
+    `\n🏢 Condominio seleccionado: ${selectedCondo.name} (Clave: ${selectedCondo.key} | ID: ${selectedCondo.id})\n`,
   );
 
   // 2. Validar o solicitar Mes
-  let month = parseMonth(monthArg);
+  let month = parseMonth(monthArg || '');
   while (!month) {
     const inputMonth = await rl.question(
       '📅 Ingresa el MES a reiniciar (número 1-12 o nombre, ej: 9 o Septiembre): ',
@@ -288,17 +383,23 @@ async function main() {
 
   console.log('\n📊 RESUMEN DE ELEMENTOS ENCONTRADOS:');
   console.log('-------------------------------------------------------------');
-  console.log(` • Viviendas / Cargos en periodo:  ${charges.length}`);
-  console.log(` • Total de pagos registrados:    ${allPayments.length}`);
   console.log(
-    ` • Importe cobrado a revertir:    $${totalCollected.toLocaleString('es-MX')} MXN`,
-  );
-  console.log(` • Recargos por mora asociados:   ${allLateFees.length}`);
-  console.log(
-    ` • Documentos y recibos en R2:     ${allR2Keys.length} (${r2Receipts.length} recibos oficiales, ${r2Proofs.length} comprobantes)`,
+    ` • Condominio:                    ${selectedCondo.name} (Clave: ${selectedCondo.key})`,
   );
   console.log(
-    ` • Modo de operación:             ${
+    ` • Periodo objetivo:              ${periodLabel} (${year}-${String(month).padStart(2, '0')})`,
+  );
+  console.log(` • Viviendas / Cargos en periodo: ${charges.length}`);
+  console.log(` • Total de pagos registrados:   ${allPayments.length}`);
+  console.log(
+    ` • Importe cobrado a revertir:   $${totalCollected.toLocaleString('es-MX')} MXN`,
+  );
+  console.log(` • Recargos por mora asociados:  ${allLateFees.length}`);
+  console.log(
+    ` • Documentos y recibos en R2:    ${allR2Keys.length} (${r2Receipts.length} recibos oficiales, ${r2Proofs.length} comprobantes)`,
+  );
+  console.log(
+    ` • Modo de operación:            ${
       isHardDelete
         ? 'ELIMINACIÓN TOTAL (Cargos y periodo se eliminan)'
         : 'REINICIO LIMPIO (Cargos quedan en PENDIENTE con $0)'
@@ -324,7 +425,7 @@ async function main() {
   // Confirmación
   if (!isYes && !isDryRun) {
     const confirmation = await rl.question(
-      `⚠️  ¿Estás seguro de que deseas eliminar los pagos y recibos de ${periodLabel}? (escribe 'SI' para confirmar): `,
+      `⚠️  ¿Estás seguro de que deseas reiniciar la cobranza de ${periodLabel} en el condominio "${selectedCondo.name}"? (escribe 'SI' para confirmar): `,
     );
     if (confirmation.trim().toUpperCase() !== 'SI') {
       console.log('🛑 Operación cancelada por el usuario.');
