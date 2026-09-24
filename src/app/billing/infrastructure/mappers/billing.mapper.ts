@@ -255,7 +255,7 @@ export class BillingMapper {
       id: charge.id,
       houseId: charge.houseId,
       houseNumber: charge.house?.houseNumber ?? '',
-      tower: charge.house?.tower ?? undefined,
+      tower: charge.house?.tower?.trim() || undefined,
       residentName,
       residentEmail,
       period: periodFormatted,
