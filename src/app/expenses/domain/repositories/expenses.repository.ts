@@ -81,6 +81,7 @@ export interface TransparencyReport {
     showSuppliers: boolean;
     showInvoices: boolean;
     showDetailedReceipts: boolean;
+    showCollectionSummary?: boolean;
   };
   period: string;
   summary: {
@@ -92,6 +93,19 @@ export interface TransparencyReport {
     totalPeriodExpenses: number;
     periodNetCashFlow: number;
     currentAvailableBalance: number;
+    totalHouses?: number;
+    paidHouses?: number;
+    pendingHouses?: number;
+    totalExpected?: number;
+    collectionRate?: number;
+  };
+  collectionSummary?: {
+    totalHouses: number;
+    paidHouses: number;
+    pendingHouses: number;
+    totalExpected: number;
+    totalCollected: number;
+    collectionRate: number;
   };
   expensesBreakdown: {
     category: string;

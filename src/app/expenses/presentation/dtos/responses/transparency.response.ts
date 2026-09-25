@@ -38,6 +38,10 @@ export class TransparencyConfigResponse {
   @Expose()
   showDetailedReceipts: boolean;
 
+  @ApiPropertyOptional()
+  @Expose()
+  showCollectionSummary?: boolean;
+
   @ApiProperty()
   @Expose()
   updatedAt: string;
@@ -75,6 +79,52 @@ export class TransparencySummaryResponse {
   @ApiProperty()
   @Expose()
   currentAvailableBalance: number;
+
+  @ApiPropertyOptional()
+  @Expose()
+  totalHouses?: number;
+
+  @ApiPropertyOptional()
+  @Expose()
+  paidHouses?: number;
+
+  @ApiPropertyOptional()
+  @Expose()
+  pendingHouses?: number;
+
+  @ApiPropertyOptional()
+  @Expose()
+  totalExpected?: number;
+
+  @ApiPropertyOptional()
+  @Expose()
+  collectionRate?: number;
+}
+
+export class TransparencyCollectionSummaryResponse {
+  @ApiProperty()
+  @Expose()
+  totalHouses: number;
+
+  @ApiProperty()
+  @Expose()
+  paidHouses: number;
+
+  @ApiProperty()
+  @Expose()
+  pendingHouses: number;
+
+  @ApiProperty()
+  @Expose()
+  totalExpected: number;
+
+  @ApiProperty()
+  @Expose()
+  totalCollected: number;
+
+  @ApiProperty()
+  @Expose()
+  collectionRate: number;
 }
 
 export class TransparencyExpenseItem {
@@ -169,6 +219,11 @@ export class TransparencyReportResponse {
   @Expose()
   @Type(() => TransparencySummaryResponse)
   summary: TransparencySummaryResponse;
+
+  @ApiPropertyOptional({ type: TransparencyCollectionSummaryResponse })
+  @Expose()
+  @Type(() => TransparencyCollectionSummaryResponse)
+  collectionSummary?: TransparencyCollectionSummaryResponse;
 
   @ApiProperty({ type: [TransparencyBreakdownItem] })
   @Expose()
