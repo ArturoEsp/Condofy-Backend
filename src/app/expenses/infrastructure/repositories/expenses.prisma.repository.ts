@@ -364,6 +364,7 @@ export class ExpensesPrismaRepository implements ExpensesRepository {
       showSuppliers: rawConfig.showSuppliers,
       showInvoices: rawConfig.allowInvoiceViewing,
       showDetailedReceipts: rawConfig.allowInvoiceDownload,
+      showCollectionSummary: rawConfig.showCollectionRate ?? true,
     };
 
     if (!config.isEnabled) {
@@ -401,23 +402,52 @@ export class ExpensesPrismaRepository implements ExpensesRepository {
     const startDate = new Date(Date.UTC(year, month - 1, 1, 0, 0, 0, 0));
     const endDate = new Date(Date.UTC(year, month, 0, 23, 59, 59, 999));
 
-    const periodCharges = await this.prisma.maintenanceCharge.findMany({
+    const allPeriodCharges = await this.prisma.maintenanceCharge.findMany({
       where: {
         condominiumId,
-        status: 'PAID',
         OR: [
           { maintenancePeriod: { year, month } },
           { dueDate: { gte: startDate, lte: endDate } },
         ],
       },
       select: {
+        amount: true,
         paidAmount: true,
+        status: true,
       },
     });
-    const periodMaintenanceIncome = periodCharges.reduce(
-      (sum, c) => sum + Number(c.paidAmount),
+
+    const activeHousesCount = await this.prisma.house.count({
+      where: { condominiumId, isDisabled: false },
+    });
+
+    const totalHouses =
+      allPeriodCharges.length > 0 ? allPeriodCharges.length : activeHousesCount;
+    const paidCharges = allPeriodCharges.filter((c) => c.status === 'PAID');
+    const paidHouses = paidCharges.length;
+    const pendingHouses = Math.max(0, totalHouses - paidHouses);
+    const defaultMonthlyFee = Number(billingConfig?.defaultMonthlyFee || 0);
+    const totalExpected =
+      allPeriodCharges.length > 0
+        ? allPeriodCharges.reduce((sum, c) => sum + Number(c.amount), 0)
+        : totalHouses * defaultMonthlyFee;
+    const periodMaintenanceIncome = paidCharges.reduce(
+      (sum, c) => sum + Number(c.paidAmount || c.amount || 0),
       0,
     );
+    const collectionRate =
+      totalExpected > 0
+        ? Math.round((periodMaintenanceIncome / totalExpected) * 100)
+        : 0;
+
+    const collectionSummary = {
+      totalHouses,
+      paidHouses,
+      pendingHouses,
+      totalExpected,
+      totalCollected: periodMaintenanceIncome,
+      collectionRate,
+    };
 
     const rawExtraIncomes = await this.prisma.extraIncome.findMany({
       where: {
@@ -572,7 +602,15 @@ export class ExpensesPrismaRepository implements ExpensesRepository {
         currentAvailableBalance: config.showBalance
           ? currentAvailableBalance
           : 0,
+        totalHouses,
+        paidHouses,
+        pendingHouses,
+        totalExpected,
+        collectionRate,
       },
+      collectionSummary: config.showCollectionSummary
+        ? collectionSummary
+        : undefined,
       expensesBreakdown: config.showExpenses ? expensesBreakdown : [],
       expenses: config.showExpenses ? expenses : [],
       incomesBreakdown: config.showIncomes ? incomesBreakdown : [],
