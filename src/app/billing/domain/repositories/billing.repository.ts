@@ -1,5 +1,6 @@
 import { BillingConfigEntity } from '../entities/billing-config.entity';
 import { BillingRecordEntity } from '../entities/billing-record.entity';
+import { ExtraIncomeEntity } from '../entities/extra-income.entity';
 
 export interface UpsertBillingConfigData {
   defaultMonthlyFee?: number;
@@ -20,6 +21,10 @@ export interface UpsertBillingConfigData {
   dueDateReminderDaysBefore?: number;
   notifyOnProofReviewed?: boolean;
   notificationChannel?: string;
+  initialBalance?: number;
+  initialReserveFund?: number;
+  initialBalanceDate?: Date | null;
+  initialBalanceNotes?: string | null;
 }
 
 export interface FindBillingRecordsParams {
@@ -66,6 +71,34 @@ export interface ReviewResidentProofData {
   receiptFolio?: string;
 }
 
+export interface CreateExtraIncomeData {
+  condominiumId: string;
+  houseId?: string | null;
+  concept: string;
+  description?: string;
+  amount: number;
+  incomeDate: Date;
+  period?: string;
+  category: string;
+  paymentMethod: string;
+  reference?: string;
+  receiptUrl?: string;
+  receiptFileName?: string;
+  receiptFileType?: string;
+  createdById: string;
+}
+
+export interface FindExtraIncomeParams {
+  period?: string;
+  category?: string;
+  search?: string;
+  startDate?: string;
+  endDate?: string;
+  houseId?: string;
+  page?: number;
+  limit?: number;
+}
+
 export default interface BillingRepository {
   getConfig(condominiumId: string): Promise<BillingConfigEntity>;
   upsertConfig(
@@ -103,4 +136,13 @@ export default interface BillingRepository {
     currentRecord: BillingRecordEntity | null;
     historyRecords: BillingRecordEntity[];
   }>;
+  createExtraIncome(data: CreateExtraIncomeData): Promise<ExtraIncomeEntity>;
+  getExtraIncomes(
+    condominiumId: string,
+    params: FindExtraIncomeParams,
+  ): Promise<ExtraIncomeEntity[]>;
+  deleteExtraIncome(
+    id: string,
+    condominiumId: string,
+  ): Promise<ExtraIncomeEntity>;
 }

@@ -2,6 +2,7 @@ import 'multer';
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Inject,
   Param,
@@ -33,6 +34,9 @@ import { RegisterPaymentUseCase } from '../../application/use-cases/register-pay
 import { UploadResidentProofUseCase } from '../../application/use-cases/upload-resident-proof.usecase';
 import { ReviewResidentProofUseCase } from '../../application/use-cases/review-resident-proof.usecase';
 import { GetMyBillingUseCase } from '../../application/use-cases/get-my-billing.usecase';
+import { CreateExtraIncomeUseCase } from '../../application/use-cases/create-extra-income.usecase';
+import { GetExtraIncomesUseCase } from '../../application/use-cases/get-extra-incomes.usecase';
+import { DeleteExtraIncomeUseCase } from '../../application/use-cases/delete-extra-income.usecase';
 import { BillingNotificationService } from '../../infrastructure/services/billing-notification.service';
 
 import { UpdateBillingSettingsRequest } from '../dtos/requests/update-billing-settings.request';
@@ -40,6 +44,12 @@ import { RegisterPaymentRequest } from '../dtos/requests/register-payment.reques
 import { UploadResidentProofRequest } from '../dtos/requests/upload-resident-proof.request';
 import { ReviewResidentProofRequest } from '../dtos/requests/review-resident-proof.request';
 import { ParamsListBillingRequest } from '../dtos/requests/params-list-billing.request';
+import { CreateExtraIncomeRequest } from '../dtos/requests/create-extra-income.request';
+import { ParamsListExtraIncomeRequest } from '../dtos/requests/params-list-extra-income.request';
+import {
+  ExtraIncomeResponse,
+  ExtraIncomesListResponse,
+} from '../dtos/responses/extra-income.response';
 
 @ApiTags('Billing')
 @Controller(':condominiumKey/billing')
@@ -52,6 +62,9 @@ export class BillingController {
     private readonly uploadResidentProofUseCase: UploadResidentProofUseCase,
     private readonly reviewResidentProofUseCase: ReviewResidentProofUseCase,
     private readonly getMyBillingUseCase: GetMyBillingUseCase,
+    private readonly createExtraIncomeUseCase: CreateExtraIncomeUseCase,
+    private readonly getExtraIncomesUseCase: GetExtraIncomesUseCase,
+    private readonly deleteExtraIncomeUseCase: DeleteExtraIncomeUseCase,
     private readonly billingNotificationService: BillingNotificationService,
     @Inject(PROVIDES_NAMES.StorageService)
     private readonly storageService: StorageService,
@@ -347,5 +360,103 @@ export class BillingController {
       condominiumId,
       period,
     );
+  }
+
+  @Post('extra-income')
+  @Roles('ADMIN')
+  @UseInterceptors(FileInterceptor('receiptFile'))
+  @ApiConsumes('application/json', 'multipart/form-data')
+  @ApiEndpoint(docs.createExtraIncome)
+  async createExtraIncome(
+    @CondominiumId() condominiumId: string,
+    @CurrentUser() user: AuthUserEntity,
+    @Body() data: CreateExtraIncomeRequest,
+    @UploadedFile() file?: Express.Multer.File,
+  ): Promise<ExtraIncomeResponse> {
+    let receiptUrl = data.receiptUrl;
+    let receiptFileName = data.receiptFileName;
+    let receiptFileType: string | undefined = undefined;
+
+    if (file) {
+      const isPdf =
+        file.mimetype === 'application/pdf' ||
+        file.originalname.toLowerCase().endsWith('.pdf');
+      receiptFileType = isPdf ? 'pdf' : 'image';
+
+      const path = this.storageService.buildStoragePath({
+        condominiumId,
+        module: 'extra-income',
+        fileName: file.originalname,
+      });
+
+      const uploadResult = await this.storageService.uploadFile({
+        file: {
+          buffer: file.buffer,
+          mimetype: file.mimetype,
+          originalname: file.originalname,
+          size: file.size,
+        },
+        path,
+        isPublic: false,
+        contentType: file.mimetype,
+      });
+
+      receiptUrl = uploadResult.key;
+      receiptFileName = file.originalname;
+    }
+
+    const created = await this.createExtraIncomeUseCase.execute({
+      condominiumId,
+      houseId: data.houseId || null,
+      concept: data.concept,
+      description: data.description,
+      amount: Number(data.amount),
+      incomeDate: new Date(data.incomeDate),
+      period: data.period,
+      category: data.category,
+      paymentMethod: data.paymentMethod,
+      reference: data.reference,
+      receiptUrl,
+      receiptFileName,
+      receiptFileType,
+      createdById: user.id,
+    });
+
+    return ExtraIncomeResponse.fromDomain(created);
+  }
+
+  @Get('extra-income')
+  @Roles('ADMIN', 'RESIDENT')
+  @ApiEndpoint(docs.getExtraIncomes)
+  async getExtraIncomes(
+    @CondominiumId() condominiumId: string,
+    @Query() params: ParamsListExtraIncomeRequest,
+  ): Promise<ExtraIncomesListResponse> {
+    const records = await this.getExtraIncomesUseCase.execute(
+      condominiumId,
+      params,
+    );
+    const totalAmount = records.reduce((acc, curr) => acc + curr.amount, 0);
+
+    return {
+      period: params.period,
+      count: records.length,
+      totalAmount,
+      records: records.map(ExtraIncomeResponse.fromDomain),
+    };
+  }
+
+  @Delete('extra-income/:id')
+  @Roles('ADMIN')
+  @ApiEndpoint(docs.deleteExtraIncome)
+  async deleteExtraIncome(
+    @CondominiumId() condominiumId: string,
+    @Param('id') id: string,
+  ): Promise<ExtraIncomeResponse> {
+    const deleted = await this.deleteExtraIncomeUseCase.execute(
+      condominiumId,
+      id,
+    );
+    return ExtraIncomeResponse.fromDomain(deleted);
   }
 }

@@ -139,3 +139,18 @@ export type LateFee = Prisma.LateFeeModel
  * 
  */
 export type CondominiumBillingConfig = Prisma.CondominiumBillingConfigModel
+/**
+ * Model Expense
+ * 
+ */
+export type Expense = Prisma.ExpenseModel
+/**
+ * Model ExtraIncome
+ * 
+ */
+export type ExtraIncome = Prisma.ExtraIncomeModel
+/**
+ * Model CondominiumTransparencyConfig
+ * 
+ */
+export type CondominiumTransparencyConfig = Prisma.CondominiumTransparencyConfigModel

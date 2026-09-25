@@ -20,6 +20,7 @@ import { UploadsModule } from './app/uploads/uploads.module';
 import { CondominiumGuard } from './app/auth/presentation/guards/condominium.guard';
 import { HealthModule } from './app/health/health.module';
 import { BillingModule } from './app/billing/billing.module';
+import { ExpensesModule } from './app/expenses/expenses.module';
 
 @Module({
   imports: [
@@ -47,6 +48,7 @@ import { BillingModule } from './app/billing/billing.module';
     NotificationsModule,
     UploadsModule,
     BillingModule,
+    ExpensesModule,
   ],
   controllers: [],
   providers: [

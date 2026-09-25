@@ -32,6 +32,8 @@ export type CondominiumBillingConfigAvgAggregateOutputType = {
   lateFeeValue: runtime.Decimal | null
   gracePeriodDays: number | null
   dueDateReminderDaysBefore: number | null
+  initialBalance: runtime.Decimal | null
+  initialReserveFund: runtime.Decimal | null
 }
 
 export type CondominiumBillingConfigSumAggregateOutputType = {
@@ -40,6 +42,8 @@ export type CondominiumBillingConfigSumAggregateOutputType = {
   lateFeeValue: runtime.Decimal | null
   gracePeriodDays: number | null
   dueDateReminderDaysBefore: number | null
+  initialBalance: runtime.Decimal | null
+  initialReserveFund: runtime.Decimal | null
 }
 
 export type CondominiumBillingConfigMinAggregateOutputType = {
@@ -63,6 +67,10 @@ export type CondominiumBillingConfigMinAggregateOutputType = {
   dueDateReminderDaysBefore: number | null
   notifyOnProofReviewed: boolean | null
   notificationChannel: string | null
+  initialBalance: runtime.Decimal | null
+  initialReserveFund: runtime.Decimal | null
+  initialBalanceDate: Date | null
+  initialBalanceNotes: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -88,6 +96,10 @@ export type CondominiumBillingConfigMaxAggregateOutputType = {
   dueDateReminderDaysBefore: number | null
   notifyOnProofReviewed: boolean | null
   notificationChannel: string | null
+  initialBalance: runtime.Decimal | null
+  initialReserveFund: runtime.Decimal | null
+  initialBalanceDate: Date | null
+  initialBalanceNotes: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -113,6 +125,10 @@ export type CondominiumBillingConfigCountAggregateOutputType = {
   dueDateReminderDaysBefore: number
   notifyOnProofReviewed: number
   notificationChannel: number
+  initialBalance: number
+  initialReserveFund: number
+  initialBalanceDate: number
+  initialBalanceNotes: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -125,6 +141,8 @@ export type CondominiumBillingConfigAvgAggregateInputType = {
   lateFeeValue?: true
   gracePeriodDays?: true
   dueDateReminderDaysBefore?: true
+  initialBalance?: true
+  initialReserveFund?: true
 }
 
 export type CondominiumBillingConfigSumAggregateInputType = {
@@ -133,6 +151,8 @@ export type CondominiumBillingConfigSumAggregateInputType = {
   lateFeeValue?: true
   gracePeriodDays?: true
   dueDateReminderDaysBefore?: true
+  initialBalance?: true
+  initialReserveFund?: true
 }
 
 export type CondominiumBillingConfigMinAggregateInputType = {
@@ -156,6 +176,10 @@ export type CondominiumBillingConfigMinAggregateInputType = {
   dueDateReminderDaysBefore?: true
   notifyOnProofReviewed?: true
   notificationChannel?: true
+  initialBalance?: true
+  initialReserveFund?: true
+  initialBalanceDate?: true
+  initialBalanceNotes?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -181,6 +205,10 @@ export type CondominiumBillingConfigMaxAggregateInputType = {
   dueDateReminderDaysBefore?: true
   notifyOnProofReviewed?: true
   notificationChannel?: true
+  initialBalance?: true
+  initialReserveFund?: true
+  initialBalanceDate?: true
+  initialBalanceNotes?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -206,6 +234,10 @@ export type CondominiumBillingConfigCountAggregateInputType = {
   dueDateReminderDaysBefore?: true
   notifyOnProofReviewed?: true
   notificationChannel?: true
+  initialBalance?: true
+  initialReserveFund?: true
+  initialBalanceDate?: true
+  initialBalanceNotes?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -318,6 +350,10 @@ export type CondominiumBillingConfigGroupByOutputType = {
   dueDateReminderDaysBefore: number
   notifyOnProofReviewed: boolean
   notificationChannel: string
+  initialBalance: runtime.Decimal
+  initialReserveFund: runtime.Decimal
+  initialBalanceDate: Date | null
+  initialBalanceNotes: string | null
   createdAt: Date
   updatedAt: Date
   _count: CondominiumBillingConfigCountAggregateOutputType | null
@@ -366,6 +402,10 @@ export type CondominiumBillingConfigWhereInput = {
   dueDateReminderDaysBefore?: Prisma.IntFilter<"CondominiumBillingConfig"> | number
   notifyOnProofReviewed?: Prisma.BoolFilter<"CondominiumBillingConfig"> | boolean
   notificationChannel?: Prisma.StringFilter<"CondominiumBillingConfig"> | string
+  initialBalance?: Prisma.DecimalFilter<"CondominiumBillingConfig"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  initialReserveFund?: Prisma.DecimalFilter<"CondominiumBillingConfig"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  initialBalanceDate?: Prisma.DateTimeNullableFilter<"CondominiumBillingConfig"> | Date | string | null
+  initialBalanceNotes?: Prisma.StringNullableFilter<"CondominiumBillingConfig"> | string | null
   createdAt?: Prisma.DateTimeFilter<"CondominiumBillingConfig"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"CondominiumBillingConfig"> | Date | string
   condominium?: Prisma.XOR<Prisma.CondominiumScalarRelationFilter, Prisma.CondominiumWhereInput>
@@ -392,6 +432,10 @@ export type CondominiumBillingConfigOrderByWithRelationInput = {
   dueDateReminderDaysBefore?: Prisma.SortOrder
   notifyOnProofReviewed?: Prisma.SortOrder
   notificationChannel?: Prisma.SortOrder
+  initialBalance?: Prisma.SortOrder
+  initialReserveFund?: Prisma.SortOrder
+  initialBalanceDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  initialBalanceNotes?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   condominium?: Prisma.CondominiumOrderByWithRelationInput
@@ -421,6 +465,10 @@ export type CondominiumBillingConfigWhereUniqueInput = Prisma.AtLeast<{
   dueDateReminderDaysBefore?: Prisma.IntFilter<"CondominiumBillingConfig"> | number
   notifyOnProofReviewed?: Prisma.BoolFilter<"CondominiumBillingConfig"> | boolean
   notificationChannel?: Prisma.StringFilter<"CondominiumBillingConfig"> | string
+  initialBalance?: Prisma.DecimalFilter<"CondominiumBillingConfig"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  initialReserveFund?: Prisma.DecimalFilter<"CondominiumBillingConfig"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  initialBalanceDate?: Prisma.DateTimeNullableFilter<"CondominiumBillingConfig"> | Date | string | null
+  initialBalanceNotes?: Prisma.StringNullableFilter<"CondominiumBillingConfig"> | string | null
   createdAt?: Prisma.DateTimeFilter<"CondominiumBillingConfig"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"CondominiumBillingConfig"> | Date | string
   condominium?: Prisma.XOR<Prisma.CondominiumScalarRelationFilter, Prisma.CondominiumWhereInput>
@@ -447,6 +495,10 @@ export type CondominiumBillingConfigOrderByWithAggregationInput = {
   dueDateReminderDaysBefore?: Prisma.SortOrder
   notifyOnProofReviewed?: Prisma.SortOrder
   notificationChannel?: Prisma.SortOrder
+  initialBalance?: Prisma.SortOrder
+  initialReserveFund?: Prisma.SortOrder
+  initialBalanceDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  initialBalanceNotes?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.CondominiumBillingConfigCountOrderByAggregateInput
@@ -480,6 +532,10 @@ export type CondominiumBillingConfigScalarWhereWithAggregatesInput = {
   dueDateReminderDaysBefore?: Prisma.IntWithAggregatesFilter<"CondominiumBillingConfig"> | number
   notifyOnProofReviewed?: Prisma.BoolWithAggregatesFilter<"CondominiumBillingConfig"> | boolean
   notificationChannel?: Prisma.StringWithAggregatesFilter<"CondominiumBillingConfig"> | string
+  initialBalance?: Prisma.DecimalWithAggregatesFilter<"CondominiumBillingConfig"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  initialReserveFund?: Prisma.DecimalWithAggregatesFilter<"CondominiumBillingConfig"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  initialBalanceDate?: Prisma.DateTimeNullableWithAggregatesFilter<"CondominiumBillingConfig"> | Date | string | null
+  initialBalanceNotes?: Prisma.StringNullableWithAggregatesFilter<"CondominiumBillingConfig"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"CondominiumBillingConfig"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"CondominiumBillingConfig"> | Date | string
 }
@@ -504,6 +560,10 @@ export type CondominiumBillingConfigCreateInput = {
   dueDateReminderDaysBefore?: number
   notifyOnProofReviewed?: boolean
   notificationChannel?: string
+  initialBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  initialReserveFund?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  initialBalanceDate?: Date | string | null
+  initialBalanceNotes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   condominium: Prisma.CondominiumCreateNestedOneWithoutBillingConfigInput
@@ -530,6 +590,10 @@ export type CondominiumBillingConfigUncheckedCreateInput = {
   dueDateReminderDaysBefore?: number
   notifyOnProofReviewed?: boolean
   notificationChannel?: string
+  initialBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  initialReserveFund?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  initialBalanceDate?: Date | string | null
+  initialBalanceNotes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -554,6 +618,10 @@ export type CondominiumBillingConfigUpdateInput = {
   dueDateReminderDaysBefore?: Prisma.IntFieldUpdateOperationsInput | number
   notifyOnProofReviewed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   notificationChannel?: Prisma.StringFieldUpdateOperationsInput | string
+  initialBalance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  initialReserveFund?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  initialBalanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  initialBalanceNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   condominium?: Prisma.CondominiumUpdateOneRequiredWithoutBillingConfigNestedInput
@@ -580,6 +648,10 @@ export type CondominiumBillingConfigUncheckedUpdateInput = {
   dueDateReminderDaysBefore?: Prisma.IntFieldUpdateOperationsInput | number
   notifyOnProofReviewed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   notificationChannel?: Prisma.StringFieldUpdateOperationsInput | string
+  initialBalance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  initialReserveFund?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  initialBalanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  initialBalanceNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -605,6 +677,10 @@ export type CondominiumBillingConfigCreateManyInput = {
   dueDateReminderDaysBefore?: number
   notifyOnProofReviewed?: boolean
   notificationChannel?: string
+  initialBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  initialReserveFund?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  initialBalanceDate?: Date | string | null
+  initialBalanceNotes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -629,6 +705,10 @@ export type CondominiumBillingConfigUpdateManyMutationInput = {
   dueDateReminderDaysBefore?: Prisma.IntFieldUpdateOperationsInput | number
   notifyOnProofReviewed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   notificationChannel?: Prisma.StringFieldUpdateOperationsInput | string
+  initialBalance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  initialReserveFund?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  initialBalanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  initialBalanceNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -654,6 +734,10 @@ export type CondominiumBillingConfigUncheckedUpdateManyInput = {
   dueDateReminderDaysBefore?: Prisma.IntFieldUpdateOperationsInput | number
   notifyOnProofReviewed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   notificationChannel?: Prisma.StringFieldUpdateOperationsInput | string
+  initialBalance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  initialReserveFund?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  initialBalanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  initialBalanceNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -684,6 +768,10 @@ export type CondominiumBillingConfigCountOrderByAggregateInput = {
   dueDateReminderDaysBefore?: Prisma.SortOrder
   notifyOnProofReviewed?: Prisma.SortOrder
   notificationChannel?: Prisma.SortOrder
+  initialBalance?: Prisma.SortOrder
+  initialReserveFund?: Prisma.SortOrder
+  initialBalanceDate?: Prisma.SortOrder
+  initialBalanceNotes?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -694,6 +782,8 @@ export type CondominiumBillingConfigAvgOrderByAggregateInput = {
   lateFeeValue?: Prisma.SortOrder
   gracePeriodDays?: Prisma.SortOrder
   dueDateReminderDaysBefore?: Prisma.SortOrder
+  initialBalance?: Prisma.SortOrder
+  initialReserveFund?: Prisma.SortOrder
 }
 
 export type CondominiumBillingConfigMaxOrderByAggregateInput = {
@@ -717,6 +807,10 @@ export type CondominiumBillingConfigMaxOrderByAggregateInput = {
   dueDateReminderDaysBefore?: Prisma.SortOrder
   notifyOnProofReviewed?: Prisma.SortOrder
   notificationChannel?: Prisma.SortOrder
+  initialBalance?: Prisma.SortOrder
+  initialReserveFund?: Prisma.SortOrder
+  initialBalanceDate?: Prisma.SortOrder
+  initialBalanceNotes?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -742,6 +836,10 @@ export type CondominiumBillingConfigMinOrderByAggregateInput = {
   dueDateReminderDaysBefore?: Prisma.SortOrder
   notifyOnProofReviewed?: Prisma.SortOrder
   notificationChannel?: Prisma.SortOrder
+  initialBalance?: Prisma.SortOrder
+  initialReserveFund?: Prisma.SortOrder
+  initialBalanceDate?: Prisma.SortOrder
+  initialBalanceNotes?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -752,6 +850,8 @@ export type CondominiumBillingConfigSumOrderByAggregateInput = {
   lateFeeValue?: Prisma.SortOrder
   gracePeriodDays?: Prisma.SortOrder
   dueDateReminderDaysBefore?: Prisma.SortOrder
+  initialBalance?: Prisma.SortOrder
+  initialReserveFund?: Prisma.SortOrder
 }
 
 export type CondominiumBillingConfigCreateNestedOneWithoutCondominiumInput = {
@@ -810,6 +910,10 @@ export type CondominiumBillingConfigCreateWithoutCondominiumInput = {
   dueDateReminderDaysBefore?: number
   notifyOnProofReviewed?: boolean
   notificationChannel?: string
+  initialBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  initialReserveFund?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  initialBalanceDate?: Date | string | null
+  initialBalanceNotes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -834,6 +938,10 @@ export type CondominiumBillingConfigUncheckedCreateWithoutCondominiumInput = {
   dueDateReminderDaysBefore?: number
   notifyOnProofReviewed?: boolean
   notificationChannel?: string
+  initialBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  initialReserveFund?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  initialBalanceDate?: Date | string | null
+  initialBalanceNotes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -874,6 +982,10 @@ export type CondominiumBillingConfigUpdateWithoutCondominiumInput = {
   dueDateReminderDaysBefore?: Prisma.IntFieldUpdateOperationsInput | number
   notifyOnProofReviewed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   notificationChannel?: Prisma.StringFieldUpdateOperationsInput | string
+  initialBalance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  initialReserveFund?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  initialBalanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  initialBalanceNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -898,6 +1010,10 @@ export type CondominiumBillingConfigUncheckedUpdateWithoutCondominiumInput = {
   dueDateReminderDaysBefore?: Prisma.IntFieldUpdateOperationsInput | number
   notifyOnProofReviewed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   notificationChannel?: Prisma.StringFieldUpdateOperationsInput | string
+  initialBalance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  initialReserveFund?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  initialBalanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  initialBalanceNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -925,6 +1041,10 @@ export type CondominiumBillingConfigSelect<ExtArgs extends runtime.Types.Extensi
   dueDateReminderDaysBefore?: boolean
   notifyOnProofReviewed?: boolean
   notificationChannel?: boolean
+  initialBalance?: boolean
+  initialReserveFund?: boolean
+  initialBalanceDate?: boolean
+  initialBalanceNotes?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   condominium?: boolean | Prisma.CondominiumDefaultArgs<ExtArgs>
@@ -951,6 +1071,10 @@ export type CondominiumBillingConfigSelectCreateManyAndReturn<ExtArgs extends ru
   dueDateReminderDaysBefore?: boolean
   notifyOnProofReviewed?: boolean
   notificationChannel?: boolean
+  initialBalance?: boolean
+  initialReserveFund?: boolean
+  initialBalanceDate?: boolean
+  initialBalanceNotes?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   condominium?: boolean | Prisma.CondominiumDefaultArgs<ExtArgs>
@@ -977,6 +1101,10 @@ export type CondominiumBillingConfigSelectUpdateManyAndReturn<ExtArgs extends ru
   dueDateReminderDaysBefore?: boolean
   notifyOnProofReviewed?: boolean
   notificationChannel?: boolean
+  initialBalance?: boolean
+  initialReserveFund?: boolean
+  initialBalanceDate?: boolean
+  initialBalanceNotes?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   condominium?: boolean | Prisma.CondominiumDefaultArgs<ExtArgs>
@@ -1003,11 +1131,15 @@ export type CondominiumBillingConfigSelectScalar = {
   dueDateReminderDaysBefore?: boolean
   notifyOnProofReviewed?: boolean
   notificationChannel?: boolean
+  initialBalance?: boolean
+  initialReserveFund?: boolean
+  initialBalanceDate?: boolean
+  initialBalanceNotes?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type CondominiumBillingConfigOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "condominiumId" | "defaultMonthlyFee" | "currency" | "dueDay" | "applyLateFee" | "lateFeeType" | "lateFeeValue" | "gracePeriodDays" | "bankName" | "accountHolder" | "clabe" | "accountNumber" | "paymentReferenceRule" | "notes" | "notifyOnPeriodStart" | "notifyDueDateReminder" | "dueDateReminderDaysBefore" | "notifyOnProofReviewed" | "notificationChannel" | "createdAt" | "updatedAt", ExtArgs["result"]["condominiumBillingConfig"]>
+export type CondominiumBillingConfigOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "condominiumId" | "defaultMonthlyFee" | "currency" | "dueDay" | "applyLateFee" | "lateFeeType" | "lateFeeValue" | "gracePeriodDays" | "bankName" | "accountHolder" | "clabe" | "accountNumber" | "paymentReferenceRule" | "notes" | "notifyOnPeriodStart" | "notifyDueDateReminder" | "dueDateReminderDaysBefore" | "notifyOnProofReviewed" | "notificationChannel" | "initialBalance" | "initialReserveFund" | "initialBalanceDate" | "initialBalanceNotes" | "createdAt" | "updatedAt", ExtArgs["result"]["condominiumBillingConfig"]>
 export type CondominiumBillingConfigInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   condominium?: boolean | Prisma.CondominiumDefaultArgs<ExtArgs>
 }
@@ -1044,6 +1176,10 @@ export type $CondominiumBillingConfigPayload<ExtArgs extends runtime.Types.Exten
     dueDateReminderDaysBefore: number
     notifyOnProofReviewed: boolean
     notificationChannel: string
+    initialBalance: runtime.Decimal
+    initialReserveFund: runtime.Decimal
+    initialBalanceDate: Date | null
+    initialBalanceNotes: string | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["condominiumBillingConfig"]>
@@ -1490,6 +1626,10 @@ export interface CondominiumBillingConfigFieldRefs {
   readonly dueDateReminderDaysBefore: Prisma.FieldRef<"CondominiumBillingConfig", 'Int'>
   readonly notifyOnProofReviewed: Prisma.FieldRef<"CondominiumBillingConfig", 'Boolean'>
   readonly notificationChannel: Prisma.FieldRef<"CondominiumBillingConfig", 'String'>
+  readonly initialBalance: Prisma.FieldRef<"CondominiumBillingConfig", 'Decimal'>
+  readonly initialReserveFund: Prisma.FieldRef<"CondominiumBillingConfig", 'Decimal'>
+  readonly initialBalanceDate: Prisma.FieldRef<"CondominiumBillingConfig", 'DateTime'>
+  readonly initialBalanceNotes: Prisma.FieldRef<"CondominiumBillingConfig", 'String'>
   readonly createdAt: Prisma.FieldRef<"CondominiumBillingConfig", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"CondominiumBillingConfig", 'DateTime'>
 }

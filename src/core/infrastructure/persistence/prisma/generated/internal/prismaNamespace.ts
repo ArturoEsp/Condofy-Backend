@@ -403,7 +403,10 @@ export const ModelName = {
   Payment: 'Payment',
   MaintenancePeriod: 'MaintenancePeriod',
   LateFee: 'LateFee',
-  CondominiumBillingConfig: 'CondominiumBillingConfig'
+  CondominiumBillingConfig: 'CondominiumBillingConfig',
+  Expense: 'Expense',
+  ExtraIncome: 'ExtraIncome',
+  CondominiumTransparencyConfig: 'CondominiumTransparencyConfig'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -419,7 +422,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "condominium" | "user" | "passwordResetToken" | "userSession" | "pushSubscription" | "house" | "houseConfiguration" | "residentProfile" | "visitor" | "accessAuthorization" | "accessLog" | "parcelDelivery" | "generalProviderAccess" | "houseAccount" | "accountMovement" | "maintenanceCharge" | "payment" | "maintenancePeriod" | "lateFee" | "condominiumBillingConfig"
+    modelProps: "condominium" | "user" | "passwordResetToken" | "userSession" | "pushSubscription" | "house" | "houseConfiguration" | "residentProfile" | "visitor" | "accessAuthorization" | "accessLog" | "parcelDelivery" | "generalProviderAccess" | "houseAccount" | "accountMovement" | "maintenanceCharge" | "payment" | "maintenancePeriod" | "lateFee" | "condominiumBillingConfig" | "expense" | "extraIncome" | "condominiumTransparencyConfig"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1903,6 +1906,228 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Expense: {
+      payload: Prisma.$ExpensePayload<ExtArgs>
+      fields: Prisma.ExpenseFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ExpenseFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExpensePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ExpenseFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExpensePayload>
+        }
+        findFirst: {
+          args: Prisma.ExpenseFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExpensePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ExpenseFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExpensePayload>
+        }
+        findMany: {
+          args: Prisma.ExpenseFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExpensePayload>[]
+        }
+        create: {
+          args: Prisma.ExpenseCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExpensePayload>
+        }
+        createMany: {
+          args: Prisma.ExpenseCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ExpenseCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExpensePayload>[]
+        }
+        delete: {
+          args: Prisma.ExpenseDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExpensePayload>
+        }
+        update: {
+          args: Prisma.ExpenseUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExpensePayload>
+        }
+        deleteMany: {
+          args: Prisma.ExpenseDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ExpenseUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ExpenseUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExpensePayload>[]
+        }
+        upsert: {
+          args: Prisma.ExpenseUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExpensePayload>
+        }
+        aggregate: {
+          args: Prisma.ExpenseAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateExpense>
+        }
+        groupBy: {
+          args: Prisma.ExpenseGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ExpenseGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ExpenseCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ExpenseCountAggregateOutputType> | number
+        }
+      }
+    }
+    ExtraIncome: {
+      payload: Prisma.$ExtraIncomePayload<ExtArgs>
+      fields: Prisma.ExtraIncomeFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ExtraIncomeFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExtraIncomePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ExtraIncomeFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExtraIncomePayload>
+        }
+        findFirst: {
+          args: Prisma.ExtraIncomeFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExtraIncomePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ExtraIncomeFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExtraIncomePayload>
+        }
+        findMany: {
+          args: Prisma.ExtraIncomeFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExtraIncomePayload>[]
+        }
+        create: {
+          args: Prisma.ExtraIncomeCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExtraIncomePayload>
+        }
+        createMany: {
+          args: Prisma.ExtraIncomeCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ExtraIncomeCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExtraIncomePayload>[]
+        }
+        delete: {
+          args: Prisma.ExtraIncomeDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExtraIncomePayload>
+        }
+        update: {
+          args: Prisma.ExtraIncomeUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExtraIncomePayload>
+        }
+        deleteMany: {
+          args: Prisma.ExtraIncomeDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ExtraIncomeUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ExtraIncomeUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExtraIncomePayload>[]
+        }
+        upsert: {
+          args: Prisma.ExtraIncomeUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExtraIncomePayload>
+        }
+        aggregate: {
+          args: Prisma.ExtraIncomeAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateExtraIncome>
+        }
+        groupBy: {
+          args: Prisma.ExtraIncomeGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ExtraIncomeGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ExtraIncomeCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ExtraIncomeCountAggregateOutputType> | number
+        }
+      }
+    }
+    CondominiumTransparencyConfig: {
+      payload: Prisma.$CondominiumTransparencyConfigPayload<ExtArgs>
+      fields: Prisma.CondominiumTransparencyConfigFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CondominiumTransparencyConfigFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CondominiumTransparencyConfigPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CondominiumTransparencyConfigFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CondominiumTransparencyConfigPayload>
+        }
+        findFirst: {
+          args: Prisma.CondominiumTransparencyConfigFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CondominiumTransparencyConfigPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CondominiumTransparencyConfigFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CondominiumTransparencyConfigPayload>
+        }
+        findMany: {
+          args: Prisma.CondominiumTransparencyConfigFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CondominiumTransparencyConfigPayload>[]
+        }
+        create: {
+          args: Prisma.CondominiumTransparencyConfigCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CondominiumTransparencyConfigPayload>
+        }
+        createMany: {
+          args: Prisma.CondominiumTransparencyConfigCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CondominiumTransparencyConfigCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CondominiumTransparencyConfigPayload>[]
+        }
+        delete: {
+          args: Prisma.CondominiumTransparencyConfigDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CondominiumTransparencyConfigPayload>
+        }
+        update: {
+          args: Prisma.CondominiumTransparencyConfigUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CondominiumTransparencyConfigPayload>
+        }
+        deleteMany: {
+          args: Prisma.CondominiumTransparencyConfigDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CondominiumTransparencyConfigUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CondominiumTransparencyConfigUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CondominiumTransparencyConfigPayload>[]
+        }
+        upsert: {
+          args: Prisma.CondominiumTransparencyConfigUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CondominiumTransparencyConfigPayload>
+        }
+        aggregate: {
+          args: Prisma.CondominiumTransparencyConfigAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCondominiumTransparencyConfig>
+        }
+        groupBy: {
+          args: Prisma.CondominiumTransparencyConfigGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CondominiumTransparencyConfigGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CondominiumTransparencyConfigCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CondominiumTransparencyConfigCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -2271,11 +2496,82 @@ export const CondominiumBillingConfigScalarFieldEnum = {
   dueDateReminderDaysBefore: 'dueDateReminderDaysBefore',
   notifyOnProofReviewed: 'notifyOnProofReviewed',
   notificationChannel: 'notificationChannel',
+  initialBalance: 'initialBalance',
+  initialReserveFund: 'initialReserveFund',
+  initialBalanceDate: 'initialBalanceDate',
+  initialBalanceNotes: 'initialBalanceNotes',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type CondominiumBillingConfigScalarFieldEnum = (typeof CondominiumBillingConfigScalarFieldEnum)[keyof typeof CondominiumBillingConfigScalarFieldEnum]
+
+
+export const ExpenseScalarFieldEnum = {
+  id: 'id',
+  condominiumId: 'condominiumId',
+  concept: 'concept',
+  description: 'description',
+  amount: 'amount',
+  expenseDate: 'expenseDate',
+  period: 'period',
+  category: 'category',
+  paymentMethod: 'paymentMethod',
+  status: 'status',
+  supplier: 'supplier',
+  reference: 'reference',
+  invoiceUrl: 'invoiceUrl',
+  invoiceFileName: 'invoiceFileName',
+  invoiceFileType: 'invoiceFileType',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ExpenseScalarFieldEnum = (typeof ExpenseScalarFieldEnum)[keyof typeof ExpenseScalarFieldEnum]
+
+
+export const ExtraIncomeScalarFieldEnum = {
+  id: 'id',
+  condominiumId: 'condominiumId',
+  houseId: 'houseId',
+  concept: 'concept',
+  description: 'description',
+  amount: 'amount',
+  incomeDate: 'incomeDate',
+  period: 'period',
+  category: 'category',
+  paymentMethod: 'paymentMethod',
+  reference: 'reference',
+  receiptUrl: 'receiptUrl',
+  receiptFileName: 'receiptFileName',
+  receiptFileType: 'receiptFileType',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ExtraIncomeScalarFieldEnum = (typeof ExtraIncomeScalarFieldEnum)[keyof typeof ExtraIncomeScalarFieldEnum]
+
+
+export const CondominiumTransparencyConfigScalarFieldEnum = {
+  id: 'id',
+  condominiumId: 'condominiumId',
+  isEnabled: 'isEnabled',
+  showExpenses: 'showExpenses',
+  showIncomes: 'showIncomes',
+  showBalance: 'showBalance',
+  showSuppliers: 'showSuppliers',
+  allowInvoiceViewing: 'allowInvoiceViewing',
+  allowInvoiceDownload: 'allowInvoiceDownload',
+  showCollectionRate: 'showCollectionRate',
+  timeframeMode: 'timeframeMode',
+  condominiumNotice: 'condominiumNotice',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CondominiumTransparencyConfigScalarFieldEnum = (typeof CondominiumTransparencyConfigScalarFieldEnum)[keyof typeof CondominiumTransparencyConfigScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -2596,6 +2892,48 @@ export type ListEnumLateFeeTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$
 
 
 /**
+ * Reference to a field of type 'ExpenseCategory'
+ */
+export type EnumExpenseCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ExpenseCategory'>
+    
+
+
+/**
+ * Reference to a field of type 'ExpenseCategory[]'
+ */
+export type ListEnumExpenseCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ExpenseCategory[]'>
+    
+
+
+/**
+ * Reference to a field of type 'ExpenseStatus'
+ */
+export type EnumExpenseStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ExpenseStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'ExpenseStatus[]'
+ */
+export type ListEnumExpenseStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ExpenseStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'ExtraIncomeCategory'
+ */
+export type EnumExtraIncomeCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ExtraIncomeCategory'>
+    
+
+
+/**
+ * Reference to a field of type 'ExtraIncomeCategory[]'
+ */
+export type ListEnumExtraIncomeCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ExtraIncomeCategory[]'>
+    
+
+
+/**
  * Reference to a field of type 'Float'
  */
 export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -2738,6 +3076,9 @@ export type GlobalOmitConfig = {
   maintenancePeriod?: Prisma.MaintenancePeriodOmit
   lateFee?: Prisma.LateFeeOmit
   condominiumBillingConfig?: Prisma.CondominiumBillingConfigOmit
+  expense?: Prisma.ExpenseOmit
+  extraIncome?: Prisma.ExtraIncomeOmit
+  condominiumTransparencyConfig?: Prisma.CondominiumTransparencyConfigOmit
 }
 
 /* Types for Logging */
