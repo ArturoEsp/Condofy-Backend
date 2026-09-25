@@ -83,55 +83,57 @@ yarn reset:billing albero 9 2026
 
 ---
 
-### `delete:payment` (Eliminación de Pago por Casa y Limpieza R2)
+#### `delete:payment` (Reinicio de Mes de Pago por Casa y Limpieza R2)
 
 _Archivos:_
 
 - TypeScript: [`scripts/delete-payment.ts`](file:///c:/Users/bmth_/OneDrive/Documentos/GitHub/Condofy-Backend/scripts/delete-payment.ts)
 - SQL Nativo: [`scripts/delete_payment.sql`](file:///c:/Users/bmth_/OneDrive/Documentos/GitHub/Condofy-Backend/scripts/delete_payment.sql)
 
-Permite revertir y eliminar un pago registrado por error o duplicado de una vivienda, recalculando con rigor contable el adeudo de la cuota de mantenimiento, revirtiendo excedentes en la cuenta de la casa y purgando el comprobante o recibo digital alojado en **Cloudflare R2**.
+Permite reiniciar el mes de pago de una casa específica para un mes y año determinado, eliminando sus pagos registrados, recargos y comprobantes/recibos en **Cloudflare R2**, y restableciendo la cuota al estatus **`PENDING`** con **`$0.00 MXN` pagados** para que pueda volverse a cargar o registrar desde cero en la plataforma.
 
-#### ¿Qué acciones realiza en cascada y cómo recalcula?
+#### ¿Qué acciones realiza el script?
 
-1. **Recálculo de la Cuota (`MaintenanceCharge`):**
-   - Resta el importe exacto del pago eliminado del campo `paidAmount` del cargo asociado.
-   - Si la cuota ya no queda cubierta en su totalidad, transiciona su estado automáticamente:
-     - **`PENDING`**: Si aún no vence la fecha límite de pago (`dueDate`).
-     - **`OVERDUE`**: Si la fecha de vencimiento ya expiró.
-     - **`PARTIAL`**: Si la cuota aún conserva otros abonos previos registrados.
-2. **Reversión de Saldo a Favor (`HouseAccount` / `AccountMovement`):**
-   - Si el pago eliminado había generado un crédito excedente registrado en la cuenta de la vivienda (cuando el residente pagó de más), descuenta dicho importe del saldo actual (`balance`) de `HouseAccount` y elimina el movimiento de crédito en `AccountMovement`.
-3. **Cloudflare R2:**
-   - Detecta la URL o clave del comprobante/recibo (`receiptUrl`) en el bucket `condofy-private` y lo elimina físicamente mediante la API de S3 (opcionalmente se puede conservar con la bandera `--keep-receipt`).
-4. **Transacción Atómica PostgreSQL:**
-   - La eliminación del registro `Payment`, la actualización de `MaintenanceCharge` y el ajuste de `HouseAccount` se ejecutan en un bloque transaccional atómico (`prisma.$transaction`). Si cualquier operación falla, la base de datos se revierte intacta.
+1. **Reinicio Completo de la Cuota (`MaintenanceCharge`):**
+   - Restablece el estatus a **`PENDING`**.
+   - Devuelve `paidAmount` a **`0.00`**.
+   - Limpia todos los datos de comprobantes y notas (`proofUrl`, `proofFileName`, `proofUploadedAt`, `proofReference`, `proofNotes`, `notes` a `null`), dejándolo como si nunca se hubiera reportado pago.
+2. **Eliminación de Pagos y Recargos:**
+   - Elimina todos los registros en `Payment` asociados a esa cuota.
+   - Elimina los registros en `LateFee` (recargos por mora) vinculados al cargo.
+3. **Reversión de Saldo a Favor (`HouseAccount` / `AccountMovement`):**
+   - Si los pagos de ese mes generaron saldo a favor en la cuenta de la vivienda (por pagar más del total exigible), revierte el movimiento en `AccountMovement` y descuenta dicho importe en `HouseAccount`.
+4. **Purga Física en Cloudflare R2:**
+   - Elimina del bucket `condofy-private` tanto el recibo oficial (`receiptUrl`) como el comprobante enviado por el residente (`proofUrl`), salvo que se use `--keep-receipt`.
+5. **Transacción Atómica PostgreSQL:**
+   - Todo se ejecuta en un bloque `prisma.$transaction`. Si surge un imprevisto, se cancela sin alterar la contabilidad.
 
 #### Sintaxis de uso:
 
 ##### A. Ejecución Directa (Local / Desarrollo):
 
 ```bash
-# Modo 1: Interactivo (te listará condominios, casas con pagos y el historial detallado del pago con folio, monto y cuota)
+# Modo 1: Interactivo paso a paso (te pide Condominio, Casa y lista los periodos/cuotas con opción de ingresar mes y año)
 yarn delete:payment
 
-# Modo 2: Parámetros posicionales (Condominio y Número de casa)
-yarn delete:payment albero 101
+# Modo 2: Parámetros posicionales (Condominio y Casa -> te preguntará el mes y año):
+yarn delete:payment albero 36
 
-# Modo 3: Parámetros posicionales completos (Condominio, Casa y Folio o ID del Pago)
-yarn delete:payment albero 101 REC-101-839212
+# Modo 3: Parámetros posicionales completos (Condominio, Casa, Mes y Año):
+yarn delete:payment albero 36 9 2026
+yarn delete:payment albero 1 septiembre 2026
 
-# Modo 4: Banderas CLI explícitas
-yarn delete:payment --condo albero --house 101 --payment REC-101-839212
+# Modo 4: Banderas CLI explícitas:
+yarn delete:payment --condo albero --house 36 --month 9 --year 2026
 
-# Modo 5: Simulación previa (--dry-run: muestra el impacto contable y estado resultante sin modificar nada)
-yarn delete:payment albero 101 REC-101-839212 --dry-run
+# Modo 5: Simulación previa (--dry-run: te muestra todo lo que se reiniciará sin tocar la BD ni R2):
+yarn delete:payment albero 36 9 2026 --dry-run
 
-# Modo 6: Desatendido / Automático (omite confirmación manual interactiva)
-yarn delete:payment albero 101 REC-101-839212 --yes
+# Modo 6: Desatendido / Automático (omite confirmación manual):
+yarn delete:payment albero 36 9 2026 --yes
 
-# Modo 7: Conservar comprobante en Cloudflare R2 (solo borra registro contable y de BD)
-yarn delete:payment albero 101 REC-101-839212 --keep-receipt
+# Modo 7: Conservar comprobante en Cloudflare R2:
+yarn delete:payment albero 36 9 2026 --keep-receipt
 ```
 
 ##### B. Ejecución con Docker (En Servidor de Producción / VPS):
@@ -140,27 +142,23 @@ yarn delete:payment albero 101 REC-101-839212 --keep-receipt
 # Modo interactivo asistido dentro del contenedor de la API:
 docker compose -f docker-compose.prod.yml exec -it api yarn delete:payment
 
-# Pasando condominio y casa de forma directa:
-docker compose -f docker-compose.prod.yml exec -it api yarn delete:payment albero 101
+# Pasando condominio, casa, mes y año directamente:
+docker compose -f docker-compose.prod.yml exec -it api yarn delete:payment albero 36 9 2026
 
 # Simulación previa en producción (Dry-run):
-docker compose -f docker-compose.prod.yml exec api yarn delete:payment albero 101 REC-101-839212 --dry-run
+docker compose -f docker-compose.prod.yml exec api yarn delete:payment albero 36 9 2026 --dry-run
 
-# Modo desatendido para pipelines o mantenimiento automatizado:
-docker compose -f docker-compose.prod.yml exec api yarn delete:payment albero 101 REC-101-839212 --yes
-
-# O mediante consola shell interactiva del contenedor:
-docker compose -f docker-compose.prod.yml exec -it api sh
-yarn delete:payment albero 101
+# Modo desatendido para automatizaciones:
+docker compose -f docker-compose.prod.yml exec api yarn delete:payment albero 36 9 2026 --yes
 ```
 
 ##### C. Script SQL Directo (DBeaver / DataGrip / psql):
 
-Si prefieres ejecutar la reversión manualmente en tu gestor de base de datos sin Node.js:
+Si prefieres ejecutar el reinicio directamente en la base de datos:
 
-- Abre el archivo [`scripts/delete_payment.sql`](file:///c:/Users/bmth_/OneDrive/Documentos/GitHub/Condofy-Backend/scripts/delete_payment.sql).
-- Sustituye la variable `'TU_PAYMENT_ID_AQUI'` en el bloque `DO $$ ... END $$;`.
-- Ejecuta el script. Realizará las mismas comprobaciones, ajustes de saldo a favor, cálculo de estatus de cuota y eliminación segura dentro de una transacción SQL.
+- Abre [`scripts/delete_payment.sql`](file:///c:/Users/bmth_/OneDrive/Documentos/GitHub/Condofy-Backend/scripts/delete_payment.sql).
+- Configura las variables `target_condo_term`, `target_house_number` y `target_period_term` (ej. `'2026-09'`).
+- Ejecuta el bloque SQL.
 
 ---
 

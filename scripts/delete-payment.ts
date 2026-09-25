@@ -35,6 +35,41 @@ if (endpoint && accessKeyId && secretAccessKey) {
   });
 }
 
+const MONTH_NAMES = [
+  'Enero',
+  'Febrero',
+  'Marzo',
+  'Abril',
+  'Mayo',
+  'Junio',
+  'Julio',
+  'Agosto',
+  'Septiembre',
+  'Octubre',
+  'Noviembre',
+  'Diciembre',
+];
+
+function parseMonth(monthInput: string): number | null {
+  if (!monthInput) return null;
+  const num = parseInt(monthInput, 10);
+  if (!isNaN(num) && num >= 1 && num <= 12) return num;
+
+  const normalized = monthInput
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '');
+
+  const idx = MONTH_NAMES.findIndex(
+    (m) =>
+      m
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '') === normalized,
+  );
+  return idx !== -1 ? idx + 1 : null;
+}
+
 function cleanStorageKey(rawUrlOrKey: string): string {
   if (!rawUrlOrKey) return '';
   let key = rawUrlOrKey.trim();
@@ -58,7 +93,7 @@ async function deleteFromR2(key: string): Promise<boolean> {
 
   if (!s3Client) {
     console.log(
-      `   [R2 SIMULACIÓN] Archivo omitido (sin credenciales R2 configuradas): ${cleanedKey}`,
+      `   [R2 SIMULATION] Archivo omitido (sin credenciales R2): ${cleanedKey}`,
     );
     return true;
   }
@@ -86,30 +121,34 @@ async function main() {
 
   if (args.includes('--help') || args.includes('-h')) {
     console.log(`
-Uso del script de eliminación de pago:
-  yarn delete:payment [condominio] [casa] [pago/folio] [opciones]
+Uso del script de reinicio / eliminación de pago por casa:
+  yarn delete:payment [condominio] [casa] [mes] [año] [opciones]
   npx tsx scripts/delete-payment.ts [opciones]
 
 Argumentos posicionales:
   condominio   Clave (ej: albero), ID o nombre del condominio
-  casa         Número de la casa (ej: 101, B-12) o UUID de la vivienda
-  pago/folio   ID del pago o folio de recibo (ej: REC-101-839212)
+  casa         Número de la casa (ej: 101, 36, "Casa 1")
+  mes          Mes a reiniciar (1-12 o nombre: "septiembre", "9")
+  año          Año a reiniciar (ej: 2026)
 
 Opciones:
   --condo, --condominium <term>   Key, ID o nombre del condominio
   --house <term>                  Número de casa (ej: "12", "101") o ID de la casa
-  --payment, --paymentId <id>     ID del pago o folio de recibo (ej: "REC-101-123456")
-  --keep-receipt                  No eliminar el comprobante/recibo de Cloudflare R2
+  --month <mes>                   Mes del cargo (1-12 o nombre: septiembre)
+  --year <año>                    Año del cargo (ej: 2026)
+  --period <YYYY-MM>              Periodo directo (ej: 2026-09)
+  --payment, --paymentId <id>     ID del pago o folio de recibo directo
+  --keep-receipt                  No eliminar los comprobantes/recibos de Cloudflare R2
   --dry-run                       Simular sin modificar la base de datos ni R2
   -y, --yes                       Confirmar automáticamente sin preguntar
   -h, --help                      Mostrar esta ayuda
 
 Ejemplos:
   yarn delete:payment
-  yarn delete:payment albero 101
-  yarn delete:payment albero 101 REC-101-839212 --dry-run
-  yarn delete:payment albero 101 REC-101-839212 --yes
-  yarn delete:payment --condo=PALMAS --house=101 --keep-receipt
+  yarn delete:payment albero 36
+  yarn delete:payment albero 36 9 2026
+  yarn delete:payment albero 1 septiembre 2026 --dry-run
+  yarn delete:payment albero 1 septiembre 2026 --yes
 `);
     process.exit(0);
   }
@@ -120,6 +159,8 @@ Ejemplos:
 
   let condoArg: string | undefined;
   let houseArg: string | undefined;
+  let monthArg: string | undefined;
+  let yearArg: string | undefined;
   let paymentArg: string | undefined;
 
   for (let i = 0; i < args.length; i++) {
@@ -134,6 +175,23 @@ Ejemplos:
     } else if (a === '--house') {
       houseArg = args[i + 1];
       i++;
+    } else if (a.startsWith('--month=')) {
+      monthArg = a.split('=')[1];
+    } else if (a === '--month') {
+      monthArg = args[i + 1];
+      i++;
+    } else if (a.startsWith('--year=')) {
+      yearArg = a.split('=')[1];
+    } else if (a === '--year') {
+      yearArg = args[i + 1];
+      i++;
+    } else if (a.startsWith('--period=')) {
+      const p = a.split('=')[1];
+      if (p.includes('-')) {
+        const parts = p.split('-');
+        yearArg = parts[0];
+        monthArg = parts[1];
+      }
     } else if (
       a.startsWith('--payment=') ||
       a.startsWith('--paymentId=') ||
@@ -146,7 +204,7 @@ Ejemplos:
     }
   }
 
-  // Soporte para argumentos posicionales (ej: yarn delete:payment albero 101 REC-101-...)
+  // Detectar argumentos posicionales
   const positionalArgs: string[] = [];
   for (let i = 0; i < args.length; i++) {
     const a = args[i];
@@ -156,6 +214,9 @@ Ejemplos:
           '--condo',
           '--condominium',
           '--house',
+          '--month',
+          '--year',
+          '--period',
           '--payment',
           '--paymentId',
           '--folio',
@@ -170,12 +231,13 @@ Ejemplos:
 
   if (!condoArg && positionalArgs.length > 0) condoArg = positionalArgs[0];
   if (!houseArg && positionalArgs.length > 1) houseArg = positionalArgs[1];
-  if (!paymentArg && positionalArgs.length > 2) paymentArg = positionalArgs[2];
+  if (!monthArg && positionalArgs.length > 2) monthArg = positionalArgs[2];
+  if (!yearArg && positionalArgs.length > 3) yearArg = positionalArgs[3];
 
   console.log(
     '\n=============================================================',
   );
-  console.log('💳 CONDOFY - ELIMINACIÓN DE PAGO DE CUOTA DE CONDOMINIO');
+  console.log('💳 CONDOFY - REINICIO DE MES DE PAGO DE UNA CASA');
   console.log(
     '=============================================================\n',
   );
@@ -255,13 +317,13 @@ Ejemplos:
 
   if (houseArg) {
     const q = houseArg.trim().toLowerCase();
-    const isUuid = UUID_REGEX.test(q);
+    const isUuid = UUID_REGEX.test(houseArg.trim());
 
     selectedHouse = await prisma.house.findFirst({
       where: {
         condominiumId: selectedCondo.id,
         ...(isUuid
-          ? { id: q }
+          ? { id: houseArg.trim() }
           : {
               OR: [
                 {
@@ -273,71 +335,81 @@ Ejemplos:
                     mode: 'insensitive',
                   },
                 },
+                {
+                  houseNumber: {
+                    equals: `Casa ${houseArg.trim().replace(/^casa\s+/i, '')}`,
+                    mode: 'insensitive',
+                  },
+                },
               ],
             }),
       },
       include: {
-        residents: {
-          include: { user: true },
-        },
+        residents: { include: { user: true } },
         houseAccount: true,
       },
     });
 
     if (!selectedHouse) {
       console.warn(
-        `⚠️  No se encontró la vivienda "${houseArg}" en ${selectedCondo.name}.\n`,
+        `⚠️  No se encontró la casa "${houseArg}" en este condominio.\n`,
       );
     }
   }
 
   while (!selectedHouse) {
-    // Buscar casas que tengan cargos con pagos registrados para orientar al usuario
-    const housesWithPayments = await prisma.house.findMany({
+    // Listar casas que tienen cargos o pagos en el condominio
+    const housesWithCharges = await prisma.house.findMany({
       where: {
         condominiumId: selectedCondo.id,
-        maintenanceCharges: {
-          some: {
-            payments: { some: {} },
-          },
-        },
       },
       include: {
         residents: { include: { user: true } },
         houseAccount: true,
+        maintenanceCharges: {
+          select: { id: true, status: true, paidAmount: true },
+        },
       },
-      orderBy: { houseNumber: 'asc' },
-      take: 20,
+      orderBy: [{ tower: 'asc' }, { houseNumber: 'asc' }],
     });
 
-    if (housesWithPayments.length > 0) {
-      console.log('\n🏡 VIVIENDAS CON PAGOS REGISTRADOS:');
-      housesWithPayments.forEach((h, idx) => {
-        const resident = h.residents[0]?.user;
-        const resName = resident
-          ? `${resident.firstName} ${resident.lastName}`
-          : 'Sin residente';
-        console.log(
-          `  [${idx + 1}] Casa ${h.houseNumber}${h.tower ? ` (Torre: ${h.tower})` : ''} - ${resName}`,
-        );
-      });
-    }
+    console.log(
+      `\n🏠 CASAS EN EL CONDOMINIO (${housesWithCharges.length} disponibles):`,
+    );
+    console.log(
+      '-------------------------------------------------------------',
+    );
+    housesWithCharges.forEach((h, idx) => {
+      const primaryResident = h.residents?.[0]?.user;
+      const resName = primaryResident
+        ? `${primaryResident.firstName} ${primaryResident.lastName}`.trim()
+        : 'Sin residente';
+      const paidCharges = h.maintenanceCharges.filter(
+        (c) => c.status === 'PAID' || Number(c.paidAmount) > 0,
+      ).length;
+      const paidNote =
+        paidCharges > 0
+          ? `(${paidCharges} mes${paidCharges === 1 ? '' : 'es'} pagado${paidCharges === 1 ? '' : 's'})`
+          : '(Sin pagos)';
+
+      console.log(
+        `  [${idx + 1}] Casa ${h.houseNumber}${h.tower ? ` (Torre ${h.tower})` : ''} - ${resName} ${paidNote}`,
+      );
+    });
 
     const ans = (
       await rl.question(
-        '\n👉 Ingresa el número de casa (ej: "101") o selecciona de la lista anterior: ',
+        `\n👉 Selecciona el número de lista [1-${housesWithCharges.length}] o escribe número de casa (ej: "1", "36"): `,
       )
     ).trim();
-
-    if (!ans) continue;
 
     const chosenIdx = parseInt(ans, 10) - 1;
     if (
       !isNaN(chosenIdx) &&
       chosenIdx >= 0 &&
-      chosenIdx < housesWithPayments.length
+      chosenIdx < housesWithCharges.length
     ) {
-      selectedHouse = housesWithPayments[chosenIdx];
+      selectedHouse = housesWithCharges[chosenIdx];
       break;
     }
 
@@ -356,6 +428,12 @@ Ejemplos:
                     mode: 'insensitive',
                   },
                 },
+                {
+                  houseNumber: {
+                    equals: `Casa ${ans.replace(/^casa\s+/i, '')}`,
+                    mode: 'insensitive',
+                  },
+                },
               ],
             }),
       },
@@ -371,239 +449,304 @@ Ejemplos:
   }
 
   const primaryResident = selectedHouse.residents?.[0]?.user;
-  const residentFullName = primaryResident
-    ? `${primaryResident.firstName} ${primaryResident.lastName}`.trim()
-    : 'Sin residente asignado';
+  const residentFullName =
+    primaryResident && (primaryResident.firstName || primaryResident.lastName)
+      ? `${primaryResident.firstName ?? ''} ${primaryResident.lastName ?? ''}`.trim()
+      : 'Sin residente asignado';
+
+  const houseDisplay = selectedHouse.houseNumber.startsWith('Casa')
+    ? selectedHouse.houseNumber
+    : `Casa ${selectedHouse.houseNumber}`;
 
   console.log(
-    `\n✅ Vivienda seleccionada: Casa ${selectedHouse.houseNumber}${
+    `\n✅ Vivienda seleccionada: ${houseDisplay}${
       selectedHouse.tower ? ` (Torre ${selectedHouse.tower})` : ''
     } - Residente: ${residentFullName}`,
   );
 
-  // 3. CONSULTAR PAGOS DE LA VIVIENDA
-  const payments = await prisma.payment.findMany({
+  // 3. SELECCIÓN DEL MES Y AÑO A REINICIAR
+  // Cargar todos los cargos de mantenimiento de la vivienda
+  const houseCharges = await prisma.maintenanceCharge.findMany({
     where: {
-      maintenanceCharge: {
-        houseId: selectedHouse.id,
-        condominiumId: selectedCondo.id,
-      },
+      houseId: selectedHouse.id,
+      condominiumId: selectedCondo.id,
     },
     include: {
-      maintenanceCharge: {
-        include: {
-          lateFees: true,
-          payments: true,
-          maintenancePeriod: true,
-        },
+      maintenancePeriod: true,
+      payments: {
+        include: { createdBy: true },
+        orderBy: { paymentDate: 'desc' },
       },
-      createdBy: {
-        select: { id: true, firstName: true, lastName: true, email: true },
-      },
+      lateFees: true,
     },
-    orderBy: { paymentDate: 'desc' },
+    orderBy: { dueDate: 'desc' },
   });
 
-  if (payments.length === 0) {
+  if (houseCharges.length === 0) {
     console.log(
-      `\nℹ️  La Casa ${selectedHouse.houseNumber} no tiene ningún pago registrado. No hay nada que eliminar.`,
+      `\nℹ️  La Casa ${selectedHouse.houseNumber} no tiene cargos de mantenimiento generados.`,
     );
     rl.close();
     process.exit(0);
   }
 
-  // 4. SELECCIONAR PAGO A ELIMINAR
-  let targetPayment: any = null;
+  let targetCharge: (typeof houseCharges)[0] | null = null;
 
+  // Si se proporcionó un ID de pago o folio directo:
   if (paymentArg) {
-    const q = paymentArg.trim().toLowerCase();
-    targetPayment = payments.find(
-      (p) =>
-        p.id.toLowerCase() === q ||
-        (p.receiptFolio && p.receiptFolio.toLowerCase() === q) ||
-        (p.reference && p.reference.toLowerCase() === q),
-    );
-    if (!targetPayment) {
-      console.warn(
-        `⚠️  No se encontró ningún pago coincidente con: "${paymentArg}"\n`,
-      );
+    targetCharge =
+      houseCharges.find((c) =>
+        c.payments.some(
+          (p) =>
+            p.id === paymentArg ||
+            p.receiptFolio?.toLowerCase() === paymentArg.toLowerCase(),
+        ),
+      ) || null;
+  }
+
+  // Si se proporcionaron mes y año por argumentos:
+  if (!targetCharge && monthArg) {
+    const parsedM = parseMonth(monthArg);
+    const parsedY = yearArg ? parseInt(yearArg, 10) : new Date().getFullYear();
+
+    if (parsedM) {
+      targetCharge =
+        houseCharges.find((c) => {
+          if (c.maintenancePeriod) {
+            return (
+              c.maintenancePeriod.month === parsedM &&
+              (!parsedY || c.maintenancePeriod.year === parsedY)
+            );
+          }
+          const d = new Date(c.dueDate);
+          return (
+            d.getMonth() + 1 === parsedM &&
+            (!parsedY || d.getFullYear() === parsedY)
+          );
+        }) || null;
+
+      if (!targetCharge) {
+        console.warn(
+          `⚠️  No se encontró un cargo para el mes ${parsedM} año ${parsedY}.\n`,
+        );
+      }
     }
   }
 
-  while (!targetPayment) {
+  // Si aún no se ha seleccionado el cargo/periodo, mostrar lista interactiva
+  while (!targetCharge) {
     console.log(
-      `\n💳 PAGOS REGISTRADOS PARA CASA ${selectedHouse.houseNumber} (${payments.length} encontrado${
-        payments.length === 1 ? '' : 's'
-      }):`,
+      `\n📅 PERIODOS Y CUOTAS DE CASA ${selectedHouse.houseNumber} (${houseCharges.length} registrados):`,
     );
     console.log(
       '-------------------------------------------------------------',
     );
 
-    payments.forEach((p, idx) => {
-      const charge = p.maintenanceCharge;
-      const dateStr = p.paymentDate
-        ? new Date(p.paymentDate).toISOString().split('T')[0]
-        : 'S/F';
-      const amountStr = `$${Number(p.amount).toLocaleString('es-MX', {
-        minimumFractionDigits: 2,
-      })} MXN`;
-      const folioStr = p.receiptFolio || 'Sin Folio';
-      const methodStr = p.paymentMethod || 'TRANSFER';
-      const hasReceipt = Boolean(p.receiptUrl);
+    houseCharges.forEach((c, idx) => {
+      const periodLabel = c.maintenancePeriod
+        ? `${MONTH_NAMES[c.maintenancePeriod.month - 1] || 'Mes ' + c.maintenancePeriod.month} ${c.maintenancePeriod.year}`
+        : c.concept;
+      const amountStr = `$${Number(c.amount).toLocaleString('es-MX')}`;
+      const paidStr = `$${Number(c.paidAmount || 0).toLocaleString('es-MX')}`;
+      const pCount = c.payments.length;
+      const statusBadge =
+        c.status === 'PAID'
+          ? '🟢 PAGADO'
+          : c.status === 'PARTIAL'
+            ? '🟡 PARCIAL'
+            : c.status === 'OVERDUE'
+              ? '🔴 VENCIDO'
+              : '⚪ PENDIENTE';
 
       console.log(
-        `  [${idx + 1}] Fecha: ${dateStr} | ${amountStr} | ${methodStr} | Folio: ${folioStr}`,
+        `  [${idx + 1}] ${periodLabel} — ${statusBadge} | Cuota: ${amountStr} | Pagado: ${paidStr} | ${pCount} pago${pCount === 1 ? '' : 's'}`,
       );
-      console.log(
-        `      Cargo: "${charge.concept}" (Status actual: ${charge.status}, Pagado: $${Number(charge.paidAmount).toLocaleString('es-MX')})`,
-      );
-      if (p.reference) {
-        console.log(`      Referencia bancaria: ${p.reference}`);
+      if (pCount > 0) {
+        c.payments.forEach((p) => {
+          const fStr = p.receiptFolio
+            ? `Folio: ${p.receiptFolio}`
+            : 'Sin folio';
+          const rStr = p.receiptUrl ? '(con recibo R2)' : '';
+          console.log(
+            `      💳 Pago $${Number(p.amount).toLocaleString('es-MX')} [${p.paymentMethod}] ${fStr} ${rStr}`,
+          );
+        });
       }
-      if (hasReceipt) {
-        console.log(
-          `      Comprobante en R2: ${cleanStorageKey(p.receiptUrl!)}`,
-        );
+      if (c.proofUrl) {
+        console.log(`      📎 Comprobante adjunto por residente en R2`);
       }
-      if (p.createdBy) {
-        console.log(
-          `      Registrado por: ${p.createdBy.firstName} ${p.createdBy.lastName}`,
-        );
-      }
-      console.log('');
     });
 
-    const promptText =
-      payments.length === 1
-        ? `👉 Selecciona el pago a eliminar [1]: `
-        : `👉 Selecciona el número de pago a eliminar [1-${payments.length}]: `;
+    // Encontrar índice sugerido: primer cargo que esté PAGADO o tenga pagos
+    const suggestedIdx = houseCharges.findIndex(
+      (c) => c.status === 'PAID' || c.payments.length > 0,
+    );
+    const defaultIdx = suggestedIdx !== -1 ? suggestedIdx : 0;
 
-    const ans = (await rl.question(promptText)).trim();
-    const chosenIdx =
-      ans === '' && payments.length === 1 ? 0 : parseInt(ans, 10) - 1;
+    const ans = (
+      await rl.question(
+        `\n👉 Selecciona el periodo a reiniciar [${defaultIdx + 1}] o escribe mes y año (ej: "9 2026", "septiembre 2026"): `,
+      )
+    ).trim();
 
-    if (!isNaN(chosenIdx) && chosenIdx >= 0 && chosenIdx < payments.length) {
-      targetPayment = payments[chosenIdx];
-    } else {
+    if (ans === '') {
+      targetCharge = houseCharges[defaultIdx];
+      break;
+    }
+
+    const chosenIdx = parseInt(ans, 10) - 1;
+    if (
+      !isNaN(chosenIdx) &&
+      chosenIdx >= 0 &&
+      chosenIdx < houseCharges.length
+    ) {
+      targetCharge = houseCharges[chosenIdx];
+      break;
+    }
+
+    // Intentar parsear entrada de texto tipo "septiembre 2026" o "9 2026"
+    const parts = ans.split(/[\s\/-]+/);
+    const userMonth = parseMonth(parts[0]) || parseMonth(parts[1]);
+    const userYear =
+      parseInt(parts.find((p) => /^\d{4}$/.test(p)) || '', 10) ||
+      new Date().getFullYear();
+
+    if (userMonth) {
+      targetCharge =
+        houseCharges.find((c) => {
+          if (c.maintenancePeriod) {
+            return (
+              c.maintenancePeriod.month === userMonth &&
+              c.maintenancePeriod.year === userYear
+            );
+          }
+          const d = new Date(c.dueDate);
+          return d.getMonth() + 1 === userMonth && d.getFullYear() === userYear;
+        }) || null;
+    }
+
+    if (!targetCharge) {
       console.log(
-        '❌ Opción inválida. Por favor ingresa un número de la lista.',
+        '❌ No se encontró cargo para esa opción o fecha. Intenta de nuevo.',
       );
     }
   }
 
-  // 5. CÁLCULO DE IMPACTO Y RESUMEN
-  const charge = targetPayment.maintenanceCharge;
-  const paymentAmount = Number(targetPayment.amount);
-  const currentPaid = Number(charge.paidAmount || 0);
+  const periodDisplayName = targetCharge.maintenancePeriod
+    ? `${MONTH_NAMES[targetCharge.maintenancePeriod.month - 1]} ${targetCharge.maintenancePeriod.year}`
+    : targetCharge.concept;
 
-  // Calcular otros pagos asociados a este mismo cargo (si hubieron abonos parciales)
-  const otherPaymentsOnCharge = charge.payments.filter(
-    (p: any) => p.id !== targetPayment.id,
-  );
-  const newPaidAmount = otherPaymentsOnCharge.reduce(
-    (sum: number, p: any) => sum + Number(p.amount),
-    0,
-  );
+  // 4. CÁLCULO DE IMPACTO Y RECOLECCIÓN DE ARCHIVOS
+  const paymentsToDelete = targetCharge.payments;
+  const totalPaidAmount = Number(targetCharge.paidAmount || 0);
+  const baseChargeAmount = Number(targetCharge.amount);
 
-  const baseAmount = Number(charge.amount);
-  const lateFeesTotal = (charge.lateFees || []).reduce(
-    (sum: number, f: any) => sum + Number(f.amount),
-    0,
-  );
-  const totalDue = baseAmount + lateFeesTotal;
-
-  let newChargeStatus: MaintenanceChargeStatus;
-  if (newPaidAmount >= totalDue) {
-    newChargeStatus = MaintenanceChargeStatus.PAID;
-  } else if (newPaidAmount > 0) {
-    newChargeStatus = MaintenanceChargeStatus.PARTIAL;
-  } else {
-    const now = new Date();
-    newChargeStatus =
-      now > charge.dueDate
-        ? MaintenanceChargeStatus.OVERDUE
-        : MaintenanceChargeStatus.PENDING;
+  // Recolectar archivos de Cloudflare R2 a eliminar
+  const r2KeysToDelete: string[] = [];
+  for (const p of paymentsToDelete) {
+    if (p.receiptUrl) {
+      const key = cleanStorageKey(p.receiptUrl);
+      if (key && !r2KeysToDelete.includes(key)) {
+        r2KeysToDelete.push(key);
+      }
+    }
+  }
+  if (targetCharge.proofUrl) {
+    const key = cleanStorageKey(targetCharge.proofUrl);
+    if (key && !r2KeysToDelete.includes(key)) {
+      r2KeysToDelete.push(key);
+    }
   }
 
-  // Verificar si hubo excedente registrado como saldo a favor en HouseAccount
+  // Detectar saldo a favor generado por estos pagos
   const excessMovements = await prisma.accountMovement.findMany({
     where: {
       houseId: selectedHouse.id,
       type: AccountMovementType.CREDIT,
       description: {
-        contains: charge.concept,
+        contains: targetCharge.concept,
       },
     },
   });
-
-  const excessAmount = excessMovements.reduce(
+  const excessToRevert = excessMovements.reduce(
     (sum, m) => sum + Number(m.amount),
     0,
   );
 
-  const receiptKey = targetPayment.receiptUrl
-    ? cleanStorageKey(targetPayment.receiptUrl)
-    : null;
+  console.log(
+    '\n=============================================================',
+  );
+  console.log('📊 RESUMEN DE REINICIO DE MES DE PAGO:');
+  console.log('=============================================================');
+  console.log(
+    ` • Condominio:          ${selectedCondo.name} (${selectedCondo.key})`,
+  );
+  console.log(` • Vivienda:            ${houseDisplay} (${residentFullName})`);
+  console.log(` • Periodo a reiniciar: ${periodDisplayName}`);
+  console.log(` • Cargo ID:            ${targetCharge.id}`);
+  console.log(
+    ` • Estatus actual:      ${targetCharge.status} (Pagado: $${totalPaidAmount.toLocaleString('es-MX')} MXN)`,
+  );
+  console.log(
+    ` • Cuota base:          $${baseChargeAmount.toLocaleString('es-MX')} MXN`,
+  );
+  console.log(` • Pagos a eliminar:    ${paymentsToDelete.length} registro(s)`);
 
-  console.log('\n📊 RESUMEN DE IMPACTO - PAGO A ELIMINAR:');
-  console.log('-------------------------------------------------------------');
-  console.log(
-    ` • Condominio:           ${selectedCondo.name} (${selectedCondo.key})`,
-  );
-  console.log(
-    ` • Vivienda:             Casa ${selectedHouse.houseNumber} (${residentFullName})`,
-  );
-  console.log(` • ID del Pago:          ${targetPayment.id}`);
-  console.log(
-    ` • Folio de Recibo:      ${targetPayment.receiptFolio || 'N/A'}`,
-  );
-  console.log(
-    ` • Importe del Pago:     $${paymentAmount.toLocaleString('es-MX', { minimumFractionDigits: 2 })} MXN`,
-  );
-  console.log(` • Forma de Pago:        ${targetPayment.paymentMethod}`);
-  console.log(
-    ` • Fecha de Pago:        ${new Date(targetPayment.paymentDate).toISOString().split('T')[0]}`,
-  );
-  console.log('-------------------------------------------------------------');
-  console.log('📋 EFECTO EN EL CARGO DE MANTENIMIENTO:');
-  console.log(` • Concepto:             "${charge.concept}"`);
-  console.log(
-    ` • Importe total exigible:$${totalDue.toLocaleString('es-MX', { minimumFractionDigits: 2 })} MXN`,
-  );
-  console.log(
-    ` • Monto pagado:         $${currentPaid.toLocaleString('es-MX')} ➡️  $${newPaidAmount.toLocaleString('es-MX')} MXN`,
-  );
-  console.log(
-    ` • Estatus del cargo:    ${charge.status} ➡️  ${newChargeStatus}`,
-  );
-  if (excessAmount > 0) {
+  paymentsToDelete.forEach((p, idx) => {
     console.log(
-      ` • Saldo a favor:        Se revertirán $${excessAmount.toLocaleString('es-MX')} MXN del saldo a favor generado por este pago.`,
+      `     [${idx + 1}] ID: ${p.id} | $${Number(p.amount).toLocaleString('es-MX')} MXN | ${p.paymentMethod} | Folio: ${p.receiptFolio || 'S/F'}`,
+    );
+  });
+
+  if (targetCharge.lateFees.length > 0) {
+    const totalLate = targetCharge.lateFees.reduce(
+      (s, f) => s + Number(f.amount),
+      0,
+    );
+    console.log(
+      ` • Recargos por mora:   Se eliminarán $${totalLate.toLocaleString('es-MX')} MXN (${targetCharge.lateFees.length} registro/s)`,
     );
   }
-  if (receiptKey) {
+
+  if (excessToRevert > 0) {
+    console.log(
+      ` • Saldo a favor:       Se revertirán $${excessToRevert.toLocaleString('es-MX')} MXN de la cuenta de la vivienda`,
+    );
+  }
+
+  if (r2KeysToDelete.length > 0) {
+    console.log(` • Archivos R2 a purgar:${r2KeysToDelete.length} archivo(s):`);
+    r2KeysToDelete.forEach((k) => console.log(`     - ${k}`));
     if (keepReceipt) {
       console.log(
-        ` • Comprobante R2:       Se conservará en Cloudflare R2 (--keep-receipt activo).`,
-      );
-    } else {
-      console.log(
-        ` • Comprobante R2:       Se eliminará de Cloudflare R2 (${receiptKey}).`,
+        '     ℹ️  (--keep-receipt activo: se conservarán los archivos en Cloudflare R2)',
       );
     }
   }
-  if (isDryRun) {
-    console.log('\n🔍 [MODO DRY-RUN ACTIVO]: No se guardará ningún cambio.');
-  }
+
+  console.log('-------------------------------------------------------------');
+  console.log('🎯 ESTADO RESULTANTE TRAS EL REINICIO:');
+  console.log(' • Estatus del cargo:    ➡️  PENDING (Pendiente de Pago)');
+  console.log(' • Monto pagado:         ➡️  $0.00 MXN');
   console.log(
-    '-------------------------------------------------------------\n',
+    ' • Comprobantes/Notas:   ➡️  Limpios (listo para volver a subir o registrar pago)',
+  );
+  console.log(
+    '=============================================================\n',
   );
 
-  // 6. CONFIRMACIÓN INTERACTIVA
-  if (!isYes && !isDryRun) {
+  if (isDryRun) {
+    console.log(
+      '🔍 [MODO DRY-RUN ACTIVO]: No se guardará ningún cambio en BD ni R2.',
+    );
+    rl.close();
+    process.exit(0);
+  }
+
+  // 5. CONFIRMACIÓN INTERACTIVA
+  if (!isYes) {
     const confirmation = await rl.question(
-      `⚠️  ¿Confirmas la eliminación permanente de este pago de $${paymentAmount.toLocaleString('es-MX')} MXN? (escribe 'SI' para confirmar): `,
+      `⚠️  ¿Confirmas reiniciar el mes de pago de ${houseDisplay} para ${periodDisplayName}? (escribe 'SI' para confirmar): `,
     );
     if (confirmation.trim().toUpperCase() !== 'SI') {
       console.log(
@@ -616,18 +759,11 @@ Ejemplos:
 
   rl.close();
 
-  if (isDryRun) {
-    console.log(
-      '✅ Simulación completada con éxito. Ningún dato fue alterado.',
-    );
-    process.exit(0);
-  }
+  console.log('\n🚀 Procesando reinicio en base de datos...');
 
-  console.log('\n🚀 Procesando eliminación en base de datos...');
-
-  // 7. EJECUCIÓN EN TRANSACCIÓN DE BASE DE DATOS
+  // 6. TRANSACCIÓN ATÓMICA EN POSTGRESQL
   await prisma.$transaction(async (tx) => {
-    // A. Revertir saldo a favor si hubo excedente asociado a este pago
+    // A. Revertir saldo a favor si hubo excedentes acreditados
     if (excessMovements.length > 0) {
       for (const mov of excessMovements) {
         const movAmount = Number(mov.amount);
@@ -650,50 +786,65 @@ Ejemplos:
       }
     }
 
-    // B. Actualizar el cargo de mantenimiento
+    // B. Eliminar recargos por mora asociados
+    if (targetCharge.lateFees.length > 0) {
+      await tx.lateFee.deleteMany({
+        where: { maintenanceChargeId: targetCharge.id },
+      });
+      console.log(
+        `   🧹 ${targetCharge.lateFees.length} recargo(s) por mora eliminado(s).`,
+      );
+    }
+
+    // C. Eliminar los registros de Payment asociados a este cargo
+    if (paymentsToDelete.length > 0) {
+      await tx.payment.deleteMany({
+        where: { maintenanceChargeId: targetCharge.id },
+      });
+      console.log(
+        `   💳 ${paymentsToDelete.length} registro(s) de pago eliminado(s).`,
+      );
+    }
+
+    // D. Reiniciar completamente el cargo de mantenimiento a PENDING
     await tx.maintenanceCharge.update({
-      where: { id: charge.id },
+      where: { id: targetCharge.id },
       data: {
-        paidAmount: newPaidAmount,
-        status: newChargeStatus,
+        paidAmount: 0,
+        status: MaintenanceChargeStatus.PENDING,
+        notes: null,
+        proofUrl: null,
+        proofFileName: null,
+        proofUploadedAt: null,
+        proofReference: null,
+        proofNotes: null,
       },
     });
     console.log(
-      `   📋 Cargo "${charge.concept}" actualizado a estatus "${newChargeStatus}" con $${newPaidAmount.toLocaleString('es-MX')} pagados.`,
-    );
-
-    // C. Eliminar el registro de Payment
-    await tx.payment.delete({
-      where: { id: targetPayment.id },
-    });
-    console.log(
-      `   💳 Registro de pago eliminado de la base de datos (ID: ${targetPayment.id}).`,
+      `   📋 Cargo "${periodDisplayName}" reiniciado exitosamente a estatus "PENDING" con $0 pagados.`,
     );
   });
 
-  // 8. ELIMINAR ARCHIVO DE CLOUDFLARE R2 / S3
-  if (receiptKey && !keepReceipt) {
-    console.log(`\n🗑️  Eliminando archivo de recibo en Cloudflare R2...`);
-    const ok = await deleteFromR2(receiptKey);
-    if (ok) {
-      console.log(`   ✅ Archivo R2 eliminado correctamente: ${receiptKey}`);
-    } else {
-      console.warn(
-        `   ⚠️  No se pudo eliminar el archivo en R2 (${receiptKey}).`,
-      );
+  // 7. ELIMINACIÓN FÍSICA EN CLOUDFLARE R2
+  if (r2KeysToDelete.length > 0 && !keepReceipt) {
+    console.log(`\n🗑️  Eliminando comprobantes y recibos de Cloudflare R2...`);
+    for (const key of r2KeysToDelete) {
+      const ok = await deleteFromR2(key);
+      if (ok) {
+        console.log(`   ✅ Eliminado de R2: ${key}`);
+      }
     }
   }
 
   console.log(
     '\n=============================================================',
   );
-  console.log('🎉 ¡PAGO ELIMINADO EXITOSAMENTE!');
-  console.log('=============================================================');
-  console.log(` • Vivienda:       Casa ${selectedHouse.houseNumber}`);
-  console.log(` • Cargo:          ${charge.concept}`);
-  console.log(` • Nuevo Estatus:  ${newChargeStatus}`);
   console.log(
-    ` • Monto Pagado:   $${newPaidAmount.toLocaleString('es-MX')} MXN`,
+    `✨ REINICIO COMPLETADO CON ÉXITO para ${houseDisplay} (${periodDisplayName})`,
+  );
+  console.log('   La cuota ahora está en estatus PENDIENTE ($0 pagados).');
+  console.log(
+    '   Ya puedes volver a cargar o registrar el pago desde la plataforma.',
   );
   console.log(
     '=============================================================\n',
@@ -702,7 +853,7 @@ Ejemplos:
 
 main()
   .catch((err) => {
-    console.error('\n💥 Error fatal durante la ejecución:', err);
+    console.error('\n❌ Ocurrió un error inesperado:', err);
     process.exit(1);
   })
   .finally(async () => {
