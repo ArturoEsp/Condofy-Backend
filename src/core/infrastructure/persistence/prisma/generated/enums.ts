@@ -67,6 +67,41 @@ export const PaymentMethod = {
 export type PaymentMethod = (typeof PaymentMethod)[keyof typeof PaymentMethod]
 
 
+export const ExpenseCategory = {
+  SERVICES: 'SERVICES',
+  MAINTENANCE: 'MAINTENANCE',
+  SECURITY: 'SECURITY',
+  CLEANING: 'CLEANING',
+  GARDENING: 'GARDENING',
+  ADMINISTRATION: 'ADMINISTRATION',
+  RESERVE_FUND: 'RESERVE_FUND',
+  OTHER: 'OTHER'
+} as const
+
+export type ExpenseCategory = (typeof ExpenseCategory)[keyof typeof ExpenseCategory]
+
+
+export const ExpenseStatus = {
+  PAID: 'PAID',
+  PENDING: 'PENDING',
+  CANCELLED: 'CANCELLED'
+} as const
+
+export type ExpenseStatus = (typeof ExpenseStatus)[keyof typeof ExpenseStatus]
+
+
+export const ExtraIncomeCategory = {
+  AMENITY_RENTAL: 'AMENITY_RENTAL',
+  ACCESS_DEVICE: 'ACCESS_DEVICE',
+  RULE_PENALTY: 'RULE_PENALTY',
+  EXTRAORDINARY_FEE: 'EXTRAORDINARY_FEE',
+  BANK_INTEREST: 'BANK_INTEREST',
+  OTHER: 'OTHER'
+} as const
+
+export type ExtraIncomeCategory = (typeof ExtraIncomeCategory)[keyof typeof ExtraIncomeCategory]
+
+
 export const AccountMovementType = {
   CHARGE: 'CHARGE',
   PAYMENT: 'PAYMENT',

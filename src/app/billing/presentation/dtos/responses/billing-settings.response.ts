@@ -83,4 +83,20 @@ export class BillingSettingsResponse {
   @ApiPropertyOptional({ example: 'ALL' })
   @Expose()
   notificationChannel: string;
+
+  @ApiPropertyOptional({ example: 50000 })
+  @Expose()
+  initialBalance: number;
+
+  @ApiPropertyOptional({ example: 20000 })
+  @Expose()
+  initialReserveFund: number;
+
+  @ApiPropertyOptional({ example: '2026-01-01' })
+  @Expose()
+  initialBalanceDate?: Date | null;
+
+  @ApiPropertyOptional({ example: 'Saldo inicial verificado' })
+  @Expose()
+  initialBalanceNotes?: string | null;
 }

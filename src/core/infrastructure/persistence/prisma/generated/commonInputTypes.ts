@@ -511,6 +511,57 @@ export type EnumLateFeeTypeWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumLateFeeTypeFilter<$PrismaModel>
 }
 
+export type EnumExpenseCategoryFilter<$PrismaModel = never> = {
+  equals?: $Enums.ExpenseCategory | Prisma.EnumExpenseCategoryFieldRefInput<$PrismaModel>
+  in?: $Enums.ExpenseCategory[] | Prisma.ListEnumExpenseCategoryFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ExpenseCategory[] | Prisma.ListEnumExpenseCategoryFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumExpenseCategoryFilter<$PrismaModel> | $Enums.ExpenseCategory
+}
+
+export type EnumExpenseStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.ExpenseStatus | Prisma.EnumExpenseStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.ExpenseStatus[] | Prisma.ListEnumExpenseStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ExpenseStatus[] | Prisma.ListEnumExpenseStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumExpenseStatusFilter<$PrismaModel> | $Enums.ExpenseStatus
+}
+
+export type EnumExpenseCategoryWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ExpenseCategory | Prisma.EnumExpenseCategoryFieldRefInput<$PrismaModel>
+  in?: $Enums.ExpenseCategory[] | Prisma.ListEnumExpenseCategoryFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ExpenseCategory[] | Prisma.ListEnumExpenseCategoryFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumExpenseCategoryWithAggregatesFilter<$PrismaModel> | $Enums.ExpenseCategory
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumExpenseCategoryFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumExpenseCategoryFilter<$PrismaModel>
+}
+
+export type EnumExpenseStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ExpenseStatus | Prisma.EnumExpenseStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.ExpenseStatus[] | Prisma.ListEnumExpenseStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ExpenseStatus[] | Prisma.ListEnumExpenseStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumExpenseStatusWithAggregatesFilter<$PrismaModel> | $Enums.ExpenseStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumExpenseStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumExpenseStatusFilter<$PrismaModel>
+}
+
+export type EnumExtraIncomeCategoryFilter<$PrismaModel = never> = {
+  equals?: $Enums.ExtraIncomeCategory | Prisma.EnumExtraIncomeCategoryFieldRefInput<$PrismaModel>
+  in?: $Enums.ExtraIncomeCategory[] | Prisma.ListEnumExtraIncomeCategoryFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ExtraIncomeCategory[] | Prisma.ListEnumExtraIncomeCategoryFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumExtraIncomeCategoryFilter<$PrismaModel> | $Enums.ExtraIncomeCategory
+}
+
+export type EnumExtraIncomeCategoryWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ExtraIncomeCategory | Prisma.EnumExtraIncomeCategoryFieldRefInput<$PrismaModel>
+  in?: $Enums.ExtraIncomeCategory[] | Prisma.ListEnumExtraIncomeCategoryFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ExtraIncomeCategory[] | Prisma.ListEnumExtraIncomeCategoryFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumExtraIncomeCategoryWithAggregatesFilter<$PrismaModel> | $Enums.ExtraIncomeCategory
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumExtraIncomeCategoryFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumExtraIncomeCategoryFilter<$PrismaModel>
+}
+
 export type NestedStringFilter<$PrismaModel = never> = {
   equals?: string | Prisma.StringFieldRefInput<$PrismaModel>
   in?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
@@ -1019,6 +1070,57 @@ export type NestedEnumLateFeeTypeWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumLateFeeTypeFilter<$PrismaModel>
   _max?: Prisma.NestedEnumLateFeeTypeFilter<$PrismaModel>
+}
+
+export type NestedEnumExpenseCategoryFilter<$PrismaModel = never> = {
+  equals?: $Enums.ExpenseCategory | Prisma.EnumExpenseCategoryFieldRefInput<$PrismaModel>
+  in?: $Enums.ExpenseCategory[] | Prisma.ListEnumExpenseCategoryFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ExpenseCategory[] | Prisma.ListEnumExpenseCategoryFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumExpenseCategoryFilter<$PrismaModel> | $Enums.ExpenseCategory
+}
+
+export type NestedEnumExpenseStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.ExpenseStatus | Prisma.EnumExpenseStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.ExpenseStatus[] | Prisma.ListEnumExpenseStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ExpenseStatus[] | Prisma.ListEnumExpenseStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumExpenseStatusFilter<$PrismaModel> | $Enums.ExpenseStatus
+}
+
+export type NestedEnumExpenseCategoryWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ExpenseCategory | Prisma.EnumExpenseCategoryFieldRefInput<$PrismaModel>
+  in?: $Enums.ExpenseCategory[] | Prisma.ListEnumExpenseCategoryFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ExpenseCategory[] | Prisma.ListEnumExpenseCategoryFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumExpenseCategoryWithAggregatesFilter<$PrismaModel> | $Enums.ExpenseCategory
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumExpenseCategoryFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumExpenseCategoryFilter<$PrismaModel>
+}
+
+export type NestedEnumExpenseStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ExpenseStatus | Prisma.EnumExpenseStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.ExpenseStatus[] | Prisma.ListEnumExpenseStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ExpenseStatus[] | Prisma.ListEnumExpenseStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumExpenseStatusWithAggregatesFilter<$PrismaModel> | $Enums.ExpenseStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumExpenseStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumExpenseStatusFilter<$PrismaModel>
+}
+
+export type NestedEnumExtraIncomeCategoryFilter<$PrismaModel = never> = {
+  equals?: $Enums.ExtraIncomeCategory | Prisma.EnumExtraIncomeCategoryFieldRefInput<$PrismaModel>
+  in?: $Enums.ExtraIncomeCategory[] | Prisma.ListEnumExtraIncomeCategoryFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ExtraIncomeCategory[] | Prisma.ListEnumExtraIncomeCategoryFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumExtraIncomeCategoryFilter<$PrismaModel> | $Enums.ExtraIncomeCategory
+}
+
+export type NestedEnumExtraIncomeCategoryWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ExtraIncomeCategory | Prisma.EnumExtraIncomeCategoryFieldRefInput<$PrismaModel>
+  in?: $Enums.ExtraIncomeCategory[] | Prisma.ListEnumExtraIncomeCategoryFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ExtraIncomeCategory[] | Prisma.ListEnumExtraIncomeCategoryFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumExtraIncomeCategoryWithAggregatesFilter<$PrismaModel> | $Enums.ExtraIncomeCategory
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumExtraIncomeCategoryFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumExtraIncomeCategoryFilter<$PrismaModel>
 }
 
 

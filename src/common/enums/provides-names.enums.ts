@@ -14,4 +14,7 @@ export const PROVIDES_NAMES = {
   PasswordResetTokensRepository: 'PasswordResetTokensRepository',
   StorageService: 'StorageService',
   BillingRepository: 'BillingRepository',
+  ExpensesRepository: 'ExpensesRepository',
+  ExtraIncomeRepository: 'ExtraIncomeRepository',
+  TransparencyRepository: 'TransparencyRepository',
 } as const;

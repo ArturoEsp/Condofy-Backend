@@ -70,7 +70,10 @@ export const ModelName = {
   Payment: 'Payment',
   MaintenancePeriod: 'MaintenancePeriod',
   LateFee: 'LateFee',
-  CondominiumBillingConfig: 'CondominiumBillingConfig'
+  CondominiumBillingConfig: 'CondominiumBillingConfig',
+  Expense: 'Expense',
+  ExtraIncome: 'ExtraIncome',
+  CondominiumTransparencyConfig: 'CondominiumTransparencyConfig'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -418,11 +421,82 @@ export const CondominiumBillingConfigScalarFieldEnum = {
   dueDateReminderDaysBefore: 'dueDateReminderDaysBefore',
   notifyOnProofReviewed: 'notifyOnProofReviewed',
   notificationChannel: 'notificationChannel',
+  initialBalance: 'initialBalance',
+  initialReserveFund: 'initialReserveFund',
+  initialBalanceDate: 'initialBalanceDate',
+  initialBalanceNotes: 'initialBalanceNotes',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type CondominiumBillingConfigScalarFieldEnum = (typeof CondominiumBillingConfigScalarFieldEnum)[keyof typeof CondominiumBillingConfigScalarFieldEnum]
+
+
+export const ExpenseScalarFieldEnum = {
+  id: 'id',
+  condominiumId: 'condominiumId',
+  concept: 'concept',
+  description: 'description',
+  amount: 'amount',
+  expenseDate: 'expenseDate',
+  period: 'period',
+  category: 'category',
+  paymentMethod: 'paymentMethod',
+  status: 'status',
+  supplier: 'supplier',
+  reference: 'reference',
+  invoiceUrl: 'invoiceUrl',
+  invoiceFileName: 'invoiceFileName',
+  invoiceFileType: 'invoiceFileType',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ExpenseScalarFieldEnum = (typeof ExpenseScalarFieldEnum)[keyof typeof ExpenseScalarFieldEnum]
+
+
+export const ExtraIncomeScalarFieldEnum = {
+  id: 'id',
+  condominiumId: 'condominiumId',
+  houseId: 'houseId',
+  concept: 'concept',
+  description: 'description',
+  amount: 'amount',
+  incomeDate: 'incomeDate',
+  period: 'period',
+  category: 'category',
+  paymentMethod: 'paymentMethod',
+  reference: 'reference',
+  receiptUrl: 'receiptUrl',
+  receiptFileName: 'receiptFileName',
+  receiptFileType: 'receiptFileType',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ExtraIncomeScalarFieldEnum = (typeof ExtraIncomeScalarFieldEnum)[keyof typeof ExtraIncomeScalarFieldEnum]
+
+
+export const CondominiumTransparencyConfigScalarFieldEnum = {
+  id: 'id',
+  condominiumId: 'condominiumId',
+  isEnabled: 'isEnabled',
+  showExpenses: 'showExpenses',
+  showIncomes: 'showIncomes',
+  showBalance: 'showBalance',
+  showSuppliers: 'showSuppliers',
+  allowInvoiceViewing: 'allowInvoiceViewing',
+  allowInvoiceDownload: 'allowInvoiceDownload',
+  showCollectionRate: 'showCollectionRate',
+  timeframeMode: 'timeframeMode',
+  condominiumNotice: 'condominiumNotice',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CondominiumTransparencyConfigScalarFieldEnum = (typeof CondominiumTransparencyConfigScalarFieldEnum)[keyof typeof CondominiumTransparencyConfigScalarFieldEnum]
 
 
 export const SortOrder = {

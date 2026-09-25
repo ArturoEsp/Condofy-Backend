@@ -1,4 +1,7 @@
-import { Prisma } from '@/core/infrastructure/persistence/prisma/generated/client';
+import {
+  Prisma,
+  ExtraIncome as PrismaExtraIncome,
+} from '@/core/infrastructure/persistence/prisma/generated/client';
 import {
   BillingConfigEntity,
   LateFeeTypeDomain,
@@ -7,6 +10,11 @@ import {
   BillingPaymentStatus,
   BillingRecordEntity,
 } from '../../domain/entities/billing-record.entity';
+import {
+  ExtraIncomeCategoryDomain,
+  ExtraIncomeEntity,
+} from '../../domain/entities/extra-income.entity';
+import { StorageService } from '@/core/domain/services/storage.service';
 
 export interface PrismaBillingConfigRecord {
   id: string;
@@ -29,6 +37,10 @@ export interface PrismaBillingConfigRecord {
   dueDateReminderDaysBefore?: number | null;
   notifyOnProofReviewed?: boolean | null;
   notificationChannel?: string | null;
+  initialBalance?: number | string | Prisma.Decimal | null;
+  initialReserveFund?: number | string | Prisma.Decimal | null;
+  initialBalanceDate?: Date | null;
+  initialBalanceNotes?: string | null;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -128,6 +140,10 @@ export class BillingMapper {
         dueDateReminderDaysBefore: 3,
         notifyOnProofReviewed: true,
         notificationChannel: 'ALL',
+        initialBalance: 0,
+        initialReserveFund: 0,
+        initialBalanceDate: null,
+        initialBalanceNotes: null,
         createdAt: new Date(),
         updatedAt: new Date(),
       };
@@ -154,6 +170,10 @@ export class BillingMapper {
       dueDateReminderDaysBefore: raw.dueDateReminderDaysBefore ?? 3,
       notifyOnProofReviewed: raw.notifyOnProofReviewed ?? true,
       notificationChannel: raw.notificationChannel ?? 'ALL',
+      initialBalance: Number(raw.initialBalance || 0),
+      initialReserveFund: Number(raw.initialReserveFund || 0),
+      initialBalanceDate: raw.initialBalanceDate ?? null,
+      initialBalanceNotes: raw.initialBalanceNotes ?? null,
       createdAt: raw.createdAt,
       updatedAt: raw.updatedAt,
     };
@@ -279,5 +299,73 @@ export class BillingMapper {
       createdAt: charge.createdAt,
       updatedAt: charge.updatedAt,
     };
+  }
+
+  static toExtraIncomeDomain(
+    raw: PrismaExtraIncome & {
+      house?: {
+        houseNumber: string;
+        residents?: { firstName: string; lastName: string }[];
+      } | null;
+      createdBy?: {
+        firstName?: string | null;
+        lastName?: string | null;
+      } | null;
+    },
+  ): ExtraIncomeEntity {
+    const entity = new ExtraIncomeEntity();
+    entity.id = raw.id;
+    entity.condominiumId = raw.condominiumId;
+    entity.houseId = raw.houseId;
+    entity.houseNumber = raw.house ? `Casa ${raw.house.houseNumber}` : null;
+    const resident = raw.house?.residents?.[0];
+    entity.residentName = resident
+      ? `${resident.firstName} ${resident.lastName}`.trim()
+      : null;
+    entity.concept = raw.concept;
+    entity.description = raw.description;
+    entity.amount = Number(raw.amount);
+    entity.incomeDate = raw.incomeDate;
+    entity.period = raw.period;
+    entity.category = raw.category as ExtraIncomeCategoryDomain;
+    entity.paymentMethod = raw.paymentMethod;
+    entity.reference = raw.reference;
+    entity.receiptUrl = raw.receiptUrl;
+    entity.receiptFileName = raw.receiptFileName;
+    entity.receiptFileType = raw.receiptFileType;
+    entity.createdById = raw.createdById;
+    entity.createdByName = raw.createdBy
+      ? `${raw.createdBy.firstName || ''} ${raw.createdBy.lastName || ''}`.trim() ||
+        'Administración'
+      : 'Administración';
+    entity.createdAt = raw.createdAt;
+    entity.updatedAt = raw.updatedAt;
+    return entity;
+  }
+
+  static async toExtraIncomeDomainWithSignedUrl(
+    raw: PrismaExtraIncome & {
+      house?: {
+        houseNumber: string;
+        residents?: { firstName: string; lastName: string }[];
+      } | null;
+      createdBy?: {
+        firstName?: string | null;
+        lastName?: string | null;
+      } | null;
+    },
+    storageService?: StorageService,
+  ): Promise<ExtraIncomeEntity> {
+    const entity = this.toExtraIncomeDomain(raw);
+    if (entity.receiptUrl && storageService) {
+      try {
+        entity.receiptUrl = await storageService.getPresignedUrl(
+          entity.receiptUrl,
+        );
+      } catch (err) {
+        // En caso de error conservamos el path original
+      }
+    }
+    return entity;
   }
 }

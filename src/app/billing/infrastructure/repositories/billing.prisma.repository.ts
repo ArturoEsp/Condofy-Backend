@@ -3,7 +3,9 @@ import { PrismaService } from '@/core/infrastructure/persistence/prisma/prisma.s
 import { PROVIDES_NAMES } from '@/common/enums/provides-names.enums';
 import { StorageService } from '@/core/domain/services/storage.service';
 import BillingRepository, {
+  CreateExtraIncomeData,
   FindBillingRecordsParams,
+  FindExtraIncomeParams,
   RegisterPaymentData,
   ReviewResidentProofData,
   UploadResidentProofData,
@@ -11,9 +13,11 @@ import BillingRepository, {
 } from '../../domain/repositories/billing.repository';
 import { BillingConfigEntity } from '../../domain/entities/billing-config.entity';
 import { BillingRecordEntity } from '../../domain/entities/billing-record.entity';
+import { ExtraIncomeEntity } from '../../domain/entities/extra-income.entity';
 import { BillingMapper } from '../mappers/billing.mapper';
 import {
   AccountMovementType,
+  ExtraIncomeCategory,
   PaymentMethod,
 } from '@/core/infrastructure/persistence/prisma/generated/client';
 
@@ -92,6 +96,12 @@ export class BillingPrismaRepository implements BillingRepository {
         dueDateReminderDaysBefore: data.dueDateReminderDaysBefore ?? 3,
         notifyOnProofReviewed: data.notifyOnProofReviewed ?? true,
         notificationChannel: data.notificationChannel ?? 'ALL',
+        initialBalance: data.initialBalance ?? 0.0,
+        initialReserveFund: data.initialReserveFund ?? 0.0,
+        initialBalanceDate: data.initialBalanceDate
+          ? new Date(data.initialBalanceDate)
+          : null,
+        initialBalanceNotes: data.initialBalanceNotes ?? null,
       },
       update: {
         ...(data.defaultMonthlyFee !== undefined && {
@@ -137,6 +147,20 @@ export class BillingPrismaRepository implements BillingRepository {
         }),
         ...(data.notificationChannel !== undefined && {
           notificationChannel: data.notificationChannel,
+        }),
+        ...(data.initialBalance !== undefined && {
+          initialBalance: data.initialBalance,
+        }),
+        ...(data.initialReserveFund !== undefined && {
+          initialReserveFund: data.initialReserveFund,
+        }),
+        ...(data.initialBalanceDate !== undefined && {
+          initialBalanceDate: data.initialBalanceDate
+            ? new Date(data.initialBalanceDate)
+            : null,
+        }),
+        ...(data.initialBalanceNotes !== undefined && {
+          initialBalanceNotes: data.initialBalanceNotes,
         }),
       },
     });
@@ -1041,5 +1065,151 @@ export class BillingPrismaRepository implements BillingRepository {
       currentRecord,
       historyRecords,
     };
+  }
+
+  async createExtraIncome(
+    data: CreateExtraIncomeData,
+  ): Promise<ExtraIncomeEntity> {
+    const period =
+      data.period || new Date(data.incomeDate).toISOString().substring(0, 7);
+
+    const created = await this.prisma.extraIncome.create({
+      data: {
+        condominiumId: data.condominiumId,
+        houseId: data.houseId || null,
+        concept: data.concept.trim(),
+        description: data.description?.trim() || null,
+        amount: data.amount,
+        incomeDate: new Date(data.incomeDate),
+        period,
+        category: data.category as ExtraIncomeCategory,
+        paymentMethod:
+          (data.paymentMethod as PaymentMethod) || PaymentMethod.TRANSFER,
+        reference: data.reference?.trim() || null,
+        receiptUrl: data.receiptUrl || null,
+        receiptFileName: data.receiptFileName || null,
+        receiptFileType: data.receiptFileType || null,
+        createdById: data.createdById,
+      },
+      include: {
+        house: {
+          select: {
+            houseNumber: true,
+            residents: {
+              select: { firstName: true, lastName: true },
+            },
+          },
+        },
+        createdBy: {
+          select: { firstName: true, lastName: true },
+        },
+      },
+    });
+
+    return await BillingMapper.toExtraIncomeDomainWithSignedUrl(
+      created,
+      this.storageService,
+    );
+  }
+
+  async getExtraIncomes(
+    condominiumId: string,
+    params: FindExtraIncomeParams,
+  ): Promise<ExtraIncomeEntity[]> {
+    const where: any = { condominiumId };
+
+    if (params.period) {
+      where.period = params.period;
+    }
+
+    if (params.category && params.category !== 'ALL') {
+      where.category = params.category as ExtraIncomeCategory;
+    }
+
+    if (params.houseId) {
+      where.houseId = params.houseId;
+    }
+
+    if (params.startDate || params.endDate) {
+      where.incomeDate = {};
+      if (params.startDate) {
+        where.incomeDate.gte = new Date(params.startDate);
+      }
+      if (params.endDate) {
+        where.incomeDate.lte = new Date(params.endDate);
+      }
+    }
+
+    if (params.search && params.search.trim()) {
+      const q = params.search.trim();
+      where.OR = [
+        { concept: { contains: q, mode: 'insensitive' } },
+        { reference: { contains: q, mode: 'insensitive' } },
+        { description: { contains: q, mode: 'insensitive' } },
+        { house: { houseNumber: { contains: q, mode: 'insensitive' } } },
+      ];
+    }
+
+    const items = await this.prisma.extraIncome.findMany({
+      where,
+      orderBy: { incomeDate: 'desc' },
+      include: {
+        house: {
+          select: {
+            houseNumber: true,
+            residents: {
+              select: { firstName: true, lastName: true },
+            },
+          },
+        },
+        createdBy: {
+          select: { firstName: true, lastName: true },
+        },
+      },
+    });
+
+    return await Promise.all(
+      items.map((i) =>
+        BillingMapper.toExtraIncomeDomainWithSignedUrl(i, this.storageService),
+      ),
+    );
+  }
+
+  async deleteExtraIncome(
+    id: string,
+    condominiumId: string,
+  ): Promise<ExtraIncomeEntity> {
+    const existing = await this.prisma.extraIncome.findFirst({
+      where: { id, condominiumId },
+      include: {
+        house: {
+          select: {
+            houseNumber: true,
+            residents: {
+              select: { firstName: true, lastName: true },
+            },
+          },
+        },
+        createdBy: {
+          select: { firstName: true, lastName: true },
+        },
+      },
+    });
+
+    if (!existing) {
+      throw new NotFoundException('Ingreso extraordinario no encontrado');
+    }
+
+    if (existing.receiptUrl) {
+      try {
+        await this.storageService.deleteFile(existing.receiptUrl);
+      } catch (err) {}
+    }
+
+    await this.prisma.extraIncome.delete({
+      where: { id },
+    });
+
+    return BillingMapper.toExtraIncomeDomain(existing);
   }
 }

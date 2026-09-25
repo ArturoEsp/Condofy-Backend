@@ -22,6 +22,10 @@ export class BillingConfigEntity {
   dueDateReminderDaysBefore: number;
   notifyOnProofReviewed: boolean;
   notificationChannel: string;
+  initialBalance?: number;
+  initialReserveFund?: number;
+  initialBalanceDate?: Date | null;
+  initialBalanceNotes?: string | null;
   createdAt: Date;
   updatedAt: Date;
 }

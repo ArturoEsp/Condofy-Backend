@@ -52,6 +52,32 @@ enum PaymentMethod {
   CHECK
 }
 
+enum ExpenseCategory {
+  SERVICES
+  MAINTENANCE
+  SECURITY
+  CLEANING
+  GARDENING
+  ADMINISTRATION
+  RESERVE_FUND
+  OTHER
+}
+
+enum ExpenseStatus {
+  PAID
+  PENDING
+  CANCELLED
+}
+
+enum ExtraIncomeCategory {
+  AMENITY_RENTAL
+  ACCESS_DEVICE
+  RULE_PENALTY
+  EXTRAORDINARY_FEE
+  BANK_INTEREST
+  OTHER
+}
+
 enum AccountMovementType {
   CHARGE
   PAYMENT
@@ -122,8 +148,8 @@ enum GeneralProviderStatus {
 }
 
 model Condominium {
-  id                      String                    @id @default(uuid())
-  key                     String                    @unique
+  id                      String                         @id @default(uuid())
+  key                     String                         @unique
   name                    String
   description             String?
   googleMapsUrl           String?
@@ -137,8 +163,11 @@ model Condominium {
   parcels                 ParcelDelivery[]
   generalProviderAccesses GeneralProviderAccess[]
   billingConfig           CondominiumBillingConfig?
-  createdAt               DateTime                  @default(now())
-  updatedAt               DateTime                  @updatedAt
+  expenses                Expense[]
+  extraIncomes            ExtraIncome[]
+  transparencyConfig      CondominiumTransparencyConfig?
+  createdAt               DateTime                       @default(now())
+  updatedAt               DateTime                       @updatedAt
 }
 
 model User {
@@ -165,6 +194,8 @@ model User {
   providerExitsRegistered   GeneralProviderAccess[] @relation("ProviderExitGuard")
   passwordResetTokens       PasswordResetToken[]
   pushSubscriptions         PushSubscription[]
+  expensesCreated           Expense[]               @relation("ExpenseCreatedBy")
+  extraIncomesCreated       ExtraIncome[]           @relation("ExtraIncomeCreatedBy")
 
   @@index([condominiumId])
 }
@@ -226,6 +257,7 @@ model House {
   visitors           Visitor[]
   houseConfiguration HouseConfiguration?
   parcels            ParcelDelivery[]
+  extraIncomes       ExtraIncome[]
   isDisabled         Boolean             @default(false)
   createdAt          DateTime            @default(now())
   updatedAt          DateTime            @updatedAt
@@ -508,8 +540,87 @@ model CondominiumBillingConfig {
   dueDateReminderDaysBefore Int         @default(3)
   notifyOnProofReviewed     Boolean     @default(true)
   notificationChannel       String      @default("ALL")
+  initialBalance            Decimal     @default(0.00) @db.Decimal(12, 2)
+  initialReserveFund        Decimal     @default(0.00) @db.Decimal(12, 2)
+  initialBalanceDate        DateTime?
+  initialBalanceNotes       String?
   createdAt                 DateTime    @default(now())
   updatedAt                 DateTime    @updatedAt
+
+  @@index([condominiumId])
+}
+
+model Expense {
+  id              String          @id @default(uuid())
+  condominiumId   String
+  condominium     Condominium     @relation(fields: [condominiumId], references: [id], onDelete: Cascade)
+  concept         String
+  description     String?
+  amount          Decimal         @db.Decimal(12, 2)
+  expenseDate     DateTime
+  period          String
+  category        ExpenseCategory
+  paymentMethod   PaymentMethod   @default(TRANSFER)
+  status          ExpenseStatus   @default(PAID)
+  supplier        String?
+  reference       String?
+  invoiceUrl      String?
+  invoiceFileName String?
+  invoiceFileType String?
+  createdById     String
+  createdBy       User            @relation("ExpenseCreatedBy", fields: [createdById], references: [id])
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+
+  @@index([condominiumId, period])
+  @@index([condominiumId, category])
+  @@index([condominiumId, status])
+  @@index([expenseDate])
+}
+
+model ExtraIncome {
+  id              String              @id @default(uuid())
+  condominiumId   String
+  condominium     Condominium         @relation(fields: [condominiumId], references: [id], onDelete: Cascade)
+  houseId         String?
+  house           House?              @relation(fields: [houseId], references: [id], onDelete: SetNull)
+  concept         String
+  description     String?
+  amount          Decimal             @db.Decimal(12, 2)
+  incomeDate      DateTime
+  period          String
+  category        ExtraIncomeCategory
+  paymentMethod   PaymentMethod       @default(TRANSFER)
+  reference       String?
+  receiptUrl      String?
+  receiptFileName String?
+  receiptFileType String?
+  createdById     String
+  createdBy       User                @relation("ExtraIncomeCreatedBy", fields: [createdById], references: [id])
+  createdAt       DateTime            @default(now())
+  updatedAt       DateTime            @updatedAt
+
+  @@index([condominiumId, period])
+  @@index([condominiumId, category])
+  @@index([incomeDate])
+}
+
+model CondominiumTransparencyConfig {
+  id                   String      @id @default(uuid())
+  condominiumId        String      @unique
+  condominium          Condominium @relation(fields: [condominiumId], references: [id], onDelete: Cascade)
+  isEnabled            Boolean     @default(true)
+  showExpenses         Boolean     @default(true)
+  showIncomes          Boolean     @default(true)
+  showBalance          Boolean     @default(true)
+  showSuppliers        Boolean     @default(false)
+  allowInvoiceViewing  Boolean     @default(true)
+  allowInvoiceDownload Boolean     @default(true)
+  showCollectionRate   Boolean     @default(true)
+  timeframeMode        String      @default("90_DAYS")
+  condominiumNotice    String?
+  createdAt            DateTime    @default(now())
+  updatedAt            DateTime    @updatedAt
 
   @@index([condominiumId])
 }

@@ -229,6 +229,9 @@ export type CondominiumWhereInput = {
   parcels?: Prisma.ParcelDeliveryListRelationFilter
   generalProviderAccesses?: Prisma.GeneralProviderAccessListRelationFilter
   billingConfig?: Prisma.XOR<Prisma.CondominiumBillingConfigNullableScalarRelationFilter, Prisma.CondominiumBillingConfigWhereInput> | null
+  expenses?: Prisma.ExpenseListRelationFilter
+  extraIncomes?: Prisma.ExtraIncomeListRelationFilter
+  transparencyConfig?: Prisma.XOR<Prisma.CondominiumTransparencyConfigNullableScalarRelationFilter, Prisma.CondominiumTransparencyConfigWhereInput> | null
 }
 
 export type CondominiumOrderByWithRelationInput = {
@@ -249,6 +252,9 @@ export type CondominiumOrderByWithRelationInput = {
   parcels?: Prisma.ParcelDeliveryOrderByRelationAggregateInput
   generalProviderAccesses?: Prisma.GeneralProviderAccessOrderByRelationAggregateInput
   billingConfig?: Prisma.CondominiumBillingConfigOrderByWithRelationInput
+  expenses?: Prisma.ExpenseOrderByRelationAggregateInput
+  extraIncomes?: Prisma.ExtraIncomeOrderByRelationAggregateInput
+  transparencyConfig?: Prisma.CondominiumTransparencyConfigOrderByWithRelationInput
 }
 
 export type CondominiumWhereUniqueInput = Prisma.AtLeast<{
@@ -272,6 +278,9 @@ export type CondominiumWhereUniqueInput = Prisma.AtLeast<{
   parcels?: Prisma.ParcelDeliveryListRelationFilter
   generalProviderAccesses?: Prisma.GeneralProviderAccessListRelationFilter
   billingConfig?: Prisma.XOR<Prisma.CondominiumBillingConfigNullableScalarRelationFilter, Prisma.CondominiumBillingConfigWhereInput> | null
+  expenses?: Prisma.ExpenseListRelationFilter
+  extraIncomes?: Prisma.ExtraIncomeListRelationFilter
+  transparencyConfig?: Prisma.XOR<Prisma.CondominiumTransparencyConfigNullableScalarRelationFilter, Prisma.CondominiumTransparencyConfigWhereInput> | null
 }, "id" | "key">
 
 export type CondominiumOrderByWithAggregationInput = {
@@ -324,6 +333,9 @@ export type CondominiumCreateInput = {
   parcels?: Prisma.ParcelDeliveryCreateNestedManyWithoutCondominiumInput
   generalProviderAccesses?: Prisma.GeneralProviderAccessCreateNestedManyWithoutCondominiumInput
   billingConfig?: Prisma.CondominiumBillingConfigCreateNestedOneWithoutCondominiumInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutCondominiumInput
+  extraIncomes?: Prisma.ExtraIncomeCreateNestedManyWithoutCondominiumInput
+  transparencyConfig?: Prisma.CondominiumTransparencyConfigCreateNestedOneWithoutCondominiumInput
 }
 
 export type CondominiumUncheckedCreateInput = {
@@ -344,6 +356,9 @@ export type CondominiumUncheckedCreateInput = {
   parcels?: Prisma.ParcelDeliveryUncheckedCreateNestedManyWithoutCondominiumInput
   generalProviderAccesses?: Prisma.GeneralProviderAccessUncheckedCreateNestedManyWithoutCondominiumInput
   billingConfig?: Prisma.CondominiumBillingConfigUncheckedCreateNestedOneWithoutCondominiumInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutCondominiumInput
+  extraIncomes?: Prisma.ExtraIncomeUncheckedCreateNestedManyWithoutCondominiumInput
+  transparencyConfig?: Prisma.CondominiumTransparencyConfigUncheckedCreateNestedOneWithoutCondominiumInput
 }
 
 export type CondominiumUpdateInput = {
@@ -364,6 +379,9 @@ export type CondominiumUpdateInput = {
   parcels?: Prisma.ParcelDeliveryUpdateManyWithoutCondominiumNestedInput
   generalProviderAccesses?: Prisma.GeneralProviderAccessUpdateManyWithoutCondominiumNestedInput
   billingConfig?: Prisma.CondominiumBillingConfigUpdateOneWithoutCondominiumNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutCondominiumNestedInput
+  extraIncomes?: Prisma.ExtraIncomeUpdateManyWithoutCondominiumNestedInput
+  transparencyConfig?: Prisma.CondominiumTransparencyConfigUpdateOneWithoutCondominiumNestedInput
 }
 
 export type CondominiumUncheckedUpdateInput = {
@@ -384,6 +402,9 @@ export type CondominiumUncheckedUpdateInput = {
   parcels?: Prisma.ParcelDeliveryUncheckedUpdateManyWithoutCondominiumNestedInput
   generalProviderAccesses?: Prisma.GeneralProviderAccessUncheckedUpdateManyWithoutCondominiumNestedInput
   billingConfig?: Prisma.CondominiumBillingConfigUncheckedUpdateOneWithoutCondominiumNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutCondominiumNestedInput
+  extraIncomes?: Prisma.ExtraIncomeUncheckedUpdateManyWithoutCondominiumNestedInput
+  transparencyConfig?: Prisma.CondominiumTransparencyConfigUncheckedUpdateOneWithoutCondominiumNestedInput
 }
 
 export type CondominiumCreateManyInput = {
@@ -586,6 +607,48 @@ export type CondominiumUpdateOneRequiredWithoutBillingConfigNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.CondominiumUpdateToOneWithWhereWithoutBillingConfigInput, Prisma.CondominiumUpdateWithoutBillingConfigInput>, Prisma.CondominiumUncheckedUpdateWithoutBillingConfigInput>
 }
 
+export type CondominiumCreateNestedOneWithoutExpensesInput = {
+  create?: Prisma.XOR<Prisma.CondominiumCreateWithoutExpensesInput, Prisma.CondominiumUncheckedCreateWithoutExpensesInput>
+  connectOrCreate?: Prisma.CondominiumCreateOrConnectWithoutExpensesInput
+  connect?: Prisma.CondominiumWhereUniqueInput
+}
+
+export type CondominiumUpdateOneRequiredWithoutExpensesNestedInput = {
+  create?: Prisma.XOR<Prisma.CondominiumCreateWithoutExpensesInput, Prisma.CondominiumUncheckedCreateWithoutExpensesInput>
+  connectOrCreate?: Prisma.CondominiumCreateOrConnectWithoutExpensesInput
+  upsert?: Prisma.CondominiumUpsertWithoutExpensesInput
+  connect?: Prisma.CondominiumWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CondominiumUpdateToOneWithWhereWithoutExpensesInput, Prisma.CondominiumUpdateWithoutExpensesInput>, Prisma.CondominiumUncheckedUpdateWithoutExpensesInput>
+}
+
+export type CondominiumCreateNestedOneWithoutExtraIncomesInput = {
+  create?: Prisma.XOR<Prisma.CondominiumCreateWithoutExtraIncomesInput, Prisma.CondominiumUncheckedCreateWithoutExtraIncomesInput>
+  connectOrCreate?: Prisma.CondominiumCreateOrConnectWithoutExtraIncomesInput
+  connect?: Prisma.CondominiumWhereUniqueInput
+}
+
+export type CondominiumUpdateOneRequiredWithoutExtraIncomesNestedInput = {
+  create?: Prisma.XOR<Prisma.CondominiumCreateWithoutExtraIncomesInput, Prisma.CondominiumUncheckedCreateWithoutExtraIncomesInput>
+  connectOrCreate?: Prisma.CondominiumCreateOrConnectWithoutExtraIncomesInput
+  upsert?: Prisma.CondominiumUpsertWithoutExtraIncomesInput
+  connect?: Prisma.CondominiumWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CondominiumUpdateToOneWithWhereWithoutExtraIncomesInput, Prisma.CondominiumUpdateWithoutExtraIncomesInput>, Prisma.CondominiumUncheckedUpdateWithoutExtraIncomesInput>
+}
+
+export type CondominiumCreateNestedOneWithoutTransparencyConfigInput = {
+  create?: Prisma.XOR<Prisma.CondominiumCreateWithoutTransparencyConfigInput, Prisma.CondominiumUncheckedCreateWithoutTransparencyConfigInput>
+  connectOrCreate?: Prisma.CondominiumCreateOrConnectWithoutTransparencyConfigInput
+  connect?: Prisma.CondominiumWhereUniqueInput
+}
+
+export type CondominiumUpdateOneRequiredWithoutTransparencyConfigNestedInput = {
+  create?: Prisma.XOR<Prisma.CondominiumCreateWithoutTransparencyConfigInput, Prisma.CondominiumUncheckedCreateWithoutTransparencyConfigInput>
+  connectOrCreate?: Prisma.CondominiumCreateOrConnectWithoutTransparencyConfigInput
+  upsert?: Prisma.CondominiumUpsertWithoutTransparencyConfigInput
+  connect?: Prisma.CondominiumWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CondominiumUpdateToOneWithWhereWithoutTransparencyConfigInput, Prisma.CondominiumUpdateWithoutTransparencyConfigInput>, Prisma.CondominiumUncheckedUpdateWithoutTransparencyConfigInput>
+}
+
 export type CondominiumCreateWithoutAdminsInput = {
   id?: string
   key: string
@@ -603,6 +666,9 @@ export type CondominiumCreateWithoutAdminsInput = {
   parcels?: Prisma.ParcelDeliveryCreateNestedManyWithoutCondominiumInput
   generalProviderAccesses?: Prisma.GeneralProviderAccessCreateNestedManyWithoutCondominiumInput
   billingConfig?: Prisma.CondominiumBillingConfigCreateNestedOneWithoutCondominiumInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutCondominiumInput
+  extraIncomes?: Prisma.ExtraIncomeCreateNestedManyWithoutCondominiumInput
+  transparencyConfig?: Prisma.CondominiumTransparencyConfigCreateNestedOneWithoutCondominiumInput
 }
 
 export type CondominiumUncheckedCreateWithoutAdminsInput = {
@@ -622,6 +688,9 @@ export type CondominiumUncheckedCreateWithoutAdminsInput = {
   parcels?: Prisma.ParcelDeliveryUncheckedCreateNestedManyWithoutCondominiumInput
   generalProviderAccesses?: Prisma.GeneralProviderAccessUncheckedCreateNestedManyWithoutCondominiumInput
   billingConfig?: Prisma.CondominiumBillingConfigUncheckedCreateNestedOneWithoutCondominiumInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutCondominiumInput
+  extraIncomes?: Prisma.ExtraIncomeUncheckedCreateNestedManyWithoutCondominiumInput
+  transparencyConfig?: Prisma.CondominiumTransparencyConfigUncheckedCreateNestedOneWithoutCondominiumInput
 }
 
 export type CondominiumCreateOrConnectWithoutAdminsInput = {
@@ -657,6 +726,9 @@ export type CondominiumUpdateWithoutAdminsInput = {
   parcels?: Prisma.ParcelDeliveryUpdateManyWithoutCondominiumNestedInput
   generalProviderAccesses?: Prisma.GeneralProviderAccessUpdateManyWithoutCondominiumNestedInput
   billingConfig?: Prisma.CondominiumBillingConfigUpdateOneWithoutCondominiumNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutCondominiumNestedInput
+  extraIncomes?: Prisma.ExtraIncomeUpdateManyWithoutCondominiumNestedInput
+  transparencyConfig?: Prisma.CondominiumTransparencyConfigUpdateOneWithoutCondominiumNestedInput
 }
 
 export type CondominiumUncheckedUpdateWithoutAdminsInput = {
@@ -676,6 +748,9 @@ export type CondominiumUncheckedUpdateWithoutAdminsInput = {
   parcels?: Prisma.ParcelDeliveryUncheckedUpdateManyWithoutCondominiumNestedInput
   generalProviderAccesses?: Prisma.GeneralProviderAccessUncheckedUpdateManyWithoutCondominiumNestedInput
   billingConfig?: Prisma.CondominiumBillingConfigUncheckedUpdateOneWithoutCondominiumNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutCondominiumNestedInput
+  extraIncomes?: Prisma.ExtraIncomeUncheckedUpdateManyWithoutCondominiumNestedInput
+  transparencyConfig?: Prisma.CondominiumTransparencyConfigUncheckedUpdateOneWithoutCondominiumNestedInput
 }
 
 export type CondominiumCreateWithoutHousesInput = {
@@ -695,6 +770,9 @@ export type CondominiumCreateWithoutHousesInput = {
   parcels?: Prisma.ParcelDeliveryCreateNestedManyWithoutCondominiumInput
   generalProviderAccesses?: Prisma.GeneralProviderAccessCreateNestedManyWithoutCondominiumInput
   billingConfig?: Prisma.CondominiumBillingConfigCreateNestedOneWithoutCondominiumInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutCondominiumInput
+  extraIncomes?: Prisma.ExtraIncomeCreateNestedManyWithoutCondominiumInput
+  transparencyConfig?: Prisma.CondominiumTransparencyConfigCreateNestedOneWithoutCondominiumInput
 }
 
 export type CondominiumUncheckedCreateWithoutHousesInput = {
@@ -714,6 +792,9 @@ export type CondominiumUncheckedCreateWithoutHousesInput = {
   parcels?: Prisma.ParcelDeliveryUncheckedCreateNestedManyWithoutCondominiumInput
   generalProviderAccesses?: Prisma.GeneralProviderAccessUncheckedCreateNestedManyWithoutCondominiumInput
   billingConfig?: Prisma.CondominiumBillingConfigUncheckedCreateNestedOneWithoutCondominiumInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutCondominiumInput
+  extraIncomes?: Prisma.ExtraIncomeUncheckedCreateNestedManyWithoutCondominiumInput
+  transparencyConfig?: Prisma.CondominiumTransparencyConfigUncheckedCreateNestedOneWithoutCondominiumInput
 }
 
 export type CondominiumCreateOrConnectWithoutHousesInput = {
@@ -749,6 +830,9 @@ export type CondominiumUpdateWithoutHousesInput = {
   parcels?: Prisma.ParcelDeliveryUpdateManyWithoutCondominiumNestedInput
   generalProviderAccesses?: Prisma.GeneralProviderAccessUpdateManyWithoutCondominiumNestedInput
   billingConfig?: Prisma.CondominiumBillingConfigUpdateOneWithoutCondominiumNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutCondominiumNestedInput
+  extraIncomes?: Prisma.ExtraIncomeUpdateManyWithoutCondominiumNestedInput
+  transparencyConfig?: Prisma.CondominiumTransparencyConfigUpdateOneWithoutCondominiumNestedInput
 }
 
 export type CondominiumUncheckedUpdateWithoutHousesInput = {
@@ -768,6 +852,9 @@ export type CondominiumUncheckedUpdateWithoutHousesInput = {
   parcels?: Prisma.ParcelDeliveryUncheckedUpdateManyWithoutCondominiumNestedInput
   generalProviderAccesses?: Prisma.GeneralProviderAccessUncheckedUpdateManyWithoutCondominiumNestedInput
   billingConfig?: Prisma.CondominiumBillingConfigUncheckedUpdateOneWithoutCondominiumNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutCondominiumNestedInput
+  extraIncomes?: Prisma.ExtraIncomeUncheckedUpdateManyWithoutCondominiumNestedInput
+  transparencyConfig?: Prisma.CondominiumTransparencyConfigUncheckedUpdateOneWithoutCondominiumNestedInput
 }
 
 export type CondominiumCreateWithoutResidentProfilesInput = {
@@ -787,6 +874,9 @@ export type CondominiumCreateWithoutResidentProfilesInput = {
   parcels?: Prisma.ParcelDeliveryCreateNestedManyWithoutCondominiumInput
   generalProviderAccesses?: Prisma.GeneralProviderAccessCreateNestedManyWithoutCondominiumInput
   billingConfig?: Prisma.CondominiumBillingConfigCreateNestedOneWithoutCondominiumInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutCondominiumInput
+  extraIncomes?: Prisma.ExtraIncomeCreateNestedManyWithoutCondominiumInput
+  transparencyConfig?: Prisma.CondominiumTransparencyConfigCreateNestedOneWithoutCondominiumInput
 }
 
 export type CondominiumUncheckedCreateWithoutResidentProfilesInput = {
@@ -806,6 +896,9 @@ export type CondominiumUncheckedCreateWithoutResidentProfilesInput = {
   parcels?: Prisma.ParcelDeliveryUncheckedCreateNestedManyWithoutCondominiumInput
   generalProviderAccesses?: Prisma.GeneralProviderAccessUncheckedCreateNestedManyWithoutCondominiumInput
   billingConfig?: Prisma.CondominiumBillingConfigUncheckedCreateNestedOneWithoutCondominiumInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutCondominiumInput
+  extraIncomes?: Prisma.ExtraIncomeUncheckedCreateNestedManyWithoutCondominiumInput
+  transparencyConfig?: Prisma.CondominiumTransparencyConfigUncheckedCreateNestedOneWithoutCondominiumInput
 }
 
 export type CondominiumCreateOrConnectWithoutResidentProfilesInput = {
@@ -841,6 +934,9 @@ export type CondominiumUpdateWithoutResidentProfilesInput = {
   parcels?: Prisma.ParcelDeliveryUpdateManyWithoutCondominiumNestedInput
   generalProviderAccesses?: Prisma.GeneralProviderAccessUpdateManyWithoutCondominiumNestedInput
   billingConfig?: Prisma.CondominiumBillingConfigUpdateOneWithoutCondominiumNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutCondominiumNestedInput
+  extraIncomes?: Prisma.ExtraIncomeUpdateManyWithoutCondominiumNestedInput
+  transparencyConfig?: Prisma.CondominiumTransparencyConfigUpdateOneWithoutCondominiumNestedInput
 }
 
 export type CondominiumUncheckedUpdateWithoutResidentProfilesInput = {
@@ -860,6 +956,9 @@ export type CondominiumUncheckedUpdateWithoutResidentProfilesInput = {
   parcels?: Prisma.ParcelDeliveryUncheckedUpdateManyWithoutCondominiumNestedInput
   generalProviderAccesses?: Prisma.GeneralProviderAccessUncheckedUpdateManyWithoutCondominiumNestedInput
   billingConfig?: Prisma.CondominiumBillingConfigUncheckedUpdateOneWithoutCondominiumNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutCondominiumNestedInput
+  extraIncomes?: Prisma.ExtraIncomeUncheckedUpdateManyWithoutCondominiumNestedInput
+  transparencyConfig?: Prisma.CondominiumTransparencyConfigUncheckedUpdateOneWithoutCondominiumNestedInput
 }
 
 export type CondominiumCreateWithoutParcelsInput = {
@@ -879,6 +978,9 @@ export type CondominiumCreateWithoutParcelsInput = {
   maintenanceCharges?: Prisma.MaintenanceChargeCreateNestedManyWithoutCondominiumInput
   generalProviderAccesses?: Prisma.GeneralProviderAccessCreateNestedManyWithoutCondominiumInput
   billingConfig?: Prisma.CondominiumBillingConfigCreateNestedOneWithoutCondominiumInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutCondominiumInput
+  extraIncomes?: Prisma.ExtraIncomeCreateNestedManyWithoutCondominiumInput
+  transparencyConfig?: Prisma.CondominiumTransparencyConfigCreateNestedOneWithoutCondominiumInput
 }
 
 export type CondominiumUncheckedCreateWithoutParcelsInput = {
@@ -898,6 +1000,9 @@ export type CondominiumUncheckedCreateWithoutParcelsInput = {
   maintenanceCharges?: Prisma.MaintenanceChargeUncheckedCreateNestedManyWithoutCondominiumInput
   generalProviderAccesses?: Prisma.GeneralProviderAccessUncheckedCreateNestedManyWithoutCondominiumInput
   billingConfig?: Prisma.CondominiumBillingConfigUncheckedCreateNestedOneWithoutCondominiumInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutCondominiumInput
+  extraIncomes?: Prisma.ExtraIncomeUncheckedCreateNestedManyWithoutCondominiumInput
+  transparencyConfig?: Prisma.CondominiumTransparencyConfigUncheckedCreateNestedOneWithoutCondominiumInput
 }
 
 export type CondominiumCreateOrConnectWithoutParcelsInput = {
@@ -933,6 +1038,9 @@ export type CondominiumUpdateWithoutParcelsInput = {
   maintenanceCharges?: Prisma.MaintenanceChargeUpdateManyWithoutCondominiumNestedInput
   generalProviderAccesses?: Prisma.GeneralProviderAccessUpdateManyWithoutCondominiumNestedInput
   billingConfig?: Prisma.CondominiumBillingConfigUpdateOneWithoutCondominiumNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutCondominiumNestedInput
+  extraIncomes?: Prisma.ExtraIncomeUpdateManyWithoutCondominiumNestedInput
+  transparencyConfig?: Prisma.CondominiumTransparencyConfigUpdateOneWithoutCondominiumNestedInput
 }
 
 export type CondominiumUncheckedUpdateWithoutParcelsInput = {
@@ -952,6 +1060,9 @@ export type CondominiumUncheckedUpdateWithoutParcelsInput = {
   maintenanceCharges?: Prisma.MaintenanceChargeUncheckedUpdateManyWithoutCondominiumNestedInput
   generalProviderAccesses?: Prisma.GeneralProviderAccessUncheckedUpdateManyWithoutCondominiumNestedInput
   billingConfig?: Prisma.CondominiumBillingConfigUncheckedUpdateOneWithoutCondominiumNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutCondominiumNestedInput
+  extraIncomes?: Prisma.ExtraIncomeUncheckedUpdateManyWithoutCondominiumNestedInput
+  transparencyConfig?: Prisma.CondominiumTransparencyConfigUncheckedUpdateOneWithoutCondominiumNestedInput
 }
 
 export type CondominiumCreateWithoutGeneralProviderAccessesInput = {
@@ -971,6 +1082,9 @@ export type CondominiumCreateWithoutGeneralProviderAccessesInput = {
   maintenanceCharges?: Prisma.MaintenanceChargeCreateNestedManyWithoutCondominiumInput
   parcels?: Prisma.ParcelDeliveryCreateNestedManyWithoutCondominiumInput
   billingConfig?: Prisma.CondominiumBillingConfigCreateNestedOneWithoutCondominiumInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutCondominiumInput
+  extraIncomes?: Prisma.ExtraIncomeCreateNestedManyWithoutCondominiumInput
+  transparencyConfig?: Prisma.CondominiumTransparencyConfigCreateNestedOneWithoutCondominiumInput
 }
 
 export type CondominiumUncheckedCreateWithoutGeneralProviderAccessesInput = {
@@ -990,6 +1104,9 @@ export type CondominiumUncheckedCreateWithoutGeneralProviderAccessesInput = {
   maintenanceCharges?: Prisma.MaintenanceChargeUncheckedCreateNestedManyWithoutCondominiumInput
   parcels?: Prisma.ParcelDeliveryUncheckedCreateNestedManyWithoutCondominiumInput
   billingConfig?: Prisma.CondominiumBillingConfigUncheckedCreateNestedOneWithoutCondominiumInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutCondominiumInput
+  extraIncomes?: Prisma.ExtraIncomeUncheckedCreateNestedManyWithoutCondominiumInput
+  transparencyConfig?: Prisma.CondominiumTransparencyConfigUncheckedCreateNestedOneWithoutCondominiumInput
 }
 
 export type CondominiumCreateOrConnectWithoutGeneralProviderAccessesInput = {
@@ -1025,6 +1142,9 @@ export type CondominiumUpdateWithoutGeneralProviderAccessesInput = {
   maintenanceCharges?: Prisma.MaintenanceChargeUpdateManyWithoutCondominiumNestedInput
   parcels?: Prisma.ParcelDeliveryUpdateManyWithoutCondominiumNestedInput
   billingConfig?: Prisma.CondominiumBillingConfigUpdateOneWithoutCondominiumNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutCondominiumNestedInput
+  extraIncomes?: Prisma.ExtraIncomeUpdateManyWithoutCondominiumNestedInput
+  transparencyConfig?: Prisma.CondominiumTransparencyConfigUpdateOneWithoutCondominiumNestedInput
 }
 
 export type CondominiumUncheckedUpdateWithoutGeneralProviderAccessesInput = {
@@ -1044,6 +1164,9 @@ export type CondominiumUncheckedUpdateWithoutGeneralProviderAccessesInput = {
   maintenanceCharges?: Prisma.MaintenanceChargeUncheckedUpdateManyWithoutCondominiumNestedInput
   parcels?: Prisma.ParcelDeliveryUncheckedUpdateManyWithoutCondominiumNestedInput
   billingConfig?: Prisma.CondominiumBillingConfigUncheckedUpdateOneWithoutCondominiumNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutCondominiumNestedInput
+  extraIncomes?: Prisma.ExtraIncomeUncheckedUpdateManyWithoutCondominiumNestedInput
+  transparencyConfig?: Prisma.CondominiumTransparencyConfigUncheckedUpdateOneWithoutCondominiumNestedInput
 }
 
 export type CondominiumCreateWithoutMaintenanceChargesInput = {
@@ -1063,6 +1186,9 @@ export type CondominiumCreateWithoutMaintenanceChargesInput = {
   parcels?: Prisma.ParcelDeliveryCreateNestedManyWithoutCondominiumInput
   generalProviderAccesses?: Prisma.GeneralProviderAccessCreateNestedManyWithoutCondominiumInput
   billingConfig?: Prisma.CondominiumBillingConfigCreateNestedOneWithoutCondominiumInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutCondominiumInput
+  extraIncomes?: Prisma.ExtraIncomeCreateNestedManyWithoutCondominiumInput
+  transparencyConfig?: Prisma.CondominiumTransparencyConfigCreateNestedOneWithoutCondominiumInput
 }
 
 export type CondominiumUncheckedCreateWithoutMaintenanceChargesInput = {
@@ -1082,6 +1208,9 @@ export type CondominiumUncheckedCreateWithoutMaintenanceChargesInput = {
   parcels?: Prisma.ParcelDeliveryUncheckedCreateNestedManyWithoutCondominiumInput
   generalProviderAccesses?: Prisma.GeneralProviderAccessUncheckedCreateNestedManyWithoutCondominiumInput
   billingConfig?: Prisma.CondominiumBillingConfigUncheckedCreateNestedOneWithoutCondominiumInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutCondominiumInput
+  extraIncomes?: Prisma.ExtraIncomeUncheckedCreateNestedManyWithoutCondominiumInput
+  transparencyConfig?: Prisma.CondominiumTransparencyConfigUncheckedCreateNestedOneWithoutCondominiumInput
 }
 
 export type CondominiumCreateOrConnectWithoutMaintenanceChargesInput = {
@@ -1117,6 +1246,9 @@ export type CondominiumUpdateWithoutMaintenanceChargesInput = {
   parcels?: Prisma.ParcelDeliveryUpdateManyWithoutCondominiumNestedInput
   generalProviderAccesses?: Prisma.GeneralProviderAccessUpdateManyWithoutCondominiumNestedInput
   billingConfig?: Prisma.CondominiumBillingConfigUpdateOneWithoutCondominiumNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutCondominiumNestedInput
+  extraIncomes?: Prisma.ExtraIncomeUpdateManyWithoutCondominiumNestedInput
+  transparencyConfig?: Prisma.CondominiumTransparencyConfigUpdateOneWithoutCondominiumNestedInput
 }
 
 export type CondominiumUncheckedUpdateWithoutMaintenanceChargesInput = {
@@ -1136,6 +1268,9 @@ export type CondominiumUncheckedUpdateWithoutMaintenanceChargesInput = {
   parcels?: Prisma.ParcelDeliveryUncheckedUpdateManyWithoutCondominiumNestedInput
   generalProviderAccesses?: Prisma.GeneralProviderAccessUncheckedUpdateManyWithoutCondominiumNestedInput
   billingConfig?: Prisma.CondominiumBillingConfigUncheckedUpdateOneWithoutCondominiumNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutCondominiumNestedInput
+  extraIncomes?: Prisma.ExtraIncomeUncheckedUpdateManyWithoutCondominiumNestedInput
+  transparencyConfig?: Prisma.CondominiumTransparencyConfigUncheckedUpdateOneWithoutCondominiumNestedInput
 }
 
 export type CondominiumCreateWithoutBillingConfigInput = {
@@ -1155,6 +1290,9 @@ export type CondominiumCreateWithoutBillingConfigInput = {
   maintenanceCharges?: Prisma.MaintenanceChargeCreateNestedManyWithoutCondominiumInput
   parcels?: Prisma.ParcelDeliveryCreateNestedManyWithoutCondominiumInput
   generalProviderAccesses?: Prisma.GeneralProviderAccessCreateNestedManyWithoutCondominiumInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutCondominiumInput
+  extraIncomes?: Prisma.ExtraIncomeCreateNestedManyWithoutCondominiumInput
+  transparencyConfig?: Prisma.CondominiumTransparencyConfigCreateNestedOneWithoutCondominiumInput
 }
 
 export type CondominiumUncheckedCreateWithoutBillingConfigInput = {
@@ -1174,6 +1312,9 @@ export type CondominiumUncheckedCreateWithoutBillingConfigInput = {
   maintenanceCharges?: Prisma.MaintenanceChargeUncheckedCreateNestedManyWithoutCondominiumInput
   parcels?: Prisma.ParcelDeliveryUncheckedCreateNestedManyWithoutCondominiumInput
   generalProviderAccesses?: Prisma.GeneralProviderAccessUncheckedCreateNestedManyWithoutCondominiumInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutCondominiumInput
+  extraIncomes?: Prisma.ExtraIncomeUncheckedCreateNestedManyWithoutCondominiumInput
+  transparencyConfig?: Prisma.CondominiumTransparencyConfigUncheckedCreateNestedOneWithoutCondominiumInput
 }
 
 export type CondominiumCreateOrConnectWithoutBillingConfigInput = {
@@ -1209,6 +1350,9 @@ export type CondominiumUpdateWithoutBillingConfigInput = {
   maintenanceCharges?: Prisma.MaintenanceChargeUpdateManyWithoutCondominiumNestedInput
   parcels?: Prisma.ParcelDeliveryUpdateManyWithoutCondominiumNestedInput
   generalProviderAccesses?: Prisma.GeneralProviderAccessUpdateManyWithoutCondominiumNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutCondominiumNestedInput
+  extraIncomes?: Prisma.ExtraIncomeUpdateManyWithoutCondominiumNestedInput
+  transparencyConfig?: Prisma.CondominiumTransparencyConfigUpdateOneWithoutCondominiumNestedInput
 }
 
 export type CondominiumUncheckedUpdateWithoutBillingConfigInput = {
@@ -1228,6 +1372,321 @@ export type CondominiumUncheckedUpdateWithoutBillingConfigInput = {
   maintenanceCharges?: Prisma.MaintenanceChargeUncheckedUpdateManyWithoutCondominiumNestedInput
   parcels?: Prisma.ParcelDeliveryUncheckedUpdateManyWithoutCondominiumNestedInput
   generalProviderAccesses?: Prisma.GeneralProviderAccessUncheckedUpdateManyWithoutCondominiumNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutCondominiumNestedInput
+  extraIncomes?: Prisma.ExtraIncomeUncheckedUpdateManyWithoutCondominiumNestedInput
+  transparencyConfig?: Prisma.CondominiumTransparencyConfigUncheckedUpdateOneWithoutCondominiumNestedInput
+}
+
+export type CondominiumCreateWithoutExpensesInput = {
+  id?: string
+  key: string
+  name: string
+  description?: string | null
+  googleMapsUrl?: string | null
+  address?: string | null
+  contactPhone?: string | null
+  contactEmail?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  houses?: Prisma.HouseCreateNestedManyWithoutCondominiumInput
+  admins?: Prisma.UserCreateNestedManyWithoutCondominiumInput
+  residentProfiles?: Prisma.ResidentProfileCreateNestedManyWithoutCondominiumInput
+  maintenanceCharges?: Prisma.MaintenanceChargeCreateNestedManyWithoutCondominiumInput
+  parcels?: Prisma.ParcelDeliveryCreateNestedManyWithoutCondominiumInput
+  generalProviderAccesses?: Prisma.GeneralProviderAccessCreateNestedManyWithoutCondominiumInput
+  billingConfig?: Prisma.CondominiumBillingConfigCreateNestedOneWithoutCondominiumInput
+  extraIncomes?: Prisma.ExtraIncomeCreateNestedManyWithoutCondominiumInput
+  transparencyConfig?: Prisma.CondominiumTransparencyConfigCreateNestedOneWithoutCondominiumInput
+}
+
+export type CondominiumUncheckedCreateWithoutExpensesInput = {
+  id?: string
+  key: string
+  name: string
+  description?: string | null
+  googleMapsUrl?: string | null
+  address?: string | null
+  contactPhone?: string | null
+  contactEmail?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  houses?: Prisma.HouseUncheckedCreateNestedManyWithoutCondominiumInput
+  admins?: Prisma.UserUncheckedCreateNestedManyWithoutCondominiumInput
+  residentProfiles?: Prisma.ResidentProfileUncheckedCreateNestedManyWithoutCondominiumInput
+  maintenanceCharges?: Prisma.MaintenanceChargeUncheckedCreateNestedManyWithoutCondominiumInput
+  parcels?: Prisma.ParcelDeliveryUncheckedCreateNestedManyWithoutCondominiumInput
+  generalProviderAccesses?: Prisma.GeneralProviderAccessUncheckedCreateNestedManyWithoutCondominiumInput
+  billingConfig?: Prisma.CondominiumBillingConfigUncheckedCreateNestedOneWithoutCondominiumInput
+  extraIncomes?: Prisma.ExtraIncomeUncheckedCreateNestedManyWithoutCondominiumInput
+  transparencyConfig?: Prisma.CondominiumTransparencyConfigUncheckedCreateNestedOneWithoutCondominiumInput
+}
+
+export type CondominiumCreateOrConnectWithoutExpensesInput = {
+  where: Prisma.CondominiumWhereUniqueInput
+  create: Prisma.XOR<Prisma.CondominiumCreateWithoutExpensesInput, Prisma.CondominiumUncheckedCreateWithoutExpensesInput>
+}
+
+export type CondominiumUpsertWithoutExpensesInput = {
+  update: Prisma.XOR<Prisma.CondominiumUpdateWithoutExpensesInput, Prisma.CondominiumUncheckedUpdateWithoutExpensesInput>
+  create: Prisma.XOR<Prisma.CondominiumCreateWithoutExpensesInput, Prisma.CondominiumUncheckedCreateWithoutExpensesInput>
+  where?: Prisma.CondominiumWhereInput
+}
+
+export type CondominiumUpdateToOneWithWhereWithoutExpensesInput = {
+  where?: Prisma.CondominiumWhereInput
+  data: Prisma.XOR<Prisma.CondominiumUpdateWithoutExpensesInput, Prisma.CondominiumUncheckedUpdateWithoutExpensesInput>
+}
+
+export type CondominiumUpdateWithoutExpensesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleMapsUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  houses?: Prisma.HouseUpdateManyWithoutCondominiumNestedInput
+  admins?: Prisma.UserUpdateManyWithoutCondominiumNestedInput
+  residentProfiles?: Prisma.ResidentProfileUpdateManyWithoutCondominiumNestedInput
+  maintenanceCharges?: Prisma.MaintenanceChargeUpdateManyWithoutCondominiumNestedInput
+  parcels?: Prisma.ParcelDeliveryUpdateManyWithoutCondominiumNestedInput
+  generalProviderAccesses?: Prisma.GeneralProviderAccessUpdateManyWithoutCondominiumNestedInput
+  billingConfig?: Prisma.CondominiumBillingConfigUpdateOneWithoutCondominiumNestedInput
+  extraIncomes?: Prisma.ExtraIncomeUpdateManyWithoutCondominiumNestedInput
+  transparencyConfig?: Prisma.CondominiumTransparencyConfigUpdateOneWithoutCondominiumNestedInput
+}
+
+export type CondominiumUncheckedUpdateWithoutExpensesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleMapsUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  houses?: Prisma.HouseUncheckedUpdateManyWithoutCondominiumNestedInput
+  admins?: Prisma.UserUncheckedUpdateManyWithoutCondominiumNestedInput
+  residentProfiles?: Prisma.ResidentProfileUncheckedUpdateManyWithoutCondominiumNestedInput
+  maintenanceCharges?: Prisma.MaintenanceChargeUncheckedUpdateManyWithoutCondominiumNestedInput
+  parcels?: Prisma.ParcelDeliveryUncheckedUpdateManyWithoutCondominiumNestedInput
+  generalProviderAccesses?: Prisma.GeneralProviderAccessUncheckedUpdateManyWithoutCondominiumNestedInput
+  billingConfig?: Prisma.CondominiumBillingConfigUncheckedUpdateOneWithoutCondominiumNestedInput
+  extraIncomes?: Prisma.ExtraIncomeUncheckedUpdateManyWithoutCondominiumNestedInput
+  transparencyConfig?: Prisma.CondominiumTransparencyConfigUncheckedUpdateOneWithoutCondominiumNestedInput
+}
+
+export type CondominiumCreateWithoutExtraIncomesInput = {
+  id?: string
+  key: string
+  name: string
+  description?: string | null
+  googleMapsUrl?: string | null
+  address?: string | null
+  contactPhone?: string | null
+  contactEmail?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  houses?: Prisma.HouseCreateNestedManyWithoutCondominiumInput
+  admins?: Prisma.UserCreateNestedManyWithoutCondominiumInput
+  residentProfiles?: Prisma.ResidentProfileCreateNestedManyWithoutCondominiumInput
+  maintenanceCharges?: Prisma.MaintenanceChargeCreateNestedManyWithoutCondominiumInput
+  parcels?: Prisma.ParcelDeliveryCreateNestedManyWithoutCondominiumInput
+  generalProviderAccesses?: Prisma.GeneralProviderAccessCreateNestedManyWithoutCondominiumInput
+  billingConfig?: Prisma.CondominiumBillingConfigCreateNestedOneWithoutCondominiumInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutCondominiumInput
+  transparencyConfig?: Prisma.CondominiumTransparencyConfigCreateNestedOneWithoutCondominiumInput
+}
+
+export type CondominiumUncheckedCreateWithoutExtraIncomesInput = {
+  id?: string
+  key: string
+  name: string
+  description?: string | null
+  googleMapsUrl?: string | null
+  address?: string | null
+  contactPhone?: string | null
+  contactEmail?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  houses?: Prisma.HouseUncheckedCreateNestedManyWithoutCondominiumInput
+  admins?: Prisma.UserUncheckedCreateNestedManyWithoutCondominiumInput
+  residentProfiles?: Prisma.ResidentProfileUncheckedCreateNestedManyWithoutCondominiumInput
+  maintenanceCharges?: Prisma.MaintenanceChargeUncheckedCreateNestedManyWithoutCondominiumInput
+  parcels?: Prisma.ParcelDeliveryUncheckedCreateNestedManyWithoutCondominiumInput
+  generalProviderAccesses?: Prisma.GeneralProviderAccessUncheckedCreateNestedManyWithoutCondominiumInput
+  billingConfig?: Prisma.CondominiumBillingConfigUncheckedCreateNestedOneWithoutCondominiumInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutCondominiumInput
+  transparencyConfig?: Prisma.CondominiumTransparencyConfigUncheckedCreateNestedOneWithoutCondominiumInput
+}
+
+export type CondominiumCreateOrConnectWithoutExtraIncomesInput = {
+  where: Prisma.CondominiumWhereUniqueInput
+  create: Prisma.XOR<Prisma.CondominiumCreateWithoutExtraIncomesInput, Prisma.CondominiumUncheckedCreateWithoutExtraIncomesInput>
+}
+
+export type CondominiumUpsertWithoutExtraIncomesInput = {
+  update: Prisma.XOR<Prisma.CondominiumUpdateWithoutExtraIncomesInput, Prisma.CondominiumUncheckedUpdateWithoutExtraIncomesInput>
+  create: Prisma.XOR<Prisma.CondominiumCreateWithoutExtraIncomesInput, Prisma.CondominiumUncheckedCreateWithoutExtraIncomesInput>
+  where?: Prisma.CondominiumWhereInput
+}
+
+export type CondominiumUpdateToOneWithWhereWithoutExtraIncomesInput = {
+  where?: Prisma.CondominiumWhereInput
+  data: Prisma.XOR<Prisma.CondominiumUpdateWithoutExtraIncomesInput, Prisma.CondominiumUncheckedUpdateWithoutExtraIncomesInput>
+}
+
+export type CondominiumUpdateWithoutExtraIncomesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleMapsUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  houses?: Prisma.HouseUpdateManyWithoutCondominiumNestedInput
+  admins?: Prisma.UserUpdateManyWithoutCondominiumNestedInput
+  residentProfiles?: Prisma.ResidentProfileUpdateManyWithoutCondominiumNestedInput
+  maintenanceCharges?: Prisma.MaintenanceChargeUpdateManyWithoutCondominiumNestedInput
+  parcels?: Prisma.ParcelDeliveryUpdateManyWithoutCondominiumNestedInput
+  generalProviderAccesses?: Prisma.GeneralProviderAccessUpdateManyWithoutCondominiumNestedInput
+  billingConfig?: Prisma.CondominiumBillingConfigUpdateOneWithoutCondominiumNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutCondominiumNestedInput
+  transparencyConfig?: Prisma.CondominiumTransparencyConfigUpdateOneWithoutCondominiumNestedInput
+}
+
+export type CondominiumUncheckedUpdateWithoutExtraIncomesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleMapsUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  houses?: Prisma.HouseUncheckedUpdateManyWithoutCondominiumNestedInput
+  admins?: Prisma.UserUncheckedUpdateManyWithoutCondominiumNestedInput
+  residentProfiles?: Prisma.ResidentProfileUncheckedUpdateManyWithoutCondominiumNestedInput
+  maintenanceCharges?: Prisma.MaintenanceChargeUncheckedUpdateManyWithoutCondominiumNestedInput
+  parcels?: Prisma.ParcelDeliveryUncheckedUpdateManyWithoutCondominiumNestedInput
+  generalProviderAccesses?: Prisma.GeneralProviderAccessUncheckedUpdateManyWithoutCondominiumNestedInput
+  billingConfig?: Prisma.CondominiumBillingConfigUncheckedUpdateOneWithoutCondominiumNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutCondominiumNestedInput
+  transparencyConfig?: Prisma.CondominiumTransparencyConfigUncheckedUpdateOneWithoutCondominiumNestedInput
+}
+
+export type CondominiumCreateWithoutTransparencyConfigInput = {
+  id?: string
+  key: string
+  name: string
+  description?: string | null
+  googleMapsUrl?: string | null
+  address?: string | null
+  contactPhone?: string | null
+  contactEmail?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  houses?: Prisma.HouseCreateNestedManyWithoutCondominiumInput
+  admins?: Prisma.UserCreateNestedManyWithoutCondominiumInput
+  residentProfiles?: Prisma.ResidentProfileCreateNestedManyWithoutCondominiumInput
+  maintenanceCharges?: Prisma.MaintenanceChargeCreateNestedManyWithoutCondominiumInput
+  parcels?: Prisma.ParcelDeliveryCreateNestedManyWithoutCondominiumInput
+  generalProviderAccesses?: Prisma.GeneralProviderAccessCreateNestedManyWithoutCondominiumInput
+  billingConfig?: Prisma.CondominiumBillingConfigCreateNestedOneWithoutCondominiumInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutCondominiumInput
+  extraIncomes?: Prisma.ExtraIncomeCreateNestedManyWithoutCondominiumInput
+}
+
+export type CondominiumUncheckedCreateWithoutTransparencyConfigInput = {
+  id?: string
+  key: string
+  name: string
+  description?: string | null
+  googleMapsUrl?: string | null
+  address?: string | null
+  contactPhone?: string | null
+  contactEmail?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  houses?: Prisma.HouseUncheckedCreateNestedManyWithoutCondominiumInput
+  admins?: Prisma.UserUncheckedCreateNestedManyWithoutCondominiumInput
+  residentProfiles?: Prisma.ResidentProfileUncheckedCreateNestedManyWithoutCondominiumInput
+  maintenanceCharges?: Prisma.MaintenanceChargeUncheckedCreateNestedManyWithoutCondominiumInput
+  parcels?: Prisma.ParcelDeliveryUncheckedCreateNestedManyWithoutCondominiumInput
+  generalProviderAccesses?: Prisma.GeneralProviderAccessUncheckedCreateNestedManyWithoutCondominiumInput
+  billingConfig?: Prisma.CondominiumBillingConfigUncheckedCreateNestedOneWithoutCondominiumInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutCondominiumInput
+  extraIncomes?: Prisma.ExtraIncomeUncheckedCreateNestedManyWithoutCondominiumInput
+}
+
+export type CondominiumCreateOrConnectWithoutTransparencyConfigInput = {
+  where: Prisma.CondominiumWhereUniqueInput
+  create: Prisma.XOR<Prisma.CondominiumCreateWithoutTransparencyConfigInput, Prisma.CondominiumUncheckedCreateWithoutTransparencyConfigInput>
+}
+
+export type CondominiumUpsertWithoutTransparencyConfigInput = {
+  update: Prisma.XOR<Prisma.CondominiumUpdateWithoutTransparencyConfigInput, Prisma.CondominiumUncheckedUpdateWithoutTransparencyConfigInput>
+  create: Prisma.XOR<Prisma.CondominiumCreateWithoutTransparencyConfigInput, Prisma.CondominiumUncheckedCreateWithoutTransparencyConfigInput>
+  where?: Prisma.CondominiumWhereInput
+}
+
+export type CondominiumUpdateToOneWithWhereWithoutTransparencyConfigInput = {
+  where?: Prisma.CondominiumWhereInput
+  data: Prisma.XOR<Prisma.CondominiumUpdateWithoutTransparencyConfigInput, Prisma.CondominiumUncheckedUpdateWithoutTransparencyConfigInput>
+}
+
+export type CondominiumUpdateWithoutTransparencyConfigInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleMapsUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  houses?: Prisma.HouseUpdateManyWithoutCondominiumNestedInput
+  admins?: Prisma.UserUpdateManyWithoutCondominiumNestedInput
+  residentProfiles?: Prisma.ResidentProfileUpdateManyWithoutCondominiumNestedInput
+  maintenanceCharges?: Prisma.MaintenanceChargeUpdateManyWithoutCondominiumNestedInput
+  parcels?: Prisma.ParcelDeliveryUpdateManyWithoutCondominiumNestedInput
+  generalProviderAccesses?: Prisma.GeneralProviderAccessUpdateManyWithoutCondominiumNestedInput
+  billingConfig?: Prisma.CondominiumBillingConfigUpdateOneWithoutCondominiumNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutCondominiumNestedInput
+  extraIncomes?: Prisma.ExtraIncomeUpdateManyWithoutCondominiumNestedInput
+}
+
+export type CondominiumUncheckedUpdateWithoutTransparencyConfigInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleMapsUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  houses?: Prisma.HouseUncheckedUpdateManyWithoutCondominiumNestedInput
+  admins?: Prisma.UserUncheckedUpdateManyWithoutCondominiumNestedInput
+  residentProfiles?: Prisma.ResidentProfileUncheckedUpdateManyWithoutCondominiumNestedInput
+  maintenanceCharges?: Prisma.MaintenanceChargeUncheckedUpdateManyWithoutCondominiumNestedInput
+  parcels?: Prisma.ParcelDeliveryUncheckedUpdateManyWithoutCondominiumNestedInput
+  generalProviderAccesses?: Prisma.GeneralProviderAccessUncheckedUpdateManyWithoutCondominiumNestedInput
+  billingConfig?: Prisma.CondominiumBillingConfigUncheckedUpdateOneWithoutCondominiumNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutCondominiumNestedInput
+  extraIncomes?: Prisma.ExtraIncomeUncheckedUpdateManyWithoutCondominiumNestedInput
 }
 
 
@@ -1242,6 +1701,8 @@ export type CondominiumCountOutputType = {
   maintenanceCharges: number
   parcels: number
   generalProviderAccesses: number
+  expenses: number
+  extraIncomes: number
 }
 
 export type CondominiumCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1251,6 +1712,8 @@ export type CondominiumCountOutputTypeSelect<ExtArgs extends runtime.Types.Exten
   maintenanceCharges?: boolean | CondominiumCountOutputTypeCountMaintenanceChargesArgs
   parcels?: boolean | CondominiumCountOutputTypeCountParcelsArgs
   generalProviderAccesses?: boolean | CondominiumCountOutputTypeCountGeneralProviderAccessesArgs
+  expenses?: boolean | CondominiumCountOutputTypeCountExpensesArgs
+  extraIncomes?: boolean | CondominiumCountOutputTypeCountExtraIncomesArgs
 }
 
 /**
@@ -1305,6 +1768,20 @@ export type CondominiumCountOutputTypeCountGeneralProviderAccessesArgs<ExtArgs e
   where?: Prisma.GeneralProviderAccessWhereInput
 }
 
+/**
+ * CondominiumCountOutputType without action
+ */
+export type CondominiumCountOutputTypeCountExpensesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ExpenseWhereInput
+}
+
+/**
+ * CondominiumCountOutputType without action
+ */
+export type CondominiumCountOutputTypeCountExtraIncomesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ExtraIncomeWhereInput
+}
+
 
 export type CondominiumSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1324,6 +1801,9 @@ export type CondominiumSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   parcels?: boolean | Prisma.Condominium$parcelsArgs<ExtArgs>
   generalProviderAccesses?: boolean | Prisma.Condominium$generalProviderAccessesArgs<ExtArgs>
   billingConfig?: boolean | Prisma.Condominium$billingConfigArgs<ExtArgs>
+  expenses?: boolean | Prisma.Condominium$expensesArgs<ExtArgs>
+  extraIncomes?: boolean | Prisma.Condominium$extraIncomesArgs<ExtArgs>
+  transparencyConfig?: boolean | Prisma.Condominium$transparencyConfigArgs<ExtArgs>
   _count?: boolean | Prisma.CondominiumCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["condominium"]>
 
@@ -1375,6 +1855,9 @@ export type CondominiumInclude<ExtArgs extends runtime.Types.Extensions.Internal
   parcels?: boolean | Prisma.Condominium$parcelsArgs<ExtArgs>
   generalProviderAccesses?: boolean | Prisma.Condominium$generalProviderAccessesArgs<ExtArgs>
   billingConfig?: boolean | Prisma.Condominium$billingConfigArgs<ExtArgs>
+  expenses?: boolean | Prisma.Condominium$expensesArgs<ExtArgs>
+  extraIncomes?: boolean | Prisma.Condominium$extraIncomesArgs<ExtArgs>
+  transparencyConfig?: boolean | Prisma.Condominium$transparencyConfigArgs<ExtArgs>
   _count?: boolean | Prisma.CondominiumCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type CondominiumIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1390,6 +1873,9 @@ export type $CondominiumPayload<ExtArgs extends runtime.Types.Extensions.Interna
     parcels: Prisma.$ParcelDeliveryPayload<ExtArgs>[]
     generalProviderAccesses: Prisma.$GeneralProviderAccessPayload<ExtArgs>[]
     billingConfig: Prisma.$CondominiumBillingConfigPayload<ExtArgs> | null
+    expenses: Prisma.$ExpensePayload<ExtArgs>[]
+    extraIncomes: Prisma.$ExtraIncomePayload<ExtArgs>[]
+    transparencyConfig: Prisma.$CondominiumTransparencyConfigPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1803,6 +2289,9 @@ export interface Prisma__CondominiumClient<T, Null = never, ExtArgs extends runt
   parcels<T extends Prisma.Condominium$parcelsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Condominium$parcelsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ParcelDeliveryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   generalProviderAccesses<T extends Prisma.Condominium$generalProviderAccessesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Condominium$generalProviderAccessesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GeneralProviderAccessPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   billingConfig<T extends Prisma.Condominium$billingConfigArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Condominium$billingConfigArgs<ExtArgs>>): Prisma.Prisma__CondominiumBillingConfigClient<runtime.Types.Result.GetResult<Prisma.$CondominiumBillingConfigPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  expenses<T extends Prisma.Condominium$expensesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Condominium$expensesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ExpensePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  extraIncomes<T extends Prisma.Condominium$extraIncomesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Condominium$extraIncomesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ExtraIncomePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  transparencyConfig<T extends Prisma.Condominium$transparencyConfigArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Condominium$transparencyConfigArgs<ExtArgs>>): Prisma.Prisma__CondominiumTransparencyConfigClient<runtime.Types.Result.GetResult<Prisma.$CondominiumTransparencyConfigPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2395,6 +2884,73 @@ export type Condominium$billingConfigArgs<ExtArgs extends runtime.Types.Extensio
    */
   include?: Prisma.CondominiumBillingConfigInclude<ExtArgs> | null
   where?: Prisma.CondominiumBillingConfigWhereInput
+}
+
+/**
+ * Condominium.expenses
+ */
+export type Condominium$expensesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Expense
+   */
+  select?: Prisma.ExpenseSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Expense
+   */
+  omit?: Prisma.ExpenseOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ExpenseInclude<ExtArgs> | null
+  where?: Prisma.ExpenseWhereInput
+  orderBy?: Prisma.ExpenseOrderByWithRelationInput | Prisma.ExpenseOrderByWithRelationInput[]
+  cursor?: Prisma.ExpenseWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ExpenseScalarFieldEnum | Prisma.ExpenseScalarFieldEnum[]
+}
+
+/**
+ * Condominium.extraIncomes
+ */
+export type Condominium$extraIncomesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ExtraIncome
+   */
+  select?: Prisma.ExtraIncomeSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ExtraIncome
+   */
+  omit?: Prisma.ExtraIncomeOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ExtraIncomeInclude<ExtArgs> | null
+  where?: Prisma.ExtraIncomeWhereInput
+  orderBy?: Prisma.ExtraIncomeOrderByWithRelationInput | Prisma.ExtraIncomeOrderByWithRelationInput[]
+  cursor?: Prisma.ExtraIncomeWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ExtraIncomeScalarFieldEnum | Prisma.ExtraIncomeScalarFieldEnum[]
+}
+
+/**
+ * Condominium.transparencyConfig
+ */
+export type Condominium$transparencyConfigArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CondominiumTransparencyConfig
+   */
+  select?: Prisma.CondominiumTransparencyConfigSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CondominiumTransparencyConfig
+   */
+  omit?: Prisma.CondominiumTransparencyConfigOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CondominiumTransparencyConfigInclude<ExtArgs> | null
+  where?: Prisma.CondominiumTransparencyConfigWhereInput
 }
 
 /**

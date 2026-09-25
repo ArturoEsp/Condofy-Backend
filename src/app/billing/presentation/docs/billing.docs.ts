@@ -4,6 +4,7 @@ import { BillingSettingsResponse } from '../dtos/responses/billing-settings.resp
 import { BillingRecordsResponse } from '../dtos/responses/billing-records.response';
 import { BillingRecordResponse } from '../dtos/responses/billing-record.response';
 import { MyBillingResponse } from '../dtos/responses/my-billing.response';
+import { ExtraIncomeResponse } from '../dtos/responses/extra-income.response';
 
 export const getSettings: ApiEndpointProps = {
   summary: 'Obtener configuración de cobranza del condominio',
@@ -71,4 +72,28 @@ export const remindPending: ApiEndpointProps = {
   summary: 'Enviar recordatorio manual a viviendas con adeudo pendiente',
   status: HttpStatus.OK,
   withToken: true,
+};
+
+export const createExtraIncome: ApiEndpointProps = {
+  summary:
+    'Registrar nuevo ingreso extraordinario (SUM, tags, multas, donaciones)',
+  status: HttpStatus.CREATED,
+  withToken: true,
+  serialization: ExtraIncomeResponse,
+  type: ExtraIncomeResponse,
+};
+
+export const getExtraIncomes: ApiEndpointProps = {
+  summary:
+    'Listar ingresos extraordinarios del condominio por periodo o categoría',
+  status: HttpStatus.OK,
+  withToken: true,
+};
+
+export const deleteExtraIncome: ApiEndpointProps = {
+  summary: 'Eliminar ingreso extraordinario registrado',
+  status: HttpStatus.OK,
+  withToken: true,
+  serialization: ExtraIncomeResponse,
+  type: ExtraIncomeResponse,
 };

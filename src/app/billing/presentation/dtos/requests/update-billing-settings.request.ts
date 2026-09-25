@@ -108,4 +108,28 @@ export class UpdateBillingSettingsRequest {
   @IsString()
   @IsOptional()
   notificationChannel?: string;
+
+  @ApiPropertyOptional({ example: 50000 })
+  @IsNumber()
+  @IsOptional()
+  @Min(0)
+  initialBalance?: number;
+
+  @ApiPropertyOptional({ example: 20000 })
+  @IsNumber()
+  @IsOptional()
+  @Min(0)
+  initialReserveFund?: number;
+
+  @ApiPropertyOptional({ example: '2026-01-01' })
+  @IsString()
+  @IsOptional()
+  initialBalanceDate?: string;
+
+  @ApiPropertyOptional({
+    example: 'Saldo inicial verificado en corte bancario',
+  })
+  @IsString()
+  @IsOptional()
+  initialBalanceNotes?: string;
 }
