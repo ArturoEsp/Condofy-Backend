@@ -22,6 +22,7 @@
     "delete:resident": "tsx scripts/delete-resident.ts",
     "delete:condominium": "tsx scripts/delete-condominium.ts",
     "delete:house": "tsx scripts/delete-house.ts",
+    "delete:payment": "tsx scripts/delete-payment.ts",
     "reset:billing": "tsx scripts/reset-billing-period.ts",
     "trim:records": "tsx scripts/trim-db-records.ts"
   },
