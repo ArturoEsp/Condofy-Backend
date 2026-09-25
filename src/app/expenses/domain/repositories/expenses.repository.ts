@@ -64,6 +64,12 @@ export interface UpdateTransparencyConfigData {
   showSuppliers?: boolean;
   showInvoices?: boolean;
   showDetailedReceipts?: boolean;
+  allowInvoiceViewing?: boolean;
+  allowInvoiceDownload?: boolean;
+  showCollectionSummary?: boolean;
+  showCollectionRate?: boolean;
+  timeframeMode?: string;
+  condominiumNotice?: string | null;
 }
 
 export interface TransparencyReport {
