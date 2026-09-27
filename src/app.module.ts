@@ -21,6 +21,7 @@ import { CondominiumGuard } from './app/auth/presentation/guards/condominium.gua
 import { HealthModule } from './app/health/health.module';
 import { BillingModule } from './app/billing/billing.module';
 import { ExpensesModule } from './app/expenses/expenses.module';
+import { ExtraordinaryFeesModule } from './app/extraordinary-fees/extraordinary-fees.module';
 
 @Module({
   imports: [
@@ -49,6 +50,7 @@ import { ExpensesModule } from './app/expenses/expenses.module';
     UploadsModule,
     BillingModule,
     ExpensesModule,
+    ExtraordinaryFeesModule,
   ],
   controllers: [],
   providers: [

@@ -73,7 +73,10 @@ export const ModelName = {
   CondominiumBillingConfig: 'CondominiumBillingConfig',
   Expense: 'Expense',
   ExtraIncome: 'ExtraIncome',
-  CondominiumTransparencyConfig: 'CondominiumTransparencyConfig'
+  CondominiumTransparencyConfig: 'CondominiumTransparencyConfig',
+  ExtraordinaryFee: 'ExtraordinaryFee',
+  ExtraordinaryFeeDocument: 'ExtraordinaryFeeDocument',
+  ExtraordinaryFeeCharge: 'ExtraordinaryFeeCharge'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -497,6 +500,67 @@ export const CondominiumTransparencyConfigScalarFieldEnum = {
 } as const
 
 export type CondominiumTransparencyConfigScalarFieldEnum = (typeof CondominiumTransparencyConfigScalarFieldEnum)[keyof typeof CondominiumTransparencyConfigScalarFieldEnum]
+
+
+export const ExtraordinaryFeeScalarFieldEnum = {
+  id: 'id',
+  condominiumId: 'condominiumId',
+  title: 'title',
+  description: 'description',
+  amountPerHouse: 'amountPerHouse',
+  totalTargetAmount: 'totalTargetAmount',
+  dueDate: 'dueDate',
+  status: 'status',
+  useCustomBankAccount: 'useCustomBankAccount',
+  bankName: 'bankName',
+  accountHolder: 'accountHolder',
+  clabe: 'clabe',
+  accountNumber: 'accountNumber',
+  paymentReferenceRule: 'paymentReferenceRule',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ExtraordinaryFeeScalarFieldEnum = (typeof ExtraordinaryFeeScalarFieldEnum)[keyof typeof ExtraordinaryFeeScalarFieldEnum]
+
+
+export const ExtraordinaryFeeDocumentScalarFieldEnum = {
+  id: 'id',
+  extraordinaryFeeId: 'extraordinaryFeeId',
+  title: 'title',
+  fileName: 'fileName',
+  fileUrl: 'fileUrl',
+  fileType: 'fileType',
+  fileSize: 'fileSize',
+  uploadedAt: 'uploadedAt'
+} as const
+
+export type ExtraordinaryFeeDocumentScalarFieldEnum = (typeof ExtraordinaryFeeDocumentScalarFieldEnum)[keyof typeof ExtraordinaryFeeDocumentScalarFieldEnum]
+
+
+export const ExtraordinaryFeeChargeScalarFieldEnum = {
+  id: 'id',
+  extraordinaryFeeId: 'extraordinaryFeeId',
+  houseId: 'houseId',
+  amount: 'amount',
+  paidAmount: 'paidAmount',
+  status: 'status',
+  paymentDate: 'paymentDate',
+  paymentMethod: 'paymentMethod',
+  reference: 'reference',
+  notes: 'notes',
+  proofUrl: 'proofUrl',
+  proofFileName: 'proofFileName',
+  proofUploadedAt: 'proofUploadedAt',
+  receiptFolio: 'receiptFolio',
+  receiptUrl: 'receiptUrl',
+  receiptUploadedAt: 'receiptUploadedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ExtraordinaryFeeChargeScalarFieldEnum = (typeof ExtraordinaryFeeChargeScalarFieldEnum)[keyof typeof ExtraordinaryFeeChargeScalarFieldEnum]
 
 
 export const SortOrder = {

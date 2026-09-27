@@ -207,6 +207,7 @@ export type HouseWhereInput = {
   houseConfiguration?: Prisma.XOR<Prisma.HouseConfigurationNullableScalarRelationFilter, Prisma.HouseConfigurationWhereInput> | null
   parcels?: Prisma.ParcelDeliveryListRelationFilter
   extraIncomes?: Prisma.ExtraIncomeListRelationFilter
+  extraordinaryFeeCharges?: Prisma.ExtraordinaryFeeChargeListRelationFilter
 }
 
 export type HouseOrderByWithRelationInput = {
@@ -226,6 +227,7 @@ export type HouseOrderByWithRelationInput = {
   houseConfiguration?: Prisma.HouseConfigurationOrderByWithRelationInput
   parcels?: Prisma.ParcelDeliveryOrderByRelationAggregateInput
   extraIncomes?: Prisma.ExtraIncomeOrderByRelationAggregateInput
+  extraordinaryFeeCharges?: Prisma.ExtraordinaryFeeChargeOrderByRelationAggregateInput
 }
 
 export type HouseWhereUniqueInput = Prisma.AtLeast<{
@@ -249,6 +251,7 @@ export type HouseWhereUniqueInput = Prisma.AtLeast<{
   houseConfiguration?: Prisma.XOR<Prisma.HouseConfigurationNullableScalarRelationFilter, Prisma.HouseConfigurationWhereInput> | null
   parcels?: Prisma.ParcelDeliveryListRelationFilter
   extraIncomes?: Prisma.ExtraIncomeListRelationFilter
+  extraordinaryFeeCharges?: Prisma.ExtraordinaryFeeChargeListRelationFilter
 }, "id" | "condominiumId_houseNumber">
 
 export type HouseOrderByWithAggregationInput = {
@@ -293,6 +296,7 @@ export type HouseCreateInput = {
   houseConfiguration?: Prisma.HouseConfigurationCreateNestedOneWithoutHouseInput
   parcels?: Prisma.ParcelDeliveryCreateNestedManyWithoutHouseInput
   extraIncomes?: Prisma.ExtraIncomeCreateNestedManyWithoutHouseInput
+  extraordinaryFeeCharges?: Prisma.ExtraordinaryFeeChargeCreateNestedManyWithoutHouseInput
 }
 
 export type HouseUncheckedCreateInput = {
@@ -311,6 +315,7 @@ export type HouseUncheckedCreateInput = {
   houseConfiguration?: Prisma.HouseConfigurationUncheckedCreateNestedOneWithoutHouseInput
   parcels?: Prisma.ParcelDeliveryUncheckedCreateNestedManyWithoutHouseInput
   extraIncomes?: Prisma.ExtraIncomeUncheckedCreateNestedManyWithoutHouseInput
+  extraordinaryFeeCharges?: Prisma.ExtraordinaryFeeChargeUncheckedCreateNestedManyWithoutHouseInput
 }
 
 export type HouseUpdateInput = {
@@ -329,6 +334,7 @@ export type HouseUpdateInput = {
   houseConfiguration?: Prisma.HouseConfigurationUpdateOneWithoutHouseNestedInput
   parcels?: Prisma.ParcelDeliveryUpdateManyWithoutHouseNestedInput
   extraIncomes?: Prisma.ExtraIncomeUpdateManyWithoutHouseNestedInput
+  extraordinaryFeeCharges?: Prisma.ExtraordinaryFeeChargeUpdateManyWithoutHouseNestedInput
 }
 
 export type HouseUncheckedUpdateInput = {
@@ -347,6 +353,7 @@ export type HouseUncheckedUpdateInput = {
   houseConfiguration?: Prisma.HouseConfigurationUncheckedUpdateOneWithoutHouseNestedInput
   parcels?: Prisma.ParcelDeliveryUncheckedUpdateManyWithoutHouseNestedInput
   extraIncomes?: Prisma.ExtraIncomeUncheckedUpdateManyWithoutHouseNestedInput
+  extraordinaryFeeCharges?: Prisma.ExtraordinaryFeeChargeUncheckedUpdateManyWithoutHouseNestedInput
 }
 
 export type HouseCreateManyInput = {
@@ -589,6 +596,20 @@ export type HouseUpdateOneWithoutExtraIncomesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.HouseUpdateToOneWithWhereWithoutExtraIncomesInput, Prisma.HouseUpdateWithoutExtraIncomesInput>, Prisma.HouseUncheckedUpdateWithoutExtraIncomesInput>
 }
 
+export type HouseCreateNestedOneWithoutExtraordinaryFeeChargesInput = {
+  create?: Prisma.XOR<Prisma.HouseCreateWithoutExtraordinaryFeeChargesInput, Prisma.HouseUncheckedCreateWithoutExtraordinaryFeeChargesInput>
+  connectOrCreate?: Prisma.HouseCreateOrConnectWithoutExtraordinaryFeeChargesInput
+  connect?: Prisma.HouseWhereUniqueInput
+}
+
+export type HouseUpdateOneRequiredWithoutExtraordinaryFeeChargesNestedInput = {
+  create?: Prisma.XOR<Prisma.HouseCreateWithoutExtraordinaryFeeChargesInput, Prisma.HouseUncheckedCreateWithoutExtraordinaryFeeChargesInput>
+  connectOrCreate?: Prisma.HouseCreateOrConnectWithoutExtraordinaryFeeChargesInput
+  upsert?: Prisma.HouseUpsertWithoutExtraordinaryFeeChargesInput
+  connect?: Prisma.HouseWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.HouseUpdateToOneWithWhereWithoutExtraordinaryFeeChargesInput, Prisma.HouseUpdateWithoutExtraordinaryFeeChargesInput>, Prisma.HouseUncheckedUpdateWithoutExtraordinaryFeeChargesInput>
+}
+
 export type HouseCreateWithoutCondominiumInput = {
   id?: string
   houseNumber: string
@@ -604,6 +625,7 @@ export type HouseCreateWithoutCondominiumInput = {
   houseConfiguration?: Prisma.HouseConfigurationCreateNestedOneWithoutHouseInput
   parcels?: Prisma.ParcelDeliveryCreateNestedManyWithoutHouseInput
   extraIncomes?: Prisma.ExtraIncomeCreateNestedManyWithoutHouseInput
+  extraordinaryFeeCharges?: Prisma.ExtraordinaryFeeChargeCreateNestedManyWithoutHouseInput
 }
 
 export type HouseUncheckedCreateWithoutCondominiumInput = {
@@ -621,6 +643,7 @@ export type HouseUncheckedCreateWithoutCondominiumInput = {
   houseConfiguration?: Prisma.HouseConfigurationUncheckedCreateNestedOneWithoutHouseInput
   parcels?: Prisma.ParcelDeliveryUncheckedCreateNestedManyWithoutHouseInput
   extraIncomes?: Prisma.ExtraIncomeUncheckedCreateNestedManyWithoutHouseInput
+  extraordinaryFeeCharges?: Prisma.ExtraordinaryFeeChargeUncheckedCreateNestedManyWithoutHouseInput
 }
 
 export type HouseCreateOrConnectWithoutCondominiumInput = {
@@ -677,6 +700,7 @@ export type HouseCreateWithoutHouseConfigurationInput = {
   visitors?: Prisma.VisitorCreateNestedManyWithoutHouseInput
   parcels?: Prisma.ParcelDeliveryCreateNestedManyWithoutHouseInput
   extraIncomes?: Prisma.ExtraIncomeCreateNestedManyWithoutHouseInput
+  extraordinaryFeeCharges?: Prisma.ExtraordinaryFeeChargeCreateNestedManyWithoutHouseInput
 }
 
 export type HouseUncheckedCreateWithoutHouseConfigurationInput = {
@@ -694,6 +718,7 @@ export type HouseUncheckedCreateWithoutHouseConfigurationInput = {
   visitors?: Prisma.VisitorUncheckedCreateNestedManyWithoutHouseInput
   parcels?: Prisma.ParcelDeliveryUncheckedCreateNestedManyWithoutHouseInput
   extraIncomes?: Prisma.ExtraIncomeUncheckedCreateNestedManyWithoutHouseInput
+  extraordinaryFeeCharges?: Prisma.ExtraordinaryFeeChargeUncheckedCreateNestedManyWithoutHouseInput
 }
 
 export type HouseCreateOrConnectWithoutHouseConfigurationInput = {
@@ -727,6 +752,7 @@ export type HouseUpdateWithoutHouseConfigurationInput = {
   visitors?: Prisma.VisitorUpdateManyWithoutHouseNestedInput
   parcels?: Prisma.ParcelDeliveryUpdateManyWithoutHouseNestedInput
   extraIncomes?: Prisma.ExtraIncomeUpdateManyWithoutHouseNestedInput
+  extraordinaryFeeCharges?: Prisma.ExtraordinaryFeeChargeUpdateManyWithoutHouseNestedInput
 }
 
 export type HouseUncheckedUpdateWithoutHouseConfigurationInput = {
@@ -744,6 +770,7 @@ export type HouseUncheckedUpdateWithoutHouseConfigurationInput = {
   visitors?: Prisma.VisitorUncheckedUpdateManyWithoutHouseNestedInput
   parcels?: Prisma.ParcelDeliveryUncheckedUpdateManyWithoutHouseNestedInput
   extraIncomes?: Prisma.ExtraIncomeUncheckedUpdateManyWithoutHouseNestedInput
+  extraordinaryFeeCharges?: Prisma.ExtraordinaryFeeChargeUncheckedUpdateManyWithoutHouseNestedInput
 }
 
 export type HouseCreateWithoutResidentsInput = {
@@ -761,6 +788,7 @@ export type HouseCreateWithoutResidentsInput = {
   houseConfiguration?: Prisma.HouseConfigurationCreateNestedOneWithoutHouseInput
   parcels?: Prisma.ParcelDeliveryCreateNestedManyWithoutHouseInput
   extraIncomes?: Prisma.ExtraIncomeCreateNestedManyWithoutHouseInput
+  extraordinaryFeeCharges?: Prisma.ExtraordinaryFeeChargeCreateNestedManyWithoutHouseInput
 }
 
 export type HouseUncheckedCreateWithoutResidentsInput = {
@@ -778,6 +806,7 @@ export type HouseUncheckedCreateWithoutResidentsInput = {
   houseConfiguration?: Prisma.HouseConfigurationUncheckedCreateNestedOneWithoutHouseInput
   parcels?: Prisma.ParcelDeliveryUncheckedCreateNestedManyWithoutHouseInput
   extraIncomes?: Prisma.ExtraIncomeUncheckedCreateNestedManyWithoutHouseInput
+  extraordinaryFeeCharges?: Prisma.ExtraordinaryFeeChargeUncheckedCreateNestedManyWithoutHouseInput
 }
 
 export type HouseCreateOrConnectWithoutResidentsInput = {
@@ -811,6 +840,7 @@ export type HouseUpdateWithoutResidentsInput = {
   houseConfiguration?: Prisma.HouseConfigurationUpdateOneWithoutHouseNestedInput
   parcels?: Prisma.ParcelDeliveryUpdateManyWithoutHouseNestedInput
   extraIncomes?: Prisma.ExtraIncomeUpdateManyWithoutHouseNestedInput
+  extraordinaryFeeCharges?: Prisma.ExtraordinaryFeeChargeUpdateManyWithoutHouseNestedInput
 }
 
 export type HouseUncheckedUpdateWithoutResidentsInput = {
@@ -828,6 +858,7 @@ export type HouseUncheckedUpdateWithoutResidentsInput = {
   houseConfiguration?: Prisma.HouseConfigurationUncheckedUpdateOneWithoutHouseNestedInput
   parcels?: Prisma.ParcelDeliveryUncheckedUpdateManyWithoutHouseNestedInput
   extraIncomes?: Prisma.ExtraIncomeUncheckedUpdateManyWithoutHouseNestedInput
+  extraordinaryFeeCharges?: Prisma.ExtraordinaryFeeChargeUncheckedUpdateManyWithoutHouseNestedInput
 }
 
 export type HouseCreateWithoutVisitorsInput = {
@@ -845,6 +876,7 @@ export type HouseCreateWithoutVisitorsInput = {
   houseConfiguration?: Prisma.HouseConfigurationCreateNestedOneWithoutHouseInput
   parcels?: Prisma.ParcelDeliveryCreateNestedManyWithoutHouseInput
   extraIncomes?: Prisma.ExtraIncomeCreateNestedManyWithoutHouseInput
+  extraordinaryFeeCharges?: Prisma.ExtraordinaryFeeChargeCreateNestedManyWithoutHouseInput
 }
 
 export type HouseUncheckedCreateWithoutVisitorsInput = {
@@ -862,6 +894,7 @@ export type HouseUncheckedCreateWithoutVisitorsInput = {
   houseConfiguration?: Prisma.HouseConfigurationUncheckedCreateNestedOneWithoutHouseInput
   parcels?: Prisma.ParcelDeliveryUncheckedCreateNestedManyWithoutHouseInput
   extraIncomes?: Prisma.ExtraIncomeUncheckedCreateNestedManyWithoutHouseInput
+  extraordinaryFeeCharges?: Prisma.ExtraordinaryFeeChargeUncheckedCreateNestedManyWithoutHouseInput
 }
 
 export type HouseCreateOrConnectWithoutVisitorsInput = {
@@ -895,6 +928,7 @@ export type HouseUpdateWithoutVisitorsInput = {
   houseConfiguration?: Prisma.HouseConfigurationUpdateOneWithoutHouseNestedInput
   parcels?: Prisma.ParcelDeliveryUpdateManyWithoutHouseNestedInput
   extraIncomes?: Prisma.ExtraIncomeUpdateManyWithoutHouseNestedInput
+  extraordinaryFeeCharges?: Prisma.ExtraordinaryFeeChargeUpdateManyWithoutHouseNestedInput
 }
 
 export type HouseUncheckedUpdateWithoutVisitorsInput = {
@@ -912,6 +946,7 @@ export type HouseUncheckedUpdateWithoutVisitorsInput = {
   houseConfiguration?: Prisma.HouseConfigurationUncheckedUpdateOneWithoutHouseNestedInput
   parcels?: Prisma.ParcelDeliveryUncheckedUpdateManyWithoutHouseNestedInput
   extraIncomes?: Prisma.ExtraIncomeUncheckedUpdateManyWithoutHouseNestedInput
+  extraordinaryFeeCharges?: Prisma.ExtraordinaryFeeChargeUncheckedUpdateManyWithoutHouseNestedInput
 }
 
 export type HouseCreateWithoutParcelsInput = {
@@ -929,6 +964,7 @@ export type HouseCreateWithoutParcelsInput = {
   visitors?: Prisma.VisitorCreateNestedManyWithoutHouseInput
   houseConfiguration?: Prisma.HouseConfigurationCreateNestedOneWithoutHouseInput
   extraIncomes?: Prisma.ExtraIncomeCreateNestedManyWithoutHouseInput
+  extraordinaryFeeCharges?: Prisma.ExtraordinaryFeeChargeCreateNestedManyWithoutHouseInput
 }
 
 export type HouseUncheckedCreateWithoutParcelsInput = {
@@ -946,6 +982,7 @@ export type HouseUncheckedCreateWithoutParcelsInput = {
   visitors?: Prisma.VisitorUncheckedCreateNestedManyWithoutHouseInput
   houseConfiguration?: Prisma.HouseConfigurationUncheckedCreateNestedOneWithoutHouseInput
   extraIncomes?: Prisma.ExtraIncomeUncheckedCreateNestedManyWithoutHouseInput
+  extraordinaryFeeCharges?: Prisma.ExtraordinaryFeeChargeUncheckedCreateNestedManyWithoutHouseInput
 }
 
 export type HouseCreateOrConnectWithoutParcelsInput = {
@@ -979,6 +1016,7 @@ export type HouseUpdateWithoutParcelsInput = {
   visitors?: Prisma.VisitorUpdateManyWithoutHouseNestedInput
   houseConfiguration?: Prisma.HouseConfigurationUpdateOneWithoutHouseNestedInput
   extraIncomes?: Prisma.ExtraIncomeUpdateManyWithoutHouseNestedInput
+  extraordinaryFeeCharges?: Prisma.ExtraordinaryFeeChargeUpdateManyWithoutHouseNestedInput
 }
 
 export type HouseUncheckedUpdateWithoutParcelsInput = {
@@ -996,6 +1034,7 @@ export type HouseUncheckedUpdateWithoutParcelsInput = {
   visitors?: Prisma.VisitorUncheckedUpdateManyWithoutHouseNestedInput
   houseConfiguration?: Prisma.HouseConfigurationUncheckedUpdateOneWithoutHouseNestedInput
   extraIncomes?: Prisma.ExtraIncomeUncheckedUpdateManyWithoutHouseNestedInput
+  extraordinaryFeeCharges?: Prisma.ExtraordinaryFeeChargeUncheckedUpdateManyWithoutHouseNestedInput
 }
 
 export type HouseCreateWithoutHouseAccountInput = {
@@ -1013,6 +1052,7 @@ export type HouseCreateWithoutHouseAccountInput = {
   houseConfiguration?: Prisma.HouseConfigurationCreateNestedOneWithoutHouseInput
   parcels?: Prisma.ParcelDeliveryCreateNestedManyWithoutHouseInput
   extraIncomes?: Prisma.ExtraIncomeCreateNestedManyWithoutHouseInput
+  extraordinaryFeeCharges?: Prisma.ExtraordinaryFeeChargeCreateNestedManyWithoutHouseInput
 }
 
 export type HouseUncheckedCreateWithoutHouseAccountInput = {
@@ -1030,6 +1070,7 @@ export type HouseUncheckedCreateWithoutHouseAccountInput = {
   houseConfiguration?: Prisma.HouseConfigurationUncheckedCreateNestedOneWithoutHouseInput
   parcels?: Prisma.ParcelDeliveryUncheckedCreateNestedManyWithoutHouseInput
   extraIncomes?: Prisma.ExtraIncomeUncheckedCreateNestedManyWithoutHouseInput
+  extraordinaryFeeCharges?: Prisma.ExtraordinaryFeeChargeUncheckedCreateNestedManyWithoutHouseInput
 }
 
 export type HouseCreateOrConnectWithoutHouseAccountInput = {
@@ -1063,6 +1104,7 @@ export type HouseUpdateWithoutHouseAccountInput = {
   houseConfiguration?: Prisma.HouseConfigurationUpdateOneWithoutHouseNestedInput
   parcels?: Prisma.ParcelDeliveryUpdateManyWithoutHouseNestedInput
   extraIncomes?: Prisma.ExtraIncomeUpdateManyWithoutHouseNestedInput
+  extraordinaryFeeCharges?: Prisma.ExtraordinaryFeeChargeUpdateManyWithoutHouseNestedInput
 }
 
 export type HouseUncheckedUpdateWithoutHouseAccountInput = {
@@ -1080,6 +1122,7 @@ export type HouseUncheckedUpdateWithoutHouseAccountInput = {
   houseConfiguration?: Prisma.HouseConfigurationUncheckedUpdateOneWithoutHouseNestedInput
   parcels?: Prisma.ParcelDeliveryUncheckedUpdateManyWithoutHouseNestedInput
   extraIncomes?: Prisma.ExtraIncomeUncheckedUpdateManyWithoutHouseNestedInput
+  extraordinaryFeeCharges?: Prisma.ExtraordinaryFeeChargeUncheckedUpdateManyWithoutHouseNestedInput
 }
 
 export type HouseCreateWithoutAccountMovementsInput = {
@@ -1097,6 +1140,7 @@ export type HouseCreateWithoutAccountMovementsInput = {
   houseConfiguration?: Prisma.HouseConfigurationCreateNestedOneWithoutHouseInput
   parcels?: Prisma.ParcelDeliveryCreateNestedManyWithoutHouseInput
   extraIncomes?: Prisma.ExtraIncomeCreateNestedManyWithoutHouseInput
+  extraordinaryFeeCharges?: Prisma.ExtraordinaryFeeChargeCreateNestedManyWithoutHouseInput
 }
 
 export type HouseUncheckedCreateWithoutAccountMovementsInput = {
@@ -1114,6 +1158,7 @@ export type HouseUncheckedCreateWithoutAccountMovementsInput = {
   houseConfiguration?: Prisma.HouseConfigurationUncheckedCreateNestedOneWithoutHouseInput
   parcels?: Prisma.ParcelDeliveryUncheckedCreateNestedManyWithoutHouseInput
   extraIncomes?: Prisma.ExtraIncomeUncheckedCreateNestedManyWithoutHouseInput
+  extraordinaryFeeCharges?: Prisma.ExtraordinaryFeeChargeUncheckedCreateNestedManyWithoutHouseInput
 }
 
 export type HouseCreateOrConnectWithoutAccountMovementsInput = {
@@ -1147,6 +1192,7 @@ export type HouseUpdateWithoutAccountMovementsInput = {
   houseConfiguration?: Prisma.HouseConfigurationUpdateOneWithoutHouseNestedInput
   parcels?: Prisma.ParcelDeliveryUpdateManyWithoutHouseNestedInput
   extraIncomes?: Prisma.ExtraIncomeUpdateManyWithoutHouseNestedInput
+  extraordinaryFeeCharges?: Prisma.ExtraordinaryFeeChargeUpdateManyWithoutHouseNestedInput
 }
 
 export type HouseUncheckedUpdateWithoutAccountMovementsInput = {
@@ -1164,6 +1210,7 @@ export type HouseUncheckedUpdateWithoutAccountMovementsInput = {
   houseConfiguration?: Prisma.HouseConfigurationUncheckedUpdateOneWithoutHouseNestedInput
   parcels?: Prisma.ParcelDeliveryUncheckedUpdateManyWithoutHouseNestedInput
   extraIncomes?: Prisma.ExtraIncomeUncheckedUpdateManyWithoutHouseNestedInput
+  extraordinaryFeeCharges?: Prisma.ExtraordinaryFeeChargeUncheckedUpdateManyWithoutHouseNestedInput
 }
 
 export type HouseCreateWithoutMaintenanceChargesInput = {
@@ -1181,6 +1228,7 @@ export type HouseCreateWithoutMaintenanceChargesInput = {
   houseConfiguration?: Prisma.HouseConfigurationCreateNestedOneWithoutHouseInput
   parcels?: Prisma.ParcelDeliveryCreateNestedManyWithoutHouseInput
   extraIncomes?: Prisma.ExtraIncomeCreateNestedManyWithoutHouseInput
+  extraordinaryFeeCharges?: Prisma.ExtraordinaryFeeChargeCreateNestedManyWithoutHouseInput
 }
 
 export type HouseUncheckedCreateWithoutMaintenanceChargesInput = {
@@ -1198,6 +1246,7 @@ export type HouseUncheckedCreateWithoutMaintenanceChargesInput = {
   houseConfiguration?: Prisma.HouseConfigurationUncheckedCreateNestedOneWithoutHouseInput
   parcels?: Prisma.ParcelDeliveryUncheckedCreateNestedManyWithoutHouseInput
   extraIncomes?: Prisma.ExtraIncomeUncheckedCreateNestedManyWithoutHouseInput
+  extraordinaryFeeCharges?: Prisma.ExtraordinaryFeeChargeUncheckedCreateNestedManyWithoutHouseInput
 }
 
 export type HouseCreateOrConnectWithoutMaintenanceChargesInput = {
@@ -1231,6 +1280,7 @@ export type HouseUpdateWithoutMaintenanceChargesInput = {
   houseConfiguration?: Prisma.HouseConfigurationUpdateOneWithoutHouseNestedInput
   parcels?: Prisma.ParcelDeliveryUpdateManyWithoutHouseNestedInput
   extraIncomes?: Prisma.ExtraIncomeUpdateManyWithoutHouseNestedInput
+  extraordinaryFeeCharges?: Prisma.ExtraordinaryFeeChargeUpdateManyWithoutHouseNestedInput
 }
 
 export type HouseUncheckedUpdateWithoutMaintenanceChargesInput = {
@@ -1248,6 +1298,7 @@ export type HouseUncheckedUpdateWithoutMaintenanceChargesInput = {
   houseConfiguration?: Prisma.HouseConfigurationUncheckedUpdateOneWithoutHouseNestedInput
   parcels?: Prisma.ParcelDeliveryUncheckedUpdateManyWithoutHouseNestedInput
   extraIncomes?: Prisma.ExtraIncomeUncheckedUpdateManyWithoutHouseNestedInput
+  extraordinaryFeeCharges?: Prisma.ExtraordinaryFeeChargeUncheckedUpdateManyWithoutHouseNestedInput
 }
 
 export type HouseCreateWithoutExtraIncomesInput = {
@@ -1265,6 +1316,7 @@ export type HouseCreateWithoutExtraIncomesInput = {
   visitors?: Prisma.VisitorCreateNestedManyWithoutHouseInput
   houseConfiguration?: Prisma.HouseConfigurationCreateNestedOneWithoutHouseInput
   parcels?: Prisma.ParcelDeliveryCreateNestedManyWithoutHouseInput
+  extraordinaryFeeCharges?: Prisma.ExtraordinaryFeeChargeCreateNestedManyWithoutHouseInput
 }
 
 export type HouseUncheckedCreateWithoutExtraIncomesInput = {
@@ -1282,6 +1334,7 @@ export type HouseUncheckedCreateWithoutExtraIncomesInput = {
   visitors?: Prisma.VisitorUncheckedCreateNestedManyWithoutHouseInput
   houseConfiguration?: Prisma.HouseConfigurationUncheckedCreateNestedOneWithoutHouseInput
   parcels?: Prisma.ParcelDeliveryUncheckedCreateNestedManyWithoutHouseInput
+  extraordinaryFeeCharges?: Prisma.ExtraordinaryFeeChargeUncheckedCreateNestedManyWithoutHouseInput
 }
 
 export type HouseCreateOrConnectWithoutExtraIncomesInput = {
@@ -1315,6 +1368,7 @@ export type HouseUpdateWithoutExtraIncomesInput = {
   visitors?: Prisma.VisitorUpdateManyWithoutHouseNestedInput
   houseConfiguration?: Prisma.HouseConfigurationUpdateOneWithoutHouseNestedInput
   parcels?: Prisma.ParcelDeliveryUpdateManyWithoutHouseNestedInput
+  extraordinaryFeeCharges?: Prisma.ExtraordinaryFeeChargeUpdateManyWithoutHouseNestedInput
 }
 
 export type HouseUncheckedUpdateWithoutExtraIncomesInput = {
@@ -1332,6 +1386,95 @@ export type HouseUncheckedUpdateWithoutExtraIncomesInput = {
   visitors?: Prisma.VisitorUncheckedUpdateManyWithoutHouseNestedInput
   houseConfiguration?: Prisma.HouseConfigurationUncheckedUpdateOneWithoutHouseNestedInput
   parcels?: Prisma.ParcelDeliveryUncheckedUpdateManyWithoutHouseNestedInput
+  extraordinaryFeeCharges?: Prisma.ExtraordinaryFeeChargeUncheckedUpdateManyWithoutHouseNestedInput
+}
+
+export type HouseCreateWithoutExtraordinaryFeeChargesInput = {
+  id?: string
+  houseNumber: string
+  tower?: string | null
+  isDisabled?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  condominium: Prisma.CondominiumCreateNestedOneWithoutHousesInput
+  residents?: Prisma.ResidentProfileCreateNestedManyWithoutHouseInput
+  maintenanceCharges?: Prisma.MaintenanceChargeCreateNestedManyWithoutHouseInput
+  houseAccount?: Prisma.HouseAccountCreateNestedOneWithoutHouseInput
+  accountMovements?: Prisma.AccountMovementCreateNestedManyWithoutHouseInput
+  visitors?: Prisma.VisitorCreateNestedManyWithoutHouseInput
+  houseConfiguration?: Prisma.HouseConfigurationCreateNestedOneWithoutHouseInput
+  parcels?: Prisma.ParcelDeliveryCreateNestedManyWithoutHouseInput
+  extraIncomes?: Prisma.ExtraIncomeCreateNestedManyWithoutHouseInput
+}
+
+export type HouseUncheckedCreateWithoutExtraordinaryFeeChargesInput = {
+  id?: string
+  condominiumId: string
+  houseNumber: string
+  tower?: string | null
+  isDisabled?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  residents?: Prisma.ResidentProfileUncheckedCreateNestedManyWithoutHouseInput
+  maintenanceCharges?: Prisma.MaintenanceChargeUncheckedCreateNestedManyWithoutHouseInput
+  houseAccount?: Prisma.HouseAccountUncheckedCreateNestedOneWithoutHouseInput
+  accountMovements?: Prisma.AccountMovementUncheckedCreateNestedManyWithoutHouseInput
+  visitors?: Prisma.VisitorUncheckedCreateNestedManyWithoutHouseInput
+  houseConfiguration?: Prisma.HouseConfigurationUncheckedCreateNestedOneWithoutHouseInput
+  parcels?: Prisma.ParcelDeliveryUncheckedCreateNestedManyWithoutHouseInput
+  extraIncomes?: Prisma.ExtraIncomeUncheckedCreateNestedManyWithoutHouseInput
+}
+
+export type HouseCreateOrConnectWithoutExtraordinaryFeeChargesInput = {
+  where: Prisma.HouseWhereUniqueInput
+  create: Prisma.XOR<Prisma.HouseCreateWithoutExtraordinaryFeeChargesInput, Prisma.HouseUncheckedCreateWithoutExtraordinaryFeeChargesInput>
+}
+
+export type HouseUpsertWithoutExtraordinaryFeeChargesInput = {
+  update: Prisma.XOR<Prisma.HouseUpdateWithoutExtraordinaryFeeChargesInput, Prisma.HouseUncheckedUpdateWithoutExtraordinaryFeeChargesInput>
+  create: Prisma.XOR<Prisma.HouseCreateWithoutExtraordinaryFeeChargesInput, Prisma.HouseUncheckedCreateWithoutExtraordinaryFeeChargesInput>
+  where?: Prisma.HouseWhereInput
+}
+
+export type HouseUpdateToOneWithWhereWithoutExtraordinaryFeeChargesInput = {
+  where?: Prisma.HouseWhereInput
+  data: Prisma.XOR<Prisma.HouseUpdateWithoutExtraordinaryFeeChargesInput, Prisma.HouseUncheckedUpdateWithoutExtraordinaryFeeChargesInput>
+}
+
+export type HouseUpdateWithoutExtraordinaryFeeChargesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  houseNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  tower?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isDisabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  condominium?: Prisma.CondominiumUpdateOneRequiredWithoutHousesNestedInput
+  residents?: Prisma.ResidentProfileUpdateManyWithoutHouseNestedInput
+  maintenanceCharges?: Prisma.MaintenanceChargeUpdateManyWithoutHouseNestedInput
+  houseAccount?: Prisma.HouseAccountUpdateOneWithoutHouseNestedInput
+  accountMovements?: Prisma.AccountMovementUpdateManyWithoutHouseNestedInput
+  visitors?: Prisma.VisitorUpdateManyWithoutHouseNestedInput
+  houseConfiguration?: Prisma.HouseConfigurationUpdateOneWithoutHouseNestedInput
+  parcels?: Prisma.ParcelDeliveryUpdateManyWithoutHouseNestedInput
+  extraIncomes?: Prisma.ExtraIncomeUpdateManyWithoutHouseNestedInput
+}
+
+export type HouseUncheckedUpdateWithoutExtraordinaryFeeChargesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  condominiumId?: Prisma.StringFieldUpdateOperationsInput | string
+  houseNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  tower?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isDisabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  residents?: Prisma.ResidentProfileUncheckedUpdateManyWithoutHouseNestedInput
+  maintenanceCharges?: Prisma.MaintenanceChargeUncheckedUpdateManyWithoutHouseNestedInput
+  houseAccount?: Prisma.HouseAccountUncheckedUpdateOneWithoutHouseNestedInput
+  accountMovements?: Prisma.AccountMovementUncheckedUpdateManyWithoutHouseNestedInput
+  visitors?: Prisma.VisitorUncheckedUpdateManyWithoutHouseNestedInput
+  houseConfiguration?: Prisma.HouseConfigurationUncheckedUpdateOneWithoutHouseNestedInput
+  parcels?: Prisma.ParcelDeliveryUncheckedUpdateManyWithoutHouseNestedInput
+  extraIncomes?: Prisma.ExtraIncomeUncheckedUpdateManyWithoutHouseNestedInput
 }
 
 export type HouseCreateManyCondominiumInput = {
@@ -1358,6 +1501,7 @@ export type HouseUpdateWithoutCondominiumInput = {
   houseConfiguration?: Prisma.HouseConfigurationUpdateOneWithoutHouseNestedInput
   parcels?: Prisma.ParcelDeliveryUpdateManyWithoutHouseNestedInput
   extraIncomes?: Prisma.ExtraIncomeUpdateManyWithoutHouseNestedInput
+  extraordinaryFeeCharges?: Prisma.ExtraordinaryFeeChargeUpdateManyWithoutHouseNestedInput
 }
 
 export type HouseUncheckedUpdateWithoutCondominiumInput = {
@@ -1375,6 +1519,7 @@ export type HouseUncheckedUpdateWithoutCondominiumInput = {
   houseConfiguration?: Prisma.HouseConfigurationUncheckedUpdateOneWithoutHouseNestedInput
   parcels?: Prisma.ParcelDeliveryUncheckedUpdateManyWithoutHouseNestedInput
   extraIncomes?: Prisma.ExtraIncomeUncheckedUpdateManyWithoutHouseNestedInput
+  extraordinaryFeeCharges?: Prisma.ExtraordinaryFeeChargeUncheckedUpdateManyWithoutHouseNestedInput
 }
 
 export type HouseUncheckedUpdateManyWithoutCondominiumInput = {
@@ -1398,6 +1543,7 @@ export type HouseCountOutputType = {
   visitors: number
   parcels: number
   extraIncomes: number
+  extraordinaryFeeCharges: number
 }
 
 export type HouseCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1407,6 +1553,7 @@ export type HouseCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.
   visitors?: boolean | HouseCountOutputTypeCountVisitorsArgs
   parcels?: boolean | HouseCountOutputTypeCountParcelsArgs
   extraIncomes?: boolean | HouseCountOutputTypeCountExtraIncomesArgs
+  extraordinaryFeeCharges?: boolean | HouseCountOutputTypeCountExtraordinaryFeeChargesArgs
 }
 
 /**
@@ -1461,6 +1608,13 @@ export type HouseCountOutputTypeCountExtraIncomesArgs<ExtArgs extends runtime.Ty
   where?: Prisma.ExtraIncomeWhereInput
 }
 
+/**
+ * HouseCountOutputType without action
+ */
+export type HouseCountOutputTypeCountExtraordinaryFeeChargesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ExtraordinaryFeeChargeWhereInput
+}
+
 
 export type HouseSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1479,6 +1633,7 @@ export type HouseSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   houseConfiguration?: boolean | Prisma.House$houseConfigurationArgs<ExtArgs>
   parcels?: boolean | Prisma.House$parcelsArgs<ExtArgs>
   extraIncomes?: boolean | Prisma.House$extraIncomesArgs<ExtArgs>
+  extraordinaryFeeCharges?: boolean | Prisma.House$extraordinaryFeeChargesArgs<ExtArgs>
   _count?: boolean | Prisma.HouseCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["house"]>
 
@@ -1525,6 +1680,7 @@ export type HouseInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   houseConfiguration?: boolean | Prisma.House$houseConfigurationArgs<ExtArgs>
   parcels?: boolean | Prisma.House$parcelsArgs<ExtArgs>
   extraIncomes?: boolean | Prisma.House$extraIncomesArgs<ExtArgs>
+  extraordinaryFeeCharges?: boolean | Prisma.House$extraordinaryFeeChargesArgs<ExtArgs>
   _count?: boolean | Prisma.HouseCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type HouseIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1546,6 +1702,7 @@ export type $HousePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     houseConfiguration: Prisma.$HouseConfigurationPayload<ExtArgs> | null
     parcels: Prisma.$ParcelDeliveryPayload<ExtArgs>[]
     extraIncomes: Prisma.$ExtraIncomePayload<ExtArgs>[]
+    extraordinaryFeeCharges: Prisma.$ExtraordinaryFeeChargePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1958,6 +2115,7 @@ export interface Prisma__HouseClient<T, Null = never, ExtArgs extends runtime.Ty
   houseConfiguration<T extends Prisma.House$houseConfigurationArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.House$houseConfigurationArgs<ExtArgs>>): Prisma.Prisma__HouseConfigurationClient<runtime.Types.Result.GetResult<Prisma.$HouseConfigurationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   parcels<T extends Prisma.House$parcelsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.House$parcelsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ParcelDeliveryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   extraIncomes<T extends Prisma.House$extraIncomesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.House$extraIncomesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ExtraIncomePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  extraordinaryFeeCharges<T extends Prisma.House$extraordinaryFeeChargesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.House$extraordinaryFeeChargesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ExtraordinaryFeeChargePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2574,6 +2732,30 @@ export type House$extraIncomesArgs<ExtArgs extends runtime.Types.Extensions.Inte
   take?: number
   skip?: number
   distinct?: Prisma.ExtraIncomeScalarFieldEnum | Prisma.ExtraIncomeScalarFieldEnum[]
+}
+
+/**
+ * House.extraordinaryFeeCharges
+ */
+export type House$extraordinaryFeeChargesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ExtraordinaryFeeCharge
+   */
+  select?: Prisma.ExtraordinaryFeeChargeSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ExtraordinaryFeeCharge
+   */
+  omit?: Prisma.ExtraordinaryFeeChargeOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ExtraordinaryFeeChargeInclude<ExtArgs> | null
+  where?: Prisma.ExtraordinaryFeeChargeWhereInput
+  orderBy?: Prisma.ExtraordinaryFeeChargeOrderByWithRelationInput | Prisma.ExtraordinaryFeeChargeOrderByWithRelationInput[]
+  cursor?: Prisma.ExtraordinaryFeeChargeWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ExtraordinaryFeeChargeScalarFieldEnum | Prisma.ExtraordinaryFeeChargeScalarFieldEnum[]
 }
 
 /**

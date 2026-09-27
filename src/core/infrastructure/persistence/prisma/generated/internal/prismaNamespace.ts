@@ -406,7 +406,10 @@ export const ModelName = {
   CondominiumBillingConfig: 'CondominiumBillingConfig',
   Expense: 'Expense',
   ExtraIncome: 'ExtraIncome',
-  CondominiumTransparencyConfig: 'CondominiumTransparencyConfig'
+  CondominiumTransparencyConfig: 'CondominiumTransparencyConfig',
+  ExtraordinaryFee: 'ExtraordinaryFee',
+  ExtraordinaryFeeDocument: 'ExtraordinaryFeeDocument',
+  ExtraordinaryFeeCharge: 'ExtraordinaryFeeCharge'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -422,7 +425,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "condominium" | "user" | "passwordResetToken" | "userSession" | "pushSubscription" | "house" | "houseConfiguration" | "residentProfile" | "visitor" | "accessAuthorization" | "accessLog" | "parcelDelivery" | "generalProviderAccess" | "houseAccount" | "accountMovement" | "maintenanceCharge" | "payment" | "maintenancePeriod" | "lateFee" | "condominiumBillingConfig" | "expense" | "extraIncome" | "condominiumTransparencyConfig"
+    modelProps: "condominium" | "user" | "passwordResetToken" | "userSession" | "pushSubscription" | "house" | "houseConfiguration" | "residentProfile" | "visitor" | "accessAuthorization" | "accessLog" | "parcelDelivery" | "generalProviderAccess" | "houseAccount" | "accountMovement" | "maintenanceCharge" | "payment" | "maintenancePeriod" | "lateFee" | "condominiumBillingConfig" | "expense" | "extraIncome" | "condominiumTransparencyConfig" | "extraordinaryFee" | "extraordinaryFeeDocument" | "extraordinaryFeeCharge"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2128,6 +2131,228 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    ExtraordinaryFee: {
+      payload: Prisma.$ExtraordinaryFeePayload<ExtArgs>
+      fields: Prisma.ExtraordinaryFeeFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ExtraordinaryFeeFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExtraordinaryFeePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ExtraordinaryFeeFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExtraordinaryFeePayload>
+        }
+        findFirst: {
+          args: Prisma.ExtraordinaryFeeFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExtraordinaryFeePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ExtraordinaryFeeFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExtraordinaryFeePayload>
+        }
+        findMany: {
+          args: Prisma.ExtraordinaryFeeFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExtraordinaryFeePayload>[]
+        }
+        create: {
+          args: Prisma.ExtraordinaryFeeCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExtraordinaryFeePayload>
+        }
+        createMany: {
+          args: Prisma.ExtraordinaryFeeCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ExtraordinaryFeeCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExtraordinaryFeePayload>[]
+        }
+        delete: {
+          args: Prisma.ExtraordinaryFeeDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExtraordinaryFeePayload>
+        }
+        update: {
+          args: Prisma.ExtraordinaryFeeUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExtraordinaryFeePayload>
+        }
+        deleteMany: {
+          args: Prisma.ExtraordinaryFeeDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ExtraordinaryFeeUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ExtraordinaryFeeUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExtraordinaryFeePayload>[]
+        }
+        upsert: {
+          args: Prisma.ExtraordinaryFeeUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExtraordinaryFeePayload>
+        }
+        aggregate: {
+          args: Prisma.ExtraordinaryFeeAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateExtraordinaryFee>
+        }
+        groupBy: {
+          args: Prisma.ExtraordinaryFeeGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ExtraordinaryFeeGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ExtraordinaryFeeCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ExtraordinaryFeeCountAggregateOutputType> | number
+        }
+      }
+    }
+    ExtraordinaryFeeDocument: {
+      payload: Prisma.$ExtraordinaryFeeDocumentPayload<ExtArgs>
+      fields: Prisma.ExtraordinaryFeeDocumentFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ExtraordinaryFeeDocumentFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExtraordinaryFeeDocumentPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ExtraordinaryFeeDocumentFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExtraordinaryFeeDocumentPayload>
+        }
+        findFirst: {
+          args: Prisma.ExtraordinaryFeeDocumentFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExtraordinaryFeeDocumentPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ExtraordinaryFeeDocumentFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExtraordinaryFeeDocumentPayload>
+        }
+        findMany: {
+          args: Prisma.ExtraordinaryFeeDocumentFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExtraordinaryFeeDocumentPayload>[]
+        }
+        create: {
+          args: Prisma.ExtraordinaryFeeDocumentCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExtraordinaryFeeDocumentPayload>
+        }
+        createMany: {
+          args: Prisma.ExtraordinaryFeeDocumentCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ExtraordinaryFeeDocumentCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExtraordinaryFeeDocumentPayload>[]
+        }
+        delete: {
+          args: Prisma.ExtraordinaryFeeDocumentDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExtraordinaryFeeDocumentPayload>
+        }
+        update: {
+          args: Prisma.ExtraordinaryFeeDocumentUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExtraordinaryFeeDocumentPayload>
+        }
+        deleteMany: {
+          args: Prisma.ExtraordinaryFeeDocumentDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ExtraordinaryFeeDocumentUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ExtraordinaryFeeDocumentUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExtraordinaryFeeDocumentPayload>[]
+        }
+        upsert: {
+          args: Prisma.ExtraordinaryFeeDocumentUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExtraordinaryFeeDocumentPayload>
+        }
+        aggregate: {
+          args: Prisma.ExtraordinaryFeeDocumentAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateExtraordinaryFeeDocument>
+        }
+        groupBy: {
+          args: Prisma.ExtraordinaryFeeDocumentGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ExtraordinaryFeeDocumentGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ExtraordinaryFeeDocumentCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ExtraordinaryFeeDocumentCountAggregateOutputType> | number
+        }
+      }
+    }
+    ExtraordinaryFeeCharge: {
+      payload: Prisma.$ExtraordinaryFeeChargePayload<ExtArgs>
+      fields: Prisma.ExtraordinaryFeeChargeFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ExtraordinaryFeeChargeFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExtraordinaryFeeChargePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ExtraordinaryFeeChargeFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExtraordinaryFeeChargePayload>
+        }
+        findFirst: {
+          args: Prisma.ExtraordinaryFeeChargeFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExtraordinaryFeeChargePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ExtraordinaryFeeChargeFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExtraordinaryFeeChargePayload>
+        }
+        findMany: {
+          args: Prisma.ExtraordinaryFeeChargeFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExtraordinaryFeeChargePayload>[]
+        }
+        create: {
+          args: Prisma.ExtraordinaryFeeChargeCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExtraordinaryFeeChargePayload>
+        }
+        createMany: {
+          args: Prisma.ExtraordinaryFeeChargeCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ExtraordinaryFeeChargeCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExtraordinaryFeeChargePayload>[]
+        }
+        delete: {
+          args: Prisma.ExtraordinaryFeeChargeDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExtraordinaryFeeChargePayload>
+        }
+        update: {
+          args: Prisma.ExtraordinaryFeeChargeUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExtraordinaryFeeChargePayload>
+        }
+        deleteMany: {
+          args: Prisma.ExtraordinaryFeeChargeDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ExtraordinaryFeeChargeUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ExtraordinaryFeeChargeUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExtraordinaryFeeChargePayload>[]
+        }
+        upsert: {
+          args: Prisma.ExtraordinaryFeeChargeUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExtraordinaryFeeChargePayload>
+        }
+        aggregate: {
+          args: Prisma.ExtraordinaryFeeChargeAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateExtraordinaryFeeCharge>
+        }
+        groupBy: {
+          args: Prisma.ExtraordinaryFeeChargeGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ExtraordinaryFeeChargeGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ExtraordinaryFeeChargeCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ExtraordinaryFeeChargeCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -2574,6 +2799,67 @@ export const CondominiumTransparencyConfigScalarFieldEnum = {
 export type CondominiumTransparencyConfigScalarFieldEnum = (typeof CondominiumTransparencyConfigScalarFieldEnum)[keyof typeof CondominiumTransparencyConfigScalarFieldEnum]
 
 
+export const ExtraordinaryFeeScalarFieldEnum = {
+  id: 'id',
+  condominiumId: 'condominiumId',
+  title: 'title',
+  description: 'description',
+  amountPerHouse: 'amountPerHouse',
+  totalTargetAmount: 'totalTargetAmount',
+  dueDate: 'dueDate',
+  status: 'status',
+  useCustomBankAccount: 'useCustomBankAccount',
+  bankName: 'bankName',
+  accountHolder: 'accountHolder',
+  clabe: 'clabe',
+  accountNumber: 'accountNumber',
+  paymentReferenceRule: 'paymentReferenceRule',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ExtraordinaryFeeScalarFieldEnum = (typeof ExtraordinaryFeeScalarFieldEnum)[keyof typeof ExtraordinaryFeeScalarFieldEnum]
+
+
+export const ExtraordinaryFeeDocumentScalarFieldEnum = {
+  id: 'id',
+  extraordinaryFeeId: 'extraordinaryFeeId',
+  title: 'title',
+  fileName: 'fileName',
+  fileUrl: 'fileUrl',
+  fileType: 'fileType',
+  fileSize: 'fileSize',
+  uploadedAt: 'uploadedAt'
+} as const
+
+export type ExtraordinaryFeeDocumentScalarFieldEnum = (typeof ExtraordinaryFeeDocumentScalarFieldEnum)[keyof typeof ExtraordinaryFeeDocumentScalarFieldEnum]
+
+
+export const ExtraordinaryFeeChargeScalarFieldEnum = {
+  id: 'id',
+  extraordinaryFeeId: 'extraordinaryFeeId',
+  houseId: 'houseId',
+  amount: 'amount',
+  paidAmount: 'paidAmount',
+  status: 'status',
+  paymentDate: 'paymentDate',
+  paymentMethod: 'paymentMethod',
+  reference: 'reference',
+  notes: 'notes',
+  proofUrl: 'proofUrl',
+  proofFileName: 'proofFileName',
+  proofUploadedAt: 'proofUploadedAt',
+  receiptFolio: 'receiptFolio',
+  receiptUrl: 'receiptUrl',
+  receiptUploadedAt: 'receiptUploadedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ExtraordinaryFeeChargeScalarFieldEnum = (typeof ExtraordinaryFeeChargeScalarFieldEnum)[keyof typeof ExtraordinaryFeeChargeScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -2934,6 +3220,20 @@ export type ListEnumExtraIncomeCategoryFieldRefInput<$PrismaModel> = FieldRefInp
 
 
 /**
+ * Reference to a field of type 'ExtraordinaryFeeStatus'
+ */
+export type EnumExtraordinaryFeeStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ExtraordinaryFeeStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'ExtraordinaryFeeStatus[]'
+ */
+export type ListEnumExtraordinaryFeeStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ExtraordinaryFeeStatus[]'>
+    
+
+
+/**
  * Reference to a field of type 'Float'
  */
 export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -3079,6 +3379,9 @@ export type GlobalOmitConfig = {
   expense?: Prisma.ExpenseOmit
   extraIncome?: Prisma.ExtraIncomeOmit
   condominiumTransparencyConfig?: Prisma.CondominiumTransparencyConfigOmit
+  extraordinaryFee?: Prisma.ExtraordinaryFeeOmit
+  extraordinaryFeeDocument?: Prisma.ExtraordinaryFeeDocumentOmit
+  extraordinaryFeeCharge?: Prisma.ExtraordinaryFeeChargeOmit
 }
 
 /* Types for Logging */
