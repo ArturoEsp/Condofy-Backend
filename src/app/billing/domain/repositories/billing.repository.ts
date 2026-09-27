@@ -1,6 +1,7 @@
 import { BillingConfigEntity } from '../entities/billing-config.entity';
 import { BillingRecordEntity } from '../entities/billing-record.entity';
 import { ExtraIncomeEntity } from '../entities/extra-income.entity';
+import { HouseStatementEntity } from '../entities/house-statement.entity';
 
 export interface UpsertBillingConfigData {
   defaultMonthlyFee?: number;
@@ -147,4 +148,8 @@ export default interface BillingRepository {
     id: string,
     condominiumId: string,
   ): Promise<ExtraIncomeEntity>;
+  getHouseStatement(
+    houseId: string,
+    condominiumId: string,
+  ): Promise<HouseStatementEntity>;
 }

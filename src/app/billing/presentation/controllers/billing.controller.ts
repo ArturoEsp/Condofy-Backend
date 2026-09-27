@@ -34,6 +34,7 @@ import { RegisterPaymentUseCase } from '../../application/use-cases/register-pay
 import { UploadResidentProofUseCase } from '../../application/use-cases/upload-resident-proof.usecase';
 import { ReviewResidentProofUseCase } from '../../application/use-cases/review-resident-proof.usecase';
 import { GetMyBillingUseCase } from '../../application/use-cases/get-my-billing.usecase';
+import { GetHouseStatementUseCase } from '../../application/use-cases/get-house-statement.usecase';
 import { CreateExtraIncomeUseCase } from '../../application/use-cases/create-extra-income.usecase';
 import { GetExtraIncomesUseCase } from '../../application/use-cases/get-extra-incomes.usecase';
 import { DeleteExtraIncomeUseCase } from '../../application/use-cases/delete-extra-income.usecase';
@@ -62,6 +63,7 @@ export class BillingController {
     private readonly uploadResidentProofUseCase: UploadResidentProofUseCase,
     private readonly reviewResidentProofUseCase: ReviewResidentProofUseCase,
     private readonly getMyBillingUseCase: GetMyBillingUseCase,
+    private readonly getHouseStatementUseCase: GetHouseStatementUseCase,
     private readonly createExtraIncomeUseCase: CreateExtraIncomeUseCase,
     private readonly getExtraIncomesUseCase: GetExtraIncomesUseCase,
     private readonly deleteExtraIncomeUseCase: DeleteExtraIncomeUseCase,
@@ -347,6 +349,16 @@ export class BillingController {
     @CurrentUser() user: AuthUserEntity,
   ) {
     return await this.getMyBillingUseCase.execute(user.id, condominiumId);
+  }
+
+  @Get('houses/:houseId/statement')
+  @Roles('ADMIN')
+  @ApiEndpoint(docs.getHouseStatement)
+  async getHouseStatement(
+    @CondominiumId() condominiumId: string,
+    @Param('houseId') houseId: string,
+  ) {
+    return await this.getHouseStatementUseCase.execute(houseId, condominiumId);
   }
 
   @Post('remind-pending')

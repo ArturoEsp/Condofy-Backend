@@ -14,6 +14,8 @@ import BillingRepository, {
 import { BillingConfigEntity } from '../../domain/entities/billing-config.entity';
 import { BillingRecordEntity } from '../../domain/entities/billing-record.entity';
 import { ExtraIncomeEntity } from '../../domain/entities/extra-income.entity';
+import { HouseStatementEntity } from '../../domain/entities/house-statement.entity';
+import { AccountMovementEntity } from '../../domain/entities/account-movement.entity';
 import { BillingMapper } from '../mappers/billing.mapper';
 import {
   AccountMovementType,
@@ -1227,5 +1229,182 @@ export class BillingPrismaRepository implements BillingRepository {
     });
 
     return BillingMapper.toExtraIncomeDomain(existing);
+  }
+
+  async getHouseStatement(
+    houseId: string,
+    condominiumId: string,
+  ): Promise<HouseStatementEntity> {
+    const house = await this.prisma.house.findFirst({
+      where: { id: houseId, condominiumId },
+      include: {
+        residents: {
+          include: { user: true },
+        },
+        houseAccount: true,
+      },
+    });
+
+    if (!house) {
+      throw new NotFoundException(`Vivienda no encontrada con ID: ${houseId}`);
+    }
+
+    // Auto-aplicar Saldo a Favor si la vivienda cuenta con crédito disponible
+    await this.autoApplyCreditToHouse(houseId, condominiumId);
+
+    const config = await this.getConfig(condominiumId);
+
+    // Obtener todas las cuotas de mantenimiento de la vivienda
+    const charges = await this.prisma.maintenanceCharge.findMany({
+      where: {
+        condominiumId,
+        houseId,
+      },
+      include: {
+        house: {
+          include: {
+            residents: {
+              include: { user: true },
+            },
+            houseAccount: true,
+          },
+        },
+        payments: {
+          include: { createdBy: true },
+          orderBy: { paymentDate: 'desc' },
+        },
+        maintenancePeriod: true,
+        lateFees: true,
+      },
+      orderBy: { dueDate: 'desc' },
+    });
+
+    const domainCharges = await Promise.all(
+      charges.map((c) => this.mapChargeToDomain(c, config)),
+    );
+
+    // Obtener saldo a favor actualizado
+    const updatedAccount = await this.prisma.houseAccount.findUnique({
+      where: { houseId },
+    });
+    const creditBalance = updatedAccount
+      ? Math.max(0, Number(updatedAccount.currentBalance))
+      : 0;
+
+    // Obtener movimientos de cuenta (saldos a favor y aplicaciones)
+    const movements = await this.prisma.accountMovement.findMany({
+      where: { houseId },
+      orderBy: { movementDate: 'desc' },
+    });
+
+    const mappedMovements: AccountMovementEntity[] = movements.map((m) => ({
+      id: m.id,
+      houseId: m.houseId,
+      type: m.type,
+      description: m.description,
+      amount: Number(m.amount),
+      movementDate: m.movementDate,
+      createdAt: m.createdAt,
+    }));
+
+    // Obtener otros ingresos (multas, tags, rentas) asignados a esta casa
+    const extraIncomes = await this.prisma.extraIncome.findMany({
+      where: { houseId, condominiumId },
+      orderBy: { incomeDate: 'desc' },
+      include: {
+        house: {
+          select: {
+            houseNumber: true,
+            residents: {
+              select: { firstName: true, lastName: true },
+            },
+          },
+        },
+        createdBy: {
+          select: { firstName: true, lastName: true },
+        },
+      },
+    });
+
+    const mappedExtraIncomes = await Promise.all(
+      extraIncomes.map((i) =>
+        BillingMapper.toExtraIncomeDomainWithSignedUrl(i, this.storageService),
+      ),
+    );
+
+    // Calcular KPIs consolidados
+    let totalPaid = 0;
+    let totalPendingDebt = 0;
+    let paidCount = 0;
+    let pendingCount = 0;
+    let overdueCount = 0;
+    let onTimePaidCount = 0;
+
+    for (const c of domainCharges) {
+      totalPaid += c.paidAmount || 0;
+      if (c.status === 'PAID') {
+        paidCount++;
+        if (c.lateFeeAmount === 0) {
+          onTimePaidCount++;
+        }
+      } else if (c.status === 'OVERDUE') {
+        overdueCount++;
+        const remaining = Math.max(0, c.totalAmount - (c.paidAmount || 0));
+        totalPendingDebt += remaining;
+      } else if (
+        c.status === 'PENDING' ||
+        c.status === 'IN_REVIEW' ||
+        c.status === 'PARTIAL'
+      ) {
+        pendingCount++;
+        const remaining = Math.max(0, c.totalAmount - (c.paidAmount || 0));
+        totalPendingDebt += remaining;
+      }
+    }
+
+    const extraIncomesTotal = mappedExtraIncomes.reduce(
+      (sum, item) => sum + item.amount,
+      0,
+    );
+    totalPaid += extraIncomesTotal;
+
+    const totalRecords = domainCharges.length;
+    const punctualityRate =
+      totalRecords > 0
+        ? Math.round((onTimePaidCount / totalRecords) * 100)
+        : 100;
+
+    // Residente principal
+    const primaryResident = house.residents?.[0];
+    const residentInfo = primaryResident
+      ? {
+          id: primaryResident.id,
+          name: `${primaryResident.firstName} ${primaryResident.lastName}`.trim(),
+          email: primaryResident.user?.email || primaryResident.comments || '',
+          phone: primaryResident.phone || null,
+        }
+      : null;
+
+    return {
+      house: {
+        id: house.id,
+        houseNumber: house.houseNumber,
+        tower: house.tower || null,
+        resident: residentInfo,
+      },
+      kpis: {
+        totalPaid,
+        totalPendingDebt,
+        creditBalance,
+        punctualityRate,
+        totalRecords,
+        paidCount,
+        pendingCount,
+        overdueCount,
+      },
+      charges: domainCharges,
+      movements: mappedMovements,
+      extraIncomes: mappedExtraIncomes,
+    };
   }
 }
