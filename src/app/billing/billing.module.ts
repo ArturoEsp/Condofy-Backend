@@ -9,6 +9,7 @@ import { RegisterPaymentUseCase } from './application/use-cases/register-payment
 import { UploadResidentProofUseCase } from './application/use-cases/upload-resident-proof.usecase';
 import { ReviewResidentProofUseCase } from './application/use-cases/review-resident-proof.usecase';
 import { GetMyBillingUseCase } from './application/use-cases/get-my-billing.usecase';
+import { GetHouseStatementUseCase } from './application/use-cases/get-house-statement.usecase';
 import { CreateExtraIncomeUseCase } from './application/use-cases/create-extra-income.usecase';
 import { GetExtraIncomesUseCase } from './application/use-cases/get-extra-incomes.usecase';
 import { DeleteExtraIncomeUseCase } from './application/use-cases/delete-extra-income.usecase';
@@ -61,6 +62,11 @@ import { BillingSchedulerService } from './infrastructure/services/billing-sched
       provide: GetMyBillingUseCase,
       inject: [PROVIDES_NAMES.BillingRepository],
       useFactory: (repo) => new GetMyBillingUseCase(repo),
+    },
+    {
+      provide: GetHouseStatementUseCase,
+      inject: [PROVIDES_NAMES.BillingRepository],
+      useFactory: (repo) => new GetHouseStatementUseCase(repo),
     },
     {
       provide: CreateExtraIncomeUseCase,

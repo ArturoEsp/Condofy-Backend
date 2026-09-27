@@ -5,6 +5,7 @@ import { BillingRecordsResponse } from '../dtos/responses/billing-records.respon
 import { BillingRecordResponse } from '../dtos/responses/billing-record.response';
 import { MyBillingResponse } from '../dtos/responses/my-billing.response';
 import { ExtraIncomeResponse } from '../dtos/responses/extra-income.response';
+import { HouseStatementResponse } from '../dtos/responses/house-statement.response';
 
 export const getSettings: ApiEndpointProps = {
   summary: 'Obtener configuración de cobranza del condominio',
@@ -96,4 +97,13 @@ export const deleteExtraIncome: ApiEndpointProps = {
   withToken: true,
   serialization: ExtraIncomeResponse,
   type: ExtraIncomeResponse,
+};
+
+export const getHouseStatement: ApiEndpointProps = {
+  summary:
+    'Obtener estado de cuenta integral y KPIs de una vivienda para el administrador',
+  status: HttpStatus.OK,
+  withToken: true,
+  serialization: HouseStatementResponse,
+  type: HouseStatementResponse,
 };
