@@ -221,6 +221,8 @@ export class BillingPrismaRepository implements BillingRepository {
     count: number;
     totalCollected: number;
     totalExpected: number;
+    totalPrepaidBalance?: number;
+    prepaidHousesCount?: number;
     records: BillingRecordEntity[];
   }> {
     const config = await this.getConfig(condominiumId);
