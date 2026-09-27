@@ -54,6 +54,9 @@ export interface ExpensesSummary {
     count: number;
     percentage: number;
   }[];
+  totalPrepaidBalance?: number;
+  operationalBalance?: number;
+  cumulativeBankBalance?: number;
 }
 
 export interface UpdateTransparencyConfigData {
@@ -93,6 +96,8 @@ export interface TransparencyReport {
     totalPeriodExpenses: number;
     periodNetCashFlow: number;
     currentAvailableBalance: number;
+    totalPrepaidBalance?: number;
+    operationalBalance?: number;
     totalHouses?: number;
     paidHouses?: number;
     pendingHouses?: number;

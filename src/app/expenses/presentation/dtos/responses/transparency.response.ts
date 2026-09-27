@@ -82,6 +82,14 @@ export class TransparencySummaryResponse {
 
   @ApiPropertyOptional()
   @Expose()
+  totalPrepaidBalance?: number;
+
+  @ApiPropertyOptional()
+  @Expose()
+  operationalBalance?: number;
+
+  @ApiPropertyOptional()
+  @Expose()
   totalHouses?: number;
 
   @ApiPropertyOptional()

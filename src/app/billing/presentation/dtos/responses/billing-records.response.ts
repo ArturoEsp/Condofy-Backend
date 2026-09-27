@@ -19,6 +19,14 @@ export class BillingRecordsResponse {
   @Expose()
   totalExpected: number;
 
+  @ApiProperty({ example: 4500, required: false })
+  @Expose()
+  totalPrepaidBalance?: number;
+
+  @ApiProperty({ example: 3, required: false })
+  @Expose()
+  prepaidHousesCount?: number;
+
   @ApiProperty({ type: [BillingRecordResponse] })
   @Expose()
   @Type(() => BillingRecordResponse)

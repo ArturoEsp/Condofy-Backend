@@ -113,6 +113,8 @@ export default interface BillingRepository {
     count: number;
     totalCollected: number;
     totalExpected: number;
+    totalPrepaidBalance?: number;
+    prepaidHousesCount?: number;
     records: BillingRecordEntity[];
   }>;
   getChargeById(
