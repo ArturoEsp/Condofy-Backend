@@ -48,6 +48,15 @@ export const MaintenanceChargeStatus = {
 export type MaintenanceChargeStatus = (typeof MaintenanceChargeStatus)[keyof typeof MaintenanceChargeStatus]
 
 
+export const ExtraordinaryFeeStatus = {
+  ACTIVE: 'ACTIVE',
+  COMPLETED: 'COMPLETED',
+  CANCELLED: 'CANCELLED'
+} as const
+
+export type ExtraordinaryFeeStatus = (typeof ExtraordinaryFeeStatus)[keyof typeof ExtraordinaryFeeStatus]
+
+
 export const LateFeeType = {
   PERCENTAGE: 'PERCENTAGE',
   FIXED: 'FIXED'

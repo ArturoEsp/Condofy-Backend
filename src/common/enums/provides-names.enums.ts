@@ -17,4 +17,5 @@ export const PROVIDES_NAMES = {
   ExpensesRepository: 'ExpensesRepository',
   ExtraIncomeRepository: 'ExtraIncomeRepository',
   TransparencyRepository: 'TransparencyRepository',
+  ExtraordinaryFeesRepository: 'ExtraordinaryFeesRepository',
 } as const;

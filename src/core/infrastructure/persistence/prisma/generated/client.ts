@@ -154,3 +154,18 @@ export type ExtraIncome = Prisma.ExtraIncomeModel
  * 
  */
 export type CondominiumTransparencyConfig = Prisma.CondominiumTransparencyConfigModel
+/**
+ * Model ExtraordinaryFee
+ * 
+ */
+export type ExtraordinaryFee = Prisma.ExtraordinaryFeeModel
+/**
+ * Model ExtraordinaryFeeDocument
+ * 
+ */
+export type ExtraordinaryFeeDocument = Prisma.ExtraordinaryFeeDocumentModel
+/**
+ * Model ExtraordinaryFeeCharge
+ * 
+ */
+export type ExtraordinaryFeeCharge = Prisma.ExtraordinaryFeeChargeModel

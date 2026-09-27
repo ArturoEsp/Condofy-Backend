@@ -39,6 +39,12 @@ enum MaintenanceChargeStatus {
   CANCELLED
 }
 
+enum ExtraordinaryFeeStatus {
+  ACTIVE
+  COMPLETED
+  CANCELLED
+}
+
 enum LateFeeType {
   PERCENTAGE
   FIXED
@@ -166,6 +172,7 @@ model Condominium {
   expenses                Expense[]
   extraIncomes            ExtraIncome[]
   transparencyConfig      CondominiumTransparencyConfig?
+  extraordinaryFees       ExtraordinaryFee[]
   createdAt               DateTime                       @default(now())
   updatedAt               DateTime                       @updatedAt
 }
@@ -196,6 +203,7 @@ model User {
   pushSubscriptions         PushSubscription[]
   expensesCreated           Expense[]               @relation("ExpenseCreatedBy")
   extraIncomesCreated       ExtraIncome[]           @relation("ExtraIncomeCreatedBy")
+  extraordinaryFeesCreated  ExtraordinaryFee[]      @relation("ExtraordinaryFeeCreatedBy")
 
   @@index([condominiumId])
 }
@@ -245,22 +253,23 @@ model PushSubscription {
 }
 
 model House {
-  id                 String              @id @default(uuid())
-  condominiumId      String
-  condominium        Condominium         @relation(fields: [condominiumId], references: [id], onDelete: Restrict)
-  houseNumber        String
-  tower              String?
-  residents          ResidentProfile[]
-  maintenanceCharges MaintenanceCharge[]
-  houseAccount       HouseAccount?
-  accountMovements   AccountMovement[]
-  visitors           Visitor[]
-  houseConfiguration HouseConfiguration?
-  parcels            ParcelDelivery[]
-  extraIncomes       ExtraIncome[]
-  isDisabled         Boolean             @default(false)
-  createdAt          DateTime            @default(now())
-  updatedAt          DateTime            @updatedAt
+  id                      String                   @id @default(uuid())
+  condominiumId           String
+  condominium             Condominium              @relation(fields: [condominiumId], references: [id], onDelete: Restrict)
+  houseNumber             String
+  tower                   String?
+  residents               ResidentProfile[]
+  maintenanceCharges      MaintenanceCharge[]
+  houseAccount            HouseAccount?
+  accountMovements        AccountMovement[]
+  visitors                Visitor[]
+  houseConfiguration      HouseConfiguration?
+  parcels                 ParcelDelivery[]
+  extraIncomes            ExtraIncome[]
+  extraordinaryFeeCharges ExtraordinaryFeeCharge[]
+  isDisabled              Boolean                  @default(false)
+  createdAt               DateTime                 @default(now())
+  updatedAt               DateTime                 @updatedAt
 
   @@unique([condominiumId, houseNumber])
 }
@@ -623,4 +632,73 @@ model CondominiumTransparencyConfig {
   updatedAt            DateTime    @updatedAt
 
   @@index([condominiumId])
+}
+
+model ExtraordinaryFee {
+  id                   String                     @id @default(uuid())
+  condominiumId        String
+  condominium          Condominium                @relation(fields: [condominiumId], references: [id], onDelete: Cascade)
+  title                String
+  description          String
+  amountPerHouse       Decimal                    @db.Decimal(12, 2)
+  totalTargetAmount    Decimal?                   @db.Decimal(12, 2)
+  dueDate              DateTime
+  status               ExtraordinaryFeeStatus     @default(ACTIVE)
+  useCustomBankAccount Boolean                    @default(false)
+  bankName             String?
+  accountHolder        String?
+  clabe                String?
+  accountNumber        String?
+  paymentReferenceRule String?
+  createdById          String
+  createdBy            User                       @relation("ExtraordinaryFeeCreatedBy", fields: [createdById], references: [id])
+  documents            ExtraordinaryFeeDocument[]
+  charges              ExtraordinaryFeeCharge[]
+  createdAt            DateTime                   @default(now())
+  updatedAt            DateTime                   @updatedAt
+
+  @@index([condominiumId, status])
+  @@index([dueDate])
+}
+
+model ExtraordinaryFeeDocument {
+  id                 String           @id @default(uuid())
+  extraordinaryFeeId String
+  extraordinaryFee   ExtraordinaryFee @relation(fields: [extraordinaryFeeId], references: [id], onDelete: Cascade)
+  title              String
+  fileName           String
+  fileUrl            String
+  fileType           String?
+  fileSize           String?
+  uploadedAt         DateTime         @default(now())
+
+  @@index([extraordinaryFeeId])
+}
+
+model ExtraordinaryFeeCharge {
+  id                 String                  @id @default(uuid())
+  extraordinaryFeeId String
+  extraordinaryFee   ExtraordinaryFee        @relation(fields: [extraordinaryFeeId], references: [id], onDelete: Cascade)
+  houseId            String
+  house              House                   @relation(fields: [houseId], references: [id], onDelete: Cascade)
+  amount             Decimal                 @db.Decimal(12, 2)
+  paidAmount         Decimal                 @default(0) @db.Decimal(12, 2)
+  status             MaintenanceChargeStatus @default(PENDING)
+  paymentDate        DateTime?
+  paymentMethod      PaymentMethod?
+  reference          String?
+  notes              String?
+  proofUrl           String?
+  proofFileName      String?
+  proofUploadedAt    DateTime?
+  receiptFolio       String?
+  receiptUrl         String?
+  receiptUploadedAt  DateTime?
+  createdAt          DateTime                @default(now())
+  updatedAt          DateTime                @updatedAt
+
+  @@unique([extraordinaryFeeId, houseId])
+  @@index([extraordinaryFeeId])
+  @@index([houseId])
+  @@index([status])
 }
