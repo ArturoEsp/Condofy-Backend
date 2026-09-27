@@ -275,6 +275,44 @@ export class ExpensesPrismaRepository implements ExpensesRepository {
       }))
       .sort((a, b) => b.amount - a.amount);
 
+    const prepaidAgg = await this.prisma.houseAccount.aggregate({
+      where: {
+        house: { condominiumId, isDisabled: false },
+        currentBalance: { gt: 0 },
+      },
+      _sum: { currentBalance: true },
+    });
+    const totalPrepaidBalance = Number(prepaidAgg._sum.currentBalance || 0);
+
+    const billingConfig = await this.prisma.condominiumBillingConfig.findUnique(
+      {
+        where: { condominiumId },
+      },
+    );
+    const initialBalance = Number(billingConfig?.initialBalance || 0);
+
+    const allChargesAgg = await this.prisma.maintenanceCharge.aggregate({
+      where: { condominiumId, paidAmount: { gt: 0 } },
+      _sum: { paidAmount: true },
+    });
+    const allExtraIncomesAgg = await this.prisma.extraIncome.aggregate({
+      where: { condominiumId },
+      _sum: { amount: true },
+    });
+    const allExpensesAgg = await this.prisma.expense.aggregate({
+      where: { condominiumId, status: ExpenseStatus.PAID },
+      _sum: { amount: true },
+    });
+
+    const allTimeIncome =
+      Number(allChargesAgg._sum.paidAmount || 0) +
+      Number(allExtraIncomesAgg._sum.amount || 0) +
+      totalPrepaidBalance;
+    const allTimeExpenses = Number(allExpensesAgg._sum.amount || 0);
+    const cumulativeBankBalance =
+      initialBalance + allTimeIncome - allTimeExpenses;
+    const operationalBalance = cumulativeBankBalance - totalPrepaidBalance;
+
     return {
       period,
       totalExpenses,
@@ -283,6 +321,9 @@ export class ExpensesPrismaRepository implements ExpensesRepository {
       paidCount: paidList.length,
       pendingCount: pendingList.length,
       categoryBreakdown,
+      totalPrepaidBalance,
+      operationalBalance,
+      cumulativeBankBalance,
     };
   }
 
@@ -480,8 +521,19 @@ export class ExpensesPrismaRepository implements ExpensesRepository {
     );
     const periodNetCashFlow = totalPeriodIncome - totalPeriodExpenses;
 
+    const advanceCreditsAgg = await this.prisma.houseAccount.aggregate({
+      where: {
+        house: { condominiumId, isDisabled: false },
+        currentBalance: { gt: 0 },
+      },
+      _sum: { currentBalance: true },
+    });
+    const totalPrepaidBalance = Number(
+      advanceCreditsAgg._sum.currentBalance || 0,
+    );
+
     const allChargesAgg = await this.prisma.maintenanceCharge.aggregate({
-      where: { condominiumId, status: 'PAID' },
+      where: { condominiumId, paidAmount: { gt: 0 } },
       _sum: { paidAmount: true },
     });
     const allExtraIncomesAgg = await this.prisma.extraIncome.aggregate({
@@ -495,10 +547,12 @@ export class ExpensesPrismaRepository implements ExpensesRepository {
 
     const allTimeIncome =
       Number(allChargesAgg._sum.paidAmount || 0) +
-      Number(allExtraIncomesAgg._sum.amount || 0);
+      Number(allExtraIncomesAgg._sum.amount || 0) +
+      totalPrepaidBalance;
     const allTimeExpenses = Number(allExpensesAgg._sum.amount || 0);
     const currentAvailableBalance =
       initialBalance + allTimeIncome - allTimeExpenses;
+    const operationalBalance = currentAvailableBalance - totalPrepaidBalance;
 
     const catMap: Record<string, number> = {};
     for (const exp of rawExpenses) {
@@ -602,6 +656,8 @@ export class ExpensesPrismaRepository implements ExpensesRepository {
         currentAvailableBalance: config.showBalance
           ? currentAvailableBalance
           : 0,
+        totalPrepaidBalance: config.showBalance ? totalPrepaidBalance : 0,
+        operationalBalance: config.showBalance ? operationalBalance : 0,
         totalHouses,
         paidHouses,
         pendingHouses,

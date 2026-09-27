@@ -48,4 +48,16 @@ export class ExpensesSummaryResponse {
   @Expose()
   @Type(() => CategoryBreakdownItem)
   categoryBreakdown: CategoryBreakdownItem[];
+
+  @ApiProperty({ example: 4500.0, required: false })
+  @Expose()
+  totalPrepaidBalance?: number;
+
+  @ApiProperty({ example: 95000.0, required: false })
+  @Expose()
+  operationalBalance?: number;
+
+  @ApiProperty({ example: 120000.0, required: false })
+  @Expose()
+  cumulativeBankBalance?: number;
 }

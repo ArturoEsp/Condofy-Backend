@@ -417,11 +417,25 @@ export class BillingPrismaRepository implements BillingRepository {
       0,
     );
 
+    // Sumar saldos a favor (pagos anticipados en custodia) de las viviendas
+    const prepaidAgg = await this.prisma.houseAccount.aggregate({
+      where: {
+        house: { condominiumId, isDisabled: false },
+        currentBalance: { gt: 0 },
+      },
+      _sum: { currentBalance: true },
+      _count: { id: true },
+    });
+    const totalPrepaidBalance = Number(prepaidAgg._sum.currentBalance || 0);
+    const prepaidHousesCount = prepaidAgg._count.id;
+
     return {
       period: periodStr,
       count,
       totalCollected,
       totalExpected,
+      totalPrepaidBalance,
+      prepaidHousesCount,
       records: domainRecords,
     };
   }
