@@ -40,6 +40,12 @@ import { StandGetActiveGeneralProvidersUseCase } from './application/use-cases/s
 import { StandGetGeneralProvidersHistoryUseCase } from './application/use-cases/stand-get-general-providers-history.usecase';
 import { ResidentGetActiveGeneralProvidersUseCase } from './application/use-cases/resident-get-active-general-providers.usecase';
 import { GeneralProvidersPrismaRepository } from './infrastructure/repositories/general-providers.prisma.repository';
+import { StandContactsPrismaRepository } from './infrastructure/repositories/stand-contacts.prisma.repository';
+
+import { CreateStandContactUseCase } from './application/use-cases/create-stand-contact.usecase';
+import { ListStandContactsUseCase } from './application/use-cases/list-stand-contacts.usecase';
+import { UpdateStandContactUseCase } from './application/use-cases/update-stand-contact.usecase';
+import { DeleteStandContactUseCase } from './application/use-cases/delete-stand-contact.usecase';
 
 import { ResidentAccessControlController } from './presentation/controllers/resident-access-control.controller';
 import { ResidentVisitorsController } from './presentation/controllers/resident-visitors.controller';
@@ -49,6 +55,7 @@ import { StandAccessControlController } from './presentation/controllers/stand-a
 import { AdminSecurityController } from './presentation/controllers/admin-security.controller';
 import { StandGeneralProvidersController } from './presentation/controllers/stand-general-providers.controller';
 import { ResidentGeneralProvidersController } from './presentation/controllers/resident-general-providers.controller';
+import { StandContactsController } from './presentation/controllers/stand-contacts.controller';
 import { PrismaService } from '@/core/infrastructure/persistence/prisma/prisma.service';
 
 @Module({
@@ -73,6 +80,10 @@ import { PrismaService } from '@/core/infrastructure/persistence/prisma/prisma.s
     {
       provide: PROVIDES_NAMES.GeneralProvidersRepository,
       useClass: GeneralProvidersPrismaRepository,
+    },
+    {
+      provide: PROVIDES_NAMES.StandContactsRepository,
+      useClass: StandContactsPrismaRepository,
     },
     {
       provide: CreateAccessAuthorizationUseCase,
@@ -374,6 +385,26 @@ import { PrismaService } from '@/core/infrastructure/persistence/prisma/prisma.s
         return new ResidentGetActiveGeneralProvidersUseCase(repo);
       },
     },
+    {
+      provide: CreateStandContactUseCase,
+      inject: [PROVIDES_NAMES.StandContactsRepository],
+      useFactory: (repo) => new CreateStandContactUseCase(repo),
+    },
+    {
+      provide: ListStandContactsUseCase,
+      inject: [PROVIDES_NAMES.StandContactsRepository],
+      useFactory: (repo) => new ListStandContactsUseCase(repo),
+    },
+    {
+      provide: UpdateStandContactUseCase,
+      inject: [PROVIDES_NAMES.StandContactsRepository],
+      useFactory: (repo) => new UpdateStandContactUseCase(repo),
+    },
+    {
+      provide: DeleteStandContactUseCase,
+      inject: [PROVIDES_NAMES.StandContactsRepository],
+      useFactory: (repo) => new DeleteStandContactUseCase(repo),
+    },
   ],
   controllers: [
     ResidentAccessControlController,
@@ -384,6 +415,7 @@ import { PrismaService } from '@/core/infrastructure/persistence/prisma/prisma.s
     AdminSecurityController,
     StandGeneralProvidersController,
     ResidentGeneralProvidersController,
+    StandContactsController,
   ],
   exports: [
     PROVIDES_NAMES.AccessAuthorizationsRepository,
@@ -391,6 +423,7 @@ import { PrismaService } from '@/core/infrastructure/persistence/prisma/prisma.s
     PROVIDES_NAMES.AccessLogsRepository,
     PROVIDES_NAMES.ParcelDeliveryRepository,
     PROVIDES_NAMES.GeneralProvidersRepository,
+    PROVIDES_NAMES.StandContactsRepository,
     CreateAccessAuthorizationUseCase,
     ListHouseAccessAuthorizationsUseCase,
     UpdateAccessAuthorizationUseCase,
@@ -419,6 +452,10 @@ import { PrismaService } from '@/core/infrastructure/persistence/prisma/prisma.s
     StandGetActiveGeneralProvidersUseCase,
     StandGetGeneralProvidersHistoryUseCase,
     ResidentGetActiveGeneralProvidersUseCase,
+    CreateStandContactUseCase,
+    ListStandContactsUseCase,
+    UpdateStandContactUseCase,
+    DeleteStandContactUseCase,
   ],
 })
 export class AccessControlModule {}

@@ -76,7 +76,8 @@ export const ModelName = {
   CondominiumTransparencyConfig: 'CondominiumTransparencyConfig',
   ExtraordinaryFee: 'ExtraordinaryFee',
   ExtraordinaryFeeDocument: 'ExtraordinaryFeeDocument',
-  ExtraordinaryFeeCharge: 'ExtraordinaryFeeCharge'
+  ExtraordinaryFeeCharge: 'ExtraordinaryFeeCharge',
+  StandContact: 'StandContact'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -561,6 +562,24 @@ export const ExtraordinaryFeeChargeScalarFieldEnum = {
 } as const
 
 export type ExtraordinaryFeeChargeScalarFieldEnum = (typeof ExtraordinaryFeeChargeScalarFieldEnum)[keyof typeof ExtraordinaryFeeChargeScalarFieldEnum]
+
+
+export const StandContactScalarFieldEnum = {
+  id: 'id',
+  condominiumId: 'condominiumId',
+  name: 'name',
+  phoneNumber: 'phoneNumber',
+  extension: 'extension',
+  schedule: 'schedule',
+  hasWhatsapp: 'hasWhatsapp',
+  isPrimary: 'isPrimary',
+  notes: 'notes',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type StandContactScalarFieldEnum = (typeof StandContactScalarFieldEnum)[keyof typeof StandContactScalarFieldEnum]
 
 
 export const SortOrder = {

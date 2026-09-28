@@ -409,7 +409,8 @@ export const ModelName = {
   CondominiumTransparencyConfig: 'CondominiumTransparencyConfig',
   ExtraordinaryFee: 'ExtraordinaryFee',
   ExtraordinaryFeeDocument: 'ExtraordinaryFeeDocument',
-  ExtraordinaryFeeCharge: 'ExtraordinaryFeeCharge'
+  ExtraordinaryFeeCharge: 'ExtraordinaryFeeCharge',
+  StandContact: 'StandContact'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -425,7 +426,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "condominium" | "user" | "passwordResetToken" | "userSession" | "pushSubscription" | "house" | "houseConfiguration" | "residentProfile" | "visitor" | "accessAuthorization" | "accessLog" | "parcelDelivery" | "generalProviderAccess" | "houseAccount" | "accountMovement" | "maintenanceCharge" | "payment" | "maintenancePeriod" | "lateFee" | "condominiumBillingConfig" | "expense" | "extraIncome" | "condominiumTransparencyConfig" | "extraordinaryFee" | "extraordinaryFeeDocument" | "extraordinaryFeeCharge"
+    modelProps: "condominium" | "user" | "passwordResetToken" | "userSession" | "pushSubscription" | "house" | "houseConfiguration" | "residentProfile" | "visitor" | "accessAuthorization" | "accessLog" | "parcelDelivery" | "generalProviderAccess" | "houseAccount" | "accountMovement" | "maintenanceCharge" | "payment" | "maintenancePeriod" | "lateFee" | "condominiumBillingConfig" | "expense" | "extraIncome" | "condominiumTransparencyConfig" | "extraordinaryFee" | "extraordinaryFeeDocument" | "extraordinaryFeeCharge" | "standContact"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2353,6 +2354,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    StandContact: {
+      payload: Prisma.$StandContactPayload<ExtArgs>
+      fields: Prisma.StandContactFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.StandContactFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StandContactPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.StandContactFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StandContactPayload>
+        }
+        findFirst: {
+          args: Prisma.StandContactFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StandContactPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.StandContactFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StandContactPayload>
+        }
+        findMany: {
+          args: Prisma.StandContactFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StandContactPayload>[]
+        }
+        create: {
+          args: Prisma.StandContactCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StandContactPayload>
+        }
+        createMany: {
+          args: Prisma.StandContactCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.StandContactCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StandContactPayload>[]
+        }
+        delete: {
+          args: Prisma.StandContactDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StandContactPayload>
+        }
+        update: {
+          args: Prisma.StandContactUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StandContactPayload>
+        }
+        deleteMany: {
+          args: Prisma.StandContactDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.StandContactUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.StandContactUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StandContactPayload>[]
+        }
+        upsert: {
+          args: Prisma.StandContactUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StandContactPayload>
+        }
+        aggregate: {
+          args: Prisma.StandContactAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateStandContact>
+        }
+        groupBy: {
+          args: Prisma.StandContactGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.StandContactGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.StandContactCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.StandContactCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -2858,6 +2933,24 @@ export const ExtraordinaryFeeChargeScalarFieldEnum = {
 } as const
 
 export type ExtraordinaryFeeChargeScalarFieldEnum = (typeof ExtraordinaryFeeChargeScalarFieldEnum)[keyof typeof ExtraordinaryFeeChargeScalarFieldEnum]
+
+
+export const StandContactScalarFieldEnum = {
+  id: 'id',
+  condominiumId: 'condominiumId',
+  name: 'name',
+  phoneNumber: 'phoneNumber',
+  extension: 'extension',
+  schedule: 'schedule',
+  hasWhatsapp: 'hasWhatsapp',
+  isPrimary: 'isPrimary',
+  notes: 'notes',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type StandContactScalarFieldEnum = (typeof StandContactScalarFieldEnum)[keyof typeof StandContactScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -3382,6 +3475,7 @@ export type GlobalOmitConfig = {
   extraordinaryFee?: Prisma.ExtraordinaryFeeOmit
   extraordinaryFeeDocument?: Prisma.ExtraordinaryFeeDocumentOmit
   extraordinaryFeeCharge?: Prisma.ExtraordinaryFeeChargeOmit
+  standContact?: Prisma.StandContactOmit
 }
 
 /* Types for Logging */

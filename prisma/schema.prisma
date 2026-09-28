@@ -173,6 +173,7 @@ model Condominium {
   extraIncomes            ExtraIncome[]
   transparencyConfig      CondominiumTransparencyConfig?
   extraordinaryFees       ExtraordinaryFee[]
+  standContacts           StandContact[]
   createdAt               DateTime                       @default(now())
   updatedAt               DateTime                       @updatedAt
 }
@@ -701,4 +702,23 @@ model ExtraordinaryFeeCharge {
   @@index([extraordinaryFeeId])
   @@index([houseId])
   @@index([status])
+}
+
+model StandContact {
+  id            String      @id @default(uuid())
+  condominiumId String
+  condominium   Condominium @relation(fields: [condominiumId], references: [id], onDelete: Cascade)
+  name          String
+  phoneNumber   String
+  extension     String?
+  schedule      String?     @default("24/7")
+  hasWhatsapp   Boolean     @default(true)
+  isPrimary     Boolean     @default(false)
+  notes         String?
+  isActive      Boolean     @default(true)
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+
+  @@index([condominiumId])
+  @@index([condominiumId, isActive])
 }
