@@ -532,6 +532,74 @@ export class ExpensesPrismaRepository implements ExpensesRepository {
       advanceCreditsAgg._sum.currentBalance || 0,
     );
 
+    // Movimientos acumulados ANTES de este periodo (para arrastre de saldo / saldo inicial del mes)
+    const priorChargesAgg = await this.prisma.maintenanceCharge.aggregate({
+      where: {
+        condominiumId,
+        paidAmount: { gt: 0 },
+        OR: [
+          {
+            maintenancePeriod: {
+              OR: [
+                { year: { lt: year } },
+                { year: year, month: { lt: month } },
+              ],
+            },
+          },
+          {
+            maintenancePeriodId: null,
+            dueDate: { lt: startDate },
+          },
+        ],
+      },
+      _sum: { paidAmount: true },
+    });
+
+    const priorExtraIncomesAgg = await this.prisma.extraIncome.aggregate({
+      where: {
+        condominiumId,
+        OR: [
+          { period: { lt: targetPeriod } },
+          { incomeDate: { lt: startDate } },
+        ],
+      },
+      _sum: { amount: true },
+    });
+
+    const priorExpensesAgg = await this.prisma.expense.aggregate({
+      where: {
+        condominiumId,
+        status: ExpenseStatus.PAID,
+        OR: [
+          { period: { lt: targetPeriod } },
+          { expenseDate: { lt: startDate } },
+        ],
+      },
+      _sum: { amount: true },
+    });
+
+    const priorExtraordinaryChargesAgg =
+      await this.prisma.extraordinaryFeeCharge.aggregate({
+        where: {
+          extraordinaryFee: { condominiumId },
+          paidAmount: { gt: 0 },
+          paymentDate: { lt: startDate },
+        },
+        _sum: { paidAmount: true },
+      });
+
+    const priorIncome =
+      Number(priorChargesAgg._sum.paidAmount || 0) +
+      Number(priorExtraIncomesAgg._sum.amount || 0) +
+      Number(priorExtraordinaryChargesAgg._sum.paidAmount || 0);
+
+    const priorExpenses = Number(priorExpensesAgg._sum.amount || 0);
+
+    // Saldo con el que abre este mes = Saldo base inicial del condominio + Ingresos anteriores - Egresos anteriores
+    const periodStartingBalance = initialBalance + priorIncome - priorExpenses;
+    // Saldo proyectado al cierre del mes = Saldo con el que abrió + Flujo neto propio del mes
+    const periodEndingBalance = periodStartingBalance + periodNetCashFlow;
+
     const allChargesAgg = await this.prisma.maintenanceCharge.aggregate({
       where: { condominiumId, paidAmount: { gt: 0 } },
       _sum: { paidAmount: true },
@@ -645,6 +713,8 @@ export class ExpensesPrismaRepository implements ExpensesRepository {
       summary: {
         initialBalance: config.showBalance ? initialBalance : 0,
         initialReserveFund: config.showBalance ? initialReserveFund : 0,
+        periodStartingBalance: config.showBalance ? periodStartingBalance : 0,
+        periodEndingBalance: config.showBalance ? periodEndingBalance : 0,
         periodMaintenanceIncome: config.showIncomes
           ? periodMaintenanceIncome
           : 0,

@@ -90,6 +90,8 @@ export interface TransparencyReport {
   summary: {
     initialBalance: number;
     initialReserveFund: number;
+    periodStartingBalance?: number;
+    periodEndingBalance?: number;
     periodMaintenanceIncome: number;
     periodExtraIncome: number;
     totalPeriodIncome: number;
