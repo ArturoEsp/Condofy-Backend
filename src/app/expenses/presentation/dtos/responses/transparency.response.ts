@@ -56,6 +56,14 @@ export class TransparencySummaryResponse {
   @Expose()
   initialReserveFund: number;
 
+  @ApiPropertyOptional()
+  @Expose()
+  periodStartingBalance?: number;
+
+  @ApiPropertyOptional()
+  @Expose()
+  periodEndingBalance?: number;
+
   @ApiProperty()
   @Expose()
   periodMaintenanceIncome: number;

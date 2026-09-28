@@ -273,6 +273,7 @@ model House {
   updatedAt               DateTime                 @updatedAt
 
   @@unique([condominiumId, houseNumber])
+  @@index([condominiumId, isDisabled])
 }
 
 model HouseConfiguration {
@@ -323,6 +324,7 @@ model Visitor {
 
   @@index([houseId])
   @@index([category])
+  @@index([houseId, createdAt])
 }
 
 model AccessAuthorization {
@@ -346,6 +348,9 @@ model AccessAuthorization {
   @@index([visitorId])
   @@index([status])
   @@index([validFrom, validUntil])
+  @@index([index])
+  @@index([vehiclePlate])
+  @@index([status, validUntil])
 }
 
 model AccessLog {
@@ -361,6 +366,8 @@ model AccessLog {
   @@index([accessAuthorizationId])
   @@index([userAcceptId])
   @@index([date])
+  @@index([accessAuthorizationId, date])
+  @@index([entryType, date])
 }
 
 model ParcelDelivery {
@@ -477,6 +484,8 @@ model MaintenanceCharge {
   @@index([houseId])
   @@index([status])
   @@index([dueDate])
+  @@index([maintenancePeriodId])
+  @@index([condominiumId, status])
 }
 
 model Payment {
@@ -702,6 +711,7 @@ model ExtraordinaryFeeCharge {
   @@index([extraordinaryFeeId])
   @@index([houseId])
   @@index([status])
+  @@index([extraordinaryFeeId, status])
 }
 
 model StandContact {
