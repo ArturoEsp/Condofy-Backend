@@ -169,3 +169,8 @@ export type ExtraordinaryFeeDocument = Prisma.ExtraordinaryFeeDocumentModel
  * 
  */
 export type ExtraordinaryFeeCharge = Prisma.ExtraordinaryFeeChargeModel
+/**
+ * Model StandContact
+ * 
+ */
+export type StandContact = Prisma.StandContactModel
