@@ -60,6 +60,13 @@ export class PublicPassCondominiumResponse {
   })
   @Expose()
   name: string;
+
+  @ApiPropertyOptional({
+    example: 'https://maps.app.goo.gl/...',
+    description: 'Enlace de ubicación en Google Maps',
+  })
+  @Expose()
+  googleMapsUrl?: string;
 }
 
 export class PublicPassResponse {
