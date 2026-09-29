@@ -234,6 +234,7 @@ export type CondominiumWhereInput = {
   transparencyConfig?: Prisma.XOR<Prisma.CondominiumTransparencyConfigNullableScalarRelationFilter, Prisma.CondominiumTransparencyConfigWhereInput> | null
   extraordinaryFees?: Prisma.ExtraordinaryFeeListRelationFilter
   standContacts?: Prisma.StandContactListRelationFilter
+  announcements?: Prisma.AnnouncementListRelationFilter
 }
 
 export type CondominiumOrderByWithRelationInput = {
@@ -259,6 +260,7 @@ export type CondominiumOrderByWithRelationInput = {
   transparencyConfig?: Prisma.CondominiumTransparencyConfigOrderByWithRelationInput
   extraordinaryFees?: Prisma.ExtraordinaryFeeOrderByRelationAggregateInput
   standContacts?: Prisma.StandContactOrderByRelationAggregateInput
+  announcements?: Prisma.AnnouncementOrderByRelationAggregateInput
 }
 
 export type CondominiumWhereUniqueInput = Prisma.AtLeast<{
@@ -287,6 +289,7 @@ export type CondominiumWhereUniqueInput = Prisma.AtLeast<{
   transparencyConfig?: Prisma.XOR<Prisma.CondominiumTransparencyConfigNullableScalarRelationFilter, Prisma.CondominiumTransparencyConfigWhereInput> | null
   extraordinaryFees?: Prisma.ExtraordinaryFeeListRelationFilter
   standContacts?: Prisma.StandContactListRelationFilter
+  announcements?: Prisma.AnnouncementListRelationFilter
 }, "id" | "key">
 
 export type CondominiumOrderByWithAggregationInput = {
@@ -344,6 +347,7 @@ export type CondominiumCreateInput = {
   transparencyConfig?: Prisma.CondominiumTransparencyConfigCreateNestedOneWithoutCondominiumInput
   extraordinaryFees?: Prisma.ExtraordinaryFeeCreateNestedManyWithoutCondominiumInput
   standContacts?: Prisma.StandContactCreateNestedManyWithoutCondominiumInput
+  announcements?: Prisma.AnnouncementCreateNestedManyWithoutCondominiumInput
 }
 
 export type CondominiumUncheckedCreateInput = {
@@ -369,6 +373,7 @@ export type CondominiumUncheckedCreateInput = {
   transparencyConfig?: Prisma.CondominiumTransparencyConfigUncheckedCreateNestedOneWithoutCondominiumInput
   extraordinaryFees?: Prisma.ExtraordinaryFeeUncheckedCreateNestedManyWithoutCondominiumInput
   standContacts?: Prisma.StandContactUncheckedCreateNestedManyWithoutCondominiumInput
+  announcements?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCondominiumInput
 }
 
 export type CondominiumUpdateInput = {
@@ -394,6 +399,7 @@ export type CondominiumUpdateInput = {
   transparencyConfig?: Prisma.CondominiumTransparencyConfigUpdateOneWithoutCondominiumNestedInput
   extraordinaryFees?: Prisma.ExtraordinaryFeeUpdateManyWithoutCondominiumNestedInput
   standContacts?: Prisma.StandContactUpdateManyWithoutCondominiumNestedInput
+  announcements?: Prisma.AnnouncementUpdateManyWithoutCondominiumNestedInput
 }
 
 export type CondominiumUncheckedUpdateInput = {
@@ -419,6 +425,7 @@ export type CondominiumUncheckedUpdateInput = {
   transparencyConfig?: Prisma.CondominiumTransparencyConfigUncheckedUpdateOneWithoutCondominiumNestedInput
   extraordinaryFees?: Prisma.ExtraordinaryFeeUncheckedUpdateManyWithoutCondominiumNestedInput
   standContacts?: Prisma.StandContactUncheckedUpdateManyWithoutCondominiumNestedInput
+  announcements?: Prisma.AnnouncementUncheckedUpdateManyWithoutCondominiumNestedInput
 }
 
 export type CondominiumCreateManyInput = {
@@ -691,6 +698,20 @@ export type CondominiumUpdateOneRequiredWithoutStandContactsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.CondominiumUpdateToOneWithWhereWithoutStandContactsInput, Prisma.CondominiumUpdateWithoutStandContactsInput>, Prisma.CondominiumUncheckedUpdateWithoutStandContactsInput>
 }
 
+export type CondominiumCreateNestedOneWithoutAnnouncementsInput = {
+  create?: Prisma.XOR<Prisma.CondominiumCreateWithoutAnnouncementsInput, Prisma.CondominiumUncheckedCreateWithoutAnnouncementsInput>
+  connectOrCreate?: Prisma.CondominiumCreateOrConnectWithoutAnnouncementsInput
+  connect?: Prisma.CondominiumWhereUniqueInput
+}
+
+export type CondominiumUpdateOneRequiredWithoutAnnouncementsNestedInput = {
+  create?: Prisma.XOR<Prisma.CondominiumCreateWithoutAnnouncementsInput, Prisma.CondominiumUncheckedCreateWithoutAnnouncementsInput>
+  connectOrCreate?: Prisma.CondominiumCreateOrConnectWithoutAnnouncementsInput
+  upsert?: Prisma.CondominiumUpsertWithoutAnnouncementsInput
+  connect?: Prisma.CondominiumWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CondominiumUpdateToOneWithWhereWithoutAnnouncementsInput, Prisma.CondominiumUpdateWithoutAnnouncementsInput>, Prisma.CondominiumUncheckedUpdateWithoutAnnouncementsInput>
+}
+
 export type CondominiumCreateWithoutAdminsInput = {
   id?: string
   key: string
@@ -713,6 +734,7 @@ export type CondominiumCreateWithoutAdminsInput = {
   transparencyConfig?: Prisma.CondominiumTransparencyConfigCreateNestedOneWithoutCondominiumInput
   extraordinaryFees?: Prisma.ExtraordinaryFeeCreateNestedManyWithoutCondominiumInput
   standContacts?: Prisma.StandContactCreateNestedManyWithoutCondominiumInput
+  announcements?: Prisma.AnnouncementCreateNestedManyWithoutCondominiumInput
 }
 
 export type CondominiumUncheckedCreateWithoutAdminsInput = {
@@ -737,6 +759,7 @@ export type CondominiumUncheckedCreateWithoutAdminsInput = {
   transparencyConfig?: Prisma.CondominiumTransparencyConfigUncheckedCreateNestedOneWithoutCondominiumInput
   extraordinaryFees?: Prisma.ExtraordinaryFeeUncheckedCreateNestedManyWithoutCondominiumInput
   standContacts?: Prisma.StandContactUncheckedCreateNestedManyWithoutCondominiumInput
+  announcements?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCondominiumInput
 }
 
 export type CondominiumCreateOrConnectWithoutAdminsInput = {
@@ -777,6 +800,7 @@ export type CondominiumUpdateWithoutAdminsInput = {
   transparencyConfig?: Prisma.CondominiumTransparencyConfigUpdateOneWithoutCondominiumNestedInput
   extraordinaryFees?: Prisma.ExtraordinaryFeeUpdateManyWithoutCondominiumNestedInput
   standContacts?: Prisma.StandContactUpdateManyWithoutCondominiumNestedInput
+  announcements?: Prisma.AnnouncementUpdateManyWithoutCondominiumNestedInput
 }
 
 export type CondominiumUncheckedUpdateWithoutAdminsInput = {
@@ -801,6 +825,7 @@ export type CondominiumUncheckedUpdateWithoutAdminsInput = {
   transparencyConfig?: Prisma.CondominiumTransparencyConfigUncheckedUpdateOneWithoutCondominiumNestedInput
   extraordinaryFees?: Prisma.ExtraordinaryFeeUncheckedUpdateManyWithoutCondominiumNestedInput
   standContacts?: Prisma.StandContactUncheckedUpdateManyWithoutCondominiumNestedInput
+  announcements?: Prisma.AnnouncementUncheckedUpdateManyWithoutCondominiumNestedInput
 }
 
 export type CondominiumCreateWithoutHousesInput = {
@@ -825,6 +850,7 @@ export type CondominiumCreateWithoutHousesInput = {
   transparencyConfig?: Prisma.CondominiumTransparencyConfigCreateNestedOneWithoutCondominiumInput
   extraordinaryFees?: Prisma.ExtraordinaryFeeCreateNestedManyWithoutCondominiumInput
   standContacts?: Prisma.StandContactCreateNestedManyWithoutCondominiumInput
+  announcements?: Prisma.AnnouncementCreateNestedManyWithoutCondominiumInput
 }
 
 export type CondominiumUncheckedCreateWithoutHousesInput = {
@@ -849,6 +875,7 @@ export type CondominiumUncheckedCreateWithoutHousesInput = {
   transparencyConfig?: Prisma.CondominiumTransparencyConfigUncheckedCreateNestedOneWithoutCondominiumInput
   extraordinaryFees?: Prisma.ExtraordinaryFeeUncheckedCreateNestedManyWithoutCondominiumInput
   standContacts?: Prisma.StandContactUncheckedCreateNestedManyWithoutCondominiumInput
+  announcements?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCondominiumInput
 }
 
 export type CondominiumCreateOrConnectWithoutHousesInput = {
@@ -889,6 +916,7 @@ export type CondominiumUpdateWithoutHousesInput = {
   transparencyConfig?: Prisma.CondominiumTransparencyConfigUpdateOneWithoutCondominiumNestedInput
   extraordinaryFees?: Prisma.ExtraordinaryFeeUpdateManyWithoutCondominiumNestedInput
   standContacts?: Prisma.StandContactUpdateManyWithoutCondominiumNestedInput
+  announcements?: Prisma.AnnouncementUpdateManyWithoutCondominiumNestedInput
 }
 
 export type CondominiumUncheckedUpdateWithoutHousesInput = {
@@ -913,6 +941,7 @@ export type CondominiumUncheckedUpdateWithoutHousesInput = {
   transparencyConfig?: Prisma.CondominiumTransparencyConfigUncheckedUpdateOneWithoutCondominiumNestedInput
   extraordinaryFees?: Prisma.ExtraordinaryFeeUncheckedUpdateManyWithoutCondominiumNestedInput
   standContacts?: Prisma.StandContactUncheckedUpdateManyWithoutCondominiumNestedInput
+  announcements?: Prisma.AnnouncementUncheckedUpdateManyWithoutCondominiumNestedInput
 }
 
 export type CondominiumCreateWithoutResidentProfilesInput = {
@@ -937,6 +966,7 @@ export type CondominiumCreateWithoutResidentProfilesInput = {
   transparencyConfig?: Prisma.CondominiumTransparencyConfigCreateNestedOneWithoutCondominiumInput
   extraordinaryFees?: Prisma.ExtraordinaryFeeCreateNestedManyWithoutCondominiumInput
   standContacts?: Prisma.StandContactCreateNestedManyWithoutCondominiumInput
+  announcements?: Prisma.AnnouncementCreateNestedManyWithoutCondominiumInput
 }
 
 export type CondominiumUncheckedCreateWithoutResidentProfilesInput = {
@@ -961,6 +991,7 @@ export type CondominiumUncheckedCreateWithoutResidentProfilesInput = {
   transparencyConfig?: Prisma.CondominiumTransparencyConfigUncheckedCreateNestedOneWithoutCondominiumInput
   extraordinaryFees?: Prisma.ExtraordinaryFeeUncheckedCreateNestedManyWithoutCondominiumInput
   standContacts?: Prisma.StandContactUncheckedCreateNestedManyWithoutCondominiumInput
+  announcements?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCondominiumInput
 }
 
 export type CondominiumCreateOrConnectWithoutResidentProfilesInput = {
@@ -1001,6 +1032,7 @@ export type CondominiumUpdateWithoutResidentProfilesInput = {
   transparencyConfig?: Prisma.CondominiumTransparencyConfigUpdateOneWithoutCondominiumNestedInput
   extraordinaryFees?: Prisma.ExtraordinaryFeeUpdateManyWithoutCondominiumNestedInput
   standContacts?: Prisma.StandContactUpdateManyWithoutCondominiumNestedInput
+  announcements?: Prisma.AnnouncementUpdateManyWithoutCondominiumNestedInput
 }
 
 export type CondominiumUncheckedUpdateWithoutResidentProfilesInput = {
@@ -1025,6 +1057,7 @@ export type CondominiumUncheckedUpdateWithoutResidentProfilesInput = {
   transparencyConfig?: Prisma.CondominiumTransparencyConfigUncheckedUpdateOneWithoutCondominiumNestedInput
   extraordinaryFees?: Prisma.ExtraordinaryFeeUncheckedUpdateManyWithoutCondominiumNestedInput
   standContacts?: Prisma.StandContactUncheckedUpdateManyWithoutCondominiumNestedInput
+  announcements?: Prisma.AnnouncementUncheckedUpdateManyWithoutCondominiumNestedInput
 }
 
 export type CondominiumCreateWithoutParcelsInput = {
@@ -1049,6 +1082,7 @@ export type CondominiumCreateWithoutParcelsInput = {
   transparencyConfig?: Prisma.CondominiumTransparencyConfigCreateNestedOneWithoutCondominiumInput
   extraordinaryFees?: Prisma.ExtraordinaryFeeCreateNestedManyWithoutCondominiumInput
   standContacts?: Prisma.StandContactCreateNestedManyWithoutCondominiumInput
+  announcements?: Prisma.AnnouncementCreateNestedManyWithoutCondominiumInput
 }
 
 export type CondominiumUncheckedCreateWithoutParcelsInput = {
@@ -1073,6 +1107,7 @@ export type CondominiumUncheckedCreateWithoutParcelsInput = {
   transparencyConfig?: Prisma.CondominiumTransparencyConfigUncheckedCreateNestedOneWithoutCondominiumInput
   extraordinaryFees?: Prisma.ExtraordinaryFeeUncheckedCreateNestedManyWithoutCondominiumInput
   standContacts?: Prisma.StandContactUncheckedCreateNestedManyWithoutCondominiumInput
+  announcements?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCondominiumInput
 }
 
 export type CondominiumCreateOrConnectWithoutParcelsInput = {
@@ -1113,6 +1148,7 @@ export type CondominiumUpdateWithoutParcelsInput = {
   transparencyConfig?: Prisma.CondominiumTransparencyConfigUpdateOneWithoutCondominiumNestedInput
   extraordinaryFees?: Prisma.ExtraordinaryFeeUpdateManyWithoutCondominiumNestedInput
   standContacts?: Prisma.StandContactUpdateManyWithoutCondominiumNestedInput
+  announcements?: Prisma.AnnouncementUpdateManyWithoutCondominiumNestedInput
 }
 
 export type CondominiumUncheckedUpdateWithoutParcelsInput = {
@@ -1137,6 +1173,7 @@ export type CondominiumUncheckedUpdateWithoutParcelsInput = {
   transparencyConfig?: Prisma.CondominiumTransparencyConfigUncheckedUpdateOneWithoutCondominiumNestedInput
   extraordinaryFees?: Prisma.ExtraordinaryFeeUncheckedUpdateManyWithoutCondominiumNestedInput
   standContacts?: Prisma.StandContactUncheckedUpdateManyWithoutCondominiumNestedInput
+  announcements?: Prisma.AnnouncementUncheckedUpdateManyWithoutCondominiumNestedInput
 }
 
 export type CondominiumCreateWithoutGeneralProviderAccessesInput = {
@@ -1161,6 +1198,7 @@ export type CondominiumCreateWithoutGeneralProviderAccessesInput = {
   transparencyConfig?: Prisma.CondominiumTransparencyConfigCreateNestedOneWithoutCondominiumInput
   extraordinaryFees?: Prisma.ExtraordinaryFeeCreateNestedManyWithoutCondominiumInput
   standContacts?: Prisma.StandContactCreateNestedManyWithoutCondominiumInput
+  announcements?: Prisma.AnnouncementCreateNestedManyWithoutCondominiumInput
 }
 
 export type CondominiumUncheckedCreateWithoutGeneralProviderAccessesInput = {
@@ -1185,6 +1223,7 @@ export type CondominiumUncheckedCreateWithoutGeneralProviderAccessesInput = {
   transparencyConfig?: Prisma.CondominiumTransparencyConfigUncheckedCreateNestedOneWithoutCondominiumInput
   extraordinaryFees?: Prisma.ExtraordinaryFeeUncheckedCreateNestedManyWithoutCondominiumInput
   standContacts?: Prisma.StandContactUncheckedCreateNestedManyWithoutCondominiumInput
+  announcements?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCondominiumInput
 }
 
 export type CondominiumCreateOrConnectWithoutGeneralProviderAccessesInput = {
@@ -1225,6 +1264,7 @@ export type CondominiumUpdateWithoutGeneralProviderAccessesInput = {
   transparencyConfig?: Prisma.CondominiumTransparencyConfigUpdateOneWithoutCondominiumNestedInput
   extraordinaryFees?: Prisma.ExtraordinaryFeeUpdateManyWithoutCondominiumNestedInput
   standContacts?: Prisma.StandContactUpdateManyWithoutCondominiumNestedInput
+  announcements?: Prisma.AnnouncementUpdateManyWithoutCondominiumNestedInput
 }
 
 export type CondominiumUncheckedUpdateWithoutGeneralProviderAccessesInput = {
@@ -1249,6 +1289,7 @@ export type CondominiumUncheckedUpdateWithoutGeneralProviderAccessesInput = {
   transparencyConfig?: Prisma.CondominiumTransparencyConfigUncheckedUpdateOneWithoutCondominiumNestedInput
   extraordinaryFees?: Prisma.ExtraordinaryFeeUncheckedUpdateManyWithoutCondominiumNestedInput
   standContacts?: Prisma.StandContactUncheckedUpdateManyWithoutCondominiumNestedInput
+  announcements?: Prisma.AnnouncementUncheckedUpdateManyWithoutCondominiumNestedInput
 }
 
 export type CondominiumCreateWithoutMaintenanceChargesInput = {
@@ -1273,6 +1314,7 @@ export type CondominiumCreateWithoutMaintenanceChargesInput = {
   transparencyConfig?: Prisma.CondominiumTransparencyConfigCreateNestedOneWithoutCondominiumInput
   extraordinaryFees?: Prisma.ExtraordinaryFeeCreateNestedManyWithoutCondominiumInput
   standContacts?: Prisma.StandContactCreateNestedManyWithoutCondominiumInput
+  announcements?: Prisma.AnnouncementCreateNestedManyWithoutCondominiumInput
 }
 
 export type CondominiumUncheckedCreateWithoutMaintenanceChargesInput = {
@@ -1297,6 +1339,7 @@ export type CondominiumUncheckedCreateWithoutMaintenanceChargesInput = {
   transparencyConfig?: Prisma.CondominiumTransparencyConfigUncheckedCreateNestedOneWithoutCondominiumInput
   extraordinaryFees?: Prisma.ExtraordinaryFeeUncheckedCreateNestedManyWithoutCondominiumInput
   standContacts?: Prisma.StandContactUncheckedCreateNestedManyWithoutCondominiumInput
+  announcements?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCondominiumInput
 }
 
 export type CondominiumCreateOrConnectWithoutMaintenanceChargesInput = {
@@ -1337,6 +1380,7 @@ export type CondominiumUpdateWithoutMaintenanceChargesInput = {
   transparencyConfig?: Prisma.CondominiumTransparencyConfigUpdateOneWithoutCondominiumNestedInput
   extraordinaryFees?: Prisma.ExtraordinaryFeeUpdateManyWithoutCondominiumNestedInput
   standContacts?: Prisma.StandContactUpdateManyWithoutCondominiumNestedInput
+  announcements?: Prisma.AnnouncementUpdateManyWithoutCondominiumNestedInput
 }
 
 export type CondominiumUncheckedUpdateWithoutMaintenanceChargesInput = {
@@ -1361,6 +1405,7 @@ export type CondominiumUncheckedUpdateWithoutMaintenanceChargesInput = {
   transparencyConfig?: Prisma.CondominiumTransparencyConfigUncheckedUpdateOneWithoutCondominiumNestedInput
   extraordinaryFees?: Prisma.ExtraordinaryFeeUncheckedUpdateManyWithoutCondominiumNestedInput
   standContacts?: Prisma.StandContactUncheckedUpdateManyWithoutCondominiumNestedInput
+  announcements?: Prisma.AnnouncementUncheckedUpdateManyWithoutCondominiumNestedInput
 }
 
 export type CondominiumCreateWithoutBillingConfigInput = {
@@ -1385,6 +1430,7 @@ export type CondominiumCreateWithoutBillingConfigInput = {
   transparencyConfig?: Prisma.CondominiumTransparencyConfigCreateNestedOneWithoutCondominiumInput
   extraordinaryFees?: Prisma.ExtraordinaryFeeCreateNestedManyWithoutCondominiumInput
   standContacts?: Prisma.StandContactCreateNestedManyWithoutCondominiumInput
+  announcements?: Prisma.AnnouncementCreateNestedManyWithoutCondominiumInput
 }
 
 export type CondominiumUncheckedCreateWithoutBillingConfigInput = {
@@ -1409,6 +1455,7 @@ export type CondominiumUncheckedCreateWithoutBillingConfigInput = {
   transparencyConfig?: Prisma.CondominiumTransparencyConfigUncheckedCreateNestedOneWithoutCondominiumInput
   extraordinaryFees?: Prisma.ExtraordinaryFeeUncheckedCreateNestedManyWithoutCondominiumInput
   standContacts?: Prisma.StandContactUncheckedCreateNestedManyWithoutCondominiumInput
+  announcements?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCondominiumInput
 }
 
 export type CondominiumCreateOrConnectWithoutBillingConfigInput = {
@@ -1449,6 +1496,7 @@ export type CondominiumUpdateWithoutBillingConfigInput = {
   transparencyConfig?: Prisma.CondominiumTransparencyConfigUpdateOneWithoutCondominiumNestedInput
   extraordinaryFees?: Prisma.ExtraordinaryFeeUpdateManyWithoutCondominiumNestedInput
   standContacts?: Prisma.StandContactUpdateManyWithoutCondominiumNestedInput
+  announcements?: Prisma.AnnouncementUpdateManyWithoutCondominiumNestedInput
 }
 
 export type CondominiumUncheckedUpdateWithoutBillingConfigInput = {
@@ -1473,6 +1521,7 @@ export type CondominiumUncheckedUpdateWithoutBillingConfigInput = {
   transparencyConfig?: Prisma.CondominiumTransparencyConfigUncheckedUpdateOneWithoutCondominiumNestedInput
   extraordinaryFees?: Prisma.ExtraordinaryFeeUncheckedUpdateManyWithoutCondominiumNestedInput
   standContacts?: Prisma.StandContactUncheckedUpdateManyWithoutCondominiumNestedInput
+  announcements?: Prisma.AnnouncementUncheckedUpdateManyWithoutCondominiumNestedInput
 }
 
 export type CondominiumCreateWithoutExpensesInput = {
@@ -1497,6 +1546,7 @@ export type CondominiumCreateWithoutExpensesInput = {
   transparencyConfig?: Prisma.CondominiumTransparencyConfigCreateNestedOneWithoutCondominiumInput
   extraordinaryFees?: Prisma.ExtraordinaryFeeCreateNestedManyWithoutCondominiumInput
   standContacts?: Prisma.StandContactCreateNestedManyWithoutCondominiumInput
+  announcements?: Prisma.AnnouncementCreateNestedManyWithoutCondominiumInput
 }
 
 export type CondominiumUncheckedCreateWithoutExpensesInput = {
@@ -1521,6 +1571,7 @@ export type CondominiumUncheckedCreateWithoutExpensesInput = {
   transparencyConfig?: Prisma.CondominiumTransparencyConfigUncheckedCreateNestedOneWithoutCondominiumInput
   extraordinaryFees?: Prisma.ExtraordinaryFeeUncheckedCreateNestedManyWithoutCondominiumInput
   standContacts?: Prisma.StandContactUncheckedCreateNestedManyWithoutCondominiumInput
+  announcements?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCondominiumInput
 }
 
 export type CondominiumCreateOrConnectWithoutExpensesInput = {
@@ -1561,6 +1612,7 @@ export type CondominiumUpdateWithoutExpensesInput = {
   transparencyConfig?: Prisma.CondominiumTransparencyConfigUpdateOneWithoutCondominiumNestedInput
   extraordinaryFees?: Prisma.ExtraordinaryFeeUpdateManyWithoutCondominiumNestedInput
   standContacts?: Prisma.StandContactUpdateManyWithoutCondominiumNestedInput
+  announcements?: Prisma.AnnouncementUpdateManyWithoutCondominiumNestedInput
 }
 
 export type CondominiumUncheckedUpdateWithoutExpensesInput = {
@@ -1585,6 +1637,7 @@ export type CondominiumUncheckedUpdateWithoutExpensesInput = {
   transparencyConfig?: Prisma.CondominiumTransparencyConfigUncheckedUpdateOneWithoutCondominiumNestedInput
   extraordinaryFees?: Prisma.ExtraordinaryFeeUncheckedUpdateManyWithoutCondominiumNestedInput
   standContacts?: Prisma.StandContactUncheckedUpdateManyWithoutCondominiumNestedInput
+  announcements?: Prisma.AnnouncementUncheckedUpdateManyWithoutCondominiumNestedInput
 }
 
 export type CondominiumCreateWithoutExtraIncomesInput = {
@@ -1609,6 +1662,7 @@ export type CondominiumCreateWithoutExtraIncomesInput = {
   transparencyConfig?: Prisma.CondominiumTransparencyConfigCreateNestedOneWithoutCondominiumInput
   extraordinaryFees?: Prisma.ExtraordinaryFeeCreateNestedManyWithoutCondominiumInput
   standContacts?: Prisma.StandContactCreateNestedManyWithoutCondominiumInput
+  announcements?: Prisma.AnnouncementCreateNestedManyWithoutCondominiumInput
 }
 
 export type CondominiumUncheckedCreateWithoutExtraIncomesInput = {
@@ -1633,6 +1687,7 @@ export type CondominiumUncheckedCreateWithoutExtraIncomesInput = {
   transparencyConfig?: Prisma.CondominiumTransparencyConfigUncheckedCreateNestedOneWithoutCondominiumInput
   extraordinaryFees?: Prisma.ExtraordinaryFeeUncheckedCreateNestedManyWithoutCondominiumInput
   standContacts?: Prisma.StandContactUncheckedCreateNestedManyWithoutCondominiumInput
+  announcements?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCondominiumInput
 }
 
 export type CondominiumCreateOrConnectWithoutExtraIncomesInput = {
@@ -1673,6 +1728,7 @@ export type CondominiumUpdateWithoutExtraIncomesInput = {
   transparencyConfig?: Prisma.CondominiumTransparencyConfigUpdateOneWithoutCondominiumNestedInput
   extraordinaryFees?: Prisma.ExtraordinaryFeeUpdateManyWithoutCondominiumNestedInput
   standContacts?: Prisma.StandContactUpdateManyWithoutCondominiumNestedInput
+  announcements?: Prisma.AnnouncementUpdateManyWithoutCondominiumNestedInput
 }
 
 export type CondominiumUncheckedUpdateWithoutExtraIncomesInput = {
@@ -1697,6 +1753,7 @@ export type CondominiumUncheckedUpdateWithoutExtraIncomesInput = {
   transparencyConfig?: Prisma.CondominiumTransparencyConfigUncheckedUpdateOneWithoutCondominiumNestedInput
   extraordinaryFees?: Prisma.ExtraordinaryFeeUncheckedUpdateManyWithoutCondominiumNestedInput
   standContacts?: Prisma.StandContactUncheckedUpdateManyWithoutCondominiumNestedInput
+  announcements?: Prisma.AnnouncementUncheckedUpdateManyWithoutCondominiumNestedInput
 }
 
 export type CondominiumCreateWithoutTransparencyConfigInput = {
@@ -1721,6 +1778,7 @@ export type CondominiumCreateWithoutTransparencyConfigInput = {
   extraIncomes?: Prisma.ExtraIncomeCreateNestedManyWithoutCondominiumInput
   extraordinaryFees?: Prisma.ExtraordinaryFeeCreateNestedManyWithoutCondominiumInput
   standContacts?: Prisma.StandContactCreateNestedManyWithoutCondominiumInput
+  announcements?: Prisma.AnnouncementCreateNestedManyWithoutCondominiumInput
 }
 
 export type CondominiumUncheckedCreateWithoutTransparencyConfigInput = {
@@ -1745,6 +1803,7 @@ export type CondominiumUncheckedCreateWithoutTransparencyConfigInput = {
   extraIncomes?: Prisma.ExtraIncomeUncheckedCreateNestedManyWithoutCondominiumInput
   extraordinaryFees?: Prisma.ExtraordinaryFeeUncheckedCreateNestedManyWithoutCondominiumInput
   standContacts?: Prisma.StandContactUncheckedCreateNestedManyWithoutCondominiumInput
+  announcements?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCondominiumInput
 }
 
 export type CondominiumCreateOrConnectWithoutTransparencyConfigInput = {
@@ -1785,6 +1844,7 @@ export type CondominiumUpdateWithoutTransparencyConfigInput = {
   extraIncomes?: Prisma.ExtraIncomeUpdateManyWithoutCondominiumNestedInput
   extraordinaryFees?: Prisma.ExtraordinaryFeeUpdateManyWithoutCondominiumNestedInput
   standContacts?: Prisma.StandContactUpdateManyWithoutCondominiumNestedInput
+  announcements?: Prisma.AnnouncementUpdateManyWithoutCondominiumNestedInput
 }
 
 export type CondominiumUncheckedUpdateWithoutTransparencyConfigInput = {
@@ -1809,6 +1869,7 @@ export type CondominiumUncheckedUpdateWithoutTransparencyConfigInput = {
   extraIncomes?: Prisma.ExtraIncomeUncheckedUpdateManyWithoutCondominiumNestedInput
   extraordinaryFees?: Prisma.ExtraordinaryFeeUncheckedUpdateManyWithoutCondominiumNestedInput
   standContacts?: Prisma.StandContactUncheckedUpdateManyWithoutCondominiumNestedInput
+  announcements?: Prisma.AnnouncementUncheckedUpdateManyWithoutCondominiumNestedInput
 }
 
 export type CondominiumCreateWithoutExtraordinaryFeesInput = {
@@ -1833,6 +1894,7 @@ export type CondominiumCreateWithoutExtraordinaryFeesInput = {
   extraIncomes?: Prisma.ExtraIncomeCreateNestedManyWithoutCondominiumInput
   transparencyConfig?: Prisma.CondominiumTransparencyConfigCreateNestedOneWithoutCondominiumInput
   standContacts?: Prisma.StandContactCreateNestedManyWithoutCondominiumInput
+  announcements?: Prisma.AnnouncementCreateNestedManyWithoutCondominiumInput
 }
 
 export type CondominiumUncheckedCreateWithoutExtraordinaryFeesInput = {
@@ -1857,6 +1919,7 @@ export type CondominiumUncheckedCreateWithoutExtraordinaryFeesInput = {
   extraIncomes?: Prisma.ExtraIncomeUncheckedCreateNestedManyWithoutCondominiumInput
   transparencyConfig?: Prisma.CondominiumTransparencyConfigUncheckedCreateNestedOneWithoutCondominiumInput
   standContacts?: Prisma.StandContactUncheckedCreateNestedManyWithoutCondominiumInput
+  announcements?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCondominiumInput
 }
 
 export type CondominiumCreateOrConnectWithoutExtraordinaryFeesInput = {
@@ -1897,6 +1960,7 @@ export type CondominiumUpdateWithoutExtraordinaryFeesInput = {
   extraIncomes?: Prisma.ExtraIncomeUpdateManyWithoutCondominiumNestedInput
   transparencyConfig?: Prisma.CondominiumTransparencyConfigUpdateOneWithoutCondominiumNestedInput
   standContacts?: Prisma.StandContactUpdateManyWithoutCondominiumNestedInput
+  announcements?: Prisma.AnnouncementUpdateManyWithoutCondominiumNestedInput
 }
 
 export type CondominiumUncheckedUpdateWithoutExtraordinaryFeesInput = {
@@ -1921,6 +1985,7 @@ export type CondominiumUncheckedUpdateWithoutExtraordinaryFeesInput = {
   extraIncomes?: Prisma.ExtraIncomeUncheckedUpdateManyWithoutCondominiumNestedInput
   transparencyConfig?: Prisma.CondominiumTransparencyConfigUncheckedUpdateOneWithoutCondominiumNestedInput
   standContacts?: Prisma.StandContactUncheckedUpdateManyWithoutCondominiumNestedInput
+  announcements?: Prisma.AnnouncementUncheckedUpdateManyWithoutCondominiumNestedInput
 }
 
 export type CondominiumCreateWithoutStandContactsInput = {
@@ -1945,6 +2010,7 @@ export type CondominiumCreateWithoutStandContactsInput = {
   extraIncomes?: Prisma.ExtraIncomeCreateNestedManyWithoutCondominiumInput
   transparencyConfig?: Prisma.CondominiumTransparencyConfigCreateNestedOneWithoutCondominiumInput
   extraordinaryFees?: Prisma.ExtraordinaryFeeCreateNestedManyWithoutCondominiumInput
+  announcements?: Prisma.AnnouncementCreateNestedManyWithoutCondominiumInput
 }
 
 export type CondominiumUncheckedCreateWithoutStandContactsInput = {
@@ -1969,6 +2035,7 @@ export type CondominiumUncheckedCreateWithoutStandContactsInput = {
   extraIncomes?: Prisma.ExtraIncomeUncheckedCreateNestedManyWithoutCondominiumInput
   transparencyConfig?: Prisma.CondominiumTransparencyConfigUncheckedCreateNestedOneWithoutCondominiumInput
   extraordinaryFees?: Prisma.ExtraordinaryFeeUncheckedCreateNestedManyWithoutCondominiumInput
+  announcements?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCondominiumInput
 }
 
 export type CondominiumCreateOrConnectWithoutStandContactsInput = {
@@ -2009,6 +2076,7 @@ export type CondominiumUpdateWithoutStandContactsInput = {
   extraIncomes?: Prisma.ExtraIncomeUpdateManyWithoutCondominiumNestedInput
   transparencyConfig?: Prisma.CondominiumTransparencyConfigUpdateOneWithoutCondominiumNestedInput
   extraordinaryFees?: Prisma.ExtraordinaryFeeUpdateManyWithoutCondominiumNestedInput
+  announcements?: Prisma.AnnouncementUpdateManyWithoutCondominiumNestedInput
 }
 
 export type CondominiumUncheckedUpdateWithoutStandContactsInput = {
@@ -2033,6 +2101,123 @@ export type CondominiumUncheckedUpdateWithoutStandContactsInput = {
   extraIncomes?: Prisma.ExtraIncomeUncheckedUpdateManyWithoutCondominiumNestedInput
   transparencyConfig?: Prisma.CondominiumTransparencyConfigUncheckedUpdateOneWithoutCondominiumNestedInput
   extraordinaryFees?: Prisma.ExtraordinaryFeeUncheckedUpdateManyWithoutCondominiumNestedInput
+  announcements?: Prisma.AnnouncementUncheckedUpdateManyWithoutCondominiumNestedInput
+}
+
+export type CondominiumCreateWithoutAnnouncementsInput = {
+  id?: string
+  key: string
+  name: string
+  description?: string | null
+  googleMapsUrl?: string | null
+  address?: string | null
+  contactPhone?: string | null
+  contactEmail?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  houses?: Prisma.HouseCreateNestedManyWithoutCondominiumInput
+  admins?: Prisma.UserCreateNestedManyWithoutCondominiumInput
+  residentProfiles?: Prisma.ResidentProfileCreateNestedManyWithoutCondominiumInput
+  maintenanceCharges?: Prisma.MaintenanceChargeCreateNestedManyWithoutCondominiumInput
+  parcels?: Prisma.ParcelDeliveryCreateNestedManyWithoutCondominiumInput
+  generalProviderAccesses?: Prisma.GeneralProviderAccessCreateNestedManyWithoutCondominiumInput
+  billingConfig?: Prisma.CondominiumBillingConfigCreateNestedOneWithoutCondominiumInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutCondominiumInput
+  extraIncomes?: Prisma.ExtraIncomeCreateNestedManyWithoutCondominiumInput
+  transparencyConfig?: Prisma.CondominiumTransparencyConfigCreateNestedOneWithoutCondominiumInput
+  extraordinaryFees?: Prisma.ExtraordinaryFeeCreateNestedManyWithoutCondominiumInput
+  standContacts?: Prisma.StandContactCreateNestedManyWithoutCondominiumInput
+}
+
+export type CondominiumUncheckedCreateWithoutAnnouncementsInput = {
+  id?: string
+  key: string
+  name: string
+  description?: string | null
+  googleMapsUrl?: string | null
+  address?: string | null
+  contactPhone?: string | null
+  contactEmail?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  houses?: Prisma.HouseUncheckedCreateNestedManyWithoutCondominiumInput
+  admins?: Prisma.UserUncheckedCreateNestedManyWithoutCondominiumInput
+  residentProfiles?: Prisma.ResidentProfileUncheckedCreateNestedManyWithoutCondominiumInput
+  maintenanceCharges?: Prisma.MaintenanceChargeUncheckedCreateNestedManyWithoutCondominiumInput
+  parcels?: Prisma.ParcelDeliveryUncheckedCreateNestedManyWithoutCondominiumInput
+  generalProviderAccesses?: Prisma.GeneralProviderAccessUncheckedCreateNestedManyWithoutCondominiumInput
+  billingConfig?: Prisma.CondominiumBillingConfigUncheckedCreateNestedOneWithoutCondominiumInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutCondominiumInput
+  extraIncomes?: Prisma.ExtraIncomeUncheckedCreateNestedManyWithoutCondominiumInput
+  transparencyConfig?: Prisma.CondominiumTransparencyConfigUncheckedCreateNestedOneWithoutCondominiumInput
+  extraordinaryFees?: Prisma.ExtraordinaryFeeUncheckedCreateNestedManyWithoutCondominiumInput
+  standContacts?: Prisma.StandContactUncheckedCreateNestedManyWithoutCondominiumInput
+}
+
+export type CondominiumCreateOrConnectWithoutAnnouncementsInput = {
+  where: Prisma.CondominiumWhereUniqueInput
+  create: Prisma.XOR<Prisma.CondominiumCreateWithoutAnnouncementsInput, Prisma.CondominiumUncheckedCreateWithoutAnnouncementsInput>
+}
+
+export type CondominiumUpsertWithoutAnnouncementsInput = {
+  update: Prisma.XOR<Prisma.CondominiumUpdateWithoutAnnouncementsInput, Prisma.CondominiumUncheckedUpdateWithoutAnnouncementsInput>
+  create: Prisma.XOR<Prisma.CondominiumCreateWithoutAnnouncementsInput, Prisma.CondominiumUncheckedCreateWithoutAnnouncementsInput>
+  where?: Prisma.CondominiumWhereInput
+}
+
+export type CondominiumUpdateToOneWithWhereWithoutAnnouncementsInput = {
+  where?: Prisma.CondominiumWhereInput
+  data: Prisma.XOR<Prisma.CondominiumUpdateWithoutAnnouncementsInput, Prisma.CondominiumUncheckedUpdateWithoutAnnouncementsInput>
+}
+
+export type CondominiumUpdateWithoutAnnouncementsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleMapsUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  houses?: Prisma.HouseUpdateManyWithoutCondominiumNestedInput
+  admins?: Prisma.UserUpdateManyWithoutCondominiumNestedInput
+  residentProfiles?: Prisma.ResidentProfileUpdateManyWithoutCondominiumNestedInput
+  maintenanceCharges?: Prisma.MaintenanceChargeUpdateManyWithoutCondominiumNestedInput
+  parcels?: Prisma.ParcelDeliveryUpdateManyWithoutCondominiumNestedInput
+  generalProviderAccesses?: Prisma.GeneralProviderAccessUpdateManyWithoutCondominiumNestedInput
+  billingConfig?: Prisma.CondominiumBillingConfigUpdateOneWithoutCondominiumNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutCondominiumNestedInput
+  extraIncomes?: Prisma.ExtraIncomeUpdateManyWithoutCondominiumNestedInput
+  transparencyConfig?: Prisma.CondominiumTransparencyConfigUpdateOneWithoutCondominiumNestedInput
+  extraordinaryFees?: Prisma.ExtraordinaryFeeUpdateManyWithoutCondominiumNestedInput
+  standContacts?: Prisma.StandContactUpdateManyWithoutCondominiumNestedInput
+}
+
+export type CondominiumUncheckedUpdateWithoutAnnouncementsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleMapsUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  houses?: Prisma.HouseUncheckedUpdateManyWithoutCondominiumNestedInput
+  admins?: Prisma.UserUncheckedUpdateManyWithoutCondominiumNestedInput
+  residentProfiles?: Prisma.ResidentProfileUncheckedUpdateManyWithoutCondominiumNestedInput
+  maintenanceCharges?: Prisma.MaintenanceChargeUncheckedUpdateManyWithoutCondominiumNestedInput
+  parcels?: Prisma.ParcelDeliveryUncheckedUpdateManyWithoutCondominiumNestedInput
+  generalProviderAccesses?: Prisma.GeneralProviderAccessUncheckedUpdateManyWithoutCondominiumNestedInput
+  billingConfig?: Prisma.CondominiumBillingConfigUncheckedUpdateOneWithoutCondominiumNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutCondominiumNestedInput
+  extraIncomes?: Prisma.ExtraIncomeUncheckedUpdateManyWithoutCondominiumNestedInput
+  transparencyConfig?: Prisma.CondominiumTransparencyConfigUncheckedUpdateOneWithoutCondominiumNestedInput
+  extraordinaryFees?: Prisma.ExtraordinaryFeeUncheckedUpdateManyWithoutCondominiumNestedInput
+  standContacts?: Prisma.StandContactUncheckedUpdateManyWithoutCondominiumNestedInput
 }
 
 
@@ -2051,6 +2236,7 @@ export type CondominiumCountOutputType = {
   extraIncomes: number
   extraordinaryFees: number
   standContacts: number
+  announcements: number
 }
 
 export type CondominiumCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2064,6 +2250,7 @@ export type CondominiumCountOutputTypeSelect<ExtArgs extends runtime.Types.Exten
   extraIncomes?: boolean | CondominiumCountOutputTypeCountExtraIncomesArgs
   extraordinaryFees?: boolean | CondominiumCountOutputTypeCountExtraordinaryFeesArgs
   standContacts?: boolean | CondominiumCountOutputTypeCountStandContactsArgs
+  announcements?: boolean | CondominiumCountOutputTypeCountAnnouncementsArgs
 }
 
 /**
@@ -2146,6 +2333,13 @@ export type CondominiumCountOutputTypeCountStandContactsArgs<ExtArgs extends run
   where?: Prisma.StandContactWhereInput
 }
 
+/**
+ * CondominiumCountOutputType without action
+ */
+export type CondominiumCountOutputTypeCountAnnouncementsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AnnouncementWhereInput
+}
+
 
 export type CondominiumSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -2170,6 +2364,7 @@ export type CondominiumSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   transparencyConfig?: boolean | Prisma.Condominium$transparencyConfigArgs<ExtArgs>
   extraordinaryFees?: boolean | Prisma.Condominium$extraordinaryFeesArgs<ExtArgs>
   standContacts?: boolean | Prisma.Condominium$standContactsArgs<ExtArgs>
+  announcements?: boolean | Prisma.Condominium$announcementsArgs<ExtArgs>
   _count?: boolean | Prisma.CondominiumCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["condominium"]>
 
@@ -2226,6 +2421,7 @@ export type CondominiumInclude<ExtArgs extends runtime.Types.Extensions.Internal
   transparencyConfig?: boolean | Prisma.Condominium$transparencyConfigArgs<ExtArgs>
   extraordinaryFees?: boolean | Prisma.Condominium$extraordinaryFeesArgs<ExtArgs>
   standContacts?: boolean | Prisma.Condominium$standContactsArgs<ExtArgs>
+  announcements?: boolean | Prisma.Condominium$announcementsArgs<ExtArgs>
   _count?: boolean | Prisma.CondominiumCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type CondominiumIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -2246,6 +2442,7 @@ export type $CondominiumPayload<ExtArgs extends runtime.Types.Extensions.Interna
     transparencyConfig: Prisma.$CondominiumTransparencyConfigPayload<ExtArgs> | null
     extraordinaryFees: Prisma.$ExtraordinaryFeePayload<ExtArgs>[]
     standContacts: Prisma.$StandContactPayload<ExtArgs>[]
+    announcements: Prisma.$AnnouncementPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2664,6 +2861,7 @@ export interface Prisma__CondominiumClient<T, Null = never, ExtArgs extends runt
   transparencyConfig<T extends Prisma.Condominium$transparencyConfigArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Condominium$transparencyConfigArgs<ExtArgs>>): Prisma.Prisma__CondominiumTransparencyConfigClient<runtime.Types.Result.GetResult<Prisma.$CondominiumTransparencyConfigPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   extraordinaryFees<T extends Prisma.Condominium$extraordinaryFeesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Condominium$extraordinaryFeesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ExtraordinaryFeePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   standContacts<T extends Prisma.Condominium$standContactsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Condominium$standContactsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StandContactPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  announcements<T extends Prisma.Condominium$announcementsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Condominium$announcementsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AnnouncementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3371,6 +3569,30 @@ export type Condominium$standContactsArgs<ExtArgs extends runtime.Types.Extensio
   take?: number
   skip?: number
   distinct?: Prisma.StandContactScalarFieldEnum | Prisma.StandContactScalarFieldEnum[]
+}
+
+/**
+ * Condominium.announcements
+ */
+export type Condominium$announcementsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Announcement
+   */
+  select?: Prisma.AnnouncementSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Announcement
+   */
+  omit?: Prisma.AnnouncementOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AnnouncementInclude<ExtArgs> | null
+  where?: Prisma.AnnouncementWhereInput
+  orderBy?: Prisma.AnnouncementOrderByWithRelationInput | Prisma.AnnouncementOrderByWithRelationInput[]
+  cursor?: Prisma.AnnouncementWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AnnouncementScalarFieldEnum | Prisma.AnnouncementScalarFieldEnum[]
 }
 
 /**

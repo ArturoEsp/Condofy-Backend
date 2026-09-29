@@ -252,6 +252,8 @@ export type UserWhereInput = {
   expensesCreated?: Prisma.ExpenseListRelationFilter
   extraIncomesCreated?: Prisma.ExtraIncomeListRelationFilter
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeListRelationFilter
+  announcementsCreated?: Prisma.AnnouncementListRelationFilter
+  announcementsRead?: Prisma.AnnouncementReaderListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -281,6 +283,8 @@ export type UserOrderByWithRelationInput = {
   expensesCreated?: Prisma.ExpenseOrderByRelationAggregateInput
   extraIncomesCreated?: Prisma.ExtraIncomeOrderByRelationAggregateInput
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeOrderByRelationAggregateInput
+  announcementsCreated?: Prisma.AnnouncementOrderByRelationAggregateInput
+  announcementsRead?: Prisma.AnnouncementReaderOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -313,6 +317,8 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   expensesCreated?: Prisma.ExpenseListRelationFilter
   extraIncomesCreated?: Prisma.ExtraIncomeListRelationFilter
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeListRelationFilter
+  announcementsCreated?: Prisma.AnnouncementListRelationFilter
+  announcementsRead?: Prisma.AnnouncementReaderListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -377,6 +383,8 @@ export type UserCreateInput = {
   expensesCreated?: Prisma.ExpenseCreateNestedManyWithoutCreatedByInput
   extraIncomesCreated?: Prisma.ExtraIncomeCreateNestedManyWithoutCreatedByInput
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeCreateNestedManyWithoutCreatedByInput
+  announcementsCreated?: Prisma.AnnouncementCreateNestedManyWithoutCreatedByInput
+  announcementsRead?: Prisma.AnnouncementReaderCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -405,6 +413,8 @@ export type UserUncheckedCreateInput = {
   expensesCreated?: Prisma.ExpenseUncheckedCreateNestedManyWithoutCreatedByInput
   extraIncomesCreated?: Prisma.ExtraIncomeUncheckedCreateNestedManyWithoutCreatedByInput
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedCreateNestedManyWithoutCreatedByInput
+  announcementsCreated?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCreatedByInput
+  announcementsRead?: Prisma.AnnouncementReaderUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -433,6 +443,8 @@ export type UserUpdateInput = {
   expensesCreated?: Prisma.ExpenseUpdateManyWithoutCreatedByNestedInput
   extraIncomesCreated?: Prisma.ExtraIncomeUpdateManyWithoutCreatedByNestedInput
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUpdateManyWithoutCreatedByNestedInput
+  announcementsCreated?: Prisma.AnnouncementUpdateManyWithoutCreatedByNestedInput
+  announcementsRead?: Prisma.AnnouncementReaderUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -461,6 +473,8 @@ export type UserUncheckedUpdateInput = {
   expensesCreated?: Prisma.ExpenseUncheckedUpdateManyWithoutCreatedByNestedInput
   extraIncomesCreated?: Prisma.ExtraIncomeUncheckedUpdateManyWithoutCreatedByNestedInput
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedUpdateManyWithoutCreatedByNestedInput
+  announcementsCreated?: Prisma.AnnouncementUncheckedUpdateManyWithoutCreatedByNestedInput
+  announcementsRead?: Prisma.AnnouncementReaderUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -812,6 +826,34 @@ export type UserUpdateOneRequiredWithoutExtraordinaryFeesCreatedNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutExtraordinaryFeesCreatedInput, Prisma.UserUpdateWithoutExtraordinaryFeesCreatedInput>, Prisma.UserUncheckedUpdateWithoutExtraordinaryFeesCreatedInput>
 }
 
+export type UserCreateNestedOneWithoutAnnouncementsCreatedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAnnouncementsCreatedInput, Prisma.UserUncheckedCreateWithoutAnnouncementsCreatedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAnnouncementsCreatedInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutAnnouncementsCreatedNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAnnouncementsCreatedInput, Prisma.UserUncheckedCreateWithoutAnnouncementsCreatedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAnnouncementsCreatedInput
+  upsert?: Prisma.UserUpsertWithoutAnnouncementsCreatedInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAnnouncementsCreatedInput, Prisma.UserUpdateWithoutAnnouncementsCreatedInput>, Prisma.UserUncheckedUpdateWithoutAnnouncementsCreatedInput>
+}
+
+export type UserCreateNestedOneWithoutAnnouncementsReadInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAnnouncementsReadInput, Prisma.UserUncheckedCreateWithoutAnnouncementsReadInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAnnouncementsReadInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutAnnouncementsReadNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAnnouncementsReadInput, Prisma.UserUncheckedCreateWithoutAnnouncementsReadInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAnnouncementsReadInput
+  upsert?: Prisma.UserUpsertWithoutAnnouncementsReadInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAnnouncementsReadInput, Prisma.UserUpdateWithoutAnnouncementsReadInput>, Prisma.UserUncheckedUpdateWithoutAnnouncementsReadInput>
+}
+
 export type UserCreateWithoutCondominiumInput = {
   id?: string
   email: string
@@ -837,6 +879,8 @@ export type UserCreateWithoutCondominiumInput = {
   expensesCreated?: Prisma.ExpenseCreateNestedManyWithoutCreatedByInput
   extraIncomesCreated?: Prisma.ExtraIncomeCreateNestedManyWithoutCreatedByInput
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeCreateNestedManyWithoutCreatedByInput
+  announcementsCreated?: Prisma.AnnouncementCreateNestedManyWithoutCreatedByInput
+  announcementsRead?: Prisma.AnnouncementReaderCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCondominiumInput = {
@@ -864,6 +908,8 @@ export type UserUncheckedCreateWithoutCondominiumInput = {
   expensesCreated?: Prisma.ExpenseUncheckedCreateNestedManyWithoutCreatedByInput
   extraIncomesCreated?: Prisma.ExtraIncomeUncheckedCreateNestedManyWithoutCreatedByInput
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedCreateNestedManyWithoutCreatedByInput
+  announcementsCreated?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCreatedByInput
+  announcementsRead?: Prisma.AnnouncementReaderUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCondominiumInput = {
@@ -935,6 +981,8 @@ export type UserCreateWithoutPasswordResetTokensInput = {
   expensesCreated?: Prisma.ExpenseCreateNestedManyWithoutCreatedByInput
   extraIncomesCreated?: Prisma.ExtraIncomeCreateNestedManyWithoutCreatedByInput
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeCreateNestedManyWithoutCreatedByInput
+  announcementsCreated?: Prisma.AnnouncementCreateNestedManyWithoutCreatedByInput
+  announcementsRead?: Prisma.AnnouncementReaderCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutPasswordResetTokensInput = {
@@ -962,6 +1010,8 @@ export type UserUncheckedCreateWithoutPasswordResetTokensInput = {
   expensesCreated?: Prisma.ExpenseUncheckedCreateNestedManyWithoutCreatedByInput
   extraIncomesCreated?: Prisma.ExtraIncomeUncheckedCreateNestedManyWithoutCreatedByInput
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedCreateNestedManyWithoutCreatedByInput
+  announcementsCreated?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCreatedByInput
+  announcementsRead?: Prisma.AnnouncementReaderUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutPasswordResetTokensInput = {
@@ -1005,6 +1055,8 @@ export type UserUpdateWithoutPasswordResetTokensInput = {
   expensesCreated?: Prisma.ExpenseUpdateManyWithoutCreatedByNestedInput
   extraIncomesCreated?: Prisma.ExtraIncomeUpdateManyWithoutCreatedByNestedInput
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUpdateManyWithoutCreatedByNestedInput
+  announcementsCreated?: Prisma.AnnouncementUpdateManyWithoutCreatedByNestedInput
+  announcementsRead?: Prisma.AnnouncementReaderUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPasswordResetTokensInput = {
@@ -1032,6 +1084,8 @@ export type UserUncheckedUpdateWithoutPasswordResetTokensInput = {
   expensesCreated?: Prisma.ExpenseUncheckedUpdateManyWithoutCreatedByNestedInput
   extraIncomesCreated?: Prisma.ExtraIncomeUncheckedUpdateManyWithoutCreatedByNestedInput
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedUpdateManyWithoutCreatedByNestedInput
+  announcementsCreated?: Prisma.AnnouncementUncheckedUpdateManyWithoutCreatedByNestedInput
+  announcementsRead?: Prisma.AnnouncementReaderUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutUserSessionsInput = {
@@ -1059,6 +1113,8 @@ export type UserCreateWithoutUserSessionsInput = {
   expensesCreated?: Prisma.ExpenseCreateNestedManyWithoutCreatedByInput
   extraIncomesCreated?: Prisma.ExtraIncomeCreateNestedManyWithoutCreatedByInput
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeCreateNestedManyWithoutCreatedByInput
+  announcementsCreated?: Prisma.AnnouncementCreateNestedManyWithoutCreatedByInput
+  announcementsRead?: Prisma.AnnouncementReaderCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutUserSessionsInput = {
@@ -1086,6 +1142,8 @@ export type UserUncheckedCreateWithoutUserSessionsInput = {
   expensesCreated?: Prisma.ExpenseUncheckedCreateNestedManyWithoutCreatedByInput
   extraIncomesCreated?: Prisma.ExtraIncomeUncheckedCreateNestedManyWithoutCreatedByInput
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedCreateNestedManyWithoutCreatedByInput
+  announcementsCreated?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCreatedByInput
+  announcementsRead?: Prisma.AnnouncementReaderUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutUserSessionsInput = {
@@ -1129,6 +1187,8 @@ export type UserUpdateWithoutUserSessionsInput = {
   expensesCreated?: Prisma.ExpenseUpdateManyWithoutCreatedByNestedInput
   extraIncomesCreated?: Prisma.ExtraIncomeUpdateManyWithoutCreatedByNestedInput
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUpdateManyWithoutCreatedByNestedInput
+  announcementsCreated?: Prisma.AnnouncementUpdateManyWithoutCreatedByNestedInput
+  announcementsRead?: Prisma.AnnouncementReaderUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutUserSessionsInput = {
@@ -1156,6 +1216,8 @@ export type UserUncheckedUpdateWithoutUserSessionsInput = {
   expensesCreated?: Prisma.ExpenseUncheckedUpdateManyWithoutCreatedByNestedInput
   extraIncomesCreated?: Prisma.ExtraIncomeUncheckedUpdateManyWithoutCreatedByNestedInput
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedUpdateManyWithoutCreatedByNestedInput
+  announcementsCreated?: Prisma.AnnouncementUncheckedUpdateManyWithoutCreatedByNestedInput
+  announcementsRead?: Prisma.AnnouncementReaderUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutPushSubscriptionsInput = {
@@ -1183,6 +1245,8 @@ export type UserCreateWithoutPushSubscriptionsInput = {
   expensesCreated?: Prisma.ExpenseCreateNestedManyWithoutCreatedByInput
   extraIncomesCreated?: Prisma.ExtraIncomeCreateNestedManyWithoutCreatedByInput
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeCreateNestedManyWithoutCreatedByInput
+  announcementsCreated?: Prisma.AnnouncementCreateNestedManyWithoutCreatedByInput
+  announcementsRead?: Prisma.AnnouncementReaderCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutPushSubscriptionsInput = {
@@ -1210,6 +1274,8 @@ export type UserUncheckedCreateWithoutPushSubscriptionsInput = {
   expensesCreated?: Prisma.ExpenseUncheckedCreateNestedManyWithoutCreatedByInput
   extraIncomesCreated?: Prisma.ExtraIncomeUncheckedCreateNestedManyWithoutCreatedByInput
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedCreateNestedManyWithoutCreatedByInput
+  announcementsCreated?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCreatedByInput
+  announcementsRead?: Prisma.AnnouncementReaderUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutPushSubscriptionsInput = {
@@ -1253,6 +1319,8 @@ export type UserUpdateWithoutPushSubscriptionsInput = {
   expensesCreated?: Prisma.ExpenseUpdateManyWithoutCreatedByNestedInput
   extraIncomesCreated?: Prisma.ExtraIncomeUpdateManyWithoutCreatedByNestedInput
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUpdateManyWithoutCreatedByNestedInput
+  announcementsCreated?: Prisma.AnnouncementUpdateManyWithoutCreatedByNestedInput
+  announcementsRead?: Prisma.AnnouncementReaderUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPushSubscriptionsInput = {
@@ -1280,6 +1348,8 @@ export type UserUncheckedUpdateWithoutPushSubscriptionsInput = {
   expensesCreated?: Prisma.ExpenseUncheckedUpdateManyWithoutCreatedByNestedInput
   extraIncomesCreated?: Prisma.ExtraIncomeUncheckedUpdateManyWithoutCreatedByNestedInput
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedUpdateManyWithoutCreatedByNestedInput
+  announcementsCreated?: Prisma.AnnouncementUncheckedUpdateManyWithoutCreatedByNestedInput
+  announcementsRead?: Prisma.AnnouncementReaderUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutResidentProfileInput = {
@@ -1307,6 +1377,8 @@ export type UserCreateWithoutResidentProfileInput = {
   expensesCreated?: Prisma.ExpenseCreateNestedManyWithoutCreatedByInput
   extraIncomesCreated?: Prisma.ExtraIncomeCreateNestedManyWithoutCreatedByInput
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeCreateNestedManyWithoutCreatedByInput
+  announcementsCreated?: Prisma.AnnouncementCreateNestedManyWithoutCreatedByInput
+  announcementsRead?: Prisma.AnnouncementReaderCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutResidentProfileInput = {
@@ -1334,6 +1406,8 @@ export type UserUncheckedCreateWithoutResidentProfileInput = {
   expensesCreated?: Prisma.ExpenseUncheckedCreateNestedManyWithoutCreatedByInput
   extraIncomesCreated?: Prisma.ExtraIncomeUncheckedCreateNestedManyWithoutCreatedByInput
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedCreateNestedManyWithoutCreatedByInput
+  announcementsCreated?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCreatedByInput
+  announcementsRead?: Prisma.AnnouncementReaderUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutResidentProfileInput = {
@@ -1377,6 +1451,8 @@ export type UserUpdateWithoutResidentProfileInput = {
   expensesCreated?: Prisma.ExpenseUpdateManyWithoutCreatedByNestedInput
   extraIncomesCreated?: Prisma.ExtraIncomeUpdateManyWithoutCreatedByNestedInput
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUpdateManyWithoutCreatedByNestedInput
+  announcementsCreated?: Prisma.AnnouncementUpdateManyWithoutCreatedByNestedInput
+  announcementsRead?: Prisma.AnnouncementReaderUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutResidentProfileInput = {
@@ -1404,6 +1480,8 @@ export type UserUncheckedUpdateWithoutResidentProfileInput = {
   expensesCreated?: Prisma.ExpenseUncheckedUpdateManyWithoutCreatedByNestedInput
   extraIncomesCreated?: Prisma.ExtraIncomeUncheckedUpdateManyWithoutCreatedByNestedInput
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedUpdateManyWithoutCreatedByNestedInput
+  announcementsCreated?: Prisma.AnnouncementUncheckedUpdateManyWithoutCreatedByNestedInput
+  announcementsRead?: Prisma.AnnouncementReaderUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutAccessLogsInput = {
@@ -1431,6 +1509,8 @@ export type UserCreateWithoutAccessLogsInput = {
   expensesCreated?: Prisma.ExpenseCreateNestedManyWithoutCreatedByInput
   extraIncomesCreated?: Prisma.ExtraIncomeCreateNestedManyWithoutCreatedByInput
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeCreateNestedManyWithoutCreatedByInput
+  announcementsCreated?: Prisma.AnnouncementCreateNestedManyWithoutCreatedByInput
+  announcementsRead?: Prisma.AnnouncementReaderCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAccessLogsInput = {
@@ -1458,6 +1538,8 @@ export type UserUncheckedCreateWithoutAccessLogsInput = {
   expensesCreated?: Prisma.ExpenseUncheckedCreateNestedManyWithoutCreatedByInput
   extraIncomesCreated?: Prisma.ExtraIncomeUncheckedCreateNestedManyWithoutCreatedByInput
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedCreateNestedManyWithoutCreatedByInput
+  announcementsCreated?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCreatedByInput
+  announcementsRead?: Prisma.AnnouncementReaderUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAccessLogsInput = {
@@ -1501,6 +1583,8 @@ export type UserUpdateWithoutAccessLogsInput = {
   expensesCreated?: Prisma.ExpenseUpdateManyWithoutCreatedByNestedInput
   extraIncomesCreated?: Prisma.ExtraIncomeUpdateManyWithoutCreatedByNestedInput
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUpdateManyWithoutCreatedByNestedInput
+  announcementsCreated?: Prisma.AnnouncementUpdateManyWithoutCreatedByNestedInput
+  announcementsRead?: Prisma.AnnouncementReaderUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAccessLogsInput = {
@@ -1528,6 +1612,8 @@ export type UserUncheckedUpdateWithoutAccessLogsInput = {
   expensesCreated?: Prisma.ExpenseUncheckedUpdateManyWithoutCreatedByNestedInput
   extraIncomesCreated?: Prisma.ExtraIncomeUncheckedUpdateManyWithoutCreatedByNestedInput
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedUpdateManyWithoutCreatedByNestedInput
+  announcementsCreated?: Prisma.AnnouncementUncheckedUpdateManyWithoutCreatedByNestedInput
+  announcementsRead?: Prisma.AnnouncementReaderUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutParcelsReceivedInput = {
@@ -1555,6 +1641,8 @@ export type UserCreateWithoutParcelsReceivedInput = {
   expensesCreated?: Prisma.ExpenseCreateNestedManyWithoutCreatedByInput
   extraIncomesCreated?: Prisma.ExtraIncomeCreateNestedManyWithoutCreatedByInput
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeCreateNestedManyWithoutCreatedByInput
+  announcementsCreated?: Prisma.AnnouncementCreateNestedManyWithoutCreatedByInput
+  announcementsRead?: Prisma.AnnouncementReaderCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutParcelsReceivedInput = {
@@ -1582,6 +1670,8 @@ export type UserUncheckedCreateWithoutParcelsReceivedInput = {
   expensesCreated?: Prisma.ExpenseUncheckedCreateNestedManyWithoutCreatedByInput
   extraIncomesCreated?: Prisma.ExtraIncomeUncheckedCreateNestedManyWithoutCreatedByInput
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedCreateNestedManyWithoutCreatedByInput
+  announcementsCreated?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCreatedByInput
+  announcementsRead?: Prisma.AnnouncementReaderUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutParcelsReceivedInput = {
@@ -1614,6 +1704,8 @@ export type UserCreateWithoutParcelsDeliveredInput = {
   expensesCreated?: Prisma.ExpenseCreateNestedManyWithoutCreatedByInput
   extraIncomesCreated?: Prisma.ExtraIncomeCreateNestedManyWithoutCreatedByInput
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeCreateNestedManyWithoutCreatedByInput
+  announcementsCreated?: Prisma.AnnouncementCreateNestedManyWithoutCreatedByInput
+  announcementsRead?: Prisma.AnnouncementReaderCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutParcelsDeliveredInput = {
@@ -1641,6 +1733,8 @@ export type UserUncheckedCreateWithoutParcelsDeliveredInput = {
   expensesCreated?: Prisma.ExpenseUncheckedCreateNestedManyWithoutCreatedByInput
   extraIncomesCreated?: Prisma.ExtraIncomeUncheckedCreateNestedManyWithoutCreatedByInput
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedCreateNestedManyWithoutCreatedByInput
+  announcementsCreated?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCreatedByInput
+  announcementsRead?: Prisma.AnnouncementReaderUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutParcelsDeliveredInput = {
@@ -1684,6 +1778,8 @@ export type UserUpdateWithoutParcelsReceivedInput = {
   expensesCreated?: Prisma.ExpenseUpdateManyWithoutCreatedByNestedInput
   extraIncomesCreated?: Prisma.ExtraIncomeUpdateManyWithoutCreatedByNestedInput
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUpdateManyWithoutCreatedByNestedInput
+  announcementsCreated?: Prisma.AnnouncementUpdateManyWithoutCreatedByNestedInput
+  announcementsRead?: Prisma.AnnouncementReaderUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutParcelsReceivedInput = {
@@ -1711,6 +1807,8 @@ export type UserUncheckedUpdateWithoutParcelsReceivedInput = {
   expensesCreated?: Prisma.ExpenseUncheckedUpdateManyWithoutCreatedByNestedInput
   extraIncomesCreated?: Prisma.ExtraIncomeUncheckedUpdateManyWithoutCreatedByNestedInput
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedUpdateManyWithoutCreatedByNestedInput
+  announcementsCreated?: Prisma.AnnouncementUncheckedUpdateManyWithoutCreatedByNestedInput
+  announcementsRead?: Prisma.AnnouncementReaderUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutParcelsDeliveredInput = {
@@ -1749,6 +1847,8 @@ export type UserUpdateWithoutParcelsDeliveredInput = {
   expensesCreated?: Prisma.ExpenseUpdateManyWithoutCreatedByNestedInput
   extraIncomesCreated?: Prisma.ExtraIncomeUpdateManyWithoutCreatedByNestedInput
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUpdateManyWithoutCreatedByNestedInput
+  announcementsCreated?: Prisma.AnnouncementUpdateManyWithoutCreatedByNestedInput
+  announcementsRead?: Prisma.AnnouncementReaderUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutParcelsDeliveredInput = {
@@ -1776,6 +1876,8 @@ export type UserUncheckedUpdateWithoutParcelsDeliveredInput = {
   expensesCreated?: Prisma.ExpenseUncheckedUpdateManyWithoutCreatedByNestedInput
   extraIncomesCreated?: Prisma.ExtraIncomeUncheckedUpdateManyWithoutCreatedByNestedInput
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedUpdateManyWithoutCreatedByNestedInput
+  announcementsCreated?: Prisma.AnnouncementUncheckedUpdateManyWithoutCreatedByNestedInput
+  announcementsRead?: Prisma.AnnouncementReaderUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutProviderEntriesRegisteredInput = {
@@ -1803,6 +1905,8 @@ export type UserCreateWithoutProviderEntriesRegisteredInput = {
   expensesCreated?: Prisma.ExpenseCreateNestedManyWithoutCreatedByInput
   extraIncomesCreated?: Prisma.ExtraIncomeCreateNestedManyWithoutCreatedByInput
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeCreateNestedManyWithoutCreatedByInput
+  announcementsCreated?: Prisma.AnnouncementCreateNestedManyWithoutCreatedByInput
+  announcementsRead?: Prisma.AnnouncementReaderCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutProviderEntriesRegisteredInput = {
@@ -1830,6 +1934,8 @@ export type UserUncheckedCreateWithoutProviderEntriesRegisteredInput = {
   expensesCreated?: Prisma.ExpenseUncheckedCreateNestedManyWithoutCreatedByInput
   extraIncomesCreated?: Prisma.ExtraIncomeUncheckedCreateNestedManyWithoutCreatedByInput
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedCreateNestedManyWithoutCreatedByInput
+  announcementsCreated?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCreatedByInput
+  announcementsRead?: Prisma.AnnouncementReaderUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutProviderEntriesRegisteredInput = {
@@ -1862,6 +1968,8 @@ export type UserCreateWithoutProviderExitsRegisteredInput = {
   expensesCreated?: Prisma.ExpenseCreateNestedManyWithoutCreatedByInput
   extraIncomesCreated?: Prisma.ExtraIncomeCreateNestedManyWithoutCreatedByInput
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeCreateNestedManyWithoutCreatedByInput
+  announcementsCreated?: Prisma.AnnouncementCreateNestedManyWithoutCreatedByInput
+  announcementsRead?: Prisma.AnnouncementReaderCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutProviderExitsRegisteredInput = {
@@ -1889,6 +1997,8 @@ export type UserUncheckedCreateWithoutProviderExitsRegisteredInput = {
   expensesCreated?: Prisma.ExpenseUncheckedCreateNestedManyWithoutCreatedByInput
   extraIncomesCreated?: Prisma.ExtraIncomeUncheckedCreateNestedManyWithoutCreatedByInput
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedCreateNestedManyWithoutCreatedByInput
+  announcementsCreated?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCreatedByInput
+  announcementsRead?: Prisma.AnnouncementReaderUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutProviderExitsRegisteredInput = {
@@ -1932,6 +2042,8 @@ export type UserUpdateWithoutProviderEntriesRegisteredInput = {
   expensesCreated?: Prisma.ExpenseUpdateManyWithoutCreatedByNestedInput
   extraIncomesCreated?: Prisma.ExtraIncomeUpdateManyWithoutCreatedByNestedInput
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUpdateManyWithoutCreatedByNestedInput
+  announcementsCreated?: Prisma.AnnouncementUpdateManyWithoutCreatedByNestedInput
+  announcementsRead?: Prisma.AnnouncementReaderUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProviderEntriesRegisteredInput = {
@@ -1959,6 +2071,8 @@ export type UserUncheckedUpdateWithoutProviderEntriesRegisteredInput = {
   expensesCreated?: Prisma.ExpenseUncheckedUpdateManyWithoutCreatedByNestedInput
   extraIncomesCreated?: Prisma.ExtraIncomeUncheckedUpdateManyWithoutCreatedByNestedInput
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedUpdateManyWithoutCreatedByNestedInput
+  announcementsCreated?: Prisma.AnnouncementUncheckedUpdateManyWithoutCreatedByNestedInput
+  announcementsRead?: Prisma.AnnouncementReaderUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutProviderExitsRegisteredInput = {
@@ -1997,6 +2111,8 @@ export type UserUpdateWithoutProviderExitsRegisteredInput = {
   expensesCreated?: Prisma.ExpenseUpdateManyWithoutCreatedByNestedInput
   extraIncomesCreated?: Prisma.ExtraIncomeUpdateManyWithoutCreatedByNestedInput
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUpdateManyWithoutCreatedByNestedInput
+  announcementsCreated?: Prisma.AnnouncementUpdateManyWithoutCreatedByNestedInput
+  announcementsRead?: Prisma.AnnouncementReaderUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProviderExitsRegisteredInput = {
@@ -2024,6 +2140,8 @@ export type UserUncheckedUpdateWithoutProviderExitsRegisteredInput = {
   expensesCreated?: Prisma.ExpenseUncheckedUpdateManyWithoutCreatedByNestedInput
   extraIncomesCreated?: Prisma.ExtraIncomeUncheckedUpdateManyWithoutCreatedByNestedInput
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedUpdateManyWithoutCreatedByNestedInput
+  announcementsCreated?: Prisma.AnnouncementUncheckedUpdateManyWithoutCreatedByNestedInput
+  announcementsRead?: Prisma.AnnouncementReaderUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutPaymentsInput = {
@@ -2051,6 +2169,8 @@ export type UserCreateWithoutPaymentsInput = {
   expensesCreated?: Prisma.ExpenseCreateNestedManyWithoutCreatedByInput
   extraIncomesCreated?: Prisma.ExtraIncomeCreateNestedManyWithoutCreatedByInput
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeCreateNestedManyWithoutCreatedByInput
+  announcementsCreated?: Prisma.AnnouncementCreateNestedManyWithoutCreatedByInput
+  announcementsRead?: Prisma.AnnouncementReaderCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutPaymentsInput = {
@@ -2078,6 +2198,8 @@ export type UserUncheckedCreateWithoutPaymentsInput = {
   expensesCreated?: Prisma.ExpenseUncheckedCreateNestedManyWithoutCreatedByInput
   extraIncomesCreated?: Prisma.ExtraIncomeUncheckedCreateNestedManyWithoutCreatedByInput
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedCreateNestedManyWithoutCreatedByInput
+  announcementsCreated?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCreatedByInput
+  announcementsRead?: Prisma.AnnouncementReaderUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutPaymentsInput = {
@@ -2121,6 +2243,8 @@ export type UserUpdateWithoutPaymentsInput = {
   expensesCreated?: Prisma.ExpenseUpdateManyWithoutCreatedByNestedInput
   extraIncomesCreated?: Prisma.ExtraIncomeUpdateManyWithoutCreatedByNestedInput
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUpdateManyWithoutCreatedByNestedInput
+  announcementsCreated?: Prisma.AnnouncementUpdateManyWithoutCreatedByNestedInput
+  announcementsRead?: Prisma.AnnouncementReaderUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPaymentsInput = {
@@ -2148,6 +2272,8 @@ export type UserUncheckedUpdateWithoutPaymentsInput = {
   expensesCreated?: Prisma.ExpenseUncheckedUpdateManyWithoutCreatedByNestedInput
   extraIncomesCreated?: Prisma.ExtraIncomeUncheckedUpdateManyWithoutCreatedByNestedInput
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedUpdateManyWithoutCreatedByNestedInput
+  announcementsCreated?: Prisma.AnnouncementUncheckedUpdateManyWithoutCreatedByNestedInput
+  announcementsRead?: Prisma.AnnouncementReaderUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutExpensesCreatedInput = {
@@ -2175,6 +2301,8 @@ export type UserCreateWithoutExpensesCreatedInput = {
   pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
   extraIncomesCreated?: Prisma.ExtraIncomeCreateNestedManyWithoutCreatedByInput
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeCreateNestedManyWithoutCreatedByInput
+  announcementsCreated?: Prisma.AnnouncementCreateNestedManyWithoutCreatedByInput
+  announcementsRead?: Prisma.AnnouncementReaderCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutExpensesCreatedInput = {
@@ -2202,6 +2330,8 @@ export type UserUncheckedCreateWithoutExpensesCreatedInput = {
   pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
   extraIncomesCreated?: Prisma.ExtraIncomeUncheckedCreateNestedManyWithoutCreatedByInput
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedCreateNestedManyWithoutCreatedByInput
+  announcementsCreated?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCreatedByInput
+  announcementsRead?: Prisma.AnnouncementReaderUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutExpensesCreatedInput = {
@@ -2245,6 +2375,8 @@ export type UserUpdateWithoutExpensesCreatedInput = {
   pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
   extraIncomesCreated?: Prisma.ExtraIncomeUpdateManyWithoutCreatedByNestedInput
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUpdateManyWithoutCreatedByNestedInput
+  announcementsCreated?: Prisma.AnnouncementUpdateManyWithoutCreatedByNestedInput
+  announcementsRead?: Prisma.AnnouncementReaderUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutExpensesCreatedInput = {
@@ -2272,6 +2404,8 @@ export type UserUncheckedUpdateWithoutExpensesCreatedInput = {
   pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
   extraIncomesCreated?: Prisma.ExtraIncomeUncheckedUpdateManyWithoutCreatedByNestedInput
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedUpdateManyWithoutCreatedByNestedInput
+  announcementsCreated?: Prisma.AnnouncementUncheckedUpdateManyWithoutCreatedByNestedInput
+  announcementsRead?: Prisma.AnnouncementReaderUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutExtraIncomesCreatedInput = {
@@ -2299,6 +2433,8 @@ export type UserCreateWithoutExtraIncomesCreatedInput = {
   pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
   expensesCreated?: Prisma.ExpenseCreateNestedManyWithoutCreatedByInput
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeCreateNestedManyWithoutCreatedByInput
+  announcementsCreated?: Prisma.AnnouncementCreateNestedManyWithoutCreatedByInput
+  announcementsRead?: Prisma.AnnouncementReaderCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutExtraIncomesCreatedInput = {
@@ -2326,6 +2462,8 @@ export type UserUncheckedCreateWithoutExtraIncomesCreatedInput = {
   pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
   expensesCreated?: Prisma.ExpenseUncheckedCreateNestedManyWithoutCreatedByInput
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedCreateNestedManyWithoutCreatedByInput
+  announcementsCreated?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCreatedByInput
+  announcementsRead?: Prisma.AnnouncementReaderUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutExtraIncomesCreatedInput = {
@@ -2369,6 +2507,8 @@ export type UserUpdateWithoutExtraIncomesCreatedInput = {
   pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
   expensesCreated?: Prisma.ExpenseUpdateManyWithoutCreatedByNestedInput
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUpdateManyWithoutCreatedByNestedInput
+  announcementsCreated?: Prisma.AnnouncementUpdateManyWithoutCreatedByNestedInput
+  announcementsRead?: Prisma.AnnouncementReaderUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutExtraIncomesCreatedInput = {
@@ -2396,6 +2536,8 @@ export type UserUncheckedUpdateWithoutExtraIncomesCreatedInput = {
   pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
   expensesCreated?: Prisma.ExpenseUncheckedUpdateManyWithoutCreatedByNestedInput
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedUpdateManyWithoutCreatedByNestedInput
+  announcementsCreated?: Prisma.AnnouncementUncheckedUpdateManyWithoutCreatedByNestedInput
+  announcementsRead?: Prisma.AnnouncementReaderUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutExtraordinaryFeesCreatedInput = {
@@ -2423,6 +2565,8 @@ export type UserCreateWithoutExtraordinaryFeesCreatedInput = {
   pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
   expensesCreated?: Prisma.ExpenseCreateNestedManyWithoutCreatedByInput
   extraIncomesCreated?: Prisma.ExtraIncomeCreateNestedManyWithoutCreatedByInput
+  announcementsCreated?: Prisma.AnnouncementCreateNestedManyWithoutCreatedByInput
+  announcementsRead?: Prisma.AnnouncementReaderCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutExtraordinaryFeesCreatedInput = {
@@ -2450,6 +2594,8 @@ export type UserUncheckedCreateWithoutExtraordinaryFeesCreatedInput = {
   pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
   expensesCreated?: Prisma.ExpenseUncheckedCreateNestedManyWithoutCreatedByInput
   extraIncomesCreated?: Prisma.ExtraIncomeUncheckedCreateNestedManyWithoutCreatedByInput
+  announcementsCreated?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCreatedByInput
+  announcementsRead?: Prisma.AnnouncementReaderUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutExtraordinaryFeesCreatedInput = {
@@ -2493,6 +2639,8 @@ export type UserUpdateWithoutExtraordinaryFeesCreatedInput = {
   pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
   expensesCreated?: Prisma.ExpenseUpdateManyWithoutCreatedByNestedInput
   extraIncomesCreated?: Prisma.ExtraIncomeUpdateManyWithoutCreatedByNestedInput
+  announcementsCreated?: Prisma.AnnouncementUpdateManyWithoutCreatedByNestedInput
+  announcementsRead?: Prisma.AnnouncementReaderUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutExtraordinaryFeesCreatedInput = {
@@ -2520,6 +2668,272 @@ export type UserUncheckedUpdateWithoutExtraordinaryFeesCreatedInput = {
   pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
   expensesCreated?: Prisma.ExpenseUncheckedUpdateManyWithoutCreatedByNestedInput
   extraIncomesCreated?: Prisma.ExtraIncomeUncheckedUpdateManyWithoutCreatedByNestedInput
+  announcementsCreated?: Prisma.AnnouncementUncheckedUpdateManyWithoutCreatedByNestedInput
+  announcementsRead?: Prisma.AnnouncementReaderUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutAnnouncementsCreatedInput = {
+  id?: string
+  email: string
+  passwordHash: string
+  firstName?: string | null
+  lastName?: string | null
+  phone?: string | null
+  role?: $Enums.UserRole
+  status?: $Enums.UserStatus
+  isEmailVerified?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  residentProfile?: Prisma.ResidentProfileCreateNestedOneWithoutUserInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutCreatedByInput
+  userSessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  condominium?: Prisma.CondominiumCreateNestedOneWithoutAdminsInput
+  accessLogs?: Prisma.AccessLogCreateNestedManyWithoutUserAcceptInput
+  parcelsReceived?: Prisma.ParcelDeliveryCreateNestedManyWithoutReceivedByInput
+  parcelsDelivered?: Prisma.ParcelDeliveryCreateNestedManyWithoutDeliveredByInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessCreateNestedManyWithoutEntryGuardInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessCreateNestedManyWithoutExitGuardInput
+  passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
+  expensesCreated?: Prisma.ExpenseCreateNestedManyWithoutCreatedByInput
+  extraIncomesCreated?: Prisma.ExtraIncomeCreateNestedManyWithoutCreatedByInput
+  extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeCreateNestedManyWithoutCreatedByInput
+  announcementsRead?: Prisma.AnnouncementReaderCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutAnnouncementsCreatedInput = {
+  id?: string
+  email: string
+  passwordHash: string
+  firstName?: string | null
+  lastName?: string | null
+  phone?: string | null
+  role?: $Enums.UserRole
+  status?: $Enums.UserStatus
+  isEmailVerified?: boolean
+  condominiumId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  residentProfile?: Prisma.ResidentProfileUncheckedCreateNestedOneWithoutUserInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCreatedByInput
+  userSessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  accessLogs?: Prisma.AccessLogUncheckedCreateNestedManyWithoutUserAcceptInput
+  parcelsReceived?: Prisma.ParcelDeliveryUncheckedCreateNestedManyWithoutReceivedByInput
+  parcelsDelivered?: Prisma.ParcelDeliveryUncheckedCreateNestedManyWithoutDeliveredByInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessUncheckedCreateNestedManyWithoutEntryGuardInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessUncheckedCreateNestedManyWithoutExitGuardInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
+  expensesCreated?: Prisma.ExpenseUncheckedCreateNestedManyWithoutCreatedByInput
+  extraIncomesCreated?: Prisma.ExtraIncomeUncheckedCreateNestedManyWithoutCreatedByInput
+  extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedCreateNestedManyWithoutCreatedByInput
+  announcementsRead?: Prisma.AnnouncementReaderUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutAnnouncementsCreatedInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutAnnouncementsCreatedInput, Prisma.UserUncheckedCreateWithoutAnnouncementsCreatedInput>
+}
+
+export type UserUpsertWithoutAnnouncementsCreatedInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutAnnouncementsCreatedInput, Prisma.UserUncheckedUpdateWithoutAnnouncementsCreatedInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutAnnouncementsCreatedInput, Prisma.UserUncheckedCreateWithoutAnnouncementsCreatedInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutAnnouncementsCreatedInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutAnnouncementsCreatedInput, Prisma.UserUncheckedUpdateWithoutAnnouncementsCreatedInput>
+}
+
+export type UserUpdateWithoutAnnouncementsCreatedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  residentProfile?: Prisma.ResidentProfileUpdateOneWithoutUserNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutCreatedByNestedInput
+  userSessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  condominium?: Prisma.CondominiumUpdateOneWithoutAdminsNestedInput
+  accessLogs?: Prisma.AccessLogUpdateManyWithoutUserAcceptNestedInput
+  parcelsReceived?: Prisma.ParcelDeliveryUpdateManyWithoutReceivedByNestedInput
+  parcelsDelivered?: Prisma.ParcelDeliveryUpdateManyWithoutDeliveredByNestedInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessUpdateManyWithoutEntryGuardNestedInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessUpdateManyWithoutExitGuardNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
+  expensesCreated?: Prisma.ExpenseUpdateManyWithoutCreatedByNestedInput
+  extraIncomesCreated?: Prisma.ExtraIncomeUpdateManyWithoutCreatedByNestedInput
+  extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUpdateManyWithoutCreatedByNestedInput
+  announcementsRead?: Prisma.AnnouncementReaderUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutAnnouncementsCreatedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  condominiumId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  residentProfile?: Prisma.ResidentProfileUncheckedUpdateOneWithoutUserNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutCreatedByNestedInput
+  userSessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  accessLogs?: Prisma.AccessLogUncheckedUpdateManyWithoutUserAcceptNestedInput
+  parcelsReceived?: Prisma.ParcelDeliveryUncheckedUpdateManyWithoutReceivedByNestedInput
+  parcelsDelivered?: Prisma.ParcelDeliveryUncheckedUpdateManyWithoutDeliveredByNestedInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessUncheckedUpdateManyWithoutEntryGuardNestedInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessUncheckedUpdateManyWithoutExitGuardNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  expensesCreated?: Prisma.ExpenseUncheckedUpdateManyWithoutCreatedByNestedInput
+  extraIncomesCreated?: Prisma.ExtraIncomeUncheckedUpdateManyWithoutCreatedByNestedInput
+  extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedUpdateManyWithoutCreatedByNestedInput
+  announcementsRead?: Prisma.AnnouncementReaderUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutAnnouncementsReadInput = {
+  id?: string
+  email: string
+  passwordHash: string
+  firstName?: string | null
+  lastName?: string | null
+  phone?: string | null
+  role?: $Enums.UserRole
+  status?: $Enums.UserStatus
+  isEmailVerified?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  residentProfile?: Prisma.ResidentProfileCreateNestedOneWithoutUserInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutCreatedByInput
+  userSessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  condominium?: Prisma.CondominiumCreateNestedOneWithoutAdminsInput
+  accessLogs?: Prisma.AccessLogCreateNestedManyWithoutUserAcceptInput
+  parcelsReceived?: Prisma.ParcelDeliveryCreateNestedManyWithoutReceivedByInput
+  parcelsDelivered?: Prisma.ParcelDeliveryCreateNestedManyWithoutDeliveredByInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessCreateNestedManyWithoutEntryGuardInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessCreateNestedManyWithoutExitGuardInput
+  passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
+  expensesCreated?: Prisma.ExpenseCreateNestedManyWithoutCreatedByInput
+  extraIncomesCreated?: Prisma.ExtraIncomeCreateNestedManyWithoutCreatedByInput
+  extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeCreateNestedManyWithoutCreatedByInput
+  announcementsCreated?: Prisma.AnnouncementCreateNestedManyWithoutCreatedByInput
+}
+
+export type UserUncheckedCreateWithoutAnnouncementsReadInput = {
+  id?: string
+  email: string
+  passwordHash: string
+  firstName?: string | null
+  lastName?: string | null
+  phone?: string | null
+  role?: $Enums.UserRole
+  status?: $Enums.UserStatus
+  isEmailVerified?: boolean
+  condominiumId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  residentProfile?: Prisma.ResidentProfileUncheckedCreateNestedOneWithoutUserInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCreatedByInput
+  userSessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  accessLogs?: Prisma.AccessLogUncheckedCreateNestedManyWithoutUserAcceptInput
+  parcelsReceived?: Prisma.ParcelDeliveryUncheckedCreateNestedManyWithoutReceivedByInput
+  parcelsDelivered?: Prisma.ParcelDeliveryUncheckedCreateNestedManyWithoutDeliveredByInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessUncheckedCreateNestedManyWithoutEntryGuardInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessUncheckedCreateNestedManyWithoutExitGuardInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
+  expensesCreated?: Prisma.ExpenseUncheckedCreateNestedManyWithoutCreatedByInput
+  extraIncomesCreated?: Prisma.ExtraIncomeUncheckedCreateNestedManyWithoutCreatedByInput
+  extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedCreateNestedManyWithoutCreatedByInput
+  announcementsCreated?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCreatedByInput
+}
+
+export type UserCreateOrConnectWithoutAnnouncementsReadInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutAnnouncementsReadInput, Prisma.UserUncheckedCreateWithoutAnnouncementsReadInput>
+}
+
+export type UserUpsertWithoutAnnouncementsReadInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutAnnouncementsReadInput, Prisma.UserUncheckedUpdateWithoutAnnouncementsReadInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutAnnouncementsReadInput, Prisma.UserUncheckedCreateWithoutAnnouncementsReadInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutAnnouncementsReadInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutAnnouncementsReadInput, Prisma.UserUncheckedUpdateWithoutAnnouncementsReadInput>
+}
+
+export type UserUpdateWithoutAnnouncementsReadInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  residentProfile?: Prisma.ResidentProfileUpdateOneWithoutUserNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutCreatedByNestedInput
+  userSessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  condominium?: Prisma.CondominiumUpdateOneWithoutAdminsNestedInput
+  accessLogs?: Prisma.AccessLogUpdateManyWithoutUserAcceptNestedInput
+  parcelsReceived?: Prisma.ParcelDeliveryUpdateManyWithoutReceivedByNestedInput
+  parcelsDelivered?: Prisma.ParcelDeliveryUpdateManyWithoutDeliveredByNestedInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessUpdateManyWithoutEntryGuardNestedInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessUpdateManyWithoutExitGuardNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
+  expensesCreated?: Prisma.ExpenseUpdateManyWithoutCreatedByNestedInput
+  extraIncomesCreated?: Prisma.ExtraIncomeUpdateManyWithoutCreatedByNestedInput
+  extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUpdateManyWithoutCreatedByNestedInput
+  announcementsCreated?: Prisma.AnnouncementUpdateManyWithoutCreatedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutAnnouncementsReadInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  condominiumId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  residentProfile?: Prisma.ResidentProfileUncheckedUpdateOneWithoutUserNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutCreatedByNestedInput
+  userSessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  accessLogs?: Prisma.AccessLogUncheckedUpdateManyWithoutUserAcceptNestedInput
+  parcelsReceived?: Prisma.ParcelDeliveryUncheckedUpdateManyWithoutReceivedByNestedInput
+  parcelsDelivered?: Prisma.ParcelDeliveryUncheckedUpdateManyWithoutDeliveredByNestedInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessUncheckedUpdateManyWithoutEntryGuardNestedInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessUncheckedUpdateManyWithoutExitGuardNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  expensesCreated?: Prisma.ExpenseUncheckedUpdateManyWithoutCreatedByNestedInput
+  extraIncomesCreated?: Prisma.ExtraIncomeUncheckedUpdateManyWithoutCreatedByNestedInput
+  extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedUpdateManyWithoutCreatedByNestedInput
+  announcementsCreated?: Prisma.AnnouncementUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserCreateManyCondominiumInput = {
@@ -2561,6 +2975,8 @@ export type UserUpdateWithoutCondominiumInput = {
   expensesCreated?: Prisma.ExpenseUpdateManyWithoutCreatedByNestedInput
   extraIncomesCreated?: Prisma.ExtraIncomeUpdateManyWithoutCreatedByNestedInput
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUpdateManyWithoutCreatedByNestedInput
+  announcementsCreated?: Prisma.AnnouncementUpdateManyWithoutCreatedByNestedInput
+  announcementsRead?: Prisma.AnnouncementReaderUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCondominiumInput = {
@@ -2588,6 +3004,8 @@ export type UserUncheckedUpdateWithoutCondominiumInput = {
   expensesCreated?: Prisma.ExpenseUncheckedUpdateManyWithoutCreatedByNestedInput
   extraIncomesCreated?: Prisma.ExtraIncomeUncheckedUpdateManyWithoutCreatedByNestedInput
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedUpdateManyWithoutCreatedByNestedInput
+  announcementsCreated?: Prisma.AnnouncementUncheckedUpdateManyWithoutCreatedByNestedInput
+  announcementsRead?: Prisma.AnnouncementReaderUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutCondominiumInput = {
@@ -2622,6 +3040,8 @@ export type UserCountOutputType = {
   expensesCreated: number
   extraIncomesCreated: number
   extraordinaryFeesCreated: number
+  announcementsCreated: number
+  announcementsRead: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2637,6 +3057,8 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   expensesCreated?: boolean | UserCountOutputTypeCountExpensesCreatedArgs
   extraIncomesCreated?: boolean | UserCountOutputTypeCountExtraIncomesCreatedArgs
   extraordinaryFeesCreated?: boolean | UserCountOutputTypeCountExtraordinaryFeesCreatedArgs
+  announcementsCreated?: boolean | UserCountOutputTypeCountAnnouncementsCreatedArgs
+  announcementsRead?: boolean | UserCountOutputTypeCountAnnouncementsReadArgs
 }
 
 /**
@@ -2733,6 +3155,20 @@ export type UserCountOutputTypeCountExtraordinaryFeesCreatedArgs<ExtArgs extends
   where?: Prisma.ExtraordinaryFeeWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountAnnouncementsCreatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AnnouncementWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountAnnouncementsReadArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AnnouncementReaderWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -2761,6 +3197,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   expensesCreated?: boolean | Prisma.User$expensesCreatedArgs<ExtArgs>
   extraIncomesCreated?: boolean | Prisma.User$extraIncomesCreatedArgs<ExtArgs>
   extraordinaryFeesCreated?: boolean | Prisma.User$extraordinaryFeesCreatedArgs<ExtArgs>
+  announcementsCreated?: boolean | Prisma.User$announcementsCreatedArgs<ExtArgs>
+  announcementsRead?: boolean | Prisma.User$announcementsReadArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -2827,6 +3265,8 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   expensesCreated?: boolean | Prisma.User$expensesCreatedArgs<ExtArgs>
   extraIncomesCreated?: boolean | Prisma.User$extraIncomesCreatedArgs<ExtArgs>
   extraordinaryFeesCreated?: boolean | Prisma.User$extraordinaryFeesCreatedArgs<ExtArgs>
+  announcementsCreated?: boolean | Prisma.User$announcementsCreatedArgs<ExtArgs>
+  announcementsRead?: boolean | Prisma.User$announcementsReadArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2853,6 +3293,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     expensesCreated: Prisma.$ExpensePayload<ExtArgs>[]
     extraIncomesCreated: Prisma.$ExtraIncomePayload<ExtArgs>[]
     extraordinaryFeesCreated: Prisma.$ExtraordinaryFeePayload<ExtArgs>[]
+    announcementsCreated: Prisma.$AnnouncementPayload<ExtArgs>[]
+    announcementsRead: Prisma.$AnnouncementReaderPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -3275,6 +3717,8 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   expensesCreated<T extends Prisma.User$expensesCreatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$expensesCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ExpensePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   extraIncomesCreated<T extends Prisma.User$extraIncomesCreatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$extraIncomesCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ExtraIncomePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   extraordinaryFeesCreated<T extends Prisma.User$extraordinaryFeesCreatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$extraordinaryFeesCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ExtraordinaryFeePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  announcementsCreated<T extends Prisma.User$announcementsCreatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$announcementsCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AnnouncementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  announcementsRead<T extends Prisma.User$announcementsReadArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$announcementsReadArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AnnouncementReaderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4040,6 +4484,54 @@ export type User$extraordinaryFeesCreatedArgs<ExtArgs extends runtime.Types.Exte
   take?: number
   skip?: number
   distinct?: Prisma.ExtraordinaryFeeScalarFieldEnum | Prisma.ExtraordinaryFeeScalarFieldEnum[]
+}
+
+/**
+ * User.announcementsCreated
+ */
+export type User$announcementsCreatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Announcement
+   */
+  select?: Prisma.AnnouncementSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Announcement
+   */
+  omit?: Prisma.AnnouncementOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AnnouncementInclude<ExtArgs> | null
+  where?: Prisma.AnnouncementWhereInput
+  orderBy?: Prisma.AnnouncementOrderByWithRelationInput | Prisma.AnnouncementOrderByWithRelationInput[]
+  cursor?: Prisma.AnnouncementWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AnnouncementScalarFieldEnum | Prisma.AnnouncementScalarFieldEnum[]
+}
+
+/**
+ * User.announcementsRead
+ */
+export type User$announcementsReadArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AnnouncementReader
+   */
+  select?: Prisma.AnnouncementReaderSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AnnouncementReader
+   */
+  omit?: Prisma.AnnouncementReaderOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AnnouncementReaderInclude<ExtArgs> | null
+  where?: Prisma.AnnouncementReaderWhereInput
+  orderBy?: Prisma.AnnouncementReaderOrderByWithRelationInput | Prisma.AnnouncementReaderOrderByWithRelationInput[]
+  cursor?: Prisma.AnnouncementReaderWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AnnouncementReaderScalarFieldEnum | Prisma.AnnouncementReaderScalarFieldEnum[]
 }
 
 /**

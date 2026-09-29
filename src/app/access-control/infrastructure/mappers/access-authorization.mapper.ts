@@ -51,6 +51,7 @@ export class AccessAuthorizationEntityMapper {
             id: model.visitor.house.condominium.id,
             name: model.visitor.house.condominium.name,
             key: model.visitor.house.condominium.key,
+            googleMapsUrl: model.visitor.house.condominium.googleMapsUrl,
           }
         : undefined,
       qrCode: model.qrCode,

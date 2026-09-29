@@ -14,6 +14,7 @@ export enum UploadModule {
   PAYMENTS = 'payments',
   BRANDING = 'branding',
   DOCUMENTS = 'documents',
+  ANNOUNCEMENTS = 'announcements',
   GENERAL = 'general',
 }
 

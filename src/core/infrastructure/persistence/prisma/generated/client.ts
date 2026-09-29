@@ -174,3 +174,18 @@ export type ExtraordinaryFeeCharge = Prisma.ExtraordinaryFeeChargeModel
  * 
  */
 export type StandContact = Prisma.StandContactModel
+/**
+ * Model Announcement
+ * 
+ */
+export type Announcement = Prisma.AnnouncementModel
+/**
+ * Model AnnouncementAttachment
+ * 
+ */
+export type AnnouncementAttachment = Prisma.AnnouncementAttachmentModel
+/**
+ * Model AnnouncementReader
+ * 
+ */
+export type AnnouncementReader = Prisma.AnnouncementReaderModel

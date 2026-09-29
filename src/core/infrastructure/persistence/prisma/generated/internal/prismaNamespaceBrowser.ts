@@ -77,7 +77,10 @@ export const ModelName = {
   ExtraordinaryFee: 'ExtraordinaryFee',
   ExtraordinaryFeeDocument: 'ExtraordinaryFeeDocument',
   ExtraordinaryFeeCharge: 'ExtraordinaryFeeCharge',
-  StandContact: 'StandContact'
+  StandContact: 'StandContact',
+  Announcement: 'Announcement',
+  AnnouncementAttachment: 'AnnouncementAttachment',
+  AnnouncementReader: 'AnnouncementReader'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -580,6 +583,53 @@ export const StandContactScalarFieldEnum = {
 } as const
 
 export type StandContactScalarFieldEnum = (typeof StandContactScalarFieldEnum)[keyof typeof StandContactScalarFieldEnum]
+
+
+export const AnnouncementScalarFieldEnum = {
+  id: 'id',
+  condominiumId: 'condominiumId',
+  title: 'title',
+  previewMessage: 'previewMessage',
+  content: 'content',
+  category: 'category',
+  priority: 'priority',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  isActive: 'isActive',
+  authorName: 'authorName',
+  createdById: 'createdById',
+  viewsCount: 'viewsCount',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AnnouncementScalarFieldEnum = (typeof AnnouncementScalarFieldEnum)[keyof typeof AnnouncementScalarFieldEnum]
+
+
+export const AnnouncementAttachmentScalarFieldEnum = {
+  id: 'id',
+  announcementId: 'announcementId',
+  type: 'type',
+  fileUrl: 'fileUrl',
+  fileName: 'fileName',
+  fileSize: 'fileSize',
+  mimeType: 'mimeType',
+  order: 'order',
+  createdAt: 'createdAt'
+} as const
+
+export type AnnouncementAttachmentScalarFieldEnum = (typeof AnnouncementAttachmentScalarFieldEnum)[keyof typeof AnnouncementAttachmentScalarFieldEnum]
+
+
+export const AnnouncementReaderScalarFieldEnum = {
+  id: 'id',
+  announcementId: 'announcementId',
+  userId: 'userId',
+  houseId: 'houseId',
+  readAt: 'readAt'
+} as const
+
+export type AnnouncementReaderScalarFieldEnum = (typeof AnnouncementReaderScalarFieldEnum)[keyof typeof AnnouncementReaderScalarFieldEnum]
 
 
 export const SortOrder = {

@@ -19,6 +19,7 @@ export class AccessAuthorizationEntity {
     id: string;
     name: string;
     key?: string;
+    googleMapsUrl?: string | null;
   };
   qrCode: string;
   pin: string;
