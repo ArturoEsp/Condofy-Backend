@@ -98,4 +98,15 @@ export class UpdateAnnouncementRequest {
   })
   @IsArray()
   keepAttachmentIds?: string[];
+
+  @ApiPropertyOptional({
+    description: 'Nombre del autor o entidad emisora',
+    example: 'Administración',
+  })
+  @IsOptional()
+  @IsString({ message: 'El nombre del autor debe ser una cadena de texto' })
+  @MaxLength(100, {
+    message: 'El nombre del autor no puede exceder 100 caracteres',
+  })
+  authorName?: string;
 }
