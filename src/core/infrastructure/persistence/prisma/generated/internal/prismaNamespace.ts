@@ -410,7 +410,10 @@ export const ModelName = {
   ExtraordinaryFee: 'ExtraordinaryFee',
   ExtraordinaryFeeDocument: 'ExtraordinaryFeeDocument',
   ExtraordinaryFeeCharge: 'ExtraordinaryFeeCharge',
-  StandContact: 'StandContact'
+  StandContact: 'StandContact',
+  Announcement: 'Announcement',
+  AnnouncementAttachment: 'AnnouncementAttachment',
+  AnnouncementReader: 'AnnouncementReader'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -426,7 +429,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "condominium" | "user" | "passwordResetToken" | "userSession" | "pushSubscription" | "house" | "houseConfiguration" | "residentProfile" | "visitor" | "accessAuthorization" | "accessLog" | "parcelDelivery" | "generalProviderAccess" | "houseAccount" | "accountMovement" | "maintenanceCharge" | "payment" | "maintenancePeriod" | "lateFee" | "condominiumBillingConfig" | "expense" | "extraIncome" | "condominiumTransparencyConfig" | "extraordinaryFee" | "extraordinaryFeeDocument" | "extraordinaryFeeCharge" | "standContact"
+    modelProps: "condominium" | "user" | "passwordResetToken" | "userSession" | "pushSubscription" | "house" | "houseConfiguration" | "residentProfile" | "visitor" | "accessAuthorization" | "accessLog" | "parcelDelivery" | "generalProviderAccess" | "houseAccount" | "accountMovement" | "maintenanceCharge" | "payment" | "maintenancePeriod" | "lateFee" | "condominiumBillingConfig" | "expense" | "extraIncome" | "condominiumTransparencyConfig" | "extraordinaryFee" | "extraordinaryFeeDocument" | "extraordinaryFeeCharge" | "standContact" | "announcement" | "announcementAttachment" | "announcementReader"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2428,6 +2431,228 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Announcement: {
+      payload: Prisma.$AnnouncementPayload<ExtArgs>
+      fields: Prisma.AnnouncementFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.AnnouncementFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AnnouncementPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.AnnouncementFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AnnouncementPayload>
+        }
+        findFirst: {
+          args: Prisma.AnnouncementFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AnnouncementPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.AnnouncementFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AnnouncementPayload>
+        }
+        findMany: {
+          args: Prisma.AnnouncementFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AnnouncementPayload>[]
+        }
+        create: {
+          args: Prisma.AnnouncementCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AnnouncementPayload>
+        }
+        createMany: {
+          args: Prisma.AnnouncementCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.AnnouncementCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AnnouncementPayload>[]
+        }
+        delete: {
+          args: Prisma.AnnouncementDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AnnouncementPayload>
+        }
+        update: {
+          args: Prisma.AnnouncementUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AnnouncementPayload>
+        }
+        deleteMany: {
+          args: Prisma.AnnouncementDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.AnnouncementUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.AnnouncementUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AnnouncementPayload>[]
+        }
+        upsert: {
+          args: Prisma.AnnouncementUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AnnouncementPayload>
+        }
+        aggregate: {
+          args: Prisma.AnnouncementAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAnnouncement>
+        }
+        groupBy: {
+          args: Prisma.AnnouncementGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AnnouncementGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.AnnouncementCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AnnouncementCountAggregateOutputType> | number
+        }
+      }
+    }
+    AnnouncementAttachment: {
+      payload: Prisma.$AnnouncementAttachmentPayload<ExtArgs>
+      fields: Prisma.AnnouncementAttachmentFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.AnnouncementAttachmentFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AnnouncementAttachmentPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.AnnouncementAttachmentFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AnnouncementAttachmentPayload>
+        }
+        findFirst: {
+          args: Prisma.AnnouncementAttachmentFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AnnouncementAttachmentPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.AnnouncementAttachmentFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AnnouncementAttachmentPayload>
+        }
+        findMany: {
+          args: Prisma.AnnouncementAttachmentFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AnnouncementAttachmentPayload>[]
+        }
+        create: {
+          args: Prisma.AnnouncementAttachmentCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AnnouncementAttachmentPayload>
+        }
+        createMany: {
+          args: Prisma.AnnouncementAttachmentCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.AnnouncementAttachmentCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AnnouncementAttachmentPayload>[]
+        }
+        delete: {
+          args: Prisma.AnnouncementAttachmentDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AnnouncementAttachmentPayload>
+        }
+        update: {
+          args: Prisma.AnnouncementAttachmentUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AnnouncementAttachmentPayload>
+        }
+        deleteMany: {
+          args: Prisma.AnnouncementAttachmentDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.AnnouncementAttachmentUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.AnnouncementAttachmentUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AnnouncementAttachmentPayload>[]
+        }
+        upsert: {
+          args: Prisma.AnnouncementAttachmentUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AnnouncementAttachmentPayload>
+        }
+        aggregate: {
+          args: Prisma.AnnouncementAttachmentAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAnnouncementAttachment>
+        }
+        groupBy: {
+          args: Prisma.AnnouncementAttachmentGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AnnouncementAttachmentGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.AnnouncementAttachmentCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AnnouncementAttachmentCountAggregateOutputType> | number
+        }
+      }
+    }
+    AnnouncementReader: {
+      payload: Prisma.$AnnouncementReaderPayload<ExtArgs>
+      fields: Prisma.AnnouncementReaderFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.AnnouncementReaderFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AnnouncementReaderPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.AnnouncementReaderFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AnnouncementReaderPayload>
+        }
+        findFirst: {
+          args: Prisma.AnnouncementReaderFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AnnouncementReaderPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.AnnouncementReaderFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AnnouncementReaderPayload>
+        }
+        findMany: {
+          args: Prisma.AnnouncementReaderFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AnnouncementReaderPayload>[]
+        }
+        create: {
+          args: Prisma.AnnouncementReaderCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AnnouncementReaderPayload>
+        }
+        createMany: {
+          args: Prisma.AnnouncementReaderCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.AnnouncementReaderCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AnnouncementReaderPayload>[]
+        }
+        delete: {
+          args: Prisma.AnnouncementReaderDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AnnouncementReaderPayload>
+        }
+        update: {
+          args: Prisma.AnnouncementReaderUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AnnouncementReaderPayload>
+        }
+        deleteMany: {
+          args: Prisma.AnnouncementReaderDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.AnnouncementReaderUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.AnnouncementReaderUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AnnouncementReaderPayload>[]
+        }
+        upsert: {
+          args: Prisma.AnnouncementReaderUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AnnouncementReaderPayload>
+        }
+        aggregate: {
+          args: Prisma.AnnouncementReaderAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAnnouncementReader>
+        }
+        groupBy: {
+          args: Prisma.AnnouncementReaderGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AnnouncementReaderGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.AnnouncementReaderCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AnnouncementReaderCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -2953,6 +3178,53 @@ export const StandContactScalarFieldEnum = {
 export type StandContactScalarFieldEnum = (typeof StandContactScalarFieldEnum)[keyof typeof StandContactScalarFieldEnum]
 
 
+export const AnnouncementScalarFieldEnum = {
+  id: 'id',
+  condominiumId: 'condominiumId',
+  title: 'title',
+  previewMessage: 'previewMessage',
+  content: 'content',
+  category: 'category',
+  priority: 'priority',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  isActive: 'isActive',
+  authorName: 'authorName',
+  createdById: 'createdById',
+  viewsCount: 'viewsCount',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AnnouncementScalarFieldEnum = (typeof AnnouncementScalarFieldEnum)[keyof typeof AnnouncementScalarFieldEnum]
+
+
+export const AnnouncementAttachmentScalarFieldEnum = {
+  id: 'id',
+  announcementId: 'announcementId',
+  type: 'type',
+  fileUrl: 'fileUrl',
+  fileName: 'fileName',
+  fileSize: 'fileSize',
+  mimeType: 'mimeType',
+  order: 'order',
+  createdAt: 'createdAt'
+} as const
+
+export type AnnouncementAttachmentScalarFieldEnum = (typeof AnnouncementAttachmentScalarFieldEnum)[keyof typeof AnnouncementAttachmentScalarFieldEnum]
+
+
+export const AnnouncementReaderScalarFieldEnum = {
+  id: 'id',
+  announcementId: 'announcementId',
+  userId: 'userId',
+  houseId: 'houseId',
+  readAt: 'readAt'
+} as const
+
+export type AnnouncementReaderScalarFieldEnum = (typeof AnnouncementReaderScalarFieldEnum)[keyof typeof AnnouncementReaderScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -3327,6 +3599,48 @@ export type ListEnumExtraordinaryFeeStatusFieldRefInput<$PrismaModel> = FieldRef
 
 
 /**
+ * Reference to a field of type 'AnnouncementCategory'
+ */
+export type EnumAnnouncementCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AnnouncementCategory'>
+    
+
+
+/**
+ * Reference to a field of type 'AnnouncementCategory[]'
+ */
+export type ListEnumAnnouncementCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AnnouncementCategory[]'>
+    
+
+
+/**
+ * Reference to a field of type 'AnnouncementPriority'
+ */
+export type EnumAnnouncementPriorityFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AnnouncementPriority'>
+    
+
+
+/**
+ * Reference to a field of type 'AnnouncementPriority[]'
+ */
+export type ListEnumAnnouncementPriorityFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AnnouncementPriority[]'>
+    
+
+
+/**
+ * Reference to a field of type 'AnnouncementAttachmentType'
+ */
+export type EnumAnnouncementAttachmentTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AnnouncementAttachmentType'>
+    
+
+
+/**
+ * Reference to a field of type 'AnnouncementAttachmentType[]'
+ */
+export type ListEnumAnnouncementAttachmentTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AnnouncementAttachmentType[]'>
+    
+
+
+/**
  * Reference to a field of type 'Float'
  */
 export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -3476,6 +3790,9 @@ export type GlobalOmitConfig = {
   extraordinaryFeeDocument?: Prisma.ExtraordinaryFeeDocumentOmit
   extraordinaryFeeCharge?: Prisma.ExtraordinaryFeeChargeOmit
   standContact?: Prisma.StandContactOmit
+  announcement?: Prisma.AnnouncementOmit
+  announcementAttachment?: Prisma.AnnouncementAttachmentOmit
+  announcementReader?: Prisma.AnnouncementReaderOmit
 }
 
 /* Types for Logging */

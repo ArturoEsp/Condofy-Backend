@@ -22,6 +22,7 @@ import { HealthModule } from './app/health/health.module';
 import { BillingModule } from './app/billing/billing.module';
 import { ExpensesModule } from './app/expenses/expenses.module';
 import { ExtraordinaryFeesModule } from './app/extraordinary-fees/extraordinary-fees.module';
+import { AnnouncementsModule } from './app/announcements/announcements.module';
 
 @Module({
   imports: [
@@ -51,6 +52,7 @@ import { ExtraordinaryFeesModule } from './app/extraordinary-fees/extraordinary-
     BillingModule,
     ExpensesModule,
     ExtraordinaryFeesModule,
+    AnnouncementsModule,
   ],
   controllers: [],
   providers: [

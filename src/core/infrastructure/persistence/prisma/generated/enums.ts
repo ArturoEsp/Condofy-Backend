@@ -76,6 +76,35 @@ export const PaymentMethod = {
 export type PaymentMethod = (typeof PaymentMethod)[keyof typeof PaymentMethod]
 
 
+export const AnnouncementPriority = {
+  NORMAL: 'NORMAL',
+  IMPORTANT: 'IMPORTANT',
+  URGENT: 'URGENT'
+} as const
+
+export type AnnouncementPriority = (typeof AnnouncementPriority)[keyof typeof AnnouncementPriority]
+
+
+export const AnnouncementCategory = {
+  GENERAL: 'GENERAL',
+  MAINTENANCE: 'MAINTENANCE',
+  SECURITY: 'SECURITY',
+  MEETING: 'MEETING',
+  FINANCE: 'FINANCE',
+  EVENT: 'EVENT'
+} as const
+
+export type AnnouncementCategory = (typeof AnnouncementCategory)[keyof typeof AnnouncementCategory]
+
+
+export const AnnouncementAttachmentType = {
+  IMAGE: 'IMAGE',
+  DOCUMENT: 'DOCUMENT'
+} as const
+
+export type AnnouncementAttachmentType = (typeof AnnouncementAttachmentType)[keyof typeof AnnouncementAttachmentType]
+
+
 export const ExpenseCategory = {
   SERVICES: 'SERVICES',
   MAINTENANCE: 'MAINTENANCE',

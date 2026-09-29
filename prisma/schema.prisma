@@ -58,6 +58,26 @@ enum PaymentMethod {
   CHECK
 }
 
+enum AnnouncementPriority {
+  NORMAL
+  IMPORTANT
+  URGENT
+}
+
+enum AnnouncementCategory {
+  GENERAL
+  MAINTENANCE
+  SECURITY
+  MEETING
+  FINANCE
+  EVENT
+}
+
+enum AnnouncementAttachmentType {
+  IMAGE
+  DOCUMENT
+}
+
 enum ExpenseCategory {
   SERVICES
   MAINTENANCE
@@ -174,6 +194,7 @@ model Condominium {
   transparencyConfig      CondominiumTransparencyConfig?
   extraordinaryFees       ExtraordinaryFee[]
   standContacts           StandContact[]
+  announcements           Announcement[]
   createdAt               DateTime                       @default(now())
   updatedAt               DateTime                       @updatedAt
 }
@@ -205,6 +226,8 @@ model User {
   expensesCreated           Expense[]               @relation("ExpenseCreatedBy")
   extraIncomesCreated       ExtraIncome[]           @relation("ExtraIncomeCreatedBy")
   extraordinaryFeesCreated  ExtraordinaryFee[]      @relation("ExtraordinaryFeeCreatedBy")
+  announcementsCreated      Announcement[]          @relation("AnnouncementCreatedBy")
+  announcementsRead         AnnouncementReader[]    @relation("AnnouncementReaderUser")
 
   @@index([condominiumId])
 }
@@ -268,6 +291,7 @@ model House {
   parcels                 ParcelDelivery[]
   extraIncomes            ExtraIncome[]
   extraordinaryFeeCharges ExtraordinaryFeeCharge[]
+  announcementReaders     AnnouncementReader[]
   isDisabled              Boolean                  @default(false)
   createdAt               DateTime                 @default(now())
   updatedAt               DateTime                 @updatedAt
@@ -731,4 +755,61 @@ model StandContact {
 
   @@index([condominiumId])
   @@index([condominiumId, isActive])
+}
+
+model Announcement {
+  id             String                   @id @default(uuid())
+  condominiumId  String
+  condominium    Condominium              @relation(fields: [condominiumId], references: [id], onDelete: Cascade)
+  title          String
+  previewMessage String
+  content        String                   @db.Text
+  category       AnnouncementCategory     @default(GENERAL)
+  priority       AnnouncementPriority     @default(NORMAL)
+  startDate      DateTime                 @default(now())
+  endDate        DateTime?
+  isActive       Boolean                  @default(true)
+  authorName     String
+  createdById    String
+  createdBy      User                     @relation("AnnouncementCreatedBy", fields: [createdById], references: [id])
+  viewsCount     Int                      @default(0)
+  attachments    AnnouncementAttachment[]
+  readers        AnnouncementReader[]
+  createdAt      DateTime                 @default(now())
+  updatedAt      DateTime                 @updatedAt
+
+  @@index([condominiumId, isActive])
+  @@index([condominiumId, startDate])
+  @@index([condominiumId, priority])
+}
+
+model AnnouncementAttachment {
+  id             String                     @id @default(uuid())
+  announcementId String
+  announcement   Announcement               @relation(fields: [announcementId], references: [id], onDelete: Cascade)
+  type           AnnouncementAttachmentType @default(IMAGE)
+  fileUrl        String
+  fileName       String
+  fileSize       String?
+  mimeType       String?
+  order          Int                        @default(0)
+  createdAt      DateTime                   @default(now())
+
+  @@index([announcementId])
+}
+
+model AnnouncementReader {
+  id             String       @id @default(uuid())
+  announcementId String
+  announcement   Announcement @relation(fields: [announcementId], references: [id], onDelete: Cascade)
+  userId         String
+  user           User         @relation("AnnouncementReaderUser", fields: [userId], references: [id], onDelete: Cascade)
+  houseId        String?
+  house          House?       @relation(fields: [houseId], references: [id], onDelete: SetNull)
+  readAt         DateTime     @default(now())
+
+  @@unique([announcementId, userId])
+  @@index([announcementId])
+  @@index([userId])
+  @@index([houseId])
 }

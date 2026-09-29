@@ -623,6 +623,57 @@ export type EnumPaymentMethodNullableWithAggregatesFilter<$PrismaModel = never> 
   _max?: Prisma.NestedEnumPaymentMethodNullableFilter<$PrismaModel>
 }
 
+export type EnumAnnouncementCategoryFilter<$PrismaModel = never> = {
+  equals?: $Enums.AnnouncementCategory | Prisma.EnumAnnouncementCategoryFieldRefInput<$PrismaModel>
+  in?: $Enums.AnnouncementCategory[] | Prisma.ListEnumAnnouncementCategoryFieldRefInput<$PrismaModel>
+  notIn?: $Enums.AnnouncementCategory[] | Prisma.ListEnumAnnouncementCategoryFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumAnnouncementCategoryFilter<$PrismaModel> | $Enums.AnnouncementCategory
+}
+
+export type EnumAnnouncementPriorityFilter<$PrismaModel = never> = {
+  equals?: $Enums.AnnouncementPriority | Prisma.EnumAnnouncementPriorityFieldRefInput<$PrismaModel>
+  in?: $Enums.AnnouncementPriority[] | Prisma.ListEnumAnnouncementPriorityFieldRefInput<$PrismaModel>
+  notIn?: $Enums.AnnouncementPriority[] | Prisma.ListEnumAnnouncementPriorityFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumAnnouncementPriorityFilter<$PrismaModel> | $Enums.AnnouncementPriority
+}
+
+export type EnumAnnouncementCategoryWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.AnnouncementCategory | Prisma.EnumAnnouncementCategoryFieldRefInput<$PrismaModel>
+  in?: $Enums.AnnouncementCategory[] | Prisma.ListEnumAnnouncementCategoryFieldRefInput<$PrismaModel>
+  notIn?: $Enums.AnnouncementCategory[] | Prisma.ListEnumAnnouncementCategoryFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumAnnouncementCategoryWithAggregatesFilter<$PrismaModel> | $Enums.AnnouncementCategory
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumAnnouncementCategoryFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumAnnouncementCategoryFilter<$PrismaModel>
+}
+
+export type EnumAnnouncementPriorityWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.AnnouncementPriority | Prisma.EnumAnnouncementPriorityFieldRefInput<$PrismaModel>
+  in?: $Enums.AnnouncementPriority[] | Prisma.ListEnumAnnouncementPriorityFieldRefInput<$PrismaModel>
+  notIn?: $Enums.AnnouncementPriority[] | Prisma.ListEnumAnnouncementPriorityFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumAnnouncementPriorityWithAggregatesFilter<$PrismaModel> | $Enums.AnnouncementPriority
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumAnnouncementPriorityFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumAnnouncementPriorityFilter<$PrismaModel>
+}
+
+export type EnumAnnouncementAttachmentTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.AnnouncementAttachmentType | Prisma.EnumAnnouncementAttachmentTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.AnnouncementAttachmentType[] | Prisma.ListEnumAnnouncementAttachmentTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.AnnouncementAttachmentType[] | Prisma.ListEnumAnnouncementAttachmentTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumAnnouncementAttachmentTypeFilter<$PrismaModel> | $Enums.AnnouncementAttachmentType
+}
+
+export type EnumAnnouncementAttachmentTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.AnnouncementAttachmentType | Prisma.EnumAnnouncementAttachmentTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.AnnouncementAttachmentType[] | Prisma.ListEnumAnnouncementAttachmentTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.AnnouncementAttachmentType[] | Prisma.ListEnumAnnouncementAttachmentTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumAnnouncementAttachmentTypeWithAggregatesFilter<$PrismaModel> | $Enums.AnnouncementAttachmentType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumAnnouncementAttachmentTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumAnnouncementAttachmentTypeFilter<$PrismaModel>
+}
+
 export type NestedStringFilter<$PrismaModel = never> = {
   equals?: string | Prisma.StringFieldRefInput<$PrismaModel>
   in?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
@@ -1243,6 +1294,57 @@ export type NestedEnumPaymentMethodNullableWithAggregatesFilter<$PrismaModel = n
   _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
   _min?: Prisma.NestedEnumPaymentMethodNullableFilter<$PrismaModel>
   _max?: Prisma.NestedEnumPaymentMethodNullableFilter<$PrismaModel>
+}
+
+export type NestedEnumAnnouncementCategoryFilter<$PrismaModel = never> = {
+  equals?: $Enums.AnnouncementCategory | Prisma.EnumAnnouncementCategoryFieldRefInput<$PrismaModel>
+  in?: $Enums.AnnouncementCategory[] | Prisma.ListEnumAnnouncementCategoryFieldRefInput<$PrismaModel>
+  notIn?: $Enums.AnnouncementCategory[] | Prisma.ListEnumAnnouncementCategoryFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumAnnouncementCategoryFilter<$PrismaModel> | $Enums.AnnouncementCategory
+}
+
+export type NestedEnumAnnouncementPriorityFilter<$PrismaModel = never> = {
+  equals?: $Enums.AnnouncementPriority | Prisma.EnumAnnouncementPriorityFieldRefInput<$PrismaModel>
+  in?: $Enums.AnnouncementPriority[] | Prisma.ListEnumAnnouncementPriorityFieldRefInput<$PrismaModel>
+  notIn?: $Enums.AnnouncementPriority[] | Prisma.ListEnumAnnouncementPriorityFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumAnnouncementPriorityFilter<$PrismaModel> | $Enums.AnnouncementPriority
+}
+
+export type NestedEnumAnnouncementCategoryWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.AnnouncementCategory | Prisma.EnumAnnouncementCategoryFieldRefInput<$PrismaModel>
+  in?: $Enums.AnnouncementCategory[] | Prisma.ListEnumAnnouncementCategoryFieldRefInput<$PrismaModel>
+  notIn?: $Enums.AnnouncementCategory[] | Prisma.ListEnumAnnouncementCategoryFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumAnnouncementCategoryWithAggregatesFilter<$PrismaModel> | $Enums.AnnouncementCategory
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumAnnouncementCategoryFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumAnnouncementCategoryFilter<$PrismaModel>
+}
+
+export type NestedEnumAnnouncementPriorityWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.AnnouncementPriority | Prisma.EnumAnnouncementPriorityFieldRefInput<$PrismaModel>
+  in?: $Enums.AnnouncementPriority[] | Prisma.ListEnumAnnouncementPriorityFieldRefInput<$PrismaModel>
+  notIn?: $Enums.AnnouncementPriority[] | Prisma.ListEnumAnnouncementPriorityFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumAnnouncementPriorityWithAggregatesFilter<$PrismaModel> | $Enums.AnnouncementPriority
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumAnnouncementPriorityFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumAnnouncementPriorityFilter<$PrismaModel>
+}
+
+export type NestedEnumAnnouncementAttachmentTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.AnnouncementAttachmentType | Prisma.EnumAnnouncementAttachmentTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.AnnouncementAttachmentType[] | Prisma.ListEnumAnnouncementAttachmentTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.AnnouncementAttachmentType[] | Prisma.ListEnumAnnouncementAttachmentTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumAnnouncementAttachmentTypeFilter<$PrismaModel> | $Enums.AnnouncementAttachmentType
+}
+
+export type NestedEnumAnnouncementAttachmentTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.AnnouncementAttachmentType | Prisma.EnumAnnouncementAttachmentTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.AnnouncementAttachmentType[] | Prisma.ListEnumAnnouncementAttachmentTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.AnnouncementAttachmentType[] | Prisma.ListEnumAnnouncementAttachmentTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumAnnouncementAttachmentTypeWithAggregatesFilter<$PrismaModel> | $Enums.AnnouncementAttachmentType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumAnnouncementAttachmentTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumAnnouncementAttachmentTypeFilter<$PrismaModel>
 }
 
 
