@@ -132,4 +132,28 @@ export class UpdateBillingSettingsRequest {
   @IsString()
   @IsOptional()
   initialBalanceNotes?: string;
+
+  @ApiPropertyOptional({
+    example: 85000.0,
+    description: 'Deuda o pasivo histórico del condominio',
+  })
+  @IsNumber()
+  @IsOptional()
+  @Min(0)
+  initialDebt?: number;
+
+  @ApiPropertyOptional({
+    example: 'Adeudo de luz y agua heredado de la administración anterior',
+  })
+  @IsString()
+  @IsOptional()
+  initialDebtNotes?: string;
+
+  @ApiPropertyOptional({
+    example: true,
+    description: 'Mostrar deuda a residentes en transparencia',
+  })
+  @IsBoolean()
+  @IsOptional()
+  showDebtInTransparency?: boolean;
 }

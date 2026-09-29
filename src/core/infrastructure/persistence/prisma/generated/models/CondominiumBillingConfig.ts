@@ -34,6 +34,7 @@ export type CondominiumBillingConfigAvgAggregateOutputType = {
   dueDateReminderDaysBefore: number | null
   initialBalance: runtime.Decimal | null
   initialReserveFund: runtime.Decimal | null
+  initialDebt: runtime.Decimal | null
 }
 
 export type CondominiumBillingConfigSumAggregateOutputType = {
@@ -44,6 +45,7 @@ export type CondominiumBillingConfigSumAggregateOutputType = {
   dueDateReminderDaysBefore: number | null
   initialBalance: runtime.Decimal | null
   initialReserveFund: runtime.Decimal | null
+  initialDebt: runtime.Decimal | null
 }
 
 export type CondominiumBillingConfigMinAggregateOutputType = {
@@ -71,6 +73,9 @@ export type CondominiumBillingConfigMinAggregateOutputType = {
   initialReserveFund: runtime.Decimal | null
   initialBalanceDate: Date | null
   initialBalanceNotes: string | null
+  initialDebt: runtime.Decimal | null
+  initialDebtNotes: string | null
+  showDebtInTransparency: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -100,6 +105,9 @@ export type CondominiumBillingConfigMaxAggregateOutputType = {
   initialReserveFund: runtime.Decimal | null
   initialBalanceDate: Date | null
   initialBalanceNotes: string | null
+  initialDebt: runtime.Decimal | null
+  initialDebtNotes: string | null
+  showDebtInTransparency: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -129,6 +137,9 @@ export type CondominiumBillingConfigCountAggregateOutputType = {
   initialReserveFund: number
   initialBalanceDate: number
   initialBalanceNotes: number
+  initialDebt: number
+  initialDebtNotes: number
+  showDebtInTransparency: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -143,6 +154,7 @@ export type CondominiumBillingConfigAvgAggregateInputType = {
   dueDateReminderDaysBefore?: true
   initialBalance?: true
   initialReserveFund?: true
+  initialDebt?: true
 }
 
 export type CondominiumBillingConfigSumAggregateInputType = {
@@ -153,6 +165,7 @@ export type CondominiumBillingConfigSumAggregateInputType = {
   dueDateReminderDaysBefore?: true
   initialBalance?: true
   initialReserveFund?: true
+  initialDebt?: true
 }
 
 export type CondominiumBillingConfigMinAggregateInputType = {
@@ -180,6 +193,9 @@ export type CondominiumBillingConfigMinAggregateInputType = {
   initialReserveFund?: true
   initialBalanceDate?: true
   initialBalanceNotes?: true
+  initialDebt?: true
+  initialDebtNotes?: true
+  showDebtInTransparency?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -209,6 +225,9 @@ export type CondominiumBillingConfigMaxAggregateInputType = {
   initialReserveFund?: true
   initialBalanceDate?: true
   initialBalanceNotes?: true
+  initialDebt?: true
+  initialDebtNotes?: true
+  showDebtInTransparency?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -238,6 +257,9 @@ export type CondominiumBillingConfigCountAggregateInputType = {
   initialReserveFund?: true
   initialBalanceDate?: true
   initialBalanceNotes?: true
+  initialDebt?: true
+  initialDebtNotes?: true
+  showDebtInTransparency?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -354,6 +376,9 @@ export type CondominiumBillingConfigGroupByOutputType = {
   initialReserveFund: runtime.Decimal
   initialBalanceDate: Date | null
   initialBalanceNotes: string | null
+  initialDebt: runtime.Decimal
+  initialDebtNotes: string | null
+  showDebtInTransparency: boolean
   createdAt: Date
   updatedAt: Date
   _count: CondominiumBillingConfigCountAggregateOutputType | null
@@ -406,6 +431,9 @@ export type CondominiumBillingConfigWhereInput = {
   initialReserveFund?: Prisma.DecimalFilter<"CondominiumBillingConfig"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   initialBalanceDate?: Prisma.DateTimeNullableFilter<"CondominiumBillingConfig"> | Date | string | null
   initialBalanceNotes?: Prisma.StringNullableFilter<"CondominiumBillingConfig"> | string | null
+  initialDebt?: Prisma.DecimalFilter<"CondominiumBillingConfig"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  initialDebtNotes?: Prisma.StringNullableFilter<"CondominiumBillingConfig"> | string | null
+  showDebtInTransparency?: Prisma.BoolFilter<"CondominiumBillingConfig"> | boolean
   createdAt?: Prisma.DateTimeFilter<"CondominiumBillingConfig"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"CondominiumBillingConfig"> | Date | string
   condominium?: Prisma.XOR<Prisma.CondominiumScalarRelationFilter, Prisma.CondominiumWhereInput>
@@ -436,6 +464,9 @@ export type CondominiumBillingConfigOrderByWithRelationInput = {
   initialReserveFund?: Prisma.SortOrder
   initialBalanceDate?: Prisma.SortOrderInput | Prisma.SortOrder
   initialBalanceNotes?: Prisma.SortOrderInput | Prisma.SortOrder
+  initialDebt?: Prisma.SortOrder
+  initialDebtNotes?: Prisma.SortOrderInput | Prisma.SortOrder
+  showDebtInTransparency?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   condominium?: Prisma.CondominiumOrderByWithRelationInput
@@ -469,6 +500,9 @@ export type CondominiumBillingConfigWhereUniqueInput = Prisma.AtLeast<{
   initialReserveFund?: Prisma.DecimalFilter<"CondominiumBillingConfig"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   initialBalanceDate?: Prisma.DateTimeNullableFilter<"CondominiumBillingConfig"> | Date | string | null
   initialBalanceNotes?: Prisma.StringNullableFilter<"CondominiumBillingConfig"> | string | null
+  initialDebt?: Prisma.DecimalFilter<"CondominiumBillingConfig"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  initialDebtNotes?: Prisma.StringNullableFilter<"CondominiumBillingConfig"> | string | null
+  showDebtInTransparency?: Prisma.BoolFilter<"CondominiumBillingConfig"> | boolean
   createdAt?: Prisma.DateTimeFilter<"CondominiumBillingConfig"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"CondominiumBillingConfig"> | Date | string
   condominium?: Prisma.XOR<Prisma.CondominiumScalarRelationFilter, Prisma.CondominiumWhereInput>
@@ -499,6 +533,9 @@ export type CondominiumBillingConfigOrderByWithAggregationInput = {
   initialReserveFund?: Prisma.SortOrder
   initialBalanceDate?: Prisma.SortOrderInput | Prisma.SortOrder
   initialBalanceNotes?: Prisma.SortOrderInput | Prisma.SortOrder
+  initialDebt?: Prisma.SortOrder
+  initialDebtNotes?: Prisma.SortOrderInput | Prisma.SortOrder
+  showDebtInTransparency?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.CondominiumBillingConfigCountOrderByAggregateInput
@@ -536,6 +573,9 @@ export type CondominiumBillingConfigScalarWhereWithAggregatesInput = {
   initialReserveFund?: Prisma.DecimalWithAggregatesFilter<"CondominiumBillingConfig"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   initialBalanceDate?: Prisma.DateTimeNullableWithAggregatesFilter<"CondominiumBillingConfig"> | Date | string | null
   initialBalanceNotes?: Prisma.StringNullableWithAggregatesFilter<"CondominiumBillingConfig"> | string | null
+  initialDebt?: Prisma.DecimalWithAggregatesFilter<"CondominiumBillingConfig"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  initialDebtNotes?: Prisma.StringNullableWithAggregatesFilter<"CondominiumBillingConfig"> | string | null
+  showDebtInTransparency?: Prisma.BoolWithAggregatesFilter<"CondominiumBillingConfig"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"CondominiumBillingConfig"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"CondominiumBillingConfig"> | Date | string
 }
@@ -564,6 +604,9 @@ export type CondominiumBillingConfigCreateInput = {
   initialReserveFund?: runtime.Decimal | runtime.DecimalJsLike | number | string
   initialBalanceDate?: Date | string | null
   initialBalanceNotes?: string | null
+  initialDebt?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  initialDebtNotes?: string | null
+  showDebtInTransparency?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   condominium: Prisma.CondominiumCreateNestedOneWithoutBillingConfigInput
@@ -594,6 +637,9 @@ export type CondominiumBillingConfigUncheckedCreateInput = {
   initialReserveFund?: runtime.Decimal | runtime.DecimalJsLike | number | string
   initialBalanceDate?: Date | string | null
   initialBalanceNotes?: string | null
+  initialDebt?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  initialDebtNotes?: string | null
+  showDebtInTransparency?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -622,6 +668,9 @@ export type CondominiumBillingConfigUpdateInput = {
   initialReserveFund?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   initialBalanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   initialBalanceNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  initialDebt?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  initialDebtNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showDebtInTransparency?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   condominium?: Prisma.CondominiumUpdateOneRequiredWithoutBillingConfigNestedInput
@@ -652,6 +701,9 @@ export type CondominiumBillingConfigUncheckedUpdateInput = {
   initialReserveFund?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   initialBalanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   initialBalanceNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  initialDebt?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  initialDebtNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showDebtInTransparency?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -681,6 +733,9 @@ export type CondominiumBillingConfigCreateManyInput = {
   initialReserveFund?: runtime.Decimal | runtime.DecimalJsLike | number | string
   initialBalanceDate?: Date | string | null
   initialBalanceNotes?: string | null
+  initialDebt?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  initialDebtNotes?: string | null
+  showDebtInTransparency?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -709,6 +764,9 @@ export type CondominiumBillingConfigUpdateManyMutationInput = {
   initialReserveFund?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   initialBalanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   initialBalanceNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  initialDebt?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  initialDebtNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showDebtInTransparency?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -738,6 +796,9 @@ export type CondominiumBillingConfigUncheckedUpdateManyInput = {
   initialReserveFund?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   initialBalanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   initialBalanceNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  initialDebt?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  initialDebtNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showDebtInTransparency?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -772,6 +833,9 @@ export type CondominiumBillingConfigCountOrderByAggregateInput = {
   initialReserveFund?: Prisma.SortOrder
   initialBalanceDate?: Prisma.SortOrder
   initialBalanceNotes?: Prisma.SortOrder
+  initialDebt?: Prisma.SortOrder
+  initialDebtNotes?: Prisma.SortOrder
+  showDebtInTransparency?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -784,6 +848,7 @@ export type CondominiumBillingConfigAvgOrderByAggregateInput = {
   dueDateReminderDaysBefore?: Prisma.SortOrder
   initialBalance?: Prisma.SortOrder
   initialReserveFund?: Prisma.SortOrder
+  initialDebt?: Prisma.SortOrder
 }
 
 export type CondominiumBillingConfigMaxOrderByAggregateInput = {
@@ -811,6 +876,9 @@ export type CondominiumBillingConfigMaxOrderByAggregateInput = {
   initialReserveFund?: Prisma.SortOrder
   initialBalanceDate?: Prisma.SortOrder
   initialBalanceNotes?: Prisma.SortOrder
+  initialDebt?: Prisma.SortOrder
+  initialDebtNotes?: Prisma.SortOrder
+  showDebtInTransparency?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -840,6 +908,9 @@ export type CondominiumBillingConfigMinOrderByAggregateInput = {
   initialReserveFund?: Prisma.SortOrder
   initialBalanceDate?: Prisma.SortOrder
   initialBalanceNotes?: Prisma.SortOrder
+  initialDebt?: Prisma.SortOrder
+  initialDebtNotes?: Prisma.SortOrder
+  showDebtInTransparency?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -852,6 +923,7 @@ export type CondominiumBillingConfigSumOrderByAggregateInput = {
   dueDateReminderDaysBefore?: Prisma.SortOrder
   initialBalance?: Prisma.SortOrder
   initialReserveFund?: Prisma.SortOrder
+  initialDebt?: Prisma.SortOrder
 }
 
 export type CondominiumBillingConfigCreateNestedOneWithoutCondominiumInput = {
@@ -914,6 +986,9 @@ export type CondominiumBillingConfigCreateWithoutCondominiumInput = {
   initialReserveFund?: runtime.Decimal | runtime.DecimalJsLike | number | string
   initialBalanceDate?: Date | string | null
   initialBalanceNotes?: string | null
+  initialDebt?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  initialDebtNotes?: string | null
+  showDebtInTransparency?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -942,6 +1017,9 @@ export type CondominiumBillingConfigUncheckedCreateWithoutCondominiumInput = {
   initialReserveFund?: runtime.Decimal | runtime.DecimalJsLike | number | string
   initialBalanceDate?: Date | string | null
   initialBalanceNotes?: string | null
+  initialDebt?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  initialDebtNotes?: string | null
+  showDebtInTransparency?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -986,6 +1064,9 @@ export type CondominiumBillingConfigUpdateWithoutCondominiumInput = {
   initialReserveFund?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   initialBalanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   initialBalanceNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  initialDebt?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  initialDebtNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showDebtInTransparency?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1014,6 +1095,9 @@ export type CondominiumBillingConfigUncheckedUpdateWithoutCondominiumInput = {
   initialReserveFund?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   initialBalanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   initialBalanceNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  initialDebt?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  initialDebtNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showDebtInTransparency?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1045,6 +1129,9 @@ export type CondominiumBillingConfigSelect<ExtArgs extends runtime.Types.Extensi
   initialReserveFund?: boolean
   initialBalanceDate?: boolean
   initialBalanceNotes?: boolean
+  initialDebt?: boolean
+  initialDebtNotes?: boolean
+  showDebtInTransparency?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   condominium?: boolean | Prisma.CondominiumDefaultArgs<ExtArgs>
@@ -1075,6 +1162,9 @@ export type CondominiumBillingConfigSelectCreateManyAndReturn<ExtArgs extends ru
   initialReserveFund?: boolean
   initialBalanceDate?: boolean
   initialBalanceNotes?: boolean
+  initialDebt?: boolean
+  initialDebtNotes?: boolean
+  showDebtInTransparency?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   condominium?: boolean | Prisma.CondominiumDefaultArgs<ExtArgs>
@@ -1105,6 +1195,9 @@ export type CondominiumBillingConfigSelectUpdateManyAndReturn<ExtArgs extends ru
   initialReserveFund?: boolean
   initialBalanceDate?: boolean
   initialBalanceNotes?: boolean
+  initialDebt?: boolean
+  initialDebtNotes?: boolean
+  showDebtInTransparency?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   condominium?: boolean | Prisma.CondominiumDefaultArgs<ExtArgs>
@@ -1135,11 +1228,14 @@ export type CondominiumBillingConfigSelectScalar = {
   initialReserveFund?: boolean
   initialBalanceDate?: boolean
   initialBalanceNotes?: boolean
+  initialDebt?: boolean
+  initialDebtNotes?: boolean
+  showDebtInTransparency?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type CondominiumBillingConfigOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "condominiumId" | "defaultMonthlyFee" | "currency" | "dueDay" | "applyLateFee" | "lateFeeType" | "lateFeeValue" | "gracePeriodDays" | "bankName" | "accountHolder" | "clabe" | "accountNumber" | "paymentReferenceRule" | "notes" | "notifyOnPeriodStart" | "notifyDueDateReminder" | "dueDateReminderDaysBefore" | "notifyOnProofReviewed" | "notificationChannel" | "initialBalance" | "initialReserveFund" | "initialBalanceDate" | "initialBalanceNotes" | "createdAt" | "updatedAt", ExtArgs["result"]["condominiumBillingConfig"]>
+export type CondominiumBillingConfigOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "condominiumId" | "defaultMonthlyFee" | "currency" | "dueDay" | "applyLateFee" | "lateFeeType" | "lateFeeValue" | "gracePeriodDays" | "bankName" | "accountHolder" | "clabe" | "accountNumber" | "paymentReferenceRule" | "notes" | "notifyOnPeriodStart" | "notifyDueDateReminder" | "dueDateReminderDaysBefore" | "notifyOnProofReviewed" | "notificationChannel" | "initialBalance" | "initialReserveFund" | "initialBalanceDate" | "initialBalanceNotes" | "initialDebt" | "initialDebtNotes" | "showDebtInTransparency" | "createdAt" | "updatedAt", ExtArgs["result"]["condominiumBillingConfig"]>
 export type CondominiumBillingConfigInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   condominium?: boolean | Prisma.CondominiumDefaultArgs<ExtArgs>
 }
@@ -1180,6 +1276,9 @@ export type $CondominiumBillingConfigPayload<ExtArgs extends runtime.Types.Exten
     initialReserveFund: runtime.Decimal
     initialBalanceDate: Date | null
     initialBalanceNotes: string | null
+    initialDebt: runtime.Decimal
+    initialDebtNotes: string | null
+    showDebtInTransparency: boolean
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["condominiumBillingConfig"]>
@@ -1630,6 +1729,9 @@ export interface CondominiumBillingConfigFieldRefs {
   readonly initialReserveFund: Prisma.FieldRef<"CondominiumBillingConfig", 'Decimal'>
   readonly initialBalanceDate: Prisma.FieldRef<"CondominiumBillingConfig", 'DateTime'>
   readonly initialBalanceNotes: Prisma.FieldRef<"CondominiumBillingConfig", 'String'>
+  readonly initialDebt: Prisma.FieldRef<"CondominiumBillingConfig", 'Decimal'>
+  readonly initialDebtNotes: Prisma.FieldRef<"CondominiumBillingConfig", 'String'>
+  readonly showDebtInTransparency: Prisma.FieldRef<"CondominiumBillingConfig", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"CondominiumBillingConfig", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"CondominiumBillingConfig", 'DateTime'>
 }

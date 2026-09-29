@@ -41,6 +41,9 @@ export interface PrismaBillingConfigRecord {
   initialReserveFund?: number | string | Prisma.Decimal | null;
   initialBalanceDate?: Date | null;
   initialBalanceNotes?: string | null;
+  initialDebt?: number | string | Prisma.Decimal | null;
+  initialDebtNotes?: string | null;
+  showDebtInTransparency?: boolean | null;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -144,6 +147,9 @@ export class BillingMapper {
         initialReserveFund: 0,
         initialBalanceDate: null,
         initialBalanceNotes: null,
+        initialDebt: 0,
+        initialDebtNotes: null,
+        showDebtInTransparency: true,
         createdAt: new Date(),
         updatedAt: new Date(),
       };
@@ -174,6 +180,9 @@ export class BillingMapper {
       initialReserveFund: Number(raw.initialReserveFund || 0),
       initialBalanceDate: raw.initialBalanceDate ?? null,
       initialBalanceNotes: raw.initialBalanceNotes ?? null,
+      initialDebt: Number(raw.initialDebt || 0),
+      initialDebtNotes: raw.initialDebtNotes ?? null,
+      showDebtInTransparency: Boolean(raw.showDebtInTransparency ?? true),
       createdAt: raw.createdAt,
       updatedAt: raw.updatedAt,
     };
