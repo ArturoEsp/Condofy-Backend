@@ -100,6 +100,9 @@ export interface TransparencyReport {
     currentAvailableBalance: number;
     totalPrepaidBalance?: number;
     operationalBalance?: number;
+    initialDebt?: number;
+    initialDebtNotes?: string | null;
+    showDebtInTransparency?: boolean;
     totalHouses?: number;
     paidHouses?: number;
     pendingHouses?: number;

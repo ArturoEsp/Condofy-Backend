@@ -26,6 +26,9 @@ export interface UpsertBillingConfigData {
   initialReserveFund?: number;
   initialBalanceDate?: Date | null;
   initialBalanceNotes?: string | null;
+  initialDebt?: number;
+  initialDebtNotes?: string | null;
+  showDebtInTransparency?: boolean;
 }
 
 export interface FindBillingRecordsParams {

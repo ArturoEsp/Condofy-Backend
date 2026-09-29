@@ -587,6 +587,9 @@ model CondominiumBillingConfig {
   initialReserveFund        Decimal     @default(0.00) @db.Decimal(12, 2)
   initialBalanceDate        DateTime?
   initialBalanceNotes       String?
+  initialDebt               Decimal     @default(0.00) @db.Decimal(12, 2)
+  initialDebtNotes          String?
+  showDebtInTransparency    Boolean     @default(true)
   createdAt                 DateTime    @default(now())
   updatedAt                 DateTime    @updatedAt
 

@@ -96,6 +96,24 @@ export class TransparencySummaryResponse {
   @Expose()
   operationalBalance?: number;
 
+  @ApiPropertyOptional({
+    description: 'Deuda histórica o pasivo informativo del condominio',
+  })
+  @Expose()
+  initialDebt?: number;
+
+  @ApiPropertyOptional({
+    description: 'Notas explicativas sobre el pasivo histórico',
+  })
+  @Expose()
+  initialDebtNotes?: string | null;
+
+  @ApiPropertyOptional({
+    description: 'Indica si este pasivo se debe mostrar a los residentes',
+  })
+  @Expose()
+  showDebtInTransparency?: boolean;
+
   @ApiPropertyOptional()
   @Expose()
   totalHouses?: number;

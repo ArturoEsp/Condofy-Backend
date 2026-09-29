@@ -432,6 +432,9 @@ export const CondominiumBillingConfigScalarFieldEnum = {
   initialReserveFund: 'initialReserveFund',
   initialBalanceDate: 'initialBalanceDate',
   initialBalanceNotes: 'initialBalanceNotes',
+  initialDebt: 'initialDebt',
+  initialDebtNotes: 'initialDebtNotes',
+  showDebtInTransparency: 'showDebtInTransparency',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const

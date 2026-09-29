@@ -104,6 +104,9 @@ export class BillingPrismaRepository implements BillingRepository {
           ? new Date(data.initialBalanceDate)
           : null,
         initialBalanceNotes: data.initialBalanceNotes ?? null,
+        initialDebt: data.initialDebt ?? 0.0,
+        initialDebtNotes: data.initialDebtNotes ?? null,
+        showDebtInTransparency: data.showDebtInTransparency ?? true,
       },
       update: {
         ...(data.defaultMonthlyFee !== undefined && {
@@ -163,6 +166,15 @@ export class BillingPrismaRepository implements BillingRepository {
         }),
         ...(data.initialBalanceNotes !== undefined && {
           initialBalanceNotes: data.initialBalanceNotes,
+        }),
+        ...(data.initialDebt !== undefined && {
+          initialDebt: data.initialDebt,
+        }),
+        ...(data.initialDebtNotes !== undefined && {
+          initialDebtNotes: data.initialDebtNotes,
+        }),
+        ...(data.showDebtInTransparency !== undefined && {
+          showDebtInTransparency: data.showDebtInTransparency,
         }),
       },
     });

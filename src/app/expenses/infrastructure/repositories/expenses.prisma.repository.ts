@@ -436,6 +436,11 @@ export class ExpensesPrismaRepository implements ExpensesRepository {
     );
     const initialBalance = Number(billingConfig?.initialBalance || 0);
     const initialReserveFund = Number(billingConfig?.initialReserveFund || 0);
+    const initialDebt = Number(billingConfig?.initialDebt || 0);
+    const initialDebtNotes = billingConfig?.initialDebtNotes ?? null;
+    const showDebtInTransparency = Boolean(
+      billingConfig?.showDebtInTransparency ?? true,
+    );
 
     const [yearStr, monthStr] = targetPeriod.split('-');
     const year = parseInt(yearStr, 10);
@@ -728,6 +733,9 @@ export class ExpensesPrismaRepository implements ExpensesRepository {
           : 0,
         totalPrepaidBalance: config.showBalance ? totalPrepaidBalance : 0,
         operationalBalance: config.showBalance ? operationalBalance : 0,
+        initialDebt: config.showBalance ? initialDebt : 0,
+        initialDebtNotes: config.showBalance ? initialDebtNotes : null,
+        showDebtInTransparency,
         totalHouses,
         paidHouses,
         pendingHouses,

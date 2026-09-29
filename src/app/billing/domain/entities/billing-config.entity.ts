@@ -26,6 +26,9 @@ export class BillingConfigEntity {
   initialReserveFund?: number;
   initialBalanceDate?: Date | null;
   initialBalanceNotes?: string | null;
+  initialDebt?: number;
+  initialDebtNotes?: string | null;
+  showDebtInTransparency?: boolean;
   createdAt: Date;
   updatedAt: Date;
 }

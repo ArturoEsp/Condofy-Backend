@@ -99,4 +99,18 @@ export class BillingSettingsResponse {
   @ApiPropertyOptional({ example: 'Saldo inicial verificado' })
   @Expose()
   initialBalanceNotes?: string | null;
+
+  @ApiPropertyOptional({ example: 85000 })
+  @Expose()
+  initialDebt: number;
+
+  @ApiPropertyOptional({
+    example: 'Adeudo de luz y agua heredado de la administración anterior',
+  })
+  @Expose()
+  initialDebtNotes?: string | null;
+
+  @ApiPropertyOptional({ example: true })
+  @Expose()
+  showDebtInTransparency: boolean;
 }
