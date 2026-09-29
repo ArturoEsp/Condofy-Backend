@@ -215,6 +215,8 @@ export class AnnouncementsPrismaRepository implements AnnouncementsRepository {
 
     const updatePayload: any = {};
     if (data.title !== undefined) updatePayload.title = data.title.trim();
+    if (data.authorName !== undefined)
+      updatePayload.authorName = data.authorName.trim();
     if (data.previewMessage !== undefined)
       updatePayload.previewMessage = data.previewMessage.trim();
     if (data.content !== undefined) updatePayload.content = data.content.trim();

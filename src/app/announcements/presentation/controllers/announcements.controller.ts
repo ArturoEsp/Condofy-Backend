@@ -253,9 +253,7 @@ export class AnnouncementsController {
       });
     }
 
-    const authorName =
-      `${user.firstName || ''} ${user.lastName || ''}`.trim() ||
-      'Administración';
+    const authorName = data.authorName?.trim() || 'Administración';
 
     const announcement = await this.createAnnouncementUseCase.execute({
       condominiumId,
@@ -419,6 +417,7 @@ export class AnnouncementsController {
       condominiumId,
       {
         title: data.title,
+        authorName: data.authorName?.trim(),
         previewMessage: data.previewMessage,
         content: data.content,
         category: data.category,

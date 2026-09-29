@@ -31,6 +31,7 @@ export interface CreateAnnouncementData {
 
 export interface UpdateAnnouncementData {
   title?: string;
+  authorName?: string;
   previewMessage?: string;
   content?: string;
   category?: AnnouncementCategory;
