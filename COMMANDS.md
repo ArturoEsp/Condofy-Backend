@@ -13,6 +13,7 @@ Este documento contiene la referencia completa de los comandos de consola actual
    - [`delete:resident` (Eliminación de Residente en Cascada)](#deleteresident-eliminación-de-residente-en-cascada)
    - [`delete:condominium` (Eliminación de Condominio en Cascada)](#deletecondominium-eliminación-de-condominio-en-cascada)
    - [`trim:records` (Limpieza y Sanitización de Espacios en BD)](#trimrecords-limpieza-y-sanitización-de-espacios-en-bd)
+   - [`fix:permanent-access` (Reparación de Pases Permanentes Afectados)](#fixpermanent-access-reparación-de-pases-permanentes-afectados)
 2. [Comandos Frecuentes de Desarrollo y Base de Datos (Local vs Docker)](#2-comandos-frecuentes-de-desarrollo-y-base-de-datos-local-vs-docker)
 3. [🐳 Guía Rápida de Ejecución con Docker (Producción / VPS)](#3--guía-rápida-de-ejecución-con-docker-producción--vps)
 4. [Guía y Estándar para Crear Futuros Scripts](#4-guía-y-estándar-para-crear-futuros-scripts)
@@ -326,6 +327,54 @@ docker compose -f docker-compose.prod.yml exec api yarn trim:records --yes
 
 # O mediante SQL directo con el contenedor de Postgres:
 docker compose -f docker-compose.prod.yml exec -i postgres psql -U condofy -d condofy < scripts/trim_database_records.sql
+```
+
+---
+
+### `fix:permanent-access` (Reparación de Pases Permanentes Afectados)
+
+_Archivos:_
+
+- TypeScript: [`scripts/fix-permanent-accesses.ts`](file:///c:/Users/bmth_/OneDrive/Documentos/GitHub/Condofy-Backend/scripts/fix-permanent-accesses.ts)
+- SQL Nativo: [`scripts/fix_permanent_accesses.sql`](file:///c:/Users/bmth_/OneDrive/Documentos/GitHub/Condofy-Backend/scripts/fix_permanent_accesses.sql)
+
+Repara todas las autorizaciones de acceso tipo `PERMANENT` que se crearon con un límite forzado de 1 entrada (`maxEntries = 1`) y que quedaron bloqueadas con estatus `USED` tras el primer ingreso en caseta.
+
+#### ¿Qué acciones realiza el script?
+
+1. **Detección Diagnóstica:** Identifica los pases permanentes que tienen `maxEntries = 1`.
+2. **Reactivación Automática:** A los pases que cambiaron a `USED`, los regresa a estatus **`ACTIVE`** y les establece `maxEntries = NULL` (entradas ilimitadas).
+3. **Saneamiento Preventivo:** A los pases activos que aún no se habían usado, les retira el límite de 1 para evitar que se bloqueen al ingresar.
+
+#### Sintaxis de uso:
+
+##### A. Ejecución Directa (Local / Desarrollo):
+
+```bash
+# Simulación previa sin tocar la BD:
+yarn fix:permanent-access --dry-run
+
+# Ejecución interactiva:
+yarn fix:permanent-access
+
+# Ejecución desatendida automática:
+yarn fix:permanent-access --yes
+```
+
+##### B. Ejecución en Servidor Droplet / Producción (Docker):
+
+```bash
+# 1. Simulación previa en producción (Dry-run):
+docker compose -f docker-compose.prod.yml exec api yarn fix:permanent-access --dry-run
+
+# 2. Ejecución interactiva con confirmación:
+docker compose -f docker-compose.prod.yml exec -it api yarn fix:permanent-access
+
+# 3. O ejecución directa desatendida:
+docker compose -f docker-compose.prod.yml exec api yarn fix:permanent-access --yes
+
+# 4. Alternativa con SQL directo en el contenedor de Postgres:
+docker compose -f docker-compose.prod.yml exec -i postgres psql -U condofy -d condofy < scripts/fix_permanent_accesses.sql
 ```
 
 ---
