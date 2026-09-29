@@ -92,22 +92,24 @@ export class AnnouncementsPrismaRepository implements AnnouncementsRepository {
     filter: FindAnnouncementsFilter,
   ): Promise<AnnouncementEntity[]> {
     const now = new Date();
+    // Margen de 2 minutos para absorber desfases de reloj entre cliente y servidor
+    const nowWithTolerance = new Date(Date.now() + 2 * 60 * 1000);
     const where: any = { condominiumId: filter.condominiumId };
 
     if (filter.activeOnly) {
       where.isActive = true;
-      where.startDate = { lte: now };
+      where.startDate = { lte: nowWithTolerance };
       where.OR = [{ endDate: null }, { endDate: { gte: now } }];
     } else if (filter.status && filter.status !== 'ALL') {
       switch (filter.status) {
         case 'ACTIVE':
           where.isActive = true;
-          where.startDate = { lte: now };
+          where.startDate = { lte: nowWithTolerance };
           where.OR = [{ endDate: null }, { endDate: { gte: now } }];
           break;
         case 'SCHEDULED':
           where.isActive = true;
-          where.startDate = { gt: now };
+          where.startDate = { gt: nowWithTolerance };
           break;
         case 'EXPIRED':
           where.isActive = true;
