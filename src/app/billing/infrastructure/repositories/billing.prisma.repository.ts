@@ -472,9 +472,9 @@ export class BillingPrismaRepository implements BillingRepository {
         key = decodeURIComponent(parsed.pathname.replace(/^\/+/, ''));
       }
 
-      // Si es una clave almacenada en el bucket privado, generar Presigned URL fresca (2 horas = 7200s)
+      // Si es una clave almacenada en el bucket privado, generar Presigned URL fresca (7 días = 604,800s)
       if (key.startsWith('condominiums/')) {
-        return await this.storageService.getPresignedUrl(key, 7200);
+        return await this.storageService.getPresignedUrl(key, 604800);
       }
 
       return rawUrlOrKey;

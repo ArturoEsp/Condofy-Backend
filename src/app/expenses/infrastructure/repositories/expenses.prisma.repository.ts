@@ -653,7 +653,7 @@ export class ExpensesPrismaRepository implements ExpensesRepository {
           try {
             invoiceUrl = await this.storageService.getPresignedUrl(
               invoiceUrl,
-              7200,
+              604800,
             );
           } catch (err) {}
         }
