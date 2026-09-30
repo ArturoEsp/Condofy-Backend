@@ -24,6 +24,51 @@ export class AnnouncementsPrismaRepository implements AnnouncementsRepository {
     private readonly storageService: StorageService,
   ) {}
 
+  private extractStorageKey(urlOrKey: string): string {
+    if (!urlOrKey) return '';
+    const trimmed = urlOrKey.trim();
+    if (trimmed.startsWith('http://') || trimmed.startsWith('https://')) {
+      try {
+        const parsed = new URL(trimmed);
+        let cleanPath = decodeURIComponent(parsed.pathname.replace(/^\/+/, ''));
+        if (cleanPath.startsWith('condofy-private/')) {
+          cleanPath = cleanPath.replace(/^condofy-private\//, '');
+        }
+        return cleanPath;
+      } catch {
+        return trimmed;
+      }
+    }
+    return trimmed;
+  }
+
+  private async resolveAttachmentUrl(rawUrlOrKey: string): Promise<string> {
+    if (!rawUrlOrKey) return '';
+    const key = this.extractStorageKey(rawUrlOrKey);
+    if (key.startsWith('condominiums/')) {
+      try {
+        // Generar Presigned URL fresca válida por 7 días (604,800 segundos)
+        return await this.storageService.getPresignedUrl(key, 604800);
+      } catch {
+        return rawUrlOrKey;
+      }
+    }
+    return rawUrlOrKey;
+  }
+
+  private async mapAnnouncementToDomain(raw: any): Promise<AnnouncementEntity> {
+    const domain = AnnouncementMapper.toDomain(raw);
+    if (domain.attachments && domain.attachments.length > 0) {
+      domain.attachments = await Promise.all(
+        domain.attachments.map(async (att) => ({
+          ...att,
+          fileUrl: await this.resolveAttachmentUrl(att.fileUrl),
+        })),
+      );
+    }
+    return domain;
+  }
+
   async create(data: CreateAnnouncementData): Promise<AnnouncementEntity> {
     const created = await this.prisma.announcement.create({
       data: {
@@ -63,7 +108,7 @@ export class AnnouncementsPrismaRepository implements AnnouncementsRepository {
       },
     });
 
-    return AnnouncementMapper.toDomain(created);
+    return this.mapAnnouncementToDomain(created);
   }
 
   async findById(
@@ -85,7 +130,7 @@ export class AnnouncementsPrismaRepository implements AnnouncementsRepository {
     });
 
     if (!announcement) return null;
-    return AnnouncementMapper.toDomain(announcement);
+    return this.mapAnnouncementToDomain(announcement);
   }
 
   async findAll(
@@ -159,7 +204,9 @@ export class AnnouncementsPrismaRepository implements AnnouncementsRepository {
       },
     });
 
-    return announcements.map((a) => AnnouncementMapper.toDomain(a));
+    return Promise.all(
+      announcements.map((a) => this.mapAnnouncementToDomain(a)),
+    );
   }
 
   async update(
@@ -185,7 +232,9 @@ export class AnnouncementsPrismaRepository implements AnnouncementsRepository {
       if (toDelete.length > 0) {
         for (const att of toDelete) {
           try {
-            await this.storageService.deleteFile(att.fileUrl);
+            await this.storageService.deleteFile(
+              this.extractStorageKey(att.fileUrl),
+            );
           } catch {
             // Continuar incluso si falla el borrado del storage
           }
@@ -244,7 +293,7 @@ export class AnnouncementsPrismaRepository implements AnnouncementsRepository {
       },
     });
 
-    return AnnouncementMapper.toDomain(updated);
+    return this.mapAnnouncementToDomain(updated);
   }
 
   async toggleActive(
@@ -273,7 +322,7 @@ export class AnnouncementsPrismaRepository implements AnnouncementsRepository {
       },
     });
 
-    return AnnouncementMapper.toDomain(updated);
+    return this.mapAnnouncementToDomain(updated);
   }
 
   async delete(id: string, condominiumId: string): Promise<void> {
@@ -289,7 +338,9 @@ export class AnnouncementsPrismaRepository implements AnnouncementsRepository {
     // Limpiar archivos en storage
     for (const att of existing.attachments) {
       try {
-        await this.storageService.deleteFile(att.fileUrl);
+        await this.storageService.deleteFile(
+          this.extractStorageKey(att.fileUrl),
+        );
       } catch {
         // Ignorar error si el archivo ya no existe
       }

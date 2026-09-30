@@ -200,7 +200,7 @@ export class AnnouncementsController {
 
         uploadedAttachments.push({
           type: 'IMAGE',
-          fileUrl: uploadResult.url || uploadResult.key,
+          fileUrl: uploadResult.key,
           fileName: photo.originalname,
           fileSize: formatFileSize(photo.size),
           mimeType: photo.mimetype,
@@ -245,7 +245,7 @@ export class AnnouncementsController {
 
       uploadedAttachments.push({
         type: 'DOCUMENT',
-        fileUrl: uploadResult.url || uploadResult.key,
+        fileUrl: uploadResult.key,
         fileName: doc.originalname,
         fileSize: formatFileSize(doc.size),
         mimeType: doc.mimetype,
@@ -366,7 +366,7 @@ export class AnnouncementsController {
 
         newAttachments.push({
           type: 'IMAGE',
-          fileUrl: uploadResult.url || uploadResult.key,
+          fileUrl: uploadResult.key,
           fileName: photo.originalname,
           fileSize: formatFileSize(photo.size),
           mimeType: photo.mimetype,
@@ -404,7 +404,7 @@ export class AnnouncementsController {
 
       newAttachments.push({
         type: 'DOCUMENT',
-        fileUrl: uploadResult.url || uploadResult.key,
+        fileUrl: uploadResult.key,
         fileName: doc.originalname,
         fileSize: formatFileSize(doc.size),
         mimeType: doc.mimetype,
