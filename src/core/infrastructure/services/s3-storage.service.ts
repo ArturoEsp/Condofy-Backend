@@ -83,8 +83,8 @@ export class S3StorageService implements StorageService {
       if (params.isPublic && this.publicUrl) {
         url = `${this.publicUrl.replace(/\/+$/, '')}/${params.path}`;
       } else {
-        // Para archivos privados o si no hay publicUrl, generamos presigned URL de 1 hora
-        url = await this.getPresignedUrl(params.path, 3600);
+        // Para archivos privados o si no hay publicUrl, generamos presigned URL de 7 días (604,800 segundos)
+        url = await this.getPresignedUrl(params.path, 604800);
       }
 
       return {
@@ -102,16 +102,25 @@ export class S3StorageService implements StorageService {
 
   async getPresignedUrl(
     key: string,
-    expiresInSeconds: number = 900,
+    expiresInSeconds: number = 604800,
   ): Promise<string> {
     if (!this.s3Client) {
       return `https://storage-simulation.local/${key}?token=simulated_presigned_url`;
     }
 
     try {
+      let cleanKey = key.trim();
+      if (cleanKey.startsWith('http://') || cleanKey.startsWith('https://')) {
+        const parsed = new URL(cleanKey);
+        cleanKey = decodeURIComponent(parsed.pathname.replace(/^\/+/, ''));
+        if (cleanKey.startsWith(`${this.bucketName}/`)) {
+          cleanKey = cleanKey.replace(new RegExp(`^${this.bucketName}/`), '');
+        }
+      }
+
       const command = new GetObjectCommand({
         Bucket: this.bucketName,
-        Key: key,
+        Key: cleanKey,
       });
 
       return await getSignedUrl(this.s3Client, command, {
@@ -135,9 +144,18 @@ export class S3StorageService implements StorageService {
     }
 
     try {
+      let cleanKey = key.trim();
+      if (cleanKey.startsWith('http://') || cleanKey.startsWith('https://')) {
+        const parsed = new URL(cleanKey);
+        cleanKey = decodeURIComponent(parsed.pathname.replace(/^\/+/, ''));
+        if (cleanKey.startsWith(`${this.bucketName}/`)) {
+          cleanKey = cleanKey.replace(new RegExp(`^${this.bucketName}/`), '');
+        }
+      }
+
       const command = new DeleteObjectCommand({
         Bucket: this.bucketName,
-        Key: key,
+        Key: cleanKey,
       });
 
       await this.s3Client.send(command);
