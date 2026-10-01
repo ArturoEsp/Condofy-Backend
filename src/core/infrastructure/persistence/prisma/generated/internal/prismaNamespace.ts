@@ -2820,6 +2820,7 @@ export const VisitorScalarFieldEnum = {
   category: 'category',
   vehiclePlate: 'vehiclePlate',
   notes: 'notes',
+  isActive: 'isActive',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const

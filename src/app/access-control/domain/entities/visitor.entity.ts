@@ -11,6 +11,7 @@ export class VisitorEntity {
   category: VisitorCategory;
   vehiclePlate: string | null;
   notes: string | null;
+  isActive: boolean;
   createdAt: Date;
   updatedAt: Date;
 }

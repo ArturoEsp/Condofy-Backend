@@ -342,6 +342,7 @@ model Visitor {
   category       VisitorCategory
   vehiclePlate   String?
   notes          String?
+  isActive       Boolean               @default(true)
   authorizations AccessAuthorization[]
   createdAt      DateTime              @default(now())
   updatedAt      DateTime              @updatedAt
@@ -349,6 +350,7 @@ model Visitor {
   @@index([houseId])
   @@index([category])
   @@index([houseId, createdAt])
+  @@index([houseId, isActive])
 }
 
 model AccessAuthorization {

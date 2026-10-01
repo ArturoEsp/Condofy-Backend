@@ -73,4 +73,11 @@ export class VisitorResponse {
   })
   @Expose()
   notes?: string;
+
+  @ApiProperty({
+    example: true,
+    description: 'Indica si el visitante se encuentra activo en la agenda',
+  })
+  @Expose()
+  isActive: boolean;
 }

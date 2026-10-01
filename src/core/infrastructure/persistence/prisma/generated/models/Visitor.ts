@@ -35,6 +35,7 @@ export type VisitorMinAggregateOutputType = {
   category: $Enums.VisitorCategory | null
   vehiclePlate: string | null
   notes: string | null
+  isActive: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -50,6 +51,7 @@ export type VisitorMaxAggregateOutputType = {
   category: $Enums.VisitorCategory | null
   vehiclePlate: string | null
   notes: string | null
+  isActive: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -65,6 +67,7 @@ export type VisitorCountAggregateOutputType = {
   category: number
   vehiclePlate: number
   notes: number
+  isActive: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -82,6 +85,7 @@ export type VisitorMinAggregateInputType = {
   category?: true
   vehiclePlate?: true
   notes?: true
+  isActive?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -97,6 +101,7 @@ export type VisitorMaxAggregateInputType = {
   category?: true
   vehiclePlate?: true
   notes?: true
+  isActive?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -112,6 +117,7 @@ export type VisitorCountAggregateInputType = {
   category?: true
   vehiclePlate?: true
   notes?: true
+  isActive?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -200,6 +206,7 @@ export type VisitorGroupByOutputType = {
   category: $Enums.VisitorCategory
   vehiclePlate: string | null
   notes: string | null
+  isActive: boolean
   createdAt: Date
   updatedAt: Date
   _count: VisitorCountAggregateOutputType | null
@@ -236,6 +243,7 @@ export type VisitorWhereInput = {
   category?: Prisma.EnumVisitorCategoryFilter<"Visitor"> | $Enums.VisitorCategory
   vehiclePlate?: Prisma.StringNullableFilter<"Visitor"> | string | null
   notes?: Prisma.StringNullableFilter<"Visitor"> | string | null
+  isActive?: Prisma.BoolFilter<"Visitor"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Visitor"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Visitor"> | Date | string
   house?: Prisma.XOR<Prisma.HouseScalarRelationFilter, Prisma.HouseWhereInput>
@@ -253,6 +261,7 @@ export type VisitorOrderByWithRelationInput = {
   category?: Prisma.SortOrder
   vehiclePlate?: Prisma.SortOrderInput | Prisma.SortOrder
   notes?: Prisma.SortOrderInput | Prisma.SortOrder
+  isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   house?: Prisma.HouseOrderByWithRelationInput
@@ -273,6 +282,7 @@ export type VisitorWhereUniqueInput = Prisma.AtLeast<{
   category?: Prisma.EnumVisitorCategoryFilter<"Visitor"> | $Enums.VisitorCategory
   vehiclePlate?: Prisma.StringNullableFilter<"Visitor"> | string | null
   notes?: Prisma.StringNullableFilter<"Visitor"> | string | null
+  isActive?: Prisma.BoolFilter<"Visitor"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Visitor"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Visitor"> | Date | string
   house?: Prisma.XOR<Prisma.HouseScalarRelationFilter, Prisma.HouseWhereInput>
@@ -290,6 +300,7 @@ export type VisitorOrderByWithAggregationInput = {
   category?: Prisma.SortOrder
   vehiclePlate?: Prisma.SortOrderInput | Prisma.SortOrder
   notes?: Prisma.SortOrderInput | Prisma.SortOrder
+  isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.VisitorCountOrderByAggregateInput
@@ -311,6 +322,7 @@ export type VisitorScalarWhereWithAggregatesInput = {
   category?: Prisma.EnumVisitorCategoryWithAggregatesFilter<"Visitor"> | $Enums.VisitorCategory
   vehiclePlate?: Prisma.StringNullableWithAggregatesFilter<"Visitor"> | string | null
   notes?: Prisma.StringNullableWithAggregatesFilter<"Visitor"> | string | null
+  isActive?: Prisma.BoolWithAggregatesFilter<"Visitor"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Visitor"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Visitor"> | Date | string
 }
@@ -325,6 +337,7 @@ export type VisitorCreateInput = {
   category: $Enums.VisitorCategory
   vehiclePlate?: string | null
   notes?: string | null
+  isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   house: Prisma.HouseCreateNestedOneWithoutVisitorsInput
@@ -342,6 +355,7 @@ export type VisitorUncheckedCreateInput = {
   category: $Enums.VisitorCategory
   vehiclePlate?: string | null
   notes?: string | null
+  isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   authorizations?: Prisma.AccessAuthorizationUncheckedCreateNestedManyWithoutVisitorInput
@@ -357,6 +371,7 @@ export type VisitorUpdateInput = {
   category?: Prisma.EnumVisitorCategoryFieldUpdateOperationsInput | $Enums.VisitorCategory
   vehiclePlate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   house?: Prisma.HouseUpdateOneRequiredWithoutVisitorsNestedInput
@@ -374,6 +389,7 @@ export type VisitorUncheckedUpdateInput = {
   category?: Prisma.EnumVisitorCategoryFieldUpdateOperationsInput | $Enums.VisitorCategory
   vehiclePlate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   authorizations?: Prisma.AccessAuthorizationUncheckedUpdateManyWithoutVisitorNestedInput
@@ -390,6 +406,7 @@ export type VisitorCreateManyInput = {
   category: $Enums.VisitorCategory
   vehiclePlate?: string | null
   notes?: string | null
+  isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -404,6 +421,7 @@ export type VisitorUpdateManyMutationInput = {
   category?: Prisma.EnumVisitorCategoryFieldUpdateOperationsInput | $Enums.VisitorCategory
   vehiclePlate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -419,6 +437,7 @@ export type VisitorUncheckedUpdateManyInput = {
   category?: Prisma.EnumVisitorCategoryFieldUpdateOperationsInput | $Enums.VisitorCategory
   vehiclePlate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -444,6 +463,7 @@ export type VisitorCountOrderByAggregateInput = {
   category?: Prisma.SortOrder
   vehiclePlate?: Prisma.SortOrder
   notes?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -459,6 +479,7 @@ export type VisitorMaxOrderByAggregateInput = {
   category?: Prisma.SortOrder
   vehiclePlate?: Prisma.SortOrder
   notes?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -474,6 +495,7 @@ export type VisitorMinOrderByAggregateInput = {
   category?: Prisma.SortOrder
   vehiclePlate?: Prisma.SortOrder
   notes?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -553,6 +575,7 @@ export type VisitorCreateWithoutHouseInput = {
   category: $Enums.VisitorCategory
   vehiclePlate?: string | null
   notes?: string | null
+  isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   authorizations?: Prisma.AccessAuthorizationCreateNestedManyWithoutVisitorInput
@@ -568,6 +591,7 @@ export type VisitorUncheckedCreateWithoutHouseInput = {
   category: $Enums.VisitorCategory
   vehiclePlate?: string | null
   notes?: string | null
+  isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   authorizations?: Prisma.AccessAuthorizationUncheckedCreateNestedManyWithoutVisitorInput
@@ -613,6 +637,7 @@ export type VisitorScalarWhereInput = {
   category?: Prisma.EnumVisitorCategoryFilter<"Visitor"> | $Enums.VisitorCategory
   vehiclePlate?: Prisma.StringNullableFilter<"Visitor"> | string | null
   notes?: Prisma.StringNullableFilter<"Visitor"> | string | null
+  isActive?: Prisma.BoolFilter<"Visitor"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Visitor"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Visitor"> | Date | string
 }
@@ -627,6 +652,7 @@ export type VisitorCreateWithoutAuthorizationsInput = {
   category: $Enums.VisitorCategory
   vehiclePlate?: string | null
   notes?: string | null
+  isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   house: Prisma.HouseCreateNestedOneWithoutVisitorsInput
@@ -643,6 +669,7 @@ export type VisitorUncheckedCreateWithoutAuthorizationsInput = {
   category: $Enums.VisitorCategory
   vehiclePlate?: string | null
   notes?: string | null
+  isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -673,6 +700,7 @@ export type VisitorUpdateWithoutAuthorizationsInput = {
   category?: Prisma.EnumVisitorCategoryFieldUpdateOperationsInput | $Enums.VisitorCategory
   vehiclePlate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   house?: Prisma.HouseUpdateOneRequiredWithoutVisitorsNestedInput
@@ -689,6 +717,7 @@ export type VisitorUncheckedUpdateWithoutAuthorizationsInput = {
   category?: Prisma.EnumVisitorCategoryFieldUpdateOperationsInput | $Enums.VisitorCategory
   vehiclePlate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -703,6 +732,7 @@ export type VisitorCreateManyHouseInput = {
   category: $Enums.VisitorCategory
   vehiclePlate?: string | null
   notes?: string | null
+  isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -717,6 +747,7 @@ export type VisitorUpdateWithoutHouseInput = {
   category?: Prisma.EnumVisitorCategoryFieldUpdateOperationsInput | $Enums.VisitorCategory
   vehiclePlate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   authorizations?: Prisma.AccessAuthorizationUpdateManyWithoutVisitorNestedInput
@@ -732,6 +763,7 @@ export type VisitorUncheckedUpdateWithoutHouseInput = {
   category?: Prisma.EnumVisitorCategoryFieldUpdateOperationsInput | $Enums.VisitorCategory
   vehiclePlate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   authorizations?: Prisma.AccessAuthorizationUncheckedUpdateManyWithoutVisitorNestedInput
@@ -747,6 +779,7 @@ export type VisitorUncheckedUpdateManyWithoutHouseInput = {
   category?: Prisma.EnumVisitorCategoryFieldUpdateOperationsInput | $Enums.VisitorCategory
   vehiclePlate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -793,6 +826,7 @@ export type VisitorSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   category?: boolean
   vehiclePlate?: boolean
   notes?: boolean
+  isActive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   house?: boolean | Prisma.HouseDefaultArgs<ExtArgs>
@@ -811,6 +845,7 @@ export type VisitorSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   category?: boolean
   vehiclePlate?: boolean
   notes?: boolean
+  isActive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   house?: boolean | Prisma.HouseDefaultArgs<ExtArgs>
@@ -827,6 +862,7 @@ export type VisitorSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   category?: boolean
   vehiclePlate?: boolean
   notes?: boolean
+  isActive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   house?: boolean | Prisma.HouseDefaultArgs<ExtArgs>
@@ -843,11 +879,12 @@ export type VisitorSelectScalar = {
   category?: boolean
   vehiclePlate?: boolean
   notes?: boolean
+  isActive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type VisitorOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "houseId" | "firstName" | "lastName" | "phone" | "email" | "photo" | "category" | "vehiclePlate" | "notes" | "createdAt" | "updatedAt", ExtArgs["result"]["visitor"]>
+export type VisitorOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "houseId" | "firstName" | "lastName" | "phone" | "email" | "photo" | "category" | "vehiclePlate" | "notes" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["visitor"]>
 export type VisitorInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   house?: boolean | Prisma.HouseDefaultArgs<ExtArgs>
   authorizations?: boolean | Prisma.Visitor$authorizationsArgs<ExtArgs>
@@ -877,6 +914,7 @@ export type $VisitorPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     category: $Enums.VisitorCategory
     vehiclePlate: string | null
     notes: string | null
+    isActive: boolean
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["visitor"]>
@@ -1314,6 +1352,7 @@ export interface VisitorFieldRefs {
   readonly category: Prisma.FieldRef<"Visitor", 'VisitorCategory'>
   readonly vehiclePlate: Prisma.FieldRef<"Visitor", 'String'>
   readonly notes: Prisma.FieldRef<"Visitor", 'String'>
+  readonly isActive: Prisma.FieldRef<"Visitor", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"Visitor", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Visitor", 'DateTime'>
 }
