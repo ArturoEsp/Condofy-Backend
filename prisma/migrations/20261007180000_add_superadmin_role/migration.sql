@@ -1,0 +1,3 @@
+-- AddValue
+ALTER TYPE "UserRole" ADD VALUE 'SUPERADMIN';
+

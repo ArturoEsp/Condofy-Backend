@@ -36,7 +36,7 @@ export class MeUseCase {
       condominium.condominiumName = findCondominium.name;
     }
 
-    if (user.role === 'ADMIN') {
+    if (user.role === 'ADMIN' || user.role === 'SUPERADMIN') {
       resident.firstName = user.firstName || '';
       resident.lastName = user.lastName || '';
       resident.phone = user.phone || '';

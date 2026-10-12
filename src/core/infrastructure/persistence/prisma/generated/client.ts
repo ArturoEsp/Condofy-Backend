@@ -45,6 +45,11 @@ export { Prisma }
  */
 export type Condominium = Prisma.CondominiumModel
 /**
+ * Model SubscriptionPlan
+ * 
+ */
+export type SubscriptionPlan = Prisma.SubscriptionPlanModel
+/**
  * Model User
  * 
  */

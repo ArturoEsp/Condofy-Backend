@@ -10,6 +10,7 @@
 */
 
 export const UserRole = {
+  SUPERADMIN: 'SUPERADMIN',
   ADMIN: 'ADMIN',
   RESIDENT: 'RESIDENT',
   STAND: 'STAND'

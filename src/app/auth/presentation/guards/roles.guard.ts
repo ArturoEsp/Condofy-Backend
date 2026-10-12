@@ -45,6 +45,9 @@ export class RolesGuard implements CanActivate {
       );
     }
 
+    // SUPERADMIN tiene acceso total sin importar el rol requerido
+    if (user.role === 'SUPERADMIN') return true;
+
     const tieneRol = requeridosRoles.includes(user.role);
     if (!tieneRol) {
       throw new ForbiddenException('Tu rol no tiene los permisos suficientes.');

@@ -22,6 +22,12 @@ export class CondominiumsPrismaRepository implements CondominiumsRepository {
     });
   }
 
+  async findAll() {
+    return await this.prismaService.condominium.findMany({
+      orderBy: { createdAt: 'desc' },
+    });
+  }
+
   async findOneByAdminId(userId: string) {
     return await this.prismaService.condominium.findFirst({
       where: { admins: { some: { id: userId } } },

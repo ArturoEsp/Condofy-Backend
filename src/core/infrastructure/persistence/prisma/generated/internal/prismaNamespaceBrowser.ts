@@ -52,6 +52,7 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   Condominium: 'Condominium',
+  SubscriptionPlan: 'SubscriptionPlan',
   User: 'User',
   PasswordResetToken: 'PasswordResetToken',
   UserSession: 'UserSession',
@@ -108,11 +109,31 @@ export const CondominiumScalarFieldEnum = {
   address: 'address',
   contactPhone: 'contactPhone',
   contactEmail: 'contactEmail',
+  planId: 'planId',
+  isTrial: 'isTrial',
+  customPriceOverride: 'customPriceOverride',
+  isDisabled: 'isDisabled',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type CondominiumScalarFieldEnum = (typeof CondominiumScalarFieldEnum)[keyof typeof CondominiumScalarFieldEnum]
+
+
+export const SubscriptionPlanScalarFieldEnum = {
+  id: 'id',
+  code: 'code',
+  name: 'name',
+  description: 'description',
+  basePrice: 'basePrice',
+  includedHouses: 'includedHouses',
+  extraHousePrice: 'extraHousePrice',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SubscriptionPlanScalarFieldEnum = (typeof SubscriptionPlanScalarFieldEnum)[keyof typeof SubscriptionPlanScalarFieldEnum]
 
 
 export const UserScalarFieldEnum = {

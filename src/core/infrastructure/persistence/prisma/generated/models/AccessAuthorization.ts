@@ -625,14 +625,6 @@ export type AccessAuthorizationUncheckedUpdateManyWithoutVisitorNestedInput = {
   deleteMany?: Prisma.AccessAuthorizationScalarWhereInput | Prisma.AccessAuthorizationScalarWhereInput[]
 }
 
-export type IntFieldUpdateOperationsInput = {
-  set?: number
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
-}
-
 export type EnumAuthorizationTypeFieldUpdateOperationsInput = {
   set?: $Enums.AuthorizationType
 }
