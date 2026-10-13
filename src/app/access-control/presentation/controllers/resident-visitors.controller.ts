@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { ApiEndpoint } from '@/common/decorators/api-endpoint.decorator';
 import { CondominiumId } from '@/common/decorators/condominium.decorator';
@@ -8,10 +8,13 @@ import { AuthUserEntity } from '@/app/auth/domain/entities/auth-user.entity';
 
 import * as Docs from '../docs/resident-visitors.docs';
 import { CreateVisitorRequest } from '../dtos/requests/create-visitor.request';
+import { UpdateVisitorRequest } from '../dtos/requests/update-visitor.request';
 import { ParamsListVisitorsRequest } from '../dtos/requests/params-list-visitors.request';
 
 import { CreateVisitorUseCase } from '../../application/use-cases/create-visitor.usecase';
 import { ListHouseVisitorsUseCase } from '../../application/use-cases/list-house-visitors.usecase';
+import { UpdateVisitorUseCase } from '../../application/use-cases/update-visitor.usecase';
+import { DeleteVisitorUseCase } from '../../application/use-cases/delete-visitor.usecase';
 
 @ApiTags('Resident Visitors')
 @Controller(':condominiumKey/residents/visitors')
@@ -20,6 +23,8 @@ export class ResidentVisitorsController {
   constructor(
     private readonly createVisitorUseCase: CreateVisitorUseCase,
     private readonly listHouseVisitorsUseCase: ListHouseVisitorsUseCase,
+    private readonly updateVisitorUseCase: UpdateVisitorUseCase,
+    private readonly deleteVisitorUseCase: DeleteVisitorUseCase,
   ) {}
 
   @Post()
@@ -53,4 +58,35 @@ export class ResidentVisitorsController {
       orderBy: query.orderBy,
     });
   }
+
+  @Patch(':id')
+  @ApiEndpoint(Docs.updateVisitor)
+  async update(
+    @CondominiumId() condominiumId: string,
+    @CurrentUser() user: AuthUserEntity,
+    @Param('id') id: string,
+    @Body() dto: UpdateVisitorRequest,
+  ) {
+    return await this.updateVisitorUseCase.execute({
+      id,
+      ...dto,
+      currentUserId: user.id,
+      condominiumId,
+    });
+  }
+
+  @Delete(':id')
+  @ApiEndpoint(Docs.deleteVisitor)
+  async delete(
+    @CondominiumId() condominiumId: string,
+    @CurrentUser() user: AuthUserEntity,
+    @Param('id') id: string,
+  ) {
+    return await this.deleteVisitorUseCase.execute({
+      id,
+      currentUserId: user.id,
+      condominiumId,
+    });
+  }
 }
+

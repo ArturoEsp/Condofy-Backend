@@ -4,6 +4,7 @@ import VisitorsRepository, {
   CreateVisitorData,
   ParamsCountVisitors,
   ParamsFindManyVisitors,
+  UpdateVisitorData,
 } from '../../domain/repositories/visitors.repository';
 import { VisitorEntity } from '../../domain/entities/visitor.entity';
 import { VisitorEntityMapper } from '../mappers/visitor.mapper';
@@ -31,6 +32,26 @@ export class VisitorsPrismaRepository implements VisitorsRepository {
     return VisitorEntityMapper.toDomain(visitor);
   }
 
+  async update(id: string, data: UpdateVisitorData): Promise<VisitorEntity> {
+    const visitor = await this.prismaService.visitor.update({
+      where: { id },
+      data: {
+        ...(data.firstName !== undefined ? { firstName: data.firstName } : {}),
+        ...(data.lastName !== undefined ? { lastName: data.lastName } : {}),
+        ...(data.phone !== undefined ? { phone: data.phone } : {}),
+        ...(data.email !== undefined ? { email: data.email } : {}),
+        ...(data.photo !== undefined ? { photo: data.photo } : {}),
+        ...(data.category !== undefined ? { category: data.category } : {}),
+        ...(data.vehiclePlate !== undefined
+          ? { vehiclePlate: data.vehiclePlate }
+          : {}),
+        ...(data.notes !== undefined ? { notes: data.notes } : {}),
+      },
+    });
+
+    return VisitorEntityMapper.toDomain(visitor);
+  }
+
   async findOneById(id: string): Promise<VisitorEntity | null> {
     const visitor = await this.prismaService.visitor.findUnique({
       where: { id },
@@ -41,7 +62,7 @@ export class VisitorsPrismaRepository implements VisitorsRepository {
 
   async findManyByHouseId(houseId: string): Promise<VisitorEntity[]> {
     const visitors = await this.prismaService.visitor.findMany({
-      where: { houseId },
+      where: { houseId, isActive: true },
       orderBy: { createdAt: 'desc' },
     });
 
@@ -71,11 +92,31 @@ export class VisitorsPrismaRepository implements VisitorsRepository {
     });
   }
 
+  async countAuthorizations(visitorId: string): Promise<number> {
+    return await this.prismaService.accessAuthorization.count({
+      where: { visitorId },
+    });
+  }
+
+  async delete(id: string): Promise<void> {
+    await this.prismaService.visitor.delete({
+      where: { id },
+    });
+  }
+
+  async softDelete(id: string): Promise<void> {
+    await this.prismaService.visitor.update({
+      where: { id },
+      data: { isActive: false },
+    });
+  }
+
   private buildWhereInput(
     params: ParamsCountVisitors,
   ): Prisma.VisitorWhereInput {
     const where: Prisma.VisitorWhereInput = {
       houseId: params.houseId,
+      isActive: params.isActive !== undefined ? params.isActive : true,
       ...(params.category ? { category: params.category } : {}),
       ...(params.search
         ? {

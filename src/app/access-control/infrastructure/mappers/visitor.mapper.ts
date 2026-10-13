@@ -14,6 +14,7 @@ export class VisitorEntityMapper {
       category: model.category,
       vehiclePlate: model.vehiclePlate,
       notes: model.notes,
+      isActive: model.isActive,
       createdAt: model.createdAt,
       updatedAt: model.updatedAt,
     };

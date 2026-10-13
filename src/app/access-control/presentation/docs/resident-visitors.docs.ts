@@ -19,3 +19,18 @@ export const listVisitors: ApiEndpointProps = {
   serialization: ListVisitorsResponse,
   type: ListVisitorsResponse,
 };
+
+export const updateVisitor: ApiEndpointProps = {
+  summary: 'Actualizar los datos de un visitante en la agenda de la casa',
+  status: HttpStatus.OK,
+  withToken: true,
+  serialization: VisitorResponse,
+  type: VisitorResponse,
+};
+
+export const deleteVisitor: ApiEndpointProps = {
+  summary:
+    'Eliminar o archivar un visitante de la agenda (archivado seguro si ya cuenta con historial de accesos)',
+  status: HttpStatus.OK,
+  withToken: true,
+};

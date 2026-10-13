@@ -13,6 +13,7 @@ datasource db {
 }
 
 enum UserRole {
+  SUPERADMIN
   ADMIN
   RESIDENT
   STAND
@@ -195,8 +196,30 @@ model Condominium {
   extraordinaryFees       ExtraordinaryFee[]
   standContacts           StandContact[]
   announcements           Announcement[]
+  surveys                 Survey[]
+  planId                  String?
+  plan                    SubscriptionPlan?              @relation(fields: [planId], references: [id], onDelete: SetNull)
+  isTrial                 Boolean                        @default(false)
+  customPriceOverride     Decimal?                       @db.Decimal(10, 2)
+  isDisabled              Boolean                        @default(false)
   createdAt               DateTime                       @default(now())
   updatedAt               DateTime                       @updatedAt
+
+  @@index([planId])
+}
+
+model SubscriptionPlan {
+  id              String        @id @default(uuid())
+  code            String        @unique
+  name            String
+  description     String?
+  basePrice       Decimal       @default(0.00) @db.Decimal(10, 2)
+  includedHouses  Int           @default(60)
+  extraHousePrice Decimal       @default(0.00) @db.Decimal(10, 2)
+  isActive        Boolean       @default(true)
+  condominiums    Condominium[]
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
 }
 
 model User {
@@ -228,6 +251,8 @@ model User {
   extraordinaryFeesCreated  ExtraordinaryFee[]      @relation("ExtraordinaryFeeCreatedBy")
   announcementsCreated      Announcement[]          @relation("AnnouncementCreatedBy")
   announcementsRead         AnnouncementReader[]    @relation("AnnouncementReaderUser")
+  surveysCreated            Survey[]                @relation("SurveyCreatedBy")
+  surveyResponses           SurveyResponse[]        @relation("SurveyResponseUser")
 
   @@index([condominiumId])
 }
@@ -292,6 +317,7 @@ model House {
   extraIncomes            ExtraIncome[]
   extraordinaryFeeCharges ExtraordinaryFeeCharge[]
   announcementReaders     AnnouncementReader[]
+  surveyResponses         SurveyResponse[]         @relation("SurveyResponseHouse")
   isDisabled              Boolean                  @default(false)
   createdAt               DateTime                 @default(now())
   updatedAt               DateTime                 @updatedAt
@@ -342,6 +368,7 @@ model Visitor {
   category       VisitorCategory
   vehiclePlate   String?
   notes          String?
+  isActive       Boolean               @default(true)
   authorizations AccessAuthorization[]
   createdAt      DateTime              @default(now())
   updatedAt      DateTime              @updatedAt
@@ -349,6 +376,7 @@ model Visitor {
   @@index([houseId])
   @@index([category])
   @@index([houseId, createdAt])
+  @@index([houseId, isActive])
 }
 
 model AccessAuthorization {
@@ -815,4 +843,103 @@ model AnnouncementReader {
   @@index([announcementId])
   @@index([userId])
   @@index([houseId])
+}
+
+enum SurveyStatus {
+  DRAFT
+  ACTIVE
+  CLOSED
+  ARCHIVED
+}
+
+enum SurveyVoteType {
+  PER_HOUSE
+  PER_RESIDENT
+}
+
+enum SurveyQuestionType {
+  SINGLE_CHOICE
+  MULTIPLE_CHOICE
+}
+
+model Survey {
+  id                        String           @id @default(uuid())
+  condominiumId             String
+  condominium               Condominium      @relation(fields: [condominiumId], references: [id], onDelete: Cascade)
+  title                     String
+  description               String?          @db.Text
+  status                    SurveyStatus     @default(DRAFT)
+  voteType                  SurveyVoteType   @default(PER_HOUSE)
+  isAnonymous               Boolean          @default(false)
+  resultsVisibleToResidents Boolean          @default(true)
+  startDate                 DateTime         @default(now())
+  endDate                   DateTime?
+  createdById               String
+  createdBy                 User             @relation("SurveyCreatedBy", fields: [createdById], references: [id])
+  questions                 SurveyQuestion[]
+  responses                 SurveyResponse[]
+  createdAt                 DateTime         @default(now())
+  updatedAt                 DateTime         @updatedAt
+
+  @@index([condominiumId, status])
+  @@index([condominiumId, startDate])
+}
+
+model SurveyQuestion {
+  id          String             @id @default(uuid())
+  surveyId    String
+  survey      Survey             @relation(fields: [surveyId], references: [id], onDelete: Cascade)
+  title       String
+  description String?
+  type        SurveyQuestionType @default(SINGLE_CHOICE)
+  isRequired  Boolean            @default(true)
+  orderIndex  Int                @default(0)
+  options     SurveyOption[]
+  answers     SurveyAnswer[]
+  createdAt   DateTime           @default(now())
+  updatedAt   DateTime           @updatedAt
+
+  @@index([surveyId])
+}
+
+model SurveyOption {
+  id         String         @id @default(uuid())
+  questionId String
+  question   SurveyQuestion @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  text       String
+  orderIndex Int            @default(0)
+  answers    SurveyAnswer[]
+  createdAt  DateTime       @default(now())
+
+  @@index([questionId])
+}
+
+model SurveyResponse {
+  id          String         @id @default(uuid())
+  surveyId    String
+  survey      Survey         @relation(fields: [surveyId], references: [id], onDelete: Cascade)
+  userId      String?
+  user        User?          @relation("SurveyResponseUser", fields: [userId], references: [id], onDelete: SetNull)
+  houseId     String?
+  house       House?         @relation("SurveyResponseHouse", fields: [houseId], references: [id], onDelete: SetNull)
+  answers     SurveyAnswer[]
+  submittedAt DateTime       @default(now())
+
+  @@index([surveyId])
+  @@index([userId])
+  @@index([houseId])
+}
+
+model SurveyAnswer {
+  id         String         @id @default(uuid())
+  responseId String
+  response   SurveyResponse @relation(fields: [responseId], references: [id], onDelete: Cascade)
+  questionId String
+  question   SurveyQuestion @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  optionId   String
+  option     SurveyOption   @relation(fields: [optionId], references: [id], onDelete: Cascade)
+
+  @@index([responseId])
+  @@index([questionId])
+  @@index([optionId])
 }

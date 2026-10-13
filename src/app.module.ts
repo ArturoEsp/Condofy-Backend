@@ -23,6 +23,8 @@ import { BillingModule } from './app/billing/billing.module';
 import { ExpensesModule } from './app/expenses/expenses.module';
 import { ExtraordinaryFeesModule } from './app/extraordinary-fees/extraordinary-fees.module';
 import { AnnouncementsModule } from './app/announcements/announcements.module';
+import { SuperadminModule } from './app/superadmin/superadmin.module';
+import { SurveysModule } from './app/surveys/surveys.module';
 
 @Module({
   imports: [
@@ -53,6 +55,8 @@ import { AnnouncementsModule } from './app/announcements/announcements.module';
     ExpensesModule,
     ExtraordinaryFeesModule,
     AnnouncementsModule,
+    SuperadminModule,
+    SurveysModule,
   ],
   controllers: [],
   providers: [

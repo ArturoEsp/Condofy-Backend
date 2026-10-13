@@ -20,4 +20,5 @@ export const PROVIDES_NAMES = {
   ExtraordinaryFeesRepository: 'ExtraordinaryFeesRepository',
   StandContactsRepository: 'StandContactsRepository',
   AnnouncementsRepository: 'AnnouncementsRepository',
+  SurveysRepository: 'SurveysRepository',
 } as const;

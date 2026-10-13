@@ -32,6 +32,9 @@ export class CondominiumGuard implements CanActivate {
       throw new UnauthorizedException('Usuario no autenticado.');
     }
 
+    // SUPERADMIN puede acceder a todos los fraccionamientos
+    if (user.role === 'SUPERADMIN') return true;
+
     if (user.condominiumKey && user.condominiumKey === paramKey) {
       return true;
     }

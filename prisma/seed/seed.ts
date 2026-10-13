@@ -11,6 +11,81 @@ const prisma = new PrismaClient({
 async function main(): Promise<void> {
   console.log('🌱 Iniciando la carga de datos...');
 
+  // ── SUPERADMIN ──────────────────────────────────────────────────────────────
+  const superadminEmail = process.env.SUPERADMIN_EMAIL;
+  const superadminPassword = process.env.SUPERADMIN_PASSWORD;
+
+  if (!superadminEmail || !superadminPassword) {
+    throw new Error(
+      '❌ Error: Las variables SUPERADMIN_EMAIL o SUPERADMIN_PASSWORD no están definidas en el .env',
+    );
+  }
+
+  const superadminHash = await bcrypt.hash(superadminPassword, 10);
+
+  await prisma.user.upsert({
+    where: { email: superadminEmail },
+    update: { passwordHash: superadminHash },
+    create: {
+      email: superadminEmail,
+      passwordHash: superadminHash,
+      firstName: 'Super',
+      lastName: 'Admin',
+      role: 'SUPERADMIN',
+      status: 'ACTIVE',
+      isEmailVerified: true,
+      condominiumId: null,
+    },
+  });
+
+  console.log(`✅ SUPERADMIN configurado: ${superadminEmail}`);
+
+  // ── Planes de Suscripción Iniciales ──────────────────────────────────────────
+  const planTrial = await prisma.subscriptionPlan.upsert({
+    where: { code: 'TRIAL' },
+    update: {},
+    create: {
+      code: 'TRIAL',
+      name: 'Prueba / Demostración',
+      description: 'Fraccionamiento de prueba o piloto gratuito sin costo.',
+      basePrice: 0.0,
+      includedHouses: 100,
+      extraHousePrice: 0.0,
+      isActive: true,
+    },
+  });
+
+  const planStandard = await prisma.subscriptionPlan.upsert({
+    where: { code: 'STANDARD' },
+    update: {},
+    create: {
+      code: 'STANDARD',
+      name: 'Estándar Condofy',
+      description: 'Base $990 MXN hasta 60 casas + $12 MXN por casa extra.',
+      basePrice: 990.0,
+      includedHouses: 60,
+      extraHousePrice: 12.0,
+      isActive: true,
+    },
+  });
+
+  await prisma.subscriptionPlan.upsert({
+    where: { code: 'PARTNER' },
+    update: {},
+    create: {
+      code: 'PARTNER',
+      name: 'Partner Administrador',
+      description: 'Tarifa mayorista con 25% de descuento ($740 base + $9 extra).',
+      basePrice: 740.0,
+      includedHouses: 60,
+      extraHousePrice: 9.0,
+      isActive: true,
+    },
+  });
+
+  console.log('✅ Planes de suscripción configurados (TRIAL, STANDARD, PARTNER)');
+
+  // ── Condominio de ejemplo ────────────────────────────────────────────────────
   const adminEmail = process.env.APP_ADMIN_EMAIL;
   const adminPassword = process.env.APP_ADMIN_PASSWORD;
 

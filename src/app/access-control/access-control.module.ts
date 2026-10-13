@@ -16,6 +16,8 @@ import { ListHouseAccessAuthorizationsUseCase } from './application/use-cases/li
 import { UpdateAccessAuthorizationUseCase } from './application/use-cases/update-access-authorization.usecase';
 import { CreateVisitorUseCase } from './application/use-cases/create-visitor.usecase';
 import { ListHouseVisitorsUseCase } from './application/use-cases/list-house-visitors.usecase';
+import { UpdateVisitorUseCase } from './application/use-cases/update-visitor.usecase';
+import { DeleteVisitorUseCase } from './application/use-cases/delete-visitor.usecase';
 import { GetPublicPassUseCase } from './application/use-cases/get-public-pass.usecase';
 import { StandRegisterAccessLogUseCase } from './application/use-cases/stand-register-access-log.usecase';
 import { StandGetAccessLogsUseCase } from './application/use-cases/stand-get-access-logs.usecase';
@@ -144,6 +146,26 @@ import { PrismaService } from '@/core/infrastructure/persistence/prisma/prisma.s
       ],
       useFactory: (residentsRepo, visitorsRepo) => {
         return new ListHouseVisitorsUseCase(residentsRepo, visitorsRepo);
+      },
+    },
+    {
+      provide: UpdateVisitorUseCase,
+      inject: [
+        PROVIDES_NAMES.ResidentsRepository,
+        PROVIDES_NAMES.VisitorsRepository,
+      ],
+      useFactory: (residentsRepo, visitorsRepo) => {
+        return new UpdateVisitorUseCase(residentsRepo, visitorsRepo);
+      },
+    },
+    {
+      provide: DeleteVisitorUseCase,
+      inject: [
+        PROVIDES_NAMES.ResidentsRepository,
+        PROVIDES_NAMES.VisitorsRepository,
+      ],
+      useFactory: (residentsRepo, visitorsRepo) => {
+        return new DeleteVisitorUseCase(residentsRepo, visitorsRepo);
       },
     },
     {

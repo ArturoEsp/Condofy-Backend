@@ -45,6 +45,11 @@ export { Prisma }
  */
 export type Condominium = Prisma.CondominiumModel
 /**
+ * Model SubscriptionPlan
+ * 
+ */
+export type SubscriptionPlan = Prisma.SubscriptionPlanModel
+/**
  * Model User
  * 
  */
@@ -189,3 +194,28 @@ export type AnnouncementAttachment = Prisma.AnnouncementAttachmentModel
  * 
  */
 export type AnnouncementReader = Prisma.AnnouncementReaderModel
+/**
+ * Model Survey
+ * 
+ */
+export type Survey = Prisma.SurveyModel
+/**
+ * Model SurveyQuestion
+ * 
+ */
+export type SurveyQuestion = Prisma.SurveyQuestionModel
+/**
+ * Model SurveyOption
+ * 
+ */
+export type SurveyOption = Prisma.SurveyOptionModel
+/**
+ * Model SurveyResponse
+ * 
+ */
+export type SurveyResponse = Prisma.SurveyResponseModel
+/**
+ * Model SurveyAnswer
+ * 
+ */
+export type SurveyAnswer = Prisma.SurveyAnswerModel
