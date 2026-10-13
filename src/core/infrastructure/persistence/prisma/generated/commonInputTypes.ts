@@ -674,6 +674,57 @@ export type EnumAnnouncementAttachmentTypeWithAggregatesFilter<$PrismaModel = ne
   _max?: Prisma.NestedEnumAnnouncementAttachmentTypeFilter<$PrismaModel>
 }
 
+export type EnumSurveyStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.SurveyStatus | Prisma.EnumSurveyStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.SurveyStatus[] | Prisma.ListEnumSurveyStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.SurveyStatus[] | Prisma.ListEnumSurveyStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumSurveyStatusFilter<$PrismaModel> | $Enums.SurveyStatus
+}
+
+export type EnumSurveyVoteTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.SurveyVoteType | Prisma.EnumSurveyVoteTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.SurveyVoteType[] | Prisma.ListEnumSurveyVoteTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.SurveyVoteType[] | Prisma.ListEnumSurveyVoteTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumSurveyVoteTypeFilter<$PrismaModel> | $Enums.SurveyVoteType
+}
+
+export type EnumSurveyStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.SurveyStatus | Prisma.EnumSurveyStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.SurveyStatus[] | Prisma.ListEnumSurveyStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.SurveyStatus[] | Prisma.ListEnumSurveyStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumSurveyStatusWithAggregatesFilter<$PrismaModel> | $Enums.SurveyStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumSurveyStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumSurveyStatusFilter<$PrismaModel>
+}
+
+export type EnumSurveyVoteTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.SurveyVoteType | Prisma.EnumSurveyVoteTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.SurveyVoteType[] | Prisma.ListEnumSurveyVoteTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.SurveyVoteType[] | Prisma.ListEnumSurveyVoteTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumSurveyVoteTypeWithAggregatesFilter<$PrismaModel> | $Enums.SurveyVoteType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumSurveyVoteTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumSurveyVoteTypeFilter<$PrismaModel>
+}
+
+export type EnumSurveyQuestionTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.SurveyQuestionType | Prisma.EnumSurveyQuestionTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.SurveyQuestionType[] | Prisma.ListEnumSurveyQuestionTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.SurveyQuestionType[] | Prisma.ListEnumSurveyQuestionTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumSurveyQuestionTypeFilter<$PrismaModel> | $Enums.SurveyQuestionType
+}
+
+export type EnumSurveyQuestionTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.SurveyQuestionType | Prisma.EnumSurveyQuestionTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.SurveyQuestionType[] | Prisma.ListEnumSurveyQuestionTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.SurveyQuestionType[] | Prisma.ListEnumSurveyQuestionTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumSurveyQuestionTypeWithAggregatesFilter<$PrismaModel> | $Enums.SurveyQuestionType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumSurveyQuestionTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumSurveyQuestionTypeFilter<$PrismaModel>
+}
+
 export type NestedStringFilter<$PrismaModel = never> = {
   equals?: string | Prisma.StringFieldRefInput<$PrismaModel>
   in?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
@@ -1345,6 +1396,57 @@ export type NestedEnumAnnouncementAttachmentTypeWithAggregatesFilter<$PrismaMode
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumAnnouncementAttachmentTypeFilter<$PrismaModel>
   _max?: Prisma.NestedEnumAnnouncementAttachmentTypeFilter<$PrismaModel>
+}
+
+export type NestedEnumSurveyStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.SurveyStatus | Prisma.EnumSurveyStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.SurveyStatus[] | Prisma.ListEnumSurveyStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.SurveyStatus[] | Prisma.ListEnumSurveyStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumSurveyStatusFilter<$PrismaModel> | $Enums.SurveyStatus
+}
+
+export type NestedEnumSurveyVoteTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.SurveyVoteType | Prisma.EnumSurveyVoteTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.SurveyVoteType[] | Prisma.ListEnumSurveyVoteTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.SurveyVoteType[] | Prisma.ListEnumSurveyVoteTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumSurveyVoteTypeFilter<$PrismaModel> | $Enums.SurveyVoteType
+}
+
+export type NestedEnumSurveyStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.SurveyStatus | Prisma.EnumSurveyStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.SurveyStatus[] | Prisma.ListEnumSurveyStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.SurveyStatus[] | Prisma.ListEnumSurveyStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumSurveyStatusWithAggregatesFilter<$PrismaModel> | $Enums.SurveyStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumSurveyStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumSurveyStatusFilter<$PrismaModel>
+}
+
+export type NestedEnumSurveyVoteTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.SurveyVoteType | Prisma.EnumSurveyVoteTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.SurveyVoteType[] | Prisma.ListEnumSurveyVoteTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.SurveyVoteType[] | Prisma.ListEnumSurveyVoteTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumSurveyVoteTypeWithAggregatesFilter<$PrismaModel> | $Enums.SurveyVoteType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumSurveyVoteTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumSurveyVoteTypeFilter<$PrismaModel>
+}
+
+export type NestedEnumSurveyQuestionTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.SurveyQuestionType | Prisma.EnumSurveyQuestionTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.SurveyQuestionType[] | Prisma.ListEnumSurveyQuestionTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.SurveyQuestionType[] | Prisma.ListEnumSurveyQuestionTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumSurveyQuestionTypeFilter<$PrismaModel> | $Enums.SurveyQuestionType
+}
+
+export type NestedEnumSurveyQuestionTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.SurveyQuestionType | Prisma.EnumSurveyQuestionTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.SurveyQuestionType[] | Prisma.ListEnumSurveyQuestionTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.SurveyQuestionType[] | Prisma.ListEnumSurveyQuestionTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumSurveyQuestionTypeWithAggregatesFilter<$PrismaModel> | $Enums.SurveyQuestionType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumSurveyQuestionTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumSurveyQuestionTypeFilter<$PrismaModel>
 }
 
 

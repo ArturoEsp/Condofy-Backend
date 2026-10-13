@@ -81,7 +81,12 @@ export const ModelName = {
   StandContact: 'StandContact',
   Announcement: 'Announcement',
   AnnouncementAttachment: 'AnnouncementAttachment',
-  AnnouncementReader: 'AnnouncementReader'
+  AnnouncementReader: 'AnnouncementReader',
+  Survey: 'Survey',
+  SurveyQuestion: 'SurveyQuestion',
+  SurveyOption: 'SurveyOption',
+  SurveyResponse: 'SurveyResponse',
+  SurveyAnswer: 'SurveyAnswer'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -655,6 +660,72 @@ export const AnnouncementReaderScalarFieldEnum = {
 } as const
 
 export type AnnouncementReaderScalarFieldEnum = (typeof AnnouncementReaderScalarFieldEnum)[keyof typeof AnnouncementReaderScalarFieldEnum]
+
+
+export const SurveyScalarFieldEnum = {
+  id: 'id',
+  condominiumId: 'condominiumId',
+  title: 'title',
+  description: 'description',
+  status: 'status',
+  voteType: 'voteType',
+  isAnonymous: 'isAnonymous',
+  resultsVisibleToResidents: 'resultsVisibleToResidents',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SurveyScalarFieldEnum = (typeof SurveyScalarFieldEnum)[keyof typeof SurveyScalarFieldEnum]
+
+
+export const SurveyQuestionScalarFieldEnum = {
+  id: 'id',
+  surveyId: 'surveyId',
+  title: 'title',
+  description: 'description',
+  type: 'type',
+  isRequired: 'isRequired',
+  orderIndex: 'orderIndex',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SurveyQuestionScalarFieldEnum = (typeof SurveyQuestionScalarFieldEnum)[keyof typeof SurveyQuestionScalarFieldEnum]
+
+
+export const SurveyOptionScalarFieldEnum = {
+  id: 'id',
+  questionId: 'questionId',
+  text: 'text',
+  orderIndex: 'orderIndex',
+  createdAt: 'createdAt'
+} as const
+
+export type SurveyOptionScalarFieldEnum = (typeof SurveyOptionScalarFieldEnum)[keyof typeof SurveyOptionScalarFieldEnum]
+
+
+export const SurveyResponseScalarFieldEnum = {
+  id: 'id',
+  surveyId: 'surveyId',
+  userId: 'userId',
+  houseId: 'houseId',
+  submittedAt: 'submittedAt'
+} as const
+
+export type SurveyResponseScalarFieldEnum = (typeof SurveyResponseScalarFieldEnum)[keyof typeof SurveyResponseScalarFieldEnum]
+
+
+export const SurveyAnswerScalarFieldEnum = {
+  id: 'id',
+  responseId: 'responseId',
+  questionId: 'questionId',
+  optionId: 'optionId'
+} as const
+
+export type SurveyAnswerScalarFieldEnum = (typeof SurveyAnswerScalarFieldEnum)[keyof typeof SurveyAnswerScalarFieldEnum]
 
 
 export const SortOrder = {

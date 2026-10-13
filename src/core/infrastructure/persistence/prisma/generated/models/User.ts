@@ -254,6 +254,8 @@ export type UserWhereInput = {
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeListRelationFilter
   announcementsCreated?: Prisma.AnnouncementListRelationFilter
   announcementsRead?: Prisma.AnnouncementReaderListRelationFilter
+  surveysCreated?: Prisma.SurveyListRelationFilter
+  surveyResponses?: Prisma.SurveyResponseListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -285,6 +287,8 @@ export type UserOrderByWithRelationInput = {
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeOrderByRelationAggregateInput
   announcementsCreated?: Prisma.AnnouncementOrderByRelationAggregateInput
   announcementsRead?: Prisma.AnnouncementReaderOrderByRelationAggregateInput
+  surveysCreated?: Prisma.SurveyOrderByRelationAggregateInput
+  surveyResponses?: Prisma.SurveyResponseOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -319,6 +323,8 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeListRelationFilter
   announcementsCreated?: Prisma.AnnouncementListRelationFilter
   announcementsRead?: Prisma.AnnouncementReaderListRelationFilter
+  surveysCreated?: Prisma.SurveyListRelationFilter
+  surveyResponses?: Prisma.SurveyResponseListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -385,6 +391,8 @@ export type UserCreateInput = {
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeCreateNestedManyWithoutCreatedByInput
   announcementsCreated?: Prisma.AnnouncementCreateNestedManyWithoutCreatedByInput
   announcementsRead?: Prisma.AnnouncementReaderCreateNestedManyWithoutUserInput
+  surveysCreated?: Prisma.SurveyCreateNestedManyWithoutCreatedByInput
+  surveyResponses?: Prisma.SurveyResponseCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -415,6 +423,8 @@ export type UserUncheckedCreateInput = {
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedCreateNestedManyWithoutCreatedByInput
   announcementsCreated?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCreatedByInput
   announcementsRead?: Prisma.AnnouncementReaderUncheckedCreateNestedManyWithoutUserInput
+  surveysCreated?: Prisma.SurveyUncheckedCreateNestedManyWithoutCreatedByInput
+  surveyResponses?: Prisma.SurveyResponseUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -445,6 +455,8 @@ export type UserUpdateInput = {
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUpdateManyWithoutCreatedByNestedInput
   announcementsCreated?: Prisma.AnnouncementUpdateManyWithoutCreatedByNestedInput
   announcementsRead?: Prisma.AnnouncementReaderUpdateManyWithoutUserNestedInput
+  surveysCreated?: Prisma.SurveyUpdateManyWithoutCreatedByNestedInput
+  surveyResponses?: Prisma.SurveyResponseUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -475,6 +487,8 @@ export type UserUncheckedUpdateInput = {
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedUpdateManyWithoutCreatedByNestedInput
   announcementsCreated?: Prisma.AnnouncementUncheckedUpdateManyWithoutCreatedByNestedInput
   announcementsRead?: Prisma.AnnouncementReaderUncheckedUpdateManyWithoutUserNestedInput
+  surveysCreated?: Prisma.SurveyUncheckedUpdateManyWithoutCreatedByNestedInput
+  surveyResponses?: Prisma.SurveyResponseUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -850,6 +864,36 @@ export type UserUpdateOneRequiredWithoutAnnouncementsReadNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAnnouncementsReadInput, Prisma.UserUpdateWithoutAnnouncementsReadInput>, Prisma.UserUncheckedUpdateWithoutAnnouncementsReadInput>
 }
 
+export type UserCreateNestedOneWithoutSurveysCreatedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSurveysCreatedInput, Prisma.UserUncheckedCreateWithoutSurveysCreatedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSurveysCreatedInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutSurveysCreatedNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSurveysCreatedInput, Prisma.UserUncheckedCreateWithoutSurveysCreatedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSurveysCreatedInput
+  upsert?: Prisma.UserUpsertWithoutSurveysCreatedInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutSurveysCreatedInput, Prisma.UserUpdateWithoutSurveysCreatedInput>, Prisma.UserUncheckedUpdateWithoutSurveysCreatedInput>
+}
+
+export type UserCreateNestedOneWithoutSurveyResponsesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSurveyResponsesInput, Prisma.UserUncheckedCreateWithoutSurveyResponsesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSurveyResponsesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutSurveyResponsesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSurveyResponsesInput, Prisma.UserUncheckedCreateWithoutSurveyResponsesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSurveyResponsesInput
+  upsert?: Prisma.UserUpsertWithoutSurveyResponsesInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutSurveyResponsesInput, Prisma.UserUpdateWithoutSurveyResponsesInput>, Prisma.UserUncheckedUpdateWithoutSurveyResponsesInput>
+}
+
 export type UserCreateWithoutCondominiumInput = {
   id?: string
   email: string
@@ -877,6 +921,8 @@ export type UserCreateWithoutCondominiumInput = {
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeCreateNestedManyWithoutCreatedByInput
   announcementsCreated?: Prisma.AnnouncementCreateNestedManyWithoutCreatedByInput
   announcementsRead?: Prisma.AnnouncementReaderCreateNestedManyWithoutUserInput
+  surveysCreated?: Prisma.SurveyCreateNestedManyWithoutCreatedByInput
+  surveyResponses?: Prisma.SurveyResponseCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCondominiumInput = {
@@ -906,6 +952,8 @@ export type UserUncheckedCreateWithoutCondominiumInput = {
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedCreateNestedManyWithoutCreatedByInput
   announcementsCreated?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCreatedByInput
   announcementsRead?: Prisma.AnnouncementReaderUncheckedCreateNestedManyWithoutUserInput
+  surveysCreated?: Prisma.SurveyUncheckedCreateNestedManyWithoutCreatedByInput
+  surveyResponses?: Prisma.SurveyResponseUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCondominiumInput = {
@@ -979,6 +1027,8 @@ export type UserCreateWithoutPasswordResetTokensInput = {
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeCreateNestedManyWithoutCreatedByInput
   announcementsCreated?: Prisma.AnnouncementCreateNestedManyWithoutCreatedByInput
   announcementsRead?: Prisma.AnnouncementReaderCreateNestedManyWithoutUserInput
+  surveysCreated?: Prisma.SurveyCreateNestedManyWithoutCreatedByInput
+  surveyResponses?: Prisma.SurveyResponseCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutPasswordResetTokensInput = {
@@ -1008,6 +1058,8 @@ export type UserUncheckedCreateWithoutPasswordResetTokensInput = {
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedCreateNestedManyWithoutCreatedByInput
   announcementsCreated?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCreatedByInput
   announcementsRead?: Prisma.AnnouncementReaderUncheckedCreateNestedManyWithoutUserInput
+  surveysCreated?: Prisma.SurveyUncheckedCreateNestedManyWithoutCreatedByInput
+  surveyResponses?: Prisma.SurveyResponseUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutPasswordResetTokensInput = {
@@ -1053,6 +1105,8 @@ export type UserUpdateWithoutPasswordResetTokensInput = {
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUpdateManyWithoutCreatedByNestedInput
   announcementsCreated?: Prisma.AnnouncementUpdateManyWithoutCreatedByNestedInput
   announcementsRead?: Prisma.AnnouncementReaderUpdateManyWithoutUserNestedInput
+  surveysCreated?: Prisma.SurveyUpdateManyWithoutCreatedByNestedInput
+  surveyResponses?: Prisma.SurveyResponseUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPasswordResetTokensInput = {
@@ -1082,6 +1136,8 @@ export type UserUncheckedUpdateWithoutPasswordResetTokensInput = {
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedUpdateManyWithoutCreatedByNestedInput
   announcementsCreated?: Prisma.AnnouncementUncheckedUpdateManyWithoutCreatedByNestedInput
   announcementsRead?: Prisma.AnnouncementReaderUncheckedUpdateManyWithoutUserNestedInput
+  surveysCreated?: Prisma.SurveyUncheckedUpdateManyWithoutCreatedByNestedInput
+  surveyResponses?: Prisma.SurveyResponseUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutUserSessionsInput = {
@@ -1111,6 +1167,8 @@ export type UserCreateWithoutUserSessionsInput = {
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeCreateNestedManyWithoutCreatedByInput
   announcementsCreated?: Prisma.AnnouncementCreateNestedManyWithoutCreatedByInput
   announcementsRead?: Prisma.AnnouncementReaderCreateNestedManyWithoutUserInput
+  surveysCreated?: Prisma.SurveyCreateNestedManyWithoutCreatedByInput
+  surveyResponses?: Prisma.SurveyResponseCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutUserSessionsInput = {
@@ -1140,6 +1198,8 @@ export type UserUncheckedCreateWithoutUserSessionsInput = {
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedCreateNestedManyWithoutCreatedByInput
   announcementsCreated?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCreatedByInput
   announcementsRead?: Prisma.AnnouncementReaderUncheckedCreateNestedManyWithoutUserInput
+  surveysCreated?: Prisma.SurveyUncheckedCreateNestedManyWithoutCreatedByInput
+  surveyResponses?: Prisma.SurveyResponseUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutUserSessionsInput = {
@@ -1185,6 +1245,8 @@ export type UserUpdateWithoutUserSessionsInput = {
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUpdateManyWithoutCreatedByNestedInput
   announcementsCreated?: Prisma.AnnouncementUpdateManyWithoutCreatedByNestedInput
   announcementsRead?: Prisma.AnnouncementReaderUpdateManyWithoutUserNestedInput
+  surveysCreated?: Prisma.SurveyUpdateManyWithoutCreatedByNestedInput
+  surveyResponses?: Prisma.SurveyResponseUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutUserSessionsInput = {
@@ -1214,6 +1276,8 @@ export type UserUncheckedUpdateWithoutUserSessionsInput = {
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedUpdateManyWithoutCreatedByNestedInput
   announcementsCreated?: Prisma.AnnouncementUncheckedUpdateManyWithoutCreatedByNestedInput
   announcementsRead?: Prisma.AnnouncementReaderUncheckedUpdateManyWithoutUserNestedInput
+  surveysCreated?: Prisma.SurveyUncheckedUpdateManyWithoutCreatedByNestedInput
+  surveyResponses?: Prisma.SurveyResponseUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutPushSubscriptionsInput = {
@@ -1243,6 +1307,8 @@ export type UserCreateWithoutPushSubscriptionsInput = {
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeCreateNestedManyWithoutCreatedByInput
   announcementsCreated?: Prisma.AnnouncementCreateNestedManyWithoutCreatedByInput
   announcementsRead?: Prisma.AnnouncementReaderCreateNestedManyWithoutUserInput
+  surveysCreated?: Prisma.SurveyCreateNestedManyWithoutCreatedByInput
+  surveyResponses?: Prisma.SurveyResponseCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutPushSubscriptionsInput = {
@@ -1272,6 +1338,8 @@ export type UserUncheckedCreateWithoutPushSubscriptionsInput = {
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedCreateNestedManyWithoutCreatedByInput
   announcementsCreated?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCreatedByInput
   announcementsRead?: Prisma.AnnouncementReaderUncheckedCreateNestedManyWithoutUserInput
+  surveysCreated?: Prisma.SurveyUncheckedCreateNestedManyWithoutCreatedByInput
+  surveyResponses?: Prisma.SurveyResponseUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutPushSubscriptionsInput = {
@@ -1317,6 +1385,8 @@ export type UserUpdateWithoutPushSubscriptionsInput = {
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUpdateManyWithoutCreatedByNestedInput
   announcementsCreated?: Prisma.AnnouncementUpdateManyWithoutCreatedByNestedInput
   announcementsRead?: Prisma.AnnouncementReaderUpdateManyWithoutUserNestedInput
+  surveysCreated?: Prisma.SurveyUpdateManyWithoutCreatedByNestedInput
+  surveyResponses?: Prisma.SurveyResponseUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPushSubscriptionsInput = {
@@ -1346,6 +1416,8 @@ export type UserUncheckedUpdateWithoutPushSubscriptionsInput = {
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedUpdateManyWithoutCreatedByNestedInput
   announcementsCreated?: Prisma.AnnouncementUncheckedUpdateManyWithoutCreatedByNestedInput
   announcementsRead?: Prisma.AnnouncementReaderUncheckedUpdateManyWithoutUserNestedInput
+  surveysCreated?: Prisma.SurveyUncheckedUpdateManyWithoutCreatedByNestedInput
+  surveyResponses?: Prisma.SurveyResponseUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutResidentProfileInput = {
@@ -1375,6 +1447,8 @@ export type UserCreateWithoutResidentProfileInput = {
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeCreateNestedManyWithoutCreatedByInput
   announcementsCreated?: Prisma.AnnouncementCreateNestedManyWithoutCreatedByInput
   announcementsRead?: Prisma.AnnouncementReaderCreateNestedManyWithoutUserInput
+  surveysCreated?: Prisma.SurveyCreateNestedManyWithoutCreatedByInput
+  surveyResponses?: Prisma.SurveyResponseCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutResidentProfileInput = {
@@ -1404,6 +1478,8 @@ export type UserUncheckedCreateWithoutResidentProfileInput = {
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedCreateNestedManyWithoutCreatedByInput
   announcementsCreated?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCreatedByInput
   announcementsRead?: Prisma.AnnouncementReaderUncheckedCreateNestedManyWithoutUserInput
+  surveysCreated?: Prisma.SurveyUncheckedCreateNestedManyWithoutCreatedByInput
+  surveyResponses?: Prisma.SurveyResponseUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutResidentProfileInput = {
@@ -1449,6 +1525,8 @@ export type UserUpdateWithoutResidentProfileInput = {
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUpdateManyWithoutCreatedByNestedInput
   announcementsCreated?: Prisma.AnnouncementUpdateManyWithoutCreatedByNestedInput
   announcementsRead?: Prisma.AnnouncementReaderUpdateManyWithoutUserNestedInput
+  surveysCreated?: Prisma.SurveyUpdateManyWithoutCreatedByNestedInput
+  surveyResponses?: Prisma.SurveyResponseUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutResidentProfileInput = {
@@ -1478,6 +1556,8 @@ export type UserUncheckedUpdateWithoutResidentProfileInput = {
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedUpdateManyWithoutCreatedByNestedInput
   announcementsCreated?: Prisma.AnnouncementUncheckedUpdateManyWithoutCreatedByNestedInput
   announcementsRead?: Prisma.AnnouncementReaderUncheckedUpdateManyWithoutUserNestedInput
+  surveysCreated?: Prisma.SurveyUncheckedUpdateManyWithoutCreatedByNestedInput
+  surveyResponses?: Prisma.SurveyResponseUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutAccessLogsInput = {
@@ -1507,6 +1587,8 @@ export type UserCreateWithoutAccessLogsInput = {
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeCreateNestedManyWithoutCreatedByInput
   announcementsCreated?: Prisma.AnnouncementCreateNestedManyWithoutCreatedByInput
   announcementsRead?: Prisma.AnnouncementReaderCreateNestedManyWithoutUserInput
+  surveysCreated?: Prisma.SurveyCreateNestedManyWithoutCreatedByInput
+  surveyResponses?: Prisma.SurveyResponseCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAccessLogsInput = {
@@ -1536,6 +1618,8 @@ export type UserUncheckedCreateWithoutAccessLogsInput = {
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedCreateNestedManyWithoutCreatedByInput
   announcementsCreated?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCreatedByInput
   announcementsRead?: Prisma.AnnouncementReaderUncheckedCreateNestedManyWithoutUserInput
+  surveysCreated?: Prisma.SurveyUncheckedCreateNestedManyWithoutCreatedByInput
+  surveyResponses?: Prisma.SurveyResponseUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAccessLogsInput = {
@@ -1581,6 +1665,8 @@ export type UserUpdateWithoutAccessLogsInput = {
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUpdateManyWithoutCreatedByNestedInput
   announcementsCreated?: Prisma.AnnouncementUpdateManyWithoutCreatedByNestedInput
   announcementsRead?: Prisma.AnnouncementReaderUpdateManyWithoutUserNestedInput
+  surveysCreated?: Prisma.SurveyUpdateManyWithoutCreatedByNestedInput
+  surveyResponses?: Prisma.SurveyResponseUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAccessLogsInput = {
@@ -1610,6 +1696,8 @@ export type UserUncheckedUpdateWithoutAccessLogsInput = {
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedUpdateManyWithoutCreatedByNestedInput
   announcementsCreated?: Prisma.AnnouncementUncheckedUpdateManyWithoutCreatedByNestedInput
   announcementsRead?: Prisma.AnnouncementReaderUncheckedUpdateManyWithoutUserNestedInput
+  surveysCreated?: Prisma.SurveyUncheckedUpdateManyWithoutCreatedByNestedInput
+  surveyResponses?: Prisma.SurveyResponseUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutParcelsReceivedInput = {
@@ -1639,6 +1727,8 @@ export type UserCreateWithoutParcelsReceivedInput = {
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeCreateNestedManyWithoutCreatedByInput
   announcementsCreated?: Prisma.AnnouncementCreateNestedManyWithoutCreatedByInput
   announcementsRead?: Prisma.AnnouncementReaderCreateNestedManyWithoutUserInput
+  surveysCreated?: Prisma.SurveyCreateNestedManyWithoutCreatedByInput
+  surveyResponses?: Prisma.SurveyResponseCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutParcelsReceivedInput = {
@@ -1668,6 +1758,8 @@ export type UserUncheckedCreateWithoutParcelsReceivedInput = {
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedCreateNestedManyWithoutCreatedByInput
   announcementsCreated?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCreatedByInput
   announcementsRead?: Prisma.AnnouncementReaderUncheckedCreateNestedManyWithoutUserInput
+  surveysCreated?: Prisma.SurveyUncheckedCreateNestedManyWithoutCreatedByInput
+  surveyResponses?: Prisma.SurveyResponseUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutParcelsReceivedInput = {
@@ -1702,6 +1794,8 @@ export type UserCreateWithoutParcelsDeliveredInput = {
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeCreateNestedManyWithoutCreatedByInput
   announcementsCreated?: Prisma.AnnouncementCreateNestedManyWithoutCreatedByInput
   announcementsRead?: Prisma.AnnouncementReaderCreateNestedManyWithoutUserInput
+  surveysCreated?: Prisma.SurveyCreateNestedManyWithoutCreatedByInput
+  surveyResponses?: Prisma.SurveyResponseCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutParcelsDeliveredInput = {
@@ -1731,6 +1825,8 @@ export type UserUncheckedCreateWithoutParcelsDeliveredInput = {
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedCreateNestedManyWithoutCreatedByInput
   announcementsCreated?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCreatedByInput
   announcementsRead?: Prisma.AnnouncementReaderUncheckedCreateNestedManyWithoutUserInput
+  surveysCreated?: Prisma.SurveyUncheckedCreateNestedManyWithoutCreatedByInput
+  surveyResponses?: Prisma.SurveyResponseUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutParcelsDeliveredInput = {
@@ -1776,6 +1872,8 @@ export type UserUpdateWithoutParcelsReceivedInput = {
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUpdateManyWithoutCreatedByNestedInput
   announcementsCreated?: Prisma.AnnouncementUpdateManyWithoutCreatedByNestedInput
   announcementsRead?: Prisma.AnnouncementReaderUpdateManyWithoutUserNestedInput
+  surveysCreated?: Prisma.SurveyUpdateManyWithoutCreatedByNestedInput
+  surveyResponses?: Prisma.SurveyResponseUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutParcelsReceivedInput = {
@@ -1805,6 +1903,8 @@ export type UserUncheckedUpdateWithoutParcelsReceivedInput = {
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedUpdateManyWithoutCreatedByNestedInput
   announcementsCreated?: Prisma.AnnouncementUncheckedUpdateManyWithoutCreatedByNestedInput
   announcementsRead?: Prisma.AnnouncementReaderUncheckedUpdateManyWithoutUserNestedInput
+  surveysCreated?: Prisma.SurveyUncheckedUpdateManyWithoutCreatedByNestedInput
+  surveyResponses?: Prisma.SurveyResponseUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutParcelsDeliveredInput = {
@@ -1845,6 +1945,8 @@ export type UserUpdateWithoutParcelsDeliveredInput = {
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUpdateManyWithoutCreatedByNestedInput
   announcementsCreated?: Prisma.AnnouncementUpdateManyWithoutCreatedByNestedInput
   announcementsRead?: Prisma.AnnouncementReaderUpdateManyWithoutUserNestedInput
+  surveysCreated?: Prisma.SurveyUpdateManyWithoutCreatedByNestedInput
+  surveyResponses?: Prisma.SurveyResponseUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutParcelsDeliveredInput = {
@@ -1874,6 +1976,8 @@ export type UserUncheckedUpdateWithoutParcelsDeliveredInput = {
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedUpdateManyWithoutCreatedByNestedInput
   announcementsCreated?: Prisma.AnnouncementUncheckedUpdateManyWithoutCreatedByNestedInput
   announcementsRead?: Prisma.AnnouncementReaderUncheckedUpdateManyWithoutUserNestedInput
+  surveysCreated?: Prisma.SurveyUncheckedUpdateManyWithoutCreatedByNestedInput
+  surveyResponses?: Prisma.SurveyResponseUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutProviderEntriesRegisteredInput = {
@@ -1903,6 +2007,8 @@ export type UserCreateWithoutProviderEntriesRegisteredInput = {
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeCreateNestedManyWithoutCreatedByInput
   announcementsCreated?: Prisma.AnnouncementCreateNestedManyWithoutCreatedByInput
   announcementsRead?: Prisma.AnnouncementReaderCreateNestedManyWithoutUserInput
+  surveysCreated?: Prisma.SurveyCreateNestedManyWithoutCreatedByInput
+  surveyResponses?: Prisma.SurveyResponseCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutProviderEntriesRegisteredInput = {
@@ -1932,6 +2038,8 @@ export type UserUncheckedCreateWithoutProviderEntriesRegisteredInput = {
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedCreateNestedManyWithoutCreatedByInput
   announcementsCreated?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCreatedByInput
   announcementsRead?: Prisma.AnnouncementReaderUncheckedCreateNestedManyWithoutUserInput
+  surveysCreated?: Prisma.SurveyUncheckedCreateNestedManyWithoutCreatedByInput
+  surveyResponses?: Prisma.SurveyResponseUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutProviderEntriesRegisteredInput = {
@@ -1966,6 +2074,8 @@ export type UserCreateWithoutProviderExitsRegisteredInput = {
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeCreateNestedManyWithoutCreatedByInput
   announcementsCreated?: Prisma.AnnouncementCreateNestedManyWithoutCreatedByInput
   announcementsRead?: Prisma.AnnouncementReaderCreateNestedManyWithoutUserInput
+  surveysCreated?: Prisma.SurveyCreateNestedManyWithoutCreatedByInput
+  surveyResponses?: Prisma.SurveyResponseCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutProviderExitsRegisteredInput = {
@@ -1995,6 +2105,8 @@ export type UserUncheckedCreateWithoutProviderExitsRegisteredInput = {
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedCreateNestedManyWithoutCreatedByInput
   announcementsCreated?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCreatedByInput
   announcementsRead?: Prisma.AnnouncementReaderUncheckedCreateNestedManyWithoutUserInput
+  surveysCreated?: Prisma.SurveyUncheckedCreateNestedManyWithoutCreatedByInput
+  surveyResponses?: Prisma.SurveyResponseUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutProviderExitsRegisteredInput = {
@@ -2040,6 +2152,8 @@ export type UserUpdateWithoutProviderEntriesRegisteredInput = {
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUpdateManyWithoutCreatedByNestedInput
   announcementsCreated?: Prisma.AnnouncementUpdateManyWithoutCreatedByNestedInput
   announcementsRead?: Prisma.AnnouncementReaderUpdateManyWithoutUserNestedInput
+  surveysCreated?: Prisma.SurveyUpdateManyWithoutCreatedByNestedInput
+  surveyResponses?: Prisma.SurveyResponseUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProviderEntriesRegisteredInput = {
@@ -2069,6 +2183,8 @@ export type UserUncheckedUpdateWithoutProviderEntriesRegisteredInput = {
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedUpdateManyWithoutCreatedByNestedInput
   announcementsCreated?: Prisma.AnnouncementUncheckedUpdateManyWithoutCreatedByNestedInput
   announcementsRead?: Prisma.AnnouncementReaderUncheckedUpdateManyWithoutUserNestedInput
+  surveysCreated?: Prisma.SurveyUncheckedUpdateManyWithoutCreatedByNestedInput
+  surveyResponses?: Prisma.SurveyResponseUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutProviderExitsRegisteredInput = {
@@ -2109,6 +2225,8 @@ export type UserUpdateWithoutProviderExitsRegisteredInput = {
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUpdateManyWithoutCreatedByNestedInput
   announcementsCreated?: Prisma.AnnouncementUpdateManyWithoutCreatedByNestedInput
   announcementsRead?: Prisma.AnnouncementReaderUpdateManyWithoutUserNestedInput
+  surveysCreated?: Prisma.SurveyUpdateManyWithoutCreatedByNestedInput
+  surveyResponses?: Prisma.SurveyResponseUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProviderExitsRegisteredInput = {
@@ -2138,6 +2256,8 @@ export type UserUncheckedUpdateWithoutProviderExitsRegisteredInput = {
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedUpdateManyWithoutCreatedByNestedInput
   announcementsCreated?: Prisma.AnnouncementUncheckedUpdateManyWithoutCreatedByNestedInput
   announcementsRead?: Prisma.AnnouncementReaderUncheckedUpdateManyWithoutUserNestedInput
+  surveysCreated?: Prisma.SurveyUncheckedUpdateManyWithoutCreatedByNestedInput
+  surveyResponses?: Prisma.SurveyResponseUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutPaymentsInput = {
@@ -2167,6 +2287,8 @@ export type UserCreateWithoutPaymentsInput = {
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeCreateNestedManyWithoutCreatedByInput
   announcementsCreated?: Prisma.AnnouncementCreateNestedManyWithoutCreatedByInput
   announcementsRead?: Prisma.AnnouncementReaderCreateNestedManyWithoutUserInput
+  surveysCreated?: Prisma.SurveyCreateNestedManyWithoutCreatedByInput
+  surveyResponses?: Prisma.SurveyResponseCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutPaymentsInput = {
@@ -2196,6 +2318,8 @@ export type UserUncheckedCreateWithoutPaymentsInput = {
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedCreateNestedManyWithoutCreatedByInput
   announcementsCreated?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCreatedByInput
   announcementsRead?: Prisma.AnnouncementReaderUncheckedCreateNestedManyWithoutUserInput
+  surveysCreated?: Prisma.SurveyUncheckedCreateNestedManyWithoutCreatedByInput
+  surveyResponses?: Prisma.SurveyResponseUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutPaymentsInput = {
@@ -2241,6 +2365,8 @@ export type UserUpdateWithoutPaymentsInput = {
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUpdateManyWithoutCreatedByNestedInput
   announcementsCreated?: Prisma.AnnouncementUpdateManyWithoutCreatedByNestedInput
   announcementsRead?: Prisma.AnnouncementReaderUpdateManyWithoutUserNestedInput
+  surveysCreated?: Prisma.SurveyUpdateManyWithoutCreatedByNestedInput
+  surveyResponses?: Prisma.SurveyResponseUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPaymentsInput = {
@@ -2270,6 +2396,8 @@ export type UserUncheckedUpdateWithoutPaymentsInput = {
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedUpdateManyWithoutCreatedByNestedInput
   announcementsCreated?: Prisma.AnnouncementUncheckedUpdateManyWithoutCreatedByNestedInput
   announcementsRead?: Prisma.AnnouncementReaderUncheckedUpdateManyWithoutUserNestedInput
+  surveysCreated?: Prisma.SurveyUncheckedUpdateManyWithoutCreatedByNestedInput
+  surveyResponses?: Prisma.SurveyResponseUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutExpensesCreatedInput = {
@@ -2299,6 +2427,8 @@ export type UserCreateWithoutExpensesCreatedInput = {
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeCreateNestedManyWithoutCreatedByInput
   announcementsCreated?: Prisma.AnnouncementCreateNestedManyWithoutCreatedByInput
   announcementsRead?: Prisma.AnnouncementReaderCreateNestedManyWithoutUserInput
+  surveysCreated?: Prisma.SurveyCreateNestedManyWithoutCreatedByInput
+  surveyResponses?: Prisma.SurveyResponseCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutExpensesCreatedInput = {
@@ -2328,6 +2458,8 @@ export type UserUncheckedCreateWithoutExpensesCreatedInput = {
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedCreateNestedManyWithoutCreatedByInput
   announcementsCreated?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCreatedByInput
   announcementsRead?: Prisma.AnnouncementReaderUncheckedCreateNestedManyWithoutUserInput
+  surveysCreated?: Prisma.SurveyUncheckedCreateNestedManyWithoutCreatedByInput
+  surveyResponses?: Prisma.SurveyResponseUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutExpensesCreatedInput = {
@@ -2373,6 +2505,8 @@ export type UserUpdateWithoutExpensesCreatedInput = {
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUpdateManyWithoutCreatedByNestedInput
   announcementsCreated?: Prisma.AnnouncementUpdateManyWithoutCreatedByNestedInput
   announcementsRead?: Prisma.AnnouncementReaderUpdateManyWithoutUserNestedInput
+  surveysCreated?: Prisma.SurveyUpdateManyWithoutCreatedByNestedInput
+  surveyResponses?: Prisma.SurveyResponseUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutExpensesCreatedInput = {
@@ -2402,6 +2536,8 @@ export type UserUncheckedUpdateWithoutExpensesCreatedInput = {
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedUpdateManyWithoutCreatedByNestedInput
   announcementsCreated?: Prisma.AnnouncementUncheckedUpdateManyWithoutCreatedByNestedInput
   announcementsRead?: Prisma.AnnouncementReaderUncheckedUpdateManyWithoutUserNestedInput
+  surveysCreated?: Prisma.SurveyUncheckedUpdateManyWithoutCreatedByNestedInput
+  surveyResponses?: Prisma.SurveyResponseUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutExtraIncomesCreatedInput = {
@@ -2431,6 +2567,8 @@ export type UserCreateWithoutExtraIncomesCreatedInput = {
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeCreateNestedManyWithoutCreatedByInput
   announcementsCreated?: Prisma.AnnouncementCreateNestedManyWithoutCreatedByInput
   announcementsRead?: Prisma.AnnouncementReaderCreateNestedManyWithoutUserInput
+  surveysCreated?: Prisma.SurveyCreateNestedManyWithoutCreatedByInput
+  surveyResponses?: Prisma.SurveyResponseCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutExtraIncomesCreatedInput = {
@@ -2460,6 +2598,8 @@ export type UserUncheckedCreateWithoutExtraIncomesCreatedInput = {
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedCreateNestedManyWithoutCreatedByInput
   announcementsCreated?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCreatedByInput
   announcementsRead?: Prisma.AnnouncementReaderUncheckedCreateNestedManyWithoutUserInput
+  surveysCreated?: Prisma.SurveyUncheckedCreateNestedManyWithoutCreatedByInput
+  surveyResponses?: Prisma.SurveyResponseUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutExtraIncomesCreatedInput = {
@@ -2505,6 +2645,8 @@ export type UserUpdateWithoutExtraIncomesCreatedInput = {
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUpdateManyWithoutCreatedByNestedInput
   announcementsCreated?: Prisma.AnnouncementUpdateManyWithoutCreatedByNestedInput
   announcementsRead?: Prisma.AnnouncementReaderUpdateManyWithoutUserNestedInput
+  surveysCreated?: Prisma.SurveyUpdateManyWithoutCreatedByNestedInput
+  surveyResponses?: Prisma.SurveyResponseUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutExtraIncomesCreatedInput = {
@@ -2534,6 +2676,8 @@ export type UserUncheckedUpdateWithoutExtraIncomesCreatedInput = {
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedUpdateManyWithoutCreatedByNestedInput
   announcementsCreated?: Prisma.AnnouncementUncheckedUpdateManyWithoutCreatedByNestedInput
   announcementsRead?: Prisma.AnnouncementReaderUncheckedUpdateManyWithoutUserNestedInput
+  surveysCreated?: Prisma.SurveyUncheckedUpdateManyWithoutCreatedByNestedInput
+  surveyResponses?: Prisma.SurveyResponseUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutExtraordinaryFeesCreatedInput = {
@@ -2563,6 +2707,8 @@ export type UserCreateWithoutExtraordinaryFeesCreatedInput = {
   extraIncomesCreated?: Prisma.ExtraIncomeCreateNestedManyWithoutCreatedByInput
   announcementsCreated?: Prisma.AnnouncementCreateNestedManyWithoutCreatedByInput
   announcementsRead?: Prisma.AnnouncementReaderCreateNestedManyWithoutUserInput
+  surveysCreated?: Prisma.SurveyCreateNestedManyWithoutCreatedByInput
+  surveyResponses?: Prisma.SurveyResponseCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutExtraordinaryFeesCreatedInput = {
@@ -2592,6 +2738,8 @@ export type UserUncheckedCreateWithoutExtraordinaryFeesCreatedInput = {
   extraIncomesCreated?: Prisma.ExtraIncomeUncheckedCreateNestedManyWithoutCreatedByInput
   announcementsCreated?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCreatedByInput
   announcementsRead?: Prisma.AnnouncementReaderUncheckedCreateNestedManyWithoutUserInput
+  surveysCreated?: Prisma.SurveyUncheckedCreateNestedManyWithoutCreatedByInput
+  surveyResponses?: Prisma.SurveyResponseUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutExtraordinaryFeesCreatedInput = {
@@ -2637,6 +2785,8 @@ export type UserUpdateWithoutExtraordinaryFeesCreatedInput = {
   extraIncomesCreated?: Prisma.ExtraIncomeUpdateManyWithoutCreatedByNestedInput
   announcementsCreated?: Prisma.AnnouncementUpdateManyWithoutCreatedByNestedInput
   announcementsRead?: Prisma.AnnouncementReaderUpdateManyWithoutUserNestedInput
+  surveysCreated?: Prisma.SurveyUpdateManyWithoutCreatedByNestedInput
+  surveyResponses?: Prisma.SurveyResponseUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutExtraordinaryFeesCreatedInput = {
@@ -2666,6 +2816,8 @@ export type UserUncheckedUpdateWithoutExtraordinaryFeesCreatedInput = {
   extraIncomesCreated?: Prisma.ExtraIncomeUncheckedUpdateManyWithoutCreatedByNestedInput
   announcementsCreated?: Prisma.AnnouncementUncheckedUpdateManyWithoutCreatedByNestedInput
   announcementsRead?: Prisma.AnnouncementReaderUncheckedUpdateManyWithoutUserNestedInput
+  surveysCreated?: Prisma.SurveyUncheckedUpdateManyWithoutCreatedByNestedInput
+  surveyResponses?: Prisma.SurveyResponseUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutAnnouncementsCreatedInput = {
@@ -2695,6 +2847,8 @@ export type UserCreateWithoutAnnouncementsCreatedInput = {
   extraIncomesCreated?: Prisma.ExtraIncomeCreateNestedManyWithoutCreatedByInput
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeCreateNestedManyWithoutCreatedByInput
   announcementsRead?: Prisma.AnnouncementReaderCreateNestedManyWithoutUserInput
+  surveysCreated?: Prisma.SurveyCreateNestedManyWithoutCreatedByInput
+  surveyResponses?: Prisma.SurveyResponseCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAnnouncementsCreatedInput = {
@@ -2724,6 +2878,8 @@ export type UserUncheckedCreateWithoutAnnouncementsCreatedInput = {
   extraIncomesCreated?: Prisma.ExtraIncomeUncheckedCreateNestedManyWithoutCreatedByInput
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedCreateNestedManyWithoutCreatedByInput
   announcementsRead?: Prisma.AnnouncementReaderUncheckedCreateNestedManyWithoutUserInput
+  surveysCreated?: Prisma.SurveyUncheckedCreateNestedManyWithoutCreatedByInput
+  surveyResponses?: Prisma.SurveyResponseUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAnnouncementsCreatedInput = {
@@ -2769,6 +2925,8 @@ export type UserUpdateWithoutAnnouncementsCreatedInput = {
   extraIncomesCreated?: Prisma.ExtraIncomeUpdateManyWithoutCreatedByNestedInput
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUpdateManyWithoutCreatedByNestedInput
   announcementsRead?: Prisma.AnnouncementReaderUpdateManyWithoutUserNestedInput
+  surveysCreated?: Prisma.SurveyUpdateManyWithoutCreatedByNestedInput
+  surveyResponses?: Prisma.SurveyResponseUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAnnouncementsCreatedInput = {
@@ -2798,6 +2956,8 @@ export type UserUncheckedUpdateWithoutAnnouncementsCreatedInput = {
   extraIncomesCreated?: Prisma.ExtraIncomeUncheckedUpdateManyWithoutCreatedByNestedInput
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedUpdateManyWithoutCreatedByNestedInput
   announcementsRead?: Prisma.AnnouncementReaderUncheckedUpdateManyWithoutUserNestedInput
+  surveysCreated?: Prisma.SurveyUncheckedUpdateManyWithoutCreatedByNestedInput
+  surveyResponses?: Prisma.SurveyResponseUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutAnnouncementsReadInput = {
@@ -2827,6 +2987,8 @@ export type UserCreateWithoutAnnouncementsReadInput = {
   extraIncomesCreated?: Prisma.ExtraIncomeCreateNestedManyWithoutCreatedByInput
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeCreateNestedManyWithoutCreatedByInput
   announcementsCreated?: Prisma.AnnouncementCreateNestedManyWithoutCreatedByInput
+  surveysCreated?: Prisma.SurveyCreateNestedManyWithoutCreatedByInput
+  surveyResponses?: Prisma.SurveyResponseCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAnnouncementsReadInput = {
@@ -2856,6 +3018,8 @@ export type UserUncheckedCreateWithoutAnnouncementsReadInput = {
   extraIncomesCreated?: Prisma.ExtraIncomeUncheckedCreateNestedManyWithoutCreatedByInput
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedCreateNestedManyWithoutCreatedByInput
   announcementsCreated?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCreatedByInput
+  surveysCreated?: Prisma.SurveyUncheckedCreateNestedManyWithoutCreatedByInput
+  surveyResponses?: Prisma.SurveyResponseUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAnnouncementsReadInput = {
@@ -2901,6 +3065,8 @@ export type UserUpdateWithoutAnnouncementsReadInput = {
   extraIncomesCreated?: Prisma.ExtraIncomeUpdateManyWithoutCreatedByNestedInput
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUpdateManyWithoutCreatedByNestedInput
   announcementsCreated?: Prisma.AnnouncementUpdateManyWithoutCreatedByNestedInput
+  surveysCreated?: Prisma.SurveyUpdateManyWithoutCreatedByNestedInput
+  surveyResponses?: Prisma.SurveyResponseUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAnnouncementsReadInput = {
@@ -2930,6 +3096,288 @@ export type UserUncheckedUpdateWithoutAnnouncementsReadInput = {
   extraIncomesCreated?: Prisma.ExtraIncomeUncheckedUpdateManyWithoutCreatedByNestedInput
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedUpdateManyWithoutCreatedByNestedInput
   announcementsCreated?: Prisma.AnnouncementUncheckedUpdateManyWithoutCreatedByNestedInput
+  surveysCreated?: Prisma.SurveyUncheckedUpdateManyWithoutCreatedByNestedInput
+  surveyResponses?: Prisma.SurveyResponseUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutSurveysCreatedInput = {
+  id?: string
+  email: string
+  passwordHash: string
+  firstName?: string | null
+  lastName?: string | null
+  phone?: string | null
+  role?: $Enums.UserRole
+  status?: $Enums.UserStatus
+  isEmailVerified?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  residentProfile?: Prisma.ResidentProfileCreateNestedOneWithoutUserInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutCreatedByInput
+  userSessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  condominium?: Prisma.CondominiumCreateNestedOneWithoutAdminsInput
+  accessLogs?: Prisma.AccessLogCreateNestedManyWithoutUserAcceptInput
+  parcelsReceived?: Prisma.ParcelDeliveryCreateNestedManyWithoutReceivedByInput
+  parcelsDelivered?: Prisma.ParcelDeliveryCreateNestedManyWithoutDeliveredByInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessCreateNestedManyWithoutEntryGuardInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessCreateNestedManyWithoutExitGuardInput
+  passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
+  expensesCreated?: Prisma.ExpenseCreateNestedManyWithoutCreatedByInput
+  extraIncomesCreated?: Prisma.ExtraIncomeCreateNestedManyWithoutCreatedByInput
+  extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeCreateNestedManyWithoutCreatedByInput
+  announcementsCreated?: Prisma.AnnouncementCreateNestedManyWithoutCreatedByInput
+  announcementsRead?: Prisma.AnnouncementReaderCreateNestedManyWithoutUserInput
+  surveyResponses?: Prisma.SurveyResponseCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutSurveysCreatedInput = {
+  id?: string
+  email: string
+  passwordHash: string
+  firstName?: string | null
+  lastName?: string | null
+  phone?: string | null
+  role?: $Enums.UserRole
+  status?: $Enums.UserStatus
+  isEmailVerified?: boolean
+  condominiumId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  residentProfile?: Prisma.ResidentProfileUncheckedCreateNestedOneWithoutUserInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCreatedByInput
+  userSessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  accessLogs?: Prisma.AccessLogUncheckedCreateNestedManyWithoutUserAcceptInput
+  parcelsReceived?: Prisma.ParcelDeliveryUncheckedCreateNestedManyWithoutReceivedByInput
+  parcelsDelivered?: Prisma.ParcelDeliveryUncheckedCreateNestedManyWithoutDeliveredByInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessUncheckedCreateNestedManyWithoutEntryGuardInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessUncheckedCreateNestedManyWithoutExitGuardInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
+  expensesCreated?: Prisma.ExpenseUncheckedCreateNestedManyWithoutCreatedByInput
+  extraIncomesCreated?: Prisma.ExtraIncomeUncheckedCreateNestedManyWithoutCreatedByInput
+  extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedCreateNestedManyWithoutCreatedByInput
+  announcementsCreated?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCreatedByInput
+  announcementsRead?: Prisma.AnnouncementReaderUncheckedCreateNestedManyWithoutUserInput
+  surveyResponses?: Prisma.SurveyResponseUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutSurveysCreatedInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutSurveysCreatedInput, Prisma.UserUncheckedCreateWithoutSurveysCreatedInput>
+}
+
+export type UserUpsertWithoutSurveysCreatedInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutSurveysCreatedInput, Prisma.UserUncheckedUpdateWithoutSurveysCreatedInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutSurveysCreatedInput, Prisma.UserUncheckedCreateWithoutSurveysCreatedInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutSurveysCreatedInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutSurveysCreatedInput, Prisma.UserUncheckedUpdateWithoutSurveysCreatedInput>
+}
+
+export type UserUpdateWithoutSurveysCreatedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  residentProfile?: Prisma.ResidentProfileUpdateOneWithoutUserNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutCreatedByNestedInput
+  userSessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  condominium?: Prisma.CondominiumUpdateOneWithoutAdminsNestedInput
+  accessLogs?: Prisma.AccessLogUpdateManyWithoutUserAcceptNestedInput
+  parcelsReceived?: Prisma.ParcelDeliveryUpdateManyWithoutReceivedByNestedInput
+  parcelsDelivered?: Prisma.ParcelDeliveryUpdateManyWithoutDeliveredByNestedInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessUpdateManyWithoutEntryGuardNestedInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessUpdateManyWithoutExitGuardNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
+  expensesCreated?: Prisma.ExpenseUpdateManyWithoutCreatedByNestedInput
+  extraIncomesCreated?: Prisma.ExtraIncomeUpdateManyWithoutCreatedByNestedInput
+  extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUpdateManyWithoutCreatedByNestedInput
+  announcementsCreated?: Prisma.AnnouncementUpdateManyWithoutCreatedByNestedInput
+  announcementsRead?: Prisma.AnnouncementReaderUpdateManyWithoutUserNestedInput
+  surveyResponses?: Prisma.SurveyResponseUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutSurveysCreatedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  condominiumId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  residentProfile?: Prisma.ResidentProfileUncheckedUpdateOneWithoutUserNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutCreatedByNestedInput
+  userSessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  accessLogs?: Prisma.AccessLogUncheckedUpdateManyWithoutUserAcceptNestedInput
+  parcelsReceived?: Prisma.ParcelDeliveryUncheckedUpdateManyWithoutReceivedByNestedInput
+  parcelsDelivered?: Prisma.ParcelDeliveryUncheckedUpdateManyWithoutDeliveredByNestedInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessUncheckedUpdateManyWithoutEntryGuardNestedInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessUncheckedUpdateManyWithoutExitGuardNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  expensesCreated?: Prisma.ExpenseUncheckedUpdateManyWithoutCreatedByNestedInput
+  extraIncomesCreated?: Prisma.ExtraIncomeUncheckedUpdateManyWithoutCreatedByNestedInput
+  extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedUpdateManyWithoutCreatedByNestedInput
+  announcementsCreated?: Prisma.AnnouncementUncheckedUpdateManyWithoutCreatedByNestedInput
+  announcementsRead?: Prisma.AnnouncementReaderUncheckedUpdateManyWithoutUserNestedInput
+  surveyResponses?: Prisma.SurveyResponseUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutSurveyResponsesInput = {
+  id?: string
+  email: string
+  passwordHash: string
+  firstName?: string | null
+  lastName?: string | null
+  phone?: string | null
+  role?: $Enums.UserRole
+  status?: $Enums.UserStatus
+  isEmailVerified?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  residentProfile?: Prisma.ResidentProfileCreateNestedOneWithoutUserInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutCreatedByInput
+  userSessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  condominium?: Prisma.CondominiumCreateNestedOneWithoutAdminsInput
+  accessLogs?: Prisma.AccessLogCreateNestedManyWithoutUserAcceptInput
+  parcelsReceived?: Prisma.ParcelDeliveryCreateNestedManyWithoutReceivedByInput
+  parcelsDelivered?: Prisma.ParcelDeliveryCreateNestedManyWithoutDeliveredByInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessCreateNestedManyWithoutEntryGuardInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessCreateNestedManyWithoutExitGuardInput
+  passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
+  expensesCreated?: Prisma.ExpenseCreateNestedManyWithoutCreatedByInput
+  extraIncomesCreated?: Prisma.ExtraIncomeCreateNestedManyWithoutCreatedByInput
+  extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeCreateNestedManyWithoutCreatedByInput
+  announcementsCreated?: Prisma.AnnouncementCreateNestedManyWithoutCreatedByInput
+  announcementsRead?: Prisma.AnnouncementReaderCreateNestedManyWithoutUserInput
+  surveysCreated?: Prisma.SurveyCreateNestedManyWithoutCreatedByInput
+}
+
+export type UserUncheckedCreateWithoutSurveyResponsesInput = {
+  id?: string
+  email: string
+  passwordHash: string
+  firstName?: string | null
+  lastName?: string | null
+  phone?: string | null
+  role?: $Enums.UserRole
+  status?: $Enums.UserStatus
+  isEmailVerified?: boolean
+  condominiumId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  residentProfile?: Prisma.ResidentProfileUncheckedCreateNestedOneWithoutUserInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCreatedByInput
+  userSessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  accessLogs?: Prisma.AccessLogUncheckedCreateNestedManyWithoutUserAcceptInput
+  parcelsReceived?: Prisma.ParcelDeliveryUncheckedCreateNestedManyWithoutReceivedByInput
+  parcelsDelivered?: Prisma.ParcelDeliveryUncheckedCreateNestedManyWithoutDeliveredByInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessUncheckedCreateNestedManyWithoutEntryGuardInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessUncheckedCreateNestedManyWithoutExitGuardInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
+  expensesCreated?: Prisma.ExpenseUncheckedCreateNestedManyWithoutCreatedByInput
+  extraIncomesCreated?: Prisma.ExtraIncomeUncheckedCreateNestedManyWithoutCreatedByInput
+  extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedCreateNestedManyWithoutCreatedByInput
+  announcementsCreated?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCreatedByInput
+  announcementsRead?: Prisma.AnnouncementReaderUncheckedCreateNestedManyWithoutUserInput
+  surveysCreated?: Prisma.SurveyUncheckedCreateNestedManyWithoutCreatedByInput
+}
+
+export type UserCreateOrConnectWithoutSurveyResponsesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutSurveyResponsesInput, Prisma.UserUncheckedCreateWithoutSurveyResponsesInput>
+}
+
+export type UserUpsertWithoutSurveyResponsesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutSurveyResponsesInput, Prisma.UserUncheckedUpdateWithoutSurveyResponsesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutSurveyResponsesInput, Prisma.UserUncheckedCreateWithoutSurveyResponsesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutSurveyResponsesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutSurveyResponsesInput, Prisma.UserUncheckedUpdateWithoutSurveyResponsesInput>
+}
+
+export type UserUpdateWithoutSurveyResponsesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  residentProfile?: Prisma.ResidentProfileUpdateOneWithoutUserNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutCreatedByNestedInput
+  userSessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  condominium?: Prisma.CondominiumUpdateOneWithoutAdminsNestedInput
+  accessLogs?: Prisma.AccessLogUpdateManyWithoutUserAcceptNestedInput
+  parcelsReceived?: Prisma.ParcelDeliveryUpdateManyWithoutReceivedByNestedInput
+  parcelsDelivered?: Prisma.ParcelDeliveryUpdateManyWithoutDeliveredByNestedInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessUpdateManyWithoutEntryGuardNestedInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessUpdateManyWithoutExitGuardNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
+  expensesCreated?: Prisma.ExpenseUpdateManyWithoutCreatedByNestedInput
+  extraIncomesCreated?: Prisma.ExtraIncomeUpdateManyWithoutCreatedByNestedInput
+  extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUpdateManyWithoutCreatedByNestedInput
+  announcementsCreated?: Prisma.AnnouncementUpdateManyWithoutCreatedByNestedInput
+  announcementsRead?: Prisma.AnnouncementReaderUpdateManyWithoutUserNestedInput
+  surveysCreated?: Prisma.SurveyUpdateManyWithoutCreatedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutSurveyResponsesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  condominiumId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  residentProfile?: Prisma.ResidentProfileUncheckedUpdateOneWithoutUserNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutCreatedByNestedInput
+  userSessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  accessLogs?: Prisma.AccessLogUncheckedUpdateManyWithoutUserAcceptNestedInput
+  parcelsReceived?: Prisma.ParcelDeliveryUncheckedUpdateManyWithoutReceivedByNestedInput
+  parcelsDelivered?: Prisma.ParcelDeliveryUncheckedUpdateManyWithoutDeliveredByNestedInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessUncheckedUpdateManyWithoutEntryGuardNestedInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessUncheckedUpdateManyWithoutExitGuardNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  expensesCreated?: Prisma.ExpenseUncheckedUpdateManyWithoutCreatedByNestedInput
+  extraIncomesCreated?: Prisma.ExtraIncomeUncheckedUpdateManyWithoutCreatedByNestedInput
+  extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedUpdateManyWithoutCreatedByNestedInput
+  announcementsCreated?: Prisma.AnnouncementUncheckedUpdateManyWithoutCreatedByNestedInput
+  announcementsRead?: Prisma.AnnouncementReaderUncheckedUpdateManyWithoutUserNestedInput
+  surveysCreated?: Prisma.SurveyUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserCreateManyCondominiumInput = {
@@ -2973,6 +3421,8 @@ export type UserUpdateWithoutCondominiumInput = {
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUpdateManyWithoutCreatedByNestedInput
   announcementsCreated?: Prisma.AnnouncementUpdateManyWithoutCreatedByNestedInput
   announcementsRead?: Prisma.AnnouncementReaderUpdateManyWithoutUserNestedInput
+  surveysCreated?: Prisma.SurveyUpdateManyWithoutCreatedByNestedInput
+  surveyResponses?: Prisma.SurveyResponseUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCondominiumInput = {
@@ -3002,6 +3452,8 @@ export type UserUncheckedUpdateWithoutCondominiumInput = {
   extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedUpdateManyWithoutCreatedByNestedInput
   announcementsCreated?: Prisma.AnnouncementUncheckedUpdateManyWithoutCreatedByNestedInput
   announcementsRead?: Prisma.AnnouncementReaderUncheckedUpdateManyWithoutUserNestedInput
+  surveysCreated?: Prisma.SurveyUncheckedUpdateManyWithoutCreatedByNestedInput
+  surveyResponses?: Prisma.SurveyResponseUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutCondominiumInput = {
@@ -3038,6 +3490,8 @@ export type UserCountOutputType = {
   extraordinaryFeesCreated: number
   announcementsCreated: number
   announcementsRead: number
+  surveysCreated: number
+  surveyResponses: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -3055,6 +3509,8 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   extraordinaryFeesCreated?: boolean | UserCountOutputTypeCountExtraordinaryFeesCreatedArgs
   announcementsCreated?: boolean | UserCountOutputTypeCountAnnouncementsCreatedArgs
   announcementsRead?: boolean | UserCountOutputTypeCountAnnouncementsReadArgs
+  surveysCreated?: boolean | UserCountOutputTypeCountSurveysCreatedArgs
+  surveyResponses?: boolean | UserCountOutputTypeCountSurveyResponsesArgs
 }
 
 /**
@@ -3165,6 +3621,20 @@ export type UserCountOutputTypeCountAnnouncementsReadArgs<ExtArgs extends runtim
   where?: Prisma.AnnouncementReaderWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountSurveysCreatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SurveyWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountSurveyResponsesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SurveyResponseWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -3195,6 +3665,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   extraordinaryFeesCreated?: boolean | Prisma.User$extraordinaryFeesCreatedArgs<ExtArgs>
   announcementsCreated?: boolean | Prisma.User$announcementsCreatedArgs<ExtArgs>
   announcementsRead?: boolean | Prisma.User$announcementsReadArgs<ExtArgs>
+  surveysCreated?: boolean | Prisma.User$surveysCreatedArgs<ExtArgs>
+  surveyResponses?: boolean | Prisma.User$surveyResponsesArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -3263,6 +3735,8 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   extraordinaryFeesCreated?: boolean | Prisma.User$extraordinaryFeesCreatedArgs<ExtArgs>
   announcementsCreated?: boolean | Prisma.User$announcementsCreatedArgs<ExtArgs>
   announcementsRead?: boolean | Prisma.User$announcementsReadArgs<ExtArgs>
+  surveysCreated?: boolean | Prisma.User$surveysCreatedArgs<ExtArgs>
+  surveyResponses?: boolean | Prisma.User$surveyResponsesArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -3291,6 +3765,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     extraordinaryFeesCreated: Prisma.$ExtraordinaryFeePayload<ExtArgs>[]
     announcementsCreated: Prisma.$AnnouncementPayload<ExtArgs>[]
     announcementsRead: Prisma.$AnnouncementReaderPayload<ExtArgs>[]
+    surveysCreated: Prisma.$SurveyPayload<ExtArgs>[]
+    surveyResponses: Prisma.$SurveyResponsePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -3715,6 +4191,8 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   extraordinaryFeesCreated<T extends Prisma.User$extraordinaryFeesCreatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$extraordinaryFeesCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ExtraordinaryFeePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   announcementsCreated<T extends Prisma.User$announcementsCreatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$announcementsCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AnnouncementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   announcementsRead<T extends Prisma.User$announcementsReadArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$announcementsReadArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AnnouncementReaderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  surveysCreated<T extends Prisma.User$surveysCreatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$surveysCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SurveyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  surveyResponses<T extends Prisma.User$surveyResponsesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$surveyResponsesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SurveyResponsePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4528,6 +5006,54 @@ export type User$announcementsReadArgs<ExtArgs extends runtime.Types.Extensions.
   take?: number
   skip?: number
   distinct?: Prisma.AnnouncementReaderScalarFieldEnum | Prisma.AnnouncementReaderScalarFieldEnum[]
+}
+
+/**
+ * User.surveysCreated
+ */
+export type User$surveysCreatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Survey
+   */
+  select?: Prisma.SurveySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Survey
+   */
+  omit?: Prisma.SurveyOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SurveyInclude<ExtArgs> | null
+  where?: Prisma.SurveyWhereInput
+  orderBy?: Prisma.SurveyOrderByWithRelationInput | Prisma.SurveyOrderByWithRelationInput[]
+  cursor?: Prisma.SurveyWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SurveyScalarFieldEnum | Prisma.SurveyScalarFieldEnum[]
+}
+
+/**
+ * User.surveyResponses
+ */
+export type User$surveyResponsesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SurveyResponse
+   */
+  select?: Prisma.SurveyResponseSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SurveyResponse
+   */
+  omit?: Prisma.SurveyResponseOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SurveyResponseInclude<ExtArgs> | null
+  where?: Prisma.SurveyResponseWhereInput
+  orderBy?: Prisma.SurveyResponseOrderByWithRelationInput | Prisma.SurveyResponseOrderByWithRelationInput[]
+  cursor?: Prisma.SurveyResponseWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SurveyResponseScalarFieldEnum | Prisma.SurveyResponseScalarFieldEnum[]
 }
 
 /**

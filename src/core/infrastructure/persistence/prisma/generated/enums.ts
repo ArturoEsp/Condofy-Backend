@@ -235,3 +235,29 @@ export const GeneralProviderStatus = {
 } as const
 
 export type GeneralProviderStatus = (typeof GeneralProviderStatus)[keyof typeof GeneralProviderStatus]
+
+
+export const SurveyStatus = {
+  DRAFT: 'DRAFT',
+  ACTIVE: 'ACTIVE',
+  CLOSED: 'CLOSED',
+  ARCHIVED: 'ARCHIVED'
+} as const
+
+export type SurveyStatus = (typeof SurveyStatus)[keyof typeof SurveyStatus]
+
+
+export const SurveyVoteType = {
+  PER_HOUSE: 'PER_HOUSE',
+  PER_RESIDENT: 'PER_RESIDENT'
+} as const
+
+export type SurveyVoteType = (typeof SurveyVoteType)[keyof typeof SurveyVoteType]
+
+
+export const SurveyQuestionType = {
+  SINGLE_CHOICE: 'SINGLE_CHOICE',
+  MULTIPLE_CHOICE: 'MULTIPLE_CHOICE'
+} as const
+
+export type SurveyQuestionType = (typeof SurveyQuestionType)[keyof typeof SurveyQuestionType]
