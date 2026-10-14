@@ -85,8 +85,8 @@ npx prisma generate
 # 3. Aplicar migraciones a la base de datos
 npx prisma migrate dev
 
-# 4. (Opcional) Cargar datos semilla
-npx tsx prisma/seed/seed.ts
+# 4. (Opcional) Cargar datos semilla (Superadmin, planes y fraccionamiento demo)
+yarn seed
 ```
 
 ---

@@ -11,9 +11,11 @@ Este documento contiene la referencia completa de los comandos de consola actual
    - [`delete:payment` (Eliminación de Pago por Casa y Limpieza R2)](#deletepayment-eliminación-de-pago-por-casa-y-limpieza-r2)
    - [`delete:house` (Eliminación de Casa en Cascada y Limpieza R2)](#deletehouse-eliminación-de-casa-en-cascada-y-limpieza-r2)
    - [`delete:resident` (Eliminación de Residente en Cascada)](#deleteresident-eliminación-de-residente-en-cascada)
+   - [`move:resident` (Traslado de Residente a Otra Casa)](#moveresident-traslado-de-residente-a-otra-casa)
    - [`delete:condominium` (Eliminación de Condominio en Cascada)](#deletecondominium-eliminación-de-condominio-en-cascada)
    - [`trim:records` (Limpieza y Sanitización de Espacios en BD)](#trimrecords-limpieza-y-sanitización-de-espacios-en-bd)
    - [`fix:permanent-access` (Reparación de Pases Permanentes Afectados)](#fixpermanent-access-reparación-de-pases-permanentes-afectados)
+   - [`seed` (Carga de Datos Iniciales: Superadmin, Planes y Condominio Demo)](#seed-carga-de-datos-iniciales-superadmin-planes-y-condominio-demo)
 2. [Comandos Frecuentes de Desarrollo y Base de Datos (Local vs Docker)](#2-comandos-frecuentes-de-desarrollo-y-base-de-datos-local-vs-docker)
 3. [🐳 Guía Rápida de Ejecución con Docker (Producción / VPS)](#3--guía-rápida-de-ejecución-con-docker-producción--vps)
 4. [Guía y Estándar para Crear Futuros Scripts](#4-guía-y-estándar-para-crear-futuros-scripts)
@@ -260,6 +262,61 @@ docker compose -f docker-compose.prod.yml exec api yarn delete:resident resident
 
 ---
 
+### `move:resident` (Traslado de Residente a Otra Casa)
+
+_Archivo:_ [`scripts/move-resident.ts`](file:///c:/Users/bmth_/OneDrive/Documentos/GitHub/Condofy-Backend/scripts/move-resident.ts)
+
+Permite trasladar de forma limpia y segura a un residente (por correo o ID de usuario) a una vivienda distinta (por número de casa o UUID).
+
+#### ¿Qué acciones realiza el script?
+
+1. **Reubicación de Residente:** Actualiza `ResidentProfile.houseId` (y `condominiumId` tanto en el perfil como en el `User` si cambia de condominio).
+2. **Familiares y Co-residentes (Opcional):** Permite incluir a los miembros familiares o inquilinos vinculados a la vivienda anterior (`--with-family` o confirmación interactiva).
+3. **Visitantes Registrados (Opcional):** Permite trasladar el directorio de visitantes de la casa previa a la nueva casa (`--move-visitors` o confirmación interactiva).
+4. **Comunicados y Lecturas:** Actualiza los registros de `AnnouncementReader` vinculados a la vivienda previa.
+5. **Invalidación de Sesiones:** Revoca las sesiones activas (`UserSession`) de los residentes trasladados para obligar a la app/frontend a refrescar inmediatamente los datos del nuevo domicilio.
+6. **Validaciones de Seguridad:** Evita mover a usuarios sin perfil de residente, previene traslados a la misma casa, advierte si la casa destino está deshabilitada y detecta si ya existen residentes en la vivienda objetivo.
+
+#### Sintaxis de uso:
+
+##### A. Ejecución Directa (Local):
+
+```bash
+# Modo 1: Parámetros posicionales (Correo y Casa destino)
+npm run move:resident residente@correo.com 102
+npm run move:resident residente@correo.com "Casa 4"
+
+# Modo 2: Interactivo (solicita datos faltantes paso a paso)
+npm run move:resident
+
+# Modo 3: Trasladar también a los familiares y visitantes
+npm run move:resident residente@correo.com 102 --with-family --move-visitors
+
+# Modo 4: Simulación previa (Dry-run: valida y muestra el resumen sin modificar la BD)
+npm run move:resident residente@correo.com 102 --dry-run
+
+# Modo 5: Desatendido / Automático para scripts (Sin confirmación manual)
+npm run move:resident residente@correo.com 102 --yes
+
+# Modo 6: Cambiar de condominio o especificar rol nuevo
+npm run move:resident residente@correo.com 102 --condo albero --role TENANT
+```
+
+##### B. Ejecución con Docker (Producción / VPS):
+
+```bash
+# Ejecución directa en producción:
+docker compose -f docker-compose.prod.yml exec api npm run move:resident residente@correo.com 102
+
+# Simulación previa en producción:
+docker compose -f docker-compose.prod.yml exec api npm run move:resident residente@correo.com 102 --dry-run
+
+# Interactivo en producción:
+docker compose -f docker-compose.prod.yml exec -it api npm run move:resident
+```
+
+---
+
 ### `delete:condominium` (Eliminación de Condominio en Cascada)
 
 _Archivo:_ [`prisma/scripts/delete-condominium.ts`](file:///c:/Users/bmth_/OneDrive/Documentos/GitHub/Condofy-Backend/prisma/scripts/delete-condominium.ts)
@@ -379,6 +436,78 @@ docker compose -f docker-compose.prod.yml exec -i postgres psql -U condofy -d co
 
 ---
 
+### `seed` (Carga de Datos Iniciales: Superadmin, Planes y Condominio Demo)
+
+_Archivo:_ [`prisma/seed/seed.ts`](file:///c:/Users/bmth_/OneDrive/Documentos/GitHub/Condofy-Backend/prisma/seed/seed.ts)
+
+Pobla o actualiza de forma idempotente (`upsert`) los datos esenciales del sistema: el usuario con rol global `SUPERADMIN`, los planes tarifarios de suscripción (`TRIAL`, `STANDARD`, `PARTNER`), el condominio inicial `Albero Residencial` (`RESIDENCIAL_ALBERO`), su administrador local y la cuenta de caseta de vigilancia.
+
+#### Variables de Entorno Requeridas (`.env`):
+
+Asegúrate de que estas variables estén configuradas tanto en local como en el `.env` de tu servidor Droplet:
+
+```dotenv
+DATABASE_URL="postgresql://usuario:password@host:5432/condofy?schema=public"
+SUPERADMIN_EMAIL="superadmin@condofy.com"
+SUPERADMIN_PASSWORD="TuPasswordSeguro123"
+APP_ADMIN_EMAIL="admin@alberoresidencial.com"
+APP_ADMIN_PASSWORD="TuPasswordAdmin123"
+```
+
+#### ¿Qué acciones realiza el seed?
+
+1. **Usuario SUPERADMIN:** Crea o actualiza el usuario con rol `SUPERADMIN` (con `condominiumId = null`), permitiéndole acceder al panel de superadministrador para crear y gestionar cualquier fraccionamiento.
+2. **Planes de Suscripción:**
+   - **`TRIAL`**: Prueba / Demostración ($0 MXN base hasta 100 casas + $0 extra).
+   - **`STANDARD`**: Estándar Condofy ($990 MXN base hasta 60 casas + $12 extra por casa).
+   - **`PARTNER`**: Partner Administrador ($740 MXN base con 25% desc. + $9 extra por casa).
+3. **Condominio Demo:** Registra o actualiza `Albero Residencial` con clave `RESIDENCIAL_ALBERO`.
+4. **Admin y Guardia de Albero:** Asigna el usuario `ADMIN` con `APP_ADMIN_EMAIL` y crea el usuario `STAND` (`guardia@condofy.com` / `guardia1234`).
+
+#### Sintaxis de uso:
+
+##### A. Ejecución Directa (Local / Desarrollo):
+
+```bash
+# Opción 1 (Script de package.json):
+yarn seed
+# o
+npm run seed
+
+# Opción 2 (Prisma CLI):
+npx prisma db seed
+
+# Opción 3 (tsx directo):
+npx tsx prisma/seed/seed.ts
+```
+
+##### B. Ejecución en Servidor Droplet / VPS (Docker):
+
+```bash
+# Método 1: A través de docker compose (Recomendado):
+docker compose -f docker-compose.prod.yml exec api npx tsx prisma/seed/seed.ts
+
+# O utilizando el script de npm/yarn dentro del contenedor:
+docker compose -f docker-compose.prod.yml exec api yarn seed
+
+# Método 2: Directamente con docker exec por nombre de contenedor:
+docker exec -it nest_api npx tsx prisma/seed/seed.ts
+
+# Método 3: Dentro de la consola interactiva del contenedor:
+docker compose -f docker-compose.prod.yml exec -it api sh
+yarn seed
+exit
+```
+
+##### C. Ejecución en Servidor Droplet sin Docker (Node.js / PM2):
+
+```bash
+cd /ruta/al/proyecto/Condofy-Backend
+npm run seed
+```
+
+---
+
 ## 2. Comandos Frecuentes de Desarrollo y Base de Datos (Local vs Docker)
 
 | Acción / Tarea                  | Ejecución Local (Host)        | Ejecución con Docker (Producción / VPS)                                          |
@@ -388,7 +517,7 @@ docker compose -f docker-compose.prod.yml exec -i postgres psql -U condofy -d co
 | **Ver logs en vivo**            | Consola directa               | `docker compose -f docker-compose.prod.yml logs -f api`                          |
 | **Aplicar migraciones BD**      | `npx prisma migrate dev`      | `docker compose -f docker-compose.prod.yml exec api npx prisma migrate deploy`   |
 | **Regenerar Prisma Client**     | `npx prisma generate`         | `docker compose -f docker-compose.prod.yml exec api npx prisma generate`         |
-| **Cargar datos semilla (Seed)** | `npx tsx prisma/seed/seed.ts` | `docker compose -f docker-compose.prod.yml exec api npx tsx prisma/seed/seed.ts` |
+| **Cargar datos semilla (Seed)** | `yarn seed` o `npx tsx prisma/seed/seed.ts` | `docker compose -f docker-compose.prod.yml exec api yarn seed` |
 | **Reiniciar servicio API**      | Reiniciar terminal            | `docker compose -f docker-compose.prod.yml restart api`                          |
 | **Shell dentro del contenedor** | N/A                           | `docker compose -f docker-compose.prod.yml exec -it api sh`                      |
 
