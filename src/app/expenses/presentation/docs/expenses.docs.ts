@@ -76,3 +76,11 @@ export const getTransparencyReport: ApiEndpointProps = {
   status: HttpStatus.OK,
   withToken: true,
 };
+
+export const remindPendingExpensesDueToday: ApiEndpointProps = {
+  summary:
+    'Disparar recordatorio Push a administradores para los egresos pendientes programados para hoy',
+  status: HttpStatus.OK,
+  withToken: true,
+};
+

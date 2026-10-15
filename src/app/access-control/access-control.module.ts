@@ -48,6 +48,7 @@ import { CreateStandContactUseCase } from './application/use-cases/create-stand-
 import { ListStandContactsUseCase } from './application/use-cases/list-stand-contacts.usecase';
 import { UpdateStandContactUseCase } from './application/use-cases/update-stand-contact.usecase';
 import { DeleteStandContactUseCase } from './application/use-cases/delete-stand-contact.usecase';
+import { GetSecurityReportUseCase } from './application/use-cases/get-security-report.usecase';
 
 import { ResidentAccessControlController } from './presentation/controllers/resident-access-control.controller';
 import { ResidentVisitorsController } from './presentation/controllers/resident-visitors.controller';
@@ -55,10 +56,12 @@ import { ResidentParcelsController } from './presentation/controllers/resident-p
 import { PublicPassController } from './presentation/controllers/public-pass.controller';
 import { StandAccessControlController } from './presentation/controllers/stand-access-control.controller';
 import { AdminSecurityController } from './presentation/controllers/admin-security.controller';
+import { AdminSecurityReportsController } from './presentation/controllers/admin-security-reports.controller';
 import { StandGeneralProvidersController } from './presentation/controllers/stand-general-providers.controller';
 import { ResidentGeneralProvidersController } from './presentation/controllers/resident-general-providers.controller';
 import { StandContactsController } from './presentation/controllers/stand-contacts.controller';
 import { PrismaService } from '@/core/infrastructure/persistence/prisma/prisma.service';
+
 
 @Module({
   imports: [CoreModule, ResidentsModule, UsersModule, NotificationsModule],
@@ -427,6 +430,7 @@ import { PrismaService } from '@/core/infrastructure/persistence/prisma/prisma.s
       inject: [PROVIDES_NAMES.StandContactsRepository],
       useFactory: (repo) => new DeleteStandContactUseCase(repo),
     },
+    GetSecurityReportUseCase,
   ],
   controllers: [
     ResidentAccessControlController,
@@ -435,6 +439,7 @@ import { PrismaService } from '@/core/infrastructure/persistence/prisma/prisma.s
     PublicPassController,
     StandAccessControlController,
     AdminSecurityController,
+    AdminSecurityReportsController,
     StandGeneralProvidersController,
     ResidentGeneralProvidersController,
     StandContactsController,
@@ -478,6 +483,7 @@ import { PrismaService } from '@/core/infrastructure/persistence/prisma/prisma.s
     ListStandContactsUseCase,
     UpdateStandContactUseCase,
     DeleteStandContactUseCase,
+    GetSecurityReportUseCase,
   ],
 })
 export class AccessControlModule {}

@@ -35,6 +35,7 @@ import { GetExpensesSummaryUseCase } from '../../application/use-cases/get-expen
 import { GetTransparencySettingsUseCase } from '../../application/use-cases/get-transparency-settings.usecase';
 import { UpdateTransparencySettingsUseCase } from '../../application/use-cases/update-transparency-settings.usecase';
 import { GetTransparencyReportUseCase } from '../../application/use-cases/get-transparency-report.usecase';
+import { ExpensesNotificationService } from '../../infrastructure/services/expenses-notification.service';
 
 import { CreateExpenseRequest } from '../dtos/requests/create-expense.request';
 import { UpdateExpenseRequest } from '../dtos/requests/update-expense.request';
@@ -71,7 +72,17 @@ export class ExpensesController {
     private readonly getTransparencyReportUseCase: GetTransparencyReportUseCase,
     @Inject(PROVIDES_NAMES.StorageService)
     private readonly storageService: StorageService,
+    private readonly expensesNotificationService: ExpensesNotificationService,
   ) {}
+
+  @Post('remind-due-today')
+  @Roles('ADMIN', 'SUPERADMIN')
+  @ApiEndpoint(docs.remindPendingExpensesDueToday)
+  async remindDueToday(@CondominiumId() condominiumId: string) {
+    return await this.expensesNotificationService.notifyPendingExpensesDueToday(
+      condominiumId,
+    );
+  }
 
   @Post()
   @Roles('ADMIN')
