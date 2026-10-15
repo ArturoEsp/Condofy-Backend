@@ -25,6 +25,7 @@ import { ExtraordinaryFeesModule } from './app/extraordinary-fees/extraordinary-
 import { AnnouncementsModule } from './app/announcements/announcements.module';
 import { SuperadminModule } from './app/superadmin/superadmin.module';
 import { SurveysModule } from './app/surveys/surveys.module';
+import { OfficialDocumentsModule } from './app/official-documents/official-documents.module';
 
 @Module({
   imports: [
@@ -57,6 +58,7 @@ import { SurveysModule } from './app/surveys/surveys.module';
     AnnouncementsModule,
     SuperadminModule,
     SurveysModule,
+    OfficialDocumentsModule,
   ],
   controllers: [],
   providers: [
