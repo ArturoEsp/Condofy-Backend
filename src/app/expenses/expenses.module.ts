@@ -1,8 +1,11 @@
 import { Module } from '@nestjs/common';
 import { CoreModule } from '@/core/core.module';
+import { NotificationsModule } from '../notifications/notifications.module';
 import { PROVIDES_NAMES } from '@/common/enums/provides-names.enums';
 import { ExpensesPrismaRepository } from './infrastructure/repositories/expenses.prisma.repository';
 import { ExpensesController } from './presentation/controllers/expenses.controller';
+import { ExpensesNotificationService } from './infrastructure/services/expenses-notification.service';
+import { ExpensesSchedulerService } from './infrastructure/services/expenses-scheduler.service';
 import { CreateExpenseUseCase } from './application/use-cases/create-expense.usecase';
 import { GetExpensesUseCase } from './application/use-cases/get-expenses.usecase';
 import { GetExpenseByIdUseCase } from './application/use-cases/get-expense-by-id.usecase';
@@ -14,8 +17,10 @@ import { UpdateTransparencySettingsUseCase } from './application/use-cases/updat
 import { GetTransparencyReportUseCase } from './application/use-cases/get-transparency-report.usecase';
 
 @Module({
-  imports: [CoreModule],
+  imports: [CoreModule, NotificationsModule],
   providers: [
+    ExpensesNotificationService,
+    ExpensesSchedulerService,
     {
       provide: PROVIDES_NAMES.ExpensesRepository,
       useClass: ExpensesPrismaRepository,
@@ -70,6 +75,6 @@ import { GetTransparencyReportUseCase } from './application/use-cases/get-transp
     },
   ],
   controllers: [ExpensesController],
-  exports: [PROVIDES_NAMES.ExpensesRepository],
+  exports: [PROVIDES_NAMES.ExpensesRepository, ExpensesNotificationService],
 })
 export class ExpensesModule {}
