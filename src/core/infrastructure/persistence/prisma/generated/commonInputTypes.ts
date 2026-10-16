@@ -725,6 +725,40 @@ export type EnumSurveyQuestionTypeWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumSurveyQuestionTypeFilter<$PrismaModel>
 }
 
+export type EnumOfficialDocumentCategoryFilter<$PrismaModel = never> = {
+  equals?: $Enums.OfficialDocumentCategory | Prisma.EnumOfficialDocumentCategoryFieldRefInput<$PrismaModel>
+  in?: $Enums.OfficialDocumentCategory[] | Prisma.ListEnumOfficialDocumentCategoryFieldRefInput<$PrismaModel>
+  notIn?: $Enums.OfficialDocumentCategory[] | Prisma.ListEnumOfficialDocumentCategoryFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumOfficialDocumentCategoryFilter<$PrismaModel> | $Enums.OfficialDocumentCategory
+}
+
+export type EnumDocumentTargetScopeFilter<$PrismaModel = never> = {
+  equals?: $Enums.DocumentTargetScope | Prisma.EnumDocumentTargetScopeFieldRefInput<$PrismaModel>
+  in?: $Enums.DocumentTargetScope[] | Prisma.ListEnumDocumentTargetScopeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.DocumentTargetScope[] | Prisma.ListEnumDocumentTargetScopeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumDocumentTargetScopeFilter<$PrismaModel> | $Enums.DocumentTargetScope
+}
+
+export type EnumOfficialDocumentCategoryWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.OfficialDocumentCategory | Prisma.EnumOfficialDocumentCategoryFieldRefInput<$PrismaModel>
+  in?: $Enums.OfficialDocumentCategory[] | Prisma.ListEnumOfficialDocumentCategoryFieldRefInput<$PrismaModel>
+  notIn?: $Enums.OfficialDocumentCategory[] | Prisma.ListEnumOfficialDocumentCategoryFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumOfficialDocumentCategoryWithAggregatesFilter<$PrismaModel> | $Enums.OfficialDocumentCategory
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumOfficialDocumentCategoryFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumOfficialDocumentCategoryFilter<$PrismaModel>
+}
+
+export type EnumDocumentTargetScopeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.DocumentTargetScope | Prisma.EnumDocumentTargetScopeFieldRefInput<$PrismaModel>
+  in?: $Enums.DocumentTargetScope[] | Prisma.ListEnumDocumentTargetScopeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.DocumentTargetScope[] | Prisma.ListEnumDocumentTargetScopeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumDocumentTargetScopeWithAggregatesFilter<$PrismaModel> | $Enums.DocumentTargetScope
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumDocumentTargetScopeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumDocumentTargetScopeFilter<$PrismaModel>
+}
+
 export type NestedStringFilter<$PrismaModel = never> = {
   equals?: string | Prisma.StringFieldRefInput<$PrismaModel>
   in?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
@@ -1447,6 +1481,40 @@ export type NestedEnumSurveyQuestionTypeWithAggregatesFilter<$PrismaModel = neve
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumSurveyQuestionTypeFilter<$PrismaModel>
   _max?: Prisma.NestedEnumSurveyQuestionTypeFilter<$PrismaModel>
+}
+
+export type NestedEnumOfficialDocumentCategoryFilter<$PrismaModel = never> = {
+  equals?: $Enums.OfficialDocumentCategory | Prisma.EnumOfficialDocumentCategoryFieldRefInput<$PrismaModel>
+  in?: $Enums.OfficialDocumentCategory[] | Prisma.ListEnumOfficialDocumentCategoryFieldRefInput<$PrismaModel>
+  notIn?: $Enums.OfficialDocumentCategory[] | Prisma.ListEnumOfficialDocumentCategoryFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumOfficialDocumentCategoryFilter<$PrismaModel> | $Enums.OfficialDocumentCategory
+}
+
+export type NestedEnumDocumentTargetScopeFilter<$PrismaModel = never> = {
+  equals?: $Enums.DocumentTargetScope | Prisma.EnumDocumentTargetScopeFieldRefInput<$PrismaModel>
+  in?: $Enums.DocumentTargetScope[] | Prisma.ListEnumDocumentTargetScopeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.DocumentTargetScope[] | Prisma.ListEnumDocumentTargetScopeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumDocumentTargetScopeFilter<$PrismaModel> | $Enums.DocumentTargetScope
+}
+
+export type NestedEnumOfficialDocumentCategoryWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.OfficialDocumentCategory | Prisma.EnumOfficialDocumentCategoryFieldRefInput<$PrismaModel>
+  in?: $Enums.OfficialDocumentCategory[] | Prisma.ListEnumOfficialDocumentCategoryFieldRefInput<$PrismaModel>
+  notIn?: $Enums.OfficialDocumentCategory[] | Prisma.ListEnumOfficialDocumentCategoryFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumOfficialDocumentCategoryWithAggregatesFilter<$PrismaModel> | $Enums.OfficialDocumentCategory
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumOfficialDocumentCategoryFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumOfficialDocumentCategoryFilter<$PrismaModel>
+}
+
+export type NestedEnumDocumentTargetScopeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.DocumentTargetScope | Prisma.EnumDocumentTargetScopeFieldRefInput<$PrismaModel>
+  in?: $Enums.DocumentTargetScope[] | Prisma.ListEnumDocumentTargetScopeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.DocumentTargetScope[] | Prisma.ListEnumDocumentTargetScopeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumDocumentTargetScopeWithAggregatesFilter<$PrismaModel> | $Enums.DocumentTargetScope
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumDocumentTargetScopeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumDocumentTargetScopeFilter<$PrismaModel>
 }
 
 

@@ -419,7 +419,10 @@ export const ModelName = {
   SurveyQuestion: 'SurveyQuestion',
   SurveyOption: 'SurveyOption',
   SurveyResponse: 'SurveyResponse',
-  SurveyAnswer: 'SurveyAnswer'
+  SurveyAnswer: 'SurveyAnswer',
+  OfficialDocument: 'OfficialDocument',
+  OfficialDocumentHouse: 'OfficialDocumentHouse',
+  OfficialDocumentAcknowledgment: 'OfficialDocumentAcknowledgment'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -435,7 +438,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "condominium" | "subscriptionPlan" | "user" | "passwordResetToken" | "userSession" | "pushSubscription" | "house" | "houseConfiguration" | "residentProfile" | "visitor" | "accessAuthorization" | "accessLog" | "parcelDelivery" | "generalProviderAccess" | "houseAccount" | "accountMovement" | "maintenanceCharge" | "payment" | "maintenancePeriod" | "lateFee" | "condominiumBillingConfig" | "expense" | "extraIncome" | "condominiumTransparencyConfig" | "extraordinaryFee" | "extraordinaryFeeDocument" | "extraordinaryFeeCharge" | "standContact" | "announcement" | "announcementAttachment" | "announcementReader" | "survey" | "surveyQuestion" | "surveyOption" | "surveyResponse" | "surveyAnswer"
+    modelProps: "condominium" | "subscriptionPlan" | "user" | "passwordResetToken" | "userSession" | "pushSubscription" | "house" | "houseConfiguration" | "residentProfile" | "visitor" | "accessAuthorization" | "accessLog" | "parcelDelivery" | "generalProviderAccess" | "houseAccount" | "accountMovement" | "maintenanceCharge" | "payment" | "maintenancePeriod" | "lateFee" | "condominiumBillingConfig" | "expense" | "extraIncome" | "condominiumTransparencyConfig" | "extraordinaryFee" | "extraordinaryFeeDocument" | "extraordinaryFeeCharge" | "standContact" | "announcement" | "announcementAttachment" | "announcementReader" | "survey" | "surveyQuestion" | "surveyOption" | "surveyResponse" | "surveyAnswer" | "officialDocument" | "officialDocumentHouse" | "officialDocumentAcknowledgment"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -3103,6 +3106,228 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    OfficialDocument: {
+      payload: Prisma.$OfficialDocumentPayload<ExtArgs>
+      fields: Prisma.OfficialDocumentFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.OfficialDocumentFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OfficialDocumentPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.OfficialDocumentFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OfficialDocumentPayload>
+        }
+        findFirst: {
+          args: Prisma.OfficialDocumentFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OfficialDocumentPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.OfficialDocumentFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OfficialDocumentPayload>
+        }
+        findMany: {
+          args: Prisma.OfficialDocumentFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OfficialDocumentPayload>[]
+        }
+        create: {
+          args: Prisma.OfficialDocumentCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OfficialDocumentPayload>
+        }
+        createMany: {
+          args: Prisma.OfficialDocumentCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.OfficialDocumentCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OfficialDocumentPayload>[]
+        }
+        delete: {
+          args: Prisma.OfficialDocumentDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OfficialDocumentPayload>
+        }
+        update: {
+          args: Prisma.OfficialDocumentUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OfficialDocumentPayload>
+        }
+        deleteMany: {
+          args: Prisma.OfficialDocumentDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.OfficialDocumentUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.OfficialDocumentUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OfficialDocumentPayload>[]
+        }
+        upsert: {
+          args: Prisma.OfficialDocumentUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OfficialDocumentPayload>
+        }
+        aggregate: {
+          args: Prisma.OfficialDocumentAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateOfficialDocument>
+        }
+        groupBy: {
+          args: Prisma.OfficialDocumentGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.OfficialDocumentGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.OfficialDocumentCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.OfficialDocumentCountAggregateOutputType> | number
+        }
+      }
+    }
+    OfficialDocumentHouse: {
+      payload: Prisma.$OfficialDocumentHousePayload<ExtArgs>
+      fields: Prisma.OfficialDocumentHouseFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.OfficialDocumentHouseFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OfficialDocumentHousePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.OfficialDocumentHouseFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OfficialDocumentHousePayload>
+        }
+        findFirst: {
+          args: Prisma.OfficialDocumentHouseFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OfficialDocumentHousePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.OfficialDocumentHouseFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OfficialDocumentHousePayload>
+        }
+        findMany: {
+          args: Prisma.OfficialDocumentHouseFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OfficialDocumentHousePayload>[]
+        }
+        create: {
+          args: Prisma.OfficialDocumentHouseCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OfficialDocumentHousePayload>
+        }
+        createMany: {
+          args: Prisma.OfficialDocumentHouseCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.OfficialDocumentHouseCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OfficialDocumentHousePayload>[]
+        }
+        delete: {
+          args: Prisma.OfficialDocumentHouseDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OfficialDocumentHousePayload>
+        }
+        update: {
+          args: Prisma.OfficialDocumentHouseUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OfficialDocumentHousePayload>
+        }
+        deleteMany: {
+          args: Prisma.OfficialDocumentHouseDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.OfficialDocumentHouseUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.OfficialDocumentHouseUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OfficialDocumentHousePayload>[]
+        }
+        upsert: {
+          args: Prisma.OfficialDocumentHouseUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OfficialDocumentHousePayload>
+        }
+        aggregate: {
+          args: Prisma.OfficialDocumentHouseAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateOfficialDocumentHouse>
+        }
+        groupBy: {
+          args: Prisma.OfficialDocumentHouseGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.OfficialDocumentHouseGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.OfficialDocumentHouseCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.OfficialDocumentHouseCountAggregateOutputType> | number
+        }
+      }
+    }
+    OfficialDocumentAcknowledgment: {
+      payload: Prisma.$OfficialDocumentAcknowledgmentPayload<ExtArgs>
+      fields: Prisma.OfficialDocumentAcknowledgmentFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.OfficialDocumentAcknowledgmentFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OfficialDocumentAcknowledgmentPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.OfficialDocumentAcknowledgmentFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OfficialDocumentAcknowledgmentPayload>
+        }
+        findFirst: {
+          args: Prisma.OfficialDocumentAcknowledgmentFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OfficialDocumentAcknowledgmentPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.OfficialDocumentAcknowledgmentFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OfficialDocumentAcknowledgmentPayload>
+        }
+        findMany: {
+          args: Prisma.OfficialDocumentAcknowledgmentFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OfficialDocumentAcknowledgmentPayload>[]
+        }
+        create: {
+          args: Prisma.OfficialDocumentAcknowledgmentCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OfficialDocumentAcknowledgmentPayload>
+        }
+        createMany: {
+          args: Prisma.OfficialDocumentAcknowledgmentCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.OfficialDocumentAcknowledgmentCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OfficialDocumentAcknowledgmentPayload>[]
+        }
+        delete: {
+          args: Prisma.OfficialDocumentAcknowledgmentDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OfficialDocumentAcknowledgmentPayload>
+        }
+        update: {
+          args: Prisma.OfficialDocumentAcknowledgmentUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OfficialDocumentAcknowledgmentPayload>
+        }
+        deleteMany: {
+          args: Prisma.OfficialDocumentAcknowledgmentDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.OfficialDocumentAcknowledgmentUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.OfficialDocumentAcknowledgmentUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OfficialDocumentAcknowledgmentPayload>[]
+        }
+        upsert: {
+          args: Prisma.OfficialDocumentAcknowledgmentUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OfficialDocumentAcknowledgmentPayload>
+        }
+        aggregate: {
+          args: Prisma.OfficialDocumentAcknowledgmentAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateOfficialDocumentAcknowledgment>
+        }
+        groupBy: {
+          args: Prisma.OfficialDocumentAcknowledgmentGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.OfficialDocumentAcknowledgmentGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.OfficialDocumentAcknowledgmentCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.OfficialDocumentAcknowledgmentCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -3765,6 +3990,49 @@ export const SurveyAnswerScalarFieldEnum = {
 export type SurveyAnswerScalarFieldEnum = (typeof SurveyAnswerScalarFieldEnum)[keyof typeof SurveyAnswerScalarFieldEnum]
 
 
+export const OfficialDocumentScalarFieldEnum = {
+  id: 'id',
+  condominiumId: 'condominiumId',
+  title: 'title',
+  description: 'description',
+  category: 'category',
+  fileUrl: 'fileUrl',
+  fileName: 'fileName',
+  fileSize: 'fileSize',
+  mimeType: 'mimeType',
+  version: 'version',
+  isPublished: 'isPublished',
+  requiresAcknowledgment: 'requiresAcknowledgment',
+  targetScope: 'targetScope',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type OfficialDocumentScalarFieldEnum = (typeof OfficialDocumentScalarFieldEnum)[keyof typeof OfficialDocumentScalarFieldEnum]
+
+
+export const OfficialDocumentHouseScalarFieldEnum = {
+  id: 'id',
+  documentId: 'documentId',
+  houseId: 'houseId'
+} as const
+
+export type OfficialDocumentHouseScalarFieldEnum = (typeof OfficialDocumentHouseScalarFieldEnum)[keyof typeof OfficialDocumentHouseScalarFieldEnum]
+
+
+export const OfficialDocumentAcknowledgmentScalarFieldEnum = {
+  id: 'id',
+  documentId: 'documentId',
+  userId: 'userId',
+  houseId: 'houseId',
+  viewedAt: 'viewedAt',
+  acknowledgedAt: 'acknowledgedAt'
+} as const
+
+export type OfficialDocumentAcknowledgmentScalarFieldEnum = (typeof OfficialDocumentAcknowledgmentScalarFieldEnum)[keyof typeof OfficialDocumentAcknowledgmentScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -4223,6 +4491,34 @@ export type ListEnumSurveyQuestionTypeFieldRefInput<$PrismaModel> = FieldRefInpu
 
 
 /**
+ * Reference to a field of type 'OfficialDocumentCategory'
+ */
+export type EnumOfficialDocumentCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OfficialDocumentCategory'>
+    
+
+
+/**
+ * Reference to a field of type 'OfficialDocumentCategory[]'
+ */
+export type ListEnumOfficialDocumentCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OfficialDocumentCategory[]'>
+    
+
+
+/**
+ * Reference to a field of type 'DocumentTargetScope'
+ */
+export type EnumDocumentTargetScopeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DocumentTargetScope'>
+    
+
+
+/**
+ * Reference to a field of type 'DocumentTargetScope[]'
+ */
+export type ListEnumDocumentTargetScopeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DocumentTargetScope[]'>
+    
+
+
+/**
  * Reference to a field of type 'Float'
  */
 export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -4381,6 +4677,9 @@ export type GlobalOmitConfig = {
   surveyOption?: Prisma.SurveyOptionOmit
   surveyResponse?: Prisma.SurveyResponseOmit
   surveyAnswer?: Prisma.SurveyAnswerOmit
+  officialDocument?: Prisma.OfficialDocumentOmit
+  officialDocumentHouse?: Prisma.OfficialDocumentHouseOmit
+  officialDocumentAcknowledgment?: Prisma.OfficialDocumentAcknowledgmentOmit
 }
 
 /* Types for Logging */

@@ -197,3 +197,18 @@ export type SurveyResponse = Prisma.SurveyResponseModel
  * 
  */
 export type SurveyAnswer = Prisma.SurveyAnswerModel
+/**
+ * Model OfficialDocument
+ * 
+ */
+export type OfficialDocument = Prisma.OfficialDocumentModel
+/**
+ * Model OfficialDocumentHouse
+ * 
+ */
+export type OfficialDocumentHouse = Prisma.OfficialDocumentHouseModel
+/**
+ * Model OfficialDocumentAcknowledgment
+ * 
+ */
+export type OfficialDocumentAcknowledgment = Prisma.OfficialDocumentAcknowledgmentModel

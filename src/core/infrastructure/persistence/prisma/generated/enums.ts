@@ -261,3 +261,25 @@ export const SurveyQuestionType = {
 } as const
 
 export type SurveyQuestionType = (typeof SurveyQuestionType)[keyof typeof SurveyQuestionType]
+
+
+export const OfficialDocumentCategory = {
+  REGLAMENTO: 'REGLAMENTO',
+  ACTA_ASAMBLEA: 'ACTA_ASAMBLEA',
+  COMUNICADO_OFICIAL: 'COMUNICADO_OFICIAL',
+  MANUAL_CONVIVENCIA: 'MANUAL_CONVIVENCIA',
+  CONTRATO_SERVICIO: 'CONTRATO_SERVICIO',
+  FINANCIERO: 'FINANCIERO',
+  OTRO: 'OTRO'
+} as const
+
+export type OfficialDocumentCategory = (typeof OfficialDocumentCategory)[keyof typeof OfficialDocumentCategory]
+
+
+export const DocumentTargetScope = {
+  ALL: 'ALL',
+  SPECIFIC_HOUSES: 'SPECIFIC_HOUSES',
+  PRIVATE: 'PRIVATE'
+} as const
+
+export type DocumentTargetScope = (typeof DocumentTargetScope)[keyof typeof DocumentTargetScope]

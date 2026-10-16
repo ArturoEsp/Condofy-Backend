@@ -197,6 +197,7 @@ model Condominium {
   standContacts           StandContact[]
   announcements           Announcement[]
   surveys                 Survey[]
+  officialDocuments       OfficialDocument[]
   planId                  String?
   plan                    SubscriptionPlan?              @relation(fields: [planId], references: [id], onDelete: SetNull)
   isTrial                 Boolean                        @default(false)
@@ -253,6 +254,8 @@ model User {
   announcementsRead         AnnouncementReader[]    @relation("AnnouncementReaderUser")
   surveysCreated            Survey[]                @relation("SurveyCreatedBy")
   surveyResponses           SurveyResponse[]        @relation("SurveyResponseUser")
+  officialDocumentsCreated  OfficialDocument[]      @relation("OfficialDocumentCreatedBy")
+  officialDocumentAcks      OfficialDocumentAcknowledgment[] @relation("DocumentAcksUser")
 
   @@index([condominiumId])
 }
@@ -317,8 +320,10 @@ model House {
   extraIncomes            ExtraIncome[]
   extraordinaryFeeCharges ExtraordinaryFeeCharge[]
   announcementReaders     AnnouncementReader[]
-  surveyResponses         SurveyResponse[]         @relation("SurveyResponseHouse")
-  isDisabled              Boolean                  @default(false)
+  surveyResponses         SurveyResponse[]                 @relation("SurveyResponseHouse")
+  officialDocumentHouses  OfficialDocumentHouse[]
+  officialDocumentAcks    OfficialDocumentAcknowledgment[] @relation("DocumentAcksHouse")
+  isDisabled              Boolean                          @default(false)
   createdAt               DateTime                 @default(now())
   updatedAt               DateTime                 @updatedAt
 
@@ -942,4 +947,76 @@ model SurveyAnswer {
   @@index([responseId])
   @@index([questionId])
   @@index([optionId])
+}
+
+enum OfficialDocumentCategory {
+  REGLAMENTO
+  ACTA_ASAMBLEA
+  COMUNICADO_OFICIAL
+  MANUAL_CONVIVENCIA
+  CONTRATO_SERVICIO
+  FINANCIERO
+  OTRO
+}
+
+enum DocumentTargetScope {
+  ALL
+  SPECIFIC_HOUSES
+  PRIVATE
+}
+
+model OfficialDocument {
+  id                     String                           @id @default(uuid())
+  condominiumId          String
+  condominium            Condominium                      @relation(fields: [condominiumId], references: [id], onDelete: Cascade)
+  title                  String
+  description            String?                          @db.Text
+  category               OfficialDocumentCategory         @default(REGLAMENTO)
+  fileUrl                String
+  fileName               String
+  fileSize               String?
+  mimeType               String?
+  version                String?
+  isPublished            Boolean                          @default(true)
+  requiresAcknowledgment Boolean                          @default(false)
+  targetScope            DocumentTargetScope              @default(ALL)
+  assignedHouses         OfficialDocumentHouse[]
+  acknowledgments        OfficialDocumentAcknowledgment[]
+  createdById            String
+  createdBy              User                             @relation("OfficialDocumentCreatedBy", fields: [createdById], references: [id])
+  createdAt              DateTime                         @default(now())
+  updatedAt              DateTime                         @updatedAt
+
+  @@index([condominiumId, isPublished])
+  @@index([condominiumId, category])
+  @@index([condominiumId, createdAt])
+}
+
+model OfficialDocumentHouse {
+  id         String           @id @default(uuid())
+  documentId String
+  document   OfficialDocument @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  houseId    String
+  house      House            @relation(fields: [houseId], references: [id], onDelete: Cascade)
+
+  @@unique([documentId, houseId])
+  @@index([documentId])
+  @@index([houseId])
+}
+
+model OfficialDocumentAcknowledgment {
+  id             String           @id @default(uuid())
+  documentId     String
+  document       OfficialDocument @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  userId         String
+  user           User             @relation("DocumentAcksUser", fields: [userId], references: [id], onDelete: Cascade)
+  houseId        String?
+  house          House?           @relation("DocumentAcksHouse", fields: [houseId], references: [id], onDelete: SetNull)
+  viewedAt       DateTime         @default(now())
+  acknowledgedAt DateTime?
+
+  @@unique([documentId, userId])
+  @@index([documentId])
+  @@index([houseId])
+  @@index([userId])
 }

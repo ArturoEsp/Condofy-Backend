@@ -86,7 +86,10 @@ export const ModelName = {
   SurveyQuestion: 'SurveyQuestion',
   SurveyOption: 'SurveyOption',
   SurveyResponse: 'SurveyResponse',
-  SurveyAnswer: 'SurveyAnswer'
+  SurveyAnswer: 'SurveyAnswer',
+  OfficialDocument: 'OfficialDocument',
+  OfficialDocumentHouse: 'OfficialDocumentHouse',
+  OfficialDocumentAcknowledgment: 'OfficialDocumentAcknowledgment'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -726,6 +729,49 @@ export const SurveyAnswerScalarFieldEnum = {
 } as const
 
 export type SurveyAnswerScalarFieldEnum = (typeof SurveyAnswerScalarFieldEnum)[keyof typeof SurveyAnswerScalarFieldEnum]
+
+
+export const OfficialDocumentScalarFieldEnum = {
+  id: 'id',
+  condominiumId: 'condominiumId',
+  title: 'title',
+  description: 'description',
+  category: 'category',
+  fileUrl: 'fileUrl',
+  fileName: 'fileName',
+  fileSize: 'fileSize',
+  mimeType: 'mimeType',
+  version: 'version',
+  isPublished: 'isPublished',
+  requiresAcknowledgment: 'requiresAcknowledgment',
+  targetScope: 'targetScope',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type OfficialDocumentScalarFieldEnum = (typeof OfficialDocumentScalarFieldEnum)[keyof typeof OfficialDocumentScalarFieldEnum]
+
+
+export const OfficialDocumentHouseScalarFieldEnum = {
+  id: 'id',
+  documentId: 'documentId',
+  houseId: 'houseId'
+} as const
+
+export type OfficialDocumentHouseScalarFieldEnum = (typeof OfficialDocumentHouseScalarFieldEnum)[keyof typeof OfficialDocumentHouseScalarFieldEnum]
+
+
+export const OfficialDocumentAcknowledgmentScalarFieldEnum = {
+  id: 'id',
+  documentId: 'documentId',
+  userId: 'userId',
+  houseId: 'houseId',
+  viewedAt: 'viewedAt',
+  acknowledgedAt: 'acknowledgedAt'
+} as const
+
+export type OfficialDocumentAcknowledgmentScalarFieldEnum = (typeof OfficialDocumentAcknowledgmentScalarFieldEnum)[keyof typeof OfficialDocumentAcknowledgmentScalarFieldEnum]
 
 
 export const SortOrder = {
