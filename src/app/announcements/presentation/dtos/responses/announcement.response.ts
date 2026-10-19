@@ -14,7 +14,9 @@ export const computeAnnouncementStatus = (
 ): 'ACTIVE' | 'SCHEDULED' | 'EXPIRED' | 'DRAFT' => {
   if (!isActive) return 'DRAFT';
   const start = new Date(startDate);
-  if (start > now) return 'SCHEDULED';
+  // Margen de 2 minutos para absorber desfases de reloj
+  const nowWithTolerance = new Date(now.getTime() + 2 * 60 * 1000);
+  if (start > nowWithTolerance) return 'SCHEDULED';
   if (endDate) {
     const end = new Date(endDate);
     if (end < now) return 'EXPIRED';

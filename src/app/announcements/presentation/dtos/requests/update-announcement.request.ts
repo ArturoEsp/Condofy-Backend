@@ -77,7 +77,10 @@ export class UpdateAnnouncementRequest {
     description: 'Indica si el comunicado está activo',
   })
   @IsOptional()
-  @Transform(({ value }) => value === 'true' || value === true)
+  @Transform(({ value }) => {
+    if (value === undefined || value === null) return undefined;
+    return value === 'true' || value === true;
+  })
   @IsBoolean()
   isActive?: boolean;
 

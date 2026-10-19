@@ -87,7 +87,10 @@ export class CreateAnnouncementRequest {
     default: true,
   })
   @IsOptional()
-  @Transform(({ value }) => value === 'true' || value === true)
+  @Transform(({ value }) => {
+    if (value === undefined || value === null) return true;
+    return value === 'true' || value === true;
+  })
   @IsBoolean()
   isActive?: boolean;
 
