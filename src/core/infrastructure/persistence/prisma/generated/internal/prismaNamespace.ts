@@ -422,7 +422,10 @@ export const ModelName = {
   SurveyAnswer: 'SurveyAnswer',
   OfficialDocument: 'OfficialDocument',
   OfficialDocumentHouse: 'OfficialDocumentHouse',
-  OfficialDocumentAcknowledgment: 'OfficialDocumentAcknowledgment'
+  OfficialDocumentAcknowledgment: 'OfficialDocumentAcknowledgment',
+  Amenity: 'Amenity',
+  AmenityBlockPeriod: 'AmenityBlockPeriod',
+  AmenityReservation: 'AmenityReservation'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -438,7 +441,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "condominium" | "subscriptionPlan" | "user" | "passwordResetToken" | "userSession" | "pushSubscription" | "house" | "houseConfiguration" | "residentProfile" | "visitor" | "accessAuthorization" | "accessLog" | "parcelDelivery" | "generalProviderAccess" | "houseAccount" | "accountMovement" | "maintenanceCharge" | "payment" | "maintenancePeriod" | "lateFee" | "condominiumBillingConfig" | "expense" | "extraIncome" | "condominiumTransparencyConfig" | "extraordinaryFee" | "extraordinaryFeeDocument" | "extraordinaryFeeCharge" | "standContact" | "announcement" | "announcementAttachment" | "announcementReader" | "survey" | "surveyQuestion" | "surveyOption" | "surveyResponse" | "surveyAnswer" | "officialDocument" | "officialDocumentHouse" | "officialDocumentAcknowledgment"
+    modelProps: "condominium" | "subscriptionPlan" | "user" | "passwordResetToken" | "userSession" | "pushSubscription" | "house" | "houseConfiguration" | "residentProfile" | "visitor" | "accessAuthorization" | "accessLog" | "parcelDelivery" | "generalProviderAccess" | "houseAccount" | "accountMovement" | "maintenanceCharge" | "payment" | "maintenancePeriod" | "lateFee" | "condominiumBillingConfig" | "expense" | "extraIncome" | "condominiumTransparencyConfig" | "extraordinaryFee" | "extraordinaryFeeDocument" | "extraordinaryFeeCharge" | "standContact" | "announcement" | "announcementAttachment" | "announcementReader" | "survey" | "surveyQuestion" | "surveyOption" | "surveyResponse" | "surveyAnswer" | "officialDocument" | "officialDocumentHouse" | "officialDocumentAcknowledgment" | "amenity" | "amenityBlockPeriod" | "amenityReservation"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -3328,6 +3331,228 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Amenity: {
+      payload: Prisma.$AmenityPayload<ExtArgs>
+      fields: Prisma.AmenityFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.AmenityFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AmenityPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.AmenityFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AmenityPayload>
+        }
+        findFirst: {
+          args: Prisma.AmenityFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AmenityPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.AmenityFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AmenityPayload>
+        }
+        findMany: {
+          args: Prisma.AmenityFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AmenityPayload>[]
+        }
+        create: {
+          args: Prisma.AmenityCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AmenityPayload>
+        }
+        createMany: {
+          args: Prisma.AmenityCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.AmenityCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AmenityPayload>[]
+        }
+        delete: {
+          args: Prisma.AmenityDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AmenityPayload>
+        }
+        update: {
+          args: Prisma.AmenityUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AmenityPayload>
+        }
+        deleteMany: {
+          args: Prisma.AmenityDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.AmenityUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.AmenityUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AmenityPayload>[]
+        }
+        upsert: {
+          args: Prisma.AmenityUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AmenityPayload>
+        }
+        aggregate: {
+          args: Prisma.AmenityAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAmenity>
+        }
+        groupBy: {
+          args: Prisma.AmenityGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AmenityGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.AmenityCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AmenityCountAggregateOutputType> | number
+        }
+      }
+    }
+    AmenityBlockPeriod: {
+      payload: Prisma.$AmenityBlockPeriodPayload<ExtArgs>
+      fields: Prisma.AmenityBlockPeriodFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.AmenityBlockPeriodFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AmenityBlockPeriodPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.AmenityBlockPeriodFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AmenityBlockPeriodPayload>
+        }
+        findFirst: {
+          args: Prisma.AmenityBlockPeriodFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AmenityBlockPeriodPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.AmenityBlockPeriodFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AmenityBlockPeriodPayload>
+        }
+        findMany: {
+          args: Prisma.AmenityBlockPeriodFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AmenityBlockPeriodPayload>[]
+        }
+        create: {
+          args: Prisma.AmenityBlockPeriodCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AmenityBlockPeriodPayload>
+        }
+        createMany: {
+          args: Prisma.AmenityBlockPeriodCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.AmenityBlockPeriodCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AmenityBlockPeriodPayload>[]
+        }
+        delete: {
+          args: Prisma.AmenityBlockPeriodDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AmenityBlockPeriodPayload>
+        }
+        update: {
+          args: Prisma.AmenityBlockPeriodUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AmenityBlockPeriodPayload>
+        }
+        deleteMany: {
+          args: Prisma.AmenityBlockPeriodDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.AmenityBlockPeriodUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.AmenityBlockPeriodUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AmenityBlockPeriodPayload>[]
+        }
+        upsert: {
+          args: Prisma.AmenityBlockPeriodUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AmenityBlockPeriodPayload>
+        }
+        aggregate: {
+          args: Prisma.AmenityBlockPeriodAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAmenityBlockPeriod>
+        }
+        groupBy: {
+          args: Prisma.AmenityBlockPeriodGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AmenityBlockPeriodGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.AmenityBlockPeriodCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AmenityBlockPeriodCountAggregateOutputType> | number
+        }
+      }
+    }
+    AmenityReservation: {
+      payload: Prisma.$AmenityReservationPayload<ExtArgs>
+      fields: Prisma.AmenityReservationFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.AmenityReservationFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AmenityReservationPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.AmenityReservationFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AmenityReservationPayload>
+        }
+        findFirst: {
+          args: Prisma.AmenityReservationFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AmenityReservationPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.AmenityReservationFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AmenityReservationPayload>
+        }
+        findMany: {
+          args: Prisma.AmenityReservationFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AmenityReservationPayload>[]
+        }
+        create: {
+          args: Prisma.AmenityReservationCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AmenityReservationPayload>
+        }
+        createMany: {
+          args: Prisma.AmenityReservationCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.AmenityReservationCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AmenityReservationPayload>[]
+        }
+        delete: {
+          args: Prisma.AmenityReservationDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AmenityReservationPayload>
+        }
+        update: {
+          args: Prisma.AmenityReservationUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AmenityReservationPayload>
+        }
+        deleteMany: {
+          args: Prisma.AmenityReservationDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.AmenityReservationUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.AmenityReservationUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AmenityReservationPayload>[]
+        }
+        upsert: {
+          args: Prisma.AmenityReservationUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AmenityReservationPayload>
+        }
+        aggregate: {
+          args: Prisma.AmenityReservationAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAmenityReservation>
+        }
+        groupBy: {
+          args: Prisma.AmenityReservationGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AmenityReservationGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.AmenityReservationCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AmenityReservationCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -4033,6 +4258,80 @@ export const OfficialDocumentAcknowledgmentScalarFieldEnum = {
 export type OfficialDocumentAcknowledgmentScalarFieldEnum = (typeof OfficialDocumentAcknowledgmentScalarFieldEnum)[keyof typeof OfficialDocumentAcknowledgmentScalarFieldEnum]
 
 
+export const AmenityScalarFieldEnum = {
+  id: 'id',
+  condominiumId: 'condominiumId',
+  name: 'name',
+  description: 'description',
+  capacity: 'capacity',
+  isActive: 'isActive',
+  cost: 'cost',
+  requiresDeposit: 'requiresDeposit',
+  depositAmount: 'depositAmount',
+  rulesDocumentUrl: 'rulesDocumentUrl',
+  rulesDocumentName: 'rulesDocumentName',
+  rulesText: 'rulesText',
+  photos: 'photos',
+  reservationType: 'reservationType',
+  openingTime: 'openingTime',
+  closingTime: 'closingTime',
+  availableDays: 'availableDays',
+  minNoticeHours: 'minNoticeHours',
+  maxNoticeDays: 'maxNoticeDays',
+  maxHoursPerReservation: 'maxHoursPerReservation',
+  requiresApproval: 'requiresApproval',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AmenityScalarFieldEnum = (typeof AmenityScalarFieldEnum)[keyof typeof AmenityScalarFieldEnum]
+
+
+export const AmenityBlockPeriodScalarFieldEnum = {
+  id: 'id',
+  amenityId: 'amenityId',
+  condominiumId: 'condominiumId',
+  title: 'title',
+  reason: 'reason',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  startTime: 'startTime',
+  endTime: 'endTime',
+  createdBy: 'createdBy',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AmenityBlockPeriodScalarFieldEnum = (typeof AmenityBlockPeriodScalarFieldEnum)[keyof typeof AmenityBlockPeriodScalarFieldEnum]
+
+
+export const AmenityReservationScalarFieldEnum = {
+  id: 'id',
+  amenityId: 'amenityId',
+  condominiumId: 'condominiumId',
+  residentId: 'residentId',
+  houseId: 'houseId',
+  reservationDate: 'reservationDate',
+  startTime: 'startTime',
+  endTime: 'endTime',
+  status: 'status',
+  totalCost: 'totalCost',
+  depositAmount: 'depositAmount',
+  paymentStatus: 'paymentStatus',
+  notes: 'notes',
+  adminNotes: 'adminNotes',
+  approvedAt: 'approvedAt',
+  approvedBy: 'approvedBy',
+  cancelledAt: 'cancelledAt',
+  cancelledBy: 'cancelledBy',
+  cancellationReason: 'cancellationReason',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AmenityReservationScalarFieldEnum = (typeof AmenityReservationScalarFieldEnum)[keyof typeof AmenityReservationScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -4519,6 +4818,48 @@ export type ListEnumDocumentTargetScopeFieldRefInput<$PrismaModel> = FieldRefInp
 
 
 /**
+ * Reference to a field of type 'AmenityReservationType'
+ */
+export type EnumAmenityReservationTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AmenityReservationType'>
+    
+
+
+/**
+ * Reference to a field of type 'AmenityReservationType[]'
+ */
+export type ListEnumAmenityReservationTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AmenityReservationType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'AmenityReservationStatus'
+ */
+export type EnumAmenityReservationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AmenityReservationStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'AmenityReservationStatus[]'
+ */
+export type ListEnumAmenityReservationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AmenityReservationStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'AmenityPaymentStatus'
+ */
+export type EnumAmenityPaymentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AmenityPaymentStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'AmenityPaymentStatus[]'
+ */
+export type ListEnumAmenityPaymentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AmenityPaymentStatus[]'>
+    
+
+
+/**
  * Reference to a field of type 'Float'
  */
 export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -4680,6 +5021,9 @@ export type GlobalOmitConfig = {
   officialDocument?: Prisma.OfficialDocumentOmit
   officialDocumentHouse?: Prisma.OfficialDocumentHouseOmit
   officialDocumentAcknowledgment?: Prisma.OfficialDocumentAcknowledgmentOmit
+  amenity?: Prisma.AmenityOmit
+  amenityBlockPeriod?: Prisma.AmenityBlockPeriodOmit
+  amenityReservation?: Prisma.AmenityReservationOmit
 }
 
 /* Types for Logging */

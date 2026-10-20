@@ -258,6 +258,7 @@ export type UserWhereInput = {
   surveyResponses?: Prisma.SurveyResponseListRelationFilter
   officialDocumentsCreated?: Prisma.OfficialDocumentListRelationFilter
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentListRelationFilter
+  amenityReservations?: Prisma.AmenityReservationListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -293,6 +294,7 @@ export type UserOrderByWithRelationInput = {
   surveyResponses?: Prisma.SurveyResponseOrderByRelationAggregateInput
   officialDocumentsCreated?: Prisma.OfficialDocumentOrderByRelationAggregateInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentOrderByRelationAggregateInput
+  amenityReservations?: Prisma.AmenityReservationOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -331,6 +333,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   surveyResponses?: Prisma.SurveyResponseListRelationFilter
   officialDocumentsCreated?: Prisma.OfficialDocumentListRelationFilter
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentListRelationFilter
+  amenityReservations?: Prisma.AmenityReservationListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -401,6 +404,7 @@ export type UserCreateInput = {
   surveyResponses?: Prisma.SurveyResponseCreateNestedManyWithoutUserInput
   officialDocumentsCreated?: Prisma.OfficialDocumentCreateNestedManyWithoutCreatedByInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentCreateNestedManyWithoutUserInput
+  amenityReservations?: Prisma.AmenityReservationCreateNestedManyWithoutResidentInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -435,6 +439,7 @@ export type UserUncheckedCreateInput = {
   surveyResponses?: Prisma.SurveyResponseUncheckedCreateNestedManyWithoutUserInput
   officialDocumentsCreated?: Prisma.OfficialDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUncheckedCreateNestedManyWithoutUserInput
+  amenityReservations?: Prisma.AmenityReservationUncheckedCreateNestedManyWithoutResidentInput
 }
 
 export type UserUpdateInput = {
@@ -469,6 +474,7 @@ export type UserUpdateInput = {
   surveyResponses?: Prisma.SurveyResponseUpdateManyWithoutUserNestedInput
   officialDocumentsCreated?: Prisma.OfficialDocumentUpdateManyWithoutCreatedByNestedInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUpdateManyWithoutUserNestedInput
+  amenityReservations?: Prisma.AmenityReservationUpdateManyWithoutResidentNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -503,6 +509,7 @@ export type UserUncheckedUpdateInput = {
   surveyResponses?: Prisma.SurveyResponseUncheckedUpdateManyWithoutUserNestedInput
   officialDocumentsCreated?: Prisma.OfficialDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUncheckedUpdateManyWithoutUserNestedInput
+  amenityReservations?: Prisma.AmenityReservationUncheckedUpdateManyWithoutResidentNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -936,6 +943,20 @@ export type UserUpdateOneRequiredWithoutOfficialDocumentAcksNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutOfficialDocumentAcksInput, Prisma.UserUpdateWithoutOfficialDocumentAcksInput>, Prisma.UserUncheckedUpdateWithoutOfficialDocumentAcksInput>
 }
 
+export type UserCreateNestedOneWithoutAmenityReservationsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAmenityReservationsInput, Prisma.UserUncheckedCreateWithoutAmenityReservationsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAmenityReservationsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutAmenityReservationsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAmenityReservationsInput, Prisma.UserUncheckedCreateWithoutAmenityReservationsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAmenityReservationsInput
+  upsert?: Prisma.UserUpsertWithoutAmenityReservationsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAmenityReservationsInput, Prisma.UserUpdateWithoutAmenityReservationsInput>, Prisma.UserUncheckedUpdateWithoutAmenityReservationsInput>
+}
+
 export type UserCreateWithoutCondominiumInput = {
   id?: string
   email: string
@@ -967,6 +988,7 @@ export type UserCreateWithoutCondominiumInput = {
   surveyResponses?: Prisma.SurveyResponseCreateNestedManyWithoutUserInput
   officialDocumentsCreated?: Prisma.OfficialDocumentCreateNestedManyWithoutCreatedByInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentCreateNestedManyWithoutUserInput
+  amenityReservations?: Prisma.AmenityReservationCreateNestedManyWithoutResidentInput
 }
 
 export type UserUncheckedCreateWithoutCondominiumInput = {
@@ -1000,6 +1022,7 @@ export type UserUncheckedCreateWithoutCondominiumInput = {
   surveyResponses?: Prisma.SurveyResponseUncheckedCreateNestedManyWithoutUserInput
   officialDocumentsCreated?: Prisma.OfficialDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUncheckedCreateNestedManyWithoutUserInput
+  amenityReservations?: Prisma.AmenityReservationUncheckedCreateNestedManyWithoutResidentInput
 }
 
 export type UserCreateOrConnectWithoutCondominiumInput = {
@@ -1077,6 +1100,7 @@ export type UserCreateWithoutPasswordResetTokensInput = {
   surveyResponses?: Prisma.SurveyResponseCreateNestedManyWithoutUserInput
   officialDocumentsCreated?: Prisma.OfficialDocumentCreateNestedManyWithoutCreatedByInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentCreateNestedManyWithoutUserInput
+  amenityReservations?: Prisma.AmenityReservationCreateNestedManyWithoutResidentInput
 }
 
 export type UserUncheckedCreateWithoutPasswordResetTokensInput = {
@@ -1110,6 +1134,7 @@ export type UserUncheckedCreateWithoutPasswordResetTokensInput = {
   surveyResponses?: Prisma.SurveyResponseUncheckedCreateNestedManyWithoutUserInput
   officialDocumentsCreated?: Prisma.OfficialDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUncheckedCreateNestedManyWithoutUserInput
+  amenityReservations?: Prisma.AmenityReservationUncheckedCreateNestedManyWithoutResidentInput
 }
 
 export type UserCreateOrConnectWithoutPasswordResetTokensInput = {
@@ -1159,6 +1184,7 @@ export type UserUpdateWithoutPasswordResetTokensInput = {
   surveyResponses?: Prisma.SurveyResponseUpdateManyWithoutUserNestedInput
   officialDocumentsCreated?: Prisma.OfficialDocumentUpdateManyWithoutCreatedByNestedInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUpdateManyWithoutUserNestedInput
+  amenityReservations?: Prisma.AmenityReservationUpdateManyWithoutResidentNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPasswordResetTokensInput = {
@@ -1192,6 +1218,7 @@ export type UserUncheckedUpdateWithoutPasswordResetTokensInput = {
   surveyResponses?: Prisma.SurveyResponseUncheckedUpdateManyWithoutUserNestedInput
   officialDocumentsCreated?: Prisma.OfficialDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUncheckedUpdateManyWithoutUserNestedInput
+  amenityReservations?: Prisma.AmenityReservationUncheckedUpdateManyWithoutResidentNestedInput
 }
 
 export type UserCreateWithoutUserSessionsInput = {
@@ -1225,6 +1252,7 @@ export type UserCreateWithoutUserSessionsInput = {
   surveyResponses?: Prisma.SurveyResponseCreateNestedManyWithoutUserInput
   officialDocumentsCreated?: Prisma.OfficialDocumentCreateNestedManyWithoutCreatedByInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentCreateNestedManyWithoutUserInput
+  amenityReservations?: Prisma.AmenityReservationCreateNestedManyWithoutResidentInput
 }
 
 export type UserUncheckedCreateWithoutUserSessionsInput = {
@@ -1258,6 +1286,7 @@ export type UserUncheckedCreateWithoutUserSessionsInput = {
   surveyResponses?: Prisma.SurveyResponseUncheckedCreateNestedManyWithoutUserInput
   officialDocumentsCreated?: Prisma.OfficialDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUncheckedCreateNestedManyWithoutUserInput
+  amenityReservations?: Prisma.AmenityReservationUncheckedCreateNestedManyWithoutResidentInput
 }
 
 export type UserCreateOrConnectWithoutUserSessionsInput = {
@@ -1307,6 +1336,7 @@ export type UserUpdateWithoutUserSessionsInput = {
   surveyResponses?: Prisma.SurveyResponseUpdateManyWithoutUserNestedInput
   officialDocumentsCreated?: Prisma.OfficialDocumentUpdateManyWithoutCreatedByNestedInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUpdateManyWithoutUserNestedInput
+  amenityReservations?: Prisma.AmenityReservationUpdateManyWithoutResidentNestedInput
 }
 
 export type UserUncheckedUpdateWithoutUserSessionsInput = {
@@ -1340,6 +1370,7 @@ export type UserUncheckedUpdateWithoutUserSessionsInput = {
   surveyResponses?: Prisma.SurveyResponseUncheckedUpdateManyWithoutUserNestedInput
   officialDocumentsCreated?: Prisma.OfficialDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUncheckedUpdateManyWithoutUserNestedInput
+  amenityReservations?: Prisma.AmenityReservationUncheckedUpdateManyWithoutResidentNestedInput
 }
 
 export type UserCreateWithoutPushSubscriptionsInput = {
@@ -1373,6 +1404,7 @@ export type UserCreateWithoutPushSubscriptionsInput = {
   surveyResponses?: Prisma.SurveyResponseCreateNestedManyWithoutUserInput
   officialDocumentsCreated?: Prisma.OfficialDocumentCreateNestedManyWithoutCreatedByInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentCreateNestedManyWithoutUserInput
+  amenityReservations?: Prisma.AmenityReservationCreateNestedManyWithoutResidentInput
 }
 
 export type UserUncheckedCreateWithoutPushSubscriptionsInput = {
@@ -1406,6 +1438,7 @@ export type UserUncheckedCreateWithoutPushSubscriptionsInput = {
   surveyResponses?: Prisma.SurveyResponseUncheckedCreateNestedManyWithoutUserInput
   officialDocumentsCreated?: Prisma.OfficialDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUncheckedCreateNestedManyWithoutUserInput
+  amenityReservations?: Prisma.AmenityReservationUncheckedCreateNestedManyWithoutResidentInput
 }
 
 export type UserCreateOrConnectWithoutPushSubscriptionsInput = {
@@ -1455,6 +1488,7 @@ export type UserUpdateWithoutPushSubscriptionsInput = {
   surveyResponses?: Prisma.SurveyResponseUpdateManyWithoutUserNestedInput
   officialDocumentsCreated?: Prisma.OfficialDocumentUpdateManyWithoutCreatedByNestedInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUpdateManyWithoutUserNestedInput
+  amenityReservations?: Prisma.AmenityReservationUpdateManyWithoutResidentNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPushSubscriptionsInput = {
@@ -1488,6 +1522,7 @@ export type UserUncheckedUpdateWithoutPushSubscriptionsInput = {
   surveyResponses?: Prisma.SurveyResponseUncheckedUpdateManyWithoutUserNestedInput
   officialDocumentsCreated?: Prisma.OfficialDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUncheckedUpdateManyWithoutUserNestedInput
+  amenityReservations?: Prisma.AmenityReservationUncheckedUpdateManyWithoutResidentNestedInput
 }
 
 export type UserCreateWithoutResidentProfileInput = {
@@ -1521,6 +1556,7 @@ export type UserCreateWithoutResidentProfileInput = {
   surveyResponses?: Prisma.SurveyResponseCreateNestedManyWithoutUserInput
   officialDocumentsCreated?: Prisma.OfficialDocumentCreateNestedManyWithoutCreatedByInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentCreateNestedManyWithoutUserInput
+  amenityReservations?: Prisma.AmenityReservationCreateNestedManyWithoutResidentInput
 }
 
 export type UserUncheckedCreateWithoutResidentProfileInput = {
@@ -1554,6 +1590,7 @@ export type UserUncheckedCreateWithoutResidentProfileInput = {
   surveyResponses?: Prisma.SurveyResponseUncheckedCreateNestedManyWithoutUserInput
   officialDocumentsCreated?: Prisma.OfficialDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUncheckedCreateNestedManyWithoutUserInput
+  amenityReservations?: Prisma.AmenityReservationUncheckedCreateNestedManyWithoutResidentInput
 }
 
 export type UserCreateOrConnectWithoutResidentProfileInput = {
@@ -1603,6 +1640,7 @@ export type UserUpdateWithoutResidentProfileInput = {
   surveyResponses?: Prisma.SurveyResponseUpdateManyWithoutUserNestedInput
   officialDocumentsCreated?: Prisma.OfficialDocumentUpdateManyWithoutCreatedByNestedInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUpdateManyWithoutUserNestedInput
+  amenityReservations?: Prisma.AmenityReservationUpdateManyWithoutResidentNestedInput
 }
 
 export type UserUncheckedUpdateWithoutResidentProfileInput = {
@@ -1636,6 +1674,7 @@ export type UserUncheckedUpdateWithoutResidentProfileInput = {
   surveyResponses?: Prisma.SurveyResponseUncheckedUpdateManyWithoutUserNestedInput
   officialDocumentsCreated?: Prisma.OfficialDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUncheckedUpdateManyWithoutUserNestedInput
+  amenityReservations?: Prisma.AmenityReservationUncheckedUpdateManyWithoutResidentNestedInput
 }
 
 export type UserCreateWithoutAccessLogsInput = {
@@ -1669,6 +1708,7 @@ export type UserCreateWithoutAccessLogsInput = {
   surveyResponses?: Prisma.SurveyResponseCreateNestedManyWithoutUserInput
   officialDocumentsCreated?: Prisma.OfficialDocumentCreateNestedManyWithoutCreatedByInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentCreateNestedManyWithoutUserInput
+  amenityReservations?: Prisma.AmenityReservationCreateNestedManyWithoutResidentInput
 }
 
 export type UserUncheckedCreateWithoutAccessLogsInput = {
@@ -1702,6 +1742,7 @@ export type UserUncheckedCreateWithoutAccessLogsInput = {
   surveyResponses?: Prisma.SurveyResponseUncheckedCreateNestedManyWithoutUserInput
   officialDocumentsCreated?: Prisma.OfficialDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUncheckedCreateNestedManyWithoutUserInput
+  amenityReservations?: Prisma.AmenityReservationUncheckedCreateNestedManyWithoutResidentInput
 }
 
 export type UserCreateOrConnectWithoutAccessLogsInput = {
@@ -1751,6 +1792,7 @@ export type UserUpdateWithoutAccessLogsInput = {
   surveyResponses?: Prisma.SurveyResponseUpdateManyWithoutUserNestedInput
   officialDocumentsCreated?: Prisma.OfficialDocumentUpdateManyWithoutCreatedByNestedInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUpdateManyWithoutUserNestedInput
+  amenityReservations?: Prisma.AmenityReservationUpdateManyWithoutResidentNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAccessLogsInput = {
@@ -1784,6 +1826,7 @@ export type UserUncheckedUpdateWithoutAccessLogsInput = {
   surveyResponses?: Prisma.SurveyResponseUncheckedUpdateManyWithoutUserNestedInput
   officialDocumentsCreated?: Prisma.OfficialDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUncheckedUpdateManyWithoutUserNestedInput
+  amenityReservations?: Prisma.AmenityReservationUncheckedUpdateManyWithoutResidentNestedInput
 }
 
 export type UserCreateWithoutParcelsReceivedInput = {
@@ -1817,6 +1860,7 @@ export type UserCreateWithoutParcelsReceivedInput = {
   surveyResponses?: Prisma.SurveyResponseCreateNestedManyWithoutUserInput
   officialDocumentsCreated?: Prisma.OfficialDocumentCreateNestedManyWithoutCreatedByInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentCreateNestedManyWithoutUserInput
+  amenityReservations?: Prisma.AmenityReservationCreateNestedManyWithoutResidentInput
 }
 
 export type UserUncheckedCreateWithoutParcelsReceivedInput = {
@@ -1850,6 +1894,7 @@ export type UserUncheckedCreateWithoutParcelsReceivedInput = {
   surveyResponses?: Prisma.SurveyResponseUncheckedCreateNestedManyWithoutUserInput
   officialDocumentsCreated?: Prisma.OfficialDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUncheckedCreateNestedManyWithoutUserInput
+  amenityReservations?: Prisma.AmenityReservationUncheckedCreateNestedManyWithoutResidentInput
 }
 
 export type UserCreateOrConnectWithoutParcelsReceivedInput = {
@@ -1888,6 +1933,7 @@ export type UserCreateWithoutParcelsDeliveredInput = {
   surveyResponses?: Prisma.SurveyResponseCreateNestedManyWithoutUserInput
   officialDocumentsCreated?: Prisma.OfficialDocumentCreateNestedManyWithoutCreatedByInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentCreateNestedManyWithoutUserInput
+  amenityReservations?: Prisma.AmenityReservationCreateNestedManyWithoutResidentInput
 }
 
 export type UserUncheckedCreateWithoutParcelsDeliveredInput = {
@@ -1921,6 +1967,7 @@ export type UserUncheckedCreateWithoutParcelsDeliveredInput = {
   surveyResponses?: Prisma.SurveyResponseUncheckedCreateNestedManyWithoutUserInput
   officialDocumentsCreated?: Prisma.OfficialDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUncheckedCreateNestedManyWithoutUserInput
+  amenityReservations?: Prisma.AmenityReservationUncheckedCreateNestedManyWithoutResidentInput
 }
 
 export type UserCreateOrConnectWithoutParcelsDeliveredInput = {
@@ -1970,6 +2017,7 @@ export type UserUpdateWithoutParcelsReceivedInput = {
   surveyResponses?: Prisma.SurveyResponseUpdateManyWithoutUserNestedInput
   officialDocumentsCreated?: Prisma.OfficialDocumentUpdateManyWithoutCreatedByNestedInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUpdateManyWithoutUserNestedInput
+  amenityReservations?: Prisma.AmenityReservationUpdateManyWithoutResidentNestedInput
 }
 
 export type UserUncheckedUpdateWithoutParcelsReceivedInput = {
@@ -2003,6 +2051,7 @@ export type UserUncheckedUpdateWithoutParcelsReceivedInput = {
   surveyResponses?: Prisma.SurveyResponseUncheckedUpdateManyWithoutUserNestedInput
   officialDocumentsCreated?: Prisma.OfficialDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUncheckedUpdateManyWithoutUserNestedInput
+  amenityReservations?: Prisma.AmenityReservationUncheckedUpdateManyWithoutResidentNestedInput
 }
 
 export type UserUpsertWithoutParcelsDeliveredInput = {
@@ -2047,6 +2096,7 @@ export type UserUpdateWithoutParcelsDeliveredInput = {
   surveyResponses?: Prisma.SurveyResponseUpdateManyWithoutUserNestedInput
   officialDocumentsCreated?: Prisma.OfficialDocumentUpdateManyWithoutCreatedByNestedInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUpdateManyWithoutUserNestedInput
+  amenityReservations?: Prisma.AmenityReservationUpdateManyWithoutResidentNestedInput
 }
 
 export type UserUncheckedUpdateWithoutParcelsDeliveredInput = {
@@ -2080,6 +2130,7 @@ export type UserUncheckedUpdateWithoutParcelsDeliveredInput = {
   surveyResponses?: Prisma.SurveyResponseUncheckedUpdateManyWithoutUserNestedInput
   officialDocumentsCreated?: Prisma.OfficialDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUncheckedUpdateManyWithoutUserNestedInput
+  amenityReservations?: Prisma.AmenityReservationUncheckedUpdateManyWithoutResidentNestedInput
 }
 
 export type UserCreateWithoutProviderEntriesRegisteredInput = {
@@ -2113,6 +2164,7 @@ export type UserCreateWithoutProviderEntriesRegisteredInput = {
   surveyResponses?: Prisma.SurveyResponseCreateNestedManyWithoutUserInput
   officialDocumentsCreated?: Prisma.OfficialDocumentCreateNestedManyWithoutCreatedByInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentCreateNestedManyWithoutUserInput
+  amenityReservations?: Prisma.AmenityReservationCreateNestedManyWithoutResidentInput
 }
 
 export type UserUncheckedCreateWithoutProviderEntriesRegisteredInput = {
@@ -2146,6 +2198,7 @@ export type UserUncheckedCreateWithoutProviderEntriesRegisteredInput = {
   surveyResponses?: Prisma.SurveyResponseUncheckedCreateNestedManyWithoutUserInput
   officialDocumentsCreated?: Prisma.OfficialDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUncheckedCreateNestedManyWithoutUserInput
+  amenityReservations?: Prisma.AmenityReservationUncheckedCreateNestedManyWithoutResidentInput
 }
 
 export type UserCreateOrConnectWithoutProviderEntriesRegisteredInput = {
@@ -2184,6 +2237,7 @@ export type UserCreateWithoutProviderExitsRegisteredInput = {
   surveyResponses?: Prisma.SurveyResponseCreateNestedManyWithoutUserInput
   officialDocumentsCreated?: Prisma.OfficialDocumentCreateNestedManyWithoutCreatedByInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentCreateNestedManyWithoutUserInput
+  amenityReservations?: Prisma.AmenityReservationCreateNestedManyWithoutResidentInput
 }
 
 export type UserUncheckedCreateWithoutProviderExitsRegisteredInput = {
@@ -2217,6 +2271,7 @@ export type UserUncheckedCreateWithoutProviderExitsRegisteredInput = {
   surveyResponses?: Prisma.SurveyResponseUncheckedCreateNestedManyWithoutUserInput
   officialDocumentsCreated?: Prisma.OfficialDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUncheckedCreateNestedManyWithoutUserInput
+  amenityReservations?: Prisma.AmenityReservationUncheckedCreateNestedManyWithoutResidentInput
 }
 
 export type UserCreateOrConnectWithoutProviderExitsRegisteredInput = {
@@ -2266,6 +2321,7 @@ export type UserUpdateWithoutProviderEntriesRegisteredInput = {
   surveyResponses?: Prisma.SurveyResponseUpdateManyWithoutUserNestedInput
   officialDocumentsCreated?: Prisma.OfficialDocumentUpdateManyWithoutCreatedByNestedInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUpdateManyWithoutUserNestedInput
+  amenityReservations?: Prisma.AmenityReservationUpdateManyWithoutResidentNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProviderEntriesRegisteredInput = {
@@ -2299,6 +2355,7 @@ export type UserUncheckedUpdateWithoutProviderEntriesRegisteredInput = {
   surveyResponses?: Prisma.SurveyResponseUncheckedUpdateManyWithoutUserNestedInput
   officialDocumentsCreated?: Prisma.OfficialDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUncheckedUpdateManyWithoutUserNestedInput
+  amenityReservations?: Prisma.AmenityReservationUncheckedUpdateManyWithoutResidentNestedInput
 }
 
 export type UserUpsertWithoutProviderExitsRegisteredInput = {
@@ -2343,6 +2400,7 @@ export type UserUpdateWithoutProviderExitsRegisteredInput = {
   surveyResponses?: Prisma.SurveyResponseUpdateManyWithoutUserNestedInput
   officialDocumentsCreated?: Prisma.OfficialDocumentUpdateManyWithoutCreatedByNestedInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUpdateManyWithoutUserNestedInput
+  amenityReservations?: Prisma.AmenityReservationUpdateManyWithoutResidentNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProviderExitsRegisteredInput = {
@@ -2376,6 +2434,7 @@ export type UserUncheckedUpdateWithoutProviderExitsRegisteredInput = {
   surveyResponses?: Prisma.SurveyResponseUncheckedUpdateManyWithoutUserNestedInput
   officialDocumentsCreated?: Prisma.OfficialDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUncheckedUpdateManyWithoutUserNestedInput
+  amenityReservations?: Prisma.AmenityReservationUncheckedUpdateManyWithoutResidentNestedInput
 }
 
 export type UserCreateWithoutPaymentsInput = {
@@ -2409,6 +2468,7 @@ export type UserCreateWithoutPaymentsInput = {
   surveyResponses?: Prisma.SurveyResponseCreateNestedManyWithoutUserInput
   officialDocumentsCreated?: Prisma.OfficialDocumentCreateNestedManyWithoutCreatedByInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentCreateNestedManyWithoutUserInput
+  amenityReservations?: Prisma.AmenityReservationCreateNestedManyWithoutResidentInput
 }
 
 export type UserUncheckedCreateWithoutPaymentsInput = {
@@ -2442,6 +2502,7 @@ export type UserUncheckedCreateWithoutPaymentsInput = {
   surveyResponses?: Prisma.SurveyResponseUncheckedCreateNestedManyWithoutUserInput
   officialDocumentsCreated?: Prisma.OfficialDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUncheckedCreateNestedManyWithoutUserInput
+  amenityReservations?: Prisma.AmenityReservationUncheckedCreateNestedManyWithoutResidentInput
 }
 
 export type UserCreateOrConnectWithoutPaymentsInput = {
@@ -2491,6 +2552,7 @@ export type UserUpdateWithoutPaymentsInput = {
   surveyResponses?: Prisma.SurveyResponseUpdateManyWithoutUserNestedInput
   officialDocumentsCreated?: Prisma.OfficialDocumentUpdateManyWithoutCreatedByNestedInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUpdateManyWithoutUserNestedInput
+  amenityReservations?: Prisma.AmenityReservationUpdateManyWithoutResidentNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPaymentsInput = {
@@ -2524,6 +2586,7 @@ export type UserUncheckedUpdateWithoutPaymentsInput = {
   surveyResponses?: Prisma.SurveyResponseUncheckedUpdateManyWithoutUserNestedInput
   officialDocumentsCreated?: Prisma.OfficialDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUncheckedUpdateManyWithoutUserNestedInput
+  amenityReservations?: Prisma.AmenityReservationUncheckedUpdateManyWithoutResidentNestedInput
 }
 
 export type UserCreateWithoutExpensesCreatedInput = {
@@ -2557,6 +2620,7 @@ export type UserCreateWithoutExpensesCreatedInput = {
   surveyResponses?: Prisma.SurveyResponseCreateNestedManyWithoutUserInput
   officialDocumentsCreated?: Prisma.OfficialDocumentCreateNestedManyWithoutCreatedByInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentCreateNestedManyWithoutUserInput
+  amenityReservations?: Prisma.AmenityReservationCreateNestedManyWithoutResidentInput
 }
 
 export type UserUncheckedCreateWithoutExpensesCreatedInput = {
@@ -2590,6 +2654,7 @@ export type UserUncheckedCreateWithoutExpensesCreatedInput = {
   surveyResponses?: Prisma.SurveyResponseUncheckedCreateNestedManyWithoutUserInput
   officialDocumentsCreated?: Prisma.OfficialDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUncheckedCreateNestedManyWithoutUserInput
+  amenityReservations?: Prisma.AmenityReservationUncheckedCreateNestedManyWithoutResidentInput
 }
 
 export type UserCreateOrConnectWithoutExpensesCreatedInput = {
@@ -2639,6 +2704,7 @@ export type UserUpdateWithoutExpensesCreatedInput = {
   surveyResponses?: Prisma.SurveyResponseUpdateManyWithoutUserNestedInput
   officialDocumentsCreated?: Prisma.OfficialDocumentUpdateManyWithoutCreatedByNestedInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUpdateManyWithoutUserNestedInput
+  amenityReservations?: Prisma.AmenityReservationUpdateManyWithoutResidentNestedInput
 }
 
 export type UserUncheckedUpdateWithoutExpensesCreatedInput = {
@@ -2672,6 +2738,7 @@ export type UserUncheckedUpdateWithoutExpensesCreatedInput = {
   surveyResponses?: Prisma.SurveyResponseUncheckedUpdateManyWithoutUserNestedInput
   officialDocumentsCreated?: Prisma.OfficialDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUncheckedUpdateManyWithoutUserNestedInput
+  amenityReservations?: Prisma.AmenityReservationUncheckedUpdateManyWithoutResidentNestedInput
 }
 
 export type UserCreateWithoutExtraIncomesCreatedInput = {
@@ -2705,6 +2772,7 @@ export type UserCreateWithoutExtraIncomesCreatedInput = {
   surveyResponses?: Prisma.SurveyResponseCreateNestedManyWithoutUserInput
   officialDocumentsCreated?: Prisma.OfficialDocumentCreateNestedManyWithoutCreatedByInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentCreateNestedManyWithoutUserInput
+  amenityReservations?: Prisma.AmenityReservationCreateNestedManyWithoutResidentInput
 }
 
 export type UserUncheckedCreateWithoutExtraIncomesCreatedInput = {
@@ -2738,6 +2806,7 @@ export type UserUncheckedCreateWithoutExtraIncomesCreatedInput = {
   surveyResponses?: Prisma.SurveyResponseUncheckedCreateNestedManyWithoutUserInput
   officialDocumentsCreated?: Prisma.OfficialDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUncheckedCreateNestedManyWithoutUserInput
+  amenityReservations?: Prisma.AmenityReservationUncheckedCreateNestedManyWithoutResidentInput
 }
 
 export type UserCreateOrConnectWithoutExtraIncomesCreatedInput = {
@@ -2787,6 +2856,7 @@ export type UserUpdateWithoutExtraIncomesCreatedInput = {
   surveyResponses?: Prisma.SurveyResponseUpdateManyWithoutUserNestedInput
   officialDocumentsCreated?: Prisma.OfficialDocumentUpdateManyWithoutCreatedByNestedInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUpdateManyWithoutUserNestedInput
+  amenityReservations?: Prisma.AmenityReservationUpdateManyWithoutResidentNestedInput
 }
 
 export type UserUncheckedUpdateWithoutExtraIncomesCreatedInput = {
@@ -2820,6 +2890,7 @@ export type UserUncheckedUpdateWithoutExtraIncomesCreatedInput = {
   surveyResponses?: Prisma.SurveyResponseUncheckedUpdateManyWithoutUserNestedInput
   officialDocumentsCreated?: Prisma.OfficialDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUncheckedUpdateManyWithoutUserNestedInput
+  amenityReservations?: Prisma.AmenityReservationUncheckedUpdateManyWithoutResidentNestedInput
 }
 
 export type UserCreateWithoutExtraordinaryFeesCreatedInput = {
@@ -2853,6 +2924,7 @@ export type UserCreateWithoutExtraordinaryFeesCreatedInput = {
   surveyResponses?: Prisma.SurveyResponseCreateNestedManyWithoutUserInput
   officialDocumentsCreated?: Prisma.OfficialDocumentCreateNestedManyWithoutCreatedByInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentCreateNestedManyWithoutUserInput
+  amenityReservations?: Prisma.AmenityReservationCreateNestedManyWithoutResidentInput
 }
 
 export type UserUncheckedCreateWithoutExtraordinaryFeesCreatedInput = {
@@ -2886,6 +2958,7 @@ export type UserUncheckedCreateWithoutExtraordinaryFeesCreatedInput = {
   surveyResponses?: Prisma.SurveyResponseUncheckedCreateNestedManyWithoutUserInput
   officialDocumentsCreated?: Prisma.OfficialDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUncheckedCreateNestedManyWithoutUserInput
+  amenityReservations?: Prisma.AmenityReservationUncheckedCreateNestedManyWithoutResidentInput
 }
 
 export type UserCreateOrConnectWithoutExtraordinaryFeesCreatedInput = {
@@ -2935,6 +3008,7 @@ export type UserUpdateWithoutExtraordinaryFeesCreatedInput = {
   surveyResponses?: Prisma.SurveyResponseUpdateManyWithoutUserNestedInput
   officialDocumentsCreated?: Prisma.OfficialDocumentUpdateManyWithoutCreatedByNestedInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUpdateManyWithoutUserNestedInput
+  amenityReservations?: Prisma.AmenityReservationUpdateManyWithoutResidentNestedInput
 }
 
 export type UserUncheckedUpdateWithoutExtraordinaryFeesCreatedInput = {
@@ -2968,6 +3042,7 @@ export type UserUncheckedUpdateWithoutExtraordinaryFeesCreatedInput = {
   surveyResponses?: Prisma.SurveyResponseUncheckedUpdateManyWithoutUserNestedInput
   officialDocumentsCreated?: Prisma.OfficialDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUncheckedUpdateManyWithoutUserNestedInput
+  amenityReservations?: Prisma.AmenityReservationUncheckedUpdateManyWithoutResidentNestedInput
 }
 
 export type UserCreateWithoutAnnouncementsCreatedInput = {
@@ -3001,6 +3076,7 @@ export type UserCreateWithoutAnnouncementsCreatedInput = {
   surveyResponses?: Prisma.SurveyResponseCreateNestedManyWithoutUserInput
   officialDocumentsCreated?: Prisma.OfficialDocumentCreateNestedManyWithoutCreatedByInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentCreateNestedManyWithoutUserInput
+  amenityReservations?: Prisma.AmenityReservationCreateNestedManyWithoutResidentInput
 }
 
 export type UserUncheckedCreateWithoutAnnouncementsCreatedInput = {
@@ -3034,6 +3110,7 @@ export type UserUncheckedCreateWithoutAnnouncementsCreatedInput = {
   surveyResponses?: Prisma.SurveyResponseUncheckedCreateNestedManyWithoutUserInput
   officialDocumentsCreated?: Prisma.OfficialDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUncheckedCreateNestedManyWithoutUserInput
+  amenityReservations?: Prisma.AmenityReservationUncheckedCreateNestedManyWithoutResidentInput
 }
 
 export type UserCreateOrConnectWithoutAnnouncementsCreatedInput = {
@@ -3083,6 +3160,7 @@ export type UserUpdateWithoutAnnouncementsCreatedInput = {
   surveyResponses?: Prisma.SurveyResponseUpdateManyWithoutUserNestedInput
   officialDocumentsCreated?: Prisma.OfficialDocumentUpdateManyWithoutCreatedByNestedInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUpdateManyWithoutUserNestedInput
+  amenityReservations?: Prisma.AmenityReservationUpdateManyWithoutResidentNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAnnouncementsCreatedInput = {
@@ -3116,6 +3194,7 @@ export type UserUncheckedUpdateWithoutAnnouncementsCreatedInput = {
   surveyResponses?: Prisma.SurveyResponseUncheckedUpdateManyWithoutUserNestedInput
   officialDocumentsCreated?: Prisma.OfficialDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUncheckedUpdateManyWithoutUserNestedInput
+  amenityReservations?: Prisma.AmenityReservationUncheckedUpdateManyWithoutResidentNestedInput
 }
 
 export type UserCreateWithoutAnnouncementsReadInput = {
@@ -3149,6 +3228,7 @@ export type UserCreateWithoutAnnouncementsReadInput = {
   surveyResponses?: Prisma.SurveyResponseCreateNestedManyWithoutUserInput
   officialDocumentsCreated?: Prisma.OfficialDocumentCreateNestedManyWithoutCreatedByInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentCreateNestedManyWithoutUserInput
+  amenityReservations?: Prisma.AmenityReservationCreateNestedManyWithoutResidentInput
 }
 
 export type UserUncheckedCreateWithoutAnnouncementsReadInput = {
@@ -3182,6 +3262,7 @@ export type UserUncheckedCreateWithoutAnnouncementsReadInput = {
   surveyResponses?: Prisma.SurveyResponseUncheckedCreateNestedManyWithoutUserInput
   officialDocumentsCreated?: Prisma.OfficialDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUncheckedCreateNestedManyWithoutUserInput
+  amenityReservations?: Prisma.AmenityReservationUncheckedCreateNestedManyWithoutResidentInput
 }
 
 export type UserCreateOrConnectWithoutAnnouncementsReadInput = {
@@ -3231,6 +3312,7 @@ export type UserUpdateWithoutAnnouncementsReadInput = {
   surveyResponses?: Prisma.SurveyResponseUpdateManyWithoutUserNestedInput
   officialDocumentsCreated?: Prisma.OfficialDocumentUpdateManyWithoutCreatedByNestedInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUpdateManyWithoutUserNestedInput
+  amenityReservations?: Prisma.AmenityReservationUpdateManyWithoutResidentNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAnnouncementsReadInput = {
@@ -3264,6 +3346,7 @@ export type UserUncheckedUpdateWithoutAnnouncementsReadInput = {
   surveyResponses?: Prisma.SurveyResponseUncheckedUpdateManyWithoutUserNestedInput
   officialDocumentsCreated?: Prisma.OfficialDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUncheckedUpdateManyWithoutUserNestedInput
+  amenityReservations?: Prisma.AmenityReservationUncheckedUpdateManyWithoutResidentNestedInput
 }
 
 export type UserCreateWithoutSurveysCreatedInput = {
@@ -3297,6 +3380,7 @@ export type UserCreateWithoutSurveysCreatedInput = {
   surveyResponses?: Prisma.SurveyResponseCreateNestedManyWithoutUserInput
   officialDocumentsCreated?: Prisma.OfficialDocumentCreateNestedManyWithoutCreatedByInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentCreateNestedManyWithoutUserInput
+  amenityReservations?: Prisma.AmenityReservationCreateNestedManyWithoutResidentInput
 }
 
 export type UserUncheckedCreateWithoutSurveysCreatedInput = {
@@ -3330,6 +3414,7 @@ export type UserUncheckedCreateWithoutSurveysCreatedInput = {
   surveyResponses?: Prisma.SurveyResponseUncheckedCreateNestedManyWithoutUserInput
   officialDocumentsCreated?: Prisma.OfficialDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUncheckedCreateNestedManyWithoutUserInput
+  amenityReservations?: Prisma.AmenityReservationUncheckedCreateNestedManyWithoutResidentInput
 }
 
 export type UserCreateOrConnectWithoutSurveysCreatedInput = {
@@ -3379,6 +3464,7 @@ export type UserUpdateWithoutSurveysCreatedInput = {
   surveyResponses?: Prisma.SurveyResponseUpdateManyWithoutUserNestedInput
   officialDocumentsCreated?: Prisma.OfficialDocumentUpdateManyWithoutCreatedByNestedInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUpdateManyWithoutUserNestedInput
+  amenityReservations?: Prisma.AmenityReservationUpdateManyWithoutResidentNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSurveysCreatedInput = {
@@ -3412,6 +3498,7 @@ export type UserUncheckedUpdateWithoutSurveysCreatedInput = {
   surveyResponses?: Prisma.SurveyResponseUncheckedUpdateManyWithoutUserNestedInput
   officialDocumentsCreated?: Prisma.OfficialDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUncheckedUpdateManyWithoutUserNestedInput
+  amenityReservations?: Prisma.AmenityReservationUncheckedUpdateManyWithoutResidentNestedInput
 }
 
 export type UserCreateWithoutSurveyResponsesInput = {
@@ -3445,6 +3532,7 @@ export type UserCreateWithoutSurveyResponsesInput = {
   surveysCreated?: Prisma.SurveyCreateNestedManyWithoutCreatedByInput
   officialDocumentsCreated?: Prisma.OfficialDocumentCreateNestedManyWithoutCreatedByInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentCreateNestedManyWithoutUserInput
+  amenityReservations?: Prisma.AmenityReservationCreateNestedManyWithoutResidentInput
 }
 
 export type UserUncheckedCreateWithoutSurveyResponsesInput = {
@@ -3478,6 +3566,7 @@ export type UserUncheckedCreateWithoutSurveyResponsesInput = {
   surveysCreated?: Prisma.SurveyUncheckedCreateNestedManyWithoutCreatedByInput
   officialDocumentsCreated?: Prisma.OfficialDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUncheckedCreateNestedManyWithoutUserInput
+  amenityReservations?: Prisma.AmenityReservationUncheckedCreateNestedManyWithoutResidentInput
 }
 
 export type UserCreateOrConnectWithoutSurveyResponsesInput = {
@@ -3527,6 +3616,7 @@ export type UserUpdateWithoutSurveyResponsesInput = {
   surveysCreated?: Prisma.SurveyUpdateManyWithoutCreatedByNestedInput
   officialDocumentsCreated?: Prisma.OfficialDocumentUpdateManyWithoutCreatedByNestedInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUpdateManyWithoutUserNestedInput
+  amenityReservations?: Prisma.AmenityReservationUpdateManyWithoutResidentNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSurveyResponsesInput = {
@@ -3560,6 +3650,7 @@ export type UserUncheckedUpdateWithoutSurveyResponsesInput = {
   surveysCreated?: Prisma.SurveyUncheckedUpdateManyWithoutCreatedByNestedInput
   officialDocumentsCreated?: Prisma.OfficialDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUncheckedUpdateManyWithoutUserNestedInput
+  amenityReservations?: Prisma.AmenityReservationUncheckedUpdateManyWithoutResidentNestedInput
 }
 
 export type UserCreateWithoutOfficialDocumentsCreatedInput = {
@@ -3593,6 +3684,7 @@ export type UserCreateWithoutOfficialDocumentsCreatedInput = {
   surveysCreated?: Prisma.SurveyCreateNestedManyWithoutCreatedByInput
   surveyResponses?: Prisma.SurveyResponseCreateNestedManyWithoutUserInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentCreateNestedManyWithoutUserInput
+  amenityReservations?: Prisma.AmenityReservationCreateNestedManyWithoutResidentInput
 }
 
 export type UserUncheckedCreateWithoutOfficialDocumentsCreatedInput = {
@@ -3626,6 +3718,7 @@ export type UserUncheckedCreateWithoutOfficialDocumentsCreatedInput = {
   surveysCreated?: Prisma.SurveyUncheckedCreateNestedManyWithoutCreatedByInput
   surveyResponses?: Prisma.SurveyResponseUncheckedCreateNestedManyWithoutUserInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUncheckedCreateNestedManyWithoutUserInput
+  amenityReservations?: Prisma.AmenityReservationUncheckedCreateNestedManyWithoutResidentInput
 }
 
 export type UserCreateOrConnectWithoutOfficialDocumentsCreatedInput = {
@@ -3675,6 +3768,7 @@ export type UserUpdateWithoutOfficialDocumentsCreatedInput = {
   surveysCreated?: Prisma.SurveyUpdateManyWithoutCreatedByNestedInput
   surveyResponses?: Prisma.SurveyResponseUpdateManyWithoutUserNestedInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUpdateManyWithoutUserNestedInput
+  amenityReservations?: Prisma.AmenityReservationUpdateManyWithoutResidentNestedInput
 }
 
 export type UserUncheckedUpdateWithoutOfficialDocumentsCreatedInput = {
@@ -3708,6 +3802,7 @@ export type UserUncheckedUpdateWithoutOfficialDocumentsCreatedInput = {
   surveysCreated?: Prisma.SurveyUncheckedUpdateManyWithoutCreatedByNestedInput
   surveyResponses?: Prisma.SurveyResponseUncheckedUpdateManyWithoutUserNestedInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUncheckedUpdateManyWithoutUserNestedInput
+  amenityReservations?: Prisma.AmenityReservationUncheckedUpdateManyWithoutResidentNestedInput
 }
 
 export type UserCreateWithoutOfficialDocumentAcksInput = {
@@ -3741,6 +3836,7 @@ export type UserCreateWithoutOfficialDocumentAcksInput = {
   surveysCreated?: Prisma.SurveyCreateNestedManyWithoutCreatedByInput
   surveyResponses?: Prisma.SurveyResponseCreateNestedManyWithoutUserInput
   officialDocumentsCreated?: Prisma.OfficialDocumentCreateNestedManyWithoutCreatedByInput
+  amenityReservations?: Prisma.AmenityReservationCreateNestedManyWithoutResidentInput
 }
 
 export type UserUncheckedCreateWithoutOfficialDocumentAcksInput = {
@@ -3774,6 +3870,7 @@ export type UserUncheckedCreateWithoutOfficialDocumentAcksInput = {
   surveysCreated?: Prisma.SurveyUncheckedCreateNestedManyWithoutCreatedByInput
   surveyResponses?: Prisma.SurveyResponseUncheckedCreateNestedManyWithoutUserInput
   officialDocumentsCreated?: Prisma.OfficialDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+  amenityReservations?: Prisma.AmenityReservationUncheckedCreateNestedManyWithoutResidentInput
 }
 
 export type UserCreateOrConnectWithoutOfficialDocumentAcksInput = {
@@ -3823,6 +3920,7 @@ export type UserUpdateWithoutOfficialDocumentAcksInput = {
   surveysCreated?: Prisma.SurveyUpdateManyWithoutCreatedByNestedInput
   surveyResponses?: Prisma.SurveyResponseUpdateManyWithoutUserNestedInput
   officialDocumentsCreated?: Prisma.OfficialDocumentUpdateManyWithoutCreatedByNestedInput
+  amenityReservations?: Prisma.AmenityReservationUpdateManyWithoutResidentNestedInput
 }
 
 export type UserUncheckedUpdateWithoutOfficialDocumentAcksInput = {
@@ -3856,6 +3954,159 @@ export type UserUncheckedUpdateWithoutOfficialDocumentAcksInput = {
   surveysCreated?: Prisma.SurveyUncheckedUpdateManyWithoutCreatedByNestedInput
   surveyResponses?: Prisma.SurveyResponseUncheckedUpdateManyWithoutUserNestedInput
   officialDocumentsCreated?: Prisma.OfficialDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+  amenityReservations?: Prisma.AmenityReservationUncheckedUpdateManyWithoutResidentNestedInput
+}
+
+export type UserCreateWithoutAmenityReservationsInput = {
+  id?: string
+  email: string
+  passwordHash: string
+  firstName?: string | null
+  lastName?: string | null
+  phone?: string | null
+  role?: $Enums.UserRole
+  status?: $Enums.UserStatus
+  isEmailVerified?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  residentProfile?: Prisma.ResidentProfileCreateNestedOneWithoutUserInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutCreatedByInput
+  userSessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  condominium?: Prisma.CondominiumCreateNestedOneWithoutAdminsInput
+  accessLogs?: Prisma.AccessLogCreateNestedManyWithoutUserAcceptInput
+  parcelsReceived?: Prisma.ParcelDeliveryCreateNestedManyWithoutReceivedByInput
+  parcelsDelivered?: Prisma.ParcelDeliveryCreateNestedManyWithoutDeliveredByInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessCreateNestedManyWithoutEntryGuardInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessCreateNestedManyWithoutExitGuardInput
+  passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
+  expensesCreated?: Prisma.ExpenseCreateNestedManyWithoutCreatedByInput
+  extraIncomesCreated?: Prisma.ExtraIncomeCreateNestedManyWithoutCreatedByInput
+  extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeCreateNestedManyWithoutCreatedByInput
+  announcementsCreated?: Prisma.AnnouncementCreateNestedManyWithoutCreatedByInput
+  announcementsRead?: Prisma.AnnouncementReaderCreateNestedManyWithoutUserInput
+  surveysCreated?: Prisma.SurveyCreateNestedManyWithoutCreatedByInput
+  surveyResponses?: Prisma.SurveyResponseCreateNestedManyWithoutUserInput
+  officialDocumentsCreated?: Prisma.OfficialDocumentCreateNestedManyWithoutCreatedByInput
+  officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutAmenityReservationsInput = {
+  id?: string
+  email: string
+  passwordHash: string
+  firstName?: string | null
+  lastName?: string | null
+  phone?: string | null
+  role?: $Enums.UserRole
+  status?: $Enums.UserStatus
+  isEmailVerified?: boolean
+  condominiumId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  residentProfile?: Prisma.ResidentProfileUncheckedCreateNestedOneWithoutUserInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCreatedByInput
+  userSessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  accessLogs?: Prisma.AccessLogUncheckedCreateNestedManyWithoutUserAcceptInput
+  parcelsReceived?: Prisma.ParcelDeliveryUncheckedCreateNestedManyWithoutReceivedByInput
+  parcelsDelivered?: Prisma.ParcelDeliveryUncheckedCreateNestedManyWithoutDeliveredByInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessUncheckedCreateNestedManyWithoutEntryGuardInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessUncheckedCreateNestedManyWithoutExitGuardInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
+  expensesCreated?: Prisma.ExpenseUncheckedCreateNestedManyWithoutCreatedByInput
+  extraIncomesCreated?: Prisma.ExtraIncomeUncheckedCreateNestedManyWithoutCreatedByInput
+  extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedCreateNestedManyWithoutCreatedByInput
+  announcementsCreated?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCreatedByInput
+  announcementsRead?: Prisma.AnnouncementReaderUncheckedCreateNestedManyWithoutUserInput
+  surveysCreated?: Prisma.SurveyUncheckedCreateNestedManyWithoutCreatedByInput
+  surveyResponses?: Prisma.SurveyResponseUncheckedCreateNestedManyWithoutUserInput
+  officialDocumentsCreated?: Prisma.OfficialDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+  officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutAmenityReservationsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutAmenityReservationsInput, Prisma.UserUncheckedCreateWithoutAmenityReservationsInput>
+}
+
+export type UserUpsertWithoutAmenityReservationsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutAmenityReservationsInput, Prisma.UserUncheckedUpdateWithoutAmenityReservationsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutAmenityReservationsInput, Prisma.UserUncheckedCreateWithoutAmenityReservationsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutAmenityReservationsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutAmenityReservationsInput, Prisma.UserUncheckedUpdateWithoutAmenityReservationsInput>
+}
+
+export type UserUpdateWithoutAmenityReservationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  residentProfile?: Prisma.ResidentProfileUpdateOneWithoutUserNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutCreatedByNestedInput
+  userSessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  condominium?: Prisma.CondominiumUpdateOneWithoutAdminsNestedInput
+  accessLogs?: Prisma.AccessLogUpdateManyWithoutUserAcceptNestedInput
+  parcelsReceived?: Prisma.ParcelDeliveryUpdateManyWithoutReceivedByNestedInput
+  parcelsDelivered?: Prisma.ParcelDeliveryUpdateManyWithoutDeliveredByNestedInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessUpdateManyWithoutEntryGuardNestedInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessUpdateManyWithoutExitGuardNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
+  expensesCreated?: Prisma.ExpenseUpdateManyWithoutCreatedByNestedInput
+  extraIncomesCreated?: Prisma.ExtraIncomeUpdateManyWithoutCreatedByNestedInput
+  extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUpdateManyWithoutCreatedByNestedInput
+  announcementsCreated?: Prisma.AnnouncementUpdateManyWithoutCreatedByNestedInput
+  announcementsRead?: Prisma.AnnouncementReaderUpdateManyWithoutUserNestedInput
+  surveysCreated?: Prisma.SurveyUpdateManyWithoutCreatedByNestedInput
+  surveyResponses?: Prisma.SurveyResponseUpdateManyWithoutUserNestedInput
+  officialDocumentsCreated?: Prisma.OfficialDocumentUpdateManyWithoutCreatedByNestedInput
+  officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutAmenityReservationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  condominiumId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  residentProfile?: Prisma.ResidentProfileUncheckedUpdateOneWithoutUserNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutCreatedByNestedInput
+  userSessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  accessLogs?: Prisma.AccessLogUncheckedUpdateManyWithoutUserAcceptNestedInput
+  parcelsReceived?: Prisma.ParcelDeliveryUncheckedUpdateManyWithoutReceivedByNestedInput
+  parcelsDelivered?: Prisma.ParcelDeliveryUncheckedUpdateManyWithoutDeliveredByNestedInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessUncheckedUpdateManyWithoutEntryGuardNestedInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessUncheckedUpdateManyWithoutExitGuardNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  expensesCreated?: Prisma.ExpenseUncheckedUpdateManyWithoutCreatedByNestedInput
+  extraIncomesCreated?: Prisma.ExtraIncomeUncheckedUpdateManyWithoutCreatedByNestedInput
+  extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedUpdateManyWithoutCreatedByNestedInput
+  announcementsCreated?: Prisma.AnnouncementUncheckedUpdateManyWithoutCreatedByNestedInput
+  announcementsRead?: Prisma.AnnouncementReaderUncheckedUpdateManyWithoutUserNestedInput
+  surveysCreated?: Prisma.SurveyUncheckedUpdateManyWithoutCreatedByNestedInput
+  surveyResponses?: Prisma.SurveyResponseUncheckedUpdateManyWithoutUserNestedInput
+  officialDocumentsCreated?: Prisma.OfficialDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+  officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyCondominiumInput = {
@@ -3903,6 +4154,7 @@ export type UserUpdateWithoutCondominiumInput = {
   surveyResponses?: Prisma.SurveyResponseUpdateManyWithoutUserNestedInput
   officialDocumentsCreated?: Prisma.OfficialDocumentUpdateManyWithoutCreatedByNestedInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUpdateManyWithoutUserNestedInput
+  amenityReservations?: Prisma.AmenityReservationUpdateManyWithoutResidentNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCondominiumInput = {
@@ -3936,6 +4188,7 @@ export type UserUncheckedUpdateWithoutCondominiumInput = {
   surveyResponses?: Prisma.SurveyResponseUncheckedUpdateManyWithoutUserNestedInput
   officialDocumentsCreated?: Prisma.OfficialDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUncheckedUpdateManyWithoutUserNestedInput
+  amenityReservations?: Prisma.AmenityReservationUncheckedUpdateManyWithoutResidentNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutCondominiumInput = {
@@ -3976,6 +4229,7 @@ export type UserCountOutputType = {
   surveyResponses: number
   officialDocumentsCreated: number
   officialDocumentAcks: number
+  amenityReservations: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -3997,6 +4251,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   surveyResponses?: boolean | UserCountOutputTypeCountSurveyResponsesArgs
   officialDocumentsCreated?: boolean | UserCountOutputTypeCountOfficialDocumentsCreatedArgs
   officialDocumentAcks?: boolean | UserCountOutputTypeCountOfficialDocumentAcksArgs
+  amenityReservations?: boolean | UserCountOutputTypeCountAmenityReservationsArgs
 }
 
 /**
@@ -4135,6 +4390,13 @@ export type UserCountOutputTypeCountOfficialDocumentAcksArgs<ExtArgs extends run
   where?: Prisma.OfficialDocumentAcknowledgmentWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountAmenityReservationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AmenityReservationWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -4169,6 +4431,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   surveyResponses?: boolean | Prisma.User$surveyResponsesArgs<ExtArgs>
   officialDocumentsCreated?: boolean | Prisma.User$officialDocumentsCreatedArgs<ExtArgs>
   officialDocumentAcks?: boolean | Prisma.User$officialDocumentAcksArgs<ExtArgs>
+  amenityReservations?: boolean | Prisma.User$amenityReservationsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -4241,6 +4504,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   surveyResponses?: boolean | Prisma.User$surveyResponsesArgs<ExtArgs>
   officialDocumentsCreated?: boolean | Prisma.User$officialDocumentsCreatedArgs<ExtArgs>
   officialDocumentAcks?: boolean | Prisma.User$officialDocumentAcksArgs<ExtArgs>
+  amenityReservations?: boolean | Prisma.User$amenityReservationsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -4273,6 +4537,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     surveyResponses: Prisma.$SurveyResponsePayload<ExtArgs>[]
     officialDocumentsCreated: Prisma.$OfficialDocumentPayload<ExtArgs>[]
     officialDocumentAcks: Prisma.$OfficialDocumentAcknowledgmentPayload<ExtArgs>[]
+    amenityReservations: Prisma.$AmenityReservationPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -4701,6 +4966,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   surveyResponses<T extends Prisma.User$surveyResponsesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$surveyResponsesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SurveyResponsePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   officialDocumentsCreated<T extends Prisma.User$officialDocumentsCreatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$officialDocumentsCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OfficialDocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   officialDocumentAcks<T extends Prisma.User$officialDocumentAcksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$officialDocumentAcksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OfficialDocumentAcknowledgmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  amenityReservations<T extends Prisma.User$amenityReservationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$amenityReservationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AmenityReservationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5610,6 +5876,30 @@ export type User$officialDocumentAcksArgs<ExtArgs extends runtime.Types.Extensio
   take?: number
   skip?: number
   distinct?: Prisma.OfficialDocumentAcknowledgmentScalarFieldEnum | Prisma.OfficialDocumentAcknowledgmentScalarFieldEnum[]
+}
+
+/**
+ * User.amenityReservations
+ */
+export type User$amenityReservationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AmenityReservation
+   */
+  select?: Prisma.AmenityReservationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AmenityReservation
+   */
+  omit?: Prisma.AmenityReservationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AmenityReservationInclude<ExtArgs> | null
+  where?: Prisma.AmenityReservationWhereInput
+  orderBy?: Prisma.AmenityReservationOrderByWithRelationInput | Prisma.AmenityReservationOrderByWithRelationInput[]
+  cursor?: Prisma.AmenityReservationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AmenityReservationScalarFieldEnum | Prisma.AmenityReservationScalarFieldEnum[]
 }
 
 /**

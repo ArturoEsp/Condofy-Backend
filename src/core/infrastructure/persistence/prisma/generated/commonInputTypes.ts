@@ -759,6 +759,57 @@ export type EnumDocumentTargetScopeWithAggregatesFilter<$PrismaModel = never> = 
   _max?: Prisma.NestedEnumDocumentTargetScopeFilter<$PrismaModel>
 }
 
+export type EnumAmenityReservationTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.AmenityReservationType | Prisma.EnumAmenityReservationTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.AmenityReservationType[] | Prisma.ListEnumAmenityReservationTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.AmenityReservationType[] | Prisma.ListEnumAmenityReservationTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumAmenityReservationTypeFilter<$PrismaModel> | $Enums.AmenityReservationType
+}
+
+export type EnumAmenityReservationTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.AmenityReservationType | Prisma.EnumAmenityReservationTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.AmenityReservationType[] | Prisma.ListEnumAmenityReservationTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.AmenityReservationType[] | Prisma.ListEnumAmenityReservationTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumAmenityReservationTypeWithAggregatesFilter<$PrismaModel> | $Enums.AmenityReservationType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumAmenityReservationTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumAmenityReservationTypeFilter<$PrismaModel>
+}
+
+export type EnumAmenityReservationStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.AmenityReservationStatus | Prisma.EnumAmenityReservationStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.AmenityReservationStatus[] | Prisma.ListEnumAmenityReservationStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.AmenityReservationStatus[] | Prisma.ListEnumAmenityReservationStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumAmenityReservationStatusFilter<$PrismaModel> | $Enums.AmenityReservationStatus
+}
+
+export type EnumAmenityPaymentStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.AmenityPaymentStatus | Prisma.EnumAmenityPaymentStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.AmenityPaymentStatus[] | Prisma.ListEnumAmenityPaymentStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.AmenityPaymentStatus[] | Prisma.ListEnumAmenityPaymentStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumAmenityPaymentStatusFilter<$PrismaModel> | $Enums.AmenityPaymentStatus
+}
+
+export type EnumAmenityReservationStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.AmenityReservationStatus | Prisma.EnumAmenityReservationStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.AmenityReservationStatus[] | Prisma.ListEnumAmenityReservationStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.AmenityReservationStatus[] | Prisma.ListEnumAmenityReservationStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumAmenityReservationStatusWithAggregatesFilter<$PrismaModel> | $Enums.AmenityReservationStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumAmenityReservationStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumAmenityReservationStatusFilter<$PrismaModel>
+}
+
+export type EnumAmenityPaymentStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.AmenityPaymentStatus | Prisma.EnumAmenityPaymentStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.AmenityPaymentStatus[] | Prisma.ListEnumAmenityPaymentStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.AmenityPaymentStatus[] | Prisma.ListEnumAmenityPaymentStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumAmenityPaymentStatusWithAggregatesFilter<$PrismaModel> | $Enums.AmenityPaymentStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumAmenityPaymentStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumAmenityPaymentStatusFilter<$PrismaModel>
+}
+
 export type NestedStringFilter<$PrismaModel = never> = {
   equals?: string | Prisma.StringFieldRefInput<$PrismaModel>
   in?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
@@ -1515,6 +1566,57 @@ export type NestedEnumDocumentTargetScopeWithAggregatesFilter<$PrismaModel = nev
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumDocumentTargetScopeFilter<$PrismaModel>
   _max?: Prisma.NestedEnumDocumentTargetScopeFilter<$PrismaModel>
+}
+
+export type NestedEnumAmenityReservationTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.AmenityReservationType | Prisma.EnumAmenityReservationTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.AmenityReservationType[] | Prisma.ListEnumAmenityReservationTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.AmenityReservationType[] | Prisma.ListEnumAmenityReservationTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumAmenityReservationTypeFilter<$PrismaModel> | $Enums.AmenityReservationType
+}
+
+export type NestedEnumAmenityReservationTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.AmenityReservationType | Prisma.EnumAmenityReservationTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.AmenityReservationType[] | Prisma.ListEnumAmenityReservationTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.AmenityReservationType[] | Prisma.ListEnumAmenityReservationTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumAmenityReservationTypeWithAggregatesFilter<$PrismaModel> | $Enums.AmenityReservationType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumAmenityReservationTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumAmenityReservationTypeFilter<$PrismaModel>
+}
+
+export type NestedEnumAmenityReservationStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.AmenityReservationStatus | Prisma.EnumAmenityReservationStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.AmenityReservationStatus[] | Prisma.ListEnumAmenityReservationStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.AmenityReservationStatus[] | Prisma.ListEnumAmenityReservationStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumAmenityReservationStatusFilter<$PrismaModel> | $Enums.AmenityReservationStatus
+}
+
+export type NestedEnumAmenityPaymentStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.AmenityPaymentStatus | Prisma.EnumAmenityPaymentStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.AmenityPaymentStatus[] | Prisma.ListEnumAmenityPaymentStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.AmenityPaymentStatus[] | Prisma.ListEnumAmenityPaymentStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumAmenityPaymentStatusFilter<$PrismaModel> | $Enums.AmenityPaymentStatus
+}
+
+export type NestedEnumAmenityReservationStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.AmenityReservationStatus | Prisma.EnumAmenityReservationStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.AmenityReservationStatus[] | Prisma.ListEnumAmenityReservationStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.AmenityReservationStatus[] | Prisma.ListEnumAmenityReservationStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumAmenityReservationStatusWithAggregatesFilter<$PrismaModel> | $Enums.AmenityReservationStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumAmenityReservationStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumAmenityReservationStatusFilter<$PrismaModel>
+}
+
+export type NestedEnumAmenityPaymentStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.AmenityPaymentStatus | Prisma.EnumAmenityPaymentStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.AmenityPaymentStatus[] | Prisma.ListEnumAmenityPaymentStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.AmenityPaymentStatus[] | Prisma.ListEnumAmenityPaymentStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumAmenityPaymentStatusWithAggregatesFilter<$PrismaModel> | $Enums.AmenityPaymentStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumAmenityPaymentStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumAmenityPaymentStatusFilter<$PrismaModel>
 }
 
 
