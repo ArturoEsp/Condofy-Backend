@@ -39,3 +39,14 @@ export class ListVisitorsResponse {
   @Type(() => VisitorResponse)
   visitors: VisitorResponse[];
 }
+
+export class ListAllVisitorsResponse {
+  @ApiProperty({
+    type: [VisitorResponse],
+    description: 'Catálogo completo de visitantes de la casa',
+  })
+  @Expose()
+  @Type(() => VisitorResponse)
+  visitors: VisitorResponse[];
+}
+
