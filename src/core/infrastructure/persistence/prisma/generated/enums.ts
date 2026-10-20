@@ -237,6 +237,34 @@ export const GeneralProviderStatus = {
 export type GeneralProviderStatus = (typeof GeneralProviderStatus)[keyof typeof GeneralProviderStatus]
 
 
+export const AmenityReservationType = {
+  PER_DAY: 'PER_DAY',
+  PER_TIME_SLOT: 'PER_TIME_SLOT'
+} as const
+
+export type AmenityReservationType = (typeof AmenityReservationType)[keyof typeof AmenityReservationType]
+
+
+export const AmenityReservationStatus = {
+  PENDING_APPROVAL: 'PENDING_APPROVAL',
+  APPROVED: 'APPROVED',
+  REJECTED: 'REJECTED',
+  CANCELLED: 'CANCELLED',
+  COMPLETED: 'COMPLETED'
+} as const
+
+export type AmenityReservationStatus = (typeof AmenityReservationStatus)[keyof typeof AmenityReservationStatus]
+
+
+export const AmenityPaymentStatus = {
+  PENDING: 'PENDING',
+  PAID: 'PAID',
+  REFUNDED_DEPOSIT: 'REFUNDED_DEPOSIT'
+} as const
+
+export type AmenityPaymentStatus = (typeof AmenityPaymentStatus)[keyof typeof AmenityPaymentStatus]
+
+
 export const SurveyStatus = {
   DRAFT: 'DRAFT',
   ACTIVE: 'ACTIVE',

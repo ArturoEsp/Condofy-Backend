@@ -15,6 +15,7 @@ export enum UploadModule {
   BRANDING = 'branding',
   DOCUMENTS = 'documents',
   ANNOUNCEMENTS = 'announcements',
+  AMENITIES = 'amenities',
   GENERAL = 'general',
 }
 

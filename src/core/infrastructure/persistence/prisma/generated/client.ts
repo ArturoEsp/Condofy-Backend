@@ -234,3 +234,18 @@ export type OfficialDocumentHouse = Prisma.OfficialDocumentHouseModel
  * 
  */
 export type OfficialDocumentAcknowledgment = Prisma.OfficialDocumentAcknowledgmentModel
+/**
+ * Model Amenity
+ * 
+ */
+export type Amenity = Prisma.AmenityModel
+/**
+ * Model AmenityBlockPeriod
+ * 
+ */
+export type AmenityBlockPeriod = Prisma.AmenityBlockPeriodModel
+/**
+ * Model AmenityReservation
+ * 
+ */
+export type AmenityReservation = Prisma.AmenityReservationModel

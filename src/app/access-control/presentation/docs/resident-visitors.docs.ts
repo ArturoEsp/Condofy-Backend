@@ -1,7 +1,10 @@
 import { ApiEndpointProps } from '@/common/decorators/api-endpoint.decorator';
 import { HttpStatus } from '@nestjs/common';
 import { VisitorResponse } from '../dtos/responses/visitor.response';
-import { ListVisitorsResponse } from '../dtos/responses/list-visitors.response';
+import {
+  ListVisitorsResponse,
+  ListAllVisitorsResponse,
+} from '../dtos/responses/list-visitors.response';
 
 export const createVisitor: ApiEndpointProps = {
   summary: 'Registrar un nuevo visitante en la agenda de la casa del residente',
@@ -9,6 +12,15 @@ export const createVisitor: ApiEndpointProps = {
   withToken: true,
   serialization: VisitorResponse,
   type: VisitorResponse,
+};
+
+export const listAllVisitors: ApiEndpointProps = {
+  summary:
+    'Consultar el catálogo completo de visitantes activos de la casa sin paginación',
+  status: HttpStatus.OK,
+  withToken: true,
+  serialization: ListAllVisitorsResponse,
+  type: ListAllVisitorsResponse,
 };
 
 export const listVisitors: ApiEndpointProps = {

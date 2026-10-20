@@ -89,7 +89,10 @@ export const ModelName = {
   SurveyAnswer: 'SurveyAnswer',
   OfficialDocument: 'OfficialDocument',
   OfficialDocumentHouse: 'OfficialDocumentHouse',
-  OfficialDocumentAcknowledgment: 'OfficialDocumentAcknowledgment'
+  OfficialDocumentAcknowledgment: 'OfficialDocumentAcknowledgment',
+  Amenity: 'Amenity',
+  AmenityBlockPeriod: 'AmenityBlockPeriod',
+  AmenityReservation: 'AmenityReservation'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -772,6 +775,80 @@ export const OfficialDocumentAcknowledgmentScalarFieldEnum = {
 } as const
 
 export type OfficialDocumentAcknowledgmentScalarFieldEnum = (typeof OfficialDocumentAcknowledgmentScalarFieldEnum)[keyof typeof OfficialDocumentAcknowledgmentScalarFieldEnum]
+
+
+export const AmenityScalarFieldEnum = {
+  id: 'id',
+  condominiumId: 'condominiumId',
+  name: 'name',
+  description: 'description',
+  capacity: 'capacity',
+  isActive: 'isActive',
+  cost: 'cost',
+  requiresDeposit: 'requiresDeposit',
+  depositAmount: 'depositAmount',
+  rulesDocumentUrl: 'rulesDocumentUrl',
+  rulesDocumentName: 'rulesDocumentName',
+  rulesText: 'rulesText',
+  photos: 'photos',
+  reservationType: 'reservationType',
+  openingTime: 'openingTime',
+  closingTime: 'closingTime',
+  availableDays: 'availableDays',
+  minNoticeHours: 'minNoticeHours',
+  maxNoticeDays: 'maxNoticeDays',
+  maxHoursPerReservation: 'maxHoursPerReservation',
+  requiresApproval: 'requiresApproval',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AmenityScalarFieldEnum = (typeof AmenityScalarFieldEnum)[keyof typeof AmenityScalarFieldEnum]
+
+
+export const AmenityBlockPeriodScalarFieldEnum = {
+  id: 'id',
+  amenityId: 'amenityId',
+  condominiumId: 'condominiumId',
+  title: 'title',
+  reason: 'reason',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  startTime: 'startTime',
+  endTime: 'endTime',
+  createdBy: 'createdBy',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AmenityBlockPeriodScalarFieldEnum = (typeof AmenityBlockPeriodScalarFieldEnum)[keyof typeof AmenityBlockPeriodScalarFieldEnum]
+
+
+export const AmenityReservationScalarFieldEnum = {
+  id: 'id',
+  amenityId: 'amenityId',
+  condominiumId: 'condominiumId',
+  residentId: 'residentId',
+  houseId: 'houseId',
+  reservationDate: 'reservationDate',
+  startTime: 'startTime',
+  endTime: 'endTime',
+  status: 'status',
+  totalCost: 'totalCost',
+  depositAmount: 'depositAmount',
+  paymentStatus: 'paymentStatus',
+  notes: 'notes',
+  adminNotes: 'adminNotes',
+  approvedAt: 'approvedAt',
+  approvedBy: 'approvedBy',
+  cancelledAt: 'cancelledAt',
+  cancelledBy: 'cancelledBy',
+  cancellationReason: 'cancellationReason',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AmenityReservationScalarFieldEnum = (typeof AmenityReservationScalarFieldEnum)[keyof typeof AmenityReservationScalarFieldEnum]
 
 
 export const SortOrder = {

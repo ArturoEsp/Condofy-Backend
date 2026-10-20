@@ -64,4 +64,24 @@ export class ListHouseVisitorsUseCase {
       visitors,
     };
   }
+
+  async executeAll(command: {
+    currentUserId: string;
+    condominiumId: string;
+  }): Promise<VisitorEntity[]> {
+    const resident = await this.residentsRepository.findOneByUserId(
+      command.currentUserId,
+    );
+
+    if (!resident || resident.condominiumId !== command.condominiumId) {
+      throw new ResidentNotFoundException();
+    }
+
+    if (!resident.houseId) {
+      throw new ResidentHouseNotFoundException();
+    }
+
+    return await this.visitorsRepository.findManyByHouseId(resident.houseId);
+  }
 }
+

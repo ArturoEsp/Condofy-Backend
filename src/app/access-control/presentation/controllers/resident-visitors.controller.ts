@@ -41,6 +41,21 @@ export class ResidentVisitorsController {
     });
   }
 
+  @Get('all')
+  @ApiEndpoint(Docs.listAllVisitors)
+  async listAll(
+    @CondominiumId() condominiumId: string,
+    @CurrentUser() user: AuthUserEntity,
+  ) {
+    const visitors = await this.listHouseVisitorsUseCase.executeAll({
+      currentUserId: user.id,
+      condominiumId,
+    });
+    return {
+      visitors,
+    };
+  }
+
   @Get()
   @ApiEndpoint(Docs.listVisitors)
   async list(
