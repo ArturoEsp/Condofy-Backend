@@ -193,6 +193,26 @@ enum AmenityPaymentStatus {
   REFUNDED_DEPOSIT
 }
 
+enum ServiceProviderType {
+  OFFICIAL
+  COMMUNITY
+}
+
+enum ServiceProviderCategory {
+  SECURITY
+  MAINTENANCE
+  PLUMBING
+  ELECTRICITY
+  AIR_CONDITIONING
+  LOCKSMITH
+  PAINTING
+  GARDENING
+  CLEANING
+  APPLIANCES
+  PETS
+  OTHER
+}
+
 model Condominium {
   id                      String                         @id @default(uuid())
   key                     String                         @unique
@@ -220,6 +240,7 @@ model Condominium {
   amenities               Amenity[]
   amenityBlockPeriods     AmenityBlockPeriod[]
   amenityReservations     AmenityReservation[]
+  serviceProviders        ServiceProvider[]
   planId                  String?
   plan                    SubscriptionPlan?              @relation(fields: [planId], references: [id], onDelete: SetNull)
   isTrial                 Boolean                        @default(false)
@@ -279,6 +300,8 @@ model User {
   officialDocumentsCreated  OfficialDocument[]      @relation("OfficialDocumentCreatedBy")
   officialDocumentAcks      OfficialDocumentAcknowledgment[] @relation("DocumentAcksUser")
   amenityReservations       AmenityReservation[]
+  serviceProvidersCreated   ServiceProvider[]       @relation("ServiceProviderCreatedBy")
+  serviceProviderLikes      ServiceProviderLike[]   @relation("ServiceProviderUserLikes")
 
   @@index([condominiumId])
 }
@@ -1132,4 +1155,46 @@ model AmenityReservation {
   @@index([reservationDate])
   @@index([status])
 }
+
+model ServiceProvider {
+  id            String                  @id @default(uuid())
+  condominiumId String
+  condominium   Condominium             @relation(fields: [condominiumId], references: [id], onDelete: Cascade)
+  name          String
+  description   String?                 @db.Text
+  category      ServiceProviderCategory
+  type          ServiceProviderType     @default(COMMUNITY)
+  imageUrl      String?
+  phone         String?
+  whatsapp      String?
+  email         String?
+  website       String?
+  schedule      String?
+  address       String?
+  isActive      Boolean                 @default(true)
+  createdById   String
+  createdBy     User                    @relation("ServiceProviderCreatedBy", fields: [createdById], references: [id])
+  likes         ServiceProviderLike[]
+
+  createdAt     DateTime                @default(now())
+  updatedAt     DateTime                @updatedAt
+
+  @@index([condominiumId, isActive])
+  @@index([condominiumId, category])
+  @@index([condominiumId, type])
+}
+
+model ServiceProviderLike {
+  id         String          @id @default(uuid())
+  providerId String
+  provider   ServiceProvider @relation(fields: [providerId], references: [id], onDelete: Cascade)
+  userId     String
+  user       User            @relation("ServiceProviderUserLikes", fields: [userId], references: [id], onDelete: Cascade)
+  createdAt  DateTime        @default(now())
+
+  @@unique([providerId, userId])
+  @@index([providerId])
+  @@index([userId])
+}
+
 

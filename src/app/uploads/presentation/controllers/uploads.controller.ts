@@ -103,7 +103,9 @@ export class UploadsController {
     const isPublic =
       dto.isPublic !== undefined
         ? dto.isPublic
-        : dto.module === UploadModule.BRANDING;
+        : dto.module === UploadModule.BRANDING ||
+          dto.module === UploadModule.PROVIDERS ||
+          dto.module === UploadModule.SERVICE_PROVIDERS;
 
     const path = this.storageService.buildStoragePath({
       condominiumId,

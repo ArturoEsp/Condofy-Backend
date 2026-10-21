@@ -249,3 +249,13 @@ export type AmenityBlockPeriod = Prisma.AmenityBlockPeriodModel
  * 
  */
 export type AmenityReservation = Prisma.AmenityReservationModel
+/**
+ * Model ServiceProvider
+ * 
+ */
+export type ServiceProvider = Prisma.ServiceProviderModel
+/**
+ * Model ServiceProviderLike
+ * 
+ */
+export type ServiceProviderLike = Prisma.ServiceProviderLikeModel

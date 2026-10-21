@@ -810,6 +810,40 @@ export type EnumAmenityPaymentStatusWithAggregatesFilter<$PrismaModel = never> =
   _max?: Prisma.NestedEnumAmenityPaymentStatusFilter<$PrismaModel>
 }
 
+export type EnumServiceProviderCategoryFilter<$PrismaModel = never> = {
+  equals?: $Enums.ServiceProviderCategory | Prisma.EnumServiceProviderCategoryFieldRefInput<$PrismaModel>
+  in?: $Enums.ServiceProviderCategory[] | Prisma.ListEnumServiceProviderCategoryFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ServiceProviderCategory[] | Prisma.ListEnumServiceProviderCategoryFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumServiceProviderCategoryFilter<$PrismaModel> | $Enums.ServiceProviderCategory
+}
+
+export type EnumServiceProviderTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.ServiceProviderType | Prisma.EnumServiceProviderTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.ServiceProviderType[] | Prisma.ListEnumServiceProviderTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ServiceProviderType[] | Prisma.ListEnumServiceProviderTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumServiceProviderTypeFilter<$PrismaModel> | $Enums.ServiceProviderType
+}
+
+export type EnumServiceProviderCategoryWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ServiceProviderCategory | Prisma.EnumServiceProviderCategoryFieldRefInput<$PrismaModel>
+  in?: $Enums.ServiceProviderCategory[] | Prisma.ListEnumServiceProviderCategoryFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ServiceProviderCategory[] | Prisma.ListEnumServiceProviderCategoryFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumServiceProviderCategoryWithAggregatesFilter<$PrismaModel> | $Enums.ServiceProviderCategory
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumServiceProviderCategoryFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumServiceProviderCategoryFilter<$PrismaModel>
+}
+
+export type EnumServiceProviderTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ServiceProviderType | Prisma.EnumServiceProviderTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.ServiceProviderType[] | Prisma.ListEnumServiceProviderTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ServiceProviderType[] | Prisma.ListEnumServiceProviderTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumServiceProviderTypeWithAggregatesFilter<$PrismaModel> | $Enums.ServiceProviderType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumServiceProviderTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumServiceProviderTypeFilter<$PrismaModel>
+}
+
 export type NestedStringFilter<$PrismaModel = never> = {
   equals?: string | Prisma.StringFieldRefInput<$PrismaModel>
   in?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
@@ -1617,6 +1651,40 @@ export type NestedEnumAmenityPaymentStatusWithAggregatesFilter<$PrismaModel = ne
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumAmenityPaymentStatusFilter<$PrismaModel>
   _max?: Prisma.NestedEnumAmenityPaymentStatusFilter<$PrismaModel>
+}
+
+export type NestedEnumServiceProviderCategoryFilter<$PrismaModel = never> = {
+  equals?: $Enums.ServiceProviderCategory | Prisma.EnumServiceProviderCategoryFieldRefInput<$PrismaModel>
+  in?: $Enums.ServiceProviderCategory[] | Prisma.ListEnumServiceProviderCategoryFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ServiceProviderCategory[] | Prisma.ListEnumServiceProviderCategoryFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumServiceProviderCategoryFilter<$PrismaModel> | $Enums.ServiceProviderCategory
+}
+
+export type NestedEnumServiceProviderTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.ServiceProviderType | Prisma.EnumServiceProviderTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.ServiceProviderType[] | Prisma.ListEnumServiceProviderTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ServiceProviderType[] | Prisma.ListEnumServiceProviderTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumServiceProviderTypeFilter<$PrismaModel> | $Enums.ServiceProviderType
+}
+
+export type NestedEnumServiceProviderCategoryWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ServiceProviderCategory | Prisma.EnumServiceProviderCategoryFieldRefInput<$PrismaModel>
+  in?: $Enums.ServiceProviderCategory[] | Prisma.ListEnumServiceProviderCategoryFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ServiceProviderCategory[] | Prisma.ListEnumServiceProviderCategoryFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumServiceProviderCategoryWithAggregatesFilter<$PrismaModel> | $Enums.ServiceProviderCategory
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumServiceProviderCategoryFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumServiceProviderCategoryFilter<$PrismaModel>
+}
+
+export type NestedEnumServiceProviderTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ServiceProviderType | Prisma.EnumServiceProviderTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.ServiceProviderType[] | Prisma.ListEnumServiceProviderTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ServiceProviderType[] | Prisma.ListEnumServiceProviderTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumServiceProviderTypeWithAggregatesFilter<$PrismaModel> | $Enums.ServiceProviderType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumServiceProviderTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumServiceProviderTypeFilter<$PrismaModel>
 }
 
 

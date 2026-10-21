@@ -27,6 +27,7 @@ import { SuperadminModule } from './app/superadmin/superadmin.module';
 import { SurveysModule } from './app/surveys/surveys.module';
 import { OfficialDocumentsModule } from './app/official-documents/official-documents.module';
 import { AmenitiesModule } from './app/amenities/amenities.module';
+import { ServiceProvidersModule } from './app/service-providers/service-providers.module';
 
 @Module({
   imports: [
@@ -61,6 +62,7 @@ import { AmenitiesModule } from './app/amenities/amenities.module';
     SurveysModule,
     OfficialDocumentsModule,
     AmenitiesModule,
+    ServiceProvidersModule,
   ],
   controllers: [],
   providers: [

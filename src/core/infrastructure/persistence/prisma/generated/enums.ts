@@ -265,6 +265,32 @@ export const AmenityPaymentStatus = {
 export type AmenityPaymentStatus = (typeof AmenityPaymentStatus)[keyof typeof AmenityPaymentStatus]
 
 
+export const ServiceProviderType = {
+  OFFICIAL: 'OFFICIAL',
+  COMMUNITY: 'COMMUNITY'
+} as const
+
+export type ServiceProviderType = (typeof ServiceProviderType)[keyof typeof ServiceProviderType]
+
+
+export const ServiceProviderCategory = {
+  SECURITY: 'SECURITY',
+  MAINTENANCE: 'MAINTENANCE',
+  PLUMBING: 'PLUMBING',
+  ELECTRICITY: 'ELECTRICITY',
+  AIR_CONDITIONING: 'AIR_CONDITIONING',
+  LOCKSMITH: 'LOCKSMITH',
+  PAINTING: 'PAINTING',
+  GARDENING: 'GARDENING',
+  CLEANING: 'CLEANING',
+  APPLIANCES: 'APPLIANCES',
+  PETS: 'PETS',
+  OTHER: 'OTHER'
+} as const
+
+export type ServiceProviderCategory = (typeof ServiceProviderCategory)[keyof typeof ServiceProviderCategory]
+
+
 export const SurveyStatus = {
   DRAFT: 'DRAFT',
   ACTIVE: 'ACTIVE',
