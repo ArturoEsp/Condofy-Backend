@@ -92,7 +92,9 @@ export const ModelName = {
   OfficialDocumentAcknowledgment: 'OfficialDocumentAcknowledgment',
   Amenity: 'Amenity',
   AmenityBlockPeriod: 'AmenityBlockPeriod',
-  AmenityReservation: 'AmenityReservation'
+  AmenityReservation: 'AmenityReservation',
+  ServiceProvider: 'ServiceProvider',
+  ServiceProviderLike: 'ServiceProviderLike'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -849,6 +851,39 @@ export const AmenityReservationScalarFieldEnum = {
 } as const
 
 export type AmenityReservationScalarFieldEnum = (typeof AmenityReservationScalarFieldEnum)[keyof typeof AmenityReservationScalarFieldEnum]
+
+
+export const ServiceProviderScalarFieldEnum = {
+  id: 'id',
+  condominiumId: 'condominiumId',
+  name: 'name',
+  description: 'description',
+  category: 'category',
+  type: 'type',
+  imageUrl: 'imageUrl',
+  phone: 'phone',
+  whatsapp: 'whatsapp',
+  email: 'email',
+  website: 'website',
+  schedule: 'schedule',
+  address: 'address',
+  isActive: 'isActive',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ServiceProviderScalarFieldEnum = (typeof ServiceProviderScalarFieldEnum)[keyof typeof ServiceProviderScalarFieldEnum]
+
+
+export const ServiceProviderLikeScalarFieldEnum = {
+  id: 'id',
+  providerId: 'providerId',
+  userId: 'userId',
+  createdAt: 'createdAt'
+} as const
+
+export type ServiceProviderLikeScalarFieldEnum = (typeof ServiceProviderLikeScalarFieldEnum)[keyof typeof ServiceProviderLikeScalarFieldEnum]
 
 
 export const SortOrder = {

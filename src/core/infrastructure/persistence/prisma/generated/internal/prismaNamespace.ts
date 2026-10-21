@@ -425,7 +425,9 @@ export const ModelName = {
   OfficialDocumentAcknowledgment: 'OfficialDocumentAcknowledgment',
   Amenity: 'Amenity',
   AmenityBlockPeriod: 'AmenityBlockPeriod',
-  AmenityReservation: 'AmenityReservation'
+  AmenityReservation: 'AmenityReservation',
+  ServiceProvider: 'ServiceProvider',
+  ServiceProviderLike: 'ServiceProviderLike'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -441,7 +443,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "condominium" | "subscriptionPlan" | "user" | "passwordResetToken" | "userSession" | "pushSubscription" | "house" | "houseConfiguration" | "residentProfile" | "visitor" | "accessAuthorization" | "accessLog" | "parcelDelivery" | "generalProviderAccess" | "houseAccount" | "accountMovement" | "maintenanceCharge" | "payment" | "maintenancePeriod" | "lateFee" | "condominiumBillingConfig" | "expense" | "extraIncome" | "condominiumTransparencyConfig" | "extraordinaryFee" | "extraordinaryFeeDocument" | "extraordinaryFeeCharge" | "standContact" | "announcement" | "announcementAttachment" | "announcementReader" | "survey" | "surveyQuestion" | "surveyOption" | "surveyResponse" | "surveyAnswer" | "officialDocument" | "officialDocumentHouse" | "officialDocumentAcknowledgment" | "amenity" | "amenityBlockPeriod" | "amenityReservation"
+    modelProps: "condominium" | "subscriptionPlan" | "user" | "passwordResetToken" | "userSession" | "pushSubscription" | "house" | "houseConfiguration" | "residentProfile" | "visitor" | "accessAuthorization" | "accessLog" | "parcelDelivery" | "generalProviderAccess" | "houseAccount" | "accountMovement" | "maintenanceCharge" | "payment" | "maintenancePeriod" | "lateFee" | "condominiumBillingConfig" | "expense" | "extraIncome" | "condominiumTransparencyConfig" | "extraordinaryFee" | "extraordinaryFeeDocument" | "extraordinaryFeeCharge" | "standContact" | "announcement" | "announcementAttachment" | "announcementReader" | "survey" | "surveyQuestion" | "surveyOption" | "surveyResponse" | "surveyAnswer" | "officialDocument" | "officialDocumentHouse" | "officialDocumentAcknowledgment" | "amenity" | "amenityBlockPeriod" | "amenityReservation" | "serviceProvider" | "serviceProviderLike"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -3553,6 +3555,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    ServiceProvider: {
+      payload: Prisma.$ServiceProviderPayload<ExtArgs>
+      fields: Prisma.ServiceProviderFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ServiceProviderFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServiceProviderPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ServiceProviderFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServiceProviderPayload>
+        }
+        findFirst: {
+          args: Prisma.ServiceProviderFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServiceProviderPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ServiceProviderFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServiceProviderPayload>
+        }
+        findMany: {
+          args: Prisma.ServiceProviderFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServiceProviderPayload>[]
+        }
+        create: {
+          args: Prisma.ServiceProviderCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServiceProviderPayload>
+        }
+        createMany: {
+          args: Prisma.ServiceProviderCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ServiceProviderCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServiceProviderPayload>[]
+        }
+        delete: {
+          args: Prisma.ServiceProviderDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServiceProviderPayload>
+        }
+        update: {
+          args: Prisma.ServiceProviderUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServiceProviderPayload>
+        }
+        deleteMany: {
+          args: Prisma.ServiceProviderDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ServiceProviderUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ServiceProviderUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServiceProviderPayload>[]
+        }
+        upsert: {
+          args: Prisma.ServiceProviderUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServiceProviderPayload>
+        }
+        aggregate: {
+          args: Prisma.ServiceProviderAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateServiceProvider>
+        }
+        groupBy: {
+          args: Prisma.ServiceProviderGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ServiceProviderGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ServiceProviderCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ServiceProviderCountAggregateOutputType> | number
+        }
+      }
+    }
+    ServiceProviderLike: {
+      payload: Prisma.$ServiceProviderLikePayload<ExtArgs>
+      fields: Prisma.ServiceProviderLikeFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ServiceProviderLikeFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServiceProviderLikePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ServiceProviderLikeFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServiceProviderLikePayload>
+        }
+        findFirst: {
+          args: Prisma.ServiceProviderLikeFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServiceProviderLikePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ServiceProviderLikeFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServiceProviderLikePayload>
+        }
+        findMany: {
+          args: Prisma.ServiceProviderLikeFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServiceProviderLikePayload>[]
+        }
+        create: {
+          args: Prisma.ServiceProviderLikeCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServiceProviderLikePayload>
+        }
+        createMany: {
+          args: Prisma.ServiceProviderLikeCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ServiceProviderLikeCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServiceProviderLikePayload>[]
+        }
+        delete: {
+          args: Prisma.ServiceProviderLikeDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServiceProviderLikePayload>
+        }
+        update: {
+          args: Prisma.ServiceProviderLikeUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServiceProviderLikePayload>
+        }
+        deleteMany: {
+          args: Prisma.ServiceProviderLikeDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ServiceProviderLikeUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ServiceProviderLikeUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServiceProviderLikePayload>[]
+        }
+        upsert: {
+          args: Prisma.ServiceProviderLikeUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServiceProviderLikePayload>
+        }
+        aggregate: {
+          args: Prisma.ServiceProviderLikeAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateServiceProviderLike>
+        }
+        groupBy: {
+          args: Prisma.ServiceProviderLikeGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ServiceProviderLikeGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ServiceProviderLikeCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ServiceProviderLikeCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -4332,6 +4482,39 @@ export const AmenityReservationScalarFieldEnum = {
 export type AmenityReservationScalarFieldEnum = (typeof AmenityReservationScalarFieldEnum)[keyof typeof AmenityReservationScalarFieldEnum]
 
 
+export const ServiceProviderScalarFieldEnum = {
+  id: 'id',
+  condominiumId: 'condominiumId',
+  name: 'name',
+  description: 'description',
+  category: 'category',
+  type: 'type',
+  imageUrl: 'imageUrl',
+  phone: 'phone',
+  whatsapp: 'whatsapp',
+  email: 'email',
+  website: 'website',
+  schedule: 'schedule',
+  address: 'address',
+  isActive: 'isActive',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ServiceProviderScalarFieldEnum = (typeof ServiceProviderScalarFieldEnum)[keyof typeof ServiceProviderScalarFieldEnum]
+
+
+export const ServiceProviderLikeScalarFieldEnum = {
+  id: 'id',
+  providerId: 'providerId',
+  userId: 'userId',
+  createdAt: 'createdAt'
+} as const
+
+export type ServiceProviderLikeScalarFieldEnum = (typeof ServiceProviderLikeScalarFieldEnum)[keyof typeof ServiceProviderLikeScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -4860,6 +5043,34 @@ export type ListEnumAmenityPaymentStatusFieldRefInput<$PrismaModel> = FieldRefIn
 
 
 /**
+ * Reference to a field of type 'ServiceProviderCategory'
+ */
+export type EnumServiceProviderCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ServiceProviderCategory'>
+    
+
+
+/**
+ * Reference to a field of type 'ServiceProviderCategory[]'
+ */
+export type ListEnumServiceProviderCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ServiceProviderCategory[]'>
+    
+
+
+/**
+ * Reference to a field of type 'ServiceProviderType'
+ */
+export type EnumServiceProviderTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ServiceProviderType'>
+    
+
+
+/**
+ * Reference to a field of type 'ServiceProviderType[]'
+ */
+export type ListEnumServiceProviderTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ServiceProviderType[]'>
+    
+
+
+/**
  * Reference to a field of type 'Float'
  */
 export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -5024,6 +5235,8 @@ export type GlobalOmitConfig = {
   amenity?: Prisma.AmenityOmit
   amenityBlockPeriod?: Prisma.AmenityBlockPeriodOmit
   amenityReservation?: Prisma.AmenityReservationOmit
+  serviceProvider?: Prisma.ServiceProviderOmit
+  serviceProviderLike?: Prisma.ServiceProviderLikeOmit
 }
 
 /* Types for Logging */
