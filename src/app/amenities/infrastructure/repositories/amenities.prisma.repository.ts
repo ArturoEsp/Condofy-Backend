@@ -283,15 +283,18 @@ export class AmenitiesPrismaRepository implements AmenitiesRepository {
   }
 
   async findBlocks(
-    amenityId: string,
+    amenityId: string | undefined,
     condominiumId: string,
     startDate?: Date,
     endDate?: Date,
   ): Promise<AmenityBlockPeriodEntity[]> {
     const where: Prisma.AmenityBlockPeriodWhereInput = {
-      amenityId,
       condominiumId,
     };
+
+    if (amenityId) {
+      where.amenityId = amenityId;
+    }
 
     if (startDate && endDate) {
       where.AND = [

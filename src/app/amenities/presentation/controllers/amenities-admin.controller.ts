@@ -27,6 +27,8 @@ import { GetAmenityCalendarUseCase } from '../../application/use-cases/get-ameni
 import { GetReservationsAdminUseCase } from '../../application/use-cases/get-reservations-admin.usecase';
 import { UpdateReservationStatusUseCase } from '../../application/use-cases/update-reservation-status.usecase';
 import { CancelReservationUseCase } from '../../application/use-cases/cancel-reservation.usecase';
+import { GetAmenityBlocksAdminUseCase } from '../../application/use-cases/get-amenity-blocks-admin.usecase';
+import { DeleteReservationUseCase } from '../../application/use-cases/delete-reservation.usecase';
 
 import { CreateAmenityRequest } from '../dtos/requests/create-amenity.request';
 import { UpdateAmenityRequest } from '../dtos/requests/update-amenity.request';
@@ -56,6 +58,8 @@ export class AmenitiesAdminController {
     private readonly getReservationsAdminUseCase: GetReservationsAdminUseCase,
     private readonly updateReservationStatusUseCase: UpdateReservationStatusUseCase,
     private readonly cancelReservationUseCase: CancelReservationUseCase,
+    private readonly getAmenityBlocksAdminUseCase: GetAmenityBlocksAdminUseCase,
+    private readonly deleteReservationUseCase: DeleteReservationUseCase,
   ) {}
 
   @Post()
@@ -163,6 +167,36 @@ export class AmenitiesAdminController {
     });
 
     return AmenityReservationResponse.fromDomain(cancelled);
+  }
+
+  @Delete('reservations/:reservationId')
+  @Roles('ADMIN', 'SUPERADMIN')
+  @ApiEndpoint(docs.deleteReservationDoc)
+  async deleteReservation(
+    @CondominiumId() condominiumId: string,
+    @Param('reservationId') reservationId: string,
+  ): Promise<{ message: string }> {
+    await this.deleteReservationUseCase.execute(reservationId, condominiumId);
+    return { message: 'Reservación eliminada correctamente' };
+  }
+
+  @Get('blocks/list')
+  @Roles('ADMIN', 'SUPERADMIN')
+  @ApiEndpoint(docs.getAdminBlocksDoc)
+  async listBlocks(
+    @CondominiumId() condominiumId: string,
+    @Query('amenityId') amenityId?: string,
+    @Query('startDate') startDate?: string,
+    @Query('endDate') endDate?: string,
+  ): Promise<AmenityBlockPeriodResponse[]> {
+    const blocks = await this.getAmenityBlocksAdminUseCase.execute(
+      condominiumId,
+      amenityId,
+      startDate ? new Date(startDate) : undefined,
+      endDate ? new Date(endDate) : undefined,
+    );
+
+    return blocks.map((b) => AmenityBlockPeriodResponse.fromDomain(b));
   }
 
   @Get(':id')

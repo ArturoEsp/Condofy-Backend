@@ -32,7 +32,7 @@ export interface AmenitiesRepository {
   ): Promise<AmenityBlockPeriodEntity>;
   deleteBlock(blockId: string, condominiumId: string): Promise<void>;
   findBlocks(
-    amenityId: string,
+    amenityId: string | undefined,
     condominiumId: string,
     startDate?: Date,
     endDate?: Date,
