@@ -54,4 +54,6 @@ export interface AmenityReservationsRepository {
       paymentStatus?: AmenityPaymentStatus;
     },
   ): Promise<AmenityReservationEntity>;
+
+  delete(id: string, condominiumId: string): Promise<void>;
 }

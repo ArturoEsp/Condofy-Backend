@@ -118,3 +118,16 @@ export const cancelReservationDoc: ApiEndpointProps = {
   serialization: AmenityReservationResponse,
   type: AmenityReservationResponse,
 };
+
+export const getAdminBlocksDoc: ApiEndpointProps = {
+  summary: 'Listar bloqueos de fechas de amenidades del condominio (Admin)',
+  status: HttpStatus.OK,
+  withToken: true,
+  type: [AmenityBlockPeriodResponse],
+};
+
+export const deleteReservationDoc: ApiEndpointProps = {
+  summary: 'Eliminar una reservación cancelada o rechazada (Admin)',
+  status: HttpStatus.OK,
+  withToken: true,
+};

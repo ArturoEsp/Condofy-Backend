@@ -225,4 +225,18 @@ export class AmenityReservationsPrismaRepository implements AmenityReservationsR
 
     return AmenityReservationMapper.toDomain(updated);
   }
+
+  async delete(id: string, condominiumId: string): Promise<void> {
+    const existing = await this.prisma.amenityReservation.findFirst({
+      where: { id, condominiumId },
+    });
+
+    if (!existing) {
+      throw new NotFoundException('La reservación solicitada no existe');
+    }
+
+    await this.prisma.amenityReservation.delete({
+      where: { id },
+    });
+  }
 }

@@ -20,6 +20,8 @@ import { GetReservationsAdminUseCase } from './application/use-cases/get-reserva
 import { GetResidentReservationsUseCase } from './application/use-cases/get-resident-reservations.usecase';
 import { UpdateReservationStatusUseCase } from './application/use-cases/update-reservation-status.usecase';
 import { CancelReservationUseCase } from './application/use-cases/cancel-reservation.usecase';
+import { GetAmenityBlocksAdminUseCase } from './application/use-cases/get-amenity-blocks-admin.usecase';
+import { DeleteReservationUseCase } from './application/use-cases/delete-reservation.usecase';
 
 import { AmenitiesAdminController } from './presentation/controllers/amenities-admin.controller';
 import { AmenitiesResidentController } from './presentation/controllers/amenities-resident.controller';
@@ -49,6 +51,8 @@ import { AmenitiesResidentController } from './presentation/controllers/amenitie
     GetResidentReservationsUseCase,
     UpdateReservationStatusUseCase,
     CancelReservationUseCase,
+    GetAmenityBlocksAdminUseCase,
+    DeleteReservationUseCase,
   ],
   controllers: [AmenitiesAdminController, AmenitiesResidentController],
   exports: [
