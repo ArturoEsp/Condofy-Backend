@@ -1,5 +1,10 @@
 import { Injectable, Logger } from '@nestjs/common';
-import PDFDocument from 'pdfkit';
+import PDFKitInstance = require('pdfkit');
+
+// Soporte universal para constructor de PDFDocument tanto en CJS como en ESM
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const PDFDocument: typeof PDFKitInstance =
+  (PDFKitInstance as any).default || PDFKitInstance;
 
 export interface ReceiptPdfData {
   condominiumName: string;
@@ -149,11 +154,16 @@ export class ReceiptPdfService {
           .font('Helvetica-Bold')
           .fontSize(10)
           .fillColor('#0F172A')
-          .text(data.residentName || 'Residente Registrado', col2X, cardTextY + 13, {
-            width: colWidth - 10,
-            lineBreak: false,
-            ellipsis: true,
-          });
+          .text(
+            data.residentName || 'Residente Registrado',
+            col2X,
+            cardTextY + 13,
+            {
+              width: colWidth - 10,
+              lineBreak: false,
+              ellipsis: true,
+            },
+          );
 
         if (data.residentEmail) {
           doc
@@ -295,15 +305,24 @@ export class ReceiptPdfService {
             .font('Helvetica-Bold')
             .fontSize(8.5)
             .fillColor('#9A3412')
-            .text('Recargo Administrativo por Extemporaneidad', margin + 12, currentY + 6, {
-              width: 270,
-            });
+            .text(
+              'Recargo Administrativo por Extemporaneidad',
+              margin + 12,
+              currentY + 6,
+              {
+                width: 270,
+              },
+            );
 
           doc
             .font('Helvetica')
             .fontSize(7.5)
             .fillColor('#EA580C')
-            .text('Aplicado tras vencer la fecha límite', margin + 12, currentY + 16);
+            .text(
+              'Aplicado tras vencer la fecha límite',
+              margin + 12,
+              currentY + 16,
+            );
 
           doc
             .font('Helvetica')
@@ -435,4 +454,3 @@ export class ReceiptPdfService {
     });
   }
 }
-
