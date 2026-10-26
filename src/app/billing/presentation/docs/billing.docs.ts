@@ -107,3 +107,10 @@ export const getHouseStatement: ApiEndpointProps = {
   serialization: HouseStatementResponse,
   type: HouseStatementResponse,
 };
+
+export const exportReceiptsZip: ApiEndpointProps = {
+  summary:
+    'Descargar archivo ZIP con recibos oficiales organizados por carpeta de vivienda',
+  status: HttpStatus.OK,
+  withToken: true,
+};

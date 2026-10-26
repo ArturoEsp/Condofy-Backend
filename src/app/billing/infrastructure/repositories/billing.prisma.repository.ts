@@ -1419,4 +1419,12 @@ export class BillingPrismaRepository implements BillingRepository {
       extraIncomes: mappedExtraIncomes,
     };
   }
+
+  async getCondominiumName(condominiumId: string): Promise<string> {
+    const condo = await this.prisma.condominium.findUnique({
+      where: { id: condominiumId },
+      select: { name: true },
+    });
+    return condo?.name || 'Condominio';
+  }
 }

@@ -155,4 +155,5 @@ export default interface BillingRepository {
     houseId: string,
     condominiumId: string,
   ): Promise<HouseStatementEntity>;
+  getCondominiumName(condominiumId: string): Promise<string>;
 }
