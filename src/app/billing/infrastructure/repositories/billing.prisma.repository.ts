@@ -1126,7 +1126,11 @@ export class BillingPrismaRepository implements BillingRepository {
           select: {
             houseNumber: true,
             residents: {
-              select: { firstName: true, lastName: true },
+              select: {
+                firstName: true,
+                lastName: true,
+                residentType: true,
+              },
             },
           },
         },
@@ -1188,7 +1192,11 @@ export class BillingPrismaRepository implements BillingRepository {
           select: {
             houseNumber: true,
             residents: {
-              select: { firstName: true, lastName: true },
+              select: {
+                firstName: true,
+                lastName: true,
+                residentType: true,
+              },
             },
           },
         },
@@ -1216,7 +1224,11 @@ export class BillingPrismaRepository implements BillingRepository {
           select: {
             houseNumber: true,
             residents: {
-              select: { firstName: true, lastName: true },
+              select: {
+                firstName: true,
+                lastName: true,
+                residentType: true,
+              },
             },
           },
         },
@@ -1328,7 +1340,11 @@ export class BillingPrismaRepository implements BillingRepository {
           select: {
             houseNumber: true,
             residents: {
-              select: { firstName: true, lastName: true },
+              select: {
+                firstName: true,
+                lastName: true,
+                residentType: true,
+              },
             },
           },
         },
@@ -1386,8 +1402,12 @@ export class BillingPrismaRepository implements BillingRepository {
         ? Math.round((onTimePaidCount / totalRecords) * 100)
         : 100;
 
-    // Residente principal
-    const primaryResident = house.residents?.[0];
+    // Residente principal (priorizando residentType === 'PRIMARY', luego 'TENANT')
+    const houseResidents = house.residents || [];
+    const primaryResident =
+      houseResidents.find((r) => r.residentType === 'PRIMARY') ||
+      houseResidents.find((r) => r.residentType === 'TENANT') ||
+      houseResidents[0];
     const residentInfo = primaryResident
       ? {
           id: primaryResident.id,

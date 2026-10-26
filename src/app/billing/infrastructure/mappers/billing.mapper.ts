@@ -75,6 +75,7 @@ export interface PrismaLateFeeItemRecord {
 export interface PrismaResidentProfileRecord {
   firstName: string;
   lastName: string;
+  residentType?: string | null;
   user?: {
     email: string;
   } | null;
@@ -118,6 +119,23 @@ export interface PrismaMaintenanceChargeRecord {
 }
 
 export class BillingMapper {
+  static getPrimaryResident(
+    residents?: PrismaResidentProfileRecord[] | null,
+  ): PrismaResidentProfileRecord | undefined {
+    if (!residents || residents.length === 0) return undefined;
+
+    // 1. Prioridad: Residente con residentType === 'PRIMARY' (Principal)
+    const primary = residents.find((r) => r.residentType === 'PRIMARY');
+    if (primary) return primary;
+
+    // 2. Segunda prioridad: Residente tipo 'TENANT' (Inquilino)
+    const tenant = residents.find((r) => r.residentType === 'TENANT');
+    if (tenant) return tenant;
+
+    // 3. Fallback al primer habitante registrado
+    return residents[0];
+  }
+
   static toConfigDomain(
     raw?: PrismaBillingConfigRecord | null,
   ): BillingConfigEntity {
@@ -233,8 +251,10 @@ export class BillingMapper {
     const totalAmount =
       status === 'PAID' ? paidAmount : baseAmount + lateFeeAmount;
 
-    // Residente principal de la casa
-    const residentProfile = charge.house?.residents?.[0];
+    // Residente principal de la casa (priorizando residentType === 'PRIMARY')
+    const residentProfile = BillingMapper.getPrimaryResident(
+      charge.house?.residents,
+    );
     const residentUser = residentProfile?.user;
     const residentName = residentProfile
       ? `${residentProfile.firstName} ${residentProfile.lastName}`.trim()
@@ -327,7 +347,9 @@ export class BillingMapper {
     entity.condominiumId = raw.condominiumId;
     entity.houseId = raw.houseId;
     entity.houseNumber = raw.house ? `Casa ${raw.house.houseNumber}` : null;
-    const resident = raw.house?.residents?.[0];
+    const resident = BillingMapper.getPrimaryResident(
+      raw.house?.residents as any,
+    );
     entity.residentName = resident
       ? `${resident.firstName} ${resident.lastName}`.trim()
       : null;
