@@ -29,4 +29,5 @@ export interface StorageService {
   getPresignedUrl(key: string, expiresInSeconds?: number): Promise<string>;
   deleteFile(key: string): Promise<void>;
   buildStoragePath(params: StoragePathParams): string;
+  getFileBuffer(key: string): Promise<Buffer | null>;
 }

@@ -38,6 +38,7 @@ import { GetHouseStatementUseCase } from '../../application/use-cases/get-house-
 import { CreateExtraIncomeUseCase } from '../../application/use-cases/create-extra-income.usecase';
 import { GetExtraIncomesUseCase } from '../../application/use-cases/get-extra-incomes.usecase';
 import { DeleteExtraIncomeUseCase } from '../../application/use-cases/delete-extra-income.usecase';
+import { ExportReceiptsZipUseCase } from '../../application/use-cases/export-receipts-zip.usecase';
 import { BillingNotificationService } from '../../infrastructure/services/billing-notification.service';
 
 import { UpdateBillingSettingsRequest } from '../dtos/requests/update-billing-settings.request';
@@ -45,6 +46,7 @@ import { RegisterPaymentRequest } from '../dtos/requests/register-payment.reques
 import { UploadResidentProofRequest } from '../dtos/requests/upload-resident-proof.request';
 import { ReviewResidentProofRequest } from '../dtos/requests/review-resident-proof.request';
 import { ParamsListBillingRequest } from '../dtos/requests/params-list-billing.request';
+import { ExportReceiptsZipRequest } from '../dtos/requests/export-receipts-zip.request';
 import { CreateExtraIncomeRequest } from '../dtos/requests/create-extra-income.request';
 import { ParamsListExtraIncomeRequest } from '../dtos/requests/params-list-extra-income.request';
 import {
@@ -67,6 +69,7 @@ export class BillingController {
     private readonly createExtraIncomeUseCase: CreateExtraIncomeUseCase,
     private readonly getExtraIncomesUseCase: GetExtraIncomesUseCase,
     private readonly deleteExtraIncomeUseCase: DeleteExtraIncomeUseCase,
+    private readonly exportReceiptsZipUseCase: ExportReceiptsZipUseCase,
     private readonly billingNotificationService: BillingNotificationService,
     @Inject(PROVIDES_NAMES.StorageService)
     private readonly storageService: StorageService,
@@ -183,6 +186,29 @@ export class BillingController {
     }
 
     return UTF8_BOM + lines.join('\r\n');
+  }
+
+  @Get('reports/receipts-zip')
+  @Roles('ADMIN', 'SUPERADMIN')
+  @ApiEndpoint(docs.exportReceiptsZip)
+  async exportReceiptsZip(
+    @CondominiumId() condominiumId: string,
+    @Query() query: ExportReceiptsZipRequest,
+    @Res() res: Response,
+  ) {
+    const { zipStream, filename } = await this.exportReceiptsZipUseCase.execute({
+      condominiumId,
+      period: query.period,
+      tower: query.tower,
+    });
+
+    res.setHeader('Content-Type', 'application/zip');
+    res.setHeader(
+      'Content-Disposition',
+      `attachment; filename="${encodeURIComponent(filename)}"`,
+    );
+
+    zipStream.pipe(res);
   }
 
   @Post('payments')

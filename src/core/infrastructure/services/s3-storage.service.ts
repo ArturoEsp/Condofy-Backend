@@ -179,4 +179,45 @@ export class S3StorageService implements StorageService {
 
     return `condominiums/${params.condominiumId}/${modulePrefix}/${refPrefix}${uniqueId}_${cleanFileName}`;
   }
+
+  async getFileBuffer(key: string): Promise<Buffer | null> {
+    if (!key || key.trim().length === 0) {
+      return null;
+    }
+
+    if (!this.s3Client) {
+      this.logger.warn(`[DEV MODE] getFileBuffer simulado para: ${key}`);
+      return null;
+    }
+
+    try {
+      let cleanKey = key.trim();
+      if (cleanKey.startsWith('http://') || cleanKey.startsWith('https://')) {
+        const parsed = new URL(cleanKey);
+        cleanKey = decodeURIComponent(parsed.pathname.replace(/^\/+/, ''));
+        if (cleanKey.startsWith(`${this.bucketName}/`)) {
+          cleanKey = cleanKey.replace(new RegExp(`^${this.bucketName}/`), '');
+        }
+      }
+
+      const command = new GetObjectCommand({
+        Bucket: this.bucketName,
+        Key: cleanKey,
+      });
+
+      const response = await this.s3Client.send(command);
+      if (!response.Body) {
+        return null;
+      }
+
+      const byteArray = await response.Body.transformToByteArray();
+      return Buffer.from(byteArray);
+    } catch (err: any) {
+      this.logger.error(
+        `Error al obtener buffer desde S3 (${key}): ${err.message}`,
+        err.stack,
+      );
+      return null;
+    }
+  }
 }

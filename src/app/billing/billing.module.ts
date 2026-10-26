@@ -13,17 +13,20 @@ import { GetHouseStatementUseCase } from './application/use-cases/get-house-stat
 import { CreateExtraIncomeUseCase } from './application/use-cases/create-extra-income.usecase';
 import { GetExtraIncomesUseCase } from './application/use-cases/get-extra-incomes.usecase';
 import { DeleteExtraIncomeUseCase } from './application/use-cases/delete-extra-income.usecase';
+import { ExportReceiptsZipUseCase } from './application/use-cases/export-receipts-zip.usecase';
 
 import { CoreModule } from '@/core/core.module';
 import { NotificationsModule } from '../notifications/notifications.module';
 import { BillingNotificationService } from './infrastructure/services/billing-notification.service';
 import { BillingSchedulerService } from './infrastructure/services/billing-scheduler.service';
+import { ReceiptPdfService } from './infrastructure/services/receipt-pdf.service';
 
 @Module({
   imports: [CoreModule, NotificationsModule],
   providers: [
     BillingNotificationService,
     BillingSchedulerService,
+    ReceiptPdfService,
     {
       provide: PROVIDES_NAMES.BillingRepository,
       useClass: BillingPrismaRepository,
@@ -82,6 +85,16 @@ import { BillingSchedulerService } from './infrastructure/services/billing-sched
       provide: DeleteExtraIncomeUseCase,
       inject: [PROVIDES_NAMES.BillingRepository],
       useFactory: (repo) => new DeleteExtraIncomeUseCase(repo),
+    },
+    {
+      provide: ExportReceiptsZipUseCase,
+      inject: [
+        PROVIDES_NAMES.BillingRepository,
+        PROVIDES_NAMES.StorageService,
+        ReceiptPdfService,
+      ],
+      useFactory: (repo, storage, pdf) =>
+        new ExportReceiptsZipUseCase(repo, storage, pdf),
     },
   ],
   controllers: [BillingController],
