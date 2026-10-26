@@ -200,12 +200,19 @@ export class S3StorageService implements StorageService {
         }
       }
 
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 3500);
+
       const command = new GetObjectCommand({
         Bucket: this.bucketName,
         Key: cleanKey,
       });
 
-      const response = await this.s3Client.send(command);
+      const response = await this.s3Client.send(command, {
+        abortSignal: controller.signal,
+      });
+      clearTimeout(timeoutId);
+
       if (!response.Body) {
         return null;
       }

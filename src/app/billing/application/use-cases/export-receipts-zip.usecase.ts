@@ -44,8 +44,9 @@ export class ExportReceiptsZipUseCase {
     command: ExportReceiptsZipCommand,
   ): Promise<ExportReceiptsZipResult> {
     const condominiumName =
-      (await this.billingRepository.getCondominiumName(command.condominiumId)) ||
-      'Condominio';
+      (await this.billingRepository.getCondominiumName(
+        command.condominiumId,
+      )) || 'Condominio';
 
     const billingData = await this.billingRepository.getRecordsByPeriod(
       command.condominiumId,
@@ -69,7 +70,10 @@ export class ExportReceiptsZipUseCase {
     const zip = new ZipArchive({ zlib: { level: 9 } });
 
     zip.on('error', (err) => {
-      this.logger.error(`Error en streaming del archivo ZIP: ${err.message}`, err.stack);
+      this.logger.error(
+        `Error en streaming del archivo ZIP: ${err.message}`,
+        err.stack,
+      );
     });
 
     const csvLines: string[] = [
@@ -93,76 +97,62 @@ export class ExportReceiptsZipUseCase {
         .join(','),
     ];
 
-    for (const record of paidRecords) {
-      let folderName = record.tower
-        ? `Casa ${record.houseNumber} - ${record.tower}`
-        : record.houseNumber.startsWith('Casa') ||
-            record.houseNumber.startsWith('Depto')
-          ? record.houseNumber
-          : `Casa ${record.houseNumber}`;
+    // Procesar y generar todos los recibos en paralelo para máxima velocidad
+    const items = await Promise.all(
+      paidRecords.map(async (record) => {
+        let folderName = record.tower
+          ? `Casa ${record.houseNumber} - ${record.tower}`
+          : record.houseNumber.startsWith('Casa') ||
+              record.houseNumber.startsWith('Depto')
+            ? record.houseNumber
+            : `Casa ${record.houseNumber}`;
 
-      folderName = folderName.replace(/[\\/:*?"<>|]/g, '_').trim();
+        folderName = folderName.replace(/[\\/:*?"<>|]/g, '_').trim();
 
-      const folio =
-        record.receipt?.folio ||
-        `REC-${record.period}-${record.houseNumber.replace(/\s+/g, '')}`;
+        const folio =
+          record.receipt?.folio ||
+          `REC-${record.period}-${record.houseNumber.replace(/\s+/g, '')}`;
 
-      const paymentDate = record.paidDate
-        ? new Date(record.paidDate)
-        : new Date();
+        const paymentDate = record.paidDate
+          ? new Date(record.paidDate)
+          : new Date();
 
-      const paymentDateStr = paymentDate.toLocaleDateString('es-MX', {
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric',
-      });
+        const paymentDateStr = paymentDate.toLocaleDateString('es-MX', {
+          day: '2-digit',
+          month: '2-digit',
+          year: 'numeric',
+        });
 
-      let receiptSource = 'DIGITAL_GENERADO';
+        let receiptSource = 'DIGITAL_GENERADO';
+        let buffer: Buffer | null = null;
+        let fileName = `Recibo_${folio}.pdf`;
 
-      if (record.receipt?.receiptUrl) {
-        try {
-          const buffer = await this.storageService.getFileBuffer(
-            record.receipt.receiptUrl,
-          );
+        if (record.receipt?.receiptUrl) {
+          try {
+            buffer = await this.storageService.getFileBuffer(
+              record.receipt.receiptUrl,
+            );
 
-          if (buffer && buffer.length > 0) {
-            const rawExt =
-              record.receipt.fileName?.split('.').pop()?.toLowerCase() || 'pdf';
-            const cleanExt = ['pdf', 'png', 'jpg', 'jpeg'].includes(rawExt)
-              ? rawExt
-              : 'pdf';
-            const fileName = `Recibo_${folio}.${cleanExt}`;
-
-            zip.append(buffer, { name: `${folderName}/${fileName}` });
-            receiptSource = 'ADJUNTO_OFICIAL';
-          } else {
-            // Buffer vacío o no encontrado en S3, generar PDF oficial
-            const pdfBuffer = await this.receiptPdfService.generateReceiptPdf({
-              condominiumName,
-              folio,
-              houseNumber: record.houseNumber,
-              tower: record.tower,
-              residentName: record.residentName || 'Residente Registrado',
-              residentEmail: record.residentEmail,
-              paymentDate,
-              paymentMethod: record.paymentMethod,
-              transactionReference: record.transactionReference,
-              concept: record.concept || 'Cuota Ordinaria de Mantenimiento',
-              period: record.period,
-              baseAmount: record.baseAmount,
-              lateFeeAmount: record.lateFeeAmount,
-              totalAmount: record.paidAmount || record.totalAmount,
-              notes: record.notes,
-            });
-
-            zip.append(pdfBuffer, { name: `${folderName}/Recibo_${folio}.pdf` });
+            if (buffer && buffer.length > 0) {
+              const rawExt =
+                record.receipt.fileName?.split('.').pop()?.toLowerCase() ||
+                'pdf';
+              const cleanExt = ['pdf', 'png', 'jpg', 'jpeg'].includes(rawExt)
+                ? rawExt
+                : 'pdf';
+              fileName = `Recibo_${folio}.${cleanExt}`;
+              receiptSource = 'ADJUNTO_OFICIAL';
+            }
+          } catch (err: any) {
+            this.logger.warn(
+              `Error leyendo adjunto S3 para ${record.houseNumber}, se generará PDF oficial: ${err.message}`,
+            );
           }
-        } catch (err: any) {
-          this.logger.warn(
-            `No se pudo leer archivo de S3 para ${record.houseNumber}, generando PDF oficial: ${err.message}`,
-          );
+        }
 
-          const pdfBuffer = await this.receiptPdfService.generateReceiptPdf({
+        // Si no había archivo adjunto o falló la descarga, generar PDF oficial vectorial
+        if (!buffer || buffer.length === 0) {
+          buffer = await this.receiptPdfService.generateReceiptPdf({
             condominiumName,
             folio,
             houseNumber: record.houseNumber,
@@ -179,34 +169,10 @@ export class ExportReceiptsZipUseCase {
             totalAmount: record.paidAmount || record.totalAmount,
             notes: record.notes,
           });
-
-          zip.append(pdfBuffer, { name: `${folderName}/Recibo_${folio}.pdf` });
+          fileName = `Recibo_${folio}.pdf`;
         }
-      } else {
-        // No tiene archivo en S3 -> Generar PDF oficial vectorial
-        const pdfBuffer = await this.receiptPdfService.generateReceiptPdf({
-          condominiumName,
-          folio,
-          houseNumber: record.houseNumber,
-          tower: record.tower,
-          residentName: record.residentName || 'Residente Registrado',
-          residentEmail: record.residentEmail,
-          paymentDate,
-          paymentMethod: record.paymentMethod,
-          transactionReference: record.transactionReference,
-          concept: record.concept || 'Cuota Ordinaria de Mantenimiento',
-          period: record.period,
-          baseAmount: record.baseAmount,
-          lateFeeAmount: record.lateFeeAmount,
-          totalAmount: record.paidAmount || record.totalAmount,
-          notes: record.notes,
-        });
 
-        zip.append(pdfBuffer, { name: `${folderName}/Recibo_${folio}.pdf` });
-      }
-
-      csvLines.push(
-        [
+        const csvRow = [
           folio,
           record.houseNumber,
           record.tower || '',
@@ -223,8 +189,16 @@ export class ExportReceiptsZipUseCase {
           receiptSource,
         ]
           .map(escapeCsvField)
-          .join(','),
-      );
+          .join(',');
+
+        return { folderName, fileName, buffer, csvRow };
+      }),
+    );
+
+    // Añadir todos los archivos empaquetados al stream ZIP
+    for (const item of items) {
+      zip.append(item.buffer, { name: `${item.folderName}/${item.fileName}` });
+      csvLines.push(item.csvRow);
     }
 
     // Agregar resumen en formato CSV dentro de la raíz del ZIP (con UTF-8 BOM para Excel)
