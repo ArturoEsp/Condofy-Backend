@@ -60,4 +60,24 @@ export class ExpensesSummaryResponse {
   @ApiProperty({ example: 120000.0, required: false })
   @Expose()
   cumulativeBankBalance?: number;
+
+  @ApiProperty({ example: 50000.0, required: false })
+  @Expose()
+  periodStartingBalance?: number;
+
+  @ApiProperty({ example: 72640.0, required: false })
+  @Expose()
+  periodEndingBalance?: number;
+
+  @ApiProperty({ example: 50000.0, required: false })
+  @Expose()
+  initialBalance?: number;
+
+  @ApiProperty({ example: '2026-09-01', required: false })
+  @Expose()
+  initialBalanceDate?: Date | null;
+
+  @ApiProperty({ example: false, required: false })
+  @Expose()
+  isInitialStartMonth?: boolean;
 }
