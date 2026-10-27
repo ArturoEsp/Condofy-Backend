@@ -57,6 +57,11 @@ export interface ExpensesSummary {
   totalPrepaidBalance?: number;
   operationalBalance?: number;
   cumulativeBankBalance?: number;
+  periodStartingBalance?: number;
+  periodEndingBalance?: number;
+  initialBalance?: number;
+  initialBalanceDate?: Date | null;
+  isInitialStartMonth?: boolean;
 }
 
 export interface UpdateTransparencyConfigData {
@@ -108,6 +113,7 @@ export interface TransparencyReport {
     pendingHouses?: number;
     totalExpected?: number;
     collectionRate?: number;
+    isInitialStartMonth?: boolean;
   };
   collectionSummary?: {
     totalHouses: number;

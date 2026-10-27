@@ -133,6 +133,10 @@ export class TransparencySummaryResponse {
   @ApiPropertyOptional()
   @Expose()
   collectionRate?: number;
+
+  @ApiPropertyOptional()
+  @Expose()
+  isInitialStartMonth?: boolean;
 }
 
 export class TransparencyCollectionSummaryResponse {
