@@ -13,6 +13,7 @@ import ExpensesRepository, {
 import { ExpenseEntity } from '../../domain/entities/expense.entity';
 import { ExpenseMapper } from '../mappers/expense.mapper';
 import {
+  AccountMovementType,
   ExpenseCategory,
   ExpenseStatus,
   PaymentMethod,
@@ -275,14 +276,14 @@ export class ExpensesPrismaRepository implements ExpensesRepository {
       }))
       .sort((a, b) => b.amount - a.amount);
 
-    const prepaidAgg = await this.prisma.houseAccount.aggregate({
-      where: {
-        house: { condominiumId, isDisabled: false },
-        currentBalance: { gt: 0 },
-      },
-      _sum: { currentBalance: true },
-    });
-    const totalPrepaidBalance = Number(prepaidAgg._sum.currentBalance || 0);
+    const [yearStr, monthStr] = period.split('-');
+    const year = parseInt(yearStr, 10);
+    const month = parseInt(monthStr, 10);
+    const periodEnd = new Date(Date.UTC(year, month, 0, 23, 59, 59, 999));
+    const totalPrepaidBalance = await this.getHistoricalPrepaidBalance(
+      condominiumId,
+      periodEnd,
+    );
 
     const billingConfig = await this.prisma.condominiumBillingConfig.findUnique(
       {
@@ -526,15 +527,9 @@ export class ExpensesPrismaRepository implements ExpensesRepository {
     );
     const periodNetCashFlow = totalPeriodIncome - totalPeriodExpenses;
 
-    const advanceCreditsAgg = await this.prisma.houseAccount.aggregate({
-      where: {
-        house: { condominiumId, isDisabled: false },
-        currentBalance: { gt: 0 },
-      },
-      _sum: { currentBalance: true },
-    });
-    const totalPrepaidBalance = Number(
-      advanceCreditsAgg._sum.currentBalance || 0,
+    const totalPrepaidBalance = await this.getHistoricalPrepaidBalance(
+      condominiumId,
+      endDate,
     );
 
     // Movimientos acumulados ANTES de este periodo (para arrastre de saldo / saldo inicial del mes)
@@ -750,5 +745,78 @@ export class ExpensesPrismaRepository implements ExpensesRepository {
       incomesBreakdown: config.showIncomes ? incomesBreakdown : [],
       extraIncomes: config.showIncomes ? extraIncomes : [],
     };
+  }
+
+  /**
+   * Calcula el total histórico de saldos a favor (adelantos en custodia)
+   * al corte de la fecha especificada (fin del periodo).
+   */
+  private async getHistoricalPrepaidBalance(
+    condominiumId: string,
+    periodEnd: Date,
+  ): Promise<number> {
+    const isPastPeriod = periodEnd.getTime() < Date.now();
+
+    const accounts = await this.prisma.houseAccount.findMany({
+      where: {
+        house: { condominiumId, isDisabled: false },
+        currentBalance: { gt: 0 },
+      },
+      select: {
+        houseId: true,
+        currentBalance: true,
+      },
+    });
+
+    if (!isPastPeriod) {
+      return accounts.reduce(
+        (sum, a) => sum + Math.max(0, Number(a.currentBalance)),
+        0,
+      );
+    }
+
+    const subsequentMovements = await this.prisma.accountMovement.findMany({
+      where: {
+        house: { condominiumId, isDisabled: false },
+        movementDate: { gt: periodEnd },
+      },
+      select: {
+        houseId: true,
+        type: true,
+        amount: true,
+      },
+    });
+
+    const netChangeAfterByHouse = new Map<string, number>();
+    for (const m of subsequentMovements) {
+      const cur = netChangeAfterByHouse.get(m.houseId) || 0;
+      const amt = Number(m.amount);
+      if (m.type === AccountMovementType.CREDIT) {
+        netChangeAfterByHouse.set(m.houseId, cur + amt);
+      } else if (
+        m.type === AccountMovementType.PAYMENT ||
+        m.type === AccountMovementType.ADJUSTMENT
+      ) {
+        netChangeAfterByHouse.set(m.houseId, cur - amt);
+      }
+    }
+
+    const allHouses = await this.prisma.house.findMany({
+      where: { condominiumId, isDisabled: false },
+      select: {
+        id: true,
+        houseAccount: { select: { currentBalance: true } },
+      },
+    });
+
+    let total = 0;
+    for (const h of allHouses) {
+      const curBal = Number(h.houseAccount?.currentBalance || 0);
+      const netAfter = netChangeAfterByHouse.get(h.id) || 0;
+      const historicalBal = Math.max(0, curBal - netAfter);
+      total += historicalBal;
+    }
+
+    return total;
   }
 }
