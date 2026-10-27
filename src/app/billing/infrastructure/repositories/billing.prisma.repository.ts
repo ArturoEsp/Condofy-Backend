@@ -386,9 +386,16 @@ export class BillingPrismaRepository implements BillingRepository {
       },
     });
 
-    // Mapear a entidades de dominio con cálculo dinámico de morosidad y firmas de URL frescas
+    // Fin del periodo consultado (último instante del mes en UTC)
+    const periodEnd = new Date(Date.UTC(year, month, 0, 23, 59, 59, 999));
+    const { balancesByHouseId, totalPrepaidBalance, prepaidHousesCount } =
+      await this.getHistoricalPrepaidBalances(condominiumId, periodEnd);
+
+    // Mapear a entidades de dominio con cálculo dinámico de morosidad, saldo histórico y firmas de URL frescas
     let domainRecords = await Promise.all(
-      charges.map((c) => this.mapChargeToDomain(c, config)),
+      charges.map((c) =>
+        this.mapChargeToDomain(c, config, balancesByHouseId.get(c.houseId)),
+      ),
     );
 
     // Ordenamiento natural por número de vivienda a nivel backend
@@ -433,18 +440,6 @@ export class BillingPrismaRepository implements BillingRepository {
       0,
     );
 
-    // Sumar saldos a favor (pagos anticipados en custodia) de las viviendas
-    const prepaidAgg = await this.prisma.houseAccount.aggregate({
-      where: {
-        house: { condominiumId, isDisabled: false },
-        currentBalance: { gt: 0 },
-      },
-      _sum: { currentBalance: true },
-      _count: { id: true },
-    });
-    const totalPrepaidBalance = Number(prepaidAgg._sum.currentBalance || 0);
-    const prepaidHousesCount = prepaidAgg._count.id;
-
     return {
       period: periodStr,
       count,
@@ -453,6 +448,95 @@ export class BillingPrismaRepository implements BillingRepository {
       totalPrepaidBalance,
       prepaidHousesCount,
       records: domainRecords,
+    };
+  }
+
+  /**
+   * Calcula el saldo histórico a favor (adelantos en custodia) de las viviendas
+   * a la fecha de corte especificada (fin del periodo consultado).
+   * Si el periodo es el actual o futuro, toma el saldo en vivo (currentBalance).
+   * Si es un periodo pasado, reconstruye el saldo retrocediendo los movimientos posteriores.
+   */
+  private async getHistoricalPrepaidBalances(
+    condominiumId: string,
+    periodEnd: Date,
+  ): Promise<{
+    balancesByHouseId: Map<string, number>;
+    totalPrepaidBalance: number;
+    prepaidHousesCount: number;
+  }> {
+    const isPastPeriod = periodEnd.getTime() < Date.now();
+
+    const housesWithAccount = await this.prisma.house.findMany({
+      where: { condominiumId, isDisabled: false },
+      select: {
+        id: true,
+        houseAccount: {
+          select: { currentBalance: true },
+        },
+      },
+    });
+
+    const balancesByHouseId = new Map<string, number>();
+
+    if (!isPastPeriod) {
+      for (const h of housesWithAccount) {
+        const bal = Math.max(0, Number(h.houseAccount?.currentBalance || 0));
+        balancesByHouseId.set(h.id, bal);
+      }
+    } else {
+      // Obtener todos los movimientos contables ocurridos DESPUÉS de la fecha de corte
+      const subsequentMovements = await this.prisma.accountMovement.findMany({
+        where: {
+          house: { condominiumId, isDisabled: false },
+          movementDate: { gt: periodEnd },
+        },
+        select: {
+          houseId: true,
+          type: true,
+          amount: true,
+        },
+      });
+
+      // Agrupar movimientos posteriores por casa
+      const netChangeAfterByHouse = new Map<string, number>();
+      for (const m of subsequentMovements) {
+        const currentNet = netChangeAfterByHouse.get(m.houseId) || 0;
+        const amt = Number(m.amount);
+        if (m.type === AccountMovementType.CREDIT) {
+          // Un crédito posterior aumentó el saldo actual, así que al retroceder se resta
+          netChangeAfterByHouse.set(m.houseId, currentNet + amt);
+        } else if (
+          m.type === AccountMovementType.PAYMENT ||
+          m.type === AccountMovementType.ADJUSTMENT
+        ) {
+          // Un pago o débito posterior disminuyó el saldo actual, así que al retroceder se suma
+          netChangeAfterByHouse.set(m.houseId, currentNet - amt);
+        }
+      }
+
+      for (const h of housesWithAccount) {
+        const curBal = Number(h.houseAccount?.currentBalance || 0);
+        const netAfter = netChangeAfterByHouse.get(h.id) || 0;
+        // Saldo a la fecha de corte = curBal - (créditos_posteriores - débitos_posteriores)
+        const historicalBal = Math.max(0, curBal - netAfter);
+        balancesByHouseId.set(h.id, historicalBal);
+      }
+    }
+
+    let totalPrepaidBalance = 0;
+    let prepaidHousesCount = 0;
+    for (const bal of balancesByHouseId.values()) {
+      if (bal > 0) {
+        totalPrepaidBalance += bal;
+        prepaidHousesCount++;
+      }
+    }
+
+    return {
+      balancesByHouseId,
+      totalPrepaidBalance,
+      prepaidHousesCount,
     };
   }
 
@@ -486,8 +570,13 @@ export class BillingPrismaRepository implements BillingRepository {
   private async mapChargeToDomain(
     charge: any,
     config?: BillingConfigEntity | null,
+    overrideCreditBalance?: number,
   ): Promise<BillingRecordEntity> {
     const domain = BillingMapper.toRecordDomain(charge, config);
+
+    if (overrideCreditBalance !== undefined) {
+      domain.houseCreditBalance = Math.max(0, overrideCreditBalance);
+    }
 
     if (domain.residentProof?.proofUrl) {
       domain.residentProof.proofUrl =
@@ -579,6 +668,12 @@ export class BillingPrismaRepository implements BillingRepository {
         (await this.prisma.user.findFirst())?.id ||
         '';
 
+      // Si el cargo pertenece a un mes futuro (dueDate > now), la fecha del movimiento y del pago
+      // debe ser la del cargo (dueDate) para que el descuento se registre en el mes correspondiente
+      // y no afecte retroactivamente el balance histórico de los meses pasados.
+      const applicationDate =
+        charge.dueDate && charge.dueDate > now ? charge.dueDate : now;
+
       await this.prisma.$transaction(async (tx) => {
         // Descontar saldo a favor de la vivienda
         await tx.houseAccount.update({
@@ -597,7 +692,7 @@ export class BillingPrismaRepository implements BillingRepository {
             type: AccountMovementType.PAYMENT,
             description: `Aplicación de saldo a favor a cuota ${charge.concept}`,
             amount: amountToApply,
-            movementDate: new Date(),
+            movementDate: applicationDate,
           },
         });
 
@@ -606,7 +701,7 @@ export class BillingPrismaRepository implements BillingRepository {
           data: {
             maintenanceChargeId: charge.id,
             amount: amountToApply,
-            paymentDate: new Date(),
+            paymentDate: applicationDate,
             paymentMethod: PaymentMethod.TRANSFER,
             reference: 'SALDO-A-FAVOR',
             observations: isFullyPaid
@@ -799,7 +894,7 @@ export class BillingPrismaRepository implements BillingRepository {
             type: AccountMovementType.CREDIT,
             description: `Saldo a favor por excedente de pago en cuota ${charge.concept}`,
             amount: excessCredit,
-            movementDate: new Date(),
+            movementDate: data.paymentDate || new Date(),
           },
         });
       }
