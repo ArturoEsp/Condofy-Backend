@@ -390,9 +390,20 @@ export class ExpensesPrismaRepository implements ExpensesRepository {
         _sum: { amount: true },
       });
 
+    const currentPeriodExtraordinaryChargesAgg =
+      await this.prisma.extraordinaryFeeCharge.aggregate({
+        where: {
+          extraordinaryFee: { condominiumId },
+          paidAmount: { gt: 0 },
+          paymentDate: { gte: startDate, lte: periodEnd },
+        },
+        _sum: { paidAmount: true },
+      });
+
     const currentPeriodIncome =
       Number(currentPeriodChargesAgg._sum.paidAmount || 0) +
-      Number(currentPeriodExtraIncomesAgg._sum.amount || 0);
+      Number(currentPeriodExtraIncomesAgg._sum.amount || 0) +
+      Number(currentPeriodExtraordinaryChargesAgg._sum.paidAmount || 0);
 
     const periodEndingBalance =
       periodStartingBalance + currentPeriodIncome - paidAmount;
@@ -407,27 +418,10 @@ export class ExpensesPrismaRepository implements ExpensesRepository {
         priorExtraIncomesAgg._sum.amount === null &&
         priorExpensesAgg._sum.amount === null);
 
-    const allChargesAgg = await this.prisma.maintenanceCharge.aggregate({
-      where: { condominiumId, paidAmount: { gt: 0 } },
-      _sum: { paidAmount: true },
-    });
-    const allExtraIncomesAgg = await this.prisma.extraIncome.aggregate({
-      where: { condominiumId },
-      _sum: { amount: true },
-    });
-    const allExpensesAgg = await this.prisma.expense.aggregate({
-      where: { condominiumId, status: ExpenseStatus.PAID },
-      _sum: { amount: true },
-    });
-
-    const allTimeIncome =
-      Number(allChargesAgg._sum.paidAmount || 0) +
-      Number(allExtraIncomesAgg._sum.amount || 0) +
-      totalPrepaidBalance;
-    const allTimeExpenses = Number(allExpensesAgg._sum.amount || 0);
-    const cumulativeBankBalance =
-      initialBalance + allTimeIncome - allTimeExpenses;
-    const operationalBalance = cumulativeBankBalance - totalPrepaidBalance;
+    // Saldo operativo al corte del periodo = dinero propio acumulado al cierre
+    const operationalBalance = periodEndingBalance;
+    // Saldo total en banco al corte = dinero propio operativo + adelantos en custodia
+    const cumulativeBankBalance = periodEndingBalance + totalPrepaidBalance;
 
     return {
       period,
@@ -730,27 +724,10 @@ export class ExpensesPrismaRepository implements ExpensesRepository {
     // Saldo proyectado al cierre del mes = Saldo con el que abrió + Flujo neto propio del mes
     const periodEndingBalance = periodStartingBalance + periodNetCashFlow;
 
-    const allChargesAgg = await this.prisma.maintenanceCharge.aggregate({
-      where: { condominiumId, paidAmount: { gt: 0 } },
-      _sum: { paidAmount: true },
-    });
-    const allExtraIncomesAgg = await this.prisma.extraIncome.aggregate({
-      where: { condominiumId },
-      _sum: { amount: true },
-    });
-    const allExpensesAgg = await this.prisma.expense.aggregate({
-      where: { condominiumId, status: ExpenseStatus.PAID },
-      _sum: { amount: true },
-    });
-
-    const allTimeIncome =
-      Number(allChargesAgg._sum.paidAmount || 0) +
-      Number(allExtraIncomesAgg._sum.amount || 0) +
-      totalPrepaidBalance;
-    const allTimeExpenses = Number(allExpensesAgg._sum.amount || 0);
-    const currentAvailableBalance =
-      initialBalance + allTimeIncome - allTimeExpenses;
-    const operationalBalance = currentAvailableBalance - totalPrepaidBalance;
+    // Saldo operativo al corte del periodo = dinero propio acumulado al cierre
+    const operationalBalance = periodEndingBalance;
+    // Saldo disponible al corte = dinero propio operativo + adelantos en custodia
+    const currentAvailableBalance = periodEndingBalance + totalPrepaidBalance;
 
     const catMap: Record<string, number> = {};
     for (const exp of rawExpenses) {
