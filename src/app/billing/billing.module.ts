@@ -14,12 +14,15 @@ import { CreateExtraIncomeUseCase } from './application/use-cases/create-extra-i
 import { GetExtraIncomesUseCase } from './application/use-cases/get-extra-incomes.usecase';
 import { DeleteExtraIncomeUseCase } from './application/use-cases/delete-extra-income.usecase';
 import { ExportReceiptsZipUseCase } from './application/use-cases/export-receipts-zip.usecase';
+import { ReconcileStatementUseCase } from './application/use-cases/reconcile-statement.usecase';
+import { ConfirmReconciliationUseCase } from './application/use-cases/confirm-reconciliation.usecase';
 
 import { CoreModule } from '@/core/core.module';
 import { NotificationsModule } from '../notifications/notifications.module';
 import { BillingNotificationService } from './infrastructure/services/billing-notification.service';
 import { BillingSchedulerService } from './infrastructure/services/billing-scheduler.service';
 import { ReceiptPdfService } from './infrastructure/services/receipt-pdf.service';
+import { BankStatementParserService } from './infrastructure/services/bank-statement-parser.service';
 
 @Module({
   imports: [CoreModule, NotificationsModule],
@@ -27,6 +30,8 @@ import { ReceiptPdfService } from './infrastructure/services/receipt-pdf.service
     BillingNotificationService,
     BillingSchedulerService,
     ReceiptPdfService,
+    BankStatementParserService,
+    ReconcileStatementUseCase,
     {
       provide: PROVIDES_NAMES.BillingRepository,
       useClass: BillingPrismaRepository,
@@ -95,6 +100,11 @@ import { ReceiptPdfService } from './infrastructure/services/receipt-pdf.service
       ],
       useFactory: (repo, storage, pdf) =>
         new ExportReceiptsZipUseCase(repo, storage, pdf),
+    },
+    {
+      provide: ConfirmReconciliationUseCase,
+      inject: [PROVIDES_NAMES.BillingRepository],
+      useFactory: (repo) => new ConfirmReconciliationUseCase(repo),
     },
   ],
   controllers: [BillingController],
