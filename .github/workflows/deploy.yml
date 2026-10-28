@@ -34,6 +34,7 @@ jobs:
         with:
           context: .
           file: ./Dockerfile
+          pull: true # Asegura descargar siempre la versión más reciente con parches de seguridad de node:22-slim
           push: true
           tags: |
             ghcr.io/arturoesp/condofy-backend:latest
