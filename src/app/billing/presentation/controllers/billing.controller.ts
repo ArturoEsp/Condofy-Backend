@@ -1,5 +1,6 @@
 import 'multer';
 import {
+  BadRequestException,
   Body,
   Controller,
   Delete,
@@ -39,10 +40,13 @@ import { CreateExtraIncomeUseCase } from '../../application/use-cases/create-ext
 import { GetExtraIncomesUseCase } from '../../application/use-cases/get-extra-incomes.usecase';
 import { DeleteExtraIncomeUseCase } from '../../application/use-cases/delete-extra-income.usecase';
 import { ExportReceiptsZipUseCase } from '../../application/use-cases/export-receipts-zip.usecase';
+import { ReconcileStatementUseCase } from '../../application/use-cases/reconcile-statement.usecase';
+import { ConfirmReconciliationUseCase } from '../../application/use-cases/confirm-reconciliation.usecase';
 import { BillingNotificationService } from '../../infrastructure/services/billing-notification.service';
 
 import { UpdateBillingSettingsRequest } from '../dtos/requests/update-billing-settings.request';
 import { RegisterPaymentRequest } from '../dtos/requests/register-payment.request';
+import { ConfirmReconciliationRequest } from '../dtos/requests/confirm-reconciliation.request';
 import { UploadResidentProofRequest } from '../dtos/requests/upload-resident-proof.request';
 import { ReviewResidentProofRequest } from '../dtos/requests/review-resident-proof.request';
 import { ParamsListBillingRequest } from '../dtos/requests/params-list-billing.request';
@@ -53,6 +57,10 @@ import {
   ExtraIncomeResponse,
   ExtraIncomesListResponse,
 } from '../dtos/responses/extra-income.response';
+import {
+  StatementReconciliationResponse,
+  ConfirmReconciliationResponse,
+} from '../dtos/responses/reconciliation.response';
 
 @ApiTags('Billing')
 @Controller(':condominiumKey/billing')
@@ -70,6 +78,8 @@ export class BillingController {
     private readonly getExtraIncomesUseCase: GetExtraIncomesUseCase,
     private readonly deleteExtraIncomeUseCase: DeleteExtraIncomeUseCase,
     private readonly exportReceiptsZipUseCase: ExportReceiptsZipUseCase,
+    private readonly reconcileStatementUseCase: ReconcileStatementUseCase,
+    private readonly confirmReconciliationUseCase: ConfirmReconciliationUseCase,
     private readonly billingNotificationService: BillingNotificationService,
     @Inject(PROVIDES_NAMES.StorageService)
     private readonly storageService: StorageService,
@@ -496,5 +506,42 @@ export class BillingController {
       id,
     );
     return ExtraIncomeResponse.fromDomain(deleted);
+  }
+
+  @Post('reconcile/upload')
+  @Roles('ADMIN')
+  @UseInterceptors(FileInterceptor('file'))
+  @ApiConsumes('multipart/form-data')
+  @ApiEndpoint(docs.reconcileStatement)
+  async reconcileStatement(
+    @CondominiumId() condominiumId: string,
+    @UploadedFile() file: Express.Multer.File,
+  ): Promise<StatementReconciliationResponse> {
+    if (!file) {
+      throw new BadRequestException(
+        'Debes adjuntar un archivo de estado de cuenta (PDF, Excel o CSV).',
+      );
+    }
+    return await this.reconcileStatementUseCase.execute({
+      condominiumId,
+      fileBuffer: file.buffer,
+      fileName: file.originalname,
+      mimeType: file.mimetype,
+    });
+  }
+
+  @Post('reconcile/confirm')
+  @Roles('ADMIN')
+  @ApiEndpoint(docs.confirmReconciliation)
+  async confirmReconciliation(
+    @CondominiumId() condominiumId: string,
+    @CurrentUser() user: AuthUserEntity,
+    @Body() data: ConfirmReconciliationRequest,
+  ): Promise<ConfirmReconciliationResponse> {
+    return await this.confirmReconciliationUseCase.execute({
+      condominiumId,
+      userId: user.id,
+      payments: data.payments,
+    });
   }
 }

@@ -7,6 +7,8 @@ import { MyBillingResponse } from '../dtos/responses/my-billing.response';
 import { ExtraIncomeResponse } from '../dtos/responses/extra-income.response';
 import { HouseStatementResponse } from '../dtos/responses/house-statement.response';
 
+import { StatementReconciliationResponse, ConfirmReconciliationResponse } from '../dtos/responses/reconciliation.response';
+
 export const getSettings: ApiEndpointProps = {
   summary: 'Obtener configuración de cobranza del condominio',
   status: HttpStatus.OK,
@@ -114,3 +116,21 @@ export const exportReceiptsZip: ApiEndpointProps = {
   status: HttpStatus.OK,
   withToken: true,
 };
+
+export const reconcileStatement: ApiEndpointProps = {
+  summary:
+    'Subir y procesar estado de cuenta bancario con Gemini Flash para conciliación inteligente',
+  status: HttpStatus.OK,
+  withToken: true,
+  serialization: StatementReconciliationResponse,
+  type: StatementReconciliationResponse,
+};
+
+export const confirmReconciliation: ApiEndpointProps = {
+  summary: 'Confirmar y aplicar en lote los pagos conciliados del estado de cuenta',
+  status: HttpStatus.CREATED,
+  withToken: true,
+  serialization: ConfirmReconciliationResponse,
+  type: ConfirmReconciliationResponse,
+};
+
