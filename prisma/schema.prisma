@@ -213,6 +213,40 @@ enum ServiceProviderCategory {
   OTHER
 }
 
+enum TicketStatus {
+  OPEN
+  IN_REVIEW
+  IN_PROGRESS
+  WAITING_THIRD_PARTY
+  RESOLVED
+  CLOSED
+  REJECTED
+}
+
+enum TicketPriority {
+  LOW
+  MEDIUM
+  HIGH
+  URGENT
+}
+
+enum TicketCategory {
+  PLUMBING
+  ELECTRICAL
+  GARDENING
+  SECURITY
+  CLEANING
+  NOISE_COMPLAINT
+  COMMON_AREA
+  INFRASTRUCTURE
+  OTHER
+}
+
+enum TicketScope {
+  COMMON_AREA
+  PRIVATE_HOUSE
+}
+
 model Condominium {
   id                      String                         @id @default(uuid())
   key                     String                         @unique
@@ -241,6 +275,7 @@ model Condominium {
   amenityBlockPeriods     AmenityBlockPeriod[]
   amenityReservations     AmenityReservation[]
   serviceProviders        ServiceProvider[]
+  tickets                 Ticket[]
   planId                  String?
   plan                    SubscriptionPlan?              @relation(fields: [planId], references: [id], onDelete: SetNull)
   isTrial                 Boolean                        @default(false)
@@ -302,6 +337,10 @@ model User {
   amenityReservations       AmenityReservation[]
   serviceProvidersCreated   ServiceProvider[]       @relation("ServiceProviderCreatedBy")
   serviceProviderLikes      ServiceProviderLike[]   @relation("ServiceProviderUserLikes")
+  ticketsCreated            Ticket[]                @relation("TicketCreator")
+  ticketsAssigned           Ticket[]                @relation("TicketAssignedAdmin")
+  ticketComments            TicketComment[]         @relation("TicketCommentAuthor")
+  ticketHistoryActions      TicketHistory[]         @relation("TicketHistoryUser")
 
   @@index([condominiumId])
 }
@@ -370,6 +409,7 @@ model House {
   officialDocumentHouses  OfficialDocumentHouse[]
   officialDocumentAcks    OfficialDocumentAcknowledgment[] @relation("DocumentAcksHouse")
   amenityReservations     AmenityReservation[]
+  tickets                 Ticket[]
   isDisabled              Boolean                          @default(false)
   createdAt               DateTime                 @default(now())
   updatedAt               DateTime                 @updatedAt
@@ -695,6 +735,7 @@ model Expense {
   invoiceFileType String?
   createdById     String
   createdBy       User            @relation("ExpenseCreatedBy", fields: [createdById], references: [id])
+  ticket          Ticket?
   createdAt       DateTime        @default(now())
   updatedAt       DateTime        @updatedAt
 
@@ -1175,6 +1216,7 @@ model ServiceProvider {
   createdById   String
   createdBy     User                    @relation("ServiceProviderCreatedBy", fields: [createdById], references: [id])
   likes         ServiceProviderLike[]
+  tickets       Ticket[]
 
   createdAt     DateTime                @default(now())
   updatedAt     DateTime                @updatedAt
@@ -1196,5 +1238,86 @@ model ServiceProviderLike {
   @@index([providerId])
   @@index([userId])
 }
+
+model Ticket {
+  id                  String           @id @default(uuid())
+  condominiumId       String
+  condominium         Condominium      @relation(fields: [condominiumId], references: [id], onDelete: Cascade)
+  creatorId           String
+  creator             User             @relation("TicketCreator", fields: [creatorId], references: [id])
+  houseId             String?
+  house               House?           @relation(fields: [houseId], references: [id], onDelete: SetNull)
+  assignedAdminId     String?
+  assignedAdmin       User?            @relation("TicketAssignedAdmin", fields: [assignedAdminId], references: [id], onDelete: SetNull)
+  providerId          String?
+  provider            ServiceProvider? @relation(fields: [providerId], references: [id], onDelete: SetNull)
+  folio               Int
+  title               String
+  description         String           @db.Text
+  category            TicketCategory
+  priority            TicketPriority   @default(MEDIUM)
+  status              TicketStatus     @default(OPEN)
+  scope               TicketScope      @default(COMMON_AREA)
+  locationDetail      String?
+  expenseId           String?          @unique
+  expense             Expense?         @relation(fields: [expenseId], references: [id], onDelete: SetNull)
+  satisfactionRating  Int?
+  satisfactionComment String?          @db.Text
+  attachments         TicketAttachment[]
+  comments            TicketComment[]
+  history             TicketHistory[]
+  resolvedAt          DateTime?
+  closedAt            DateTime?
+  createdAt           DateTime         @default(now())
+  updatedAt           DateTime         @updatedAt
+
+  @@index([condominiumId, status])
+  @@index([condominiumId, folio])
+  @@index([creatorId])
+  @@index([assignedAdminId])
+}
+
+model TicketAttachment {
+  id         String   @id @default(uuid())
+  ticketId   String
+  ticket     Ticket   @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+  fileUrl    String
+  fileName   String?
+  fileSize   String?
+  mimeType   String?
+  createdAt  DateTime @default(now())
+
+  @@index([ticketId])
+}
+
+model TicketComment {
+  id         String   @id @default(uuid())
+  ticketId   String
+  ticket     Ticket   @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+  authorId   String
+  author     User     @relation("TicketCommentAuthor", fields: [authorId], references: [id])
+  content    String   @db.Text
+  isInternal Boolean  @default(false)
+  attachments Json?
+  createdAt  DateTime @default(now())
+
+  @@index([ticketId])
+}
+
+model TicketHistory {
+  id          String   @id @default(uuid())
+  ticketId    String
+  ticket      Ticket   @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+  changedById String
+  changedBy   User     @relation("TicketHistoryUser", fields: [changedById], references: [id])
+  action      String
+  oldValue    String?
+  newValue    String?
+  note        String?  @db.Text
+  createdAt   DateTime @default(now())
+
+  @@index([ticketId])
+}
+
 
 

@@ -307,6 +307,7 @@ export type CondominiumWhereInput = {
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodListRelationFilter
   amenityReservations?: Prisma.AmenityReservationListRelationFilter
   serviceProviders?: Prisma.ServiceProviderListRelationFilter
+  tickets?: Prisma.TicketListRelationFilter
   plan?: Prisma.XOR<Prisma.SubscriptionPlanNullableScalarRelationFilter, Prisma.SubscriptionPlanWhereInput> | null
 }
 
@@ -344,6 +345,7 @@ export type CondominiumOrderByWithRelationInput = {
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodOrderByRelationAggregateInput
   amenityReservations?: Prisma.AmenityReservationOrderByRelationAggregateInput
   serviceProviders?: Prisma.ServiceProviderOrderByRelationAggregateInput
+  tickets?: Prisma.TicketOrderByRelationAggregateInput
   plan?: Prisma.SubscriptionPlanOrderByWithRelationInput
 }
 
@@ -384,6 +386,7 @@ export type CondominiumWhereUniqueInput = Prisma.AtLeast<{
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodListRelationFilter
   amenityReservations?: Prisma.AmenityReservationListRelationFilter
   serviceProviders?: Prisma.ServiceProviderListRelationFilter
+  tickets?: Prisma.TicketListRelationFilter
   plan?: Prisma.XOR<Prisma.SubscriptionPlanNullableScalarRelationFilter, Prisma.SubscriptionPlanWhereInput> | null
 }, "id" | "key">
 
@@ -462,6 +465,7 @@ export type CondominiumCreateInput = {
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodCreateNestedManyWithoutCondominiumInput
   amenityReservations?: Prisma.AmenityReservationCreateNestedManyWithoutCondominiumInput
   serviceProviders?: Prisma.ServiceProviderCreateNestedManyWithoutCondominiumInput
+  tickets?: Prisma.TicketCreateNestedManyWithoutCondominiumInput
   plan?: Prisma.SubscriptionPlanCreateNestedOneWithoutCondominiumsInput
 }
 
@@ -499,6 +503,7 @@ export type CondominiumUncheckedCreateInput = {
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodUncheckedCreateNestedManyWithoutCondominiumInput
   amenityReservations?: Prisma.AmenityReservationUncheckedCreateNestedManyWithoutCondominiumInput
   serviceProviders?: Prisma.ServiceProviderUncheckedCreateNestedManyWithoutCondominiumInput
+  tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutCondominiumInput
 }
 
 export type CondominiumUpdateInput = {
@@ -534,6 +539,7 @@ export type CondominiumUpdateInput = {
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodUpdateManyWithoutCondominiumNestedInput
   amenityReservations?: Prisma.AmenityReservationUpdateManyWithoutCondominiumNestedInput
   serviceProviders?: Prisma.ServiceProviderUpdateManyWithoutCondominiumNestedInput
+  tickets?: Prisma.TicketUpdateManyWithoutCondominiumNestedInput
   plan?: Prisma.SubscriptionPlanUpdateOneWithoutCondominiumsNestedInput
 }
 
@@ -571,6 +577,7 @@ export type CondominiumUncheckedUpdateInput = {
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodUncheckedUpdateManyWithoutCondominiumNestedInput
   amenityReservations?: Prisma.AmenityReservationUncheckedUpdateManyWithoutCondominiumNestedInput
   serviceProviders?: Prisma.ServiceProviderUncheckedUpdateManyWithoutCondominiumNestedInput
+  tickets?: Prisma.TicketUncheckedUpdateManyWithoutCondominiumNestedInput
 }
 
 export type CondominiumCreateManyInput = {
@@ -1036,6 +1043,20 @@ export type CondominiumUpdateOneRequiredWithoutServiceProvidersNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.CondominiumUpdateToOneWithWhereWithoutServiceProvidersInput, Prisma.CondominiumUpdateWithoutServiceProvidersInput>, Prisma.CondominiumUncheckedUpdateWithoutServiceProvidersInput>
 }
 
+export type CondominiumCreateNestedOneWithoutTicketsInput = {
+  create?: Prisma.XOR<Prisma.CondominiumCreateWithoutTicketsInput, Prisma.CondominiumUncheckedCreateWithoutTicketsInput>
+  connectOrCreate?: Prisma.CondominiumCreateOrConnectWithoutTicketsInput
+  connect?: Prisma.CondominiumWhereUniqueInput
+}
+
+export type CondominiumUpdateOneRequiredWithoutTicketsNestedInput = {
+  create?: Prisma.XOR<Prisma.CondominiumCreateWithoutTicketsInput, Prisma.CondominiumUncheckedCreateWithoutTicketsInput>
+  connectOrCreate?: Prisma.CondominiumCreateOrConnectWithoutTicketsInput
+  upsert?: Prisma.CondominiumUpsertWithoutTicketsInput
+  connect?: Prisma.CondominiumWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CondominiumUpdateToOneWithWhereWithoutTicketsInput, Prisma.CondominiumUpdateWithoutTicketsInput>, Prisma.CondominiumUncheckedUpdateWithoutTicketsInput>
+}
+
 export type CondominiumCreateWithoutPlanInput = {
   id?: string
   key: string
@@ -1069,6 +1090,7 @@ export type CondominiumCreateWithoutPlanInput = {
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodCreateNestedManyWithoutCondominiumInput
   amenityReservations?: Prisma.AmenityReservationCreateNestedManyWithoutCondominiumInput
   serviceProviders?: Prisma.ServiceProviderCreateNestedManyWithoutCondominiumInput
+  tickets?: Prisma.TicketCreateNestedManyWithoutCondominiumInput
 }
 
 export type CondominiumUncheckedCreateWithoutPlanInput = {
@@ -1104,6 +1126,7 @@ export type CondominiumUncheckedCreateWithoutPlanInput = {
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodUncheckedCreateNestedManyWithoutCondominiumInput
   amenityReservations?: Prisma.AmenityReservationUncheckedCreateNestedManyWithoutCondominiumInput
   serviceProviders?: Prisma.ServiceProviderUncheckedCreateNestedManyWithoutCondominiumInput
+  tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutCondominiumInput
 }
 
 export type CondominiumCreateOrConnectWithoutPlanInput = {
@@ -1184,6 +1207,7 @@ export type CondominiumCreateWithoutAdminsInput = {
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodCreateNestedManyWithoutCondominiumInput
   amenityReservations?: Prisma.AmenityReservationCreateNestedManyWithoutCondominiumInput
   serviceProviders?: Prisma.ServiceProviderCreateNestedManyWithoutCondominiumInput
+  tickets?: Prisma.TicketCreateNestedManyWithoutCondominiumInput
   plan?: Prisma.SubscriptionPlanCreateNestedOneWithoutCondominiumsInput
 }
 
@@ -1220,6 +1244,7 @@ export type CondominiumUncheckedCreateWithoutAdminsInput = {
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodUncheckedCreateNestedManyWithoutCondominiumInput
   amenityReservations?: Prisma.AmenityReservationUncheckedCreateNestedManyWithoutCondominiumInput
   serviceProviders?: Prisma.ServiceProviderUncheckedCreateNestedManyWithoutCondominiumInput
+  tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutCondominiumInput
 }
 
 export type CondominiumCreateOrConnectWithoutAdminsInput = {
@@ -1270,6 +1295,7 @@ export type CondominiumUpdateWithoutAdminsInput = {
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodUpdateManyWithoutCondominiumNestedInput
   amenityReservations?: Prisma.AmenityReservationUpdateManyWithoutCondominiumNestedInput
   serviceProviders?: Prisma.ServiceProviderUpdateManyWithoutCondominiumNestedInput
+  tickets?: Prisma.TicketUpdateManyWithoutCondominiumNestedInput
   plan?: Prisma.SubscriptionPlanUpdateOneWithoutCondominiumsNestedInput
 }
 
@@ -1306,6 +1332,7 @@ export type CondominiumUncheckedUpdateWithoutAdminsInput = {
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodUncheckedUpdateManyWithoutCondominiumNestedInput
   amenityReservations?: Prisma.AmenityReservationUncheckedUpdateManyWithoutCondominiumNestedInput
   serviceProviders?: Prisma.ServiceProviderUncheckedUpdateManyWithoutCondominiumNestedInput
+  tickets?: Prisma.TicketUncheckedUpdateManyWithoutCondominiumNestedInput
 }
 
 export type CondominiumCreateWithoutHousesInput = {
@@ -1340,6 +1367,7 @@ export type CondominiumCreateWithoutHousesInput = {
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodCreateNestedManyWithoutCondominiumInput
   amenityReservations?: Prisma.AmenityReservationCreateNestedManyWithoutCondominiumInput
   serviceProviders?: Prisma.ServiceProviderCreateNestedManyWithoutCondominiumInput
+  tickets?: Prisma.TicketCreateNestedManyWithoutCondominiumInput
   plan?: Prisma.SubscriptionPlanCreateNestedOneWithoutCondominiumsInput
 }
 
@@ -1376,6 +1404,7 @@ export type CondominiumUncheckedCreateWithoutHousesInput = {
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodUncheckedCreateNestedManyWithoutCondominiumInput
   amenityReservations?: Prisma.AmenityReservationUncheckedCreateNestedManyWithoutCondominiumInput
   serviceProviders?: Prisma.ServiceProviderUncheckedCreateNestedManyWithoutCondominiumInput
+  tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutCondominiumInput
 }
 
 export type CondominiumCreateOrConnectWithoutHousesInput = {
@@ -1426,6 +1455,7 @@ export type CondominiumUpdateWithoutHousesInput = {
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodUpdateManyWithoutCondominiumNestedInput
   amenityReservations?: Prisma.AmenityReservationUpdateManyWithoutCondominiumNestedInput
   serviceProviders?: Prisma.ServiceProviderUpdateManyWithoutCondominiumNestedInput
+  tickets?: Prisma.TicketUpdateManyWithoutCondominiumNestedInput
   plan?: Prisma.SubscriptionPlanUpdateOneWithoutCondominiumsNestedInput
 }
 
@@ -1462,6 +1492,7 @@ export type CondominiumUncheckedUpdateWithoutHousesInput = {
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodUncheckedUpdateManyWithoutCondominiumNestedInput
   amenityReservations?: Prisma.AmenityReservationUncheckedUpdateManyWithoutCondominiumNestedInput
   serviceProviders?: Prisma.ServiceProviderUncheckedUpdateManyWithoutCondominiumNestedInput
+  tickets?: Prisma.TicketUncheckedUpdateManyWithoutCondominiumNestedInput
 }
 
 export type CondominiumCreateWithoutResidentProfilesInput = {
@@ -1496,6 +1527,7 @@ export type CondominiumCreateWithoutResidentProfilesInput = {
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodCreateNestedManyWithoutCondominiumInput
   amenityReservations?: Prisma.AmenityReservationCreateNestedManyWithoutCondominiumInput
   serviceProviders?: Prisma.ServiceProviderCreateNestedManyWithoutCondominiumInput
+  tickets?: Prisma.TicketCreateNestedManyWithoutCondominiumInput
   plan?: Prisma.SubscriptionPlanCreateNestedOneWithoutCondominiumsInput
 }
 
@@ -1532,6 +1564,7 @@ export type CondominiumUncheckedCreateWithoutResidentProfilesInput = {
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodUncheckedCreateNestedManyWithoutCondominiumInput
   amenityReservations?: Prisma.AmenityReservationUncheckedCreateNestedManyWithoutCondominiumInput
   serviceProviders?: Prisma.ServiceProviderUncheckedCreateNestedManyWithoutCondominiumInput
+  tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutCondominiumInput
 }
 
 export type CondominiumCreateOrConnectWithoutResidentProfilesInput = {
@@ -1582,6 +1615,7 @@ export type CondominiumUpdateWithoutResidentProfilesInput = {
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodUpdateManyWithoutCondominiumNestedInput
   amenityReservations?: Prisma.AmenityReservationUpdateManyWithoutCondominiumNestedInput
   serviceProviders?: Prisma.ServiceProviderUpdateManyWithoutCondominiumNestedInput
+  tickets?: Prisma.TicketUpdateManyWithoutCondominiumNestedInput
   plan?: Prisma.SubscriptionPlanUpdateOneWithoutCondominiumsNestedInput
 }
 
@@ -1618,6 +1652,7 @@ export type CondominiumUncheckedUpdateWithoutResidentProfilesInput = {
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodUncheckedUpdateManyWithoutCondominiumNestedInput
   amenityReservations?: Prisma.AmenityReservationUncheckedUpdateManyWithoutCondominiumNestedInput
   serviceProviders?: Prisma.ServiceProviderUncheckedUpdateManyWithoutCondominiumNestedInput
+  tickets?: Prisma.TicketUncheckedUpdateManyWithoutCondominiumNestedInput
 }
 
 export type CondominiumCreateWithoutParcelsInput = {
@@ -1652,6 +1687,7 @@ export type CondominiumCreateWithoutParcelsInput = {
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodCreateNestedManyWithoutCondominiumInput
   amenityReservations?: Prisma.AmenityReservationCreateNestedManyWithoutCondominiumInput
   serviceProviders?: Prisma.ServiceProviderCreateNestedManyWithoutCondominiumInput
+  tickets?: Prisma.TicketCreateNestedManyWithoutCondominiumInput
   plan?: Prisma.SubscriptionPlanCreateNestedOneWithoutCondominiumsInput
 }
 
@@ -1688,6 +1724,7 @@ export type CondominiumUncheckedCreateWithoutParcelsInput = {
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodUncheckedCreateNestedManyWithoutCondominiumInput
   amenityReservations?: Prisma.AmenityReservationUncheckedCreateNestedManyWithoutCondominiumInput
   serviceProviders?: Prisma.ServiceProviderUncheckedCreateNestedManyWithoutCondominiumInput
+  tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutCondominiumInput
 }
 
 export type CondominiumCreateOrConnectWithoutParcelsInput = {
@@ -1738,6 +1775,7 @@ export type CondominiumUpdateWithoutParcelsInput = {
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodUpdateManyWithoutCondominiumNestedInput
   amenityReservations?: Prisma.AmenityReservationUpdateManyWithoutCondominiumNestedInput
   serviceProviders?: Prisma.ServiceProviderUpdateManyWithoutCondominiumNestedInput
+  tickets?: Prisma.TicketUpdateManyWithoutCondominiumNestedInput
   plan?: Prisma.SubscriptionPlanUpdateOneWithoutCondominiumsNestedInput
 }
 
@@ -1774,6 +1812,7 @@ export type CondominiumUncheckedUpdateWithoutParcelsInput = {
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodUncheckedUpdateManyWithoutCondominiumNestedInput
   amenityReservations?: Prisma.AmenityReservationUncheckedUpdateManyWithoutCondominiumNestedInput
   serviceProviders?: Prisma.ServiceProviderUncheckedUpdateManyWithoutCondominiumNestedInput
+  tickets?: Prisma.TicketUncheckedUpdateManyWithoutCondominiumNestedInput
 }
 
 export type CondominiumCreateWithoutGeneralProviderAccessesInput = {
@@ -1808,6 +1847,7 @@ export type CondominiumCreateWithoutGeneralProviderAccessesInput = {
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodCreateNestedManyWithoutCondominiumInput
   amenityReservations?: Prisma.AmenityReservationCreateNestedManyWithoutCondominiumInput
   serviceProviders?: Prisma.ServiceProviderCreateNestedManyWithoutCondominiumInput
+  tickets?: Prisma.TicketCreateNestedManyWithoutCondominiumInput
   plan?: Prisma.SubscriptionPlanCreateNestedOneWithoutCondominiumsInput
 }
 
@@ -1844,6 +1884,7 @@ export type CondominiumUncheckedCreateWithoutGeneralProviderAccessesInput = {
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodUncheckedCreateNestedManyWithoutCondominiumInput
   amenityReservations?: Prisma.AmenityReservationUncheckedCreateNestedManyWithoutCondominiumInput
   serviceProviders?: Prisma.ServiceProviderUncheckedCreateNestedManyWithoutCondominiumInput
+  tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutCondominiumInput
 }
 
 export type CondominiumCreateOrConnectWithoutGeneralProviderAccessesInput = {
@@ -1894,6 +1935,7 @@ export type CondominiumUpdateWithoutGeneralProviderAccessesInput = {
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodUpdateManyWithoutCondominiumNestedInput
   amenityReservations?: Prisma.AmenityReservationUpdateManyWithoutCondominiumNestedInput
   serviceProviders?: Prisma.ServiceProviderUpdateManyWithoutCondominiumNestedInput
+  tickets?: Prisma.TicketUpdateManyWithoutCondominiumNestedInput
   plan?: Prisma.SubscriptionPlanUpdateOneWithoutCondominiumsNestedInput
 }
 
@@ -1930,6 +1972,7 @@ export type CondominiumUncheckedUpdateWithoutGeneralProviderAccessesInput = {
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodUncheckedUpdateManyWithoutCondominiumNestedInput
   amenityReservations?: Prisma.AmenityReservationUncheckedUpdateManyWithoutCondominiumNestedInput
   serviceProviders?: Prisma.ServiceProviderUncheckedUpdateManyWithoutCondominiumNestedInput
+  tickets?: Prisma.TicketUncheckedUpdateManyWithoutCondominiumNestedInput
 }
 
 export type CondominiumCreateWithoutMaintenanceChargesInput = {
@@ -1964,6 +2007,7 @@ export type CondominiumCreateWithoutMaintenanceChargesInput = {
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodCreateNestedManyWithoutCondominiumInput
   amenityReservations?: Prisma.AmenityReservationCreateNestedManyWithoutCondominiumInput
   serviceProviders?: Prisma.ServiceProviderCreateNestedManyWithoutCondominiumInput
+  tickets?: Prisma.TicketCreateNestedManyWithoutCondominiumInput
   plan?: Prisma.SubscriptionPlanCreateNestedOneWithoutCondominiumsInput
 }
 
@@ -2000,6 +2044,7 @@ export type CondominiumUncheckedCreateWithoutMaintenanceChargesInput = {
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodUncheckedCreateNestedManyWithoutCondominiumInput
   amenityReservations?: Prisma.AmenityReservationUncheckedCreateNestedManyWithoutCondominiumInput
   serviceProviders?: Prisma.ServiceProviderUncheckedCreateNestedManyWithoutCondominiumInput
+  tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutCondominiumInput
 }
 
 export type CondominiumCreateOrConnectWithoutMaintenanceChargesInput = {
@@ -2050,6 +2095,7 @@ export type CondominiumUpdateWithoutMaintenanceChargesInput = {
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodUpdateManyWithoutCondominiumNestedInput
   amenityReservations?: Prisma.AmenityReservationUpdateManyWithoutCondominiumNestedInput
   serviceProviders?: Prisma.ServiceProviderUpdateManyWithoutCondominiumNestedInput
+  tickets?: Prisma.TicketUpdateManyWithoutCondominiumNestedInput
   plan?: Prisma.SubscriptionPlanUpdateOneWithoutCondominiumsNestedInput
 }
 
@@ -2086,6 +2132,7 @@ export type CondominiumUncheckedUpdateWithoutMaintenanceChargesInput = {
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodUncheckedUpdateManyWithoutCondominiumNestedInput
   amenityReservations?: Prisma.AmenityReservationUncheckedUpdateManyWithoutCondominiumNestedInput
   serviceProviders?: Prisma.ServiceProviderUncheckedUpdateManyWithoutCondominiumNestedInput
+  tickets?: Prisma.TicketUncheckedUpdateManyWithoutCondominiumNestedInput
 }
 
 export type CondominiumCreateWithoutBillingConfigInput = {
@@ -2120,6 +2167,7 @@ export type CondominiumCreateWithoutBillingConfigInput = {
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodCreateNestedManyWithoutCondominiumInput
   amenityReservations?: Prisma.AmenityReservationCreateNestedManyWithoutCondominiumInput
   serviceProviders?: Prisma.ServiceProviderCreateNestedManyWithoutCondominiumInput
+  tickets?: Prisma.TicketCreateNestedManyWithoutCondominiumInput
   plan?: Prisma.SubscriptionPlanCreateNestedOneWithoutCondominiumsInput
 }
 
@@ -2156,6 +2204,7 @@ export type CondominiumUncheckedCreateWithoutBillingConfigInput = {
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodUncheckedCreateNestedManyWithoutCondominiumInput
   amenityReservations?: Prisma.AmenityReservationUncheckedCreateNestedManyWithoutCondominiumInput
   serviceProviders?: Prisma.ServiceProviderUncheckedCreateNestedManyWithoutCondominiumInput
+  tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutCondominiumInput
 }
 
 export type CondominiumCreateOrConnectWithoutBillingConfigInput = {
@@ -2206,6 +2255,7 @@ export type CondominiumUpdateWithoutBillingConfigInput = {
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodUpdateManyWithoutCondominiumNestedInput
   amenityReservations?: Prisma.AmenityReservationUpdateManyWithoutCondominiumNestedInput
   serviceProviders?: Prisma.ServiceProviderUpdateManyWithoutCondominiumNestedInput
+  tickets?: Prisma.TicketUpdateManyWithoutCondominiumNestedInput
   plan?: Prisma.SubscriptionPlanUpdateOneWithoutCondominiumsNestedInput
 }
 
@@ -2242,6 +2292,7 @@ export type CondominiumUncheckedUpdateWithoutBillingConfigInput = {
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodUncheckedUpdateManyWithoutCondominiumNestedInput
   amenityReservations?: Prisma.AmenityReservationUncheckedUpdateManyWithoutCondominiumNestedInput
   serviceProviders?: Prisma.ServiceProviderUncheckedUpdateManyWithoutCondominiumNestedInput
+  tickets?: Prisma.TicketUncheckedUpdateManyWithoutCondominiumNestedInput
 }
 
 export type CondominiumCreateWithoutExpensesInput = {
@@ -2276,6 +2327,7 @@ export type CondominiumCreateWithoutExpensesInput = {
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodCreateNestedManyWithoutCondominiumInput
   amenityReservations?: Prisma.AmenityReservationCreateNestedManyWithoutCondominiumInput
   serviceProviders?: Prisma.ServiceProviderCreateNestedManyWithoutCondominiumInput
+  tickets?: Prisma.TicketCreateNestedManyWithoutCondominiumInput
   plan?: Prisma.SubscriptionPlanCreateNestedOneWithoutCondominiumsInput
 }
 
@@ -2312,6 +2364,7 @@ export type CondominiumUncheckedCreateWithoutExpensesInput = {
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodUncheckedCreateNestedManyWithoutCondominiumInput
   amenityReservations?: Prisma.AmenityReservationUncheckedCreateNestedManyWithoutCondominiumInput
   serviceProviders?: Prisma.ServiceProviderUncheckedCreateNestedManyWithoutCondominiumInput
+  tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutCondominiumInput
 }
 
 export type CondominiumCreateOrConnectWithoutExpensesInput = {
@@ -2362,6 +2415,7 @@ export type CondominiumUpdateWithoutExpensesInput = {
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodUpdateManyWithoutCondominiumNestedInput
   amenityReservations?: Prisma.AmenityReservationUpdateManyWithoutCondominiumNestedInput
   serviceProviders?: Prisma.ServiceProviderUpdateManyWithoutCondominiumNestedInput
+  tickets?: Prisma.TicketUpdateManyWithoutCondominiumNestedInput
   plan?: Prisma.SubscriptionPlanUpdateOneWithoutCondominiumsNestedInput
 }
 
@@ -2398,6 +2452,7 @@ export type CondominiumUncheckedUpdateWithoutExpensesInput = {
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodUncheckedUpdateManyWithoutCondominiumNestedInput
   amenityReservations?: Prisma.AmenityReservationUncheckedUpdateManyWithoutCondominiumNestedInput
   serviceProviders?: Prisma.ServiceProviderUncheckedUpdateManyWithoutCondominiumNestedInput
+  tickets?: Prisma.TicketUncheckedUpdateManyWithoutCondominiumNestedInput
 }
 
 export type CondominiumCreateWithoutExtraIncomesInput = {
@@ -2432,6 +2487,7 @@ export type CondominiumCreateWithoutExtraIncomesInput = {
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodCreateNestedManyWithoutCondominiumInput
   amenityReservations?: Prisma.AmenityReservationCreateNestedManyWithoutCondominiumInput
   serviceProviders?: Prisma.ServiceProviderCreateNestedManyWithoutCondominiumInput
+  tickets?: Prisma.TicketCreateNestedManyWithoutCondominiumInput
   plan?: Prisma.SubscriptionPlanCreateNestedOneWithoutCondominiumsInput
 }
 
@@ -2468,6 +2524,7 @@ export type CondominiumUncheckedCreateWithoutExtraIncomesInput = {
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodUncheckedCreateNestedManyWithoutCondominiumInput
   amenityReservations?: Prisma.AmenityReservationUncheckedCreateNestedManyWithoutCondominiumInput
   serviceProviders?: Prisma.ServiceProviderUncheckedCreateNestedManyWithoutCondominiumInput
+  tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutCondominiumInput
 }
 
 export type CondominiumCreateOrConnectWithoutExtraIncomesInput = {
@@ -2518,6 +2575,7 @@ export type CondominiumUpdateWithoutExtraIncomesInput = {
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodUpdateManyWithoutCondominiumNestedInput
   amenityReservations?: Prisma.AmenityReservationUpdateManyWithoutCondominiumNestedInput
   serviceProviders?: Prisma.ServiceProviderUpdateManyWithoutCondominiumNestedInput
+  tickets?: Prisma.TicketUpdateManyWithoutCondominiumNestedInput
   plan?: Prisma.SubscriptionPlanUpdateOneWithoutCondominiumsNestedInput
 }
 
@@ -2554,6 +2612,7 @@ export type CondominiumUncheckedUpdateWithoutExtraIncomesInput = {
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodUncheckedUpdateManyWithoutCondominiumNestedInput
   amenityReservations?: Prisma.AmenityReservationUncheckedUpdateManyWithoutCondominiumNestedInput
   serviceProviders?: Prisma.ServiceProviderUncheckedUpdateManyWithoutCondominiumNestedInput
+  tickets?: Prisma.TicketUncheckedUpdateManyWithoutCondominiumNestedInput
 }
 
 export type CondominiumCreateWithoutTransparencyConfigInput = {
@@ -2588,6 +2647,7 @@ export type CondominiumCreateWithoutTransparencyConfigInput = {
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodCreateNestedManyWithoutCondominiumInput
   amenityReservations?: Prisma.AmenityReservationCreateNestedManyWithoutCondominiumInput
   serviceProviders?: Prisma.ServiceProviderCreateNestedManyWithoutCondominiumInput
+  tickets?: Prisma.TicketCreateNestedManyWithoutCondominiumInput
   plan?: Prisma.SubscriptionPlanCreateNestedOneWithoutCondominiumsInput
 }
 
@@ -2624,6 +2684,7 @@ export type CondominiumUncheckedCreateWithoutTransparencyConfigInput = {
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodUncheckedCreateNestedManyWithoutCondominiumInput
   amenityReservations?: Prisma.AmenityReservationUncheckedCreateNestedManyWithoutCondominiumInput
   serviceProviders?: Prisma.ServiceProviderUncheckedCreateNestedManyWithoutCondominiumInput
+  tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutCondominiumInput
 }
 
 export type CondominiumCreateOrConnectWithoutTransparencyConfigInput = {
@@ -2674,6 +2735,7 @@ export type CondominiumUpdateWithoutTransparencyConfigInput = {
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodUpdateManyWithoutCondominiumNestedInput
   amenityReservations?: Prisma.AmenityReservationUpdateManyWithoutCondominiumNestedInput
   serviceProviders?: Prisma.ServiceProviderUpdateManyWithoutCondominiumNestedInput
+  tickets?: Prisma.TicketUpdateManyWithoutCondominiumNestedInput
   plan?: Prisma.SubscriptionPlanUpdateOneWithoutCondominiumsNestedInput
 }
 
@@ -2710,6 +2772,7 @@ export type CondominiumUncheckedUpdateWithoutTransparencyConfigInput = {
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodUncheckedUpdateManyWithoutCondominiumNestedInput
   amenityReservations?: Prisma.AmenityReservationUncheckedUpdateManyWithoutCondominiumNestedInput
   serviceProviders?: Prisma.ServiceProviderUncheckedUpdateManyWithoutCondominiumNestedInput
+  tickets?: Prisma.TicketUncheckedUpdateManyWithoutCondominiumNestedInput
 }
 
 export type CondominiumCreateWithoutExtraordinaryFeesInput = {
@@ -2744,6 +2807,7 @@ export type CondominiumCreateWithoutExtraordinaryFeesInput = {
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodCreateNestedManyWithoutCondominiumInput
   amenityReservations?: Prisma.AmenityReservationCreateNestedManyWithoutCondominiumInput
   serviceProviders?: Prisma.ServiceProviderCreateNestedManyWithoutCondominiumInput
+  tickets?: Prisma.TicketCreateNestedManyWithoutCondominiumInput
   plan?: Prisma.SubscriptionPlanCreateNestedOneWithoutCondominiumsInput
 }
 
@@ -2780,6 +2844,7 @@ export type CondominiumUncheckedCreateWithoutExtraordinaryFeesInput = {
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodUncheckedCreateNestedManyWithoutCondominiumInput
   amenityReservations?: Prisma.AmenityReservationUncheckedCreateNestedManyWithoutCondominiumInput
   serviceProviders?: Prisma.ServiceProviderUncheckedCreateNestedManyWithoutCondominiumInput
+  tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutCondominiumInput
 }
 
 export type CondominiumCreateOrConnectWithoutExtraordinaryFeesInput = {
@@ -2830,6 +2895,7 @@ export type CondominiumUpdateWithoutExtraordinaryFeesInput = {
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodUpdateManyWithoutCondominiumNestedInput
   amenityReservations?: Prisma.AmenityReservationUpdateManyWithoutCondominiumNestedInput
   serviceProviders?: Prisma.ServiceProviderUpdateManyWithoutCondominiumNestedInput
+  tickets?: Prisma.TicketUpdateManyWithoutCondominiumNestedInput
   plan?: Prisma.SubscriptionPlanUpdateOneWithoutCondominiumsNestedInput
 }
 
@@ -2866,6 +2932,7 @@ export type CondominiumUncheckedUpdateWithoutExtraordinaryFeesInput = {
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodUncheckedUpdateManyWithoutCondominiumNestedInput
   amenityReservations?: Prisma.AmenityReservationUncheckedUpdateManyWithoutCondominiumNestedInput
   serviceProviders?: Prisma.ServiceProviderUncheckedUpdateManyWithoutCondominiumNestedInput
+  tickets?: Prisma.TicketUncheckedUpdateManyWithoutCondominiumNestedInput
 }
 
 export type CondominiumCreateWithoutStandContactsInput = {
@@ -2900,6 +2967,7 @@ export type CondominiumCreateWithoutStandContactsInput = {
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodCreateNestedManyWithoutCondominiumInput
   amenityReservations?: Prisma.AmenityReservationCreateNestedManyWithoutCondominiumInput
   serviceProviders?: Prisma.ServiceProviderCreateNestedManyWithoutCondominiumInput
+  tickets?: Prisma.TicketCreateNestedManyWithoutCondominiumInput
   plan?: Prisma.SubscriptionPlanCreateNestedOneWithoutCondominiumsInput
 }
 
@@ -2936,6 +3004,7 @@ export type CondominiumUncheckedCreateWithoutStandContactsInput = {
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodUncheckedCreateNestedManyWithoutCondominiumInput
   amenityReservations?: Prisma.AmenityReservationUncheckedCreateNestedManyWithoutCondominiumInput
   serviceProviders?: Prisma.ServiceProviderUncheckedCreateNestedManyWithoutCondominiumInput
+  tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutCondominiumInput
 }
 
 export type CondominiumCreateOrConnectWithoutStandContactsInput = {
@@ -2986,6 +3055,7 @@ export type CondominiumUpdateWithoutStandContactsInput = {
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodUpdateManyWithoutCondominiumNestedInput
   amenityReservations?: Prisma.AmenityReservationUpdateManyWithoutCondominiumNestedInput
   serviceProviders?: Prisma.ServiceProviderUpdateManyWithoutCondominiumNestedInput
+  tickets?: Prisma.TicketUpdateManyWithoutCondominiumNestedInput
   plan?: Prisma.SubscriptionPlanUpdateOneWithoutCondominiumsNestedInput
 }
 
@@ -3022,6 +3092,7 @@ export type CondominiumUncheckedUpdateWithoutStandContactsInput = {
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodUncheckedUpdateManyWithoutCondominiumNestedInput
   amenityReservations?: Prisma.AmenityReservationUncheckedUpdateManyWithoutCondominiumNestedInput
   serviceProviders?: Prisma.ServiceProviderUncheckedUpdateManyWithoutCondominiumNestedInput
+  tickets?: Prisma.TicketUncheckedUpdateManyWithoutCondominiumNestedInput
 }
 
 export type CondominiumCreateWithoutAnnouncementsInput = {
@@ -3056,6 +3127,7 @@ export type CondominiumCreateWithoutAnnouncementsInput = {
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodCreateNestedManyWithoutCondominiumInput
   amenityReservations?: Prisma.AmenityReservationCreateNestedManyWithoutCondominiumInput
   serviceProviders?: Prisma.ServiceProviderCreateNestedManyWithoutCondominiumInput
+  tickets?: Prisma.TicketCreateNestedManyWithoutCondominiumInput
   plan?: Prisma.SubscriptionPlanCreateNestedOneWithoutCondominiumsInput
 }
 
@@ -3092,6 +3164,7 @@ export type CondominiumUncheckedCreateWithoutAnnouncementsInput = {
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodUncheckedCreateNestedManyWithoutCondominiumInput
   amenityReservations?: Prisma.AmenityReservationUncheckedCreateNestedManyWithoutCondominiumInput
   serviceProviders?: Prisma.ServiceProviderUncheckedCreateNestedManyWithoutCondominiumInput
+  tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutCondominiumInput
 }
 
 export type CondominiumCreateOrConnectWithoutAnnouncementsInput = {
@@ -3142,6 +3215,7 @@ export type CondominiumUpdateWithoutAnnouncementsInput = {
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodUpdateManyWithoutCondominiumNestedInput
   amenityReservations?: Prisma.AmenityReservationUpdateManyWithoutCondominiumNestedInput
   serviceProviders?: Prisma.ServiceProviderUpdateManyWithoutCondominiumNestedInput
+  tickets?: Prisma.TicketUpdateManyWithoutCondominiumNestedInput
   plan?: Prisma.SubscriptionPlanUpdateOneWithoutCondominiumsNestedInput
 }
 
@@ -3178,6 +3252,7 @@ export type CondominiumUncheckedUpdateWithoutAnnouncementsInput = {
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodUncheckedUpdateManyWithoutCondominiumNestedInput
   amenityReservations?: Prisma.AmenityReservationUncheckedUpdateManyWithoutCondominiumNestedInput
   serviceProviders?: Prisma.ServiceProviderUncheckedUpdateManyWithoutCondominiumNestedInput
+  tickets?: Prisma.TicketUncheckedUpdateManyWithoutCondominiumNestedInput
 }
 
 export type CondominiumCreateWithoutSurveysInput = {
@@ -3212,6 +3287,7 @@ export type CondominiumCreateWithoutSurveysInput = {
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodCreateNestedManyWithoutCondominiumInput
   amenityReservations?: Prisma.AmenityReservationCreateNestedManyWithoutCondominiumInput
   serviceProviders?: Prisma.ServiceProviderCreateNestedManyWithoutCondominiumInput
+  tickets?: Prisma.TicketCreateNestedManyWithoutCondominiumInput
   plan?: Prisma.SubscriptionPlanCreateNestedOneWithoutCondominiumsInput
 }
 
@@ -3248,6 +3324,7 @@ export type CondominiumUncheckedCreateWithoutSurveysInput = {
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodUncheckedCreateNestedManyWithoutCondominiumInput
   amenityReservations?: Prisma.AmenityReservationUncheckedCreateNestedManyWithoutCondominiumInput
   serviceProviders?: Prisma.ServiceProviderUncheckedCreateNestedManyWithoutCondominiumInput
+  tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutCondominiumInput
 }
 
 export type CondominiumCreateOrConnectWithoutSurveysInput = {
@@ -3298,6 +3375,7 @@ export type CondominiumUpdateWithoutSurveysInput = {
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodUpdateManyWithoutCondominiumNestedInput
   amenityReservations?: Prisma.AmenityReservationUpdateManyWithoutCondominiumNestedInput
   serviceProviders?: Prisma.ServiceProviderUpdateManyWithoutCondominiumNestedInput
+  tickets?: Prisma.TicketUpdateManyWithoutCondominiumNestedInput
   plan?: Prisma.SubscriptionPlanUpdateOneWithoutCondominiumsNestedInput
 }
 
@@ -3334,6 +3412,7 @@ export type CondominiumUncheckedUpdateWithoutSurveysInput = {
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodUncheckedUpdateManyWithoutCondominiumNestedInput
   amenityReservations?: Prisma.AmenityReservationUncheckedUpdateManyWithoutCondominiumNestedInput
   serviceProviders?: Prisma.ServiceProviderUncheckedUpdateManyWithoutCondominiumNestedInput
+  tickets?: Prisma.TicketUncheckedUpdateManyWithoutCondominiumNestedInput
 }
 
 export type CondominiumCreateWithoutOfficialDocumentsInput = {
@@ -3368,6 +3447,7 @@ export type CondominiumCreateWithoutOfficialDocumentsInput = {
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodCreateNestedManyWithoutCondominiumInput
   amenityReservations?: Prisma.AmenityReservationCreateNestedManyWithoutCondominiumInput
   serviceProviders?: Prisma.ServiceProviderCreateNestedManyWithoutCondominiumInput
+  tickets?: Prisma.TicketCreateNestedManyWithoutCondominiumInput
   plan?: Prisma.SubscriptionPlanCreateNestedOneWithoutCondominiumsInput
 }
 
@@ -3404,6 +3484,7 @@ export type CondominiumUncheckedCreateWithoutOfficialDocumentsInput = {
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodUncheckedCreateNestedManyWithoutCondominiumInput
   amenityReservations?: Prisma.AmenityReservationUncheckedCreateNestedManyWithoutCondominiumInput
   serviceProviders?: Prisma.ServiceProviderUncheckedCreateNestedManyWithoutCondominiumInput
+  tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutCondominiumInput
 }
 
 export type CondominiumCreateOrConnectWithoutOfficialDocumentsInput = {
@@ -3454,6 +3535,7 @@ export type CondominiumUpdateWithoutOfficialDocumentsInput = {
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodUpdateManyWithoutCondominiumNestedInput
   amenityReservations?: Prisma.AmenityReservationUpdateManyWithoutCondominiumNestedInput
   serviceProviders?: Prisma.ServiceProviderUpdateManyWithoutCondominiumNestedInput
+  tickets?: Prisma.TicketUpdateManyWithoutCondominiumNestedInput
   plan?: Prisma.SubscriptionPlanUpdateOneWithoutCondominiumsNestedInput
 }
 
@@ -3490,6 +3572,7 @@ export type CondominiumUncheckedUpdateWithoutOfficialDocumentsInput = {
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodUncheckedUpdateManyWithoutCondominiumNestedInput
   amenityReservations?: Prisma.AmenityReservationUncheckedUpdateManyWithoutCondominiumNestedInput
   serviceProviders?: Prisma.ServiceProviderUncheckedUpdateManyWithoutCondominiumNestedInput
+  tickets?: Prisma.TicketUncheckedUpdateManyWithoutCondominiumNestedInput
 }
 
 export type CondominiumCreateWithoutAmenitiesInput = {
@@ -3524,6 +3607,7 @@ export type CondominiumCreateWithoutAmenitiesInput = {
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodCreateNestedManyWithoutCondominiumInput
   amenityReservations?: Prisma.AmenityReservationCreateNestedManyWithoutCondominiumInput
   serviceProviders?: Prisma.ServiceProviderCreateNestedManyWithoutCondominiumInput
+  tickets?: Prisma.TicketCreateNestedManyWithoutCondominiumInput
   plan?: Prisma.SubscriptionPlanCreateNestedOneWithoutCondominiumsInput
 }
 
@@ -3560,6 +3644,7 @@ export type CondominiumUncheckedCreateWithoutAmenitiesInput = {
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodUncheckedCreateNestedManyWithoutCondominiumInput
   amenityReservations?: Prisma.AmenityReservationUncheckedCreateNestedManyWithoutCondominiumInput
   serviceProviders?: Prisma.ServiceProviderUncheckedCreateNestedManyWithoutCondominiumInput
+  tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutCondominiumInput
 }
 
 export type CondominiumCreateOrConnectWithoutAmenitiesInput = {
@@ -3610,6 +3695,7 @@ export type CondominiumUpdateWithoutAmenitiesInput = {
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodUpdateManyWithoutCondominiumNestedInput
   amenityReservations?: Prisma.AmenityReservationUpdateManyWithoutCondominiumNestedInput
   serviceProviders?: Prisma.ServiceProviderUpdateManyWithoutCondominiumNestedInput
+  tickets?: Prisma.TicketUpdateManyWithoutCondominiumNestedInput
   plan?: Prisma.SubscriptionPlanUpdateOneWithoutCondominiumsNestedInput
 }
 
@@ -3646,6 +3732,7 @@ export type CondominiumUncheckedUpdateWithoutAmenitiesInput = {
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodUncheckedUpdateManyWithoutCondominiumNestedInput
   amenityReservations?: Prisma.AmenityReservationUncheckedUpdateManyWithoutCondominiumNestedInput
   serviceProviders?: Prisma.ServiceProviderUncheckedUpdateManyWithoutCondominiumNestedInput
+  tickets?: Prisma.TicketUncheckedUpdateManyWithoutCondominiumNestedInput
 }
 
 export type CondominiumCreateWithoutAmenityBlockPeriodsInput = {
@@ -3680,6 +3767,7 @@ export type CondominiumCreateWithoutAmenityBlockPeriodsInput = {
   amenities?: Prisma.AmenityCreateNestedManyWithoutCondominiumInput
   amenityReservations?: Prisma.AmenityReservationCreateNestedManyWithoutCondominiumInput
   serviceProviders?: Prisma.ServiceProviderCreateNestedManyWithoutCondominiumInput
+  tickets?: Prisma.TicketCreateNestedManyWithoutCondominiumInput
   plan?: Prisma.SubscriptionPlanCreateNestedOneWithoutCondominiumsInput
 }
 
@@ -3716,6 +3804,7 @@ export type CondominiumUncheckedCreateWithoutAmenityBlockPeriodsInput = {
   amenities?: Prisma.AmenityUncheckedCreateNestedManyWithoutCondominiumInput
   amenityReservations?: Prisma.AmenityReservationUncheckedCreateNestedManyWithoutCondominiumInput
   serviceProviders?: Prisma.ServiceProviderUncheckedCreateNestedManyWithoutCondominiumInput
+  tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutCondominiumInput
 }
 
 export type CondominiumCreateOrConnectWithoutAmenityBlockPeriodsInput = {
@@ -3766,6 +3855,7 @@ export type CondominiumUpdateWithoutAmenityBlockPeriodsInput = {
   amenities?: Prisma.AmenityUpdateManyWithoutCondominiumNestedInput
   amenityReservations?: Prisma.AmenityReservationUpdateManyWithoutCondominiumNestedInput
   serviceProviders?: Prisma.ServiceProviderUpdateManyWithoutCondominiumNestedInput
+  tickets?: Prisma.TicketUpdateManyWithoutCondominiumNestedInput
   plan?: Prisma.SubscriptionPlanUpdateOneWithoutCondominiumsNestedInput
 }
 
@@ -3802,6 +3892,7 @@ export type CondominiumUncheckedUpdateWithoutAmenityBlockPeriodsInput = {
   amenities?: Prisma.AmenityUncheckedUpdateManyWithoutCondominiumNestedInput
   amenityReservations?: Prisma.AmenityReservationUncheckedUpdateManyWithoutCondominiumNestedInput
   serviceProviders?: Prisma.ServiceProviderUncheckedUpdateManyWithoutCondominiumNestedInput
+  tickets?: Prisma.TicketUncheckedUpdateManyWithoutCondominiumNestedInput
 }
 
 export type CondominiumCreateWithoutAmenityReservationsInput = {
@@ -3836,6 +3927,7 @@ export type CondominiumCreateWithoutAmenityReservationsInput = {
   amenities?: Prisma.AmenityCreateNestedManyWithoutCondominiumInput
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodCreateNestedManyWithoutCondominiumInput
   serviceProviders?: Prisma.ServiceProviderCreateNestedManyWithoutCondominiumInput
+  tickets?: Prisma.TicketCreateNestedManyWithoutCondominiumInput
   plan?: Prisma.SubscriptionPlanCreateNestedOneWithoutCondominiumsInput
 }
 
@@ -3872,6 +3964,7 @@ export type CondominiumUncheckedCreateWithoutAmenityReservationsInput = {
   amenities?: Prisma.AmenityUncheckedCreateNestedManyWithoutCondominiumInput
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodUncheckedCreateNestedManyWithoutCondominiumInput
   serviceProviders?: Prisma.ServiceProviderUncheckedCreateNestedManyWithoutCondominiumInput
+  tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutCondominiumInput
 }
 
 export type CondominiumCreateOrConnectWithoutAmenityReservationsInput = {
@@ -3922,6 +4015,7 @@ export type CondominiumUpdateWithoutAmenityReservationsInput = {
   amenities?: Prisma.AmenityUpdateManyWithoutCondominiumNestedInput
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodUpdateManyWithoutCondominiumNestedInput
   serviceProviders?: Prisma.ServiceProviderUpdateManyWithoutCondominiumNestedInput
+  tickets?: Prisma.TicketUpdateManyWithoutCondominiumNestedInput
   plan?: Prisma.SubscriptionPlanUpdateOneWithoutCondominiumsNestedInput
 }
 
@@ -3958,6 +4052,7 @@ export type CondominiumUncheckedUpdateWithoutAmenityReservationsInput = {
   amenities?: Prisma.AmenityUncheckedUpdateManyWithoutCondominiumNestedInput
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodUncheckedUpdateManyWithoutCondominiumNestedInput
   serviceProviders?: Prisma.ServiceProviderUncheckedUpdateManyWithoutCondominiumNestedInput
+  tickets?: Prisma.TicketUncheckedUpdateManyWithoutCondominiumNestedInput
 }
 
 export type CondominiumCreateWithoutServiceProvidersInput = {
@@ -3992,6 +4087,7 @@ export type CondominiumCreateWithoutServiceProvidersInput = {
   amenities?: Prisma.AmenityCreateNestedManyWithoutCondominiumInput
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodCreateNestedManyWithoutCondominiumInput
   amenityReservations?: Prisma.AmenityReservationCreateNestedManyWithoutCondominiumInput
+  tickets?: Prisma.TicketCreateNestedManyWithoutCondominiumInput
   plan?: Prisma.SubscriptionPlanCreateNestedOneWithoutCondominiumsInput
 }
 
@@ -4028,6 +4124,7 @@ export type CondominiumUncheckedCreateWithoutServiceProvidersInput = {
   amenities?: Prisma.AmenityUncheckedCreateNestedManyWithoutCondominiumInput
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodUncheckedCreateNestedManyWithoutCondominiumInput
   amenityReservations?: Prisma.AmenityReservationUncheckedCreateNestedManyWithoutCondominiumInput
+  tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutCondominiumInput
 }
 
 export type CondominiumCreateOrConnectWithoutServiceProvidersInput = {
@@ -4078,6 +4175,7 @@ export type CondominiumUpdateWithoutServiceProvidersInput = {
   amenities?: Prisma.AmenityUpdateManyWithoutCondominiumNestedInput
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodUpdateManyWithoutCondominiumNestedInput
   amenityReservations?: Prisma.AmenityReservationUpdateManyWithoutCondominiumNestedInput
+  tickets?: Prisma.TicketUpdateManyWithoutCondominiumNestedInput
   plan?: Prisma.SubscriptionPlanUpdateOneWithoutCondominiumsNestedInput
 }
 
@@ -4114,6 +4212,167 @@ export type CondominiumUncheckedUpdateWithoutServiceProvidersInput = {
   amenities?: Prisma.AmenityUncheckedUpdateManyWithoutCondominiumNestedInput
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodUncheckedUpdateManyWithoutCondominiumNestedInput
   amenityReservations?: Prisma.AmenityReservationUncheckedUpdateManyWithoutCondominiumNestedInput
+  tickets?: Prisma.TicketUncheckedUpdateManyWithoutCondominiumNestedInput
+}
+
+export type CondominiumCreateWithoutTicketsInput = {
+  id?: string
+  key: string
+  name: string
+  description?: string | null
+  googleMapsUrl?: string | null
+  address?: string | null
+  contactPhone?: string | null
+  contactEmail?: string | null
+  isTrial?: boolean
+  customPriceOverride?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  isDisabled?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  houses?: Prisma.HouseCreateNestedManyWithoutCondominiumInput
+  admins?: Prisma.UserCreateNestedManyWithoutCondominiumInput
+  residentProfiles?: Prisma.ResidentProfileCreateNestedManyWithoutCondominiumInput
+  maintenanceCharges?: Prisma.MaintenanceChargeCreateNestedManyWithoutCondominiumInput
+  parcels?: Prisma.ParcelDeliveryCreateNestedManyWithoutCondominiumInput
+  generalProviderAccesses?: Prisma.GeneralProviderAccessCreateNestedManyWithoutCondominiumInput
+  billingConfig?: Prisma.CondominiumBillingConfigCreateNestedOneWithoutCondominiumInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutCondominiumInput
+  extraIncomes?: Prisma.ExtraIncomeCreateNestedManyWithoutCondominiumInput
+  transparencyConfig?: Prisma.CondominiumTransparencyConfigCreateNestedOneWithoutCondominiumInput
+  extraordinaryFees?: Prisma.ExtraordinaryFeeCreateNestedManyWithoutCondominiumInput
+  standContacts?: Prisma.StandContactCreateNestedManyWithoutCondominiumInput
+  announcements?: Prisma.AnnouncementCreateNestedManyWithoutCondominiumInput
+  surveys?: Prisma.SurveyCreateNestedManyWithoutCondominiumInput
+  officialDocuments?: Prisma.OfficialDocumentCreateNestedManyWithoutCondominiumInput
+  amenities?: Prisma.AmenityCreateNestedManyWithoutCondominiumInput
+  amenityBlockPeriods?: Prisma.AmenityBlockPeriodCreateNestedManyWithoutCondominiumInput
+  amenityReservations?: Prisma.AmenityReservationCreateNestedManyWithoutCondominiumInput
+  serviceProviders?: Prisma.ServiceProviderCreateNestedManyWithoutCondominiumInput
+  plan?: Prisma.SubscriptionPlanCreateNestedOneWithoutCondominiumsInput
+}
+
+export type CondominiumUncheckedCreateWithoutTicketsInput = {
+  id?: string
+  key: string
+  name: string
+  description?: string | null
+  googleMapsUrl?: string | null
+  address?: string | null
+  contactPhone?: string | null
+  contactEmail?: string | null
+  planId?: string | null
+  isTrial?: boolean
+  customPriceOverride?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  isDisabled?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  houses?: Prisma.HouseUncheckedCreateNestedManyWithoutCondominiumInput
+  admins?: Prisma.UserUncheckedCreateNestedManyWithoutCondominiumInput
+  residentProfiles?: Prisma.ResidentProfileUncheckedCreateNestedManyWithoutCondominiumInput
+  maintenanceCharges?: Prisma.MaintenanceChargeUncheckedCreateNestedManyWithoutCondominiumInput
+  parcels?: Prisma.ParcelDeliveryUncheckedCreateNestedManyWithoutCondominiumInput
+  generalProviderAccesses?: Prisma.GeneralProviderAccessUncheckedCreateNestedManyWithoutCondominiumInput
+  billingConfig?: Prisma.CondominiumBillingConfigUncheckedCreateNestedOneWithoutCondominiumInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutCondominiumInput
+  extraIncomes?: Prisma.ExtraIncomeUncheckedCreateNestedManyWithoutCondominiumInput
+  transparencyConfig?: Prisma.CondominiumTransparencyConfigUncheckedCreateNestedOneWithoutCondominiumInput
+  extraordinaryFees?: Prisma.ExtraordinaryFeeUncheckedCreateNestedManyWithoutCondominiumInput
+  standContacts?: Prisma.StandContactUncheckedCreateNestedManyWithoutCondominiumInput
+  announcements?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCondominiumInput
+  surveys?: Prisma.SurveyUncheckedCreateNestedManyWithoutCondominiumInput
+  officialDocuments?: Prisma.OfficialDocumentUncheckedCreateNestedManyWithoutCondominiumInput
+  amenities?: Prisma.AmenityUncheckedCreateNestedManyWithoutCondominiumInput
+  amenityBlockPeriods?: Prisma.AmenityBlockPeriodUncheckedCreateNestedManyWithoutCondominiumInput
+  amenityReservations?: Prisma.AmenityReservationUncheckedCreateNestedManyWithoutCondominiumInput
+  serviceProviders?: Prisma.ServiceProviderUncheckedCreateNestedManyWithoutCondominiumInput
+}
+
+export type CondominiumCreateOrConnectWithoutTicketsInput = {
+  where: Prisma.CondominiumWhereUniqueInput
+  create: Prisma.XOR<Prisma.CondominiumCreateWithoutTicketsInput, Prisma.CondominiumUncheckedCreateWithoutTicketsInput>
+}
+
+export type CondominiumUpsertWithoutTicketsInput = {
+  update: Prisma.XOR<Prisma.CondominiumUpdateWithoutTicketsInput, Prisma.CondominiumUncheckedUpdateWithoutTicketsInput>
+  create: Prisma.XOR<Prisma.CondominiumCreateWithoutTicketsInput, Prisma.CondominiumUncheckedCreateWithoutTicketsInput>
+  where?: Prisma.CondominiumWhereInput
+}
+
+export type CondominiumUpdateToOneWithWhereWithoutTicketsInput = {
+  where?: Prisma.CondominiumWhereInput
+  data: Prisma.XOR<Prisma.CondominiumUpdateWithoutTicketsInput, Prisma.CondominiumUncheckedUpdateWithoutTicketsInput>
+}
+
+export type CondominiumUpdateWithoutTicketsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleMapsUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isTrial?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  customPriceOverride?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  isDisabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  houses?: Prisma.HouseUpdateManyWithoutCondominiumNestedInput
+  admins?: Prisma.UserUpdateManyWithoutCondominiumNestedInput
+  residentProfiles?: Prisma.ResidentProfileUpdateManyWithoutCondominiumNestedInput
+  maintenanceCharges?: Prisma.MaintenanceChargeUpdateManyWithoutCondominiumNestedInput
+  parcels?: Prisma.ParcelDeliveryUpdateManyWithoutCondominiumNestedInput
+  generalProviderAccesses?: Prisma.GeneralProviderAccessUpdateManyWithoutCondominiumNestedInput
+  billingConfig?: Prisma.CondominiumBillingConfigUpdateOneWithoutCondominiumNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutCondominiumNestedInput
+  extraIncomes?: Prisma.ExtraIncomeUpdateManyWithoutCondominiumNestedInput
+  transparencyConfig?: Prisma.CondominiumTransparencyConfigUpdateOneWithoutCondominiumNestedInput
+  extraordinaryFees?: Prisma.ExtraordinaryFeeUpdateManyWithoutCondominiumNestedInput
+  standContacts?: Prisma.StandContactUpdateManyWithoutCondominiumNestedInput
+  announcements?: Prisma.AnnouncementUpdateManyWithoutCondominiumNestedInput
+  surveys?: Prisma.SurveyUpdateManyWithoutCondominiumNestedInput
+  officialDocuments?: Prisma.OfficialDocumentUpdateManyWithoutCondominiumNestedInput
+  amenities?: Prisma.AmenityUpdateManyWithoutCondominiumNestedInput
+  amenityBlockPeriods?: Prisma.AmenityBlockPeriodUpdateManyWithoutCondominiumNestedInput
+  amenityReservations?: Prisma.AmenityReservationUpdateManyWithoutCondominiumNestedInput
+  serviceProviders?: Prisma.ServiceProviderUpdateManyWithoutCondominiumNestedInput
+  plan?: Prisma.SubscriptionPlanUpdateOneWithoutCondominiumsNestedInput
+}
+
+export type CondominiumUncheckedUpdateWithoutTicketsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleMapsUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  planId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isTrial?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  customPriceOverride?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  isDisabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  houses?: Prisma.HouseUncheckedUpdateManyWithoutCondominiumNestedInput
+  admins?: Prisma.UserUncheckedUpdateManyWithoutCondominiumNestedInput
+  residentProfiles?: Prisma.ResidentProfileUncheckedUpdateManyWithoutCondominiumNestedInput
+  maintenanceCharges?: Prisma.MaintenanceChargeUncheckedUpdateManyWithoutCondominiumNestedInput
+  parcels?: Prisma.ParcelDeliveryUncheckedUpdateManyWithoutCondominiumNestedInput
+  generalProviderAccesses?: Prisma.GeneralProviderAccessUncheckedUpdateManyWithoutCondominiumNestedInput
+  billingConfig?: Prisma.CondominiumBillingConfigUncheckedUpdateOneWithoutCondominiumNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutCondominiumNestedInput
+  extraIncomes?: Prisma.ExtraIncomeUncheckedUpdateManyWithoutCondominiumNestedInput
+  transparencyConfig?: Prisma.CondominiumTransparencyConfigUncheckedUpdateOneWithoutCondominiumNestedInput
+  extraordinaryFees?: Prisma.ExtraordinaryFeeUncheckedUpdateManyWithoutCondominiumNestedInput
+  standContacts?: Prisma.StandContactUncheckedUpdateManyWithoutCondominiumNestedInput
+  announcements?: Prisma.AnnouncementUncheckedUpdateManyWithoutCondominiumNestedInput
+  surveys?: Prisma.SurveyUncheckedUpdateManyWithoutCondominiumNestedInput
+  officialDocuments?: Prisma.OfficialDocumentUncheckedUpdateManyWithoutCondominiumNestedInput
+  amenities?: Prisma.AmenityUncheckedUpdateManyWithoutCondominiumNestedInput
+  amenityBlockPeriods?: Prisma.AmenityBlockPeriodUncheckedUpdateManyWithoutCondominiumNestedInput
+  amenityReservations?: Prisma.AmenityReservationUncheckedUpdateManyWithoutCondominiumNestedInput
+  serviceProviders?: Prisma.ServiceProviderUncheckedUpdateManyWithoutCondominiumNestedInput
 }
 
 export type CondominiumCreateManyPlanInput = {
@@ -4165,6 +4424,7 @@ export type CondominiumUpdateWithoutPlanInput = {
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodUpdateManyWithoutCondominiumNestedInput
   amenityReservations?: Prisma.AmenityReservationUpdateManyWithoutCondominiumNestedInput
   serviceProviders?: Prisma.ServiceProviderUpdateManyWithoutCondominiumNestedInput
+  tickets?: Prisma.TicketUpdateManyWithoutCondominiumNestedInput
 }
 
 export type CondominiumUncheckedUpdateWithoutPlanInput = {
@@ -4200,6 +4460,7 @@ export type CondominiumUncheckedUpdateWithoutPlanInput = {
   amenityBlockPeriods?: Prisma.AmenityBlockPeriodUncheckedUpdateManyWithoutCondominiumNestedInput
   amenityReservations?: Prisma.AmenityReservationUncheckedUpdateManyWithoutCondominiumNestedInput
   serviceProviders?: Prisma.ServiceProviderUncheckedUpdateManyWithoutCondominiumNestedInput
+  tickets?: Prisma.TicketUncheckedUpdateManyWithoutCondominiumNestedInput
 }
 
 export type CondominiumUncheckedUpdateManyWithoutPlanInput = {
@@ -4241,6 +4502,7 @@ export type CondominiumCountOutputType = {
   amenityBlockPeriods: number
   amenityReservations: number
   serviceProviders: number
+  tickets: number
 }
 
 export type CondominiumCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -4261,6 +4523,7 @@ export type CondominiumCountOutputTypeSelect<ExtArgs extends runtime.Types.Exten
   amenityBlockPeriods?: boolean | CondominiumCountOutputTypeCountAmenityBlockPeriodsArgs
   amenityReservations?: boolean | CondominiumCountOutputTypeCountAmenityReservationsArgs
   serviceProviders?: boolean | CondominiumCountOutputTypeCountServiceProvidersArgs
+  tickets?: boolean | CondominiumCountOutputTypeCountTicketsArgs
 }
 
 /**
@@ -4392,6 +4655,13 @@ export type CondominiumCountOutputTypeCountServiceProvidersArgs<ExtArgs extends 
   where?: Prisma.ServiceProviderWhereInput
 }
 
+/**
+ * CondominiumCountOutputType without action
+ */
+export type CondominiumCountOutputTypeCountTicketsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TicketWhereInput
+}
+
 
 export type CondominiumSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -4427,6 +4697,7 @@ export type CondominiumSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   amenityBlockPeriods?: boolean | Prisma.Condominium$amenityBlockPeriodsArgs<ExtArgs>
   amenityReservations?: boolean | Prisma.Condominium$amenityReservationsArgs<ExtArgs>
   serviceProviders?: boolean | Prisma.Condominium$serviceProvidersArgs<ExtArgs>
+  tickets?: boolean | Prisma.Condominium$ticketsArgs<ExtArgs>
   plan?: boolean | Prisma.Condominium$planArgs<ExtArgs>
   _count?: boolean | Prisma.CondominiumCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["condominium"]>
@@ -4505,6 +4776,7 @@ export type CondominiumInclude<ExtArgs extends runtime.Types.Extensions.Internal
   amenityBlockPeriods?: boolean | Prisma.Condominium$amenityBlockPeriodsArgs<ExtArgs>
   amenityReservations?: boolean | Prisma.Condominium$amenityReservationsArgs<ExtArgs>
   serviceProviders?: boolean | Prisma.Condominium$serviceProvidersArgs<ExtArgs>
+  tickets?: boolean | Prisma.Condominium$ticketsArgs<ExtArgs>
   plan?: boolean | Prisma.Condominium$planArgs<ExtArgs>
   _count?: boolean | Prisma.CondominiumCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -4537,6 +4809,7 @@ export type $CondominiumPayload<ExtArgs extends runtime.Types.Extensions.Interna
     amenityBlockPeriods: Prisma.$AmenityBlockPeriodPayload<ExtArgs>[]
     amenityReservations: Prisma.$AmenityReservationPayload<ExtArgs>[]
     serviceProviders: Prisma.$ServiceProviderPayload<ExtArgs>[]
+    tickets: Prisma.$TicketPayload<ExtArgs>[]
     plan: Prisma.$SubscriptionPlanPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -4967,6 +5240,7 @@ export interface Prisma__CondominiumClient<T, Null = never, ExtArgs extends runt
   amenityBlockPeriods<T extends Prisma.Condominium$amenityBlockPeriodsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Condominium$amenityBlockPeriodsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AmenityBlockPeriodPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   amenityReservations<T extends Prisma.Condominium$amenityReservationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Condominium$amenityReservationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AmenityReservationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   serviceProviders<T extends Prisma.Condominium$serviceProvidersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Condominium$serviceProvidersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ServiceProviderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  tickets<T extends Prisma.Condominium$ticketsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Condominium$ticketsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TicketPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   plan<T extends Prisma.Condominium$planArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Condominium$planArgs<ExtArgs>>): Prisma.Prisma__SubscriptionPlanClient<runtime.Types.Result.GetResult<Prisma.$SubscriptionPlanPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -5855,6 +6129,30 @@ export type Condominium$serviceProvidersArgs<ExtArgs extends runtime.Types.Exten
   take?: number
   skip?: number
   distinct?: Prisma.ServiceProviderScalarFieldEnum | Prisma.ServiceProviderScalarFieldEnum[]
+}
+
+/**
+ * Condominium.tickets
+ */
+export type Condominium$ticketsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Ticket
+   */
+  select?: Prisma.TicketSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Ticket
+   */
+  omit?: Prisma.TicketOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TicketInclude<ExtArgs> | null
+  where?: Prisma.TicketWhereInput
+  orderBy?: Prisma.TicketOrderByWithRelationInput | Prisma.TicketOrderByWithRelationInput[]
+  cursor?: Prisma.TicketWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TicketScalarFieldEnum | Prisma.TicketScalarFieldEnum[]
 }
 
 /**

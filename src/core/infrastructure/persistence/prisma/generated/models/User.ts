@@ -261,6 +261,10 @@ export type UserWhereInput = {
   amenityReservations?: Prisma.AmenityReservationListRelationFilter
   serviceProvidersCreated?: Prisma.ServiceProviderListRelationFilter
   serviceProviderLikes?: Prisma.ServiceProviderLikeListRelationFilter
+  ticketsCreated?: Prisma.TicketListRelationFilter
+  ticketsAssigned?: Prisma.TicketListRelationFilter
+  ticketComments?: Prisma.TicketCommentListRelationFilter
+  ticketHistoryActions?: Prisma.TicketHistoryListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -299,6 +303,10 @@ export type UserOrderByWithRelationInput = {
   amenityReservations?: Prisma.AmenityReservationOrderByRelationAggregateInput
   serviceProvidersCreated?: Prisma.ServiceProviderOrderByRelationAggregateInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeOrderByRelationAggregateInput
+  ticketsCreated?: Prisma.TicketOrderByRelationAggregateInput
+  ticketsAssigned?: Prisma.TicketOrderByRelationAggregateInput
+  ticketComments?: Prisma.TicketCommentOrderByRelationAggregateInput
+  ticketHistoryActions?: Prisma.TicketHistoryOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -340,6 +348,10 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   amenityReservations?: Prisma.AmenityReservationListRelationFilter
   serviceProvidersCreated?: Prisma.ServiceProviderListRelationFilter
   serviceProviderLikes?: Prisma.ServiceProviderLikeListRelationFilter
+  ticketsCreated?: Prisma.TicketListRelationFilter
+  ticketsAssigned?: Prisma.TicketListRelationFilter
+  ticketComments?: Prisma.TicketCommentListRelationFilter
+  ticketHistoryActions?: Prisma.TicketHistoryListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -413,6 +425,10 @@ export type UserCreateInput = {
   amenityReservations?: Prisma.AmenityReservationCreateNestedManyWithoutResidentInput
   serviceProvidersCreated?: Prisma.ServiceProviderCreateNestedManyWithoutCreatedByInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeCreateNestedManyWithoutUserInput
+  ticketsCreated?: Prisma.TicketCreateNestedManyWithoutCreatorInput
+  ticketsAssigned?: Prisma.TicketCreateNestedManyWithoutAssignedAdminInput
+  ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutAuthorInput
+  ticketHistoryActions?: Prisma.TicketHistoryCreateNestedManyWithoutChangedByInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -450,6 +466,10 @@ export type UserUncheckedCreateInput = {
   amenityReservations?: Prisma.AmenityReservationUncheckedCreateNestedManyWithoutResidentInput
   serviceProvidersCreated?: Prisma.ServiceProviderUncheckedCreateNestedManyWithoutCreatedByInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeUncheckedCreateNestedManyWithoutUserInput
+  ticketsCreated?: Prisma.TicketUncheckedCreateNestedManyWithoutCreatorInput
+  ticketsAssigned?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedAdminInput
+  ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
+  ticketHistoryActions?: Prisma.TicketHistoryUncheckedCreateNestedManyWithoutChangedByInput
 }
 
 export type UserUpdateInput = {
@@ -487,6 +507,10 @@ export type UserUpdateInput = {
   amenityReservations?: Prisma.AmenityReservationUpdateManyWithoutResidentNestedInput
   serviceProvidersCreated?: Prisma.ServiceProviderUpdateManyWithoutCreatedByNestedInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeUpdateManyWithoutUserNestedInput
+  ticketsCreated?: Prisma.TicketUpdateManyWithoutCreatorNestedInput
+  ticketsAssigned?: Prisma.TicketUpdateManyWithoutAssignedAdminNestedInput
+  ticketComments?: Prisma.TicketCommentUpdateManyWithoutAuthorNestedInput
+  ticketHistoryActions?: Prisma.TicketHistoryUpdateManyWithoutChangedByNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -524,6 +548,10 @@ export type UserUncheckedUpdateInput = {
   amenityReservations?: Prisma.AmenityReservationUncheckedUpdateManyWithoutResidentNestedInput
   serviceProvidersCreated?: Prisma.ServiceProviderUncheckedUpdateManyWithoutCreatedByNestedInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeUncheckedUpdateManyWithoutUserNestedInput
+  ticketsCreated?: Prisma.TicketUncheckedUpdateManyWithoutCreatorNestedInput
+  ticketsAssigned?: Prisma.TicketUncheckedUpdateManyWithoutAssignedAdminNestedInput
+  ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
+  ticketHistoryActions?: Prisma.TicketHistoryUncheckedUpdateManyWithoutChangedByNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -999,6 +1027,64 @@ export type UserUpdateOneRequiredWithoutServiceProviderLikesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutServiceProviderLikesInput, Prisma.UserUpdateWithoutServiceProviderLikesInput>, Prisma.UserUncheckedUpdateWithoutServiceProviderLikesInput>
 }
 
+export type UserCreateNestedOneWithoutTicketsCreatedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutTicketsCreatedInput, Prisma.UserUncheckedCreateWithoutTicketsCreatedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTicketsCreatedInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutTicketsAssignedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutTicketsAssignedInput, Prisma.UserUncheckedCreateWithoutTicketsAssignedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTicketsAssignedInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutTicketsCreatedNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutTicketsCreatedInput, Prisma.UserUncheckedCreateWithoutTicketsCreatedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTicketsCreatedInput
+  upsert?: Prisma.UserUpsertWithoutTicketsCreatedInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutTicketsCreatedInput, Prisma.UserUpdateWithoutTicketsCreatedInput>, Prisma.UserUncheckedUpdateWithoutTicketsCreatedInput>
+}
+
+export type UserUpdateOneWithoutTicketsAssignedNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutTicketsAssignedInput, Prisma.UserUncheckedCreateWithoutTicketsAssignedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTicketsAssignedInput
+  upsert?: Prisma.UserUpsertWithoutTicketsAssignedInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutTicketsAssignedInput, Prisma.UserUpdateWithoutTicketsAssignedInput>, Prisma.UserUncheckedUpdateWithoutTicketsAssignedInput>
+}
+
+export type UserCreateNestedOneWithoutTicketCommentsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutTicketCommentsInput, Prisma.UserUncheckedCreateWithoutTicketCommentsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTicketCommentsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutTicketCommentsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutTicketCommentsInput, Prisma.UserUncheckedCreateWithoutTicketCommentsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTicketCommentsInput
+  upsert?: Prisma.UserUpsertWithoutTicketCommentsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutTicketCommentsInput, Prisma.UserUpdateWithoutTicketCommentsInput>, Prisma.UserUncheckedUpdateWithoutTicketCommentsInput>
+}
+
+export type UserCreateNestedOneWithoutTicketHistoryActionsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutTicketHistoryActionsInput, Prisma.UserUncheckedCreateWithoutTicketHistoryActionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTicketHistoryActionsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutTicketHistoryActionsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutTicketHistoryActionsInput, Prisma.UserUncheckedCreateWithoutTicketHistoryActionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTicketHistoryActionsInput
+  upsert?: Prisma.UserUpsertWithoutTicketHistoryActionsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutTicketHistoryActionsInput, Prisma.UserUpdateWithoutTicketHistoryActionsInput>, Prisma.UserUncheckedUpdateWithoutTicketHistoryActionsInput>
+}
+
 export type UserCreateWithoutCondominiumInput = {
   id?: string
   email: string
@@ -1033,6 +1119,10 @@ export type UserCreateWithoutCondominiumInput = {
   amenityReservations?: Prisma.AmenityReservationCreateNestedManyWithoutResidentInput
   serviceProvidersCreated?: Prisma.ServiceProviderCreateNestedManyWithoutCreatedByInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeCreateNestedManyWithoutUserInput
+  ticketsCreated?: Prisma.TicketCreateNestedManyWithoutCreatorInput
+  ticketsAssigned?: Prisma.TicketCreateNestedManyWithoutAssignedAdminInput
+  ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutAuthorInput
+  ticketHistoryActions?: Prisma.TicketHistoryCreateNestedManyWithoutChangedByInput
 }
 
 export type UserUncheckedCreateWithoutCondominiumInput = {
@@ -1069,6 +1159,10 @@ export type UserUncheckedCreateWithoutCondominiumInput = {
   amenityReservations?: Prisma.AmenityReservationUncheckedCreateNestedManyWithoutResidentInput
   serviceProvidersCreated?: Prisma.ServiceProviderUncheckedCreateNestedManyWithoutCreatedByInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeUncheckedCreateNestedManyWithoutUserInput
+  ticketsCreated?: Prisma.TicketUncheckedCreateNestedManyWithoutCreatorInput
+  ticketsAssigned?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedAdminInput
+  ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
+  ticketHistoryActions?: Prisma.TicketHistoryUncheckedCreateNestedManyWithoutChangedByInput
 }
 
 export type UserCreateOrConnectWithoutCondominiumInput = {
@@ -1149,6 +1243,10 @@ export type UserCreateWithoutPasswordResetTokensInput = {
   amenityReservations?: Prisma.AmenityReservationCreateNestedManyWithoutResidentInput
   serviceProvidersCreated?: Prisma.ServiceProviderCreateNestedManyWithoutCreatedByInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeCreateNestedManyWithoutUserInput
+  ticketsCreated?: Prisma.TicketCreateNestedManyWithoutCreatorInput
+  ticketsAssigned?: Prisma.TicketCreateNestedManyWithoutAssignedAdminInput
+  ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutAuthorInput
+  ticketHistoryActions?: Prisma.TicketHistoryCreateNestedManyWithoutChangedByInput
 }
 
 export type UserUncheckedCreateWithoutPasswordResetTokensInput = {
@@ -1185,6 +1283,10 @@ export type UserUncheckedCreateWithoutPasswordResetTokensInput = {
   amenityReservations?: Prisma.AmenityReservationUncheckedCreateNestedManyWithoutResidentInput
   serviceProvidersCreated?: Prisma.ServiceProviderUncheckedCreateNestedManyWithoutCreatedByInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeUncheckedCreateNestedManyWithoutUserInput
+  ticketsCreated?: Prisma.TicketUncheckedCreateNestedManyWithoutCreatorInput
+  ticketsAssigned?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedAdminInput
+  ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
+  ticketHistoryActions?: Prisma.TicketHistoryUncheckedCreateNestedManyWithoutChangedByInput
 }
 
 export type UserCreateOrConnectWithoutPasswordResetTokensInput = {
@@ -1237,6 +1339,10 @@ export type UserUpdateWithoutPasswordResetTokensInput = {
   amenityReservations?: Prisma.AmenityReservationUpdateManyWithoutResidentNestedInput
   serviceProvidersCreated?: Prisma.ServiceProviderUpdateManyWithoutCreatedByNestedInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeUpdateManyWithoutUserNestedInput
+  ticketsCreated?: Prisma.TicketUpdateManyWithoutCreatorNestedInput
+  ticketsAssigned?: Prisma.TicketUpdateManyWithoutAssignedAdminNestedInput
+  ticketComments?: Prisma.TicketCommentUpdateManyWithoutAuthorNestedInput
+  ticketHistoryActions?: Prisma.TicketHistoryUpdateManyWithoutChangedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPasswordResetTokensInput = {
@@ -1273,6 +1379,10 @@ export type UserUncheckedUpdateWithoutPasswordResetTokensInput = {
   amenityReservations?: Prisma.AmenityReservationUncheckedUpdateManyWithoutResidentNestedInput
   serviceProvidersCreated?: Prisma.ServiceProviderUncheckedUpdateManyWithoutCreatedByNestedInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeUncheckedUpdateManyWithoutUserNestedInput
+  ticketsCreated?: Prisma.TicketUncheckedUpdateManyWithoutCreatorNestedInput
+  ticketsAssigned?: Prisma.TicketUncheckedUpdateManyWithoutAssignedAdminNestedInput
+  ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
+  ticketHistoryActions?: Prisma.TicketHistoryUncheckedUpdateManyWithoutChangedByNestedInput
 }
 
 export type UserCreateWithoutUserSessionsInput = {
@@ -1309,6 +1419,10 @@ export type UserCreateWithoutUserSessionsInput = {
   amenityReservations?: Prisma.AmenityReservationCreateNestedManyWithoutResidentInput
   serviceProvidersCreated?: Prisma.ServiceProviderCreateNestedManyWithoutCreatedByInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeCreateNestedManyWithoutUserInput
+  ticketsCreated?: Prisma.TicketCreateNestedManyWithoutCreatorInput
+  ticketsAssigned?: Prisma.TicketCreateNestedManyWithoutAssignedAdminInput
+  ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutAuthorInput
+  ticketHistoryActions?: Prisma.TicketHistoryCreateNestedManyWithoutChangedByInput
 }
 
 export type UserUncheckedCreateWithoutUserSessionsInput = {
@@ -1345,6 +1459,10 @@ export type UserUncheckedCreateWithoutUserSessionsInput = {
   amenityReservations?: Prisma.AmenityReservationUncheckedCreateNestedManyWithoutResidentInput
   serviceProvidersCreated?: Prisma.ServiceProviderUncheckedCreateNestedManyWithoutCreatedByInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeUncheckedCreateNestedManyWithoutUserInput
+  ticketsCreated?: Prisma.TicketUncheckedCreateNestedManyWithoutCreatorInput
+  ticketsAssigned?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedAdminInput
+  ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
+  ticketHistoryActions?: Prisma.TicketHistoryUncheckedCreateNestedManyWithoutChangedByInput
 }
 
 export type UserCreateOrConnectWithoutUserSessionsInput = {
@@ -1397,6 +1515,10 @@ export type UserUpdateWithoutUserSessionsInput = {
   amenityReservations?: Prisma.AmenityReservationUpdateManyWithoutResidentNestedInput
   serviceProvidersCreated?: Prisma.ServiceProviderUpdateManyWithoutCreatedByNestedInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeUpdateManyWithoutUserNestedInput
+  ticketsCreated?: Prisma.TicketUpdateManyWithoutCreatorNestedInput
+  ticketsAssigned?: Prisma.TicketUpdateManyWithoutAssignedAdminNestedInput
+  ticketComments?: Prisma.TicketCommentUpdateManyWithoutAuthorNestedInput
+  ticketHistoryActions?: Prisma.TicketHistoryUpdateManyWithoutChangedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutUserSessionsInput = {
@@ -1433,6 +1555,10 @@ export type UserUncheckedUpdateWithoutUserSessionsInput = {
   amenityReservations?: Prisma.AmenityReservationUncheckedUpdateManyWithoutResidentNestedInput
   serviceProvidersCreated?: Prisma.ServiceProviderUncheckedUpdateManyWithoutCreatedByNestedInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeUncheckedUpdateManyWithoutUserNestedInput
+  ticketsCreated?: Prisma.TicketUncheckedUpdateManyWithoutCreatorNestedInput
+  ticketsAssigned?: Prisma.TicketUncheckedUpdateManyWithoutAssignedAdminNestedInput
+  ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
+  ticketHistoryActions?: Prisma.TicketHistoryUncheckedUpdateManyWithoutChangedByNestedInput
 }
 
 export type UserCreateWithoutPushSubscriptionsInput = {
@@ -1469,6 +1595,10 @@ export type UserCreateWithoutPushSubscriptionsInput = {
   amenityReservations?: Prisma.AmenityReservationCreateNestedManyWithoutResidentInput
   serviceProvidersCreated?: Prisma.ServiceProviderCreateNestedManyWithoutCreatedByInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeCreateNestedManyWithoutUserInput
+  ticketsCreated?: Prisma.TicketCreateNestedManyWithoutCreatorInput
+  ticketsAssigned?: Prisma.TicketCreateNestedManyWithoutAssignedAdminInput
+  ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutAuthorInput
+  ticketHistoryActions?: Prisma.TicketHistoryCreateNestedManyWithoutChangedByInput
 }
 
 export type UserUncheckedCreateWithoutPushSubscriptionsInput = {
@@ -1505,6 +1635,10 @@ export type UserUncheckedCreateWithoutPushSubscriptionsInput = {
   amenityReservations?: Prisma.AmenityReservationUncheckedCreateNestedManyWithoutResidentInput
   serviceProvidersCreated?: Prisma.ServiceProviderUncheckedCreateNestedManyWithoutCreatedByInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeUncheckedCreateNestedManyWithoutUserInput
+  ticketsCreated?: Prisma.TicketUncheckedCreateNestedManyWithoutCreatorInput
+  ticketsAssigned?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedAdminInput
+  ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
+  ticketHistoryActions?: Prisma.TicketHistoryUncheckedCreateNestedManyWithoutChangedByInput
 }
 
 export type UserCreateOrConnectWithoutPushSubscriptionsInput = {
@@ -1557,6 +1691,10 @@ export type UserUpdateWithoutPushSubscriptionsInput = {
   amenityReservations?: Prisma.AmenityReservationUpdateManyWithoutResidentNestedInput
   serviceProvidersCreated?: Prisma.ServiceProviderUpdateManyWithoutCreatedByNestedInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeUpdateManyWithoutUserNestedInput
+  ticketsCreated?: Prisma.TicketUpdateManyWithoutCreatorNestedInput
+  ticketsAssigned?: Prisma.TicketUpdateManyWithoutAssignedAdminNestedInput
+  ticketComments?: Prisma.TicketCommentUpdateManyWithoutAuthorNestedInput
+  ticketHistoryActions?: Prisma.TicketHistoryUpdateManyWithoutChangedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPushSubscriptionsInput = {
@@ -1593,6 +1731,10 @@ export type UserUncheckedUpdateWithoutPushSubscriptionsInput = {
   amenityReservations?: Prisma.AmenityReservationUncheckedUpdateManyWithoutResidentNestedInput
   serviceProvidersCreated?: Prisma.ServiceProviderUncheckedUpdateManyWithoutCreatedByNestedInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeUncheckedUpdateManyWithoutUserNestedInput
+  ticketsCreated?: Prisma.TicketUncheckedUpdateManyWithoutCreatorNestedInput
+  ticketsAssigned?: Prisma.TicketUncheckedUpdateManyWithoutAssignedAdminNestedInput
+  ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
+  ticketHistoryActions?: Prisma.TicketHistoryUncheckedUpdateManyWithoutChangedByNestedInput
 }
 
 export type UserCreateWithoutResidentProfileInput = {
@@ -1629,6 +1771,10 @@ export type UserCreateWithoutResidentProfileInput = {
   amenityReservations?: Prisma.AmenityReservationCreateNestedManyWithoutResidentInput
   serviceProvidersCreated?: Prisma.ServiceProviderCreateNestedManyWithoutCreatedByInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeCreateNestedManyWithoutUserInput
+  ticketsCreated?: Prisma.TicketCreateNestedManyWithoutCreatorInput
+  ticketsAssigned?: Prisma.TicketCreateNestedManyWithoutAssignedAdminInput
+  ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutAuthorInput
+  ticketHistoryActions?: Prisma.TicketHistoryCreateNestedManyWithoutChangedByInput
 }
 
 export type UserUncheckedCreateWithoutResidentProfileInput = {
@@ -1665,6 +1811,10 @@ export type UserUncheckedCreateWithoutResidentProfileInput = {
   amenityReservations?: Prisma.AmenityReservationUncheckedCreateNestedManyWithoutResidentInput
   serviceProvidersCreated?: Prisma.ServiceProviderUncheckedCreateNestedManyWithoutCreatedByInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeUncheckedCreateNestedManyWithoutUserInput
+  ticketsCreated?: Prisma.TicketUncheckedCreateNestedManyWithoutCreatorInput
+  ticketsAssigned?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedAdminInput
+  ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
+  ticketHistoryActions?: Prisma.TicketHistoryUncheckedCreateNestedManyWithoutChangedByInput
 }
 
 export type UserCreateOrConnectWithoutResidentProfileInput = {
@@ -1717,6 +1867,10 @@ export type UserUpdateWithoutResidentProfileInput = {
   amenityReservations?: Prisma.AmenityReservationUpdateManyWithoutResidentNestedInput
   serviceProvidersCreated?: Prisma.ServiceProviderUpdateManyWithoutCreatedByNestedInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeUpdateManyWithoutUserNestedInput
+  ticketsCreated?: Prisma.TicketUpdateManyWithoutCreatorNestedInput
+  ticketsAssigned?: Prisma.TicketUpdateManyWithoutAssignedAdminNestedInput
+  ticketComments?: Prisma.TicketCommentUpdateManyWithoutAuthorNestedInput
+  ticketHistoryActions?: Prisma.TicketHistoryUpdateManyWithoutChangedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutResidentProfileInput = {
@@ -1753,6 +1907,10 @@ export type UserUncheckedUpdateWithoutResidentProfileInput = {
   amenityReservations?: Prisma.AmenityReservationUncheckedUpdateManyWithoutResidentNestedInput
   serviceProvidersCreated?: Prisma.ServiceProviderUncheckedUpdateManyWithoutCreatedByNestedInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeUncheckedUpdateManyWithoutUserNestedInput
+  ticketsCreated?: Prisma.TicketUncheckedUpdateManyWithoutCreatorNestedInput
+  ticketsAssigned?: Prisma.TicketUncheckedUpdateManyWithoutAssignedAdminNestedInput
+  ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
+  ticketHistoryActions?: Prisma.TicketHistoryUncheckedUpdateManyWithoutChangedByNestedInput
 }
 
 export type UserCreateWithoutAccessLogsInput = {
@@ -1789,6 +1947,10 @@ export type UserCreateWithoutAccessLogsInput = {
   amenityReservations?: Prisma.AmenityReservationCreateNestedManyWithoutResidentInput
   serviceProvidersCreated?: Prisma.ServiceProviderCreateNestedManyWithoutCreatedByInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeCreateNestedManyWithoutUserInput
+  ticketsCreated?: Prisma.TicketCreateNestedManyWithoutCreatorInput
+  ticketsAssigned?: Prisma.TicketCreateNestedManyWithoutAssignedAdminInput
+  ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutAuthorInput
+  ticketHistoryActions?: Prisma.TicketHistoryCreateNestedManyWithoutChangedByInput
 }
 
 export type UserUncheckedCreateWithoutAccessLogsInput = {
@@ -1825,6 +1987,10 @@ export type UserUncheckedCreateWithoutAccessLogsInput = {
   amenityReservations?: Prisma.AmenityReservationUncheckedCreateNestedManyWithoutResidentInput
   serviceProvidersCreated?: Prisma.ServiceProviderUncheckedCreateNestedManyWithoutCreatedByInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeUncheckedCreateNestedManyWithoutUserInput
+  ticketsCreated?: Prisma.TicketUncheckedCreateNestedManyWithoutCreatorInput
+  ticketsAssigned?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedAdminInput
+  ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
+  ticketHistoryActions?: Prisma.TicketHistoryUncheckedCreateNestedManyWithoutChangedByInput
 }
 
 export type UserCreateOrConnectWithoutAccessLogsInput = {
@@ -1877,6 +2043,10 @@ export type UserUpdateWithoutAccessLogsInput = {
   amenityReservations?: Prisma.AmenityReservationUpdateManyWithoutResidentNestedInput
   serviceProvidersCreated?: Prisma.ServiceProviderUpdateManyWithoutCreatedByNestedInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeUpdateManyWithoutUserNestedInput
+  ticketsCreated?: Prisma.TicketUpdateManyWithoutCreatorNestedInput
+  ticketsAssigned?: Prisma.TicketUpdateManyWithoutAssignedAdminNestedInput
+  ticketComments?: Prisma.TicketCommentUpdateManyWithoutAuthorNestedInput
+  ticketHistoryActions?: Prisma.TicketHistoryUpdateManyWithoutChangedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAccessLogsInput = {
@@ -1913,6 +2083,10 @@ export type UserUncheckedUpdateWithoutAccessLogsInput = {
   amenityReservations?: Prisma.AmenityReservationUncheckedUpdateManyWithoutResidentNestedInput
   serviceProvidersCreated?: Prisma.ServiceProviderUncheckedUpdateManyWithoutCreatedByNestedInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeUncheckedUpdateManyWithoutUserNestedInput
+  ticketsCreated?: Prisma.TicketUncheckedUpdateManyWithoutCreatorNestedInput
+  ticketsAssigned?: Prisma.TicketUncheckedUpdateManyWithoutAssignedAdminNestedInput
+  ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
+  ticketHistoryActions?: Prisma.TicketHistoryUncheckedUpdateManyWithoutChangedByNestedInput
 }
 
 export type UserCreateWithoutParcelsReceivedInput = {
@@ -1949,6 +2123,10 @@ export type UserCreateWithoutParcelsReceivedInput = {
   amenityReservations?: Prisma.AmenityReservationCreateNestedManyWithoutResidentInput
   serviceProvidersCreated?: Prisma.ServiceProviderCreateNestedManyWithoutCreatedByInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeCreateNestedManyWithoutUserInput
+  ticketsCreated?: Prisma.TicketCreateNestedManyWithoutCreatorInput
+  ticketsAssigned?: Prisma.TicketCreateNestedManyWithoutAssignedAdminInput
+  ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutAuthorInput
+  ticketHistoryActions?: Prisma.TicketHistoryCreateNestedManyWithoutChangedByInput
 }
 
 export type UserUncheckedCreateWithoutParcelsReceivedInput = {
@@ -1985,6 +2163,10 @@ export type UserUncheckedCreateWithoutParcelsReceivedInput = {
   amenityReservations?: Prisma.AmenityReservationUncheckedCreateNestedManyWithoutResidentInput
   serviceProvidersCreated?: Prisma.ServiceProviderUncheckedCreateNestedManyWithoutCreatedByInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeUncheckedCreateNestedManyWithoutUserInput
+  ticketsCreated?: Prisma.TicketUncheckedCreateNestedManyWithoutCreatorInput
+  ticketsAssigned?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedAdminInput
+  ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
+  ticketHistoryActions?: Prisma.TicketHistoryUncheckedCreateNestedManyWithoutChangedByInput
 }
 
 export type UserCreateOrConnectWithoutParcelsReceivedInput = {
@@ -2026,6 +2208,10 @@ export type UserCreateWithoutParcelsDeliveredInput = {
   amenityReservations?: Prisma.AmenityReservationCreateNestedManyWithoutResidentInput
   serviceProvidersCreated?: Prisma.ServiceProviderCreateNestedManyWithoutCreatedByInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeCreateNestedManyWithoutUserInput
+  ticketsCreated?: Prisma.TicketCreateNestedManyWithoutCreatorInput
+  ticketsAssigned?: Prisma.TicketCreateNestedManyWithoutAssignedAdminInput
+  ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutAuthorInput
+  ticketHistoryActions?: Prisma.TicketHistoryCreateNestedManyWithoutChangedByInput
 }
 
 export type UserUncheckedCreateWithoutParcelsDeliveredInput = {
@@ -2062,6 +2248,10 @@ export type UserUncheckedCreateWithoutParcelsDeliveredInput = {
   amenityReservations?: Prisma.AmenityReservationUncheckedCreateNestedManyWithoutResidentInput
   serviceProvidersCreated?: Prisma.ServiceProviderUncheckedCreateNestedManyWithoutCreatedByInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeUncheckedCreateNestedManyWithoutUserInput
+  ticketsCreated?: Prisma.TicketUncheckedCreateNestedManyWithoutCreatorInput
+  ticketsAssigned?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedAdminInput
+  ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
+  ticketHistoryActions?: Prisma.TicketHistoryUncheckedCreateNestedManyWithoutChangedByInput
 }
 
 export type UserCreateOrConnectWithoutParcelsDeliveredInput = {
@@ -2114,6 +2304,10 @@ export type UserUpdateWithoutParcelsReceivedInput = {
   amenityReservations?: Prisma.AmenityReservationUpdateManyWithoutResidentNestedInput
   serviceProvidersCreated?: Prisma.ServiceProviderUpdateManyWithoutCreatedByNestedInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeUpdateManyWithoutUserNestedInput
+  ticketsCreated?: Prisma.TicketUpdateManyWithoutCreatorNestedInput
+  ticketsAssigned?: Prisma.TicketUpdateManyWithoutAssignedAdminNestedInput
+  ticketComments?: Prisma.TicketCommentUpdateManyWithoutAuthorNestedInput
+  ticketHistoryActions?: Prisma.TicketHistoryUpdateManyWithoutChangedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutParcelsReceivedInput = {
@@ -2150,6 +2344,10 @@ export type UserUncheckedUpdateWithoutParcelsReceivedInput = {
   amenityReservations?: Prisma.AmenityReservationUncheckedUpdateManyWithoutResidentNestedInput
   serviceProvidersCreated?: Prisma.ServiceProviderUncheckedUpdateManyWithoutCreatedByNestedInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeUncheckedUpdateManyWithoutUserNestedInput
+  ticketsCreated?: Prisma.TicketUncheckedUpdateManyWithoutCreatorNestedInput
+  ticketsAssigned?: Prisma.TicketUncheckedUpdateManyWithoutAssignedAdminNestedInput
+  ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
+  ticketHistoryActions?: Prisma.TicketHistoryUncheckedUpdateManyWithoutChangedByNestedInput
 }
 
 export type UserUpsertWithoutParcelsDeliveredInput = {
@@ -2197,6 +2395,10 @@ export type UserUpdateWithoutParcelsDeliveredInput = {
   amenityReservations?: Prisma.AmenityReservationUpdateManyWithoutResidentNestedInput
   serviceProvidersCreated?: Prisma.ServiceProviderUpdateManyWithoutCreatedByNestedInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeUpdateManyWithoutUserNestedInput
+  ticketsCreated?: Prisma.TicketUpdateManyWithoutCreatorNestedInput
+  ticketsAssigned?: Prisma.TicketUpdateManyWithoutAssignedAdminNestedInput
+  ticketComments?: Prisma.TicketCommentUpdateManyWithoutAuthorNestedInput
+  ticketHistoryActions?: Prisma.TicketHistoryUpdateManyWithoutChangedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutParcelsDeliveredInput = {
@@ -2233,6 +2435,10 @@ export type UserUncheckedUpdateWithoutParcelsDeliveredInput = {
   amenityReservations?: Prisma.AmenityReservationUncheckedUpdateManyWithoutResidentNestedInput
   serviceProvidersCreated?: Prisma.ServiceProviderUncheckedUpdateManyWithoutCreatedByNestedInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeUncheckedUpdateManyWithoutUserNestedInput
+  ticketsCreated?: Prisma.TicketUncheckedUpdateManyWithoutCreatorNestedInput
+  ticketsAssigned?: Prisma.TicketUncheckedUpdateManyWithoutAssignedAdminNestedInput
+  ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
+  ticketHistoryActions?: Prisma.TicketHistoryUncheckedUpdateManyWithoutChangedByNestedInput
 }
 
 export type UserCreateWithoutProviderEntriesRegisteredInput = {
@@ -2269,6 +2475,10 @@ export type UserCreateWithoutProviderEntriesRegisteredInput = {
   amenityReservations?: Prisma.AmenityReservationCreateNestedManyWithoutResidentInput
   serviceProvidersCreated?: Prisma.ServiceProviderCreateNestedManyWithoutCreatedByInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeCreateNestedManyWithoutUserInput
+  ticketsCreated?: Prisma.TicketCreateNestedManyWithoutCreatorInput
+  ticketsAssigned?: Prisma.TicketCreateNestedManyWithoutAssignedAdminInput
+  ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutAuthorInput
+  ticketHistoryActions?: Prisma.TicketHistoryCreateNestedManyWithoutChangedByInput
 }
 
 export type UserUncheckedCreateWithoutProviderEntriesRegisteredInput = {
@@ -2305,6 +2515,10 @@ export type UserUncheckedCreateWithoutProviderEntriesRegisteredInput = {
   amenityReservations?: Prisma.AmenityReservationUncheckedCreateNestedManyWithoutResidentInput
   serviceProvidersCreated?: Prisma.ServiceProviderUncheckedCreateNestedManyWithoutCreatedByInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeUncheckedCreateNestedManyWithoutUserInput
+  ticketsCreated?: Prisma.TicketUncheckedCreateNestedManyWithoutCreatorInput
+  ticketsAssigned?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedAdminInput
+  ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
+  ticketHistoryActions?: Prisma.TicketHistoryUncheckedCreateNestedManyWithoutChangedByInput
 }
 
 export type UserCreateOrConnectWithoutProviderEntriesRegisteredInput = {
@@ -2346,6 +2560,10 @@ export type UserCreateWithoutProviderExitsRegisteredInput = {
   amenityReservations?: Prisma.AmenityReservationCreateNestedManyWithoutResidentInput
   serviceProvidersCreated?: Prisma.ServiceProviderCreateNestedManyWithoutCreatedByInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeCreateNestedManyWithoutUserInput
+  ticketsCreated?: Prisma.TicketCreateNestedManyWithoutCreatorInput
+  ticketsAssigned?: Prisma.TicketCreateNestedManyWithoutAssignedAdminInput
+  ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutAuthorInput
+  ticketHistoryActions?: Prisma.TicketHistoryCreateNestedManyWithoutChangedByInput
 }
 
 export type UserUncheckedCreateWithoutProviderExitsRegisteredInput = {
@@ -2382,6 +2600,10 @@ export type UserUncheckedCreateWithoutProviderExitsRegisteredInput = {
   amenityReservations?: Prisma.AmenityReservationUncheckedCreateNestedManyWithoutResidentInput
   serviceProvidersCreated?: Prisma.ServiceProviderUncheckedCreateNestedManyWithoutCreatedByInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeUncheckedCreateNestedManyWithoutUserInput
+  ticketsCreated?: Prisma.TicketUncheckedCreateNestedManyWithoutCreatorInput
+  ticketsAssigned?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedAdminInput
+  ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
+  ticketHistoryActions?: Prisma.TicketHistoryUncheckedCreateNestedManyWithoutChangedByInput
 }
 
 export type UserCreateOrConnectWithoutProviderExitsRegisteredInput = {
@@ -2434,6 +2656,10 @@ export type UserUpdateWithoutProviderEntriesRegisteredInput = {
   amenityReservations?: Prisma.AmenityReservationUpdateManyWithoutResidentNestedInput
   serviceProvidersCreated?: Prisma.ServiceProviderUpdateManyWithoutCreatedByNestedInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeUpdateManyWithoutUserNestedInput
+  ticketsCreated?: Prisma.TicketUpdateManyWithoutCreatorNestedInput
+  ticketsAssigned?: Prisma.TicketUpdateManyWithoutAssignedAdminNestedInput
+  ticketComments?: Prisma.TicketCommentUpdateManyWithoutAuthorNestedInput
+  ticketHistoryActions?: Prisma.TicketHistoryUpdateManyWithoutChangedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProviderEntriesRegisteredInput = {
@@ -2470,6 +2696,10 @@ export type UserUncheckedUpdateWithoutProviderEntriesRegisteredInput = {
   amenityReservations?: Prisma.AmenityReservationUncheckedUpdateManyWithoutResidentNestedInput
   serviceProvidersCreated?: Prisma.ServiceProviderUncheckedUpdateManyWithoutCreatedByNestedInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeUncheckedUpdateManyWithoutUserNestedInput
+  ticketsCreated?: Prisma.TicketUncheckedUpdateManyWithoutCreatorNestedInput
+  ticketsAssigned?: Prisma.TicketUncheckedUpdateManyWithoutAssignedAdminNestedInput
+  ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
+  ticketHistoryActions?: Prisma.TicketHistoryUncheckedUpdateManyWithoutChangedByNestedInput
 }
 
 export type UserUpsertWithoutProviderExitsRegisteredInput = {
@@ -2517,6 +2747,10 @@ export type UserUpdateWithoutProviderExitsRegisteredInput = {
   amenityReservations?: Prisma.AmenityReservationUpdateManyWithoutResidentNestedInput
   serviceProvidersCreated?: Prisma.ServiceProviderUpdateManyWithoutCreatedByNestedInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeUpdateManyWithoutUserNestedInput
+  ticketsCreated?: Prisma.TicketUpdateManyWithoutCreatorNestedInput
+  ticketsAssigned?: Prisma.TicketUpdateManyWithoutAssignedAdminNestedInput
+  ticketComments?: Prisma.TicketCommentUpdateManyWithoutAuthorNestedInput
+  ticketHistoryActions?: Prisma.TicketHistoryUpdateManyWithoutChangedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProviderExitsRegisteredInput = {
@@ -2553,6 +2787,10 @@ export type UserUncheckedUpdateWithoutProviderExitsRegisteredInput = {
   amenityReservations?: Prisma.AmenityReservationUncheckedUpdateManyWithoutResidentNestedInput
   serviceProvidersCreated?: Prisma.ServiceProviderUncheckedUpdateManyWithoutCreatedByNestedInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeUncheckedUpdateManyWithoutUserNestedInput
+  ticketsCreated?: Prisma.TicketUncheckedUpdateManyWithoutCreatorNestedInput
+  ticketsAssigned?: Prisma.TicketUncheckedUpdateManyWithoutAssignedAdminNestedInput
+  ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
+  ticketHistoryActions?: Prisma.TicketHistoryUncheckedUpdateManyWithoutChangedByNestedInput
 }
 
 export type UserCreateWithoutPaymentsInput = {
@@ -2589,6 +2827,10 @@ export type UserCreateWithoutPaymentsInput = {
   amenityReservations?: Prisma.AmenityReservationCreateNestedManyWithoutResidentInput
   serviceProvidersCreated?: Prisma.ServiceProviderCreateNestedManyWithoutCreatedByInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeCreateNestedManyWithoutUserInput
+  ticketsCreated?: Prisma.TicketCreateNestedManyWithoutCreatorInput
+  ticketsAssigned?: Prisma.TicketCreateNestedManyWithoutAssignedAdminInput
+  ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutAuthorInput
+  ticketHistoryActions?: Prisma.TicketHistoryCreateNestedManyWithoutChangedByInput
 }
 
 export type UserUncheckedCreateWithoutPaymentsInput = {
@@ -2625,6 +2867,10 @@ export type UserUncheckedCreateWithoutPaymentsInput = {
   amenityReservations?: Prisma.AmenityReservationUncheckedCreateNestedManyWithoutResidentInput
   serviceProvidersCreated?: Prisma.ServiceProviderUncheckedCreateNestedManyWithoutCreatedByInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeUncheckedCreateNestedManyWithoutUserInput
+  ticketsCreated?: Prisma.TicketUncheckedCreateNestedManyWithoutCreatorInput
+  ticketsAssigned?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedAdminInput
+  ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
+  ticketHistoryActions?: Prisma.TicketHistoryUncheckedCreateNestedManyWithoutChangedByInput
 }
 
 export type UserCreateOrConnectWithoutPaymentsInput = {
@@ -2677,6 +2923,10 @@ export type UserUpdateWithoutPaymentsInput = {
   amenityReservations?: Prisma.AmenityReservationUpdateManyWithoutResidentNestedInput
   serviceProvidersCreated?: Prisma.ServiceProviderUpdateManyWithoutCreatedByNestedInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeUpdateManyWithoutUserNestedInput
+  ticketsCreated?: Prisma.TicketUpdateManyWithoutCreatorNestedInput
+  ticketsAssigned?: Prisma.TicketUpdateManyWithoutAssignedAdminNestedInput
+  ticketComments?: Prisma.TicketCommentUpdateManyWithoutAuthorNestedInput
+  ticketHistoryActions?: Prisma.TicketHistoryUpdateManyWithoutChangedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPaymentsInput = {
@@ -2713,6 +2963,10 @@ export type UserUncheckedUpdateWithoutPaymentsInput = {
   amenityReservations?: Prisma.AmenityReservationUncheckedUpdateManyWithoutResidentNestedInput
   serviceProvidersCreated?: Prisma.ServiceProviderUncheckedUpdateManyWithoutCreatedByNestedInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeUncheckedUpdateManyWithoutUserNestedInput
+  ticketsCreated?: Prisma.TicketUncheckedUpdateManyWithoutCreatorNestedInput
+  ticketsAssigned?: Prisma.TicketUncheckedUpdateManyWithoutAssignedAdminNestedInput
+  ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
+  ticketHistoryActions?: Prisma.TicketHistoryUncheckedUpdateManyWithoutChangedByNestedInput
 }
 
 export type UserCreateWithoutExpensesCreatedInput = {
@@ -2749,6 +3003,10 @@ export type UserCreateWithoutExpensesCreatedInput = {
   amenityReservations?: Prisma.AmenityReservationCreateNestedManyWithoutResidentInput
   serviceProvidersCreated?: Prisma.ServiceProviderCreateNestedManyWithoutCreatedByInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeCreateNestedManyWithoutUserInput
+  ticketsCreated?: Prisma.TicketCreateNestedManyWithoutCreatorInput
+  ticketsAssigned?: Prisma.TicketCreateNestedManyWithoutAssignedAdminInput
+  ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutAuthorInput
+  ticketHistoryActions?: Prisma.TicketHistoryCreateNestedManyWithoutChangedByInput
 }
 
 export type UserUncheckedCreateWithoutExpensesCreatedInput = {
@@ -2785,6 +3043,10 @@ export type UserUncheckedCreateWithoutExpensesCreatedInput = {
   amenityReservations?: Prisma.AmenityReservationUncheckedCreateNestedManyWithoutResidentInput
   serviceProvidersCreated?: Prisma.ServiceProviderUncheckedCreateNestedManyWithoutCreatedByInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeUncheckedCreateNestedManyWithoutUserInput
+  ticketsCreated?: Prisma.TicketUncheckedCreateNestedManyWithoutCreatorInput
+  ticketsAssigned?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedAdminInput
+  ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
+  ticketHistoryActions?: Prisma.TicketHistoryUncheckedCreateNestedManyWithoutChangedByInput
 }
 
 export type UserCreateOrConnectWithoutExpensesCreatedInput = {
@@ -2837,6 +3099,10 @@ export type UserUpdateWithoutExpensesCreatedInput = {
   amenityReservations?: Prisma.AmenityReservationUpdateManyWithoutResidentNestedInput
   serviceProvidersCreated?: Prisma.ServiceProviderUpdateManyWithoutCreatedByNestedInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeUpdateManyWithoutUserNestedInput
+  ticketsCreated?: Prisma.TicketUpdateManyWithoutCreatorNestedInput
+  ticketsAssigned?: Prisma.TicketUpdateManyWithoutAssignedAdminNestedInput
+  ticketComments?: Prisma.TicketCommentUpdateManyWithoutAuthorNestedInput
+  ticketHistoryActions?: Prisma.TicketHistoryUpdateManyWithoutChangedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutExpensesCreatedInput = {
@@ -2873,6 +3139,10 @@ export type UserUncheckedUpdateWithoutExpensesCreatedInput = {
   amenityReservations?: Prisma.AmenityReservationUncheckedUpdateManyWithoutResidentNestedInput
   serviceProvidersCreated?: Prisma.ServiceProviderUncheckedUpdateManyWithoutCreatedByNestedInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeUncheckedUpdateManyWithoutUserNestedInput
+  ticketsCreated?: Prisma.TicketUncheckedUpdateManyWithoutCreatorNestedInput
+  ticketsAssigned?: Prisma.TicketUncheckedUpdateManyWithoutAssignedAdminNestedInput
+  ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
+  ticketHistoryActions?: Prisma.TicketHistoryUncheckedUpdateManyWithoutChangedByNestedInput
 }
 
 export type UserCreateWithoutExtraIncomesCreatedInput = {
@@ -2909,6 +3179,10 @@ export type UserCreateWithoutExtraIncomesCreatedInput = {
   amenityReservations?: Prisma.AmenityReservationCreateNestedManyWithoutResidentInput
   serviceProvidersCreated?: Prisma.ServiceProviderCreateNestedManyWithoutCreatedByInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeCreateNestedManyWithoutUserInput
+  ticketsCreated?: Prisma.TicketCreateNestedManyWithoutCreatorInput
+  ticketsAssigned?: Prisma.TicketCreateNestedManyWithoutAssignedAdminInput
+  ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutAuthorInput
+  ticketHistoryActions?: Prisma.TicketHistoryCreateNestedManyWithoutChangedByInput
 }
 
 export type UserUncheckedCreateWithoutExtraIncomesCreatedInput = {
@@ -2945,6 +3219,10 @@ export type UserUncheckedCreateWithoutExtraIncomesCreatedInput = {
   amenityReservations?: Prisma.AmenityReservationUncheckedCreateNestedManyWithoutResidentInput
   serviceProvidersCreated?: Prisma.ServiceProviderUncheckedCreateNestedManyWithoutCreatedByInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeUncheckedCreateNestedManyWithoutUserInput
+  ticketsCreated?: Prisma.TicketUncheckedCreateNestedManyWithoutCreatorInput
+  ticketsAssigned?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedAdminInput
+  ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
+  ticketHistoryActions?: Prisma.TicketHistoryUncheckedCreateNestedManyWithoutChangedByInput
 }
 
 export type UserCreateOrConnectWithoutExtraIncomesCreatedInput = {
@@ -2997,6 +3275,10 @@ export type UserUpdateWithoutExtraIncomesCreatedInput = {
   amenityReservations?: Prisma.AmenityReservationUpdateManyWithoutResidentNestedInput
   serviceProvidersCreated?: Prisma.ServiceProviderUpdateManyWithoutCreatedByNestedInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeUpdateManyWithoutUserNestedInput
+  ticketsCreated?: Prisma.TicketUpdateManyWithoutCreatorNestedInput
+  ticketsAssigned?: Prisma.TicketUpdateManyWithoutAssignedAdminNestedInput
+  ticketComments?: Prisma.TicketCommentUpdateManyWithoutAuthorNestedInput
+  ticketHistoryActions?: Prisma.TicketHistoryUpdateManyWithoutChangedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutExtraIncomesCreatedInput = {
@@ -3033,6 +3315,10 @@ export type UserUncheckedUpdateWithoutExtraIncomesCreatedInput = {
   amenityReservations?: Prisma.AmenityReservationUncheckedUpdateManyWithoutResidentNestedInput
   serviceProvidersCreated?: Prisma.ServiceProviderUncheckedUpdateManyWithoutCreatedByNestedInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeUncheckedUpdateManyWithoutUserNestedInput
+  ticketsCreated?: Prisma.TicketUncheckedUpdateManyWithoutCreatorNestedInput
+  ticketsAssigned?: Prisma.TicketUncheckedUpdateManyWithoutAssignedAdminNestedInput
+  ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
+  ticketHistoryActions?: Prisma.TicketHistoryUncheckedUpdateManyWithoutChangedByNestedInput
 }
 
 export type UserCreateWithoutExtraordinaryFeesCreatedInput = {
@@ -3069,6 +3355,10 @@ export type UserCreateWithoutExtraordinaryFeesCreatedInput = {
   amenityReservations?: Prisma.AmenityReservationCreateNestedManyWithoutResidentInput
   serviceProvidersCreated?: Prisma.ServiceProviderCreateNestedManyWithoutCreatedByInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeCreateNestedManyWithoutUserInput
+  ticketsCreated?: Prisma.TicketCreateNestedManyWithoutCreatorInput
+  ticketsAssigned?: Prisma.TicketCreateNestedManyWithoutAssignedAdminInput
+  ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutAuthorInput
+  ticketHistoryActions?: Prisma.TicketHistoryCreateNestedManyWithoutChangedByInput
 }
 
 export type UserUncheckedCreateWithoutExtraordinaryFeesCreatedInput = {
@@ -3105,6 +3395,10 @@ export type UserUncheckedCreateWithoutExtraordinaryFeesCreatedInput = {
   amenityReservations?: Prisma.AmenityReservationUncheckedCreateNestedManyWithoutResidentInput
   serviceProvidersCreated?: Prisma.ServiceProviderUncheckedCreateNestedManyWithoutCreatedByInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeUncheckedCreateNestedManyWithoutUserInput
+  ticketsCreated?: Prisma.TicketUncheckedCreateNestedManyWithoutCreatorInput
+  ticketsAssigned?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedAdminInput
+  ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
+  ticketHistoryActions?: Prisma.TicketHistoryUncheckedCreateNestedManyWithoutChangedByInput
 }
 
 export type UserCreateOrConnectWithoutExtraordinaryFeesCreatedInput = {
@@ -3157,6 +3451,10 @@ export type UserUpdateWithoutExtraordinaryFeesCreatedInput = {
   amenityReservations?: Prisma.AmenityReservationUpdateManyWithoutResidentNestedInput
   serviceProvidersCreated?: Prisma.ServiceProviderUpdateManyWithoutCreatedByNestedInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeUpdateManyWithoutUserNestedInput
+  ticketsCreated?: Prisma.TicketUpdateManyWithoutCreatorNestedInput
+  ticketsAssigned?: Prisma.TicketUpdateManyWithoutAssignedAdminNestedInput
+  ticketComments?: Prisma.TicketCommentUpdateManyWithoutAuthorNestedInput
+  ticketHistoryActions?: Prisma.TicketHistoryUpdateManyWithoutChangedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutExtraordinaryFeesCreatedInput = {
@@ -3193,6 +3491,10 @@ export type UserUncheckedUpdateWithoutExtraordinaryFeesCreatedInput = {
   amenityReservations?: Prisma.AmenityReservationUncheckedUpdateManyWithoutResidentNestedInput
   serviceProvidersCreated?: Prisma.ServiceProviderUncheckedUpdateManyWithoutCreatedByNestedInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeUncheckedUpdateManyWithoutUserNestedInput
+  ticketsCreated?: Prisma.TicketUncheckedUpdateManyWithoutCreatorNestedInput
+  ticketsAssigned?: Prisma.TicketUncheckedUpdateManyWithoutAssignedAdminNestedInput
+  ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
+  ticketHistoryActions?: Prisma.TicketHistoryUncheckedUpdateManyWithoutChangedByNestedInput
 }
 
 export type UserCreateWithoutAnnouncementsCreatedInput = {
@@ -3229,6 +3531,10 @@ export type UserCreateWithoutAnnouncementsCreatedInput = {
   amenityReservations?: Prisma.AmenityReservationCreateNestedManyWithoutResidentInput
   serviceProvidersCreated?: Prisma.ServiceProviderCreateNestedManyWithoutCreatedByInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeCreateNestedManyWithoutUserInput
+  ticketsCreated?: Prisma.TicketCreateNestedManyWithoutCreatorInput
+  ticketsAssigned?: Prisma.TicketCreateNestedManyWithoutAssignedAdminInput
+  ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutAuthorInput
+  ticketHistoryActions?: Prisma.TicketHistoryCreateNestedManyWithoutChangedByInput
 }
 
 export type UserUncheckedCreateWithoutAnnouncementsCreatedInput = {
@@ -3265,6 +3571,10 @@ export type UserUncheckedCreateWithoutAnnouncementsCreatedInput = {
   amenityReservations?: Prisma.AmenityReservationUncheckedCreateNestedManyWithoutResidentInput
   serviceProvidersCreated?: Prisma.ServiceProviderUncheckedCreateNestedManyWithoutCreatedByInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeUncheckedCreateNestedManyWithoutUserInput
+  ticketsCreated?: Prisma.TicketUncheckedCreateNestedManyWithoutCreatorInput
+  ticketsAssigned?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedAdminInput
+  ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
+  ticketHistoryActions?: Prisma.TicketHistoryUncheckedCreateNestedManyWithoutChangedByInput
 }
 
 export type UserCreateOrConnectWithoutAnnouncementsCreatedInput = {
@@ -3317,6 +3627,10 @@ export type UserUpdateWithoutAnnouncementsCreatedInput = {
   amenityReservations?: Prisma.AmenityReservationUpdateManyWithoutResidentNestedInput
   serviceProvidersCreated?: Prisma.ServiceProviderUpdateManyWithoutCreatedByNestedInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeUpdateManyWithoutUserNestedInput
+  ticketsCreated?: Prisma.TicketUpdateManyWithoutCreatorNestedInput
+  ticketsAssigned?: Prisma.TicketUpdateManyWithoutAssignedAdminNestedInput
+  ticketComments?: Prisma.TicketCommentUpdateManyWithoutAuthorNestedInput
+  ticketHistoryActions?: Prisma.TicketHistoryUpdateManyWithoutChangedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAnnouncementsCreatedInput = {
@@ -3353,6 +3667,10 @@ export type UserUncheckedUpdateWithoutAnnouncementsCreatedInput = {
   amenityReservations?: Prisma.AmenityReservationUncheckedUpdateManyWithoutResidentNestedInput
   serviceProvidersCreated?: Prisma.ServiceProviderUncheckedUpdateManyWithoutCreatedByNestedInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeUncheckedUpdateManyWithoutUserNestedInput
+  ticketsCreated?: Prisma.TicketUncheckedUpdateManyWithoutCreatorNestedInput
+  ticketsAssigned?: Prisma.TicketUncheckedUpdateManyWithoutAssignedAdminNestedInput
+  ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
+  ticketHistoryActions?: Prisma.TicketHistoryUncheckedUpdateManyWithoutChangedByNestedInput
 }
 
 export type UserCreateWithoutAnnouncementsReadInput = {
@@ -3389,6 +3707,10 @@ export type UserCreateWithoutAnnouncementsReadInput = {
   amenityReservations?: Prisma.AmenityReservationCreateNestedManyWithoutResidentInput
   serviceProvidersCreated?: Prisma.ServiceProviderCreateNestedManyWithoutCreatedByInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeCreateNestedManyWithoutUserInput
+  ticketsCreated?: Prisma.TicketCreateNestedManyWithoutCreatorInput
+  ticketsAssigned?: Prisma.TicketCreateNestedManyWithoutAssignedAdminInput
+  ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutAuthorInput
+  ticketHistoryActions?: Prisma.TicketHistoryCreateNestedManyWithoutChangedByInput
 }
 
 export type UserUncheckedCreateWithoutAnnouncementsReadInput = {
@@ -3425,6 +3747,10 @@ export type UserUncheckedCreateWithoutAnnouncementsReadInput = {
   amenityReservations?: Prisma.AmenityReservationUncheckedCreateNestedManyWithoutResidentInput
   serviceProvidersCreated?: Prisma.ServiceProviderUncheckedCreateNestedManyWithoutCreatedByInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeUncheckedCreateNestedManyWithoutUserInput
+  ticketsCreated?: Prisma.TicketUncheckedCreateNestedManyWithoutCreatorInput
+  ticketsAssigned?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedAdminInput
+  ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
+  ticketHistoryActions?: Prisma.TicketHistoryUncheckedCreateNestedManyWithoutChangedByInput
 }
 
 export type UserCreateOrConnectWithoutAnnouncementsReadInput = {
@@ -3477,6 +3803,10 @@ export type UserUpdateWithoutAnnouncementsReadInput = {
   amenityReservations?: Prisma.AmenityReservationUpdateManyWithoutResidentNestedInput
   serviceProvidersCreated?: Prisma.ServiceProviderUpdateManyWithoutCreatedByNestedInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeUpdateManyWithoutUserNestedInput
+  ticketsCreated?: Prisma.TicketUpdateManyWithoutCreatorNestedInput
+  ticketsAssigned?: Prisma.TicketUpdateManyWithoutAssignedAdminNestedInput
+  ticketComments?: Prisma.TicketCommentUpdateManyWithoutAuthorNestedInput
+  ticketHistoryActions?: Prisma.TicketHistoryUpdateManyWithoutChangedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAnnouncementsReadInput = {
@@ -3513,6 +3843,10 @@ export type UserUncheckedUpdateWithoutAnnouncementsReadInput = {
   amenityReservations?: Prisma.AmenityReservationUncheckedUpdateManyWithoutResidentNestedInput
   serviceProvidersCreated?: Prisma.ServiceProviderUncheckedUpdateManyWithoutCreatedByNestedInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeUncheckedUpdateManyWithoutUserNestedInput
+  ticketsCreated?: Prisma.TicketUncheckedUpdateManyWithoutCreatorNestedInput
+  ticketsAssigned?: Prisma.TicketUncheckedUpdateManyWithoutAssignedAdminNestedInput
+  ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
+  ticketHistoryActions?: Prisma.TicketHistoryUncheckedUpdateManyWithoutChangedByNestedInput
 }
 
 export type UserCreateWithoutSurveysCreatedInput = {
@@ -3549,6 +3883,10 @@ export type UserCreateWithoutSurveysCreatedInput = {
   amenityReservations?: Prisma.AmenityReservationCreateNestedManyWithoutResidentInput
   serviceProvidersCreated?: Prisma.ServiceProviderCreateNestedManyWithoutCreatedByInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeCreateNestedManyWithoutUserInput
+  ticketsCreated?: Prisma.TicketCreateNestedManyWithoutCreatorInput
+  ticketsAssigned?: Prisma.TicketCreateNestedManyWithoutAssignedAdminInput
+  ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutAuthorInput
+  ticketHistoryActions?: Prisma.TicketHistoryCreateNestedManyWithoutChangedByInput
 }
 
 export type UserUncheckedCreateWithoutSurveysCreatedInput = {
@@ -3585,6 +3923,10 @@ export type UserUncheckedCreateWithoutSurveysCreatedInput = {
   amenityReservations?: Prisma.AmenityReservationUncheckedCreateNestedManyWithoutResidentInput
   serviceProvidersCreated?: Prisma.ServiceProviderUncheckedCreateNestedManyWithoutCreatedByInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeUncheckedCreateNestedManyWithoutUserInput
+  ticketsCreated?: Prisma.TicketUncheckedCreateNestedManyWithoutCreatorInput
+  ticketsAssigned?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedAdminInput
+  ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
+  ticketHistoryActions?: Prisma.TicketHistoryUncheckedCreateNestedManyWithoutChangedByInput
 }
 
 export type UserCreateOrConnectWithoutSurveysCreatedInput = {
@@ -3637,6 +3979,10 @@ export type UserUpdateWithoutSurveysCreatedInput = {
   amenityReservations?: Prisma.AmenityReservationUpdateManyWithoutResidentNestedInput
   serviceProvidersCreated?: Prisma.ServiceProviderUpdateManyWithoutCreatedByNestedInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeUpdateManyWithoutUserNestedInput
+  ticketsCreated?: Prisma.TicketUpdateManyWithoutCreatorNestedInput
+  ticketsAssigned?: Prisma.TicketUpdateManyWithoutAssignedAdminNestedInput
+  ticketComments?: Prisma.TicketCommentUpdateManyWithoutAuthorNestedInput
+  ticketHistoryActions?: Prisma.TicketHistoryUpdateManyWithoutChangedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSurveysCreatedInput = {
@@ -3673,6 +4019,10 @@ export type UserUncheckedUpdateWithoutSurveysCreatedInput = {
   amenityReservations?: Prisma.AmenityReservationUncheckedUpdateManyWithoutResidentNestedInput
   serviceProvidersCreated?: Prisma.ServiceProviderUncheckedUpdateManyWithoutCreatedByNestedInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeUncheckedUpdateManyWithoutUserNestedInput
+  ticketsCreated?: Prisma.TicketUncheckedUpdateManyWithoutCreatorNestedInput
+  ticketsAssigned?: Prisma.TicketUncheckedUpdateManyWithoutAssignedAdminNestedInput
+  ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
+  ticketHistoryActions?: Prisma.TicketHistoryUncheckedUpdateManyWithoutChangedByNestedInput
 }
 
 export type UserCreateWithoutSurveyResponsesInput = {
@@ -3709,6 +4059,10 @@ export type UserCreateWithoutSurveyResponsesInput = {
   amenityReservations?: Prisma.AmenityReservationCreateNestedManyWithoutResidentInput
   serviceProvidersCreated?: Prisma.ServiceProviderCreateNestedManyWithoutCreatedByInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeCreateNestedManyWithoutUserInput
+  ticketsCreated?: Prisma.TicketCreateNestedManyWithoutCreatorInput
+  ticketsAssigned?: Prisma.TicketCreateNestedManyWithoutAssignedAdminInput
+  ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutAuthorInput
+  ticketHistoryActions?: Prisma.TicketHistoryCreateNestedManyWithoutChangedByInput
 }
 
 export type UserUncheckedCreateWithoutSurveyResponsesInput = {
@@ -3745,6 +4099,10 @@ export type UserUncheckedCreateWithoutSurveyResponsesInput = {
   amenityReservations?: Prisma.AmenityReservationUncheckedCreateNestedManyWithoutResidentInput
   serviceProvidersCreated?: Prisma.ServiceProviderUncheckedCreateNestedManyWithoutCreatedByInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeUncheckedCreateNestedManyWithoutUserInput
+  ticketsCreated?: Prisma.TicketUncheckedCreateNestedManyWithoutCreatorInput
+  ticketsAssigned?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedAdminInput
+  ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
+  ticketHistoryActions?: Prisma.TicketHistoryUncheckedCreateNestedManyWithoutChangedByInput
 }
 
 export type UserCreateOrConnectWithoutSurveyResponsesInput = {
@@ -3797,6 +4155,10 @@ export type UserUpdateWithoutSurveyResponsesInput = {
   amenityReservations?: Prisma.AmenityReservationUpdateManyWithoutResidentNestedInput
   serviceProvidersCreated?: Prisma.ServiceProviderUpdateManyWithoutCreatedByNestedInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeUpdateManyWithoutUserNestedInput
+  ticketsCreated?: Prisma.TicketUpdateManyWithoutCreatorNestedInput
+  ticketsAssigned?: Prisma.TicketUpdateManyWithoutAssignedAdminNestedInput
+  ticketComments?: Prisma.TicketCommentUpdateManyWithoutAuthorNestedInput
+  ticketHistoryActions?: Prisma.TicketHistoryUpdateManyWithoutChangedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSurveyResponsesInput = {
@@ -3833,6 +4195,10 @@ export type UserUncheckedUpdateWithoutSurveyResponsesInput = {
   amenityReservations?: Prisma.AmenityReservationUncheckedUpdateManyWithoutResidentNestedInput
   serviceProvidersCreated?: Prisma.ServiceProviderUncheckedUpdateManyWithoutCreatedByNestedInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeUncheckedUpdateManyWithoutUserNestedInput
+  ticketsCreated?: Prisma.TicketUncheckedUpdateManyWithoutCreatorNestedInput
+  ticketsAssigned?: Prisma.TicketUncheckedUpdateManyWithoutAssignedAdminNestedInput
+  ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
+  ticketHistoryActions?: Prisma.TicketHistoryUncheckedUpdateManyWithoutChangedByNestedInput
 }
 
 export type UserCreateWithoutOfficialDocumentsCreatedInput = {
@@ -3869,6 +4235,10 @@ export type UserCreateWithoutOfficialDocumentsCreatedInput = {
   amenityReservations?: Prisma.AmenityReservationCreateNestedManyWithoutResidentInput
   serviceProvidersCreated?: Prisma.ServiceProviderCreateNestedManyWithoutCreatedByInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeCreateNestedManyWithoutUserInput
+  ticketsCreated?: Prisma.TicketCreateNestedManyWithoutCreatorInput
+  ticketsAssigned?: Prisma.TicketCreateNestedManyWithoutAssignedAdminInput
+  ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutAuthorInput
+  ticketHistoryActions?: Prisma.TicketHistoryCreateNestedManyWithoutChangedByInput
 }
 
 export type UserUncheckedCreateWithoutOfficialDocumentsCreatedInput = {
@@ -3905,6 +4275,10 @@ export type UserUncheckedCreateWithoutOfficialDocumentsCreatedInput = {
   amenityReservations?: Prisma.AmenityReservationUncheckedCreateNestedManyWithoutResidentInput
   serviceProvidersCreated?: Prisma.ServiceProviderUncheckedCreateNestedManyWithoutCreatedByInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeUncheckedCreateNestedManyWithoutUserInput
+  ticketsCreated?: Prisma.TicketUncheckedCreateNestedManyWithoutCreatorInput
+  ticketsAssigned?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedAdminInput
+  ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
+  ticketHistoryActions?: Prisma.TicketHistoryUncheckedCreateNestedManyWithoutChangedByInput
 }
 
 export type UserCreateOrConnectWithoutOfficialDocumentsCreatedInput = {
@@ -3957,6 +4331,10 @@ export type UserUpdateWithoutOfficialDocumentsCreatedInput = {
   amenityReservations?: Prisma.AmenityReservationUpdateManyWithoutResidentNestedInput
   serviceProvidersCreated?: Prisma.ServiceProviderUpdateManyWithoutCreatedByNestedInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeUpdateManyWithoutUserNestedInput
+  ticketsCreated?: Prisma.TicketUpdateManyWithoutCreatorNestedInput
+  ticketsAssigned?: Prisma.TicketUpdateManyWithoutAssignedAdminNestedInput
+  ticketComments?: Prisma.TicketCommentUpdateManyWithoutAuthorNestedInput
+  ticketHistoryActions?: Prisma.TicketHistoryUpdateManyWithoutChangedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutOfficialDocumentsCreatedInput = {
@@ -3993,6 +4371,10 @@ export type UserUncheckedUpdateWithoutOfficialDocumentsCreatedInput = {
   amenityReservations?: Prisma.AmenityReservationUncheckedUpdateManyWithoutResidentNestedInput
   serviceProvidersCreated?: Prisma.ServiceProviderUncheckedUpdateManyWithoutCreatedByNestedInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeUncheckedUpdateManyWithoutUserNestedInput
+  ticketsCreated?: Prisma.TicketUncheckedUpdateManyWithoutCreatorNestedInput
+  ticketsAssigned?: Prisma.TicketUncheckedUpdateManyWithoutAssignedAdminNestedInput
+  ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
+  ticketHistoryActions?: Prisma.TicketHistoryUncheckedUpdateManyWithoutChangedByNestedInput
 }
 
 export type UserCreateWithoutOfficialDocumentAcksInput = {
@@ -4029,6 +4411,10 @@ export type UserCreateWithoutOfficialDocumentAcksInput = {
   amenityReservations?: Prisma.AmenityReservationCreateNestedManyWithoutResidentInput
   serviceProvidersCreated?: Prisma.ServiceProviderCreateNestedManyWithoutCreatedByInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeCreateNestedManyWithoutUserInput
+  ticketsCreated?: Prisma.TicketCreateNestedManyWithoutCreatorInput
+  ticketsAssigned?: Prisma.TicketCreateNestedManyWithoutAssignedAdminInput
+  ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutAuthorInput
+  ticketHistoryActions?: Prisma.TicketHistoryCreateNestedManyWithoutChangedByInput
 }
 
 export type UserUncheckedCreateWithoutOfficialDocumentAcksInput = {
@@ -4065,6 +4451,10 @@ export type UserUncheckedCreateWithoutOfficialDocumentAcksInput = {
   amenityReservations?: Prisma.AmenityReservationUncheckedCreateNestedManyWithoutResidentInput
   serviceProvidersCreated?: Prisma.ServiceProviderUncheckedCreateNestedManyWithoutCreatedByInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeUncheckedCreateNestedManyWithoutUserInput
+  ticketsCreated?: Prisma.TicketUncheckedCreateNestedManyWithoutCreatorInput
+  ticketsAssigned?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedAdminInput
+  ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
+  ticketHistoryActions?: Prisma.TicketHistoryUncheckedCreateNestedManyWithoutChangedByInput
 }
 
 export type UserCreateOrConnectWithoutOfficialDocumentAcksInput = {
@@ -4117,6 +4507,10 @@ export type UserUpdateWithoutOfficialDocumentAcksInput = {
   amenityReservations?: Prisma.AmenityReservationUpdateManyWithoutResidentNestedInput
   serviceProvidersCreated?: Prisma.ServiceProviderUpdateManyWithoutCreatedByNestedInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeUpdateManyWithoutUserNestedInput
+  ticketsCreated?: Prisma.TicketUpdateManyWithoutCreatorNestedInput
+  ticketsAssigned?: Prisma.TicketUpdateManyWithoutAssignedAdminNestedInput
+  ticketComments?: Prisma.TicketCommentUpdateManyWithoutAuthorNestedInput
+  ticketHistoryActions?: Prisma.TicketHistoryUpdateManyWithoutChangedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutOfficialDocumentAcksInput = {
@@ -4153,6 +4547,10 @@ export type UserUncheckedUpdateWithoutOfficialDocumentAcksInput = {
   amenityReservations?: Prisma.AmenityReservationUncheckedUpdateManyWithoutResidentNestedInput
   serviceProvidersCreated?: Prisma.ServiceProviderUncheckedUpdateManyWithoutCreatedByNestedInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeUncheckedUpdateManyWithoutUserNestedInput
+  ticketsCreated?: Prisma.TicketUncheckedUpdateManyWithoutCreatorNestedInput
+  ticketsAssigned?: Prisma.TicketUncheckedUpdateManyWithoutAssignedAdminNestedInput
+  ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
+  ticketHistoryActions?: Prisma.TicketHistoryUncheckedUpdateManyWithoutChangedByNestedInput
 }
 
 export type UserCreateWithoutAmenityReservationsInput = {
@@ -4189,6 +4587,10 @@ export type UserCreateWithoutAmenityReservationsInput = {
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentCreateNestedManyWithoutUserInput
   serviceProvidersCreated?: Prisma.ServiceProviderCreateNestedManyWithoutCreatedByInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeCreateNestedManyWithoutUserInput
+  ticketsCreated?: Prisma.TicketCreateNestedManyWithoutCreatorInput
+  ticketsAssigned?: Prisma.TicketCreateNestedManyWithoutAssignedAdminInput
+  ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutAuthorInput
+  ticketHistoryActions?: Prisma.TicketHistoryCreateNestedManyWithoutChangedByInput
 }
 
 export type UserUncheckedCreateWithoutAmenityReservationsInput = {
@@ -4225,6 +4627,10 @@ export type UserUncheckedCreateWithoutAmenityReservationsInput = {
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUncheckedCreateNestedManyWithoutUserInput
   serviceProvidersCreated?: Prisma.ServiceProviderUncheckedCreateNestedManyWithoutCreatedByInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeUncheckedCreateNestedManyWithoutUserInput
+  ticketsCreated?: Prisma.TicketUncheckedCreateNestedManyWithoutCreatorInput
+  ticketsAssigned?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedAdminInput
+  ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
+  ticketHistoryActions?: Prisma.TicketHistoryUncheckedCreateNestedManyWithoutChangedByInput
 }
 
 export type UserCreateOrConnectWithoutAmenityReservationsInput = {
@@ -4277,6 +4683,10 @@ export type UserUpdateWithoutAmenityReservationsInput = {
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUpdateManyWithoutUserNestedInput
   serviceProvidersCreated?: Prisma.ServiceProviderUpdateManyWithoutCreatedByNestedInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeUpdateManyWithoutUserNestedInput
+  ticketsCreated?: Prisma.TicketUpdateManyWithoutCreatorNestedInput
+  ticketsAssigned?: Prisma.TicketUpdateManyWithoutAssignedAdminNestedInput
+  ticketComments?: Prisma.TicketCommentUpdateManyWithoutAuthorNestedInput
+  ticketHistoryActions?: Prisma.TicketHistoryUpdateManyWithoutChangedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAmenityReservationsInput = {
@@ -4313,6 +4723,10 @@ export type UserUncheckedUpdateWithoutAmenityReservationsInput = {
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUncheckedUpdateManyWithoutUserNestedInput
   serviceProvidersCreated?: Prisma.ServiceProviderUncheckedUpdateManyWithoutCreatedByNestedInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeUncheckedUpdateManyWithoutUserNestedInput
+  ticketsCreated?: Prisma.TicketUncheckedUpdateManyWithoutCreatorNestedInput
+  ticketsAssigned?: Prisma.TicketUncheckedUpdateManyWithoutAssignedAdminNestedInput
+  ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
+  ticketHistoryActions?: Prisma.TicketHistoryUncheckedUpdateManyWithoutChangedByNestedInput
 }
 
 export type UserCreateWithoutServiceProvidersCreatedInput = {
@@ -4349,6 +4763,10 @@ export type UserCreateWithoutServiceProvidersCreatedInput = {
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentCreateNestedManyWithoutUserInput
   amenityReservations?: Prisma.AmenityReservationCreateNestedManyWithoutResidentInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeCreateNestedManyWithoutUserInput
+  ticketsCreated?: Prisma.TicketCreateNestedManyWithoutCreatorInput
+  ticketsAssigned?: Prisma.TicketCreateNestedManyWithoutAssignedAdminInput
+  ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutAuthorInput
+  ticketHistoryActions?: Prisma.TicketHistoryCreateNestedManyWithoutChangedByInput
 }
 
 export type UserUncheckedCreateWithoutServiceProvidersCreatedInput = {
@@ -4385,6 +4803,10 @@ export type UserUncheckedCreateWithoutServiceProvidersCreatedInput = {
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUncheckedCreateNestedManyWithoutUserInput
   amenityReservations?: Prisma.AmenityReservationUncheckedCreateNestedManyWithoutResidentInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeUncheckedCreateNestedManyWithoutUserInput
+  ticketsCreated?: Prisma.TicketUncheckedCreateNestedManyWithoutCreatorInput
+  ticketsAssigned?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedAdminInput
+  ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
+  ticketHistoryActions?: Prisma.TicketHistoryUncheckedCreateNestedManyWithoutChangedByInput
 }
 
 export type UserCreateOrConnectWithoutServiceProvidersCreatedInput = {
@@ -4437,6 +4859,10 @@ export type UserUpdateWithoutServiceProvidersCreatedInput = {
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUpdateManyWithoutUserNestedInput
   amenityReservations?: Prisma.AmenityReservationUpdateManyWithoutResidentNestedInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeUpdateManyWithoutUserNestedInput
+  ticketsCreated?: Prisma.TicketUpdateManyWithoutCreatorNestedInput
+  ticketsAssigned?: Prisma.TicketUpdateManyWithoutAssignedAdminNestedInput
+  ticketComments?: Prisma.TicketCommentUpdateManyWithoutAuthorNestedInput
+  ticketHistoryActions?: Prisma.TicketHistoryUpdateManyWithoutChangedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutServiceProvidersCreatedInput = {
@@ -4473,6 +4899,10 @@ export type UserUncheckedUpdateWithoutServiceProvidersCreatedInput = {
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUncheckedUpdateManyWithoutUserNestedInput
   amenityReservations?: Prisma.AmenityReservationUncheckedUpdateManyWithoutResidentNestedInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeUncheckedUpdateManyWithoutUserNestedInput
+  ticketsCreated?: Prisma.TicketUncheckedUpdateManyWithoutCreatorNestedInput
+  ticketsAssigned?: Prisma.TicketUncheckedUpdateManyWithoutAssignedAdminNestedInput
+  ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
+  ticketHistoryActions?: Prisma.TicketHistoryUncheckedUpdateManyWithoutChangedByNestedInput
 }
 
 export type UserCreateWithoutServiceProviderLikesInput = {
@@ -4509,6 +4939,10 @@ export type UserCreateWithoutServiceProviderLikesInput = {
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentCreateNestedManyWithoutUserInput
   amenityReservations?: Prisma.AmenityReservationCreateNestedManyWithoutResidentInput
   serviceProvidersCreated?: Prisma.ServiceProviderCreateNestedManyWithoutCreatedByInput
+  ticketsCreated?: Prisma.TicketCreateNestedManyWithoutCreatorInput
+  ticketsAssigned?: Prisma.TicketCreateNestedManyWithoutAssignedAdminInput
+  ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutAuthorInput
+  ticketHistoryActions?: Prisma.TicketHistoryCreateNestedManyWithoutChangedByInput
 }
 
 export type UserUncheckedCreateWithoutServiceProviderLikesInput = {
@@ -4545,6 +4979,10 @@ export type UserUncheckedCreateWithoutServiceProviderLikesInput = {
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUncheckedCreateNestedManyWithoutUserInput
   amenityReservations?: Prisma.AmenityReservationUncheckedCreateNestedManyWithoutResidentInput
   serviceProvidersCreated?: Prisma.ServiceProviderUncheckedCreateNestedManyWithoutCreatedByInput
+  ticketsCreated?: Prisma.TicketUncheckedCreateNestedManyWithoutCreatorInput
+  ticketsAssigned?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedAdminInput
+  ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
+  ticketHistoryActions?: Prisma.TicketHistoryUncheckedCreateNestedManyWithoutChangedByInput
 }
 
 export type UserCreateOrConnectWithoutServiceProviderLikesInput = {
@@ -4597,6 +5035,10 @@ export type UserUpdateWithoutServiceProviderLikesInput = {
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUpdateManyWithoutUserNestedInput
   amenityReservations?: Prisma.AmenityReservationUpdateManyWithoutResidentNestedInput
   serviceProvidersCreated?: Prisma.ServiceProviderUpdateManyWithoutCreatedByNestedInput
+  ticketsCreated?: Prisma.TicketUpdateManyWithoutCreatorNestedInput
+  ticketsAssigned?: Prisma.TicketUpdateManyWithoutAssignedAdminNestedInput
+  ticketComments?: Prisma.TicketCommentUpdateManyWithoutAuthorNestedInput
+  ticketHistoryActions?: Prisma.TicketHistoryUpdateManyWithoutChangedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutServiceProviderLikesInput = {
@@ -4633,6 +5075,714 @@ export type UserUncheckedUpdateWithoutServiceProviderLikesInput = {
   officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUncheckedUpdateManyWithoutUserNestedInput
   amenityReservations?: Prisma.AmenityReservationUncheckedUpdateManyWithoutResidentNestedInput
   serviceProvidersCreated?: Prisma.ServiceProviderUncheckedUpdateManyWithoutCreatedByNestedInput
+  ticketsCreated?: Prisma.TicketUncheckedUpdateManyWithoutCreatorNestedInput
+  ticketsAssigned?: Prisma.TicketUncheckedUpdateManyWithoutAssignedAdminNestedInput
+  ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
+  ticketHistoryActions?: Prisma.TicketHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+}
+
+export type UserCreateWithoutTicketsCreatedInput = {
+  id?: string
+  email: string
+  passwordHash: string
+  firstName?: string | null
+  lastName?: string | null
+  phone?: string | null
+  role?: $Enums.UserRole
+  status?: $Enums.UserStatus
+  isEmailVerified?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  residentProfile?: Prisma.ResidentProfileCreateNestedOneWithoutUserInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutCreatedByInput
+  userSessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  condominium?: Prisma.CondominiumCreateNestedOneWithoutAdminsInput
+  accessLogs?: Prisma.AccessLogCreateNestedManyWithoutUserAcceptInput
+  parcelsReceived?: Prisma.ParcelDeliveryCreateNestedManyWithoutReceivedByInput
+  parcelsDelivered?: Prisma.ParcelDeliveryCreateNestedManyWithoutDeliveredByInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessCreateNestedManyWithoutEntryGuardInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessCreateNestedManyWithoutExitGuardInput
+  passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
+  expensesCreated?: Prisma.ExpenseCreateNestedManyWithoutCreatedByInput
+  extraIncomesCreated?: Prisma.ExtraIncomeCreateNestedManyWithoutCreatedByInput
+  extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeCreateNestedManyWithoutCreatedByInput
+  announcementsCreated?: Prisma.AnnouncementCreateNestedManyWithoutCreatedByInput
+  announcementsRead?: Prisma.AnnouncementReaderCreateNestedManyWithoutUserInput
+  surveysCreated?: Prisma.SurveyCreateNestedManyWithoutCreatedByInput
+  surveyResponses?: Prisma.SurveyResponseCreateNestedManyWithoutUserInput
+  officialDocumentsCreated?: Prisma.OfficialDocumentCreateNestedManyWithoutCreatedByInput
+  officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentCreateNestedManyWithoutUserInput
+  amenityReservations?: Prisma.AmenityReservationCreateNestedManyWithoutResidentInput
+  serviceProvidersCreated?: Prisma.ServiceProviderCreateNestedManyWithoutCreatedByInput
+  serviceProviderLikes?: Prisma.ServiceProviderLikeCreateNestedManyWithoutUserInput
+  ticketsAssigned?: Prisma.TicketCreateNestedManyWithoutAssignedAdminInput
+  ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutAuthorInput
+  ticketHistoryActions?: Prisma.TicketHistoryCreateNestedManyWithoutChangedByInput
+}
+
+export type UserUncheckedCreateWithoutTicketsCreatedInput = {
+  id?: string
+  email: string
+  passwordHash: string
+  firstName?: string | null
+  lastName?: string | null
+  phone?: string | null
+  role?: $Enums.UserRole
+  status?: $Enums.UserStatus
+  isEmailVerified?: boolean
+  condominiumId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  residentProfile?: Prisma.ResidentProfileUncheckedCreateNestedOneWithoutUserInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCreatedByInput
+  userSessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  accessLogs?: Prisma.AccessLogUncheckedCreateNestedManyWithoutUserAcceptInput
+  parcelsReceived?: Prisma.ParcelDeliveryUncheckedCreateNestedManyWithoutReceivedByInput
+  parcelsDelivered?: Prisma.ParcelDeliveryUncheckedCreateNestedManyWithoutDeliveredByInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessUncheckedCreateNestedManyWithoutEntryGuardInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessUncheckedCreateNestedManyWithoutExitGuardInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
+  expensesCreated?: Prisma.ExpenseUncheckedCreateNestedManyWithoutCreatedByInput
+  extraIncomesCreated?: Prisma.ExtraIncomeUncheckedCreateNestedManyWithoutCreatedByInput
+  extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedCreateNestedManyWithoutCreatedByInput
+  announcementsCreated?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCreatedByInput
+  announcementsRead?: Prisma.AnnouncementReaderUncheckedCreateNestedManyWithoutUserInput
+  surveysCreated?: Prisma.SurveyUncheckedCreateNestedManyWithoutCreatedByInput
+  surveyResponses?: Prisma.SurveyResponseUncheckedCreateNestedManyWithoutUserInput
+  officialDocumentsCreated?: Prisma.OfficialDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+  officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUncheckedCreateNestedManyWithoutUserInput
+  amenityReservations?: Prisma.AmenityReservationUncheckedCreateNestedManyWithoutResidentInput
+  serviceProvidersCreated?: Prisma.ServiceProviderUncheckedCreateNestedManyWithoutCreatedByInput
+  serviceProviderLikes?: Prisma.ServiceProviderLikeUncheckedCreateNestedManyWithoutUserInput
+  ticketsAssigned?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedAdminInput
+  ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
+  ticketHistoryActions?: Prisma.TicketHistoryUncheckedCreateNestedManyWithoutChangedByInput
+}
+
+export type UserCreateOrConnectWithoutTicketsCreatedInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutTicketsCreatedInput, Prisma.UserUncheckedCreateWithoutTicketsCreatedInput>
+}
+
+export type UserCreateWithoutTicketsAssignedInput = {
+  id?: string
+  email: string
+  passwordHash: string
+  firstName?: string | null
+  lastName?: string | null
+  phone?: string | null
+  role?: $Enums.UserRole
+  status?: $Enums.UserStatus
+  isEmailVerified?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  residentProfile?: Prisma.ResidentProfileCreateNestedOneWithoutUserInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutCreatedByInput
+  userSessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  condominium?: Prisma.CondominiumCreateNestedOneWithoutAdminsInput
+  accessLogs?: Prisma.AccessLogCreateNestedManyWithoutUserAcceptInput
+  parcelsReceived?: Prisma.ParcelDeliveryCreateNestedManyWithoutReceivedByInput
+  parcelsDelivered?: Prisma.ParcelDeliveryCreateNestedManyWithoutDeliveredByInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessCreateNestedManyWithoutEntryGuardInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessCreateNestedManyWithoutExitGuardInput
+  passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
+  expensesCreated?: Prisma.ExpenseCreateNestedManyWithoutCreatedByInput
+  extraIncomesCreated?: Prisma.ExtraIncomeCreateNestedManyWithoutCreatedByInput
+  extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeCreateNestedManyWithoutCreatedByInput
+  announcementsCreated?: Prisma.AnnouncementCreateNestedManyWithoutCreatedByInput
+  announcementsRead?: Prisma.AnnouncementReaderCreateNestedManyWithoutUserInput
+  surveysCreated?: Prisma.SurveyCreateNestedManyWithoutCreatedByInput
+  surveyResponses?: Prisma.SurveyResponseCreateNestedManyWithoutUserInput
+  officialDocumentsCreated?: Prisma.OfficialDocumentCreateNestedManyWithoutCreatedByInput
+  officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentCreateNestedManyWithoutUserInput
+  amenityReservations?: Prisma.AmenityReservationCreateNestedManyWithoutResidentInput
+  serviceProvidersCreated?: Prisma.ServiceProviderCreateNestedManyWithoutCreatedByInput
+  serviceProviderLikes?: Prisma.ServiceProviderLikeCreateNestedManyWithoutUserInput
+  ticketsCreated?: Prisma.TicketCreateNestedManyWithoutCreatorInput
+  ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutAuthorInput
+  ticketHistoryActions?: Prisma.TicketHistoryCreateNestedManyWithoutChangedByInput
+}
+
+export type UserUncheckedCreateWithoutTicketsAssignedInput = {
+  id?: string
+  email: string
+  passwordHash: string
+  firstName?: string | null
+  lastName?: string | null
+  phone?: string | null
+  role?: $Enums.UserRole
+  status?: $Enums.UserStatus
+  isEmailVerified?: boolean
+  condominiumId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  residentProfile?: Prisma.ResidentProfileUncheckedCreateNestedOneWithoutUserInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCreatedByInput
+  userSessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  accessLogs?: Prisma.AccessLogUncheckedCreateNestedManyWithoutUserAcceptInput
+  parcelsReceived?: Prisma.ParcelDeliveryUncheckedCreateNestedManyWithoutReceivedByInput
+  parcelsDelivered?: Prisma.ParcelDeliveryUncheckedCreateNestedManyWithoutDeliveredByInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessUncheckedCreateNestedManyWithoutEntryGuardInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessUncheckedCreateNestedManyWithoutExitGuardInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
+  expensesCreated?: Prisma.ExpenseUncheckedCreateNestedManyWithoutCreatedByInput
+  extraIncomesCreated?: Prisma.ExtraIncomeUncheckedCreateNestedManyWithoutCreatedByInput
+  extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedCreateNestedManyWithoutCreatedByInput
+  announcementsCreated?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCreatedByInput
+  announcementsRead?: Prisma.AnnouncementReaderUncheckedCreateNestedManyWithoutUserInput
+  surveysCreated?: Prisma.SurveyUncheckedCreateNestedManyWithoutCreatedByInput
+  surveyResponses?: Prisma.SurveyResponseUncheckedCreateNestedManyWithoutUserInput
+  officialDocumentsCreated?: Prisma.OfficialDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+  officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUncheckedCreateNestedManyWithoutUserInput
+  amenityReservations?: Prisma.AmenityReservationUncheckedCreateNestedManyWithoutResidentInput
+  serviceProvidersCreated?: Prisma.ServiceProviderUncheckedCreateNestedManyWithoutCreatedByInput
+  serviceProviderLikes?: Prisma.ServiceProviderLikeUncheckedCreateNestedManyWithoutUserInput
+  ticketsCreated?: Prisma.TicketUncheckedCreateNestedManyWithoutCreatorInput
+  ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
+  ticketHistoryActions?: Prisma.TicketHistoryUncheckedCreateNestedManyWithoutChangedByInput
+}
+
+export type UserCreateOrConnectWithoutTicketsAssignedInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutTicketsAssignedInput, Prisma.UserUncheckedCreateWithoutTicketsAssignedInput>
+}
+
+export type UserUpsertWithoutTicketsCreatedInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutTicketsCreatedInput, Prisma.UserUncheckedUpdateWithoutTicketsCreatedInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutTicketsCreatedInput, Prisma.UserUncheckedCreateWithoutTicketsCreatedInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutTicketsCreatedInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutTicketsCreatedInput, Prisma.UserUncheckedUpdateWithoutTicketsCreatedInput>
+}
+
+export type UserUpdateWithoutTicketsCreatedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  residentProfile?: Prisma.ResidentProfileUpdateOneWithoutUserNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutCreatedByNestedInput
+  userSessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  condominium?: Prisma.CondominiumUpdateOneWithoutAdminsNestedInput
+  accessLogs?: Prisma.AccessLogUpdateManyWithoutUserAcceptNestedInput
+  parcelsReceived?: Prisma.ParcelDeliveryUpdateManyWithoutReceivedByNestedInput
+  parcelsDelivered?: Prisma.ParcelDeliveryUpdateManyWithoutDeliveredByNestedInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessUpdateManyWithoutEntryGuardNestedInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessUpdateManyWithoutExitGuardNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
+  expensesCreated?: Prisma.ExpenseUpdateManyWithoutCreatedByNestedInput
+  extraIncomesCreated?: Prisma.ExtraIncomeUpdateManyWithoutCreatedByNestedInput
+  extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUpdateManyWithoutCreatedByNestedInput
+  announcementsCreated?: Prisma.AnnouncementUpdateManyWithoutCreatedByNestedInput
+  announcementsRead?: Prisma.AnnouncementReaderUpdateManyWithoutUserNestedInput
+  surveysCreated?: Prisma.SurveyUpdateManyWithoutCreatedByNestedInput
+  surveyResponses?: Prisma.SurveyResponseUpdateManyWithoutUserNestedInput
+  officialDocumentsCreated?: Prisma.OfficialDocumentUpdateManyWithoutCreatedByNestedInput
+  officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUpdateManyWithoutUserNestedInput
+  amenityReservations?: Prisma.AmenityReservationUpdateManyWithoutResidentNestedInput
+  serviceProvidersCreated?: Prisma.ServiceProviderUpdateManyWithoutCreatedByNestedInput
+  serviceProviderLikes?: Prisma.ServiceProviderLikeUpdateManyWithoutUserNestedInput
+  ticketsAssigned?: Prisma.TicketUpdateManyWithoutAssignedAdminNestedInput
+  ticketComments?: Prisma.TicketCommentUpdateManyWithoutAuthorNestedInput
+  ticketHistoryActions?: Prisma.TicketHistoryUpdateManyWithoutChangedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutTicketsCreatedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  condominiumId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  residentProfile?: Prisma.ResidentProfileUncheckedUpdateOneWithoutUserNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutCreatedByNestedInput
+  userSessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  accessLogs?: Prisma.AccessLogUncheckedUpdateManyWithoutUserAcceptNestedInput
+  parcelsReceived?: Prisma.ParcelDeliveryUncheckedUpdateManyWithoutReceivedByNestedInput
+  parcelsDelivered?: Prisma.ParcelDeliveryUncheckedUpdateManyWithoutDeliveredByNestedInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessUncheckedUpdateManyWithoutEntryGuardNestedInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessUncheckedUpdateManyWithoutExitGuardNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  expensesCreated?: Prisma.ExpenseUncheckedUpdateManyWithoutCreatedByNestedInput
+  extraIncomesCreated?: Prisma.ExtraIncomeUncheckedUpdateManyWithoutCreatedByNestedInput
+  extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedUpdateManyWithoutCreatedByNestedInput
+  announcementsCreated?: Prisma.AnnouncementUncheckedUpdateManyWithoutCreatedByNestedInput
+  announcementsRead?: Prisma.AnnouncementReaderUncheckedUpdateManyWithoutUserNestedInput
+  surveysCreated?: Prisma.SurveyUncheckedUpdateManyWithoutCreatedByNestedInput
+  surveyResponses?: Prisma.SurveyResponseUncheckedUpdateManyWithoutUserNestedInput
+  officialDocumentsCreated?: Prisma.OfficialDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+  officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUncheckedUpdateManyWithoutUserNestedInput
+  amenityReservations?: Prisma.AmenityReservationUncheckedUpdateManyWithoutResidentNestedInput
+  serviceProvidersCreated?: Prisma.ServiceProviderUncheckedUpdateManyWithoutCreatedByNestedInput
+  serviceProviderLikes?: Prisma.ServiceProviderLikeUncheckedUpdateManyWithoutUserNestedInput
+  ticketsAssigned?: Prisma.TicketUncheckedUpdateManyWithoutAssignedAdminNestedInput
+  ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
+  ticketHistoryActions?: Prisma.TicketHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+}
+
+export type UserUpsertWithoutTicketsAssignedInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutTicketsAssignedInput, Prisma.UserUncheckedUpdateWithoutTicketsAssignedInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutTicketsAssignedInput, Prisma.UserUncheckedCreateWithoutTicketsAssignedInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutTicketsAssignedInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutTicketsAssignedInput, Prisma.UserUncheckedUpdateWithoutTicketsAssignedInput>
+}
+
+export type UserUpdateWithoutTicketsAssignedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  residentProfile?: Prisma.ResidentProfileUpdateOneWithoutUserNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutCreatedByNestedInput
+  userSessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  condominium?: Prisma.CondominiumUpdateOneWithoutAdminsNestedInput
+  accessLogs?: Prisma.AccessLogUpdateManyWithoutUserAcceptNestedInput
+  parcelsReceived?: Prisma.ParcelDeliveryUpdateManyWithoutReceivedByNestedInput
+  parcelsDelivered?: Prisma.ParcelDeliveryUpdateManyWithoutDeliveredByNestedInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessUpdateManyWithoutEntryGuardNestedInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessUpdateManyWithoutExitGuardNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
+  expensesCreated?: Prisma.ExpenseUpdateManyWithoutCreatedByNestedInput
+  extraIncomesCreated?: Prisma.ExtraIncomeUpdateManyWithoutCreatedByNestedInput
+  extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUpdateManyWithoutCreatedByNestedInput
+  announcementsCreated?: Prisma.AnnouncementUpdateManyWithoutCreatedByNestedInput
+  announcementsRead?: Prisma.AnnouncementReaderUpdateManyWithoutUserNestedInput
+  surveysCreated?: Prisma.SurveyUpdateManyWithoutCreatedByNestedInput
+  surveyResponses?: Prisma.SurveyResponseUpdateManyWithoutUserNestedInput
+  officialDocumentsCreated?: Prisma.OfficialDocumentUpdateManyWithoutCreatedByNestedInput
+  officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUpdateManyWithoutUserNestedInput
+  amenityReservations?: Prisma.AmenityReservationUpdateManyWithoutResidentNestedInput
+  serviceProvidersCreated?: Prisma.ServiceProviderUpdateManyWithoutCreatedByNestedInput
+  serviceProviderLikes?: Prisma.ServiceProviderLikeUpdateManyWithoutUserNestedInput
+  ticketsCreated?: Prisma.TicketUpdateManyWithoutCreatorNestedInput
+  ticketComments?: Prisma.TicketCommentUpdateManyWithoutAuthorNestedInput
+  ticketHistoryActions?: Prisma.TicketHistoryUpdateManyWithoutChangedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutTicketsAssignedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  condominiumId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  residentProfile?: Prisma.ResidentProfileUncheckedUpdateOneWithoutUserNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutCreatedByNestedInput
+  userSessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  accessLogs?: Prisma.AccessLogUncheckedUpdateManyWithoutUserAcceptNestedInput
+  parcelsReceived?: Prisma.ParcelDeliveryUncheckedUpdateManyWithoutReceivedByNestedInput
+  parcelsDelivered?: Prisma.ParcelDeliveryUncheckedUpdateManyWithoutDeliveredByNestedInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessUncheckedUpdateManyWithoutEntryGuardNestedInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessUncheckedUpdateManyWithoutExitGuardNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  expensesCreated?: Prisma.ExpenseUncheckedUpdateManyWithoutCreatedByNestedInput
+  extraIncomesCreated?: Prisma.ExtraIncomeUncheckedUpdateManyWithoutCreatedByNestedInput
+  extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedUpdateManyWithoutCreatedByNestedInput
+  announcementsCreated?: Prisma.AnnouncementUncheckedUpdateManyWithoutCreatedByNestedInput
+  announcementsRead?: Prisma.AnnouncementReaderUncheckedUpdateManyWithoutUserNestedInput
+  surveysCreated?: Prisma.SurveyUncheckedUpdateManyWithoutCreatedByNestedInput
+  surveyResponses?: Prisma.SurveyResponseUncheckedUpdateManyWithoutUserNestedInput
+  officialDocumentsCreated?: Prisma.OfficialDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+  officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUncheckedUpdateManyWithoutUserNestedInput
+  amenityReservations?: Prisma.AmenityReservationUncheckedUpdateManyWithoutResidentNestedInput
+  serviceProvidersCreated?: Prisma.ServiceProviderUncheckedUpdateManyWithoutCreatedByNestedInput
+  serviceProviderLikes?: Prisma.ServiceProviderLikeUncheckedUpdateManyWithoutUserNestedInput
+  ticketsCreated?: Prisma.TicketUncheckedUpdateManyWithoutCreatorNestedInput
+  ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
+  ticketHistoryActions?: Prisma.TicketHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+}
+
+export type UserCreateWithoutTicketCommentsInput = {
+  id?: string
+  email: string
+  passwordHash: string
+  firstName?: string | null
+  lastName?: string | null
+  phone?: string | null
+  role?: $Enums.UserRole
+  status?: $Enums.UserStatus
+  isEmailVerified?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  residentProfile?: Prisma.ResidentProfileCreateNestedOneWithoutUserInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutCreatedByInput
+  userSessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  condominium?: Prisma.CondominiumCreateNestedOneWithoutAdminsInput
+  accessLogs?: Prisma.AccessLogCreateNestedManyWithoutUserAcceptInput
+  parcelsReceived?: Prisma.ParcelDeliveryCreateNestedManyWithoutReceivedByInput
+  parcelsDelivered?: Prisma.ParcelDeliveryCreateNestedManyWithoutDeliveredByInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessCreateNestedManyWithoutEntryGuardInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessCreateNestedManyWithoutExitGuardInput
+  passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
+  expensesCreated?: Prisma.ExpenseCreateNestedManyWithoutCreatedByInput
+  extraIncomesCreated?: Prisma.ExtraIncomeCreateNestedManyWithoutCreatedByInput
+  extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeCreateNestedManyWithoutCreatedByInput
+  announcementsCreated?: Prisma.AnnouncementCreateNestedManyWithoutCreatedByInput
+  announcementsRead?: Prisma.AnnouncementReaderCreateNestedManyWithoutUserInput
+  surveysCreated?: Prisma.SurveyCreateNestedManyWithoutCreatedByInput
+  surveyResponses?: Prisma.SurveyResponseCreateNestedManyWithoutUserInput
+  officialDocumentsCreated?: Prisma.OfficialDocumentCreateNestedManyWithoutCreatedByInput
+  officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentCreateNestedManyWithoutUserInput
+  amenityReservations?: Prisma.AmenityReservationCreateNestedManyWithoutResidentInput
+  serviceProvidersCreated?: Prisma.ServiceProviderCreateNestedManyWithoutCreatedByInput
+  serviceProviderLikes?: Prisma.ServiceProviderLikeCreateNestedManyWithoutUserInput
+  ticketsCreated?: Prisma.TicketCreateNestedManyWithoutCreatorInput
+  ticketsAssigned?: Prisma.TicketCreateNestedManyWithoutAssignedAdminInput
+  ticketHistoryActions?: Prisma.TicketHistoryCreateNestedManyWithoutChangedByInput
+}
+
+export type UserUncheckedCreateWithoutTicketCommentsInput = {
+  id?: string
+  email: string
+  passwordHash: string
+  firstName?: string | null
+  lastName?: string | null
+  phone?: string | null
+  role?: $Enums.UserRole
+  status?: $Enums.UserStatus
+  isEmailVerified?: boolean
+  condominiumId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  residentProfile?: Prisma.ResidentProfileUncheckedCreateNestedOneWithoutUserInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCreatedByInput
+  userSessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  accessLogs?: Prisma.AccessLogUncheckedCreateNestedManyWithoutUserAcceptInput
+  parcelsReceived?: Prisma.ParcelDeliveryUncheckedCreateNestedManyWithoutReceivedByInput
+  parcelsDelivered?: Prisma.ParcelDeliveryUncheckedCreateNestedManyWithoutDeliveredByInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessUncheckedCreateNestedManyWithoutEntryGuardInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessUncheckedCreateNestedManyWithoutExitGuardInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
+  expensesCreated?: Prisma.ExpenseUncheckedCreateNestedManyWithoutCreatedByInput
+  extraIncomesCreated?: Prisma.ExtraIncomeUncheckedCreateNestedManyWithoutCreatedByInput
+  extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedCreateNestedManyWithoutCreatedByInput
+  announcementsCreated?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCreatedByInput
+  announcementsRead?: Prisma.AnnouncementReaderUncheckedCreateNestedManyWithoutUserInput
+  surveysCreated?: Prisma.SurveyUncheckedCreateNestedManyWithoutCreatedByInput
+  surveyResponses?: Prisma.SurveyResponseUncheckedCreateNestedManyWithoutUserInput
+  officialDocumentsCreated?: Prisma.OfficialDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+  officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUncheckedCreateNestedManyWithoutUserInput
+  amenityReservations?: Prisma.AmenityReservationUncheckedCreateNestedManyWithoutResidentInput
+  serviceProvidersCreated?: Prisma.ServiceProviderUncheckedCreateNestedManyWithoutCreatedByInput
+  serviceProviderLikes?: Prisma.ServiceProviderLikeUncheckedCreateNestedManyWithoutUserInput
+  ticketsCreated?: Prisma.TicketUncheckedCreateNestedManyWithoutCreatorInput
+  ticketsAssigned?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedAdminInput
+  ticketHistoryActions?: Prisma.TicketHistoryUncheckedCreateNestedManyWithoutChangedByInput
+}
+
+export type UserCreateOrConnectWithoutTicketCommentsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutTicketCommentsInput, Prisma.UserUncheckedCreateWithoutTicketCommentsInput>
+}
+
+export type UserUpsertWithoutTicketCommentsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutTicketCommentsInput, Prisma.UserUncheckedUpdateWithoutTicketCommentsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutTicketCommentsInput, Prisma.UserUncheckedCreateWithoutTicketCommentsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutTicketCommentsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutTicketCommentsInput, Prisma.UserUncheckedUpdateWithoutTicketCommentsInput>
+}
+
+export type UserUpdateWithoutTicketCommentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  residentProfile?: Prisma.ResidentProfileUpdateOneWithoutUserNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutCreatedByNestedInput
+  userSessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  condominium?: Prisma.CondominiumUpdateOneWithoutAdminsNestedInput
+  accessLogs?: Prisma.AccessLogUpdateManyWithoutUserAcceptNestedInput
+  parcelsReceived?: Prisma.ParcelDeliveryUpdateManyWithoutReceivedByNestedInput
+  parcelsDelivered?: Prisma.ParcelDeliveryUpdateManyWithoutDeliveredByNestedInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessUpdateManyWithoutEntryGuardNestedInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessUpdateManyWithoutExitGuardNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
+  expensesCreated?: Prisma.ExpenseUpdateManyWithoutCreatedByNestedInput
+  extraIncomesCreated?: Prisma.ExtraIncomeUpdateManyWithoutCreatedByNestedInput
+  extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUpdateManyWithoutCreatedByNestedInput
+  announcementsCreated?: Prisma.AnnouncementUpdateManyWithoutCreatedByNestedInput
+  announcementsRead?: Prisma.AnnouncementReaderUpdateManyWithoutUserNestedInput
+  surveysCreated?: Prisma.SurveyUpdateManyWithoutCreatedByNestedInput
+  surveyResponses?: Prisma.SurveyResponseUpdateManyWithoutUserNestedInput
+  officialDocumentsCreated?: Prisma.OfficialDocumentUpdateManyWithoutCreatedByNestedInput
+  officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUpdateManyWithoutUserNestedInput
+  amenityReservations?: Prisma.AmenityReservationUpdateManyWithoutResidentNestedInput
+  serviceProvidersCreated?: Prisma.ServiceProviderUpdateManyWithoutCreatedByNestedInput
+  serviceProviderLikes?: Prisma.ServiceProviderLikeUpdateManyWithoutUserNestedInput
+  ticketsCreated?: Prisma.TicketUpdateManyWithoutCreatorNestedInput
+  ticketsAssigned?: Prisma.TicketUpdateManyWithoutAssignedAdminNestedInput
+  ticketHistoryActions?: Prisma.TicketHistoryUpdateManyWithoutChangedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutTicketCommentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  condominiumId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  residentProfile?: Prisma.ResidentProfileUncheckedUpdateOneWithoutUserNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutCreatedByNestedInput
+  userSessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  accessLogs?: Prisma.AccessLogUncheckedUpdateManyWithoutUserAcceptNestedInput
+  parcelsReceived?: Prisma.ParcelDeliveryUncheckedUpdateManyWithoutReceivedByNestedInput
+  parcelsDelivered?: Prisma.ParcelDeliveryUncheckedUpdateManyWithoutDeliveredByNestedInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessUncheckedUpdateManyWithoutEntryGuardNestedInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessUncheckedUpdateManyWithoutExitGuardNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  expensesCreated?: Prisma.ExpenseUncheckedUpdateManyWithoutCreatedByNestedInput
+  extraIncomesCreated?: Prisma.ExtraIncomeUncheckedUpdateManyWithoutCreatedByNestedInput
+  extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedUpdateManyWithoutCreatedByNestedInput
+  announcementsCreated?: Prisma.AnnouncementUncheckedUpdateManyWithoutCreatedByNestedInput
+  announcementsRead?: Prisma.AnnouncementReaderUncheckedUpdateManyWithoutUserNestedInput
+  surveysCreated?: Prisma.SurveyUncheckedUpdateManyWithoutCreatedByNestedInput
+  surveyResponses?: Prisma.SurveyResponseUncheckedUpdateManyWithoutUserNestedInput
+  officialDocumentsCreated?: Prisma.OfficialDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+  officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUncheckedUpdateManyWithoutUserNestedInput
+  amenityReservations?: Prisma.AmenityReservationUncheckedUpdateManyWithoutResidentNestedInput
+  serviceProvidersCreated?: Prisma.ServiceProviderUncheckedUpdateManyWithoutCreatedByNestedInput
+  serviceProviderLikes?: Prisma.ServiceProviderLikeUncheckedUpdateManyWithoutUserNestedInput
+  ticketsCreated?: Prisma.TicketUncheckedUpdateManyWithoutCreatorNestedInput
+  ticketsAssigned?: Prisma.TicketUncheckedUpdateManyWithoutAssignedAdminNestedInput
+  ticketHistoryActions?: Prisma.TicketHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+}
+
+export type UserCreateWithoutTicketHistoryActionsInput = {
+  id?: string
+  email: string
+  passwordHash: string
+  firstName?: string | null
+  lastName?: string | null
+  phone?: string | null
+  role?: $Enums.UserRole
+  status?: $Enums.UserStatus
+  isEmailVerified?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  residentProfile?: Prisma.ResidentProfileCreateNestedOneWithoutUserInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutCreatedByInput
+  userSessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  condominium?: Prisma.CondominiumCreateNestedOneWithoutAdminsInput
+  accessLogs?: Prisma.AccessLogCreateNestedManyWithoutUserAcceptInput
+  parcelsReceived?: Prisma.ParcelDeliveryCreateNestedManyWithoutReceivedByInput
+  parcelsDelivered?: Prisma.ParcelDeliveryCreateNestedManyWithoutDeliveredByInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessCreateNestedManyWithoutEntryGuardInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessCreateNestedManyWithoutExitGuardInput
+  passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  pushSubscriptions?: Prisma.PushSubscriptionCreateNestedManyWithoutUserInput
+  expensesCreated?: Prisma.ExpenseCreateNestedManyWithoutCreatedByInput
+  extraIncomesCreated?: Prisma.ExtraIncomeCreateNestedManyWithoutCreatedByInput
+  extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeCreateNestedManyWithoutCreatedByInput
+  announcementsCreated?: Prisma.AnnouncementCreateNestedManyWithoutCreatedByInput
+  announcementsRead?: Prisma.AnnouncementReaderCreateNestedManyWithoutUserInput
+  surveysCreated?: Prisma.SurveyCreateNestedManyWithoutCreatedByInput
+  surveyResponses?: Prisma.SurveyResponseCreateNestedManyWithoutUserInput
+  officialDocumentsCreated?: Prisma.OfficialDocumentCreateNestedManyWithoutCreatedByInput
+  officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentCreateNestedManyWithoutUserInput
+  amenityReservations?: Prisma.AmenityReservationCreateNestedManyWithoutResidentInput
+  serviceProvidersCreated?: Prisma.ServiceProviderCreateNestedManyWithoutCreatedByInput
+  serviceProviderLikes?: Prisma.ServiceProviderLikeCreateNestedManyWithoutUserInput
+  ticketsCreated?: Prisma.TicketCreateNestedManyWithoutCreatorInput
+  ticketsAssigned?: Prisma.TicketCreateNestedManyWithoutAssignedAdminInput
+  ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutAuthorInput
+}
+
+export type UserUncheckedCreateWithoutTicketHistoryActionsInput = {
+  id?: string
+  email: string
+  passwordHash: string
+  firstName?: string | null
+  lastName?: string | null
+  phone?: string | null
+  role?: $Enums.UserRole
+  status?: $Enums.UserStatus
+  isEmailVerified?: boolean
+  condominiumId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  residentProfile?: Prisma.ResidentProfileUncheckedCreateNestedOneWithoutUserInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCreatedByInput
+  userSessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  accessLogs?: Prisma.AccessLogUncheckedCreateNestedManyWithoutUserAcceptInput
+  parcelsReceived?: Prisma.ParcelDeliveryUncheckedCreateNestedManyWithoutReceivedByInput
+  parcelsDelivered?: Prisma.ParcelDeliveryUncheckedCreateNestedManyWithoutDeliveredByInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessUncheckedCreateNestedManyWithoutEntryGuardInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessUncheckedCreateNestedManyWithoutExitGuardInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
+  expensesCreated?: Prisma.ExpenseUncheckedCreateNestedManyWithoutCreatedByInput
+  extraIncomesCreated?: Prisma.ExtraIncomeUncheckedCreateNestedManyWithoutCreatedByInput
+  extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedCreateNestedManyWithoutCreatedByInput
+  announcementsCreated?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCreatedByInput
+  announcementsRead?: Prisma.AnnouncementReaderUncheckedCreateNestedManyWithoutUserInput
+  surveysCreated?: Prisma.SurveyUncheckedCreateNestedManyWithoutCreatedByInput
+  surveyResponses?: Prisma.SurveyResponseUncheckedCreateNestedManyWithoutUserInput
+  officialDocumentsCreated?: Prisma.OfficialDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+  officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUncheckedCreateNestedManyWithoutUserInput
+  amenityReservations?: Prisma.AmenityReservationUncheckedCreateNestedManyWithoutResidentInput
+  serviceProvidersCreated?: Prisma.ServiceProviderUncheckedCreateNestedManyWithoutCreatedByInput
+  serviceProviderLikes?: Prisma.ServiceProviderLikeUncheckedCreateNestedManyWithoutUserInput
+  ticketsCreated?: Prisma.TicketUncheckedCreateNestedManyWithoutCreatorInput
+  ticketsAssigned?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedAdminInput
+  ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutAuthorInput
+}
+
+export type UserCreateOrConnectWithoutTicketHistoryActionsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutTicketHistoryActionsInput, Prisma.UserUncheckedCreateWithoutTicketHistoryActionsInput>
+}
+
+export type UserUpsertWithoutTicketHistoryActionsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutTicketHistoryActionsInput, Prisma.UserUncheckedUpdateWithoutTicketHistoryActionsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutTicketHistoryActionsInput, Prisma.UserUncheckedCreateWithoutTicketHistoryActionsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutTicketHistoryActionsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutTicketHistoryActionsInput, Prisma.UserUncheckedUpdateWithoutTicketHistoryActionsInput>
+}
+
+export type UserUpdateWithoutTicketHistoryActionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  residentProfile?: Prisma.ResidentProfileUpdateOneWithoutUserNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutCreatedByNestedInput
+  userSessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  condominium?: Prisma.CondominiumUpdateOneWithoutAdminsNestedInput
+  accessLogs?: Prisma.AccessLogUpdateManyWithoutUserAcceptNestedInput
+  parcelsReceived?: Prisma.ParcelDeliveryUpdateManyWithoutReceivedByNestedInput
+  parcelsDelivered?: Prisma.ParcelDeliveryUpdateManyWithoutDeliveredByNestedInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessUpdateManyWithoutEntryGuardNestedInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessUpdateManyWithoutExitGuardNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUpdateManyWithoutUserNestedInput
+  expensesCreated?: Prisma.ExpenseUpdateManyWithoutCreatedByNestedInput
+  extraIncomesCreated?: Prisma.ExtraIncomeUpdateManyWithoutCreatedByNestedInput
+  extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUpdateManyWithoutCreatedByNestedInput
+  announcementsCreated?: Prisma.AnnouncementUpdateManyWithoutCreatedByNestedInput
+  announcementsRead?: Prisma.AnnouncementReaderUpdateManyWithoutUserNestedInput
+  surveysCreated?: Prisma.SurveyUpdateManyWithoutCreatedByNestedInput
+  surveyResponses?: Prisma.SurveyResponseUpdateManyWithoutUserNestedInput
+  officialDocumentsCreated?: Prisma.OfficialDocumentUpdateManyWithoutCreatedByNestedInput
+  officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUpdateManyWithoutUserNestedInput
+  amenityReservations?: Prisma.AmenityReservationUpdateManyWithoutResidentNestedInput
+  serviceProvidersCreated?: Prisma.ServiceProviderUpdateManyWithoutCreatedByNestedInput
+  serviceProviderLikes?: Prisma.ServiceProviderLikeUpdateManyWithoutUserNestedInput
+  ticketsCreated?: Prisma.TicketUpdateManyWithoutCreatorNestedInput
+  ticketsAssigned?: Prisma.TicketUpdateManyWithoutAssignedAdminNestedInput
+  ticketComments?: Prisma.TicketCommentUpdateManyWithoutAuthorNestedInput
+}
+
+export type UserUncheckedUpdateWithoutTicketHistoryActionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  condominiumId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  residentProfile?: Prisma.ResidentProfileUncheckedUpdateOneWithoutUserNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutCreatedByNestedInput
+  userSessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  accessLogs?: Prisma.AccessLogUncheckedUpdateManyWithoutUserAcceptNestedInput
+  parcelsReceived?: Prisma.ParcelDeliveryUncheckedUpdateManyWithoutReceivedByNestedInput
+  parcelsDelivered?: Prisma.ParcelDeliveryUncheckedUpdateManyWithoutDeliveredByNestedInput
+  providerEntriesRegistered?: Prisma.GeneralProviderAccessUncheckedUpdateManyWithoutEntryGuardNestedInput
+  providerExitsRegistered?: Prisma.GeneralProviderAccessUncheckedUpdateManyWithoutExitGuardNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  pushSubscriptions?: Prisma.PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  expensesCreated?: Prisma.ExpenseUncheckedUpdateManyWithoutCreatedByNestedInput
+  extraIncomesCreated?: Prisma.ExtraIncomeUncheckedUpdateManyWithoutCreatedByNestedInput
+  extraordinaryFeesCreated?: Prisma.ExtraordinaryFeeUncheckedUpdateManyWithoutCreatedByNestedInput
+  announcementsCreated?: Prisma.AnnouncementUncheckedUpdateManyWithoutCreatedByNestedInput
+  announcementsRead?: Prisma.AnnouncementReaderUncheckedUpdateManyWithoutUserNestedInput
+  surveysCreated?: Prisma.SurveyUncheckedUpdateManyWithoutCreatedByNestedInput
+  surveyResponses?: Prisma.SurveyResponseUncheckedUpdateManyWithoutUserNestedInput
+  officialDocumentsCreated?: Prisma.OfficialDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+  officialDocumentAcks?: Prisma.OfficialDocumentAcknowledgmentUncheckedUpdateManyWithoutUserNestedInput
+  amenityReservations?: Prisma.AmenityReservationUncheckedUpdateManyWithoutResidentNestedInput
+  serviceProvidersCreated?: Prisma.ServiceProviderUncheckedUpdateManyWithoutCreatedByNestedInput
+  serviceProviderLikes?: Prisma.ServiceProviderLikeUncheckedUpdateManyWithoutUserNestedInput
+  ticketsCreated?: Prisma.TicketUncheckedUpdateManyWithoutCreatorNestedInput
+  ticketsAssigned?: Prisma.TicketUncheckedUpdateManyWithoutAssignedAdminNestedInput
+  ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
 }
 
 export type UserCreateManyCondominiumInput = {
@@ -4683,6 +5833,10 @@ export type UserUpdateWithoutCondominiumInput = {
   amenityReservations?: Prisma.AmenityReservationUpdateManyWithoutResidentNestedInput
   serviceProvidersCreated?: Prisma.ServiceProviderUpdateManyWithoutCreatedByNestedInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeUpdateManyWithoutUserNestedInput
+  ticketsCreated?: Prisma.TicketUpdateManyWithoutCreatorNestedInput
+  ticketsAssigned?: Prisma.TicketUpdateManyWithoutAssignedAdminNestedInput
+  ticketComments?: Prisma.TicketCommentUpdateManyWithoutAuthorNestedInput
+  ticketHistoryActions?: Prisma.TicketHistoryUpdateManyWithoutChangedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCondominiumInput = {
@@ -4719,6 +5873,10 @@ export type UserUncheckedUpdateWithoutCondominiumInput = {
   amenityReservations?: Prisma.AmenityReservationUncheckedUpdateManyWithoutResidentNestedInput
   serviceProvidersCreated?: Prisma.ServiceProviderUncheckedUpdateManyWithoutCreatedByNestedInput
   serviceProviderLikes?: Prisma.ServiceProviderLikeUncheckedUpdateManyWithoutUserNestedInput
+  ticketsCreated?: Prisma.TicketUncheckedUpdateManyWithoutCreatorNestedInput
+  ticketsAssigned?: Prisma.TicketUncheckedUpdateManyWithoutAssignedAdminNestedInput
+  ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutAuthorNestedInput
+  ticketHistoryActions?: Prisma.TicketHistoryUncheckedUpdateManyWithoutChangedByNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutCondominiumInput = {
@@ -4762,6 +5920,10 @@ export type UserCountOutputType = {
   amenityReservations: number
   serviceProvidersCreated: number
   serviceProviderLikes: number
+  ticketsCreated: number
+  ticketsAssigned: number
+  ticketComments: number
+  ticketHistoryActions: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -4786,6 +5948,10 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   amenityReservations?: boolean | UserCountOutputTypeCountAmenityReservationsArgs
   serviceProvidersCreated?: boolean | UserCountOutputTypeCountServiceProvidersCreatedArgs
   serviceProviderLikes?: boolean | UserCountOutputTypeCountServiceProviderLikesArgs
+  ticketsCreated?: boolean | UserCountOutputTypeCountTicketsCreatedArgs
+  ticketsAssigned?: boolean | UserCountOutputTypeCountTicketsAssignedArgs
+  ticketComments?: boolean | UserCountOutputTypeCountTicketCommentsArgs
+  ticketHistoryActions?: boolean | UserCountOutputTypeCountTicketHistoryActionsArgs
 }
 
 /**
@@ -4945,6 +6111,34 @@ export type UserCountOutputTypeCountServiceProviderLikesArgs<ExtArgs extends run
   where?: Prisma.ServiceProviderLikeWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountTicketsCreatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TicketWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountTicketsAssignedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TicketWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountTicketCommentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TicketCommentWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountTicketHistoryActionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TicketHistoryWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -4982,6 +6176,10 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   amenityReservations?: boolean | Prisma.User$amenityReservationsArgs<ExtArgs>
   serviceProvidersCreated?: boolean | Prisma.User$serviceProvidersCreatedArgs<ExtArgs>
   serviceProviderLikes?: boolean | Prisma.User$serviceProviderLikesArgs<ExtArgs>
+  ticketsCreated?: boolean | Prisma.User$ticketsCreatedArgs<ExtArgs>
+  ticketsAssigned?: boolean | Prisma.User$ticketsAssignedArgs<ExtArgs>
+  ticketComments?: boolean | Prisma.User$ticketCommentsArgs<ExtArgs>
+  ticketHistoryActions?: boolean | Prisma.User$ticketHistoryActionsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -5057,6 +6255,10 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   amenityReservations?: boolean | Prisma.User$amenityReservationsArgs<ExtArgs>
   serviceProvidersCreated?: boolean | Prisma.User$serviceProvidersCreatedArgs<ExtArgs>
   serviceProviderLikes?: boolean | Prisma.User$serviceProviderLikesArgs<ExtArgs>
+  ticketsCreated?: boolean | Prisma.User$ticketsCreatedArgs<ExtArgs>
+  ticketsAssigned?: boolean | Prisma.User$ticketsAssignedArgs<ExtArgs>
+  ticketComments?: boolean | Prisma.User$ticketCommentsArgs<ExtArgs>
+  ticketHistoryActions?: boolean | Prisma.User$ticketHistoryActionsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -5092,6 +6294,10 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     amenityReservations: Prisma.$AmenityReservationPayload<ExtArgs>[]
     serviceProvidersCreated: Prisma.$ServiceProviderPayload<ExtArgs>[]
     serviceProviderLikes: Prisma.$ServiceProviderLikePayload<ExtArgs>[]
+    ticketsCreated: Prisma.$TicketPayload<ExtArgs>[]
+    ticketsAssigned: Prisma.$TicketPayload<ExtArgs>[]
+    ticketComments: Prisma.$TicketCommentPayload<ExtArgs>[]
+    ticketHistoryActions: Prisma.$TicketHistoryPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -5523,6 +6729,10 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   amenityReservations<T extends Prisma.User$amenityReservationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$amenityReservationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AmenityReservationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   serviceProvidersCreated<T extends Prisma.User$serviceProvidersCreatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$serviceProvidersCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ServiceProviderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   serviceProviderLikes<T extends Prisma.User$serviceProviderLikesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$serviceProviderLikesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ServiceProviderLikePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  ticketsCreated<T extends Prisma.User$ticketsCreatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$ticketsCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TicketPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  ticketsAssigned<T extends Prisma.User$ticketsAssignedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$ticketsAssignedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TicketPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  ticketComments<T extends Prisma.User$ticketCommentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$ticketCommentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TicketCommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  ticketHistoryActions<T extends Prisma.User$ticketHistoryActionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$ticketHistoryActionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TicketHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6504,6 +7714,102 @@ export type User$serviceProviderLikesArgs<ExtArgs extends runtime.Types.Extensio
   take?: number
   skip?: number
   distinct?: Prisma.ServiceProviderLikeScalarFieldEnum | Prisma.ServiceProviderLikeScalarFieldEnum[]
+}
+
+/**
+ * User.ticketsCreated
+ */
+export type User$ticketsCreatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Ticket
+   */
+  select?: Prisma.TicketSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Ticket
+   */
+  omit?: Prisma.TicketOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TicketInclude<ExtArgs> | null
+  where?: Prisma.TicketWhereInput
+  orderBy?: Prisma.TicketOrderByWithRelationInput | Prisma.TicketOrderByWithRelationInput[]
+  cursor?: Prisma.TicketWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TicketScalarFieldEnum | Prisma.TicketScalarFieldEnum[]
+}
+
+/**
+ * User.ticketsAssigned
+ */
+export type User$ticketsAssignedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Ticket
+   */
+  select?: Prisma.TicketSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Ticket
+   */
+  omit?: Prisma.TicketOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TicketInclude<ExtArgs> | null
+  where?: Prisma.TicketWhereInput
+  orderBy?: Prisma.TicketOrderByWithRelationInput | Prisma.TicketOrderByWithRelationInput[]
+  cursor?: Prisma.TicketWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TicketScalarFieldEnum | Prisma.TicketScalarFieldEnum[]
+}
+
+/**
+ * User.ticketComments
+ */
+export type User$ticketCommentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TicketComment
+   */
+  select?: Prisma.TicketCommentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the TicketComment
+   */
+  omit?: Prisma.TicketCommentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TicketCommentInclude<ExtArgs> | null
+  where?: Prisma.TicketCommentWhereInput
+  orderBy?: Prisma.TicketCommentOrderByWithRelationInput | Prisma.TicketCommentOrderByWithRelationInput[]
+  cursor?: Prisma.TicketCommentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TicketCommentScalarFieldEnum | Prisma.TicketCommentScalarFieldEnum[]
+}
+
+/**
+ * User.ticketHistoryActions
+ */
+export type User$ticketHistoryActionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TicketHistory
+   */
+  select?: Prisma.TicketHistorySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the TicketHistory
+   */
+  omit?: Prisma.TicketHistoryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TicketHistoryInclude<ExtArgs> | null
+  where?: Prisma.TicketHistoryWhereInput
+  orderBy?: Prisma.TicketHistoryOrderByWithRelationInput | Prisma.TicketHistoryOrderByWithRelationInput[]
+  cursor?: Prisma.TicketHistoryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TicketHistoryScalarFieldEnum | Prisma.TicketHistoryScalarFieldEnum[]
 }
 
 /**

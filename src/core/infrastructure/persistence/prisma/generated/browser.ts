@@ -237,3 +237,23 @@ export type ServiceProvider = Prisma.ServiceProviderModel
  * 
  */
 export type ServiceProviderLike = Prisma.ServiceProviderLikeModel
+/**
+ * Model Ticket
+ * 
+ */
+export type Ticket = Prisma.TicketModel
+/**
+ * Model TicketAttachment
+ * 
+ */
+export type TicketAttachment = Prisma.TicketAttachmentModel
+/**
+ * Model TicketComment
+ * 
+ */
+export type TicketComment = Prisma.TicketCommentModel
+/**
+ * Model TicketHistory
+ * 
+ */
+export type TicketHistory = Prisma.TicketHistoryModel

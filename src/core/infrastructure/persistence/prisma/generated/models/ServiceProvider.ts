@@ -281,6 +281,7 @@ export type ServiceProviderWhereInput = {
   condominium?: Prisma.XOR<Prisma.CondominiumScalarRelationFilter, Prisma.CondominiumWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   likes?: Prisma.ServiceProviderLikeListRelationFilter
+  tickets?: Prisma.TicketListRelationFilter
 }
 
 export type ServiceProviderOrderByWithRelationInput = {
@@ -304,6 +305,7 @@ export type ServiceProviderOrderByWithRelationInput = {
   condominium?: Prisma.CondominiumOrderByWithRelationInput
   createdBy?: Prisma.UserOrderByWithRelationInput
   likes?: Prisma.ServiceProviderLikeOrderByRelationAggregateInput
+  tickets?: Prisma.TicketOrderByRelationAggregateInput
 }
 
 export type ServiceProviderWhereUniqueInput = Prisma.AtLeast<{
@@ -330,6 +332,7 @@ export type ServiceProviderWhereUniqueInput = Prisma.AtLeast<{
   condominium?: Prisma.XOR<Prisma.CondominiumScalarRelationFilter, Prisma.CondominiumWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   likes?: Prisma.ServiceProviderLikeListRelationFilter
+  tickets?: Prisma.TicketListRelationFilter
 }, "id">
 
 export type ServiceProviderOrderByWithAggregationInput = {
@@ -397,6 +400,7 @@ export type ServiceProviderCreateInput = {
   condominium: Prisma.CondominiumCreateNestedOneWithoutServiceProvidersInput
   createdBy: Prisma.UserCreateNestedOneWithoutServiceProvidersCreatedInput
   likes?: Prisma.ServiceProviderLikeCreateNestedManyWithoutProviderInput
+  tickets?: Prisma.TicketCreateNestedManyWithoutProviderInput
 }
 
 export type ServiceProviderUncheckedCreateInput = {
@@ -418,6 +422,7 @@ export type ServiceProviderUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   likes?: Prisma.ServiceProviderLikeUncheckedCreateNestedManyWithoutProviderInput
+  tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutProviderInput
 }
 
 export type ServiceProviderUpdateInput = {
@@ -439,6 +444,7 @@ export type ServiceProviderUpdateInput = {
   condominium?: Prisma.CondominiumUpdateOneRequiredWithoutServiceProvidersNestedInput
   createdBy?: Prisma.UserUpdateOneRequiredWithoutServiceProvidersCreatedNestedInput
   likes?: Prisma.ServiceProviderLikeUpdateManyWithoutProviderNestedInput
+  tickets?: Prisma.TicketUpdateManyWithoutProviderNestedInput
 }
 
 export type ServiceProviderUncheckedUpdateInput = {
@@ -460,6 +466,7 @@ export type ServiceProviderUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   likes?: Prisma.ServiceProviderLikeUncheckedUpdateManyWithoutProviderNestedInput
+  tickets?: Prisma.TicketUncheckedUpdateManyWithoutProviderNestedInput
 }
 
 export type ServiceProviderCreateManyInput = {
@@ -595,6 +602,11 @@ export type ServiceProviderScalarRelationFilter = {
   isNot?: Prisma.ServiceProviderWhereInput
 }
 
+export type ServiceProviderNullableScalarRelationFilter = {
+  is?: Prisma.ServiceProviderWhereInput | null
+  isNot?: Prisma.ServiceProviderWhereInput | null
+}
+
 export type ServiceProviderCreateNestedManyWithoutCondominiumInput = {
   create?: Prisma.XOR<Prisma.ServiceProviderCreateWithoutCondominiumInput, Prisma.ServiceProviderUncheckedCreateWithoutCondominiumInput> | Prisma.ServiceProviderCreateWithoutCondominiumInput[] | Prisma.ServiceProviderUncheckedCreateWithoutCondominiumInput[]
   connectOrCreate?: Prisma.ServiceProviderCreateOrConnectWithoutCondominiumInput | Prisma.ServiceProviderCreateOrConnectWithoutCondominiumInput[]
@@ -701,6 +713,22 @@ export type ServiceProviderUpdateOneRequiredWithoutLikesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ServiceProviderUpdateToOneWithWhereWithoutLikesInput, Prisma.ServiceProviderUpdateWithoutLikesInput>, Prisma.ServiceProviderUncheckedUpdateWithoutLikesInput>
 }
 
+export type ServiceProviderCreateNestedOneWithoutTicketsInput = {
+  create?: Prisma.XOR<Prisma.ServiceProviderCreateWithoutTicketsInput, Prisma.ServiceProviderUncheckedCreateWithoutTicketsInput>
+  connectOrCreate?: Prisma.ServiceProviderCreateOrConnectWithoutTicketsInput
+  connect?: Prisma.ServiceProviderWhereUniqueInput
+}
+
+export type ServiceProviderUpdateOneWithoutTicketsNestedInput = {
+  create?: Prisma.XOR<Prisma.ServiceProviderCreateWithoutTicketsInput, Prisma.ServiceProviderUncheckedCreateWithoutTicketsInput>
+  connectOrCreate?: Prisma.ServiceProviderCreateOrConnectWithoutTicketsInput
+  upsert?: Prisma.ServiceProviderUpsertWithoutTicketsInput
+  disconnect?: Prisma.ServiceProviderWhereInput | boolean
+  delete?: Prisma.ServiceProviderWhereInput | boolean
+  connect?: Prisma.ServiceProviderWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ServiceProviderUpdateToOneWithWhereWithoutTicketsInput, Prisma.ServiceProviderUpdateWithoutTicketsInput>, Prisma.ServiceProviderUncheckedUpdateWithoutTicketsInput>
+}
+
 export type ServiceProviderCreateWithoutCondominiumInput = {
   id?: string
   name: string
@@ -719,6 +747,7 @@ export type ServiceProviderCreateWithoutCondominiumInput = {
   updatedAt?: Date | string
   createdBy: Prisma.UserCreateNestedOneWithoutServiceProvidersCreatedInput
   likes?: Prisma.ServiceProviderLikeCreateNestedManyWithoutProviderInput
+  tickets?: Prisma.TicketCreateNestedManyWithoutProviderInput
 }
 
 export type ServiceProviderUncheckedCreateWithoutCondominiumInput = {
@@ -739,6 +768,7 @@ export type ServiceProviderUncheckedCreateWithoutCondominiumInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   likes?: Prisma.ServiceProviderLikeUncheckedCreateNestedManyWithoutProviderInput
+  tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutProviderInput
 }
 
 export type ServiceProviderCreateOrConnectWithoutCondominiumInput = {
@@ -808,6 +838,7 @@ export type ServiceProviderCreateWithoutCreatedByInput = {
   updatedAt?: Date | string
   condominium: Prisma.CondominiumCreateNestedOneWithoutServiceProvidersInput
   likes?: Prisma.ServiceProviderLikeCreateNestedManyWithoutProviderInput
+  tickets?: Prisma.TicketCreateNestedManyWithoutProviderInput
 }
 
 export type ServiceProviderUncheckedCreateWithoutCreatedByInput = {
@@ -828,6 +859,7 @@ export type ServiceProviderUncheckedCreateWithoutCreatedByInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   likes?: Prisma.ServiceProviderLikeUncheckedCreateNestedManyWithoutProviderInput
+  tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutProviderInput
 }
 
 export type ServiceProviderCreateOrConnectWithoutCreatedByInput = {
@@ -874,6 +906,7 @@ export type ServiceProviderCreateWithoutLikesInput = {
   updatedAt?: Date | string
   condominium: Prisma.CondominiumCreateNestedOneWithoutServiceProvidersInput
   createdBy: Prisma.UserCreateNestedOneWithoutServiceProvidersCreatedInput
+  tickets?: Prisma.TicketCreateNestedManyWithoutProviderInput
 }
 
 export type ServiceProviderUncheckedCreateWithoutLikesInput = {
@@ -894,6 +927,7 @@ export type ServiceProviderUncheckedCreateWithoutLikesInput = {
   createdById: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutProviderInput
 }
 
 export type ServiceProviderCreateOrConnectWithoutLikesInput = {
@@ -930,6 +964,7 @@ export type ServiceProviderUpdateWithoutLikesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   condominium?: Prisma.CondominiumUpdateOneRequiredWithoutServiceProvidersNestedInput
   createdBy?: Prisma.UserUpdateOneRequiredWithoutServiceProvidersCreatedNestedInput
+  tickets?: Prisma.TicketUpdateManyWithoutProviderNestedInput
 }
 
 export type ServiceProviderUncheckedUpdateWithoutLikesInput = {
@@ -950,6 +985,107 @@ export type ServiceProviderUncheckedUpdateWithoutLikesInput = {
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tickets?: Prisma.TicketUncheckedUpdateManyWithoutProviderNestedInput
+}
+
+export type ServiceProviderCreateWithoutTicketsInput = {
+  id?: string
+  name: string
+  description?: string | null
+  category: $Enums.ServiceProviderCategory
+  type?: $Enums.ServiceProviderType
+  imageUrl?: string | null
+  phone?: string | null
+  whatsapp?: string | null
+  email?: string | null
+  website?: string | null
+  schedule?: string | null
+  address?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  condominium: Prisma.CondominiumCreateNestedOneWithoutServiceProvidersInput
+  createdBy: Prisma.UserCreateNestedOneWithoutServiceProvidersCreatedInput
+  likes?: Prisma.ServiceProviderLikeCreateNestedManyWithoutProviderInput
+}
+
+export type ServiceProviderUncheckedCreateWithoutTicketsInput = {
+  id?: string
+  condominiumId: string
+  name: string
+  description?: string | null
+  category: $Enums.ServiceProviderCategory
+  type?: $Enums.ServiceProviderType
+  imageUrl?: string | null
+  phone?: string | null
+  whatsapp?: string | null
+  email?: string | null
+  website?: string | null
+  schedule?: string | null
+  address?: string | null
+  isActive?: boolean
+  createdById: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  likes?: Prisma.ServiceProviderLikeUncheckedCreateNestedManyWithoutProviderInput
+}
+
+export type ServiceProviderCreateOrConnectWithoutTicketsInput = {
+  where: Prisma.ServiceProviderWhereUniqueInput
+  create: Prisma.XOR<Prisma.ServiceProviderCreateWithoutTicketsInput, Prisma.ServiceProviderUncheckedCreateWithoutTicketsInput>
+}
+
+export type ServiceProviderUpsertWithoutTicketsInput = {
+  update: Prisma.XOR<Prisma.ServiceProviderUpdateWithoutTicketsInput, Prisma.ServiceProviderUncheckedUpdateWithoutTicketsInput>
+  create: Prisma.XOR<Prisma.ServiceProviderCreateWithoutTicketsInput, Prisma.ServiceProviderUncheckedCreateWithoutTicketsInput>
+  where?: Prisma.ServiceProviderWhereInput
+}
+
+export type ServiceProviderUpdateToOneWithWhereWithoutTicketsInput = {
+  where?: Prisma.ServiceProviderWhereInput
+  data: Prisma.XOR<Prisma.ServiceProviderUpdateWithoutTicketsInput, Prisma.ServiceProviderUncheckedUpdateWithoutTicketsInput>
+}
+
+export type ServiceProviderUpdateWithoutTicketsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.EnumServiceProviderCategoryFieldUpdateOperationsInput | $Enums.ServiceProviderCategory
+  type?: Prisma.EnumServiceProviderTypeFieldUpdateOperationsInput | $Enums.ServiceProviderType
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schedule?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  condominium?: Prisma.CondominiumUpdateOneRequiredWithoutServiceProvidersNestedInput
+  createdBy?: Prisma.UserUpdateOneRequiredWithoutServiceProvidersCreatedNestedInput
+  likes?: Prisma.ServiceProviderLikeUpdateManyWithoutProviderNestedInput
+}
+
+export type ServiceProviderUncheckedUpdateWithoutTicketsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  condominiumId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.EnumServiceProviderCategoryFieldUpdateOperationsInput | $Enums.ServiceProviderCategory
+  type?: Prisma.EnumServiceProviderTypeFieldUpdateOperationsInput | $Enums.ServiceProviderType
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schedule?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdById?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  likes?: Prisma.ServiceProviderLikeUncheckedUpdateManyWithoutProviderNestedInput
 }
 
 export type ServiceProviderCreateManyCondominiumInput = {
@@ -989,6 +1125,7 @@ export type ServiceProviderUpdateWithoutCondominiumInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.UserUpdateOneRequiredWithoutServiceProvidersCreatedNestedInput
   likes?: Prisma.ServiceProviderLikeUpdateManyWithoutProviderNestedInput
+  tickets?: Prisma.TicketUpdateManyWithoutProviderNestedInput
 }
 
 export type ServiceProviderUncheckedUpdateWithoutCondominiumInput = {
@@ -1009,6 +1146,7 @@ export type ServiceProviderUncheckedUpdateWithoutCondominiumInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   likes?: Prisma.ServiceProviderLikeUncheckedUpdateManyWithoutProviderNestedInput
+  tickets?: Prisma.TicketUncheckedUpdateManyWithoutProviderNestedInput
 }
 
 export type ServiceProviderUncheckedUpdateManyWithoutCondominiumInput = {
@@ -1067,6 +1205,7 @@ export type ServiceProviderUpdateWithoutCreatedByInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   condominium?: Prisma.CondominiumUpdateOneRequiredWithoutServiceProvidersNestedInput
   likes?: Prisma.ServiceProviderLikeUpdateManyWithoutProviderNestedInput
+  tickets?: Prisma.TicketUpdateManyWithoutProviderNestedInput
 }
 
 export type ServiceProviderUncheckedUpdateWithoutCreatedByInput = {
@@ -1087,6 +1226,7 @@ export type ServiceProviderUncheckedUpdateWithoutCreatedByInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   likes?: Prisma.ServiceProviderLikeUncheckedUpdateManyWithoutProviderNestedInput
+  tickets?: Prisma.TicketUncheckedUpdateManyWithoutProviderNestedInput
 }
 
 export type ServiceProviderUncheckedUpdateManyWithoutCreatedByInput = {
@@ -1115,10 +1255,12 @@ export type ServiceProviderUncheckedUpdateManyWithoutCreatedByInput = {
 
 export type ServiceProviderCountOutputType = {
   likes: number
+  tickets: number
 }
 
 export type ServiceProviderCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   likes?: boolean | ServiceProviderCountOutputTypeCountLikesArgs
+  tickets?: boolean | ServiceProviderCountOutputTypeCountTicketsArgs
 }
 
 /**
@@ -1136,6 +1278,13 @@ export type ServiceProviderCountOutputTypeDefaultArgs<ExtArgs extends runtime.Ty
  */
 export type ServiceProviderCountOutputTypeCountLikesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.ServiceProviderLikeWhereInput
+}
+
+/**
+ * ServiceProviderCountOutputType without action
+ */
+export type ServiceProviderCountOutputTypeCountTicketsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TicketWhereInput
 }
 
 
@@ -1160,6 +1309,7 @@ export type ServiceProviderSelect<ExtArgs extends runtime.Types.Extensions.Inter
   condominium?: boolean | Prisma.CondominiumDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   likes?: boolean | Prisma.ServiceProvider$likesArgs<ExtArgs>
+  tickets?: boolean | Prisma.ServiceProvider$ticketsArgs<ExtArgs>
   _count?: boolean | Prisma.ServiceProviderCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["serviceProvider"]>
 
@@ -1232,6 +1382,7 @@ export type ServiceProviderInclude<ExtArgs extends runtime.Types.Extensions.Inte
   condominium?: boolean | Prisma.CondominiumDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   likes?: boolean | Prisma.ServiceProvider$likesArgs<ExtArgs>
+  tickets?: boolean | Prisma.ServiceProvider$ticketsArgs<ExtArgs>
   _count?: boolean | Prisma.ServiceProviderCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ServiceProviderIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1249,6 +1400,7 @@ export type $ServiceProviderPayload<ExtArgs extends runtime.Types.Extensions.Int
     condominium: Prisma.$CondominiumPayload<ExtArgs>
     createdBy: Prisma.$UserPayload<ExtArgs>
     likes: Prisma.$ServiceProviderLikePayload<ExtArgs>[]
+    tickets: Prisma.$TicketPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1665,6 +1817,7 @@ export interface Prisma__ServiceProviderClient<T, Null = never, ExtArgs extends 
   condominium<T extends Prisma.CondominiumDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CondominiumDefaultArgs<ExtArgs>>): Prisma.Prisma__CondominiumClient<runtime.Types.Result.GetResult<Prisma.$CondominiumPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   createdBy<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   likes<T extends Prisma.ServiceProvider$likesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ServiceProvider$likesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ServiceProviderLikePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  tickets<T extends Prisma.ServiceProvider$ticketsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ServiceProvider$ticketsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TicketPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2133,6 +2286,30 @@ export type ServiceProvider$likesArgs<ExtArgs extends runtime.Types.Extensions.I
   take?: number
   skip?: number
   distinct?: Prisma.ServiceProviderLikeScalarFieldEnum | Prisma.ServiceProviderLikeScalarFieldEnum[]
+}
+
+/**
+ * ServiceProvider.tickets
+ */
+export type ServiceProvider$ticketsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Ticket
+   */
+  select?: Prisma.TicketSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Ticket
+   */
+  omit?: Prisma.TicketOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TicketInclude<ExtArgs> | null
+  where?: Prisma.TicketWhereInput
+  orderBy?: Prisma.TicketOrderByWithRelationInput | Prisma.TicketOrderByWithRelationInput[]
+  cursor?: Prisma.TicketWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TicketScalarFieldEnum | Prisma.TicketScalarFieldEnum[]
 }
 
 /**

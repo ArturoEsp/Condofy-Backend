@@ -25,4 +25,5 @@ export const PROVIDES_NAMES = {
   AmenitiesRepository: 'AmenitiesRepository',
   AmenityReservationsRepository: 'AmenityReservationsRepository',
   ServiceProvidersRepository: 'ServiceProvidersRepository',
+  TicketsRepository: 'TicketsRepository',
 } as const;

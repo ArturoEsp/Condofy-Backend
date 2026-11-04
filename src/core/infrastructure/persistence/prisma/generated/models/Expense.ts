@@ -322,6 +322,7 @@ export type ExpenseWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Expense"> | Date | string
   condominium?: Prisma.XOR<Prisma.CondominiumScalarRelationFilter, Prisma.CondominiumWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  ticket?: Prisma.XOR<Prisma.TicketNullableScalarRelationFilter, Prisma.TicketWhereInput> | null
 }
 
 export type ExpenseOrderByWithRelationInput = {
@@ -345,6 +346,7 @@ export type ExpenseOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   condominium?: Prisma.CondominiumOrderByWithRelationInput
   createdBy?: Prisma.UserOrderByWithRelationInput
+  ticket?: Prisma.TicketOrderByWithRelationInput
 }
 
 export type ExpenseWhereUniqueInput = Prisma.AtLeast<{
@@ -371,6 +373,7 @@ export type ExpenseWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"Expense"> | Date | string
   condominium?: Prisma.XOR<Prisma.CondominiumScalarRelationFilter, Prisma.CondominiumWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  ticket?: Prisma.XOR<Prisma.TicketNullableScalarRelationFilter, Prisma.TicketWhereInput> | null
 }, "id">
 
 export type ExpenseOrderByWithAggregationInput = {
@@ -442,6 +445,7 @@ export type ExpenseCreateInput = {
   updatedAt?: Date | string
   condominium: Prisma.CondominiumCreateNestedOneWithoutExpensesInput
   createdBy: Prisma.UserCreateNestedOneWithoutExpensesCreatedInput
+  ticket?: Prisma.TicketCreateNestedOneWithoutExpenseInput
 }
 
 export type ExpenseUncheckedCreateInput = {
@@ -463,6 +467,7 @@ export type ExpenseUncheckedCreateInput = {
   createdById: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  ticket?: Prisma.TicketUncheckedCreateNestedOneWithoutExpenseInput
 }
 
 export type ExpenseUpdateInput = {
@@ -484,6 +489,7 @@ export type ExpenseUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   condominium?: Prisma.CondominiumUpdateOneRequiredWithoutExpensesNestedInput
   createdBy?: Prisma.UserUpdateOneRequiredWithoutExpensesCreatedNestedInput
+  ticket?: Prisma.TicketUpdateOneWithoutExpenseNestedInput
 }
 
 export type ExpenseUncheckedUpdateInput = {
@@ -505,6 +511,7 @@ export type ExpenseUncheckedUpdateInput = {
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ticket?: Prisma.TicketUncheckedUpdateOneWithoutExpenseNestedInput
 }
 
 export type ExpenseCreateManyInput = {
@@ -649,6 +656,11 @@ export type ExpenseSumOrderByAggregateInput = {
   amount?: Prisma.SortOrder
 }
 
+export type ExpenseNullableScalarRelationFilter = {
+  is?: Prisma.ExpenseWhereInput | null
+  isNot?: Prisma.ExpenseWhereInput | null
+}
+
 export type ExpenseCreateNestedManyWithoutCondominiumInput = {
   create?: Prisma.XOR<Prisma.ExpenseCreateWithoutCondominiumInput, Prisma.ExpenseUncheckedCreateWithoutCondominiumInput> | Prisma.ExpenseCreateWithoutCondominiumInput[] | Prisma.ExpenseUncheckedCreateWithoutCondominiumInput[]
   connectOrCreate?: Prisma.ExpenseCreateOrConnectWithoutCondominiumInput | Prisma.ExpenseCreateOrConnectWithoutCondominiumInput[]
@@ -741,6 +753,22 @@ export type EnumExpenseStatusFieldUpdateOperationsInput = {
   set?: $Enums.ExpenseStatus
 }
 
+export type ExpenseCreateNestedOneWithoutTicketInput = {
+  create?: Prisma.XOR<Prisma.ExpenseCreateWithoutTicketInput, Prisma.ExpenseUncheckedCreateWithoutTicketInput>
+  connectOrCreate?: Prisma.ExpenseCreateOrConnectWithoutTicketInput
+  connect?: Prisma.ExpenseWhereUniqueInput
+}
+
+export type ExpenseUpdateOneWithoutTicketNestedInput = {
+  create?: Prisma.XOR<Prisma.ExpenseCreateWithoutTicketInput, Prisma.ExpenseUncheckedCreateWithoutTicketInput>
+  connectOrCreate?: Prisma.ExpenseCreateOrConnectWithoutTicketInput
+  upsert?: Prisma.ExpenseUpsertWithoutTicketInput
+  disconnect?: Prisma.ExpenseWhereInput | boolean
+  delete?: Prisma.ExpenseWhereInput | boolean
+  connect?: Prisma.ExpenseWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ExpenseUpdateToOneWithWhereWithoutTicketInput, Prisma.ExpenseUpdateWithoutTicketInput>, Prisma.ExpenseUncheckedUpdateWithoutTicketInput>
+}
+
 export type ExpenseCreateWithoutCondominiumInput = {
   id?: string
   concept: string
@@ -759,6 +787,7 @@ export type ExpenseCreateWithoutCondominiumInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   createdBy: Prisma.UserCreateNestedOneWithoutExpensesCreatedInput
+  ticket?: Prisma.TicketCreateNestedOneWithoutExpenseInput
 }
 
 export type ExpenseUncheckedCreateWithoutCondominiumInput = {
@@ -779,6 +808,7 @@ export type ExpenseUncheckedCreateWithoutCondominiumInput = {
   createdById: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  ticket?: Prisma.TicketUncheckedCreateNestedOneWithoutExpenseInput
 }
 
 export type ExpenseCreateOrConnectWithoutCondominiumInput = {
@@ -849,6 +879,7 @@ export type ExpenseCreateWithoutCreatedByInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   condominium: Prisma.CondominiumCreateNestedOneWithoutExpensesInput
+  ticket?: Prisma.TicketCreateNestedOneWithoutExpenseInput
 }
 
 export type ExpenseUncheckedCreateWithoutCreatedByInput = {
@@ -869,6 +900,7 @@ export type ExpenseUncheckedCreateWithoutCreatedByInput = {
   invoiceFileType?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  ticket?: Prisma.TicketUncheckedCreateNestedOneWithoutExpenseInput
 }
 
 export type ExpenseCreateOrConnectWithoutCreatedByInput = {
@@ -895,6 +927,106 @@ export type ExpenseUpdateWithWhereUniqueWithoutCreatedByInput = {
 export type ExpenseUpdateManyWithWhereWithoutCreatedByInput = {
   where: Prisma.ExpenseScalarWhereInput
   data: Prisma.XOR<Prisma.ExpenseUpdateManyMutationInput, Prisma.ExpenseUncheckedUpdateManyWithoutCreatedByInput>
+}
+
+export type ExpenseCreateWithoutTicketInput = {
+  id?: string
+  concept: string
+  description?: string | null
+  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  expenseDate: Date | string
+  period: string
+  category: $Enums.ExpenseCategory
+  paymentMethod?: $Enums.PaymentMethod
+  status?: $Enums.ExpenseStatus
+  supplier?: string | null
+  reference?: string | null
+  invoiceUrl?: string | null
+  invoiceFileName?: string | null
+  invoiceFileType?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  condominium: Prisma.CondominiumCreateNestedOneWithoutExpensesInput
+  createdBy: Prisma.UserCreateNestedOneWithoutExpensesCreatedInput
+}
+
+export type ExpenseUncheckedCreateWithoutTicketInput = {
+  id?: string
+  condominiumId: string
+  concept: string
+  description?: string | null
+  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  expenseDate: Date | string
+  period: string
+  category: $Enums.ExpenseCategory
+  paymentMethod?: $Enums.PaymentMethod
+  status?: $Enums.ExpenseStatus
+  supplier?: string | null
+  reference?: string | null
+  invoiceUrl?: string | null
+  invoiceFileName?: string | null
+  invoiceFileType?: string | null
+  createdById: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type ExpenseCreateOrConnectWithoutTicketInput = {
+  where: Prisma.ExpenseWhereUniqueInput
+  create: Prisma.XOR<Prisma.ExpenseCreateWithoutTicketInput, Prisma.ExpenseUncheckedCreateWithoutTicketInput>
+}
+
+export type ExpenseUpsertWithoutTicketInput = {
+  update: Prisma.XOR<Prisma.ExpenseUpdateWithoutTicketInput, Prisma.ExpenseUncheckedUpdateWithoutTicketInput>
+  create: Prisma.XOR<Prisma.ExpenseCreateWithoutTicketInput, Prisma.ExpenseUncheckedCreateWithoutTicketInput>
+  where?: Prisma.ExpenseWhereInput
+}
+
+export type ExpenseUpdateToOneWithWhereWithoutTicketInput = {
+  where?: Prisma.ExpenseWhereInput
+  data: Prisma.XOR<Prisma.ExpenseUpdateWithoutTicketInput, Prisma.ExpenseUncheckedUpdateWithoutTicketInput>
+}
+
+export type ExpenseUpdateWithoutTicketInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  concept?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  expenseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  period?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.EnumExpenseCategoryFieldUpdateOperationsInput | $Enums.ExpenseCategory
+  paymentMethod?: Prisma.EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+  status?: Prisma.EnumExpenseStatusFieldUpdateOperationsInput | $Enums.ExpenseStatus
+  supplier?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceFileType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  condominium?: Prisma.CondominiumUpdateOneRequiredWithoutExpensesNestedInput
+  createdBy?: Prisma.UserUpdateOneRequiredWithoutExpensesCreatedNestedInput
+}
+
+export type ExpenseUncheckedUpdateWithoutTicketInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  condominiumId?: Prisma.StringFieldUpdateOperationsInput | string
+  concept?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  expenseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  period?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.EnumExpenseCategoryFieldUpdateOperationsInput | $Enums.ExpenseCategory
+  paymentMethod?: Prisma.EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+  status?: Prisma.EnumExpenseStatusFieldUpdateOperationsInput | $Enums.ExpenseStatus
+  supplier?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceFileType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ExpenseCreateManyCondominiumInput = {
@@ -935,6 +1067,7 @@ export type ExpenseUpdateWithoutCondominiumInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.UserUpdateOneRequiredWithoutExpensesCreatedNestedInput
+  ticket?: Prisma.TicketUpdateOneWithoutExpenseNestedInput
 }
 
 export type ExpenseUncheckedUpdateWithoutCondominiumInput = {
@@ -955,6 +1088,7 @@ export type ExpenseUncheckedUpdateWithoutCondominiumInput = {
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ticket?: Prisma.TicketUncheckedUpdateOneWithoutExpenseNestedInput
 }
 
 export type ExpenseUncheckedUpdateManyWithoutCondominiumInput = {
@@ -1015,6 +1149,7 @@ export type ExpenseUpdateWithoutCreatedByInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   condominium?: Prisma.CondominiumUpdateOneRequiredWithoutExpensesNestedInput
+  ticket?: Prisma.TicketUpdateOneWithoutExpenseNestedInput
 }
 
 export type ExpenseUncheckedUpdateWithoutCreatedByInput = {
@@ -1035,6 +1170,7 @@ export type ExpenseUncheckedUpdateWithoutCreatedByInput = {
   invoiceFileType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ticket?: Prisma.TicketUncheckedUpdateOneWithoutExpenseNestedInput
 }
 
 export type ExpenseUncheckedUpdateManyWithoutCreatedByInput = {
@@ -1080,6 +1216,7 @@ export type ExpenseSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   updatedAt?: boolean
   condominium?: boolean | Prisma.CondominiumDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  ticket?: boolean | Prisma.Expense$ticketArgs<ExtArgs>
 }, ExtArgs["result"]["expense"]>
 
 export type ExpenseSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1153,6 +1290,7 @@ export type ExpenseOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
 export type ExpenseInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   condominium?: boolean | Prisma.CondominiumDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  ticket?: boolean | Prisma.Expense$ticketArgs<ExtArgs>
 }
 export type ExpenseIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   condominium?: boolean | Prisma.CondominiumDefaultArgs<ExtArgs>
@@ -1168,6 +1306,7 @@ export type $ExpensePayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   objects: {
     condominium: Prisma.$CondominiumPayload<ExtArgs>
     createdBy: Prisma.$UserPayload<ExtArgs>
+    ticket: Prisma.$TicketPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1584,6 +1723,7 @@ export interface Prisma__ExpenseClient<T, Null = never, ExtArgs extends runtime.
   readonly [Symbol.toStringTag]: "PrismaPromise"
   condominium<T extends Prisma.CondominiumDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CondominiumDefaultArgs<ExtArgs>>): Prisma.Prisma__CondominiumClient<runtime.Types.Result.GetResult<Prisma.$CondominiumPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   createdBy<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  ticket<T extends Prisma.Expense$ticketArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Expense$ticketArgs<ExtArgs>>): Prisma.Prisma__TicketClient<runtime.Types.Result.GetResult<Prisma.$TicketPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2029,6 +2169,25 @@ export type ExpenseDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Limit how many Expenses to delete.
    */
   limit?: number
+}
+
+/**
+ * Expense.ticket
+ */
+export type Expense$ticketArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Ticket
+   */
+  select?: Prisma.TicketSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Ticket
+   */
+  omit?: Prisma.TicketOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TicketInclude<ExtArgs> | null
+  where?: Prisma.TicketWhereInput
 }
 
 /**
