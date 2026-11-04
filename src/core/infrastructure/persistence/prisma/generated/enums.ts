@@ -291,6 +291,52 @@ export const ServiceProviderCategory = {
 export type ServiceProviderCategory = (typeof ServiceProviderCategory)[keyof typeof ServiceProviderCategory]
 
 
+export const TicketStatus = {
+  OPEN: 'OPEN',
+  IN_REVIEW: 'IN_REVIEW',
+  IN_PROGRESS: 'IN_PROGRESS',
+  WAITING_THIRD_PARTY: 'WAITING_THIRD_PARTY',
+  RESOLVED: 'RESOLVED',
+  CLOSED: 'CLOSED',
+  REJECTED: 'REJECTED'
+} as const
+
+export type TicketStatus = (typeof TicketStatus)[keyof typeof TicketStatus]
+
+
+export const TicketPriority = {
+  LOW: 'LOW',
+  MEDIUM: 'MEDIUM',
+  HIGH: 'HIGH',
+  URGENT: 'URGENT'
+} as const
+
+export type TicketPriority = (typeof TicketPriority)[keyof typeof TicketPriority]
+
+
+export const TicketCategory = {
+  PLUMBING: 'PLUMBING',
+  ELECTRICAL: 'ELECTRICAL',
+  GARDENING: 'GARDENING',
+  SECURITY: 'SECURITY',
+  CLEANING: 'CLEANING',
+  NOISE_COMPLAINT: 'NOISE_COMPLAINT',
+  COMMON_AREA: 'COMMON_AREA',
+  INFRASTRUCTURE: 'INFRASTRUCTURE',
+  OTHER: 'OTHER'
+} as const
+
+export type TicketCategory = (typeof TicketCategory)[keyof typeof TicketCategory]
+
+
+export const TicketScope = {
+  COMMON_AREA: 'COMMON_AREA',
+  PRIVATE_HOUSE: 'PRIVATE_HOUSE'
+} as const
+
+export type TicketScope = (typeof TicketScope)[keyof typeof TicketScope]
+
+
 export const SurveyStatus = {
   DRAFT: 'DRAFT',
   ACTIVE: 'ACTIVE',

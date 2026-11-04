@@ -18,6 +18,7 @@ export enum UploadModule {
   AMENITIES = 'amenities',
   PROVIDERS = 'providers',
   SERVICE_PROVIDERS = 'service-providers',
+  TICKETS = 'tickets',
   GENERAL = 'general',
 }
 
@@ -30,7 +31,7 @@ export class UploadFileRequest {
   })
   @IsEnum(UploadModule, {
     message:
-      'El módulo debe ser uno de: visitors, parcels, payments, branding, documents, announcements, amenities, providers, service-providers, general',
+      'El módulo debe ser uno de: visitors, parcels, payments, branding, documents, announcements, amenities, providers, service-providers, tickets, general',
   })
   @IsNotEmpty({ message: 'El módulo es requerido' })
   module: UploadModule;
